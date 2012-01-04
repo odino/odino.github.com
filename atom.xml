@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://odino.github.com/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-01-04T11:07:05+01:00</updated>
+  <id>http://odino.github.com/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Zombie Ninjas Attack: A survivor's retrospective]]></title>
+    <link href="http://odino.github.com/blog/2011/07/03/prova/"/>
+    <updated>2011-07-03T05:59:00+02:00</updated>
+    <id>http://odino.github.com/blog/2011/07/03/prova</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
