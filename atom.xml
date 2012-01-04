@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.github.com/atom.xml" rel="self"/>
   <link href="http://odino.github.com/"/>
-  <updated>2012-01-04T11:25:10+01:00</updated>
+  <updated>2012-01-04T11:59:36+01:00</updated>
   <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -18,7 +18,18 @@
     <link href="http://odino.github.com/prova/"/>
     <updated>2011-07-03T05:59:00+02:00</updated>
     <id>http://odino.github.com/prova</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This is my first post.</p>
+
+<!-- more -->
+
+
+<p><span class='pullquote-right' data-pullquote='surround it like this, like you did never before blablabla seen'>
+Surround your paragraph with the pull quote tags. Then when you come to f
+Surround your paragraph with the pull quote tags. Then when you come to
+the text you want to pull, surround it like this, like you did never before blablabla seen and that&#8217;s all there is to it.
+Surround your paragraph with the pull quote tags. Then when you come to
+Surround your paragraph with the pull quote tags. Then when you come to Then when you come to Then when you come to Then when you come to Then when you come to.
+</span></p>
 ]]></content>
   </entry>
   
