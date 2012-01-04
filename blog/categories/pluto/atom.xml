@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: pluto | Alessandro Nadalin]]></title>
+  <link href="http://odino.github.com/blog/categories/pluto/atom.xml" rel="self"/>
   <link href="http://odino.github.com/"/>
   <updated>2012-01-04T12:08:39+01:00</updated>
   <id>http://odino.github.com/</id>
@@ -26,7 +26,7 @@
 <p><span class='pullquote-right' data-pullquote='surround it like this, like you did never before blablabla seen'>
 Surround your paragraph with the pull quote tags. Then when you come to f
 Surround your paragraph with the pull quote tags. Then when you come to
-the text you want to pull, surround it like this, like you did never before blablabla seen and that&#8217;s all there is to it.
+the text you want to pull, surround it like this, like you did never before blablabla seen and that's all there is to it.
 Surround your paragraph with the pull quote tags. Then when you come to
 Surround your paragraph with the pull quote tags. Then when you come to Then when you come to Then when you come to Then when you come to Then when you come to.
 </span></p>
