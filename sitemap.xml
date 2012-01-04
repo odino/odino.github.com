@@ -1,15 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://odino.github.com/prova/</loc>
-        <lastmod>2012-01-04T12:08:35+01:00</lastmod>
+        <loc>http://odino.github.com/embrace-change/</loc>
+        <lastmod>2012-01-04T15:06:16+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://odino.github.com/conferences/</loc>
+        <lastmod>2012-01-04T14:54:54+01:00</lastmod>
     </url>
     <url>
         <loc>http://odino.github.com/</loc>
-        <lastmod>2012-01-04T12:08:35+01:00</lastmod>
+        <lastmod>2012-01-04T15:06:16+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://odino.github.com/about/</loc>
+        <lastmod>2012-01-04T14:46:13+01:00</lastmod>
     </url>
     <url>
         <loc>http://odino.github.com/blog/archives/</loc>
-        <lastmod>2012-01-04T12:08:35+01:00</lastmod>
+        <lastmod>2012-01-04T15:06:16+01:00</lastmod>
     </url>
 </urlset>
