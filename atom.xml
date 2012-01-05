@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.github.com/atom.xml" rel="self"/>
   <link href="http://odino.github.com/"/>
-  <updated>2012-01-04T15:27:08+01:00</updated>
+  <updated>2012-01-05T15:16:13+01:00</updated>
   <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -28,6 +28,9 @@ keep up together.</p>
 or stuff like that: thanks to <a href="http://octopress.org/">Octopress</a> my technical
 sadism has been satisfied and now I can run my own blog to <a href="http://github.com">Github</a>,
 thanks to <em>Github pages</em>.</p>
+
+<p>I am porting the old most viewed contents here, with some rewrites to ensure old
+links will not break (301).</p>
 ]]></content>
   </entry>
   
