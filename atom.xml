@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Alessandro Nadalin]]></title>
+  <link href="http://odino.github.com/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-01-05T15:16:13+01:00</updated>
+  <id>http://odino.github.com/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Embrace change]]></title>
+    <link href="http://odino.github.com/embrace-change/"/>
+    <updated>2012-01-04T14:57:00+01:00</updated>
+    <id>http://odino.github.com/embrace-change</id>
+    <content type="html"><![CDATA[<p>So this is my final attempt to ensure my nerdy passions and my will to blog will
+keep up together.</p>
+
+<!-- more -->
+
+
+<p>Being a nerd, it&#8217;s fun to spend time on something like <em>deploying my new article</em>
+or stuff like that: thanks to <a href="http://octopress.org/">Octopress</a> my technical
+sadism has been satisfied and now I can run my own blog to <a href="http://github.com">Github</a>,
+thanks to <em>Github pages</em>.</p>
+
+<p>I am porting the old most viewed contents here, with some rewrites to ensure old
+links will not break (301).</p>
+]]></content>
+  </entry>
+  
+</feed>
