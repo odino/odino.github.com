@@ -3,17 +3,17 @@
 # ----------------------- #
 
 url: http://odino.github.com
-title: Alessandro Nadalin
-subtitle: Temptations of PHP, team leading, agile development and graph databases
-author: Alessandro Nadalin
+title: 
+subtitle: A blogging framework for hackers.
+author: Your Name
 simple_search: http://google.com/search
-description: Blog of a young, passionate, heavy bearded, always learning team leader, developer and crappy-code writer.
+description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
 # http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
 # Additionally, %o will give you the ordinal representation of the day
-date_format: "%A, %d %B %Y at %R"
+date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /atom.xml
@@ -27,7 +27,7 @@ email:
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 root: /
-permalink: /:title/
+permalink: /blog/:year/:month/:day/:title/
 source: source
 destination: public
 plugins: plugins
@@ -50,21 +50,21 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.ht
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
 # blog_index_asides:
-post_asides:  []
-page_asides:  []
+# post_asides:
+# page_asides:
 
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
 
 # Github repositories
-github_user: 
+github_user:
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user: _odino_
+twitter_user:
 twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: true
