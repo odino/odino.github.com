@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Zombie Ninjas Attack: A survivor's retrospective"
+date: 2011-07-03 5:59
+comments: true
+categories: [pluto, paperino]
+---
+
+This is my first post.
+
+<!-- more -->
+
+{% pullquote %}
+Surround your paragraph with the pull quote tags. Then when you come to f
+Surround your paragraph with the pull quote tags. Then when you come to
+the text you want to pull, {" surround it like this, like you did never before blablabla seen"} and that's all there is to it.
+Surround your paragraph with the pull quote tags. Then when you come to
+Surround your paragraph with the pull quote tags. Then when you come to Then when you come to Then when you come to Then when you come to Then when you come to.
+{% endpullquote %}
+
