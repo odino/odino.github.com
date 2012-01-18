@@ -11,7 +11,13 @@ h1 {
 
 header[role="banner"] {
     text-align: center;
-    padding: 1em;
+    padding-bottom: 0em;
+}
+
+article[role="article"] header {
+    padding-top: 0em;
+    text-align: center;
+    font-size: 1em;
 }
 
 a {
@@ -23,3 +29,7 @@ a:hover {
 }
 
 .no-sidebar, #main, #content { border-right: 0; }
+
+article {
+    padding-top: 0;
+}
