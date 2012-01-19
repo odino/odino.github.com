@@ -1,0 +1,17 @@
+---
+layout: page
+title: Page not found
+footer: false
+---
+
+{% img right images/dude_wtf.png Sorry dude, I could not find what you was looking for %}
+
+{% blockquote Edward A. Murphy http://en.wikipedia.org/wiki/Murphy's_law Murphy's law %}
+Anything that can go wrong will go wrong
+{% endblockquote %}
+
+The page you are looking for could not be found, and I feel terribly sorry'bout
+that.
+
+What if you drop me a line at my email, `alessandro.nadalin@gmail.com` ?  
+Or maybe you can rant with [a tweet](http://twitter.com/_odino_)?
