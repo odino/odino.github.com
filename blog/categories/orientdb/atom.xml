@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: OrientDB | Alessandro Nadalin]]></title>
+  <link href="http://odino.github.com/blog/categories/orientdb/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-01-19T03:34:25+01:00</updated>
+  <id>http://odino.github.com/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting back on OrientDB]]></title>
+    <link href="http://odino.github.com/getting-back-on-orientdb/"/>
+    <updated>2012-01-03T17:16:00+01:00</updated>
+    <id>http://odino.github.com/getting-back-on-orientdb</id>
+    <content type="html"><![CDATA[<p>It's been a while since I don't give any update about <a href="https://github.com/congow/Orient">Orient</a>,
+the library we are developing to work with <a href="http://www.orientechnologies.com/orient-db.htm">OrientDB</a>
+in PHP...</p>
+
+<!-- more -->
+
+
+<p>...so here's a brief recap:</p>
+
+<ul>
+<li><a href="https://twitter.com/#!/jol1hahn">Daniele</a> has joined the team, with some great
+brand new ideas ( the adoption, for example, of <a href="https://github.com/composer/composer">Composer</a>; I will blog later on this )</li>
+<li>I am personally taking care of finishing the open issues ( mostly integration tests ) for the beta-5 release, the one introducing objects hydration</li>
+<li><a href="http://davidfunaro.com/">David</a> is leading the moves for the beta-6 release,
+which is the last one before going RC, introducing persistence into the <a href="https://github.com/congow/Orient/tree/master/src/Congow/Orient/ODM">data mapper</a></li>
+</ul>
+
+
+<p>Uh, well, <a href="http://code.google.com/p/orient/wiki/Y2011">happy 2012</a>: this year we
+ will see some great things from OrientDB and its ecosystem!</p>
+]]></content>
+  </entry>
+  
+</feed>
