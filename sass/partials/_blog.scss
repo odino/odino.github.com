@@ -18,8 +18,7 @@ article {
       margin: 0;
       &.meta {
         @extend .sans;
-        text-transform: uppercase;
-        position: absolute; top: 0;
+        top: 0;
       }
     }
     @media only screen and (min-width: 768px) {

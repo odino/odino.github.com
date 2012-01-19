@@ -5,13 +5,16 @@ li {
     margin-left: 50px;
 }
 
-h1 {
-    font-size: 2.2em;
+*, html {
+    background: #fff;
 }
 
 header[role="banner"] {
     text-align: center;
     padding-bottom: 0em;
+    background: #fff;
+    font-size: 1.6em;
+    padding-top: 0.5em;
 }
 
 article[role="article"] header {
@@ -32,4 +35,44 @@ a:hover {
 
 article {
     padding-top: 0;
+}
+
+a, a:visited {
+  color: #cc0033;
+}
+
+nav a, nav a:visited {
+    color: #9A9A9A;
+}
+
+nav a:hover {
+    color: #111;
+    text-decoration: none;
+}
+
+.front-title {
+    width:50%;
+    float: left;
+    margin-top: 0em;
+    text-align: left;
+}
+
+.front-title span {
+    font-style: italic;
+}
+
+.blog-index > article > .entry-content {
+    width: 50%;
+    float:right;
+}
+
+#content .blog-index article {
+    padding-top: 0.3em;
+}
+
+footer span.categories {
+    border-top: 1px solid #BFBFBF;
+    width: 100%;
+    display: block;
+    padding-top: 0.5em;
 }
