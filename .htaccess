@@ -1,4 +1,4 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteRule (.*) http://zanshin.net/$1 [R=Permanent]
+RewriteRule ^/feed /atom.xml [R=301, L]
