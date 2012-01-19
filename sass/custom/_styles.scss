@@ -56,13 +56,41 @@ nav a:hover {
 
 .front-title {
     width:50%;
-    float: left;
+    float: right;
     margin-top: 0em;
     text-align: left;
+    padding-left: 2em;
+}
+
+article header p {
+    color: #7E8683;
 }
 
 .front-title span {
     font-style: italic;
+}
+
+.front-title h1 {
+    margin: 0;
+}
+
+#content .blog-index article h1 {
+    font-size: 1.5em;
+}
+
+.blog-index .meta
+{
+    width: 50%;
+    margin-top: 0.4em;
+}
+
+.front-meta {
+    text-align: right;
+}
+
+.blog-index article {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E5E6E6;
 }
 
 .blog-index > article > .entry-content {
@@ -74,8 +102,12 @@ nav a:hover {
     padding-top: 0.3em;
 }
 
+body div {
+    border: 0;
+}
+
 footer span.categories {
-    border-top: 1px solid #BFBFBF;
+    border-top: 1px solid #E5E6E6;
     width: 100%;
     display: block;
     padding-top: 0.5em;
