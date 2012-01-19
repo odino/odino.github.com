@@ -1,5 +1,4 @@
 RewriteEngine on
 RewriteBase /
 
-RewriteCond %{HTTP_HOST} ^www.zanshin.net$
 RewriteRule (.*) http://zanshin.net/$1 [R=Permanent]
