@@ -62,11 +62,37 @@ keep up together.</p>
 
 <p>Being a nerd, it&#8217;s fun to spend time on something like <em>deploying my new article</em>
 or stuff like that: thanks to <a href="http://octopress.org/">Octopress</a> my technical
-sadism has been satisfied and now I can run my own blog to <a href="http://github.com">Github</a>,
-thanks to <em>Github pages</em>.</p>
+sadism has been satisfied and now I can run my own blog on <a href="http://github.com">Github</a>,
+thanks to <strong>Github pages</strong>.</p>
 
 <p>I am porting the old most viewed contents here, with some rewrites to ensure old
-links will not break (301).</p>
+links will not break: the problem is that Github Pages does not provide any way
+to reasonably handle an <code>.htaccess</code> file for your site, so the redirects are such
+this kind of crap:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;refresh&quot;</span> <span class="na">content=</span><span class="s">&quot;0;url=/my-new-url/&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So you, humans, will continue to consume old links while spiders and automated
+bots will never know that the old contents have switched location ( they will get
+a <code>200 OK</code> status code delivered by Github ).</p>
+
+<p>If someone of you knows how to handle a <code>301 Moved Permanently</code> on Github Pages&#8230;
+free beer.</p>
 </div>
 
 
