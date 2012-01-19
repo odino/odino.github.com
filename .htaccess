@@ -1,5 +1,5 @@
-Options +FollowSymLinks +ExecCGI
+RewriteEngine on
+RewriteBase /
 
-RewriteEngine On
-
-RewriteRule   ^oldstuff\.html$  /
+RewriteCond %{HTTP_HOST} ^www.zanshin.net$
+RewriteRule (.*) http://zanshin.net/$1 [R=Permanent]
