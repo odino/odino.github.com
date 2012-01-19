@@ -5,7 +5,7 @@ li {
     margin-left: 50px;
 }
 
-*, html {
+html {
     background: #fff;
 }
 
@@ -38,7 +38,11 @@ article {
 }
 
 a, a:visited {
-  color: #cc0033;
+  color: #940000;
+}
+
+a:hover {
+    color: #DE0000;
 }
 
 nav a, nav a:visited {
