@@ -4,6 +4,7 @@ title: "Getting back on OrientDB"
 date: 2012-01-3 17:16
 comments: true
 categories: OrientDB
+alias: "/397/getting-back-on-orientdb"
 ---
 
 It's been a while since I don't give any update about [Orient](https://github.com/congow/Orient),
