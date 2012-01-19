@@ -2,4 +2,4 @@ Options +FollowSymLinks +ExecCGI
 
 RewriteEngine On
 
-RewriteRule   ^oldstuff\.html$  newstuff.html
+RewriteRule   ^oldstuff\.html$  /
