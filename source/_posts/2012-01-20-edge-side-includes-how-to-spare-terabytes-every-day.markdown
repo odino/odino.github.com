@@ -28,7 +28,7 @@ across many clients.
   <body>
     ...
 
-    long pile of crap
+    pile of HTML
 
     ...
 
@@ -47,19 +47,12 @@ thanks to the Symfony2 architecture, fully embracing the HTTP specification:
 consider that Symfony2 has **no application-level caching layer**, so everything
 is done with the HTTP cache, and ESI is the solution for really dynamic webpages.
 
-...but who's responsible of processing ESI fragments?
-
-{% blockquote %}
-Processing ESI tags is a matter of an ESI processor
-{% endblockquote %}
-
-Thanks, captain obvious.
-
-Digging some more, an esi processor can be a [middleware in your architecture](http://rack.rubyforge.org/)
+...but who's responsible of processing ESI fragments? Digging some more, an esi
+processor can be a [middleware in your architecture](http://rack.rubyforge.org/)
 , a reverse proxy or a [software component](http://symfony.com/doc/2.0/book/http_cache.html#using-edge-side-includes)
 ; basically any kind of software implementing the ESI specification.
 
-But hey, all this kind of things are softwares that lie in the server side.
+But hey, all this kind of things are softwares that lie on the server side.
 
 ## A different approch ##
 
@@ -80,19 +73,19 @@ I was thinking about pushing ESI to the client side:
 </html>
 ```
 
-Seems an Ugly idea, cause if the browser is capable to merge different fragments, retrieved
+Seems a bad idea, since, if the browser is capable to merge different fragments, retrieved
 with different HTTP requests, for assembling a really simple webpage you would
 need to hit your application much more times than with a single request, so there
 is no real need to ask for ESI support in clients, in this scenario.
 
-But there's a *real-world* application of ESI in the client side that should
+But there's a *real-world* application of ESI on the client side that should
 **save lot of traffic** over the internet and **lot of bandwith**.
 
 **Rarely-changing output fragments**.
 
 A RCOF - sorry for this bad acronym - is everything that can be **cached for
 relatively long time** (talking more about days than hours), like Facebook's
-footer of your google analytics JS code.
+footer or your google analytics JS code.
 
 {% img center /images/fb.footer.png %}
 
@@ -100,9 +93,9 @@ footer of your google analytics JS code.
 
 Why should we always transport Facebook's footer over the network?
 
-We don't need this waste: once the user landed on his profile page, as he jumps
-to other FB pages, the footer it's always the same, and should be retrieved from
-the client's cache instead of being sent over the network.
+We don't need it: once the user landed on his profile page, as he jumps
+to other FB pages, **the footer it's always the same**, and **should be retrieved from
+the client's cache** instead of being sent over the network.
 
 This means that once you send your response
 
@@ -132,7 +125,7 @@ requests, also **on different webpages**, it can use the cached fragment:
 because it recognizes that fragment has been already retrieved once you requested
 the "Your profile" page.
 
-You probably don't get the great aspect of ESI in the client side, so **carefully
+You probably don't get the great aspect of ESI on the client side, so **carefully
 read the next chapter**.
 
 ## A few numbers
@@ -168,24 +161,46 @@ approaches, traditional and ESIsh, is trivial:
 
 * Facebook has something more than [400M daily users](http://www.facebook.com/press/info.php?statistics)
 * it has [12 pageviews per user](http://www.alexa.com/siteinfo/facebook.com)
-* retrieving the footer the traditional way, we add 1.5k of data each users' request
-* retrieving it with ESI, we add 1.5k of data for the first users' request,
-0.5k for the consequent ones
+* retrieving the footer the traditional way, we add `1.5k` of data each users' request
+* retrieving it with ESI, we add `1.5k` of data for the first users' request,
+`0.5k` for the consequent ones
 
 Then we can extrapolate some data:
 
-``` Facebook daily pageviews
-daily users * avg pageviews = 400M * 12 = 4800M
+``` html Facebook daily pageviews
+daily users * avg pageviews
+
+400M * 12
+
+4800M
 ```
 
-```Data traffic without client-side ESI
-daily pageviews * footer fragment weight = 4800M * 1.4k = ~12 terabytes
+``` html Data traffic without client-side ESI
+daily pageviews * footer fragment weight
+
+4800M * 1.4k
+
+~6.25 terabytes
 ```
 
-```Data traffic with client-side ESI
-(first requests * footer fragment weight) + ((daily pageviews - first pageviews) * ESI tag weight) = (400M * 1.4k) + ((4800M - 400M) * 0.5k) = ~7 terabytes
+``` html Data traffic with client-side ESI
+(first requests * footer fragment weight) + ((daily pageviews - first pageviews) * ESI tag weight)
+
+(400M * 1.4k) + ((4800M - 400M) * 0.5k)
+
+~2.57 terabytes
 ```
 
+So, just for the footer, **facebook could decrease the internet traffic by 2 and a
+half terabytes *per day***, just looking at its footer.
+
+It's obvious that **this approach rewards facebook** (it processes less stuff on his
+side, whether it uses a reverse proxy as gateway cache or not), ISPs and the final
+user, who's taking advantage of a (more) **lean network**.
+
+If you enlarge your vision, think about sites like Google, LinkedIN, twitter and all
+those web applications which send **useless pieces of HTTP responses over the
+internet**.
 
 ## Client side ESI invalidation
 
@@ -200,7 +215,7 @@ really easy:
   <body>
     ...
 
-    Pile of FB crap
+    pile of FB code
 
     ...
 
@@ -217,7 +232,7 @@ really easy:
   <body>
     ...
 
-    Pile of FB crap
+    pile of FB code
 
     ...
 
@@ -226,19 +241,20 @@ really easy:
 </html>
 ```
 
-Note the revision change in the ESI tag, something we already, daily, use for
-managing static assets' caching.
+Note the **revision change in the ESI tag**, something we already, daily, use for
+managing [static assets' caching](http://muffinresearch.co.uk/archives/2008/04/08/automatic-asset-versioning-in-django/).
 
 ## This is not a panacea
 
 I don't wanna sound arrogant proposing this tecnique, but I would really like to
-get feedbacks about such this kind of approach.
+**get feedbacks about such this kind of approach**: as stated, this can be a
+great plus for the global network but its **limited to RCOF**.
 
 The only aspect I haven't considered yet is the second HTTP request the browser
-needs to do to retrieve the fragment, once, parsing the response, it found an ESI
-tag: since I really don't know how to calculate this kind of metric, any help would
-be appreciated.
+needs to do to retrieve the fragment, once, parsing the response, it finds an ESI
+tag: since I really don't know how to calculate how it affects the network,
+so any kind of help would be appreciated.
 
-The aim of this post is to consider if browser vendors should really start thinking
-about implementing ESI processors directly in their products, for a better, faster
+The aim of this post is to consider if **browser vendors should really start thinking
+about implementing ESI processors** directly in their products, for a better, faster
 and leaner web.
