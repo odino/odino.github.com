@@ -1,5 +1,4 @@
 ---
-published: false
 layout: post
 title: "Edge Side Includes, how to spare terabytes every day"
 date: 2012-01-20 14:15
