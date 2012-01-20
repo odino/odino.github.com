@@ -1,57 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-01-20T01:54:56+01:00</updated>
-  <id>http://odino.github.com/</id>
-  <author>
-    <name><![CDATA[Alessandro Nadalin]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Creating your own services for the Symfony2 DIC - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
 
   
-  <entry>
-    <title type="html"><![CDATA[Getting back on OrientDB]]></title>
-    <link href="http://odino.github.com/getting-back-on-orientdb/"/>
-    <updated>2012-01-03T17:16:00+01:00</updated>
-    <id>http://odino.github.com/getting-back-on-orientdb</id>
-    <content type="html"><![CDATA[<p>It&#8217;s been a while since I don&#8217;t give any update about
-<a href="https://github.com/congow/Orient">Orient</a>,
-the library we are developing to work with
-<a href="http://www.orientechnologies.com/orient-db.htm">OrientDB</a>
-in PHP&#8230;</p>
+  <meta name="description" content="I want you to know how to write a service and let the container handle it for you. This post comes from a very cool evening with Jacopo Romei
+and &hellip;">
+  
 
-<!-- more -->
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.github.com/creating-your-own-services-for-the-symfony2-dic">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
 
-<p>&#8230;so here&#8217;s a brief recap:</p>
+</head>
 
-<ul>
-<li><a href="https://twitter.com/#!/jol1hahn">Daniele</a> has joined the team, with some great
-brand new ideas ( the adoption, for example, of
-<a href="https://github.com/composer/composer">Composer</a>; I will blog later on this )</li>
-<li>I am personally taking care of finishing the open issues ( mostly integration tests )
-for the <code>beta-5</code> release, the one introducing <strong>objects hydration</strong></li>
-<li><a href="http://davidfunaro.com/">David</a> is leading the moves for the <code>beta-6</code> release,
-which is the last one before going RC, introducing <strong>persistence</strong> into the
-<a href="https://github.com/congow/Orient/tree/master/src/Congow/Orient/ODM">data mapper</a></li>
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Creating your own services for the Symfony2 DIC</a></h1>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
 </ul>
 
-
-<p>Uh, well, <a href="http://code.google.com/p/orient/wiki/Y2011">happy 2012</a>: this year we
- will see some great things from OrientDB and its ecosystem!</p>
-]]></content>
-  </entry>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
   
-  <entry>
-    <title type="html"><![CDATA[Creating your own services for the Symfony2 DIC]]></title>
-    <link href="http://odino.github.com/creating-your-own-services-for-the-symfony2-dic/"/>
-    <updated>2011-01-08T19:50:00+01:00</updated>
-    <id>http://odino.github.com/creating-your-own-services-for-the-symfony2-dic</id>
-    <content type="html"><![CDATA[<p>I want you to know how to write a service and let the container handle it for you.</p>
+<div class="entry-content"><p>I want you to know how to write a service and let the container handle it for you.</p>
 
 <!-- more -->
 
@@ -99,7 +115,7 @@ application bundle, <code>HelloBundle</code>, which exposes the route:</p>
 
 <p>and renders a template saying <code>hello</code> to the name:</p>
 
-<p><img class="center" src="http://odino.github.com/images/hello.sf2.png"></p>
+<p><img class="center" src="/images/hello.sf2.png"></p>
 
 <p>We will add the mood of our application to that page ;-)</p>
 
@@ -373,7 +389,7 @@ argument to the template:</p>
 
 <p>then edit the twig template:</p>
 
-<figure class='code'><figcaption><span>[src/Application/HelloBundle/Resource/views/Hello/index.twig] [] (dic.twig)</span> <a href='http://odino.github.com/downloads/code/dic.twig'>download</a></figcaption>
+<figure class='code'><figcaption><span>[src/Application/HelloBundle/Resource/views/Hello/index.twig] [] (dic.twig)</span> <a href='/downloads/code/dic.twig'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -397,7 +413,7 @@ argument to the template:</p>
 
 <p>So, let&#8217;s see it in action:</p>
 
-<p><img class="center" src="http://odino.github.com/images/on-no-sf2.png"></p>
+<p><img class="center" src="/images/on-no-sf2.png"></p>
 
 <p>Now we can edit the service configuration:</p>
 
@@ -410,7 +426,7 @@ argument to the template:</p>
 
 <p>and see what happens:</p>
 
-<p><img class="center" src="http://odino.github.com/images/sf2-sunshine.png"></p>
+<p><img class="center" src="/images/sf2-sunshine.png"></p>
 
 <h2>&#8220;Oh shit&#8221;&#8230; A bit lost? Here&#8217;s a recap!</h2>
 
@@ -440,7 +456,69 @@ the class with a really simple:</p>
 
 
 <p>the result is that you get an instance of your service configured as you want.</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
   
-</feed>
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-08T19:50:00+01:00" pubdate data-updated="true">Saturday, 08 January 2011 at 19:50</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/peaa/'>PEAA</a>, <a class='category' href='/blog/categories/symfony2-/'>Symfony2,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/getting-back-on-orientdb/" title="next Post: Getting back on OrientDB">Getting back on OrientDB &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
