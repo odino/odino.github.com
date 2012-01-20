@@ -1,4 +1,5 @@
 ---
+published: false
 layout: post
 title: "Edge Side Includes, how to spare terabytes every day"
 date: 2012-01-20 14:15
@@ -62,11 +63,7 @@ But hey, all this kind of things are softwares that lie in the server side.
 
 ## A different approch ##
 
-I was thinking about pushing ESI to the client side.
-
-Ugly idea, cause if the browser is capable to merge different fragments, retrieved
-with different HTTP requests, for assembling a really simple webpage you would
-need to hit your application far more times than a single request.
+I was thinking about pushing ESI to the client side:
 
 ``` html The response retrieved with the browser would generate lots of subrequests
 <html>
@@ -83,7 +80,10 @@ need to hit your application far more times than a single request.
 </html>
 ```
 
-So there is no real need to ask for ESI support in clients, in this scenario.
+Seems an Ugly idea, cause if the browser is capable to merge different fragments, retrieved
+with different HTTP requests, for assembling a really simple webpage you would
+need to hit your application much more times than with a single request, so there
+is no real need to ask for ESI support in clients, in this scenario.
 
 But there's a *real-world* application of ESI in the client side that should
 **save lot of traffic** over the internet and **lot of bandwith**.
@@ -104,7 +104,88 @@ We don't need this waste: once the user landed on his profile page, as he jumps
 to other FB pages, the footer it's always the same, and should be retrieved from
 the client's cache instead of being sent over the network.
 
+This means that once you send your response
+
+``` html Your profile page
+<body>
+    <h1>My Profile!</h1>
+
+    ...
+
+    <esi:include src="http://example.com/footer.html" />
+</body>
+```
+
+the browser makes an additional request to retrieve the footer and then, on subsequent
+requests, also **on different webpages**, it can use the cached fragment:
+
+``` html Facebook help center
+<body>
+    <h1>Hi n00b, how can we help you?</h1>
+
+    ...
+
+    <esi:include src="http://example.com/footer.html" />
+</body>
+```
+
+because it recognizes that fragment has been already retrieved once you requested
+the "Your profile" page.
+
+You probably don't get the great aspect of ESI in the client side, so **carefully
+read the next chapter**.
+
 ## A few numbers
+
+Facebook's footer is about `1.4k`:
+
+``` html
+<div id="pageFooter" data-referrer="page_footer">
+    <div id="contentCurve"></div>
+    <div class="clearfix" id="footerContainer">
+        <div class="mrl lfloat" role="contentinfo">
+            <div class="fsm fwn fcg">
+                <span> Facebook © 2012</span> · <a rel="dialog" href="/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+            </div>
+        </div>
+        <div class="navigation fsm fwn fcg" role="navigation">
+            <a href="http://www.facebook.com/facebook" accesskey="8" title="Read our blog, discover the resource center, and find job opportunities.">About</a> · <a href="http://www.facebook.com/campaign/landing.php?placement=pf&amp;campaign_id=402047449186&amp;extra_1=auto" title="Advertise on Facebook.">Advertising</a> · <a href="http://www.facebook.com/pages/create.php?ref_type=sitefooter" title="Create a Page">Create a Page</a> · <a href="http://developers.facebook.com/?ref=pf" title="Develop on our platform.">Developers</a> · <a href="http://www.facebook.com/careers/?ref=pf" title="Make your next career move to our awesome company.">Careers</a> · <a href="http://www.facebook.com/privacy/explanation" title="Learn about your privacy and Facebook.">Privacy</a> · <a href="http://www.facebook.com/legal/terms?ref=pf" accesskey="9" title="Review our terms of service.">Terms</a> · <a href="http://www.facebook.com/help/?ref=pf" accesskey="0" title="Visit our Help Center.">
+                Help
+            </a>
+        </div>
+    </div>
+</div>
+```
+
+while an ESI fragment is `0.5k`:
+
+``` xml
+<esi:include src="http://facebook.com/footer" />
+```
+
+Calculating how much traffic the internet needs to sustain with the 2
+approaches, traditional and ESIsh, is trivial:
+
+* Facebook has something more than [400M daily users](http://www.facebook.com/press/info.php?statistics)
+* it has [12 pageviews per user](http://www.alexa.com/siteinfo/facebook.com)
+* retrieving the footer the traditional way, we add 1.5k of data each users' request
+* retrieving it with ESI, we add 1.5k of data for the first users' request,
+0.5k for the consequent ones
+
+Then we can extrapolate some data:
+
+``` Facebook daily pageviews
+daily users * avg pageviews = 400M * 12 = 4800M
+```
+
+```Data traffic without client-side ESI
+daily pageviews * footer fragment weight = 4800M * 1.4k = ~12 terabytes
+```
+
+```Data traffic with client-side ESI
+(first requests * footer fragment weight) + ((daily pageviews - first pageviews) * ESI tag weight) = (400M * 1.4k) + ((4800M - 400M) * 0.5k) = ~7 terabytes
+```
+
 
 ## Client side ESI invalidation
 
@@ -148,7 +229,16 @@ really easy:
 Note the revision change in the ESI tag, something we already, daily, use for
 managing static assets' caching.
 
-## Opinions?
+## This is not a panacea
 
 I don't wanna sound arrogant proposing this tecnique, but I would really like to
 get feedbacks about such this kind of approach.
+
+The only aspect I haven't considered yet is the second HTTP request the browser
+needs to do to retrieve the fragment, once, parsing the response, it found an ESI
+tag: since I really don't know how to calculate this kind of metric, any help would
+be appreciated.
+
+The aim of this post is to consider if browser vendors should really start thinking
+about implementing ESI processors directly in their products, for a better, faster
+and leaner web.
