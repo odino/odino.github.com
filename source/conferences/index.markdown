@@ -13,7 +13,7 @@ presentations you'd better visit my [slideshare account](http://www.slideshare.n
 
 Here's a summary of the most important ones:
 
-{% img right images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
+{% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
 * [Graph databases in PHP](http://www.slideshare.net/odino/graph-databases-in-php-phpcon-poland-10222011), 
 given at the PHPCon Poland 2011 in Kielce (PL), dealing with the theory behind **graph databases** and how to use OrientDB in PHP
