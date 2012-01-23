@@ -15,19 +15,18 @@ some fresh new words.
 ## RESTcalation ##
 
 REST became popular as an alternative to [SOAP](http://www.w3.org/TR/2000/NOTE-SOAP-20000508/)
-in writing webservices.
-
-They are different and some kind of complementary in so many ways: first of all,
-**SOAP is not an architectural style**; this is pretty interesting since lot of people
-actually think that **REST *equals* some kind of API style**.
+in writing webservices, while, in fact, they are different and some kind
+of complementary in some ways: first of all, **SOAP is not an architectural
+style**; this is pretty interesting since lot of people actually think that
+**REST *equals* some kind of API style**.
 
 It was pretty obvious that REST would have gained so much attention:
 
 * sold as **SOAP's nemesis**, while developers were starting to feel frustrated
 with the WS-* stack
-* it seemed so simple: GET, POST, 404, 200, Cache-Control and you're done
-* many RAD frameworks were using URI templates, so it seemed that using such
-this kind of schemes was a **really good standardization** (while, in fact, they
+* it seemed so simple: `GET`, `POST`, `404`, `200`, `Cache-Control` and you're done
+* many RAD frameworks were using **URI templates**, so it seemed that using such
+this kind of schemes was a **really good standardization** (while they
 are coupling-prone{% footnote_ref 1 %}, one of the aspects that REST fights)
 
 REST has - basically - 5 constraints ( the sixth one is
@@ -55,18 +54,17 @@ The greatest example of uniform interface is the [HTTP protocol](http://my.safar
 something able to make 2 pieces of software talk an [ubiquitous language](http://domaindrivendesign.org/node/132).
 
 Think about HTTP verbs, status codes and media types which are transported along the
-network: without HTTP everything would be a mess, **a complete mess**.
-
-Thanks to the HTTP protocol we are [able to face most of the real-world use-cases we need
-to model in our software with a universal way to communicate applications' workflows](http://tomayko.com/writings/rest-to-my-wife).
-
-## What is the greatest feature that the HTTP protocol leveraged? ##
+network: without HTTP
+[it would be hard to face most of the real-world use-cases](http://tomayko.com/writings/rest-to-my-wife)
+we need to model in our software with a universal way to communicate applications' workflows.
 
 This{% footnote_ref 3 %} wouldn't be sensational omitting two things which explain
 why the web has been able to tremendously benefit from its uniform interface:
 **media types** and **hyperlinks**.
 
-Media types are basically the contract{% footnote_ref 4 %} between a client and
+## Media types
+
+They are - basically - the contract{% footnote_ref 4 %} between a client and
 a server, which defines how they should communicate and exchange resources: an
 example is `application/xml`, another one is `text/plain`: never forget that
 you can have *vendor-specific* media types (in [DNSEE](http://www.dnsee.com) we have
@@ -74,9 +72,9 @@ used our own `application/vnd.dnsee.ses.+xml;v=1.0`{% footnote_ref 5 %}, an XML 
 atom-based - dialect), if you are not ok with re-using existing types from the
 [IANA registry](http://www.iana.org/assignments/media-types/index.html).
 
-Media types are not only bound to HTTP responses' bodies, since - before even
-parsing a response's body - machines can agree on exchanging informations in a
-specific format:
+Media types are not only important for understanding HTTP responses' bodies,
+since - before even parsing a response's body - machines can agree on exchanging
+informations in a specific format:
 
 ``` bash The Accept header of an HTTP request
 Accept: text/*, text/html
@@ -85,7 +83,7 @@ Accept: text/*, text/html
 The `Accept` header seen above is an example of how a client tells a server
 **which media types it understands**: 
 
-* `text/*` is accepted, telling the server that any kind of text-based media
+* `text/*` tells the server that any kind of text-based media
 type can be succesfully interpreted by the client
 * being a declination of `text/*`, `text/html` should be the preferred response
 format
@@ -106,8 +104,7 @@ at the protocol level: for example, if the server  - on a certain resource -
 provides an `Allow: HEAD, GET` and the client PUTs at that resource it will
 receive a `405 Method Not Allowed` back.
 
-Another important aspect of the web's success is the extensive usage of
-**hypermedias**.
+## Hypermedia
 
 {% blockquote Roy Fielding http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718 REST API must be hypertext-driven %}
 When I say hypertext, I mean the simultaneous presentation of information and
@@ -117,7 +114,7 @@ expansion on what text means to include temporal anchors within a media stream;
 most researchers have dropped the distinction.
 {% endblockquote %}
 
-When talking about hypermedia on the web, we usually imagine **hyperlinks**:
+When talking about hypermedia on the web, we usually think about **hyperlinks**:
 
 ``` html A simple example of web link
 <a href="http://amazon.com" >Cool stuff</a>
