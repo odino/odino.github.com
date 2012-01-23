@@ -164,7 +164,6 @@ We can throw some basic hypermedia to the mix:
   <id>38</id>
   <avatar>http://personas.com/avatar.jpg</avatar>
   <description>...</description>
-  <link
   <atom:link href="http://example.org/cities/302" rel="http://example.com/cities" type="application/xml" />
   ...
 </persona>
