@@ -119,3 +119,21 @@ p.article-date {
     padding-top: 0.5em;
     color: #9A9A9A;
 }
+
+sup, sub {
+	padding: 0 0.2em;
+	display: inline;
+}
+
+.footnotes {
+    font-size: 0.8em;
+    border-top: 1px solid #E5E6E6;
+    color: #6B6B6B;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.footnotes span {
+    font-size: 1em;
+    text-transform: uppercase;
+}
