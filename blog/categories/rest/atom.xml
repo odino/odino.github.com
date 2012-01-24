@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: REST | Alessandro Nadalin]]></title>
+  <link href="http://odino.github.com/blog/categories/rest/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-01-24T03:21:20+01:00</updated>
+  <id>http://odino.github.com/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
+    <link href="http://odino.github.com/hypermedia-services-beyond-rest-architectures/"/>
+    <updated>2012-01-22T12:04:00+01:00</updated>
+    <id>http://odino.github.com/hypermedia-services-beyond-rest-architectures</id>
+    <content type="html"><![CDATA[<p>RESTafarians should support the abandon of the
+original term - REpresentational State Transfer -  in favour of
+some fresh new words.</p>
+
+<!-- more -->
+
+
+<h2>RESTcalation</h2>
+
+<p>REST became popular as an alternative to <a href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/">SOAP</a>
+in writing webservices, while, in fact, they are different and some kind
+of complementary in some ways: first of all, <strong>SOAP is not an architectural
+style</strong>; this is pretty interesting since lot of people actually think that
+<strong>REST <em>equals</em> some kind of API style</strong>.</p>
+
+<p>It was pretty obvious that REST would have gained so much attention:</p>
+
+<ul>
+<li>sold as <strong>SOAP's nemesis</strong>, while developers were starting to feel frustrated
+with the WS-* stack</li>
+<li>it seemed so simple: <code>GET</code>, <code>POST</code>, <code>404</code>, <code>200</code>, <code>Cache-Control</code> and you're done</li>
+<li>many RAD frameworks were using <strong>URI templates</strong>, so it seemed that using such
+this kind of schemes was a <strong>really good standardization</strong> (while they
+are coupling-prone<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, one of the aspects that REST fights)</li>
+</ul>
+
+
+<p>REST has - basically - 5 constraints ( the sixth one is
+<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_7">Code On Demand</a>,
+but it's not <em>that</em> important ):</p>
+
+<ul>
+<li>client/server communication</li>
+<li>stateleness</li>
+<li>caching</li>
+<li>layering</li>
+<li>uniform interface</li>
+</ul>
+
+
+<p>and, on the web, mainly with the HTTP protocol, people have been able to build:</p>
+
+<ul>
+<li>client/server models</li>
+<li>stateless communications</li>
+<li>cacheable resources</li>
+<li>layered systems<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup></li>
+</ul>
+
+
+<p>What's missing? The <strong>uniform interface</strong>.</p>
+
+<h2>What is REST's uniform interface?</h2>
+
+<p>The greatest example of uniform interface is the <a href="http://my.safaribooksonline.com/9780596809140/1">HTTP protocol</a>:
+something able to make 2 pieces of software talk an <a href="http://domaindrivendesign.org/node/132">ubiquitous language</a>.</p>
+
+<p>Think about HTTP verbs, status codes and media types which are transported along the
+network: without HTTP
+<a href="http://tomayko.com/writings/rest-to-my-wife">it would be hard to face most of the real-world use-cases</a>
+we need to model in our software with a universal way to communicate applications' workflows.</p>
+
+<p>This<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup> wouldn't be sensational omitting two things which explain
+why the web has been able to tremendously benefit from its uniform interface:
+<strong>media types</strong> and <strong>hyperlinks</strong>.</p>
+
+<h2>Media types</h2>
+
+<p>They are - basically - the contract<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup> between a client and
+a server, which defines how they should communicate and exchange resources: an
+example is <code>application/xml</code>, another one is <code>text/plain</code>: never forget that
+you can have <em>vendor-specific</em> media types (in <a href="http://www.dnsee.com">DNSEE</a> we have
+used our own <code>application/vnd.dnsee.ses.+xml;v=1.0</code><sup id='fnref:5'><a href='#fn:5' rel='footnote'>5</a></sup>, an XML -
+atom-based - dialect), if you are not ok with re-using existing types from the
+<a href="http://www.iana.org/assignments/media-types/index.html">IANA registry</a>.</p>
+
+<p>Media types are not only important for understanding HTTP responses' bodies,
+since - before even parsing a response's body - machines can agree on exchanging
+informations in a specific format:</p>
+
+<p><code>bash The Accept header of an HTTP request
+Accept: text/*, text/html
+</code></p>
+
+<p>The <code>Accept</code> header seen above is an example of how a client tells a server
+<strong>which media types it understands</strong>:</p>
+
+<ul>
+<li><code>text/*</code> tells the server that any kind of text-based media
+type can be succesfully interpreted by the client</li>
+<li>being a declination of <code>text/*</code>, <code>text/html</code> should be the preferred response
+format</li>
+</ul>
+
+
+<p>Servers can behave in different ways based on the media-type requested or used by
+clients: for example, if the client POSTs a new resource with a media type the
+server doesn't get, it will receive back a <code>406 Not Acceptable</code> status code.</p>
+
+<p>All these practices have a name, <strong>content negotiation</strong>, which is applied not
+only to media types but also to more human concepts, like responses' language:</p>
+
+<p><code>bash Content negotation based on the language of the resource
+Accept-Language: en; q=1.0, it; q=0.7
+</code></p>
+
+<p>Acceptance is not the only criteria used to instantiate a correct communication
+at the protocol level: for example, if the server  - on a certain resource -
+provides an <code>Allow: HEAD, GET</code> and the client PUTs at that resource it will
+receive a <code>405 Method Not Allowed</code> back.</p>
+
+<h2>Hypermedia</h2>
+
+<p><blockquote><p>When I say hypertext, I mean the simultaneous presentation of information and<br/>controls such that the information becomes the affordance through which the user<br/>(or automaton) obtains choices and selects actions. Hypermedia is just an<br/>expansion on what text means to include temporal anchors within a media stream;<br/>most researchers have dropped the distinction.</p><footer><strong>Roy Fielding</strong> <cite><a href='http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven#comment-718'>REST API Must Be Hypertext-driven</a></cite></footer></blockquote></p>
+
+<p>When talking about hypermedia on the web, we usually think about <strong>hyperlinks</strong>:</p>
+
+<p><code>html A simple example of web link
+&lt;a href="http://amazon.com" &gt;Cool stuff&lt;/a&gt;
+</code></p>
+
+<p>without considering that hyperlinks can be really complex data structures:</p>
+
+<p>``` html A more complex hyperlinking example
+&lt;a
+  href="http://amazon.com/payment/2068"
+  rel="payment"
+  hreflang="en"
+  type="text/html"
+  name="amazon-payment-2068"</p>
+
+<blockquote><p>Cool stuff</a>
+```</p></blockquote>
+
+<p>and that they are not bound to (X)HTML documents:</p>
+
+<p><code>xml Atom link indicating how to edit a resource
+&lt;link href="http://odino.github.com/personas/100" rel="edit" type="application/json"&gt;Modify this!&lt;/link&gt;
+</code></p>
+
+<p><a href="http://ietfreport.isoc.org/idref/draft-nottingham-http-cache-channels/">Cache channels</a>
+, which let you build more efficient, reliable and scalable services, are a good example
+of leveraging the power of hyperlinks in a complex scenario:</p>
+
+<p>``` xml A cache channel: reverse proxies take a loot at them in order to invalidate cached representations
+  <feed xmlns="http://www.w3.org/2005/Atom"
+   xmlns:cc="http://purl.org/syndication/cache-channel"></p>
+
+<pre><code>&lt;title&gt;Invalidations for www.example.org&lt;/title&gt;
+&lt;id&gt;http://admin.example.org/events/&lt;/id&gt;
+&lt;link rel="self"
+ href="http://admin.example.org/events/current"/&gt;
+&lt;link rel="prev-archive"
+ href="http://admin.example.org/events/archive/1234"/&gt;
+&lt;updated&gt;2007-04-13T11:23:42Z&lt;/updated&gt;
+&lt;author&gt;
+   &lt;name&gt;Administrator&lt;/name&gt;
+   &lt;email&gt;web-admin@example.org&lt;/email&gt;
+&lt;/author&gt;
+&lt;cc:precision&gt;60&lt;/cc:precision&gt;
+&lt;cc:lifetime&gt;2592000&lt;/cc:lifetime&gt;
+&lt;entry&gt;
+  &lt;title&gt;stale&lt;/title&gt;
+  &lt;id&gt;http://admin.example.org/events/1125&lt;/id&gt;
+  &lt;updated&gt;2007-04-13T10:31:01Z&lt;/updated&gt;
+  &lt;link href="http://www.example.org/img/123.gif" type="image/gif"/&gt;
+  &lt;link href="http://www.example.org/img/123.png" type="image/png"/&gt;
+  &lt;cc:stale/&gt;
+&lt;/entry&gt;
+</code></pre>
+
+<p>  </feed>
+```</p>
+
+<p>Hyperlinks are used to connect resources and verify their freshness in a M2M scenario,
+and not only rendered by a browser "just" to be clicked by a user.</p>
+
+<h2>REST in the world</h2>
+
+<p>Never talked about <a href="http://tools.ietf.org/html/rfc3023">media types</a> with your
+colleagues?  <br/>
+Ordinary.</p>
+
+<p>Never heard about <a href="http://www.w3.org/TR/html4/struct/links.html#adef-hreflang">hreflang</a>
+attributes in hyperlinking?  <br/>
+Ordinary.</p>
+
+<p>Don't you know the difference between <code>text/xml</code> and <code>application/xml</code>?  <br/>
+Ordinary.</p>
+
+<p>Never thought that if you consume some data, when their URL changes you can still
+fetch them without changing any line of code?  <br/>
+Less ordinary, but I can't judge you.</p>
+
+<p>REST failed: most of the times we hear people talking about REST they discuss about
+building <em>*plain-old-XML over HTTP webservices</em>, without even knowing the importance of
+having an extensible infrastructure supporting updates and not breaking
+retrocompatibility with your consumers.</p>
+
+<h2>Enter hypermedia services</h2>
+
+<p><blockquote><p>By applying the software engineering principle of generality to the component interface, the overall system architecture is simplified and the visibility of interactions is improved. Implementations are decoupled from the services they provide, which encourages independent evolvability.<br/>The trade-off, though, is that a uniform interface degrades efficiency, since information is transferred in a standardized form rather than one which is specific to an application's needs.<br/>The REST interface is designed to be efficient for large-grain hypermedia data transfer, optimizing for the common case of the Web, but resulting in an interface that is not optimal for other forms of architectural interaction.</p><footer><strong>Roy Fielding</strong> <cite><a href='http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_5'>The Uniform Interface</a></cite></footer></blockquote></p>
+
+<p>Hypermedia services are the ones that rely on hypermedia controls in order to efficiently
+implement decoupling and avoid breaking retrocompatibility.</p>
+
+<p>For instance, let's look at the <em>URI templates coupling</em> problem:</p>
+
+<p><code>bash When a resource is created, tell the client its address
+201 Created
+Location: /personas/24
+</code></p>
+
+<p><code>bash When a resource is moved, tell the client its new address
+301 Moved Permanently
+Location: /api/personas/24
+</code></p>
+
+<p>``` html Throw some semantic CRUD into the mix</p>
+
+<ul>
+  <li>
+    <a href="http://odino.github.com/products/5" rel="update" ... >Product 1</a>
+  </li>
+  ...
+```
+
+## Enter hypermedia-aware clients
+
+<blockquote><p>When the client decides which URI to call and when, they run the risk of attempting to request state transitions<br/>that are not valid for the current state of the server side resource. <br/>An example from my problem domain ... it's not allowed to "start" a virtual machine (VM) until you have "deployed" it.<br/>The server knows about URIs to initiate each of the state changes (via a POST), but the<br/>representation of the VM lists only the URIs for state transitions that are valid from the current state.<br/>This makes it extremely easy for the client to understand that trying to start a VM that hasn't been deployed yet is not legal, because there will be no corresponding URI in the VM representation.</p><footer><strong>Craing McClanahan</strong> <cite><a href='http://tech.groups.yahoo.com/group/rest-discuss/message/12358'>REST-discuss Mailing List</a></cite></footer></blockquote>
+
+Hypermedia-aware clients are those client able to detect, understand, process, ignore hypermedia
+controls, making no assumption in consuming a resource.
+
+People should really care about implementing HATEOAS<sup id='fnref:6'><a href='#fn:6' rel='footnote'>6</a></sup> and HATEOAS-detection,
+since it has proven to be a winning factor in writing robust, fault-tolerant, balanced and
+durable systems:
+
+<div class="slideshare" id="__ss_1547275"><iframe src="http://www.slideshare.net/slideshow/embed_code/1547275 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>URI templates would not be a problem - per sè - if developers wouldn\'t forget about decoupling URIs with the application\'s flow <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Layered system are now a big part of the web, not only of the enterprise world, thanks to social services and the social web: in order to face webscale problems we now need - more than ever - reverse proxies, gateway caches, the cloud... <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Machine-To-Machine ubiquitous communication <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>As stated earlier in some of my posts or at some conferences, REST has contracts (called media types) just like SOAP has WSDLs <a href='#fnref:4' rev='footnote'>↩</a></li><li id='fn:5'>"ses" stands for Service Expression Synthax <a href='#fnref:5' rev='footnote'>↩</a></li><li id='fn:6'>Hypermedia As The Engine Of Application State <a href='#fnref:6' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+
+
+]]></content>
+  </entry>
+  
+</feed>
