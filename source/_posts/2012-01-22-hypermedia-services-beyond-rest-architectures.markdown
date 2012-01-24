@@ -1,7 +1,6 @@
 ---
-published: false
 layout: post
-title: "Hypermedia services: beyond REST architectures"
+title: "Media types and hypermedia services: beyond REST architectures"
 date: 2012-01-22 12:04
 comments: true
 categories: [REST, HATEOAS, hypermedia, webservice]
@@ -138,63 +137,41 @@ and that they are not bound to (X)HTML documents:
 <link href="/personas/100" rel="edit" type="application/json">Modify this!</link>
 ```
 
-Given this, let's analyze how to refactor a *plain-old-XML* document:
-
-``` xml An XML document representing a person and its city
-<persona>
-  <id>38</id>
-  <avatar>http://personas.com/avatar.jpg</avatar>
-  <description>...</description>
-  <city>
-    <name>Rome</name>
-    <description>...</name>
-  </city>
-  ...
-</persona>
-```
-
-We can throw some basic hypermedia to the mix:
-
-``` xml The XML document refactored
-// import the atom namespace
-<persona>
-  <id>38</id>
-  <avatar>http://personas.com/avatar.jpg</avatar>
-  <description>...</description>
-  <atom:link href="http://example.org/cities/302" rel="http://example.com/cities" type="application/xml" />
-  ...
-</persona>
-```
-
-This is important for some factors:
-
-* payload: your response is lightweight
-* caching: you fragment your resources, having the possibility to specify different
-*time-to-live*
-* fallbacks: getting a `404` on the city, a client is able to render a response
-saying that informations on the city are currently unavailable, but the main
-object - person - is complete
-
-and many others that you can imagine.
-
-Pushing forward this *linking passion*, here's how you solve URI templates
-coupling:
-
-``` bash When a resource is created, tell the client its address
-201 Created
-Location: /personas/24
-```
-
-``` bash When a resource is moved, tell the client its new address
-301 Moved Permanently
-Location: /api/personas/24
-```
-
-A more complex example of the advantages of *going hyperlinked*?
 [Cache channels](http://ietfreport.isoc.org/idref/draft-nottingham-http-cache-channels/)
-, which let you build more efficient, reliable and scalable services.
+, which let you build more efficient, reliable and scalable services, are a good example
+of leveraging the power of hyperlinks in a complex scenario:
 
-## No one knows
+``` xml A cache channel: reverse proxies take a loot at them in order to invalidate cached representations
+  <feed xmlns="http://www.w3.org/2005/Atom"
+   xmlns:cc="http://purl.org/syndication/cache-channel">
+    <title>Invalidations for www.example.org</title>
+    <id>http://admin.example.org/events/</id>
+    <link rel="self"
+     href="http://admin.example.org/events/current"/>
+    <link rel="prev-archive"
+     href="http://admin.example.org/events/archive/1234"/>
+    <updated>2007-04-13T11:23:42Z</updated>
+    <author>
+       <name>Administrator</name>
+       <email>web-admin@example.org</email>
+    </author>
+    <cc:precision>60</cc:precision>
+    <cc:lifetime>2592000</cc:lifetime>
+    <entry>
+      <title>stale</title>
+      <id>http://admin.example.org/events/1125</id>
+      <updated>2007-04-13T10:31:01Z</updated>
+      <link href="http://www.example.org/img/123.gif" type="image/gif"/>
+      <link href="http://www.example.org/img/123.png" type="image/png"/>
+      <cc:stale/>
+    </entry>
+  </feed>
+```
+
+Hyperlinks are used to connect resources and verify their freshness in a M2M scenario,
+and not only rendered by a browser "just" to be clicked by a user.
+
+## REST in the world
 
 Never talked about [media types](http://tools.ietf.org/html/rfc3023) with your
 colleagues?    
@@ -207,20 +184,65 @@ Ordinary.
 Don't you know the difference between `text/xml` and `application/xml`?    
 Ordinary.
 
-Never seen how the [Atom Publishing Protocol](http://www.ietf.org/rfc/rfc5023.txt)
-solved the "[lost update](http://www.w3.org/1999/04/Editing/)" problem?    
+Never thought that if you consume some data, when their URL changes you can still
+fetch them without changing any line of code?    
 Less ordinary, but I can't judge you.
 
-So REST failed: most of the times we hear people talking about REST they discuss about 
+REST failed: most of the times we hear people talking about REST they discuss about 
 building **plain-old-XML over HTTP webservices*, without even knowing the importance of
 having an extensible infrastructure supporting updates and not breaking
 retrocompatibility with your consumers.
 
-## What we should advertise/support? ##
+## Enter hypermedia services
 
-**Hypermedia services** and **hypermedia-aware clients**.
+{% blockquote Roy Fielding http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_5 The uniform interface %}
+By applying the software engineering principle of generality to the component interface, the overall system architecture is simplified and the visibility of interactions is improved. Implementations are decoupled from the services they provide, which encourages independent evolvability.
+The trade-off, though, is that a uniform interface degrades efficiency, since information is transferred in a standardized form rather than one which is specific to an application's needs.
+The REST interface is designed to be efficient for large-grain hypermedia data transfer, optimizing for the common case of the Web, but resulting in an interface that is not optimal for other forms of architectural interaction.
+{% endblockquote %}
 
+Hypermedia services are the ones that rely on hypermedia controls in order to efficiently
+implement decoupling and avoid breaking retrocompatibility.
 
+For instance, let's look at the *URI templates coupling* problem:
+
+``` bash When a resource is created, tell the client its address
+201 Created
+Location: /personas/24
+```
+
+``` bash When a resource is moved, tell the client its new address
+301 Moved Permanently
+Location: /api/personas/24
+```
+
+``` html Throw some semantic CRUD into the mix
+<ul>
+  <li>
+    <a href="/products/5" rel="update" ... >Product 1</a>
+  </li>
+  ...
+```
+
+## Enter hypermedia-aware clients
+
+{% blockquote Craing McClanahan http://tech.groups.yahoo.com/group/rest-discuss/message/12358 REST-discuss mailing list %}
+When the client decides which URI to call and when, they run the risk of attempting to request state transitions
+that are not valid for the current state of the server side resource. 
+An example from my problem domain ... it's not allowed to "start" a virtual machine (VM) until you have "deployed" it.
+The server knows about URIs to initiate each of the state changes (via a POST), but the
+representation of the VM lists only the URIs for state transitions that are valid from the current state.
+This makes it extremely easy for the client to understand that trying to start a VM that hasn't been deployed yet is not legal, because there will be no corresponding URI in the VM representation.
+{% endblockquote %}
+
+Hypermedia-aware clients are those client able to detect, understand, process, ignore hypermedia
+controls, making no assumption in consuming a resource.
+
+People should really care about implementing HATEOAS{% footnote_ref 6 %} and HATEOAS-detection,
+since it has proven to be a winning factor in writing robust, fault-tolerant, balanced and
+durable systems:
+
+{% slideshare 1547275 100% 550 %}
 
 {% footnotes %}
   {% fn URI templates would not be a problem - per sè - if developers wouldn\'t forget about decoupling URIs with the application\'s flow %}
@@ -228,4 +250,5 @@ retrocompatibility with your consumers.
   {% fn Machine-To-Machine ubiquitous communication %}
   {% fn As stated earlier in some of my posts or at some conferences, REST has contracts (called media types) just like SOAP has WSDLs %}
   {% fn "ses" stands for Service Expression Synthax %}
+  {% fn Hypermedia As The Engine Of Application State %}
 {% endfootnotes%}
