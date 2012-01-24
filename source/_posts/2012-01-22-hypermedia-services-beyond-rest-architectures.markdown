@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Media types and hypermedia services: beyond REST architectures"
-date: 2012-01-22 12:04
+date: 2012-01-24 03:22
 comments: true
 categories: [REST, HATEOAS, hypermedia, webservice]
 ---
