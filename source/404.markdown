@@ -4,7 +4,7 @@ title: Page not found
 footer: false
 ---
 
-{% img right images/dude_wtf.png Sorry dude, I could not find what you was looking for %}
+{% img right /images/dude_wtf.png Sorry dude, I could not find what you was looking for %}
 
 {% blockquote Edward A. Murphy http://en.wikipedia.org/wiki/Murphy's_law Murphy's law %}
 Anything that can go wrong will go wrong
