@@ -3,7 +3,7 @@ layout: post
 title: "Quality isn't always better than quantity"
 date: 2012-01-25 13:43
 comments: true
-categories: [data]
+categories: [data, algorithm]
 ---
 
 Reading about [data processing with MapReduce](http://www.amazon.com/Data-Intensive-Processing-MapReduce-Synthesis-Technologies/dp/1608453421)
