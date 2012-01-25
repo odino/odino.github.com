@@ -6,6 +6,7 @@ comments: true
 categories: [PHP]
 ---
 
+<!-- more -->
 {% img right /images/white.puzzle.jpg %}
 
 {% blockquote Henry Bergius http://bergie.iki.fi/blog/composer_solves_the_php_code-sharing_problem/ Composer solves the PHP code-sharing problem %}
