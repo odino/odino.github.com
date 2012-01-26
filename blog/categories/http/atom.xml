@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
+  <link href="http://odino.github.com/blog/categories/http/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-01-26T02:25:47+01:00</updated>
+  <id>http://odino.github.com/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
+    <link href="http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day/"/>
+    <updated>2012-01-20T14:15:00+01:00</updated>
+    <id>http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day</id>
+    <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
+had in the last months.</p>
+
+<!-- more -->
+
+
+<p>Lots of you probably know <a href="http://www.w3.org/TR/esi-lang">ESI</a>, the specification
+written by <a href="http://www.akamai.com/">Akamai</a> and <a href="http://www.oracle.com/index.html">Oracle</a>
+back in 2001.</p>
+
+<p>It basically consists in a XML dialect which lets <a href="http://en.wikipedia.org/wiki/Reverse_proxy">reverse proxies</a>
+(eg. <a href="https://www.varnish-cache.org/">Varnish</a>) cache fragments of your webpages
+in order not to hit your application for output fragments that can be re-used
+across many clients.</p>
+
+<p>``` html A webpage including an ESI tag
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+
+pile of HTML
+
+...
+
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>A <strong>really good presentation</strong> about ESI is <a href="http://www.slideshare.net/fabpot/caching-on-the-edge/99">Caching On The Edge</a>
+, by <a href="http://fabien.potencier.org/">Fabien Potencier</a>.</p>
+
+<h2>ESI's context</h2>
+
+<p>ESI is a really great technology that recently gained hype, in my ecosystem (PHP),
+thanks to the Symfony2 architecture, fully embracing the HTTP specification:
+consider that Symfony2 has <strong>no application-level caching layer</strong>, so everything
+is done with the HTTP cache, and ESI is the solution for really dynamic webpages.</p>
+
+<p>...but who's responsible of processing ESI fragments? Digging some more, an esi
+processor can be a <a href="http://rack.rubyforge.org/">middleware in your architecture</a>
+, a reverse proxy or a <a href="http://symfony.com/doc/2.0/book/http_cache.html#using-edge-side-includes">software component</a>
+; basically any kind of software implementing the ESI specification.</p>
+
+<p>But hey, all this kind of things are softwares that lie on the server side.</p>
+
+<h2>A different approch</h2>
+
+<p>I was thinking about pushing ESI to the client side:</p>
+
+<p>``` html The response retrieved with the browser would generate lots of subrequests
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>&lt;esi:include src="http://example.com/header.html" /&gt;
+&lt;esi:include src="http://example.com/navigation.html" /&gt;
+&lt;esi:include src="http://example.com/foo.html" /&gt;
+&lt;esi:include src="http://example.com/bar.html" /&gt;
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>Seems a bad idea, since, if the browser is capable to merge different fragments, retrieved
+with different HTTP requests, for assembling a really simple webpage you would
+need to hit your application much more times than with a single request, so there
+is no real need to ask for ESI support in clients, in this scenario.</p>
+
+<p>But there's a <em>real-world</em> application of ESI on the client side that should
+<strong>save lot of traffic</strong> over the internet and <strong>lot of bandwith</strong>.</p>
+
+<p><strong>Rarely-changing output fragments</strong>.</p>
+
+<p>A RCOF - sorry for this bad acronym - is everything that can be <strong>cached for
+relatively long time</strong> (talking more about days than hours), like Facebook's
+footer or your google analytics JS code.</p>
+
+<p><img class="center" src="/images/fb.footer.png"></p>
+
+<h2>The use-case</h2>
+
+<p>Why should we always transport Facebook's footer over the network?</p>
+
+<p>We don't need it: once the user landed on his profile page, as he jumps
+to other FB pages, <strong>the footer it's always the same</strong>, and <strong>should be retrieved from
+the client's cache</strong> instead of being sent over the network.</p>
+
+<p>This means that once you send your response</p>
+
+<p>``` html Your profile page
+<body></p>
+
+<pre><code>&lt;h1&gt;My Profile!&lt;/h1&gt;
+
+...
+
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p></body>
+```</p>
+
+<p>the browser makes an additional request to retrieve the footer and then, on subsequent
+requests, also <strong>on different webpages</strong>, it can use the cached fragment:</p>
+
+<p>``` html Facebook help center
+<body></p>
+
+<pre><code>&lt;h1&gt;Hi n00b, how can we help you?&lt;/h1&gt;
+
+...
+
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p></body>
+```</p>
+
+<p>because it recognizes that fragment has been already retrieved once you requested
+the "Your profile" page.</p>
+
+<p>You probably don't get the great aspect of ESI on the client side, so <strong>carefully
+read the next chapter</strong>.</p>
+
+<h2>A few numbers</h2>
+
+<p>Facebook's footer is about <code>1.4k</code>:</p>
+
+<p>``` html</p>
+
+<div id="pageFooter" data-referrer="page_footer">
+    <div id="contentCurve"></div>
+    <div class="clearfix" id="footerContainer">
+        <div class="mrl lfloat" role="contentinfo">
+            <div class="fsm fwn fcg">
+                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.github.com/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+            </div>
+        </div>
+        <div class="navigation fsm fwn fcg" role="navigation">
+            <a href="http://www.facebook.com/facebook" accesskey="8" title="Read our blog, discover the resource center, and find job opportunities.">About</a> · <a href="http://www.facebook.com/campaign/landing.php?placement=pf&amp;campaign_id=402047449186&amp;extra_1=auto" title="Advertise on Facebook.">Advertising</a> · <a href="http://www.facebook.com/pages/create.php?ref_type=sitefooter" title="Create a Page">Create a Page</a> · <a href="http://developers.facebook.com/?ref=pf" title="Develop on our platform.">Developers</a> · <a href="http://www.facebook.com/careers/?ref=pf" title="Make your next career move to our awesome company.">Careers</a> · <a href="http://www.facebook.com/privacy/explanation" title="Learn about your privacy and Facebook.">Privacy</a> · <a href="http://www.facebook.com/legal/terms?ref=pf" accesskey="9" title="Review our terms of service.">Terms</a> · <a href="http://www.facebook.com/help/?ref=pf" accesskey="0" title="Visit our Help Center.">
+                Help
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<p>```</p>
+
+<p>while an ESI fragment is <code>0.5k</code>:</p>
+
+<p><code>xml
+&lt;esi:include src="http://facebook.com/footer" /&gt;
+</code></p>
+
+<p>Calculating how much traffic the internet needs to sustain with the 2
+approaches, traditional and ESIsh, is trivial:</p>
+
+<ul>
+<li>Facebook has something more than <a href="http://www.facebook.com/press/info.php?statistics">400M daily users</a></li>
+<li>it has <a href="http://www.alexa.com/siteinfo/facebook.com">12 pageviews per user</a></li>
+<li>retrieving the footer the traditional way, we add <code>1.5k</code> of data each users' request</li>
+<li>retrieving it with ESI, we add <code>1.5k</code> of data for the first users' request,
+<code>0.5k</code> for the consequent ones</li>
+</ul>
+
+
+<p>Then we can extrapolate some data:</p>
+
+<p>``` html Facebook daily pageviews
+daily users * avg pageviews</p>
+
+<p>400M * 12</p>
+
+<p>4800M
+```</p>
+
+<p>``` html Data traffic without client-side ESI
+daily pageviews * footer fragment weight</p>
+
+<p>4800M * 1.4k</p>
+
+<p>~6.25 terabytes
+```</p>
+
+<p>``` html Data traffic with client-side ESI
+(first requests * footer fragment weight) + ((daily pageviews - first pageviews) * ESI tag weight)</p>
+
+<p>(400M * 1.4k) + ((4800M - 400M) * 0.5k)</p>
+
+<p>~2.57 terabytes
+```</p>
+
+<p>So, just for the footer, <strong>facebook could decrease the internet traffic by 2 and a
+half terabytes <em>per day</em></strong>, just looking at its footer.</p>
+
+<p>It's obvious that <strong>this approach rewards facebook</strong> (it processes less stuff on his
+side, whether it uses a reverse proxy as gateway cache or not), ISPs and the final
+user, who's taking advantage of a (more) <strong>lean network</strong>.</p>
+
+<p>If you enlarge your vision, think about sites like Google, LinkedIN, twitter and all
+those web applications which send <strong>useless pieces of HTTP responses over the
+internet</strong>.</p>
+
+<h2>Client side ESI invalidation</h2>
+
+<p>If you are scared about invalidating this kind of cache, the solution would be
+really easy:</p>
+
+<p>``` html Facebook before updating the footer
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+
+pile of FB code
+
+...
+
+&lt;esi:include src="http://example.com/footer.html?v=1" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>``` html Facebook after updating the footer
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+
+pile of FB code
+
+...
+
+&lt;esi:include src="http://example.com/footer.html?v=2" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>Note the <strong>revision change in the ESI tag</strong>, something we already, daily, use for
+managing <a href="http://muffinresearch.co.uk/archives/2008/04/08/automatic-asset-versioning-in-django/">static assets' caching</a>.</p>
+
+<h2>This is not a panacea</h2>
+
+<p>I don't wanna sound arrogant proposing this tecnique, but I would really like to
+<strong>get feedbacks about such this kind of approach</strong>: as stated, this can be a
+great plus for the global network but its <strong>limited to RCOF</strong>.</p>
+
+<p>The only aspect I haven't considered yet is the second HTTP request the browser
+needs to do to retrieve the fragment, once, parsing the response, it finds an ESI
+tag: since I really don't know how to calculate how it affects the network,
+so any kind of help would be appreciated.</p>
+
+<p>The aim of this post is to consider if <strong>browser vendors should really start thinking
+about implementing ESI processors</strong> directly in their products, for a better, faster
+and leaner web.</p>
+]]></content>
+  </entry>
+  
+</feed>
