@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.github.com/atom.xml" rel="self"/>
   <link href="http://odino.github.com/"/>
-  <updated>2012-01-24T03:25:03+01:00</updated>
+  <updated>2012-01-26T02:25:47+01:00</updated>
   <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,782 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Functional testing symfony 1.X with PHPUnit: the Symfony2 way]]></title>
+    <link href="http://odino.github.com/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
+    <updated>2012-01-26T00:45:00+01:00</updated>
+    <id>http://odino.github.com/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
+    <content type="html"><![CDATA[<p>In the process of starting a brand new project here at
+<a href="http://www.dnsee.com">DNSEE</a>, me and my colleague
+<a href="http://www.linkedin.com/in/matteobiagetti">Matteo</a> decided
+- in order to make the whole team aware of how to test
+Symfony2 applications with <a href="http://www.phpunit.de">PHPUnit</a>
+- to port the Symfony2 functional testing mechanism into
+this project, which will be developed with symfony
+1.X<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<!-- more -->
+
+
+<h2>Background</h2>
+
+<p><a href="http://trac.symfony-project.org/wiki/LimeTestingFramework">Lime</a>
+- as you may know - is the officially-supported testing
+&#8220;framework&#8221;: it was specifically built to be used inside
+symfony 1.X applications and introduced lots of developers
+to the whole idea of testing in PHP.</p>
+
+<p>It&#8217;s a lightweight and simple implementation of a testing
+framework, with poor support for mock objects, test doubles,
+data providers and test isolation, but it does its job.</p>
+
+<p>Since <a href="http://www.symfony.com">Symfony2</a> decided to move to
+PHPUnit - a <strong>serious</strong> and more robust testing framework -
+suddenly all symfony developers needed to learn PHPUnit in order
+to test the new applications: this - at least - didn&#8217;t
+happened to me, because I heavily faced PHPUnit developing
+<a href="http://github.com/congow/Orient">Orient</a>, with lots of
+WTFs - mainly <em>my</em> fault.</p>
+
+<p>So, starting this new project, I asked the team if they would
+agree on using PHPUnit to functionally test this new symfony 1.4
+application, for 2 main reasons:</p>
+
+<ul>
+<li><strong>learn PHPUnit</strong>, since the 3 developers involved in the project
+have worked for 10|4|0 months on PHPUnit ever</li>
+<li><strong>get prepared for the big move</strong>, since Symfony2 uses an analogous testing
+mechanism</li>
+</ul>
+
+
+<h2>The Symfony2 way</h2>
+
+<p>In Symfony2 you basically instantiate your application with a fake
+client and make requests to it; at each request the application
+produces a response and a crawler lets you
+<a href="http://symfony.com/doc/2.0/book/testing.html#working-with-the-test-client">test the output</a>:</p>
+
+<figure class='code'><figcaption><span>A functional test for Symfony2</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">Acme\DemoBundle\Tests\Controller</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">FooControllerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndex</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/homepage&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s2">&quot;Welcome!&quot;</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;h1#page-title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>So, as you see, PHPUnit is used to make assertions
+on the response body<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<h2>The basic idea</h2>
+
+<p>So, to backport the mechanism illustrated in the previous
+chapter to symfony 1.X, we should <strong>rely on a
+DOM crawler and a browser</strong>, capable of making HTTP requests
+and parse subquent responses&#8217; bodies.</p>
+
+<p>Fortunately, symfony 1.X&#8217;s functional testing mechanism already
+relies on an <a href="http://www.symfony-project.org/api/1_4/sfBrowser">internal browser</a>
+, able to bootstrap the application and make fake HTTP
+requests<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>, so we only need to integrate this browser
+into a PHPUnit test and parse responses with a crawler: since
+Symfony2 is a well-decoupled set of libraries we will use its
+<a href="https://github.com/symfony/DomCrawler">DomCrawler</a> component.</p>
+
+<h2>Implementation</h2>
+
+<p>First of all import the required libraries into your
+symfony project; using SVN, we updated the <code>lib/vendor</code>
+directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir -p lib/vendor/Symfony/Component
+</span><span class='line'>svn add lib/vendor/Symfony
+</span><span class='line'>svn pe svn:externals lib/vendor/Symfony/Component
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the content of the <code>externals</code> property will be:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>DomCrawler https://svn.github.com/symfony/DomCrawler.git
+</span><span class='line'>CssSelector https://svn.github.com/symfony/CssSelector.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We are downloading the CssSelector component in order to use
+CSS selectors within the crawler: if you don&#8217;t want to use it you&#8217;ll
+need to write XPath queries to access the DOM nodes.</p>
+
+<p>Save the <code>externals</code> file and commit, then update the
+<code>lib/vendor/Symfony</code> directory in order to phisically
+download the dependencies.</p>
+
+<p>To finish the setup of the environment, create a <code>phpunit.xml.dist</code>
+file in the root of the symfony project:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;phpunit</span> <span class="na">backupGlobals=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">bootstrap=</span><span class="s">&quot;test/bootstrap/autoload.php&quot;</span>
+</span><span class='line'>         <span class="na">backupStaticAttributes=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">colors=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">convertErrorsToExceptions=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">convertNoticesToExceptions=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">convertWarningsToExceptions=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">forceCoversAnnotation=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">mapTestClassNameToCoveredClassName=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">processIsolation=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">stopOnError=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">stopOnFailure=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">stopOnIncomplete=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">stopOnSkipped=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">syntaxCheck=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">testSuiteLoaderClass=</span><span class="s">&quot;PHPUnit_Runner_StandardTestSuiteLoader&quot;</span>
+</span><span class='line'>         <span class="na">strict=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>         <span class="na">verbose=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;testsuites&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;testsuite</span> <span class="na">name=</span><span class="s">&quot;Main tests&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;directory</span> <span class="nt">&gt;</span>test/phpunit<span class="nt">&lt;/directory&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/testsuite&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/testsuites&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;filter&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;blacklist&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;directory</span> <span class="na">suffix=</span><span class="s">&quot;.php&quot;</span><span class="nt">&gt;</span>test<span class="nt">&lt;/directory&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;directory</span> <span class="na">suffix=</span><span class="s">&quot;.php&quot;</span><span class="nt">&gt;</span>src<span class="nt">&lt;/directory&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/blacklist&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/filter&gt;</span>
+</span><span class='line'><span class="nt">&lt;/phpunit&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and the <code>test/bootstrap/autoloader.php</code> file, used by PHPUnit
+for -guess it - autoloading classes:</p>
+
+<figure class='code'><figcaption><span>The autoloader taken from Composer</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">Composer\Autoload</span><span class="p">;</span> <span class="k">class</span> <span class="nc">ClassLoader</span> <span class="p">{</span> <span class="k">private</span> <span class="nv">$prefixes</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span> <span class="k">private</span> <span class="nv">$fallbackDirs</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">getPrefixes</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefixes</span><span class="p">;</span> <span class="p">}</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">getFallbackDirs</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fallbackDirs</span><span class="p">;</span> <span class="p">}</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$paths</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$prefix</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fallbackDirs</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span> <span class="nv">$paths</span><span class="p">;</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefixes</span><span class="p">[</span><span class="nv">$prefix</span><span class="p">]))</span> <span class="p">{</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefixes</span><span class="p">[</span><span class="nv">$prefix</span><span class="p">]</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">(</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefixes</span><span class="p">[</span><span class="nv">$prefix</span><span class="p">],</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span> <span class="nv">$paths</span> <span class="p">);</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefixes</span><span class="p">[</span><span class="nv">$prefix</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span> <span class="nv">$paths</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nv">$prepend</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span> <span class="nx">spl_autoload_register</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;loadClass&#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">,</span> <span class="nv">$prepend</span><span class="p">);</span> <span class="p">}</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">loadClass</span><span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$file</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findFile</span><span class="p">(</span><span class="nv">$class</span><span class="p">))</span> <span class="p">{</span> <span class="k">require</span> <span class="nv">$file</span><span class="p">;</span> <span class="k">return</span> <span class="k">true</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">findFile</span><span class="p">(</span><span class="nv">$class</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;\\&#39;</span> <span class="o">==</span> <span class="nv">$class</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span> <span class="nv">$class</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="p">}</span> <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">!==</span> <span class="nv">$pos</span> <span class="o">=</span> <span class="nb">strrpos</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="s1">&#39;\\&#39;</span><span class="p">))</span> <span class="p">{</span> <span class="nv">$classPath</span> <span class="o">=</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;\\&#39;</span><span class="p">,</span> <span class="nx">DIRECTORY_SEPARATOR</span><span class="p">,</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$pos</span><span class="p">));</span> <span class="nv">$className</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nv">$classPath</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span> <span class="nv">$className</span> <span class="o">=</span> <span class="nv">$class</span><span class="p">;</span> <span class="p">}</span> <span class="nv">$classPath</span> <span class="o">.=</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="nx">DIRECTORY_SEPARATOR</span><span class="p">,</span> <span class="nv">$className</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;.php&#39;</span><span class="p">;</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefixes</span> <span class="k">as</span> <span class="nv">$prefix</span> <span class="o">=&gt;</span> <span class="nv">$dirs</span><span class="p">)</span> <span class="p">{</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$dirs</span> <span class="k">as</span> <span class="nv">$dir</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$prefix</span><span class="p">))</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$dir</span> <span class="o">.</span> <span class="nv">$classPath</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span> <span class="nv">$dir</span> <span class="o">.</span> <span class="nv">$classPath</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fallbackDirs</span> <span class="k">as</span> <span class="nv">$dir</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$dir</span> <span class="o">.</span> <span class="nv">$classPath</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span> <span class="nv">$dir</span> <span class="o">.</span> <span class="nv">$classPath</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$__composer_autoload_init</span> <span class="o">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Composer\Autoload\ClassLoader</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$map</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;Symfony\\Component\\DomCrawler&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../../lib/vendor/&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Symfony\\Component\\CssSelector&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../../lib/vendor/&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$map</span> <span class="k">as</span> <span class="nv">$namespace</span> <span class="o">=&gt;</span> <span class="nv">$path</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$namespace</span><span class="p">,</span> <span class="nv">$path</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$loader</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="nv">$__composer_autoload_init</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point the environment is ready, and you can start writing
+your Symfony2&#8217;s correspondent <code>WebTestCase</code> class<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup>:</p>
+
+<figure class='code'><figcaption><span>lib/test/sfWebTestCase.class.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">abstract</span> <span class="k">class</span> <span class="nc">sfWebTestCase</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">function</span> <span class="nf">createClient</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getApplication</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">include</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/../../test/bootstrap/functional.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="nx">sfPHPUnitBrowser</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">abstract</span> <span class="k">protected</span> <span class="k">function</span> <span class="nf">getApplication</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we&#8217;ve created a base class for every functional test we&#8217;ll write.</p>
+
+<p>It consist in:</p>
+
+<ul>
+<li>a <code>createClient()</code> method which instantiates a new browser based on
+some configuration</li>
+<li>an abstract method that each functional test need to implement in order
+to setup the right application in the <code>createClient()</code> method
+(frontent, backend, whatever&#8230;)</li>
+</ul>
+
+
+<p>The browser that we are using is <code>sfPHPUnitBrowser</code>, instance of a
+non-existing class, so let&#8217;s create it:</p>
+
+<figure class='code'><figcaption><span>lib/test/sfPHPUnitBrowser.class.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">sfPHPUnitBrowser</span> <span class="k">extends</span> <span class="nx">sfBrowser</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">call</span><span class="p">(</span><span class="nv">$uri</span><span class="p">,</span> <span class="nv">$method</span> <span class="o">=</span> <span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="k">array</span><span class="p">(),</span> <span class="nv">$changeStack</span> <span class="o">=</span> <span class="k">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$browser</span> <span class="o">=</span> <span class="k">parent</span><span class="o">::</span><span class="na">call</span><span class="p">(</span><span class="nv">$uri</span><span class="p">,</span> <span class="nv">$method</span><span class="p">,</span> <span class="nv">$parameters</span><span class="p">,</span> <span class="nv">$changeStack</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$crawler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Crawler</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$browser</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$crawler</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This class extends the usual <code>sfBrowser</code> one adding a simple functionality:
+when a request is made, it does not return itself but an instance of a
+<code>Crawler</code> object.</p>
+
+<p>This will let you do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertCount</span><span class="p">(</span><span class="nx">X</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;CSS selector here&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;html:contains(h1)&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>If you didn&#8217;t mistyped anything you should be able to
+create your first test:</p>
+
+<figure class='code'><figcaption><span>test/phpunit/HomepageTest.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">include</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s2">&quot;/../../lib/test/sfWebTestCase.class.php&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">HomepageTest</span> <span class="k">extends</span> <span class="nx">sfWebTestCase</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">testHelloWorld</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$client</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createClient</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">function</span> <span class="nf">getApplication</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;frontend&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, create a route for your homepage and render
+some dummy template:</p>
+
+<figure class='code'><figcaption><span>The template we are going to test</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h1&gt;</span>Hello world<span class="nt">&lt;/h1&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can run the test with the usual <code>phpunit</code> command:</p>
+
+<p><img class="center" src="http://odino.github.com/images/phpunit.symfony.png"></p>
+
+<p>The greatest benefit of this approach is that you can <strong>use
+PHPUnit&#8217;s pure functionalities to test symfony 1.X
+applications</strong> without re-inventing the wheel: what we saw
+was the test of some output but bare in mind that, extending
+<code>sfBrowser</code>, our <code>$client</code> object is able to access the request
+and the user session too.</p>
+
+<h2>Why not re-using existing integrations?</h2>
+
+<p>Obviously, <strong>before</strong> writing any line of code, we took a look
+at existing PHPUnit&#8217;s integrations into symfony 1.X.</p>
+
+<p>There are - basically - 2 plugins:</p>
+
+<ul>
+<li><a href="http://www.symfony-project.org/plugins/sfPHPUnit2Plugin">sfPHPUnit2Plugin</a>,
+which seemed useless being a PHPUnit wrapper for lime</li>
+<li><a href="http://www.symfony-project.org/plugins/sfPhpunitPlugin">sfPHPUnitPlugin</a>,
+which uses PHPUnit + Selenium, but we really don&#8217;t want to depend on
+a selenium instance to run our tests</li>
+</ul>
+
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>We are actually developing a few projects with Symfony2, mostly landing pages and small data-driven CRUD applications, due to the lack of comprehensive documentation about Symfony2, but I will flame about it in another post <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>This is not entirely true: PHPUnit is mainly used for testing the response, but inside a test-case you can access the user&#8217;s session, cookies and so on, therefore you can assert against lots of objects and use-cases <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>You can also use a real HTTP client to make requests to your application and test the output, but this approach is strongly discouraged because of dramatically-low performances <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>The WebTestCase is a base class for every functional test (in Symfony2), like PHPUnit_Framework_TestCase for canonical unit tests <a href='#fnref:4' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quality isn't always better than quantity]]></title>
+    <link href="http://odino.github.com/quality-isnt-always-better-than-quality/"/>
+    <updated>2012-01-25T13:43:00+01:00</updated>
+    <id>http://odino.github.com/quality-isnt-always-better-than-quality</id>
+    <content type="html"><![CDATA[<p>Reading about <a href="http://www.amazon.com/Data-Intensive-Processing-MapReduce-Synthesis-Technologies/dp/1608453421">data processing with MapReduce</a>
+I was astonished when I first encountered the <em><a href="http://books.google.it/books?id=GxFYuVZHG60C&amp;pg=PA134&amp;lpg=PA134&amp;dq=stupid+backoff+algorithm&amp;source=bl&amp;ots=fMzZNlaNaN&amp;sig=mcEdim6-_wZL4aWKebh3s79KMS4&amp;hl=it&amp;sa=X&amp;ei=z_kfT56BG-vP4QSY2N2ODw&amp;ved=0CD0Q6AEwAzgK#v=onepage&amp;q=stupid%20backoff%20algorithm&amp;f=false">Stupid backoff</a></em>
+algorithm&#8217;s tale.</p>
+
+<!-- more -->
+
+
+<p>The story is pretty simple: the <a href="diom.ucsd.edu/~rlevy/lign256/winter2008/kneser_ney_mini_example.pdf">Kneser-Ney</a>
+smoothing strategy was a <em>state-of-the-art</em> way for processing data, but it
+had an heavy computational cost.</p>
+
+<blockquote><p>We introduce a new smoothing method, dubbed Stupid Backoff, that is inexpensive to train on large data sets and approaches the quality of Kneser-Ney Smoothing as the amount of training data increases.</p><footer><strong>Thorsten Brants</strong> <cite><a href='http://acl.ldc.upenn.edu/D/D07/D07-1090.pdf'>Large Language Models in Machine Translation</a></cite></footer></blockquote>
+
+
+<p>In 2007 <a href="http://www.coli.uni-saarland.de/~thorsten/">Thorsten Brants</a> developed
+a new smoothing algorithm, simpler than the Kneser-Ney one, which was very lean
+and appliable to large amounts of data.</p>
+
+<h2>The result?</h2>
+
+<p>These algorithms were heavily used in machine translations, and you can already
+figure out what happened: with small datasets the <em>backoff</em> was generating
+less-accurate translations but, as the amount of data analized growed, it was
+able to extract more valid translations, eventually beating Kneser-Ney&#8217;s score<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>I&#8217;d like you to read a few notes about the <em>stupid backoff</em>&#8217;s introductory paper:</p>
+
+<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Facl.ldc.upenn.edu%2FD%2FD07%2FD07-1090.pdf&embedded=true" width="100%" height="780" style="border: none;"></iframe>
+
+
+
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>This was possible, in the machine-translation scenario, thanks to the fact that the algorithm could be &#8220;trained&#8221; to perform better translations as the dataset grew <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Managing PHP dependencies with composer]]></title>
+    <link href="http://odino.github.com/managing-php-dependencies-with-composer/"/>
+    <updated>2012-01-25T11:44:00+01:00</updated>
+    <id>http://odino.github.com/managing-php-dependencies-with-composer</id>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<p><img class="right" src="http://odino.github.com/images/white.puzzle.jpg"></p>
+
+<blockquote><p>In PHP we&#8217;ve had a lousy culture of code-sharing. Because depending on code from others as been tricky, every major PHP application or framework has practically had to reimplement the whole world. Only some tools, like PHPUnit, have managed to break over this barrier and become de-facto standards across project boundaries. But for the rest: just write it yourself.</p><footer><strong>Henry Bergius</strong> <cite><a href='http://bergie.iki.fi/blog/composer_solves_the_php_code-sharing_problem/'>Composer Solves the PHP Code-sharing Problem</a></cite></footer></blockquote>
+
+
+<p>Managing dependencies between pieces of software, in PHP, hasn&#8217;t always
+been a relief: we had <a href="http://pear.php.net/">PEAR</a> and <a href="http://pecl.php.net/">PECL</a>
+<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+with their workflows and problems while, in other ecosystems, the
+solution to this problem has been solved in better ways, like
+NodeJS&#8217;s <a href="http://npmjs.org/">NPM</a>.</p>
+
+<h2>Composer</h2>
+
+<p>Composer is the nifty missing brick in managing PHP dependencies:
+inspired to what&#8217;s hot in Ruby&#8217;s and NodeJS&#8217;s ecosystems, it is a
+simple but powerful packaging system specifically written for PHP.</p>
+
+<p>Born and mantained from a <a href="https://github.com/composer/composer/contributors">few personalities</a>
+of the Symfony2 community, it&#8217;s really easy to use and install.</p>
+
+<p>First of all, go to the root directory of your project and
+download composer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget http://getcomposer.org/composer.phar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then write a <code>composer.json</code> file describing your project&#8217;s dependencies:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;vendor/NutsAPI&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;library&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;description&quot;</span>: <span class="s2">&quot;PHP SDK for IFeelNuts APIs.&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;keywords&quot;</span>: <span class="o">[</span><span class="s2">&quot;nuts&quot;</span>, <span class="s2">&quot;API&quot;</span>, <span class="s2">&quot;SDK&quot;</span><span class="o">]</span>,
+</span><span class='line'>    <span class="s2">&quot;license&quot;</span>: <span class="s2">&quot;MIT&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;authors&quot;</span>: <span class="o">[</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Alessandro Nadalin&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;alessandro.nadalin@gmail.com&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;homepage&quot;</span>: <span class="s2">&quot;http://www.odino.org&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">]</span>,
+</span><span class='line'>    <span class="s2">&quot;autoload&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;psr-0&quot;</span>: <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;NutsAPI&quot;</span>: <span class="s2">&quot;src/&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>,
+</span><span class='line'>    <span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;kriswallsmith/Buzz&quot;</span>: <span class="s2">&quot;&gt;=0.5&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are 3 main parts in the <code>composer.json</code>, the first one describing
+your project (if you want to put that in Packagist - something I will
+later explain):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;vendor/NutsAPI&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;library&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;description&quot;</span>: <span class="s2">&quot;PHP SDK for IFeelNuts APIs.&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;keywords&quot;</span>: <span class="o">[</span><span class="s2">&quot;nuts&quot;</span>, <span class="s2">&quot;API&quot;</span>, <span class="s2">&quot;SDK&quot;</span><span class="o">]</span>,
+</span><span class='line'>    <span class="s2">&quot;license&quot;</span>: <span class="s2">&quot;MIT&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;authors&quot;</span>: <span class="o">[</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Alessandro Nadalin&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;alessandro.nadalin@gmail.com&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;homepage&quot;</span>: <span class="s2">&quot;http://www.odino.org&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">]</span>,
+</span><span class='line'>    ...
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the second one is the <strong>autoloading specification</strong>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;autoload&quot;</span>: <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;psr-0&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;NutsAPI&quot;</span>: <span class="s2">&quot;src/&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this is basically awesome because it lets you specify the
+autoloading standard used for your library (I strongly suggest
+you to follow the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0 convention</a>):
+in the example we see that our <code>NutsAPI</code> namespace will be
+autoloaded in the <code>src</code> directory.</p>
+
+<p>You can also specify <strong>nested namespaces</strong>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;autoload&quot;</span>: <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;psr-0&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;Doctrine\\Common&quot;</span>: <span class="s2">&quot;src/Doctrine/Common&quot;</span>
+</span><span class='line'>        <span class="s2">&quot;Doctrine\\DBAL&quot;</span>:   <span class="s2">&quot;src/Doctrine/DBAL/Experiments&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The last part of the file is the most important one, describing
+which libraries you depend on:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;kriswallsmith/Buzz&quot;</span>: <span class="s2">&quot;&gt;=0.5&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as you see, this directive tells composer that it should download
+the <a href="https://github.com/kriswallsmith/Buzz">Buzz</a> library and
+force a certain revision to be used; note that composer is also
+able to verify that your PHP version is ok too.</p>
+
+<p>Once you completed the <code>composer.json</code> you can run a:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>php composer.phar install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="left" src="http://odino.github.com/images/composer.installation.png"></p>
+
+<p>and see that composer downloads the required dependencies and puts them
+under the <code>vendor</code> directory, writes its lock file<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup> and
+generates an <strong>autoloader</strong>.</p>
+
+<p>The autoloader is located at <code>vendor/.composer/autoload.php</code> and you can
+obviously use it for your application:</p>
+
+<figure class='code'><figcaption><span>PHPUnit&#8217;s configuration file using a composer-generated autoloader</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;phpunit</span> <span class="na">backupGlobals=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">bootstrap=</span><span class="s">&quot;vendor/.composer/autoload.php&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One of the pains in managing dependencies is upgrading the libraries you depend
+on, a problem that composer solves by just running a <code>php composer.phar update</code>.</p>
+
+<p>Since some <strong>composer-generated files and the 3rd party libraries are irrelevant</strong>
+for your SCM, it is highly recommended to ignore them:</p>
+
+<figure class='code'><figcaption><span>Example of .gitignore</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/vendor/.composer/
+</span><span class='line'>composer.lock
+</span><span class='line'>vendor/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Packagist</h2>
+
+<p><a href="http://packagist.org/">Packagist</a> is the main repository of composer packages:
+you can browse already-registered packages or <a href="http://packagist.org/packages/submit">create your own one</a>.</p>
+
+<p>It is fully integrated with <a href="http://github.com">Github</a>: when creating a new package
+you will be asked the URL of the git repository for your project.</p>
+
+<p>Note that on the website there is some
+<a href="http://packagist.org/about-composer">further documentation about composer</a>.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>While PEAR is a repository of PHP software you can reuse, PECL collects various PHP extensions, written in C <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>The lockfile is used by composer to track already-downloaded dependencies and check, on successive updates, that it doesn&#8217;t needs to re-download the dependency <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
