@@ -15,6 +15,9 @@ Here's a summary of the most important ones:
 
 {% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
+* [Got units?](http://www.slideshare.net/odino/got-units-osidays), presented at
+OSIDays 2011 in Bengaluru (IND), an introductive talk about implementing Dijkstra's
+algorithm in PHP with **test-driven development**
 * [Graph databases in PHP](http://www.slideshare.net/odino/graph-databases-in-php-phpcon-poland-10222011), 
 given at the PHPCon Poland 2011 in Kielce (PL), dealing with the theory behind **graph databases** and how to use OrientDB in PHP
 * [REST in peace: a handbook of software waste](http://www.slideshare.net/odino/rest-in-peace-a-handbook-of-software-waste-jazoon-2011-06222011), 

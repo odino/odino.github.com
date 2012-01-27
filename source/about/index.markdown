@@ -67,4 +67,5 @@ of that [beautiful country](http://www.flickr.com/photos/alessandrolombardi/6438
 which I visited for a [conference](http://2011.osidays.com/speakers)
 * I love Rome, but I feel like it's not the right place to raise my (future) children
 * Far more than Rome, I love my beautiful smurf, [Dede](http://a6.sphotos.ak.fbcdn.net/hphotos-ak-snc7/393732_2987523297749_1552073836_2820295_1254732329_n.jpg)
+* I have a *personal* blog, in italian, called [nerdiario](http://www.nerdiario.it) ("*nerd-diary*")
 
