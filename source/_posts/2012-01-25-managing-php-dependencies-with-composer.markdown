@@ -160,9 +160,17 @@ for your SCM, it is highly recommended to ignore them:
 
 ``` bash Example of .gitignore
 /vendor/.composer/
-composer.lock
 vendor/
 ```
+
+As pointed out by [Nils](http://www.naderman.de/) from the PhpBB community
+in the comments:
+
+{% blockquote Nils Adermann %}
+You should not ignore the [composer.lock] file in git.
+In fact you should commit it whenever it is changed.
+Users of your project or other developers can then run "composer install" to install exactly the versions you had in your lock file, rather than installing versions based on composer.json and potentially ending up with a slightly newer dependency which could result in problems, since you didn't test with that particular version.
+{% endblockquote %}
 
 ## Packagist
 
