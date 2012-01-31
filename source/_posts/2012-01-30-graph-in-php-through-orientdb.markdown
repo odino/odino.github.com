@@ -8,6 +8,7 @@ alias: "/328/graph-in-php-through-orientdb"
 ---
 
 As I [said](http://www.odino.org/327/graph-databases-orientdb-to-the-rescue), Orient has an HTTP interface which you can use to manage and query any DB, document and navigate the graph: since it speaks HTTP...
+<!-- more -->
 
 ## OrientDB and PHP
 

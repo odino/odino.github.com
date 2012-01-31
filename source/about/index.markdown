@@ -51,7 +51,7 @@ I would have needed a real job
 * I ran my own company, while younger, with a couple of friends: it was called
 **Ternaria** 
 * I failed at using a **kanban board** to manage home-related issues
-* I have 2 cats, and I am missing my long-time companion
+* I ~~have~~ had 2 cats, and I am missing my long-time companion
 [Ade](http://www.odino.org/201/il-buio-nell-anima), who died in late 2010
 * I don't spontaneously tell my age in conversations
 * I've got 2 kawasaki, an

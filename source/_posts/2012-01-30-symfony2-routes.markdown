@@ -7,6 +7,8 @@ categories: [Symfony2, PHP]
 alias: "/270/symfony2-routes"
 ---
 
+<!-- more -->
+
 Let's look at two identhical routes, one described in symfony 1.4:
 
 ``` yml
