@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Debug a SQL query in Magento"
-date: 2011-09-11 02:22
+date: 2010-09-11 02:22
 comments: true
 categories: [PHP]
 alias: "/99/debug-a-sql-query-in-magento"
