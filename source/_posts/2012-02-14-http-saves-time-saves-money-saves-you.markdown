@@ -8,6 +8,7 @@ alias: "/384/http-saves-time-saves-money-saves-you"
 ---
 
 It Italy, as usual, our govern is a mess when talking about *{insert any topic here}*: today's topic will be... **webservices, saving money, time and providing an efficient service to the citizens**.
+<!-- more -->
 
 ## Veryfing a VAT number
 

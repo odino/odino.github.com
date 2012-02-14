@@ -8,6 +8,7 @@ alias: "/72/ffmpeg-get-a-thumbnail-from-a-video-with-php"
 ---
 
 Here's a simple tutorial in order to **extract a thumbnail from a video** using FFMPEG and PHP.
+<!-- more -->
 
 First of all let's install FFMPEG ( you probably already got it if you know what kind of kick-ass video manipulator it is ):
 
