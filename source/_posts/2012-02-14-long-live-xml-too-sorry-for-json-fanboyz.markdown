@@ -4,6 +4,7 @@ title: "Long live XML (too sorry for JSON fanboyz)"
 date: 2011-04-02 11:47
 comments: true
 categories: [XML]
+alias: "/320/long-live-xml-too-sorry-for-json-fanboyz"
 ---
 
 Time after time, the web sees the exploit of a technology, sometimes new, other times old, applied in a different context.
