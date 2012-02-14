@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Unit testing your symfony forms"
-date: 2012-08-01 14:01
+date: 2011-08-01 14:01
 comments: true
 categories: [symfony, testing]
 alias: "/374/unit-testing-your-symfony-forms"
