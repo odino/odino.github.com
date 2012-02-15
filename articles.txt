@@ -1,5 +1,4 @@
 /231/multiple-doctrine-relations-on-the-same-table
-/206/deploying-a-symfony-application
 /312/rest-in-practice-my-review
 /352/the-orientdb-php-data-mapper-from-the-trenches
 /395/less-rest-more-hypermedia
