@@ -1,7 +1,6 @@
 /231/multiple-doctrine-relations-on-the-same-table
 /312/rest-in-practice-my-review
 /352/the-orientdb-php-data-mapper-from-the-trenches
-/395/less-rest-more-hypermedia
 /363/resources-about-hateoas
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
 /304/rest-better-common-pitfalls
