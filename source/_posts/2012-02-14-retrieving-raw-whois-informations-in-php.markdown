@@ -6,6 +6,8 @@ comments: true
 categories: [Robowhois, PHP, WHOIS]
 ---
 
+{% render_partial series/robowhois.markdown %}
+
 After something more than a week I'm back here with a first implementation of
 the PHP library I was [talking earlier](/a-php-library-to-retrieve-whois-informations/)
 to retrieve WHOIS informations with PHP.

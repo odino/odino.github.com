@@ -141,3 +141,23 @@ sup, sub {
 .slideshare {
   width: 100%;
 }
+
+ol.aseries {
+	display: none;
+}
+
+article.hentry ol.aseries {
+	display: 						block;
+}
+
+ol.aseries
+{
+	list-style-type: upper-roman;
+	padding-left: 7em;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	padding-right: 2em;
+	background: image-url('notes.png') center left no-repeat;
+  border-bottom: 2px dashed #8F8F8F;
+  width: 75%;
+}

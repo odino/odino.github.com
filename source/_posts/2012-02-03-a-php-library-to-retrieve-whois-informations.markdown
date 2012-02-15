@@ -6,6 +6,8 @@ comments: true
 categories: [PHP, open source]
 ---
 
+{% render_partial series/robowhois.markdown %}
+
 In this days me and my friend [David](http://davidfunaro.com) are renewing our committment
 to *open source*: our next project is going to be an **SDK for a
 WHOIS webservice**.
