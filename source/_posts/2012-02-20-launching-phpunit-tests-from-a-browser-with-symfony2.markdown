@@ -159,8 +159,8 @@ echo json_encode(array('content' => $f, 'stop' => 1));
 {% endblockquote %}
 
 There are some advantages of using Process instead of writing your own command
-executor: first of all, if you want to take care of the subtle **differences
-between the different platforms**, you can use the `Process\ProcessBuilder` class;
+executor: first of all, if you don't want to take care of the subtle **differences
+between the different platforms** everything is done for you;
 then **error handling becomes very easy** since you are able to catch all the buffers:
 
 ``` php
