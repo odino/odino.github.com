@@ -6,4 +6,7 @@
 	<li>
 		<a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
 	</li>
+	<li>
+		<a href="/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+	</li>
 </ol>
