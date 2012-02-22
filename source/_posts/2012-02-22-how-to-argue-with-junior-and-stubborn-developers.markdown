@@ -29,8 +29,8 @@ se ti accorgi che stanno sbagliando dovresti seguire alcune pratiche, eccole
 
 ## Consolidate doubts
 
-## Give trust
+## Give trust, feed the monster and save him before death
 
-fa in modo che si sentano di avere paura
+fa in modo che si sentano di avere paura, ma fagli risolvere le cose da soli
 
 ## Gain trust
