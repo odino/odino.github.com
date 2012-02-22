@@ -79,9 +79,62 @@ situations occurred during those valuable years.
 
 {% img right /images/sheldon.board.jpg %}
 
+[Sheldon Cooper](http://en.wikipedia.org/wiki/Sheldon_Cooper)
+has a huge problem in his life: he's not open to
+look at the situations he faces from perspectives different
+from his own one.
+
+This makes impossible, for him, to solve decisional problems
+taking different looks, from different point of views: one
+aspect of your job is to provide different solutions to the
+same problem instead.
+
+Solutions may be incomplete, or may be not suitable for the
+developer against you, but will help you in gaining trust when
+explaining your points: someone stucked to his view may be
+considered stubborn and not qualificated, but if you are able
+to **provide different pros and cons to different solutions**
+you will get respect from the person at the other side of
+the argument, as you will be recognized not as a firm
+believer, but as a thinker. 
+
 ## Make spikes
 
+It may sound inefficient, but spikes are a good way to bring your
+result home: you are not meant to directly write a spike for a
+*use case* but you should **encourage the counterpart to start
+writing small and rough pieces of code** to test if some of the
+solutions he thiks are gonna work seem to be working fine.
+
+{% img left /images/lego.technic.jpg %}
+
+This makes the developer feel that he's  gaining trust from you,
+as he is allowed to actually spend some billable time on his
+implementation, but as some problem comes out ask him how to
+solve it: a good developer may immediately find that he was wrong
+about it, so your problem is solved; if he keeps trying to follow
+this deadly way - maybe for [pride](http://c2.com/cgi/wiki?CowboyCoder)
+- just move at the subsequent step, which means making the
+developer recognise he needs help.
+
+Bear in mind that whenever you decide to make a spike, something
+practical actually happens, and it could turn out that the
+implementation you were criticizing may accomplish its duty:
+since no one is perfect prepare your words to congratulate with
+the developer and thank him for the good approach, **without
+feeling embarassed**. 
+
 ## Consolidate doubts
+
+With a [socratic approach](http://en.wikipedia.org/wiki/Socratic_method),
+as you see that he is developing some spikes but comes to
+unacceptable endpoints, start smashing his beliefs pointing
+out the flaws his design has, the possible problems that you are
+going to face and the limitations that this piece of code will
+bring to his direct components - just to mention a few possible
+type of problems.
+
+{% img left /images/student.jpg %}
 
 ## Give trust, feed the monster and save him before death
 
