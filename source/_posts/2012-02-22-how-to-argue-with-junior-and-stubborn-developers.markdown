@@ -1,5 +1,4 @@
 ---
-published: false
 layout: post
 title: "How to argue with junior and stubborn developers"
 date: 2012-02-22 16:00
@@ -124,27 +123,83 @@ since no one is perfect prepare your words to congratulate with
 the developer and thank him for the good approach, **without
 feeling embarassed**. 
 
+{% img right /images/socrates.gif %}
+
 ## Consolidate doubts
 
 With a [socratic approach](http://en.wikipedia.org/wiki/Socratic_method),
-as you see that he is developing some spikes but comes to
-unacceptable endpoints, start smashing his beliefs pointing
+as you see that he is developing some spikes but **comes to
+unacceptable endpoints**, start smashing his beliefs pointing
 out the flaws his design has, the possible problems that you are
 going to face and the limitations that this piece of code will
 bring to his direct components - just to mention a few possible
 type of problems.
 
-{% img left /images/student.jpg %}
+I strongly recommend you to read
+[The Republic](http://en.wikipedia.org/wiki/The_Republic_(Plato)),
+by Plato, to understand how the socratic approach works in
+practice: it's a really good practice to **rely on ancient wisdom**
+to solve inter-people issues, as this kind of knowledge is
+transversal to any kind of context.
 
 ## Give trust, feed the monster and save him before death
 
-fa in modo che si sentano di avere paura, ma fagli risolvere le cose da soli
+May 8, 1970: [Willis Reed](http://en.wikipedia.org/wiki/Willis_Reed),
+captain and leader of the
+[New York Knickerbockers](http://www.nba.com/knicks/) is
+injured, and the Knicks need to defeat the Los Angeles Lakers
+in game 7 (last game of a 3-3 tied series) to become NBA champions.
+
+{% img right /images/walt.frazier.jpg %}
+
+Willis starts the game, sinks down the first two points for New York
+with a perimetral shot and, well, then he stops there.
+
+Your developer is Reed: he's under pressure, feels he can't solve
+the situation but dramatically tries not to drown; **there comes Walt**.
+
+[Walt Frazier](http://en.wikipedia.org/wiki/Walt_Frazier) is a
+tiny little point guard, a decent scorer: he's facing
+LA's [Jerry West](http://en.wikipedia.org/wiki/Jerry_West), one of the
+legends of the NBA, named Mr. Clutch due to his ability to stay
+focused and sink shots in high-pressure conditions.
+
+Walt does not care: inspired by his captain, he puts together an awesome
+performance, scoring 36 points, serving 19 assists and stealing several
+balls from West's hands.
+
+Now it's time - for you - to play as Walt 'Clyde' Frazier: as the developers
+is drowning down you need to come there, **give him the advices** to fix his
+implementation and to get out of that situation, **pair with him** and make
+him feel that **you could also be in that situation**, it's not such a big
+problem: doing this he will firmly listen to you, as you are leading
+him out of troubles, the best way to gain respect from others.
 
 ## Gain trust
 
+The key to lead a team is gain trust from your team: it is rarely acceptable
+that a team leader could lead his team with a cocky behaviour, so you are
+going to fail if your only aim is to do **people management**, and not team
+leading.
+
+Letting people pull responsabilities, giving them trust, analyzing with the
+team the problems which may occur after a decision (an implementation, or
+the change of a process), involving everyone in your job.
+
+As I like to state:
+
+{% blockquote %}
+  Great leaders let other leaders emerge.
+{% endblockquote %}
+
 ## Be humble and step back
 
-se ti aaccorgi in ritardo che sbagli tu ammettilo, ti fara guadagnare rispetto e non ti mettera in cattiva luce come tiranno
+What if you were wrong? It may happen, and it's perfectly acceptable:
+don't be rude when supporting your ideas, because as it turns out
+that you were wrong, this may harm your position.
+
+If you sell yourself as a humble guy, you will get the trust of your
+team, because **they will recognize you as a wise guide**, not a tyrant.
 
 {% footnotes %}
   {% fn Monkeys %}
