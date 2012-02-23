@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to argue with junior and stubborn developers"
-date: 2012-02-22 16:00
+date: 2012-02-23 12:00
 comments: true
 categories: [teams]
 ---
@@ -136,7 +136,7 @@ bring to his direct components - just to mention a few possible
 type of problems.
 
 I strongly recommend you to read
-[The Republic](http://en.wikipedia.org/wiki/The_Republic_(Plato)),
+[The Republic](http://en.wikipedia.org/wiki/The_Republic_(Plato\)),
 by Plato, to understand how the socratic approach works in
 practice: it's a really good practice to **rely on ancient wisdom**
 to solve inter-people issues, as this kind of knowledge is
@@ -168,7 +168,7 @@ Walt does not care: inspired by his captain, he puts together an awesome
 performance, scoring 36 points, serving 19 assists and stealing several
 balls from West's hands.
 
-Now it's time - for you - to play as Walt 'Clyde' Frazier: as the developers
+Now it's time - for you - to play as Walt 'Clyde' Frazier: as the developer
 is drowning down you need to come there, **give him the advices** to fix his
 implementation and to get out of that situation, **pair with him** and make
 him feel that **you could also be in that situation**, it's not such a big
@@ -177,7 +177,7 @@ him out of troubles, the best way to gain respect from others.
 
 ## Gain trust
 
-The key to lead a team is gain trust from your team: it is rarely acceptable
+The key to lead a team is gain trust from its components: it is rarely acceptable
 that a team leader could lead his team with a cocky behaviour, so you are
 going to fail if your only aim is to do **people management**, and not team
 leading.
