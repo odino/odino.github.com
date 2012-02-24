@@ -48,7 +48,7 @@ include the JS and add a namespace declaration to your documents:
        type="text/javascript"></script>
 ```
 
-whenever you need to aggregate data from a sub-recource you
+whenever you need to aggregate data from a sub-resource you
 only need to **add an hinclude tag**:
 
 ``` html
