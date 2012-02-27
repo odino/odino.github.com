@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "REST in peace, again"
-date: 2012-02-27 23:17
+date: 2011-07-12 23:17
 comments: true
 categories: [REST]
 alias: "/369/rest-in-peace-again"
