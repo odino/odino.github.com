@@ -3,7 +3,7 @@ layout: post
 title: "REST better: common pitfalls"
 date: 2011-03-19 22:54
 comments: true
-categories: 
+categories: [REST]
 alias: "/304/rest-better-common-pitfalls"
 ---
 
