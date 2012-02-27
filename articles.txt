@@ -32,15 +32,10 @@
 /366/jazoon-2011-wrapup
 /334/it-s-client-s-fault
 /237/browsers-rest-too-much-rest-lesser
-/290/rest-in-peace
 /329/a-simple-menu-and-the-relational-model-collapses
 /168/the-law-of-demeter-in-php
-/307/singletons-of-the-web
 /360/phpday-2011-wrapup
 /238/mockups-of-web-authentication-the-rest-rescue
 /293/a-f-awesome-2011-php-benelux-conference
 /300/be-clever-with-your-etags
-/358/goodbye-florence-hello-zurich
-/291/i-broke-the-rest
-/353/the-problem-with-non-hypermedia-driven-services
 
