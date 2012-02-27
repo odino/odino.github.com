@@ -1,5 +1,4 @@
 /231/multiple-doctrine-relations-on-the-same-table
-/312/rest-in-practice-my-review
 /352/the-orientdb-php-data-mapper-from-the-trenches
 /363/resources-about-hateoas
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
@@ -16,7 +15,6 @@
 /5/profiling-with-xdebug-and-kcachegrind
 /386/the-new-development-here-in-dnsee-bdd-and-much-more
 /340/a-data-mapper-for-orientdb
-/321/xml-vs-json-for-real
 /365/suboptimizations
 /369/rest-in-peace-again
 /201/il-buio-nell-anima

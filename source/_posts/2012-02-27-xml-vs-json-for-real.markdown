@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "XML vs JSON for real"
-date: 2012-02-27 13:23
+date: 2011-04-17 13:23
 comments: true
 categories: [evolvability]
 ---
