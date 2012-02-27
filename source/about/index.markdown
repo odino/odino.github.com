@@ -10,24 +10,23 @@ footer: true
 
 {% img right http://www.odino.org/media/alex.jpg Me as of 2011 %}
 
-I like to play with the [Symfony framework](http://www.symfony.com), 
-[OrientDB](http://www.orientechnologies.com/) and 
-[extreme programming](http://www.extremeprogramming.org/).
+I'm currently living in
+[Rome](http://maps.google.com/maps?q=roma+via+dei+prati+fiscali&hl=en&sll=41.89052,12.494249&sspn=0.913949,2.113495&vpsrc=0&hnear=Via+dei+Prati+Fiscali,+Roma,+Italy&t=m&z=16) 
+where I am permanently employed for *Interactive Thinking s.r.l*, also known as
+[DNSEE](http://www.dnsee.com), as a team leader and software architect.
 
-I like being involved in discussions about (web)architectures design, and I
+I like to play with the [Symfony framework](http://www.symfony.com), 
+[OrientDB](http://www.orientechnologies.com/),
+[extreme programming](http://www.extremeprogramming.org/)
+and being involved in discussions about (web)architectures design, and I
 evangelize the **REST architectural style**.
 
-Far from being a real (or decent) coach, I love to share my experience and
+I love to share my experience and
 thoughts about **agile development** with colleagues as much as I like to 
 [talk across many events](conferences) and
 contribute to some open source projects: the most important of them is
 [Orient](http://github.com/congow/Orient), which is a **Data Mapper for OrientDB**
 written in PHP.
-
-I'm currently living in
-[Rome](http://maps.google.com/maps?q=roma+via+dei+prati+fiscali&hl=en&sll=41.89052,12.494249&sspn=0.913949,2.113495&vpsrc=0&hnear=Via+dei+Prati+Fiscali,+Roma,+Italy&t=m&z=16) 
-where I am permanently employed for *Interactive Thinking s.r.l*, also known as
-[DNSEE](http://www.dnsee.com).
 
 If you want to get in touch with me, write a few lines to
 `alessandro.nadalin@gmail.com`.
