@@ -4,6 +4,7 @@ title: "Singletons of the web"
 date: 2011-03-21 11:14
 comments: true
 categories: [REST]
+alias: "/307/singletons-of-the-web"
 ---
 
 A few hours ago I was reading [a post from a member of the CI community](http://philsturgeon.co.uk/blog/2011/03/video-set-up-a-rest-api-with-codeigniter), which was explaining how to set up a REST api ( omitting the most important part, the [hypermedia constraint](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven\) ).

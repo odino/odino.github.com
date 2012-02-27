@@ -4,6 +4,7 @@ title: "XML vs JSON for real"
 date: 2011-04-17 13:23
 comments: true
 categories: [evolvability]
+alias: "/321/xml-vs-json-for-real"
 ---
 
 Since somebody, on Twitter, didn't appreciated my examples in the [JSON vs XML](http://www.odino.org/320/long-live-xml-too-sorry-for-json-fanboyz) fight ( and I just want to remember everybody that I'm not for the former or the latter, **without context** ), here I post an example that should be a *for-real* case in favour of XML, applied in the context of evolving a system without breaking existing clients.

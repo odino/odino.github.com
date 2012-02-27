@@ -4,6 +4,7 @@ title: "I broke the REST"
 date: 2011-03-6 11:09
 comments: true
 categories: [REST]
+alias: "/291/i-broke-the-rest"
 ---
 
 I've made a few mistakes with this plugin, called [sfRestWebServicePlugin](http://www.symfony-project.org/plugins/sfRestWebServicePlugin).

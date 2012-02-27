@@ -2,7 +2,6 @@
 /352/the-orientdb-php-data-mapper-from-the-trenches
 /363/resources-about-hateoas
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
-/304/rest-better-common-pitfalls
 /285/mapping-your-sfdoctrineguard-users-against-ldap
 /348/the-query-builder-for-orientdb
 /136/customizing-pagination-in-symfony

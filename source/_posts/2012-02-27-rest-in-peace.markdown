@@ -4,6 +4,7 @@ title: "REST in peace"
 date: 2011-03-05 11:19
 comments: true
 categories: [REST]
+alias: "/290/rest-in-peace"
 ---
 
 I'm pretty satisfied about the presentation I gave at the [Codemotion](http://www.codemotion.it/) this afternoon.

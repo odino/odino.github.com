@@ -4,6 +4,7 @@ title: "The problem with non hypermedia-driven webservices"
 date: 2011-05-31 11:12
 comments: true
 categories: [hypermedia]
+alias: "/353/the-problem-with-non-hypermedia-driven-services"
 ---
 
 I don't like SOAP. But I don't blame people using it.
