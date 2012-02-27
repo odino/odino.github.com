@@ -16,7 +16,6 @@
 /340/a-data-mapper-for-orientdb
 /365/suboptimizations
 /369/rest-in-peace-again
-/201/il-buio-nell-anima
 /294/symfony-live-2011-my-pov
 /357/get-prepared-for-orientdb-s-query-builder
 /339/esi-upside-down-will-the-client-be-happier
