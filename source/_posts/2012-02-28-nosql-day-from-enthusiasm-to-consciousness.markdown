@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NoSQL day: from enthusiasm to consciousness"
-date: 2012-02-28 15:11
+date: 2011-03-26 15:11
 comments: true
 categories: [NoSQL]
 alias: "/313/nosql-day-from-enthusiasm-to-consciousness"
