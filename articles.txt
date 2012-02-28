@@ -6,7 +6,6 @@
 /348/the-query-builder-for-orientdb
 /136/customizing-pagination-in-symfony
 /392/application-level-caching-fight-the-right-battle
-/313/nosql-day-from-enthusiasm-to-consciousness
 /376/news-from-the-orient-library-orientdb-query-builder-goes-out
 /345/some-common-questions-about-edge-side-includes
 /316/the-current-vague-state-of-put-and-delete-in-html5
