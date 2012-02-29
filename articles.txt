@@ -1,6 +1,5 @@
 /231/multiple-doctrine-relations-on-the-same-table
 /352/the-orientdb-php-data-mapper-from-the-trenches
-/363/resources-about-hateoas
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
 /285/mapping-your-sfdoctrineguard-users-against-ldap
 /348/the-query-builder-for-orientdb
