@@ -18,7 +18,6 @@
 /339/esi-upside-down-will-the-client-be-happier
 /368/contributing-to-the-zend-framework-via-github
 /356/yahoo-s-s4-stream-computing-platform
-/296/the-art-of-agile-development-my-review
 /394/osidays-2011-wrapup
 /319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles
 /299/ideas-of-march-rest-better
