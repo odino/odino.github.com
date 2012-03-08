@@ -9,7 +9,6 @@
 /345/some-common-questions-about-edge-side-includes
 /316/the-current-vague-state-of-put-and-delete-in-html5
 /5/profiling-with-xdebug-and-kcachegrind
-/386/the-new-development-here-in-dnsee-bdd-and-much-more
 /340/a-data-mapper-for-orientdb
 /365/suboptimizations
 /294/symfony-live-2011-my-pov
