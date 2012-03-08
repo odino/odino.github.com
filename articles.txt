@@ -1,9 +1,7 @@
 /231/multiple-doctrine-relations-on-the-same-table
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
 /285/mapping-your-sfdoctrineguard-users-against-ldap
-/392/application-level-caching-fight-the-right-battle
 /376/news-from-the-orient-library-orientdb-query-builder-goes-out
-/345/some-common-questions-about-edge-side-includes
 /365/suboptimizations
 /294/symfony-live-2011-my-pov
 /339/esi-upside-down-will-the-client-be-happier
@@ -14,6 +12,5 @@
 /329/a-simple-menu-and-the-relational-model-collapses
 /168/the-law-of-demeter-in-php
 /360/phpday-2011-wrapup
-/238/mockups-of-web-authentication-the-rest-rescue
 /293/a-f-awesome-2011-php-benelux-conference
 /300/be-clever-with-your-etags

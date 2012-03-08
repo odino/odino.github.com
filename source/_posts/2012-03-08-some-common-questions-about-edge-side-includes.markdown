@@ -4,9 +4,11 @@ title: "Some common questions about Edge Side Includes"
 date: 2011-05-30 15:07
 comments: true
 categories: [ESI, cache]
+alias: "/345/some-common-questions-about-edge-side-includes"
 ---
 
 After my [REST in (a mobile) peace](http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011) talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so "standard", here's a parade of little things to know about [ESI](http://en.wikipedia.org/wiki/Edge_Side_Includes).
+<!-- more -->
 
 ## Is it a single-construct language?
 
