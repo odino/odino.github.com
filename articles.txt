@@ -13,4 +13,3 @@
 /168/the-law-of-demeter-in-php
 /360/phpday-2011-wrapup
 /293/a-f-awesome-2011-php-benelux-conference
-/300/be-clever-with-your-etags
