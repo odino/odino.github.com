@@ -17,7 +17,6 @@
 /368/contributing-to-the-zend-framework-via-github
 /394/osidays-2011-wrapup
 /319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles
-/299/ideas-of-march-rest-better
 /366/jazoon-2011-wrapup
 /237/browsers-rest-too-much-rest-lesser
 /329/a-simple-menu-and-the-relational-model-collapses
