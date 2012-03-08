@@ -7,7 +7,6 @@
 /345/some-common-questions-about-edge-side-includes
 /365/suboptimizations
 /294/symfony-live-2011-my-pov
-/357/get-prepared-for-orientdb-s-query-builder
 /339/esi-upside-down-will-the-client-be-happier
 /394/osidays-2011-wrapup
 /319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles
