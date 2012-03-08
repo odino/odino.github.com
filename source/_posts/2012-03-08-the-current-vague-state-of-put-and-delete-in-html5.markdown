@@ -4,6 +4,7 @@ title: "The current vague state of PUT and DELETE in HTML5"
 date: 2011-05-06 13:01
 comments: true
 categories: [HTML5, HTTP]
+alias: "/316/the-current-vague-state-of-put-and-delete-in-html5"
 ---
 
 If you followed my [REST in peace](http://www.slideshare.net/odino/rest-in-peace-codemotion-2011) presentation, you probably noted that I was [a bit angry against HTML5](http://www.slideshare.net/odino/rest-in-peace-codemotion-2011/180).
