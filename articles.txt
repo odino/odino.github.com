@@ -5,8 +5,6 @@
 /392/application-level-caching-fight-the-right-battle
 /376/news-from-the-orient-library-orientdb-query-builder-goes-out
 /345/some-common-questions-about-edge-side-includes
-/5/profiling-with-xdebug-and-kcachegrind
-/340/a-data-mapper-for-orientdb
 /365/suboptimizations
 /294/symfony-live-2011-my-pov
 /357/get-prepared-for-orientdb-s-query-builder
