@@ -19,7 +19,6 @@
 /319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles
 /299/ideas-of-march-rest-better
 /366/jazoon-2011-wrapup
-/334/it-s-client-s-fault
 /237/browsers-rest-too-much-rest-lesser
 /329/a-simple-menu-and-the-relational-model-collapses
 /168/the-law-of-demeter-in-php
