@@ -1,7 +1,6 @@
 /231/multiple-doctrine-relations-on-the-same-table
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
 /285/mapping-your-sfdoctrineguard-users-against-ldap
-/348/the-query-builder-for-orientdb
 /136/customizing-pagination-in-symfony
 /392/application-level-caching-fight-the-right-battle
 /376/news-from-the-orient-library-orientdb-query-builder-goes-out
