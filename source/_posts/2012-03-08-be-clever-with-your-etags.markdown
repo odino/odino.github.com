@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Be clever with your Etags"
-date: 2012-03-08 15:21
+date: 2011-03-17 15:21
 comments: true
 categories: [HTTP]
 alias: "/300/be-clever-with-your-etags"
