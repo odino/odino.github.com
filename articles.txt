@@ -1,14 +1,9 @@
-/231/multiple-doctrine-relations-on-the-same-table
 /383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more
-/285/mapping-your-sfdoctrineguard-users-against-ldap
 /376/news-from-the-orient-library-orientdb-query-builder-goes-out
-/365/suboptimizations
 /339/esi-upside-down-will-the-client-be-happier
 /394/osidays-2011-wrapup
 /319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles
-/366/jazoon-2011-wrapup
 /237/browsers-rest-too-much-rest-lesser
 /329/a-simple-menu-and-the-relational-model-collapses
-/168/the-law-of-demeter-in-php
 /360/phpday-2011-wrapup
 /293/a-f-awesome-2011-php-benelux-conference
