@@ -1,0 +1,53 @@
+---
+layout: post
+title: "PHPDay 2011 wrapup"
+date: 2011-06-09 15:33
+comments: true
+categories: [conference]
+alias: "/360/phpday-2011-wrapup"
+---
+
+It's been a while since I got back from the PHPDay ( ~1 month ) and the experience definitely deserves a post.
+<!-- more -->
+
+## Where, when, how..
+
+This year's PHPDay has been held in Verona, the wonderful place where Romeo and Juliet had their drama.
+
+The location was the same of the 2009 edition ( which, BTW, was the first conference as a speaker, for me ) with the addition of the third day, just like the last year.
+
+The conference had a first day of workshops and the last 2 days of tutorials and talks: 25 minutes for the former, 45 for the latter.
+
+## Day 1: the german track
+
+Very curious, the workshop day had an entire track with german speakers: Sebastian Bergmann gave a nice [overview of PHPUnit 3.5](http://www.phpday.it/2011/session/testing-lamp-applications) with the addition of a live example testing legacy code.
+
+The guys from Quafoo presented the [document component from the Apache Zeta Components](http://www.phpday.it/2011/session/any-any-convert-your-documents): seems pretty awesome, given that document conversion is something everyone of us faces during his career and everyone of us blamed TCPDF at least once.
+
+Quafoo again showed us their [application installer](http://www.phpday.it/2011/session/generic-php-application-installer), which is an high-level library able to let developers code their own installer according to common needs ( database setup, filesystem configuration and so on ).
+
+## Day 2: tremendous keynote
+
+My second day started with a topic we're facing in our company: the hard combination between [agile development and user-centered design](http://www.phpday.it/2011/session/just-married-user-centred-design-and-agile).
+
+[Jacopo Romei](http://www.phpday.it/2011/session/many-many-no-man-island) had an embarassing ( with a positive meaning ) keynote about collaboration and communities: one of the coolest I ever heard, given that I often find keynotes boring.
+
+In the first session of the afternoon I presented the [HTTP cache inside Symfony2](http://www.phpday.it/2011/session/be-lazy-be-esi-http-caching-and-symfony2-0), pretty satisfied about the people listening and their feedbacks.
+
+Then I listened about 2 build systems, [Phing and Ant](http://www.phpday.it/2011/session/phing-vs-ant-parola-chiave-automatizzare): an insteresting italian talk, given that I didn't know that a few code metrics tools are well-integrated with this kind of systems.
+
+## Day 3: leaving Verona with style
+
+My attention was firstly captured by the [real-world report about calciomercato.com](http://www.phpday.it/2011/session/symfony-e-grandi-numeri-si-pu-fare) ( that can be translated in soccertrades.com ), a site, built with symfony 1.4, which scored 4 milions visits in August 2010: definitely impressive.
+
+The talks wasn't obviously focused on the software architecture but on the system architecture behind the website: a cool thing was that they prefered to build 2 separate machine templates ( you usually have 1 VM template, that you scale horizontally ), one used to serve the website and the other for the static assets, some kind of a little CDN.
+
+Giorgio Sironi had an interesting talk about [DDD in PHP](http://www.phpday.it/2011/session/pursuing-domain-driven-design-practices-php): it was a real pity that there were a few guys listening him, because DDD is - obviously - coupled with doing OO right, and PHPers often forget about them both.
+
+During the afternoon I had the great occasion to present, with David, an overview about the [problems relational DBMS have with fuzzy-model softwares](http://www.phpday.it/2011/session/cmf-pain-f), like CMSes: it has been an opportunity to show off that [DNSEE](http://www.dnsee.com/) guys are working hard to develop a CMF based on Symfony2 and a NoSQL graph database, OrientDB.
+
+## So what?
+
+Once again, the best conference I ever attended, did not betrayed my expectations.
+
+If you want to view the slides of the talks, have a look at the [Joind.in](http://joind.in/event/view/472) page.

@@ -3,5 +3,4 @@
 /319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles
 /237/browsers-rest-too-much-rest-lesser
 /329/a-simple-menu-and-the-relational-model-collapses
-/360/phpday-2011-wrapup
 /293/a-f-awesome-2011-php-benelux-conference
