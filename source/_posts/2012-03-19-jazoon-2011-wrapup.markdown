@@ -1,0 +1,55 @@
+---
+layout: post
+title: "Jazoon 2011 wrapup"
+date: 2011-06-28 15:09
+comments: true
+categories: [conference]
+alias: "/366/jazoon-2011-wrapup"
+---
+
+So, as you might know, the last week I've been in Zurich in order to partecipate to the Jazoon Rookie Award.
+<!-- more -->
+
+{% img center /images/jazoon1.jpg %}
+
+## The city
+
+Zurich, gotta say, is a really nice city: it has a lot of green and its quite clean: as Lukas told me, it's not because Swiss people are that respectful, but because the public administration hires lots of scavengers :)
+
+Switzerland is also soooooooooo expensive, and, by the way, my hotel was in what they call "the gold coast of Zurich", the richest part of the city, so as I ordered a plate of ananas at a vegetarian restaurant, I was traumatized when paying: 30 euros or something like that ( note for the me of the future: remember before the departure's flight that Switzerland is not in the UE, so they don't have euros ).
+
+{% img center /images/jazoon2.jpg %}
+
+## The conference
+
+{% img center /images/jazoon3.jpg %}
+
+The Jazoon was pretty awesome: I had the opportunity to meet a lot of funny people and we had great time playing at the table-soccer or just chatting about the current state of sw lifecycles and other nerdy stuff.
+
+The organization was really good, because at the hotel everyone knew about our arrival and the conference was easy to reach, with a perfect wi-fi connection and some recreative areas.
+
+And, since I am italian I need to say it, the food was really tasty :)
+
+## The award
+
+{% img center /images/jazoon4.jpg %}
+
+Oh, man, a really really really great experience.
+
+I competed against Benjamin from Karlsruhe and Ivo from Skopje, 2 really cool guys that had really good presentations.
+
+I ranked 2nd with my "REST in peace: a handbook of software waste" and won a Lenovo IdeaPad which is, basically... awesome :)
+
+## Many thanks to...
+
+The other 2 rookies, we had a few beers and funny moments together, it was well-spent time with those guys.
+
+And, obviously, a particular thank you to Georgios ( I hope the name is ok, George! ), Ivo's mentor - as far as I understood - a really nice person to chat with: we had a few moments to talk and it was really nice to have the opportunity to listen the point of view of such a wise and experienced guy.
+
+Last but not least, a really big "thank you!" to Felix, Jutta and Marco from the organization, it was a pleasure to be invited at such this kind of conference.
+
+## My presentation
+
+As usual, I post here the presentation, but you can find it on slideshare:
+
+{% slideshare 8392980 850 730 %}
