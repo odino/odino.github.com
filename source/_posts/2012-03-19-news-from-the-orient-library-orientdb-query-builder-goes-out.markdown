@@ -4,6 +4,7 @@ title: "News from the Orient library: OrientDB query-builder goes out"
 date: 2011-07-31 15:19
 comments: true
 categories: [OrientDB, PHP]
+alias: "/376/news-from-the-orient-library-orientdb-query-builder-goes-out"
 ---
 
 There are times to celebrate, like this one, that I was expecting since 2 months; a moment I delayed because of an amount of things that you can't even imagine.
