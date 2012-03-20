@@ -6,4 +6,7 @@
 	<li>
 		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
 	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
 </ol>
