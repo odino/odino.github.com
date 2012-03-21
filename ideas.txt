@@ -1,3 +1,5 @@
 Wanna be hired? Go get yourself a blog and a github profile
 HTML5 cache: useless regression or a new paradigm for the web?
+source/_posts/2012-02-27-the-perfect-architecture.markdown
+source/_posts/2012-01-24-building-fault-tolerant-api-clients.markdown
 
