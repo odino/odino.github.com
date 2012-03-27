@@ -7,7 +7,7 @@ categories: [teams]
 ---
 
 As part of my last days in [DNSEE](http://dnsee.com) and first days in
-[Rocket](rocket-internet.de) I'm involved in two recruitment processes
+[Rocket](http://rocket-internet.de) I'm involved in two recruitment processes
 and after the huge amount of CVs we got for DNSEE after the
 [Codemotion](http://www.codemotion.it/) I thought it would be good to
 share some thoughts about **my** recruiting habits.
