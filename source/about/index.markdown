@@ -11,9 +11,7 @@ footer: true
 {% img right http://www.odino.org/media/alex.jpg Me as of 2011 %}
 
 I'm currently living in
-[Rome](http://maps.google.com/maps?q=roma+via+dei+prati+fiscali&hl=en&sll=41.89052,12.494249&sspn=0.913949,2.113495&vpsrc=0&hnear=Via+dei+Prati+Fiscali,+Roma,+Italy&t=m&z=16) 
-where I am permanently employed for *Interactive Thinking s.r.l*, also known as
-[DNSEE](http://www.dnsee.com), as a team leader and software architect.
+Dubai where I am permanently employed for [Rocket Internet](http://www.rocket-internet.de), as a team leader.
 
 I like to play with the [Symfony framework](http://www.symfony.com), 
 [OrientDB](http://www.orientechnologies.com/),
@@ -60,10 +58,10 @@ I would have needed a real job
 * with [Jacopo](http://www.agiledevelopment.it/), I've been part of the 
 [Frog crew](http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc6/179422_1744393780288_1552073836_1746666_5292395_n.jpg) during Santa Marinella's 2010/2011 Este24 winter championship
 * I've changed **5 houses in 3 years**
-* fascinated by [indian food](http://a8.sphotos.ak.fbcdn.net/hphotos-ak-snc7/390052_2597546188565_1552073836_2665338_114963098_n.jpg) and almost
+* I'm fascinated by [indian food](http://a8.sphotos.ak.fbcdn.net/hphotos-ak-snc7/390052_2597546188565_1552073836_2665338_114963098_n.jpg) and almost
 [everything](http://a3.sphotos.ak.fbcdn.net/hphotos-ak-snc7/319666_2596714327769_1552073836_2664926_1543548191_n.jpg)
 of that [beautiful country](http://www.flickr.com/photos/alessandrolombardi/6438543299/in/set-72157628237175419),
 which I visited for a [conference](http://2011.osidays.com/speakers)
 * I love Rome, but I feel like it's not the right place to raise my (future) children
 * I have a *personal* blog, in italian, called [nerdiario](http://www.nerdiario.it) ("*nerd-diary*")
-
+* In March, 2012, I've moved to Dubai
