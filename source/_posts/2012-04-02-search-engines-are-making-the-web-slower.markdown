@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Search engines are making the web slower"
-date: 2012-04-02 11:23
+date: 2012-04-07 10:00
 comments: true
 categories: [scaling, web, performances]
 ---
@@ -17,7 +17,7 @@ is now recognized as a first-level programming language{% fn_ref 1 %},
 although SE are around since more than a decade: thus,
 crawlers and spiders, although able to interpretate basic
 JS code, cannot do more complex stuff, like managing
-Handlerbars or HInclude.
+[Handlerbars](http://handlebarsjs.com/) or [HInclude](http://mnot.github.com/hinclude/).
 
 Or, at least, we don't know if they can.
 
@@ -27,12 +27,12 @@ spider could see the whole resource without the need of
 executing JS code: a workaround that would cost in terms of
 development time, but still an acceptable workaround.
 
-The problem, here, is that tis tecnique, known as cloacking
-is part of the black SEO list, so you basically can't take 
+The problem, here, is that tis tecnique, known as [cloacking](http://en.wikipedia.org/wiki/Cloaking)
+is part of the [black hat SEO](http://en.wikipedia.org/wiki/Search_engine_optimization#White_hat_versus_black_hat) list, so you basically can't take 
 advantage of it as malicious web developers would use
 cloacking to serve keyword-stuffed contents to bots and
 "normal" webpages to humans, and this is something you
-really want to avoid, since SERPs' attinence(???) is an
+really want to avoid, since SERPs' relevance is an
 important part of a user's eb experience.
 
 But, at least, we don't know how search engines would react
