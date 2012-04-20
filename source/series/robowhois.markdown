@@ -9,4 +9,7 @@
 	<li>
 		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
 	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
 </ol>
