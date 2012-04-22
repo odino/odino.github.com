@@ -51,9 +51,7 @@ I would have needed a real job
 * I ~~have~~ had 2 cats, and I am missing my long-time companion
 [Ade](http://www.odino.org/201/il-buio-nell-anima), who died in late 2010
 * I don't spontaneously tell my age in conversations
-* I've got 2 kawasaki, an
-[ER5](http://a7.sphotos.ak.fbcdn.net/hphotos-ak-snc3/16736_1234432711580_1552073836_625961_6134828_n.jpg)
- and a ['92 ZZR](http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc3/15331_1230037001690_1552073836_615791_859041_n.jpg)
+* I've a ['92 ZZR](http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc3/15331_1230037001690_1552073836_615791_859041_n.jpg), but I used to have 2 bikes - 3 for a few weeks
 * Gimme some drums or a guitar, I still should be able to play something 
 * with [Jacopo](http://www.agiledevelopment.it/), I've been part of the 
 [Frog crew](http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc6/179422_1744393780288_1552073836_1746666_5292395_n.jpg) during Santa Marinella's 2010/2011 Este24 winter championship
