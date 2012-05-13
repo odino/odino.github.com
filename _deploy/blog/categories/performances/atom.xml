@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: performances | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/performances/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T01:54:34+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Search engines are making the web slower]]></title>
+    <link href="http://odino.org/search-engines-are-making-the-web-slower/"/>
+    <updated>2012-04-07T10:00:00+04:00</updated>
+    <id>http://odino.org/search-engines-are-making-the-web-slower</id>
+    <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
+a tecnique which made the web able to scale the way
+it is now: <strong>search engines are making it slower</strong> and
+less scalable, as they don't want us to do so.</p>
+
+<!-- more -->
+
+
+<p>The problem is that JavaScript - the <em>creepy</em> JavaScript -
+is now recognized as a first-level programming language<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+although SE are around since more than a decade: thus,
+crawlers and spiders, although able to interpretate basic
+JS code, cannot do more complex stuff, like managing
+<a href="http://handlebarsjs.com/">Handlerbars</a> or <a href="http://mnot.github.com/hinclude/">HInclude</a>.</p>
+
+<p>Or, at least, we don't know if they can.</p>
+
+<p>There would be a workaround to this kind of issue, by just
+<strong>serving different content for JS-aware clients</strong>, so that a
+spider could see the whole resource without the need of
+executing JS code: a workaround that would cost in terms of
+development time, but still an acceptable workaround.</p>
+
+<p>The problem, here, is that tis tecnique, known as <a href="http://en.wikipedia.org/wiki/Cloaking">cloacking</a>
+is part of the <a href="http://en.wikipedia.org/wiki/Search_engine_optimization#White_hat_versus_black_hat">black hat SEO</a> list, so you basically can't take
+advantage of it as malicious web developers would use
+cloacking to serve keyword-stuffed contents to bots and
+"normal" webpages to humans, and this is something you
+really want to avoid, since SERPs' relevance is an
+important part of a user's eb experience.</p>
+
+<p>But, at least, we don't know how search engines would react
+to the workaround I just explained.</p>
+
+<h2>What do we need?</h2>
+
+<p>We should have clarifications from SE vendors, to know whether
+they are able or not to let us take advantage of great JS-based
+technologies able to make our applications scale better, or - better -
+have fully JS-aware spiders and crawlers, able to elaborate
+resources like real-world browsers.</p>
+
+<p>It's not about me, it's not about you, it's about the web: a faster,
+and <strong>definitely better</strong>, web.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Mainly because of the NodeJS hype <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

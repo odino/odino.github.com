@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: architecture | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/architecture/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T01:54:34+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Application-level caching: fight the right battle ]]></title>
+    <link href="http://odino.org/application-level-caching-fight-the-right-battle/"/>
+    <updated>2011-11-22T15:01:00+04:00</updated>
+    <id>http://odino.org/application-level-caching-fight-the-right-battle</id>
+    <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
+
+<blockquote><p>Why do you hate application-level caches?</p></blockquote>
+
+<p>First of all, I don't.</p>
+
+<p>And here's explained why I don't hate AL caches and why I do really hate how developers integrate caching in their applications.</p>
+
+<!-- more -->
+
+
+<h2>What should we cache</h2>
+
+<p>There are a few aspects of our architecture/application that usually need caching-capabilities to improve performances, and I will analyze each one of them in order to understand whether they fit well in an application cache or not.</p>
+
+<p>To summarize them, here's a brief list:</p>
+
+<ul>
+<li>finding file on the filesystem</li>
+<li>metadata</li>
+<li>routing</li>
+<li>configuration</li>
+<li>non-native data providers</li>
+<li>output fragments</li>
+</ul>
+
+
+<h2>Finding files</h2>
+
+<p>An AL cache is really good for finding files on the filesystem: autoloaders are pretty smart ( for example, in PHP, we have the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> standard ) so they basically know a set of conventions and calculate the path to a required file: well, the process of calculating that path is really unnecessary when going live on production, because the core of our application is rarely meant to be moved/changed.</p>
+
+<p>``` php autoloading.php
+&lt;?php</p>
+
+<p>array(
+  'Symfony\Component\Finder\Finder' => <strong>DIR</strong> .'/src/Symfony/Component/Finder/Finder.php',
+  ...
+  ...
+);
+```</p>
+
+<p>Flushing the autoloading cache at every deploy is the solution for those rare scenarios.</p>
+
+<h2>Reading metadata</h2>
+
+<p>When you need to specify metadata on objects, a good solution is recurring to annotations:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Dog
+{
+  /<em>*
+   *  @validation(int)
+   </em>/
+  protected $age;
+}
+```</p>
+
+<p>but reading that data can be expensive, since you always need to parse and introspect an entity.</p>
+
+<p>Doctrine2, the infamous PHP ORM, uses <a href="https://github.com/doctrine/common/tree/master/lib/Doctrine/Common/Cache">caching</a> exactly to solve the issue of always reading metadata from objects.</p>
+
+<h2>Routing</h2>
+
+<p>We usually compile YML/XML files for routing ( 'cause they are way easier to read/write ), which means that at every request we parse the URI, parse the routing file and find a match between them.</p>
+
+<p>Reading the routing can be annoying, so we can easily compile down a PHP file with routing rules from the original routing file.</p>
+
+<h2>Can I haz natives?</h2>
+
+<p>As you might understand, a good solution is to cache when we need to face formats which are different from our language: so, for example, from configuration files we can compile - in PHP - arrays, or stuff like that.</p>
+
+<p>Symfony2, for example, add the ability of <a href="http://www.slideshare.net/fabpot/dependency-injection-in-php-5354/100">compiling down the whole dependency injection container</a> from different formats to plain PHP.</p>
+
+<h2>Bad smells, here they come</h2>
+
+<p>So you may wonder why I hate application caches, and <strong>here it comes the tornado</strong>.</p>
+
+<p>We are basically used to think that <strong>caching the output</strong> is just good, and we have those CMSes like Joomla! or Drupal doing that.</p>
+
+<p>Think about how many things you are loosing re-implementing an output caching layer inside your application: your application needs to do the storage of cached files, it needs to calculate dates and evaluate if an HTML fragment have expired or not, it needs to be hit for 2 identical requests and then, the most disturbing thing, you need to add a layer on top of your application.</p>
+
+<p>Adding new layers is bad, because as you add them, you potentially introduce bugs, coupling and limitations to your software: <strong>the more code you write, the more bugs happen</strong>.</p>
+
+<p>Output caching should be done with the HTTP cache, which works at the protocol level: you don't have to add any layer to your application ( you only need a good framework ), and whether to cache or not a resource is demanded to the client's browser or to the reverse proxy.</p>
+
+<p>In the HTTP cache, you can serve the same response to 1 milion clients just with a stupid reverse proxy; you can serve the same response after identical requests, to a single client, without even making the subsequent requests traverse the internet.</p>
+
+<p>Custom output caches are not capable of doing 1% of what the HTTP cache has proven to be able to do.</p>
+
+<p>Application-level output caches are an antipattern, get over it.</p>
+]]></content>
+  </entry>
+  
+</feed>

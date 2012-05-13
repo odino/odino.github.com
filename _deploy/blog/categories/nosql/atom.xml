@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: NoSQL | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/nosql/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T01:54:34+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Back in track with OrientDB]]></title>
+    <link href="http://odino.org/back-in-track-with-orientdb/"/>
+    <updated>2012-04-20T15:26:00+04:00</updated>
+    <id>http://odino.org/back-in-track-with-orientdb</id>
+    <content type="html"><![CDATA[<p>It's been a while since I don't release any update about
+Orient, the PHP data mapper for OrientDB: we recently got
+back on track and I have a few interesting news.</p>
+
+<!-- more -->
+
+
+<p>I just moved to Dubai, as you may know, so the last couple
+of months have been a huge mess for me, while David was
+doing some <a href="https://github.com/congow/Orient/tree/persistence">major experiments</a>
+for the library: we only had the time, at the end of March,
+to talk about OrientDB and the ODM at the
+<a href="http://www.slideshare.net/ingdavidino/graph-db-inphp">Codemotion</a>.</p>
+
+<p>Since in the last week we restarted pairing together to
+finalize a few open things in the library, I will explain what
+is the current status of Orient.</p>
+
+<h2>Beta-5</h2>
+
+<p>We decided to put back our effort on the <code>beta-5</code> release,
+instead of letting me complete the issues still belonging
+to this version by myself.</p>
+
+<p>In these days we are finalizing the integration tests for
+OrientDB's native data types, and refactoring a bit the
+implementation of the <strong>hydration mechanism</strong>, which will be more
+configurable: we will release an ODM able to let the developer
+decide what to do when an hydration error occurs (in other words,
+you mapped an attribute as integer but in the OrientDB record
+that attribute is mistakenly set as a date): before this
+refactoring process <code>null</code> was returned by default, but now
+you'll be able to decide whether to <a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Formatter/Caster.php#L520">force the casting or raise an exception</a> for these errors.</p>
+
+<p>As we complete these 2 tasks, we will remove the TODOs from
+the codebase and then we will release this version which,
+I remind it for those who are not up-2-date with the library's
+lifecycle, is the one introducing <strong>hydration</strong>, which is the
+ability to run SQL queries against an OrientDB instance and map
+the results as PHP objects.</p>
+
+<p>Similarly to Doctrine2, Orient offers the ability to map objects
+from PHP to OrientDB via annotations:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Congow\Orient\ODM\Mapper\Annotations as ODM;</p>
+
+<p>/<em>*
+* @ODM\Document(class="Address")
+</em>/
+class Address
+{</p>
+
+<pre><code>/**
+ * @ODM\Property(type="link")
+ */
+public $city;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<h2>Doctrine ODM</h2>
+
+<p>From the beginning, we've been committed in finding a way to make
+<a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Contract/Protocol/Adapter.php#L23">interoperability</a>
+a feature of Orient: another side of this issue is the fact that
+we tried to stick to Doctrine2's design for lots of our problems,
+from the implementation of mapping to lazy-loading through
+auto-generated proxy classes.</p>
+
+<p>In the last weeks I pro-actively asked the Doctrine2 community if they
+would be happy in welcoming this project in their community, and the
+responses we received were positive: as a result, after going out with
+the <code>beta-5</code> release we will refactor the library's namespaces and move
+the repository on Github.</p>
+
+<p>There will be lots of things to do, lot of code to refactor, lot of
+complaints from the Doctrine2 core members because of our "strange"
+code, but this is a huge step towards a more robust PHP library
+for OrientDB.</p>
+
+<h2>Beta-6</h2>
+
+<p>After the incubation inside the Doctrine organization we will re-start
+working on the <code>beta-6</code> version, which will bundle <strong>persistence</strong> - the
+ability to persist mapped PHP objects into OrientDB, using a couple
+well known design patterns like the <a href="http://martinfowler.com/eaaCatalog/unitOfWork.html">unit of work</a>
+and the <a href="http://martinfowler.com/eaaCatalog/identityMap.html">identity map</a>.</p>
+
+<p>I won't commit myself in an estimate: <strong>this will take a long time</strong>,
+especially if only me and <a href="http://davidfunaro.com">David</a> will keep
+the good work on this library.</p>
+
+<p>But since we had <strong>huge contributions</strong> from
+<a href="https://github.com/nrk">Daniele Alessandri</a> and
+are gonna be part of the Doctrine community, I bet we will be able to
+deliver what promised in less than then what I currently think.</p>
+
+<h2>RC</h2>
+
+<p>Last but not least, there will be a few planned refactorings and feature
+add-ons that we don't need now but are mandatory for a decent stable
+version, which will come as we roll out our first <code>RC</code>.</p>
+
+<h2>Thanks, again</h2>
+
+<p>I could not keep my effort and motivation constant during
+<a href="https://github.com/congow/Orient/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">this year</a>
+without your many "thank you", your enthusiasm and
+encouraging words: this is what makes me eager to type
+with my fat fingers new LoCs dealing with PHP and NoSQL.</p>
+
+<p>This won't be a library I wrote<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, this is something an entire
+community was waiting for and contributed to.</p>
+
+<p>So, <em>thank y'all</em>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Although I still remember the first commit on Github: I was only wearing my underwear, alone in the hall of my flat <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
+    <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
+    <updated>2011-05-06T15:42:00+04:00</updated>
+    <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
+    <content type="html"><![CDATA[<p>There's a common goal that NoSQL and ESI share together: consistency.</p>
+
+<p>Since <a href="http://www.slideshare.net/odino/http-cache-pug-rome-03292011/2">the web is inconsistent</a>, we should be able to find some hacks to make it more consistent and satisfy both us, reducing bandwidth, traffic and CPU load, and the end-user, decreasing the latency of our services.</p>
+
+<!-- more -->
+
+
+<h2>Edge Side Includes</h2>
+
+<p>ESI is a specification written 10 years ago in order to let the reverse proxies being able to include <em>{insert media type here}</em> fragments in HTTP responses.</p>
+
+<p>It's so useful because it let's you take advantage of HTTP's native caching specification without recurring to application caches for really dynamic pages.</p>
+
+<p>An ESI tag is pretty straightforward:</p>
+
+<p>``` xml
+<html>
+  <head>...</head>
+  <body></p>
+
+<pre><code>...
+  &lt;esi:include src="http://odino.org/footer.html" /&gt;
+...
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>So, as you see, caching directives for webpages' fragments are now a matter of the protocol ( HTTP, in most cases ) and not of the application ( Symfony, DotNetNuke, Joomla, WordPress, Drupal, Django, Django REST framework, Ruby, Sinatra, ... ).</p>
+
+<p>This is so awesome because:</p>
+
+<ul>
+<li>it lets you scale when really dynamic data needs to be sent over the network</li>
+<li>you don't have to re-invent the wheel with your application's caching layer</li>
+<li>caching directives are a matter of the protocol, thus, if you'll change your application, caching configuration won't change</li>
+</ul>
+
+
+<h2>NoSQL</h2>
+
+<p>The NoSQL movement is really old, but has been highlighted in the last 2/3 years.</p>
+
+<p>At the italian NoSQLday I listened a talk about Redis and another one about SQL antipatterns which helped me contextualizing this DBMS: a few of them are out there in order to help you increase your performances without recurring to a caching mechanism, having the possibility to <strong>really</strong> show really real-time data.</p>
+
+<p>Most of them are so fast, damn.</p>
+
+<h2>A common goal</h2>
+
+<p>Since, as we see, a few players are pointing towards a more consistent web, we should assume that this is the way to drive tecnology through: organizations like Facebook have to need to scale to milions of users mantaining the appearance of a real-time service, and the more they reach their goals, the more our customers pretend to act like them.</p>
+
+<p>In order to "<em>real-time scale</em>" you can use a technology born a decade ago or another one which is on everyone's lips since a couple years.</p>
+
+<p>The choice is yours: tools are always tools, but the architecture's design is something we, only we, can manage.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A simple menu and the relational model collapses]]></title>
+    <link href="http://odino.org/a-simple-menu-and-the-relational-model-collapses/"/>
+    <updated>2011-04-17T16:07:00+04:00</updated>
+    <id>http://odino.org/a-simple-menu-and-the-relational-model-collapses</id>
+    <content type="html"><![CDATA[<p>Relational sucks, some say.</p>
+
+<p>That's not fair, because we used it for 30 years and we still need it: but there are some particular cases, out there, that relational, and traditional, databases can't handle well.</p>
+
+<!-- more -->
+
+
+<h2>The simple case of the menu</h2>
+
+<p>You are building a CMS for your customer, and you just got to the point you need to develop <em>that</em> feature, the <strong>menu management system</strong>.</p>
+
+<p>A menu is really simple, because it's an entity connected ( N to N ) with other entities ( menu items ).</p>
+
+<p>So the class diagram is really simple:</p>
+
+<p><img class="center" src="/images/Menuclassdiagram.png"></p>
+
+<p>But there's a problem: not all of the menu items are equal; you can link an external URI or a news ( an entity of your model ).</p>
+
+<p>There you basically have 2 choices: to de-normalize your data or to do <strong>column aggregation</strong>.</p>
+
+<h2>Column aggregation</h2>
+
+<p>You can simply create a single table, link, with a type column ( the type is usually used in order to <a href="http://www.doctrine-project.org/documentation/manual/1_2/en/inheritance:column-aggregation">work with an ORM</a> ):</p>
+
+<p><img class="center" src="/images/Columnaggregation.png"></p>
+
+<p>but the situation gets ridicolous, although your ORM may work fine with this pattern: as soon as your domain grows and you need to link more entities, you get</p>
+
+<p><code>bash
+(n-1) * r
+</code></p>
+
+<p><code>NULL</code>s in your table, given <code>n</code> as our entities and <code>r</code> the amount of rows.</p>
+
+<p>Another problem is that the relations can be NULLable, and sometimes you can't afford it.</p>
+
+<p>I like to call tables created with the column aggregation <strong>full-o'null</strong>, because they suck really much: despite this, they can save your life if you need to develop small system, with a modest domain; plus, they usually help you avoid UNIONs.</p>
+
+<h2>De-normalization</h2>
+
+<p>Subtitle: how to use a RDBMS as a non relational system.</p>
+
+<p>Sub-subtitle: <strong>being an ass with RDBMS</strong>.</p>
+
+<p>Normalization is one of the things we try to achieve with relational systems, so dropping it it's evil: we tend to consider de-normalization good as far as we recognize our data don't fit well in a RDBMS ( thus the problem it's not with MySQL or Oracle, it's our fault ).</p>
+
+<p>But sometimes we like being asses, and we go for disrupting our relational DB.</p>
+
+<p><img class="center" src="/images/Denormalization.png"></p>
+
+<p>With this approach, you break the referential integrity, although you have much cleaner tables. I personally don't like it, but sometimes it's the fastest and most clever way to go.</p>
+
+<h2>A menu, with its complications</h2>
+
+<p>So, as you see, a menu ( something that should be really simple ) can undermine our data structure: and since we are used to relational data we think relational DBMS can handle very well this kind of problems.</p>
+
+<p>That's, obviously, wrong, because relational databases have their limitations: they can't, for example, deal with <strong>semantic inheritance</strong>.</p>
+
+<h2>The semantic inheritance dilemma</h2>
+
+<p>A menu has N links, and each link differs from the others.</p>
+
+<p>So a link basically has a relation with semantics ( "I <strong>link</strong> in a menu" ) and its inheritance ( links inherit from a base Link class ) but the relational systems aren't able to provide a way to express a relation, which has a single semantics, with entities from different sources ( = tables, roughly speaking ).</p>
+
+<p>When you work with systems like <a href="http://www.orientechnologies.com/">OrientDB</a>, everything is done for you; being a NoSQL graph db:</p>
+
+<ul>
+<li>the system doesn't care, by itself, about referential integrity ( so you feel relieved :-) )</li>
+<li>the system stores a direct link to express the relation</li>
+<li>the system has a native API to easily retrieve linked objects</li>
+</ul>
+
+
+<p>For example, in OrientDB you can:</p>
+
+<p><code>bash
+select links from menu where @rid = [rid of the menu] // [29:0, 28:0, 28:1]
+</code></p>
+
+<p>as you see that returns you records from different classes ( <strong>29</strong>:0, <strong>28</strong>:0, ... ), that you can retrieve with:</p>
+
+<p><code>bash
+select from [28:0, 28:1, 29:0, ...]
+</code></p>
+
+<p>Yes, awesome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Graph databases: OrientDB to the rescue]]></title>
+    <link href="http://odino.org/graph-databases-orientdb-to-the-rescue/"/>
+    <updated>2011-04-16T14:02:00+04:00</updated>
+    <id>http://odino.org/graph-databases-orientdb-to-the-rescue</id>
+    <content type="html"><![CDATA[<p><a href="http://www.orientechnologies.com/">OrientDB</a> is a graph database written in Java, mainly developed by <a href="http://zion-city.blogspot.com/">Luca Garulli</a>, <a href="http://www.assetdata.it/it/index.php">AssetData</a>'s CTO.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/orientdb.png"></p>
+
+<h2>Why a graph database</h2>
+
+<p>Sometimes the relation model isn't the way you want both to collect and navigate your data: Luca Bonmasser, at the NoSQL day, highlighted it in his talk about <a href="http://www.slideshare.net/bonmassar/patterns-antipatterns-with-nosql/29">anti-patterns in the relational ecosystem</a>.</p>
+
+<p>So, sometimes, in order to:</p>
+
+<ul>
+<li>improve performances</li>
+<li>mantain a clean data structure</li>
+<li>do DDD right<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup></li>
+</ul>
+
+
+<p>you should go for a NoSQL solution: that said, when you also need to store and retrieve a particular data structure, you should work with a graph database.</p>
+
+<h2>Oh My Graph</h2>
+
+<p><img class="left" src="/images/directed.graph.svg"></p>
+
+<p>A graph is a really simple entity ( ok, not that simple: I try to outrageously simplify things here ) with <strong>vertices</strong> and <strong>edges</strong>.</p>
+
+<p>Edges connect various vertices, and can be <strong>directed</strong> or <strong>undirected</strong>: directed connections happen when the edge has an orientation ( like in the case of a person <em>having</em> a car ), undirected when it hasn't ( like a person being friend of a person, which is a bi-directional connection ).</p>
+
+<p>You use and work with graphs more frequently than what you can actually think: when dealing with trees ( like the ones you tend to solve with <a href="http://www.doctrine-project.org/documentation/manual/1_2/nl/hierarchical-data">Doctrine's nested sets</a> ) you are basically working with <strong>a directed graph with no cycles</strong>.</p>
+
+<p>In the database domain, the graph has an additional element, the <strong>property</strong>: N properties can be assigned to a vertex ( thus <strong>any graph storage engine can work as a document-oriented DB</strong> ).</p>
+
+<h2>Why OrientDB</h2>
+
+<p>OrientDB is a NoSQL graph database with an aim: be easy by making you more productive.</p>
+
+<p>So it's really easy to install and setup: you just need to download the <a href="http://code.google.com/p/orient/downloads/list">latest release from googlecode</a> ( hope they will move it to GitHub soon ), unzip it and start the server:</p>
+
+<p><code>bash
+cd path/to/orient
+cd bin
+chmod +x server.sh
+./server.sh
+</code></p>
+
+<p><img class="center" src="/images/orient-bash.png"></p>
+
+<p>Orient is also SQL-friendly, letting you query the database with SQL-like syntax: since everybody knows SQL, you should be able to take confidence with its query language in a few minutes.</p>
+
+<p>It is <a href="http://en.wikipedia.org/wiki/ACID">ACID</a> and can be schema-*; which means that:</p>
+
+<ul>
+<li>it can be schema-ful, just like a RDBMS</li>
+<li>it can be schema-less, leveraging the power of no-prior knowledge of data's structure</li>
+<li>it can be schema-mixed, ...well, you guessed it!</li>
+</ul>
+
+
+<p>Another cool thing is that the distribution comes with a pre-defined set of data: so now you are ready to play with graph stuff... but how?</p>
+
+<h2>REST in P...DB</h2>
+
+<p><img class="right" src="/images/orient-studio.png"></p>
+
+<p>I introduce you OrientStudio, the GUI to manage your Orient's instance.</p>
+
+<p>OrientStudio is a simple tool bundled with Orient's package, which listens on port 2480 as you start the server, mainly developed in JavaScript, able to let you:</p>
+
+<ul>
+<li>CRUD objects, <a href="http://code.google.com/p/orient/wiki/Concepts#Class">classes</a> and <a href="http://code.google.com/p/orient/wiki/Concepts#Cluster">clusters</a></li>
+<li>query the DB</li>
+<li>explore and navigate your graph's objects</li>
+</ul>
+
+
+<p>There's something really cool about OrientStudio: it works, natively, via HTTP, which means that Orient has an <a href="http://code.google.com/p/orient/wiki/OrientDB_REST">HTTP interface</a> to let you manage your graph.</p>
+
+<p>The interface is defined "RESTful", in the docs: just don't be finicky and consider it as RESTful as CouchDB ( so definitely not RESTful, but HTTP-loving ).</p>
+
+<p>Orient also works with its binary protocol, which is a looooooot faster than the HTTP one.</p>
+
+<h2>OrientDB and PHP</h2>
+
+<p>So, what does this have in common with our so-loved scripting language?</p>
+
+<p>We'll find it out in my next article, where I'll tell you how to query OrientDb from PHP.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>This is not an academic motivation: DDD is the base of a good OO design <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NoSQL day: from enthusiasm to consciousness]]></title>
+    <link href="http://odino.org/nosql-day-from-enthusiasm-to-consciousness/"/>
+    <updated>2011-03-26T15:11:00+04:00</updated>
+    <id>http://odino.org/nosql-day-from-enthusiasm-to-consciousness</id>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<p><img class="center" src="/images/nosqldaylogo.jpg"></p>
+
+<p>The <a href="http://www.nosqlday.it/">NoSQL day</a> has been an amazing 1-day/1-track conference held in Brescia, Italy, yesterday.</p>
+
+<p>I went there because in <a href="http://www.dnsee.com/">DNSEE</a> we are facing huge problems with the design of a software in which we thought MySQL would fit without many matters: so, given that non-relational databases are getting very popular, me and <a href="http://www.davidfunaro.com/">David</a> decided we should attend this event.</p>
+
+<h2>What we had, have, will have and how we use them</h2>
+
+<p>The event starts with the keynote of Gabriele Lana, which briefly explains the history of the DB as we know it.</p>
+
+<p>Luca Bonmasser continues explaining (No)SQL antipatterns: the session was great, because it highlighted tons of use-cases which we solve with the relational model but don't need it; we basically add to a complex and heavy-constrained system data that should not belong to that domain, like messaging queues or configuration parameters.</p>
+
+<p>Then it comes The Net Planet ( a firm represented by <a href="http://www.linkedin.com/pub/flavio-percoco-premoli/b/61/457">Flavio Percoco</a> and Alberto Paro ), which introduces MongoDB to the crowd, coupled with <a href="http://www.elasticsearch.org/">ElasticSearch</a>, a system built to solve research issues.</p>
+
+<p>I didn't enjoyed it so much because they didn't dig into Mongo but mainly explained the common infrastructure they use on their products/systems.</p>
+
+<h2>Technologic contextualization</h2>
+
+<p><a href="http://twitter.com/#!/antirez">Antirez</a>, creator of <a href="http://redis.io/">Redis</a>, had an amazing talk about his product and the NoSQL panorama: he was really capable to enjoy the crowd and contextualize NoSQL solutions' use cases.</p>
+
+<p>I really appreciated that he specified the limitations of Redis and other non-relational databases: as far as Redis is concerned, he told us that the cases where it fits really well are <strong>caching</strong>, <strong>messaging queues</strong> and <strong>fast computations</strong> ( like intersections between datasets ).</p>
+
+<p>We also had the opportunity to talk with him at lunch: a very cool personality :)</p>
+
+<p><img class="right" src="/images/nosqlday-antirez.jpg"></p>
+
+<p>Just after lunch, Gabriele Lana had his 2nd talk, soooo technical, about his 2-years long experience with MongoDB, explaining to the attendees a few tricks and howtos when dealing with this product.</p>
+
+<p>It was a pity that we were in heavy digestion... ;-)</p>
+
+<h2>OrientDB</h2>
+
+<p><img class="left" src="/images/nosqlday-garulli.jpg"></p>
+
+<p><a href="http://zion-city.blogspot.com/">Luca Garulli</a> introduced to the conference <a href="http://www.orientechnologies.com/">OrientDB</a>, a <strong>fast and scalable graphdb</strong> for the masses, written in Java with 2 interfaces, binary and HTTP.</p>
+
+<p>Although I knew Orient ( and I will <a href="https://github.com/odino/Orient">know it better</a> ), it was great to listen the creator of this cool product explaining all the features that would probably solve a lot of the problems I mentioned at the beginning of this post.</p>
+
+<h2>What did the NoSQL day gave us?</h2>
+
+<p>The consciousness about this technology: buzzwords are often abused, and time after time every technology is marked as <strong>definitive</strong>, because the <strong>one size fits all rule</strong> hasn't penetrated in software engineering yet.</p>
+
+<p>So this kind of events are the glue between a technology and its proper usage, because they introduce you to a new world as well as they boost your productivity.</p>
+
+<h2>Next big thing</h2>
+
+<p>We will have our first <strong>Node.js conference in Italy</strong> in september and I can't wait for it: so... Thanks and kudos to <a href="http://www.webdebs.org/">WebDeBs</a>, the organizers of the "for real" conferences!</p>
+]]></content>
+  </entry>
+  
+</feed>

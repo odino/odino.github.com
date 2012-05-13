@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Managing PHP dependencies with composer - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="In PHP we&#8217;ve had a lousy culture of code-sharing. Because depending on code from others as been tricky, every major PHP application or &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/managing-php-dependencies-with-composer">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Managing PHP dependencies with composer</a></h1>
+  <p class="article-date">
+      Wednesday, 25 January 2012
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><!-- more -->
+
+
+<p><img class="right" src="/images/white.puzzle.jpg"></p>
+
+<blockquote><p>In PHP we&#8217;ve had a lousy culture of code-sharing. Because depending on code from others as been tricky, every major PHP application or framework has practically had to reimplement the whole world. Only some tools, like PHPUnit, have managed to break over this barrier and become de-facto standards across project boundaries. But for the rest: just write it yourself.</p><footer><strong>Henry Bergius</strong> <cite><a href='http://bergie.iki.fi/blog/composer_solves_the_php_code-sharing_problem/'>Composer Solves the PHP Code-sharing Problem</a></cite></footer></blockquote>
+
+
+<p>Managing dependencies between pieces of software, in PHP, hasn&#8217;t always
+been a relief: we had <a href="http://pear.php.net/">PEAR</a> and <a href="http://pecl.php.net/">PECL</a>
+<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+with their workflows and problems while, in other ecosystems, the
+solution to this problem has been solved in better ways, like
+NodeJS&#8217;s <a href="http://npmjs.org/">NPM</a>.</p>
+
+<h2>Composer</h2>
+
+<p>Composer is the nifty missing brick in managing PHP dependencies:
+inspired to what&#8217;s hot in Ruby&#8217;s and NodeJS&#8217;s ecosystems, it is a
+simple but powerful packaging system specifically written for PHP.</p>
+
+<p>Born and mantained from a <a href="https://github.com/composer/composer/contributors">few personalities</a>
+of the Symfony2 community, it&#8217;s really easy to use and install.</p>
+
+<p>First of all, go to the root directory of your project and
+download composer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget http://getcomposer.org/composer.phar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then write a <code>composer.json</code> file describing your project&#8217;s dependencies:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;vendor/NutsAPI&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;library&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;description&quot;</span>: <span class="s2">&quot;PHP SDK for IFeelNuts APIs.&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;keywords&quot;</span>: <span class="o">[</span><span class="s2">&quot;nuts&quot;</span>, <span class="s2">&quot;API&quot;</span>, <span class="s2">&quot;SDK&quot;</span><span class="o">]</span>,
+</span><span class='line'>    <span class="s2">&quot;license&quot;</span>: <span class="s2">&quot;MIT&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;authors&quot;</span>: <span class="o">[</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Alessandro Nadalin&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;alessandro.nadalin@gmail.com&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;homepage&quot;</span>: <span class="s2">&quot;http://www.odino.org&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">]</span>,
+</span><span class='line'>    <span class="s2">&quot;autoload&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;psr-0&quot;</span>: <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;NutsAPI&quot;</span>: <span class="s2">&quot;src/&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>,
+</span><span class='line'>    <span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;kriswallsmith/Buzz&quot;</span>: <span class="s2">&quot;&gt;=0.5&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are 3 main parts in the <code>composer.json</code>, the first one describing
+your project (if you want to put that in Packagist - something I will
+later explain):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;vendor/NutsAPI&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;type&quot;</span>: <span class="s2">&quot;library&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;description&quot;</span>: <span class="s2">&quot;PHP SDK for IFeelNuts APIs.&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;keywords&quot;</span>: <span class="o">[</span><span class="s2">&quot;nuts&quot;</span>, <span class="s2">&quot;API&quot;</span>, <span class="s2">&quot;SDK&quot;</span><span class="o">]</span>,
+</span><span class='line'>    <span class="s2">&quot;license&quot;</span>: <span class="s2">&quot;MIT&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;authors&quot;</span>: <span class="o">[</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Alessandro Nadalin&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;alessandro.nadalin@gmail.com&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;homepage&quot;</span>: <span class="s2">&quot;http://www.odino.org&quot;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">]</span>,
+</span><span class='line'>    ...
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the second one is the <strong>autoloading specification</strong>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;autoload&quot;</span>: <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;psr-0&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;NutsAPI&quot;</span>: <span class="s2">&quot;src/&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this is basically awesome because it lets you specify the
+autoloading standard used for your library (I strongly suggest
+you to follow the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0 convention</a>):
+in the example we see that our <code>NutsAPI</code> namespace will be
+autoloaded in the <code>src</code> directory.</p>
+
+<p>You can also specify <strong>nested namespaces</strong>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;autoload&quot;</span>: <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;psr-0&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;Doctrine\\Common&quot;</span>: <span class="s2">&quot;src/Doctrine/Common&quot;</span>
+</span><span class='line'>        <span class="s2">&quot;Doctrine\\DBAL&quot;</span>:   <span class="s2">&quot;src/Doctrine/DBAL/Experiments&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The last part of the file is the most important one, describing
+which libraries you depend on:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>    <span class="s2">&quot;kriswallsmith/Buzz&quot;</span>: <span class="s2">&quot;&gt;=0.5&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as you see, this directive tells composer that it should download
+the <a href="https://github.com/kriswallsmith/Buzz">Buzz</a> library and
+force a certain revision to be used; note that composer is also
+able to verify that your PHP version is ok too.</p>
+
+<p>Once you completed the <code>composer.json</code> you can run a:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>php composer.phar install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="left" src="/images/composer.installation.png"></p>
+
+<p>and see that composer downloads the required dependencies and puts them
+under the <code>vendor</code> directory, writes its lock file<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup> and
+generates an <strong>autoloader</strong>.</p>
+
+<p>The autoloader is located at <code>vendor/.composer/autoload.php</code> and you can
+obviously use it for your application:</p>
+
+<figure class='code'><figcaption><span>PHPUnit&#8217;s configuration file using a composer-generated autoloader</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;phpunit</span> <span class="na">backupGlobals=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>         <span class="na">bootstrap=</span><span class="s">&quot;vendor/.composer/autoload.php&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One of the pains in managing dependencies is upgrading the libraries you depend
+on, a problem that composer solves by just running a <code>php composer.phar update</code>.</p>
+
+<p>Since some <strong>composer-generated files and the 3rd party libraries are irrelevant</strong>
+for your SCM, it is highly recommended to ignore them:</p>
+
+<figure class='code'><figcaption><span>Example of .gitignore</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/vendor/.composer/
+</span><span class='line'>vendor/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As pointed out by <a href="http://www.naderman.de/">Nils</a> from the PhpBB community
+in the comments:</p>
+
+<blockquote><p>You should not ignore the [composer.lock] file in git.<br/>In fact you should commit it whenever it is changed.<br/>Users of your project or other developers can then run &#8220;composer install&#8221; to install exactly the versions you had in your lock file, rather than installing versions based on composer.json and potentially ending up with a slightly newer dependency which could result in problems, since you didn&#8217;t test with that particular version.</p></blockquote>
+
+
+<h2>Packagist</h2>
+
+<p><a href="http://packagist.org/">Packagist</a> is the main repository of composer packages:
+you can browse already-registered packages or <a href="http://packagist.org/packages/submit">create your own one</a>.</p>
+
+<p>It is fully integrated with <a href="http://github.com">Github</a>: when creating a new package
+you will be asked the URL of the git repository for your project.</p>
+
+<p>Note that on the website there is some
+<a href="http://packagist.org/about-composer">further documentation about composer</a>.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>While PEAR is a repository of PHP software you can reuse, PECL collects various PHP extensions, written in C <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>The lockfile is used by composer to track already-downloaded dependencies and check, on successive updates, that it doesn&#8217;t needs to re-download the dependency <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-25T11:44:00+04:00" pubdate data-updated="true">Wednesday, 25 January 2012 at 11:44</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/hypermedia-services-beyond-rest-architectures/" title="Previous Post: Media types and hypermedia services: beyond REST architectures">&laquo; Media types and hypermedia services: beyond REST architectures</a>
+      
+      
+        <a class="basic-alignment right" href="/quality-isnt-always-better-than-quality/" title="next Post: Quality isn't always better than quantity">Quality isn't always better than quantity &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/managing-php-dependencies-with-composer/';
+        var disqus_url = 'http://odino.org/managing-php-dependencies-with-composer/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

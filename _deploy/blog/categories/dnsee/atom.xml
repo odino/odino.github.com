@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: DNSEE | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/dnsee/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T01:54:34+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The "new" development here in DNSEE: BDD and much more]]></title>
+    <link href="http://odino.org/the-new-development-here-in-dnsee-bdd-and-much-more/"/>
+    <updated>2011-10-03T12:34:00+04:00</updated>
+    <id>http://odino.org/the-new-development-here-in-dnsee-bdd-and-much-more</id>
+    <content type="html"><![CDATA[<p>It's been a couple months that we <strong>renewed a few aspects of our experience</strong>, as developers, here at DNSEE, introducing a few practices that common software factories ignore: we - and I - don't know if these practices will always be fine for our daily job but, as far as we saw, things are just working fine.</p>
+
+<!-- more -->
+
+
+<h2>Behaviour-driven development</h2>
+
+<p><img class="right" src="/images/behat.logo.png"></p>
+
+<p>We introduced <a href="http://behat.org/">Behat</a> in a pilot project, in order to ease the process of veryfing features delivered, which is done by our QA guy, <a href="http://www.linkedin.com/in/villagiovanni">Giovanni</a>.</p>
+
+<p>Additionally, BDD lets developers and <a href="http://www.mountaingoatsoftware.com/scrum/product-owner">product owners</a> speak an <strong>ubiquitous language</strong>, thus the PO can write the test-cases for the development team, in <a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin</a> language:</p>
+
+<p>``` bash Example of a Gherkin story
+Feature: Some terse yet descriptive text of what is desired
+   In order to realize a named business value
+   As an explicit system actor
+   I want to gain some beneficial outcome which furthers the goal</p>
+
+<p>   Scenario: Some determinable business situation</p>
+
+<pre><code> Given some precondition
+   And some other precondition
+  When some action by the actor
+   And some other action
+   And yet another action
+  Then some testable outcome is achieved
+   And something else we can check happens too
+</code></pre>
+
+<p>```</p>
+
+<p>thus you - developer - are not always required to write a test for every feature in the project: this task is done by the PO, <strong>helped by you</strong> ( while experienced PO may not need your help, at all ).</p>
+
+<h2>The scope of the tests</h2>
+
+<p>We usually develop projects with the RAD framework <a href="http://www.symfony-project.org/">symfony 1.4</a>, which comes bundled with <em>Lime</em>, a ( limited ) <strong>unit and functional testing tool</strong>: we are now testing features wanted by the stakeholders of the projects with Behat, and functionally testing those ones who require pretty <strong>complex DOM checks</strong>.</p>
+
+<p>Unit tests cover almost every class which are dangerous not to test: apart from these classes, we also use <strong>unit tests to test forms</strong>, because a form can behave in different ways based on the input it receives: since you should tests those forms in a functional test, submitting several times the form and veryfing the expected output, functional tests become very slow ( a test-suite is slow, IMHO, when it lasts more than 10 minutes ): thus, we decided to unit test the forms ( in symfony 1.4, they all are objects, so easy to unit test ).</p>
+
+<p>Unit testing forms means faster test-suites, since, in functional ones we only test the <em>happy path</em>, which is <strong>submitting good values to the form and veryfing the expected successfull output</strong> ( thanks <a href="http://www.agiledevelopment.it/">Jacopo Romei</a> for suggesting it ).</p>
+
+<p><img class="left" src="/images/kit.jpg"></p>
+
+<h2>Capifony</h2>
+
+<p>We started using Capistrano through <a href="http://capifony.org/">Capifony</a>, the automatic-deployment utility written for symfony 1.4: at every commit the developer is responsible of generating the proper doctrine migrations and deploy ( deployment usually takes... one bash command ) with</p>
+
+<p><code>bash Simple capifony usage
+cap deploy deploy:migrate
+</code></p>
+
+<p>Since we also wanted to ease the process of updating the issue tracker and BDD reports, we created a script that launches the test-suite ( BDD, functional, unit, integration tests ), deploys with Capifony and publishes the BDD reports on Alfresco, the platform we use for sharing documents: it's a dummy bash script, similar to this one.</p>
+
+<h2>SCRUM</h2>
+
+<p><img class="right" src="/images/scrum.jpg"></p>
+
+<p>It's not hidden, we are trying to use <a href="http://en.wikipedia.org/wiki/Scrum_(development">SCRUM</a>) as a framework for our processes: I prefer XP, mainly because there's no <em>CrapMaster</em> and the whole team is connected ( I repeat it, <a href="http://epf.eclipse.org/wikis/xp/xp/guidances/concepts/whole_team_7E4B7BE3.html">whole team</a> ) but things seem to work fine.</p>
+
+<p>Our first ScrumMaster, <a href="http://it.linkedin.com/in/acceli">Andrew</a>, tought us the basics of the framework and helped us in becoming a SCRUM team; as he left, <a href="http://www.scrumalliance.org/profiles/130822-daniela-cecchinelli">Daniela</a> started following the team as <em>product owner</em>, giving some hints to <a href="http://www.davidfunaro.com/">David</a>, which is trying to act as the new ScrumMaster, and the rest of the team.</p>
+
+<h2>Open Source</h2>
+
+<p>We are basically dedicating much more time to OS development: <a href="https://github.com/congow/Orient">Orient</a> is just <a href="https://github.com/congow">one of the libraries sponsored by DNSEE</a>.</p>
+
+<p>In the meantime, we are also continuing the effort of developing our CMF, <a href="https://github.com/congow/congow">ConGoW</a>, but things are going a bit slow and we are keeping it <em>inter nos</em> until we will have a usable version of the framework.</p>
+
+<p>The effort of exposing ourselves to the OS world is paying off now: a few customers are coming asking for mainly-technical works, like refactoring an old-style architecture or re-writing their webservices.</p>
+
+<p>If you find this point strange to mention, consider that DNSEE is a <a href="http://www.webranking.eu/Articles/Articles/2011/Eni--Best-in-online-communication-2010/">leading agency</a> in communication and creativity, thus not born with a technical focus: what else do I need to say? <a href="http://www.linkedin.com/in/alexlombardi">Alex</a>, our CTO, has done a tremendous work.</p>
+
+<h2>Conclusions</h2>
+
+<p>I'm pretty sure that lots of guys who read this blog are aware of this tecniques/processes, so this won't be a groundbreaking discovery: my intention is to share how we try to manufacture software in DNSEE and hear, from y'all, some other points of view.</p>
+]]></content>
+  </entry>
+  
+</feed>

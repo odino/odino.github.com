@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>REST in practice, my review - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="I&#8217;m home after the NoSQL day in Brescia, a great community-driven event, that I will recap on the next post: since I went to Brescia by train &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/rest-in-practice-my-review">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">REST in practice, my review</a></h1>
+  <p class="article-date">
+      Saturday, 26 March 2011
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>I&#8217;m home after the <a href="http://www.nosqlday.it/">NoSQL day</a> in Brescia, a great community-driven event, that I will recap on the next post: since I went to Brescia by train ( 4 + 4 hours ) I had the opportunity, after 20 days on intense love for this book, to finish it, so I publish my thoughts about.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/rip.jpg"></p>
+
+<p>I decided to buy this book because of its subtitle, <strong>hypermedia and system architectures</strong>, since I&#8217;m exploring the world of media types, hypermedia formats and how they improve semantics and evolvability, I was wondering if it could gave me a good overview about the right implementation of hypermedia-driven services.</p>
+
+<h2>Richardson maturity model</h2>
+
+<p>This book has a great start, driving you from level 0 to 3 of the <a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Richardson Maturity Model</a>: you&#8217;ll be guided from writing an HTTP-tunneling service to an hypermedia-driven one, with the intermediate of an HTTP-loving CRUD.</p>
+
+<p>These are fundamental steps because you will basically climb a mountain discovering:</p>
+
+<ul>
+<li>how to write an HTTP-tunnel</li>
+<li>how to write a better HTTP tunnel</li>
+<li>how an HTTP-loving CRUD works</li>
+<li>how to implement the <a href="http://en.wikipedia.org/wiki/HATEOAS">hypermedia tenet</a> in your services</li>
+</ul>
+
+
+<h2>Caching</h2>
+
+<p>An entire chapter was dedicated on <a href="http://www.odino.org/301/rest-better-http-cache">caching strategies</a>, in order to explain how to scale well from this point of view.</p>
+
+<p>Starting from the explicit admission of <strong>WWW&#8217;s weak consistency</strong>, the book guides you through HTTP&#8217;s cache specification and how to correctly implement HTTP&#8217;s cache on your system: it deserves a mention the fact that the authors explained really well why <strong>cache invalidation is bad for the web</strong> ( invalidation assumed that the server should know the state of N clients ).</p>
+
+<h2>AtomMix</h2>
+
+<p>In the middle of this, the book starts to tightly couple with the Atom format and the AtomPub publishing protocol: it explains very well how to use Atom as a flexible and extensible format, and AtomPub to re-use a common but valid workflow for your Domain Application Protocol.</p>
+
+<h2>A soft end</h2>
+
+<p>The last chapters are both interesting and soft to read: they deal with web security, semantics, <strong>SOAP</strong> and the <strong>WS-* world</strong>.</p>
+
+<p>I really liked how it compares web oriented architectures to SOAP and WS, because it doesn&#8217;t yell at anyone and doesn&#8217;t blame ( too much :-P ) that world.</p>
+
+<p>Security chapter deals with the OpenID and OAuth protocols but didn&#8217;t really convinced me: I&#8217;m probably not so well documented about them to get into what the book tried to explain; semantics was a great chapter instead: <a href="http://en.wikipedia.org/wiki/Web_Ontology_Language">OWL</a>, <a href="http://en.wikipedia.org/wiki/Resource_Description_Framework">RDF</a> and <a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL</a> are well integrated with the code you previously built.</p>
+
+<h2>Is it the right book for me?</h2>
+
+<p>If you don&#8217;t know anything about REST, you probably need it: it explains very well how ( and <strong>why</strong> ) to implement a semantic hypermedia-driven service from nOOb to master. There&#8217;s so much theory that you will find it really explanatory.</p>
+
+<p>If you know this architectural style but want to get deeper into it, like me, the book won&#8217;t disappoint you too: I lacked at security and semantics and was courious about authors&#8217; vision about hypermedia, so this book was really helpful to me.</p>
+
+<p>There are a lot of code examples, in both .NET and Java ( I scrolled some pages really fast :) ), so you won&#8217;t miss <em>that</em> part.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-26T23:24:00+04:00" pubdate data-updated="true">Saturday, 26 March 2011 at 23:24</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/book/'>book</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/nosql-day-from-enthusiasm-to-consciousness/" title="Previous Post: NoSQL day: from enthusiasm to consciousness">&laquo; NoSQL day: from enthusiasm to consciousness</a>
+      
+      
+        <a class="basic-alignment right" href="/long-live-xml-too-sorry-for-json-fanboyz/" title="next Post: Long live XML (too sorry for JSON fanboyz)">Long live XML (too sorry for JSON fanboyz) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/rest-in-practice-my-review/';
+        var disqus_url = 'http://odino.org/rest-in-practice-my-review/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: symfony. PHP | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/symfony-php/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T01:54:34+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Basic HTTP authentication on a symfony backend]]></title>
+    <link href="http://odino.org/basic-http-authentication-on-a-symfony-backend/"/>
+    <updated>2010-09-17T11:09:00+04:00</updated>
+    <id>http://odino.org/basic-http-authentication-on-a-symfony-backend</id>
+    <content type="html"><![CDATA[<p>Since I'm not a ninja from this point of view, any better solution is welcome.</p>
+
+<!-- more -->
+
+
+<p>You only need to edit your application's front controller:</p>
+
+<p>``` php</p>
+
+<p>&lt;?php</p>
+
+<p>if ($<em>SERVER['PHP_AUTH_USER'] !== 'username' || $</em>SERVER['PHP_AUTH_PW'] !== 'password')
+{  <br/>
+  header('WWW-Authenticate: Basic realm="Site Administration Area"');
+  header('Status: 401 Unauthorized');
+  /<em> Special Header for CGI mode </em>/
+  header('HTTP-Status: 401 Unauthorized');
+}
+else
+{
+  require_once(dirname(<strong>FILE</strong>).'/../config/ProjectConfiguration.class.php');</p>
+
+<p>  $configuration = ProjectConfiguration::getApplicationConfiguration('backend', 'prod', false);
+  sfContext::createInstance($configuration)->dispatch();
+}
+```</p>
+
+<p>The IF block is not something I've done by myself ( although it's really easy ), I've taken it from an article on <a href="http://www.phpnerds.com/article/securing-php-files-using-http-authentication/2">PHPnerds</a>: since the code in the article has a <strong>huge flaw</strong> don't use it.</p>
+
+<p>The problem lies in the IF conditions:</p>
+
+<p><code>
+$_SERVER['PHP_AUTH_USER'] !== 'username' &amp;&amp; $_SERVER['PHP_AUTH_PW'] !== 'password'
+</code></p>
+
+<p>which are concatenated by an AND and not an OR, leading through a possible unauthorized authentication knowing only the username <strong>or</strong> the password ( the negative  operator ! supports the trick, damn ).</p>
+
+<p>A better solution is to use a more direct approach:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>if ($<em>SERVER['PHP_AUTH_USER'] == 'username' &amp;&amp; $</em>SERVER['PHP_AUTH_PW'] == 'password')
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
