@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Alessandro Nadalin]]></title>
-  <link href="http://odino.org/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>
-    <link href="http://odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
+    <link href="http://odino.github.com/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
     <updated>2012-05-14T00:28:00+04:00</updated>
-    <id>http://odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
+    <id>http://odino.github.com/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
     <content type="html"><![CDATA[<p>In PHP we have tons of bad constructs/functions that don&#8217;t actually
 help newcomers on writing good code: the <code>SWITCH/CASE</code> statement is one
 of those that I hate the most, although very few developers rely on
@@ -147,9 +147,9 @@ for that specific method.</p>
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
-    <link href="http://odino.org/back-in-track-with-orientdb/"/>
+    <link href="http://odino.github.com/back-in-track-with-orientdb/"/>
     <updated>2012-04-20T15:26:00+04:00</updated>
-    <id>http://odino.org/back-in-track-with-orientdb</id>
+    <id>http://odino.github.com/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It&#8217;s been a while since I don&#8217;t release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
 back on track and I have a few interesting news.</p>
@@ -297,22 +297,22 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
-    <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
+    <link href="http://odino.github.com/y-u-no-access-whois-informations-in-php/"/>
     <updated>2012-04-16T00:38:00+04:00</updated>
-    <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
+    <id>http://odino.github.com/y-u-no-access-whois-informations-in-php</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
@@ -477,9 +477,9 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   
   <entry>
     <title type="html"><![CDATA[Search engines are making the web slower]]></title>
-    <link href="http://odino.org/search-engines-are-making-the-web-slower/"/>
+    <link href="http://odino.github.com/search-engines-are-making-the-web-slower/"/>
     <updated>2012-04-07T10:00:00+04:00</updated>
-    <id>http://odino.org/search-engines-are-making-the-web-slower</id>
+    <id>http://odino.github.com/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way
 it is now: <strong>search engines are making it slower</strong> and
@@ -541,9 +541,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Wanna be hired? Go get yourself a blog and a github profile]]></title>
-    <link href="http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/"/>
+    <link href="http://odino.github.com/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/"/>
     <updated>2012-03-27T11:32:00+04:00</updated>
-    <id>http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile</id>
+    <id>http://odino.github.com/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile</id>
     <content type="html"><![CDATA[<p>As part of my last days in <a href="http://dnsee.com">DNSEE</a> and first days in
 <a href="http://rocket-internet.de">Rocket</a> I&#8217;m involved in two recruitment processes
 and after the huge amount of CVs we got for DNSEE after the
@@ -560,7 +560,7 @@ it works when you want to work in a body rental Java company and want to
 be identified with a mere number (and if you want to end up like that,
 stop reading this article)<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
 
-<p><img class="left" src="http://odino.org/images/hipster.glasses.jpg"></p>
+<p><img class="left" src="http://odino.github.com/images/hipster.glasses.jpg"></p>
 
 <p>Some months ago someone on Twitter was suggesting to move the CV on
 <a href="http://slideshare.net">slideshare</a>, something I really wanted to do - but
@@ -577,7 +577,7 @@ which is what I basically look for, at least for a first glance.</p>
 
 <h2>It&#8217;s not where you worked unless it was The Place</h2>
 
-<p><img class="right" src="http://odino.org/images/virgin.jpg"></p>
+<p><img class="right" src="http://odino.github.com/images/virgin.jpg"></p>
 
 <p>It&#8217;s pretty common to see dozens of working experiences in a CV,
 without a deep description of the position held and a summary of
@@ -613,7 +613,7 @@ it would be nice if you show them the top line of your skiils, maybe
 via a Github profile; doing so, you give the chance to take a
 look at your best code.</p>
 
-<p><img class="right" src="http://odino.org/images/hand.jpg"></p>
+<p><img class="right" src="http://odino.github.com/images/hand.jpg"></p>
 
 <h2>Why don&#8217;t you share your thoughts with me?</h2>
 
@@ -668,22 +668,22 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
-    <link href="http://odino.org/checking-a-domain-s-availability-with-php/"/>
+    <link href="http://odino.github.com/checking-a-domain-s-availability-with-php/"/>
     <updated>2012-03-20T09:49:00+04:00</updated>
-    <id>http://odino.org/checking-a-domain-s-availability-with-php</id>
+    <id>http://odino.github.com/checking-a-domain-s-availability-with-php</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
@@ -849,9 +849,9 @@ are provided under the <code>sample</code> directory.</p>
   
   <entry>
     <title type="html"><![CDATA[Moving to Dubai]]></title>
-    <link href="http://odino.org/moving-to-dubai/"/>
+    <link href="http://odino.github.com/moving-to-dubai/"/>
     <updated>2012-03-05T10:00:00+04:00</updated>
-    <id>http://odino.org/moving-to-dubai</id>
+    <id>http://odino.github.com/moving-to-dubai</id>
     <content type="html"><![CDATA[<p>Yes, you got it.</p>
 
 <!-- more -->
@@ -876,11 +876,11 @@ I&#8217;m just <strong>so excited</strong> to start this new challenge.</p>
   
   <entry>
     <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
-    <link href="http://odino.org/scaling-through-hinclude/"/>
+    <link href="http://odino.github.com/scaling-through-hinclude/"/>
     <updated>2012-02-24T10:50:00+04:00</updated>
-    <id>http://odino.org/scaling-through-hinclude</id>
+    <id>http://odino.github.com/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it&#8217;s been a while that I spread the idea of
-having <a href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
+having <a href="http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
 someone pointed out that a good solution, technically
 different from the one I personally proposed, would
 be to use JavaScript to and asynchronous sub-requests.</p>
@@ -906,7 +906,7 @@ network, as you need, at least, to hit the reverse proxy,
 which then handles the composition on a resource with
 sub-resources.</p>
 
-<p>As I <a href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/">stated earlier</a>,
+<p>As I <a href="http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day/">stated earlier</a>,
 this is not an optimal approach for every <em>use-case</em>, so you
 definitely should try to use local caches (your users) to
 scale better.</p>
@@ -1166,9 +1166,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Book review: Data-Intensive Text Processing with MapReduce]]></title>
-    <link href="http://odino.org/book-review-data-intensive-text-processing-with-mapreduce/"/>
+    <link href="http://odino.github.com/book-review-data-intensive-text-processing-with-mapreduce/"/>
     <updated>2012-02-23T12:57:00+04:00</updated>
-    <id>http://odino.org/book-review-data-intensive-text-processing-with-mapreduce</id>
+    <id>http://odino.github.com/book-review-data-intensive-text-processing-with-mapreduce</id>
     <content type="html"><![CDATA[<p>As part of my studies not directly connected to my job,
 in the last month I&#8217;ve finished this interesting book, which
 gives you a good overview about
@@ -1177,7 +1177,7 @@ gives you a good overview about
 <!-- more -->
 
 
-<p><img class="right" src="http://odino.org/images/mapreduce.book.jpg"></p>
+<p><img class="right" src="http://odino.github.com/images/mapreduce.book.jpg"></p>
 
 <p><a href="http://www.umiacs.umd.edu/~jimmylin/">Jimmy Lin</a> and Chris
 Dyer nailed this one: the book is really clear and leaves
@@ -1204,7 +1204,7 @@ think about <strong>stateful</strong> large scale data-processing algorithms.</p
 
 <p>I strongly recommend you to read such this kind of book: the approach
 followed by the writers is so engineered and some examples they give,
-like the <a href="http://odino.org/quality-isnt-always-better-than-quality/">stupid backoff</a>,
+like the <a href="http://odino.github.com/quality-isnt-always-better-than-quality/">stupid backoff</a>,
 are pearls for your working experience.</p>
 
 <div class="footnotes">
@@ -1223,9 +1223,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[How to argue with junior and stubborn developers]]></title>
-    <link href="http://odino.org/how-to-argue-with-junior-and-stubborn-developers/"/>
+    <link href="http://odino.github.com/how-to-argue-with-junior-and-stubborn-developers/"/>
     <updated>2012-02-23T12:00:00+04:00</updated>
-    <id>http://odino.org/how-to-argue-with-junior-and-stubborn-developers</id>
+    <id>http://odino.github.com/how-to-argue-with-junior-and-stubborn-developers</id>
     <content type="html"><![CDATA[<p>In these days I had a nice chat with
 <a href="http://www.linkedin.com/in/gogebakan">Önder Göğebakan</a> to exchange
 some views about <strong>team leading</strong>: one of the points I loved to face
@@ -1241,7 +1241,7 @@ the indications received from their technical lead</strong>.</p>
 opinion/advice/dictation: it may be due to inexperience or attitude, and this
 is not <em>that</em> bad.</p>
 
-<p><img class="right" src="http://odino.org/images/rooster.jpg"></p>
+<p><img class="right" src="http://odino.github.com/images/rooster.jpg"></p>
 
 <p>A developer which pulls responsabilities shows a good attitude, as it
 demonstrates that he wants to take a decision based on different variables
@@ -1269,7 +1269,7 @@ an unvaluable knowledge about problem solving, and when I say
 unvaluable I mean that there&#8217;s no inexperienced brain that could
 overcome a seasoned veteran.</p>
 
-<p><img class="left" src="http://odino.org/images/jordan.jpg"></p>
+<p><img class="left" src="http://odino.github.com/images/jordan.jpg"></p>
 
 <p>Think about the way you solved that technical problem earlier in your
 career and start adding examples to your cause: don&#8217;t pretend to
@@ -1298,7 +1298,7 @@ situations occurred during those valuable years.</p>
 
 <h2>Approach the problem from different points of view</h2>
 
-<p><img class="right" src="http://odino.org/images/sheldon.board.jpg"></p>
+<p><img class="right" src="http://odino.github.com/images/sheldon.board.jpg"></p>
 
 <p><a href="http://en.wikipedia.org/wiki/Sheldon_Cooper">Sheldon Cooper</a>
 has a huge problem in his life: he&#8217;s not open to
@@ -1327,7 +1327,7 @@ result home: you are not meant to directly write a spike for a
 writing small and rough pieces of code</strong> to test if some of the
 solutions he thiks are gonna work seem to be working fine.</p>
 
-<p><img class="left" src="http://odino.org/images/lego.technic.jpg"></p>
+<p><img class="left" src="http://odino.github.com/images/lego.technic.jpg"></p>
 
 <p>This makes the developer feel that he&#8217;s  gaining trust from you,
 as he is allowed to actually spend some billable time on his
@@ -1345,7 +1345,7 @@ since no one is perfect prepare your words to congratulate with
 the developer and thank him for the good approach, <strong>without
 feeling embarassed</strong>.</p>
 
-<p><img class="right" src="http://odino.org/images/socrates.gif"></p>
+<p><img class="right" src="http://odino.github.com/images/socrates.gif"></p>
 
 <h2>Consolidate doubts</h2>
 
@@ -1372,7 +1372,7 @@ captain and leader of the
 injured, and the Knicks need to defeat the Los Angeles Lakers
 in game 7 (last game of a 3-3 tied series) to become NBA champions.</p>
 
-<p><img class="right" src="http://odino.org/images/walt.frazier.jpg"></p>
+<p><img class="right" src="http://odino.github.com/images/walt.frazier.jpg"></p>
 
 <p>Willis starts the game, sinks down the first two points for New York
 with a perimetral shot and, well, then he stops there.</p>
@@ -1438,19 +1438,19 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
-    <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <link href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00+04:00</updated>
-    <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
+    <id>http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+        <a href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
     </li>
     <li>
-        <a href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+        <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
     </li>
     <li>
-        <a href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+        <a href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
     </li>
 </ol>
 
@@ -1463,7 +1463,7 @@ in pure PHP.</p>
 <!-- more -->
 
 
-<p><img class="right" src="http://odino.org/images/installer.png"></p>
+<p><img class="right" src="http://odino.github.com/images/installer.png"></p>
 
 <p>In this episode we are going to create an interactive shell
 able to generate new composer-based projects: we will have a
@@ -1491,7 +1491,7 @@ implement your own commands, so we will add a couple custom commands, one to
 <strong>register dependencies</strong> and one to <strong>execute the installation</strong>.</p>
 
 <p>First of all, let create our own <code>composer.json</code>, to download the Console
-and <a href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Process</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+and <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Process</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
 components:</p>
 
 <figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1982,7 +1982,7 @@ usual composer&#8217;s installation process on the installation directory:</p>
 <p>This is the console output for generating a new project which depends on
 <code>symfony/yaml</code> and <code>symfony/dom-crawler</code>:</p>
 
-<p><img class="center" src="http://odino.org/images/shell.png"></p>
+<p><img class="center" src="http://odino.github.com/images/shell.png"></p>
 
 <p>The auto-generated <code>composer.json</code> will look like:</p>
 
@@ -2022,19 +2022,19 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Launching PHPUnit tests from a browser with Symfony2]]></title>
-    <link href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
+    <link href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
     <updated>2012-02-20T13:41:00+04:00</updated>
-    <id>http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2</id>
+    <id>http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+        <a href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
     </li>
     <li>
-        <a href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+        <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
     </li>
     <li>
-        <a href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+        <a href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
     </li>
 </ol>
 
@@ -2264,7 +2264,7 @@ the <code>stop</code> attribute to the JSON object it outputs:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><img class="center" src="http://odino.org/images/phpunit-process.png"></p>
+<p><img class="center" src="http://odino.github.com/images/phpunit-process.png"></p>
 
 <h2>Benefits from the Process component</h2>
 
@@ -2319,19 +2319,19 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Using the Symfony2 DIC as a standalone component]]></title>
-    <link href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
+    <link href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
     <updated>2012-02-15T20:06:00+04:00</updated>
-    <id>http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
+    <id>http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+        <a href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
     </li>
     <li>
-        <a href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+        <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
     </li>
     <li>
-        <a href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+        <a href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
     </li>
 </ol>
 
@@ -2790,28 +2790,28 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Retrieving raw WHOIS informations in PHP]]></title>
-    <link href="http://odino.org/retrieving-raw-whois-informations-in-php/"/>
+    <link href="http://odino.github.com/retrieving-raw-whois-informations-in-php/"/>
     <updated>2012-02-14T00:58:00+04:00</updated>
-    <id>http://odino.org/retrieving-raw-whois-informations-in-php</id>
+    <id>http://odino.github.com/retrieving-raw-whois-informations-in-php</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
 
 <p>After something more than a week I&#8217;m back here with a first implementation of
-the PHP library I was <a href="http://odino.org/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
+the PHP library I was <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
 to retrieve WHOIS informations with PHP.</p>
 
 <!-- more -->
@@ -2825,7 +2825,7 @@ a PHP library to consume <a href="http://robowhois.com">Robowhois</a> APIs.</p>
 
 <h2>Installation</h2>
 
-<p>The library is assembled with <a href="http://odino.org/managing-php-dependencies-with-composer/">Composer</a>,
+<p>The library is assembled with <a href="http://odino.github.com/managing-php-dependencies-with-composer/">Composer</a>,
 so you only need to follow the canonical steps in order to download the
 required dependencies and use it in your own codebase</p>
 
@@ -2937,22 +2937,22 @@ be able to go out with a stable client for y&#8217;all.</p>
   
   <entry>
     <title type="html"><![CDATA[A PHP library to retrieve WHOIS informations]]></title>
-    <link href="http://odino.org/a-php-library-to-retrieve-whois-informations/"/>
+    <link href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/"/>
     <updated>2012-02-03T03:40:00+04:00</updated>
-    <id>http://odino.org/a-php-library-to-retrieve-whois-informations</id>
+    <id>http://odino.github.com/a-php-library-to-retrieve-whois-informations</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
@@ -2964,7 +2964,7 @@ WHOIS webservice</strong>.</p>
 <!-- more -->
 
 
-<p><img class="right" src="http://odino.org/images/robodomain.png"></p>
+<p><img class="right" src="http://odino.github.com/images/robodomain.png"></p>
 
 <p>Last week we got in touch with Simone, the mind behind <a href="http://robodomain.com">Robodomain</a>,
 a startup delivering a really useful product, which lets you</p>
@@ -3048,9 +3048,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
-    <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
+    <link href="http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
     <updated>2012-01-27T19:27:00+04:00</updated>
-    <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
+    <id>http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&#8217;s gaining
 its <em>momentum</em> due to a good article which explained how you should build
 your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
@@ -3058,7 +3058,7 @@ your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-t
 <!-- more -->
 
 
-<p><img class="left" src="http://odino.org/images/http.png"></p>
+<p><img class="left" src="http://odino.github.com/images/http.png"></p>
 
 <h2>HTTP is slowly dying</h2>
 
@@ -3070,7 +3070,7 @@ in today&#8217;s web, that&#8217;s a <em>de-facto</em> issue.</p>
 
 <h2>SPDY in a nutshell</h2>
 
-<p><img class="right" src="http://odino.org/images/spdy.packet.png"></p>
+<p><img class="right" src="http://odino.github.com/images/spdy.packet.png"></p>
 
 <p>SPDY is just a <strong>really good protocol implementation</strong>: it supports multiplexing,
 <strong>encourages</strong> content compression, allows servers to <strong>push notifications</strong> and
@@ -3127,15 +3127,15 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Roy Fielding on SOAP in the W3C context]]></title>
-    <link href="http://odino.org/roy-fielding-on-soap-in-the-w3c-context/"/>
+    <link href="http://odino.github.com/roy-fielding-on-soap-in-the-w3c-context/"/>
     <updated>2012-01-27T15:20:00+04:00</updated>
-    <id>http://odino.org/roy-fielding-on-soap-in-the-w3c-context</id>
+    <id>http://odino.github.com/roy-fielding-on-soap-in-the-w3c-context</id>
     <content type="html"><![CDATA[<!-- more -->
 
 
 <p>I found an old but interesting entry in the WWW-talk mailing list:</p>
 
-<p><img class="right" src="http://odino.org/images/royfielding.png"></p>
+<p><img class="right" src="http://odino.github.com/images/royfielding.png"></p>
 
 <blockquote><p>The only reason SOAP remains in the W3C for standardization is because all of the other forums either rejected the concept out of hand or refused to rubber-stamp a poor implementation of a bad idea.<br/>If this thing is going to be called Web Services, then I insist that it actually have something to do with the Web.<br/>If not, I&#8217;d rather have the WS-I group responsible for abusing the marketplace with yet another CORBA/DCOM than have the W3C waste its effort pandering to the whims of marketing consultants.<br/>I am not here to accommodate the requirements of mass hysteria.</p><footer><strong>Roy T. Fielding</strong> <cite><a href='http://lists.w3.org/Archives/Public/www-tag/2002Apr/0235.html'>WWW-talk Mailing List</a></cite></footer></blockquote>
 
@@ -3146,10 +3146,10 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
-    <link href="http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
+    <link href="http://odino.github.com/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
     <updated>2012-01-26T11:51:00+04:00</updated>
-    <id>http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
-    <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="http://odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
+    <id>http://odino.github.com/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
+    <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="http://odino.github.com/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
 testing mechanism into symfony 1.X</a>
 : in order to make this piece of software as clean and evolvable as possible
 I just isolated it and made a small repo on Github.</p>
@@ -3168,7 +3168,7 @@ and a configuration file) which lets you write functional tests, in symfony 1.X,
 you will find the basic instructions to start writing your tests: keep in mind
 that - although it&#8217;s usable on <em>old-school</em> symfony projects (svn etc) - you
 should install it with Git and manage dependencies and updates with
-<a href="http://odino.org/managing-php-dependencies-with-composer/">Composer</a>.</p>
+<a href="http://odino.github.com/managing-php-dependencies-with-composer/">Composer</a>.</p>
 
 <figure class='code'><figcaption><span>A PHPUnit functional test for symfony 1.X written thanks to SfCcTesting</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -3391,9 +3391,9 @@ you can already rely on this small library via
   
   <entry>
     <title type="html"><![CDATA[Functional testing symfony 1.X with PHPUnit: the Symfony2 way]]></title>
-    <link href="http://odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
+    <link href="http://odino.github.com/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
     <updated>2012-01-26T00:45:00+04:00</updated>
-    <id>http://odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
+    <id>http://odino.github.com/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
     <content type="html"><![CDATA[<p>In the process of starting a brand new project here at
 <a href="http://www.dnsee.com">DNSEE</a>, me and my colleague
 <a href="http://www.linkedin.com/in/matteobiagetti">Matteo</a> decided
@@ -3822,7 +3822,7 @@ some dummy template:</p>
 
 <p>Now you can run the test with the usual <code>phpunit</code> command:</p>
 
-<p><img class="center" src="http://odino.org/images/phpunit.symfony.png"></p>
+<p><img class="center" src="http://odino.github.com/images/phpunit.symfony.png"></p>
 
 <p>The greatest benefit of this approach is that you can <strong>use
 PHPUnit&#8217;s pure functionalities to test symfony 1.X
@@ -3863,9 +3863,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Quality isn't always better than quantity]]></title>
-    <link href="http://odino.org/quality-isnt-always-better-than-quality/"/>
+    <link href="http://odino.github.com/quality-isnt-always-better-than-quality/"/>
     <updated>2012-01-25T13:43:00+04:00</updated>
-    <id>http://odino.org/quality-isnt-always-better-than-quality</id>
+    <id>http://odino.github.com/quality-isnt-always-better-than-quality</id>
     <content type="html"><![CDATA[<p>Reading about <a href="http://www.amazon.com/Data-Intensive-Processing-MapReduce-Synthesis-Technologies/dp/1608453421">data processing with MapReduce</a>
 I was astonished when I first encountered the <em><a href="http://books.google.it/books?id=GxFYuVZHG60C&amp;pg=PA134&amp;lpg=PA134&amp;dq=stupid+backoff+algorithm&amp;source=bl&amp;ots=fMzZNlaNaN&amp;sig=mcEdim6-_wZL4aWKebh3s79KMS4&amp;hl=it&amp;sa=X&amp;ei=z_kfT56BG-vP4QSY2N2ODw&amp;ved=0CD0Q6AEwAzgK#v=onepage&amp;q=stupid%20backoff%20algorithm&amp;f=false">Stupid backoff</a></em>
 algorithm&#8217;s tale.</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: HATEOAS | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/hateoas/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/hateoas/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
-    <link href="http://odino.org/hypermedia-services-beyond-rest-architectures/"/>
+    <link href="http://odino.github.com/hypermedia-services-beyond-rest-architectures/"/>
     <updated>2012-01-24T03:22:00+04:00</updated>
-    <id>http://odino.org/hypermedia-services-beyond-rest-architectures</id>
+    <id>http://odino.github.com/hypermedia-services-beyond-rest-architectures</id>
     <content type="html"><![CDATA[<p>RESTafarians should support the abandon of the
 original term - REpresentational State Transfer -  in favour of
 some fresh new words.</p>
@@ -155,7 +155,7 @@ receive a <code>405 Method Not Allowed</code> back.</p>
 <p>and that they are not bound to (X)HTML documents:</p>
 
 <p><code>xml Atom link indicating how to edit a resource
-&lt;link href="http://odino.org/personas/100" rel="edit" type="application/json"&gt;Modify this!&lt;/link&gt;
+&lt;link href="http://odino.github.com/personas/100" rel="edit" type="application/json"&gt;Modify this!&lt;/link&gt;
 </code></p>
 
 <p><a href="http://ietfreport.isoc.org/idref/draft-nottingham-http-cache-channels/">Cache channels</a>
@@ -240,7 +240,7 @@ Location: /api/personas/24
 
 <ul>
   <li>
-    <a href="http://odino.org/products/5" rel="update" ... >Product 1</a>
+    <a href="http://odino.github.com/products/5" rel="update" ... >Product 1</a>
   </li>
   ...
 ```

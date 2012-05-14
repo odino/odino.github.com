@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: SPDY | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/spdy/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/spdy/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
-    <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
+    <link href="http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
     <updated>2012-01-27T19:27:00+04:00</updated>
-    <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
+    <id>http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it's gaining
 its <em>momentum</em> due to a good article which explained how you should build
 your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>

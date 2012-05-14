@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Doctrine | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/doctrine/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/doctrine/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A CRUD with Symfony2 and Doctrine 2]]></title>
-    <link href="http://odino.org/a-crud-with-symfony2-and-doctrine-2/"/>
+    <link href="http://odino.github.com/a-crud-with-symfony2-and-doctrine-2/"/>
     <updated>2011-02-03T12:00:00+04:00</updated>
-    <id>http://odino.org/a-crud-with-symfony2-and-doctrine-2</id>
+    <id>http://odino.github.com/a-crud-with-symfony2-and-doctrine-2</id>
     <content type="html"><![CDATA[<p>A few weeks ago I've made an experiment with Symfony2 and Doctrine 2,
 creating a simple, dummy and no-purpose blog CRUD, the <a href="https://github.com/odino/BlogBundle">BlogBundle</a>.</p>
 
@@ -49,9 +49,9 @@ initial concepts.</p>
   
   <entry>
     <title type="html"><![CDATA[Versioning other behaviours' columns with Doctrine Versionable]]></title>
-    <link href="http://odino.org/versioning-other-behaviours-columns-with-doctrine-versionable/"/>
+    <link href="http://odino.github.com/versioning-other-behaviours-columns-with-doctrine-versionable/"/>
     <updated>2010-11-23T13:54:00+04:00</updated>
-    <id>http://odino.org/versioning-other-behaviours-columns-with-doctrine-versionable</id>
+    <id>http://odino.github.com/versioning-other-behaviours-columns-with-doctrine-versionable</id>
     <content type="html"><![CDATA[<p>Using doctrine inside symfony is a relief: behaviours, particularly, can save your days.</p>
 
 <!-- more -->
@@ -125,9 +125,9 @@ Versionable:  ~
   
   <entry>
     <title type="html"><![CDATA[Custom pagination on different models with symfony and Doctrine]]></title>
-    <link href="http://odino.org/custom-pagination-on-different-models-with-symfony-and-doctrine/"/>
+    <link href="http://odino.github.com/custom-pagination-on-different-models-with-symfony-and-doctrine/"/>
     <updated>2010-10-24T12:03:00+04:00</updated>
-    <id>http://odino.org/custom-pagination-on-different-models-with-symfony-and-doctrine</id>
+    <id>http://odino.github.com/custom-pagination-on-different-models-with-symfony-and-doctrine</id>
     <content type="html"><![CDATA[<p>As I <a href="http://www.google.it/search?sourceid=chrome&amp;client=ubuntu&amp;channel=cs&amp;ie=UTF-8&amp;q=sfdoctrinepager+different+models">googled</a> and <a href="http://groups.google.it/group/symfony-it/browse_thread/thread/bad5cffee14c60fb?hl=it">asked</a>, and nobody could give me a better solution, I post it, conviced that the following code is <strong>pure crap</strong>.</p>
 
 <!-- more -->

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Symfony2 | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/symfony2/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/symfony2/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
-    <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <link href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00+04:00</updated>
-    <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
+    <id>http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -431,9 +431,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Launching PHPUnit tests from a browser with Symfony2]]></title>
-    <link href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
+    <link href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
     <updated>2012-02-20T13:41:00+04:00</updated>
-    <id>http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2</id>
+    <id>http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -643,9 +643,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Using the Symfony2 DIC as a standalone component]]></title>
-    <link href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
+    <link href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
     <updated>2012-02-15T20:06:00+04:00</updated>
-    <id>http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
+    <id>http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -990,9 +990,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Symfony2, HTTP cache & the good parts of both of'em]]></title>
-    <link href="http://odino.org/symfony-2-http-cache/"/>
+    <link href="http://odino.github.com/symfony-2-http-cache/"/>
     <updated>2011-05-15T23:27:00+04:00</updated>
-    <id>http://odino.org/symfony-2-http-cache</id>
+    <id>http://odino.github.com/symfony-2-http-cache</id>
     <content type="html"><![CDATA[<p>If you missed my talk about HTTP caching and Symfony2 at the PHPDay, here are the slides that I published friday.</p>
 
 <!-- more -->
@@ -1004,9 +1004,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Re-doing things with Symfony2]]></title>
-    <link href="http://odino.org/re-doing-things-with-symfony2/"/>
+    <link href="http://odino.github.com/re-doing-things-with-symfony2/"/>
     <updated>2011-03-13T10:46:00+04:00</updated>
-    <id>http://odino.org/re-doing-things-with-symfony2</id>
+    <id>http://odino.github.com/re-doing-things-with-symfony2</id>
     <content type="html"><![CDATA[<p>At the end I realized I should re-write this website with the latest ( not stable ) version of my favourite framework: Symfony2.</p>
 
 <p>I downloaded the PR7 and started converting the old Sf1.x application to Symfony2: since I had really cool impressions, and since I made a few mistakes, I want to share a few considerations.</p>

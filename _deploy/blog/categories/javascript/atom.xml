@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[iMacro: JavaScript loops with variables]]></title>
-    <link href="http://odino.org/imacro-javascript-loops-with-variables/"/>
+    <link href="http://odino.github.com/imacro-javascript-loops-with-variables/"/>
     <updated>2010-12-01T02:03:00+04:00</updated>
-    <id>http://odino.org/imacro-javascript-loops-with-variables</id>
+    <id>http://odino.github.com/imacro-javascript-loops-with-variables</id>
     <content type="html"><![CDATA[<p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
 
 <!-- more -->

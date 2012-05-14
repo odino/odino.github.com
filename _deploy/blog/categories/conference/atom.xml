@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/conference/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[OSIDays 2011 wrapup]]></title>
-    <link href="http://odino.org/osidays-2011-wrapup/"/>
+    <link href="http://odino.github.com/osidays-2011-wrapup/"/>
     <updated>2011-11-22T15:26:00+04:00</updated>
-    <id>http://odino.org/osidays-2011-wrapup</id>
+    <id>http://odino.github.com/osidays-2011-wrapup</id>
     <content type="html"><![CDATA[<p>There we go: I am in Bengaluru for OSIDays, and the conference is about to finish today, after cool and less cool moments.</p>
 
 <!-- more -->
@@ -74,9 +74,9 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
   
   <entry>
     <title type="html"><![CDATA[Jazoon 2011 wrapup]]></title>
-    <link href="http://odino.org/jazoon-2011-wrapup/"/>
+    <link href="http://odino.github.com/jazoon-2011-wrapup/"/>
     <updated>2011-06-28T15:09:00+04:00</updated>
-    <id>http://odino.org/jazoon-2011-wrapup</id>
+    <id>http://odino.github.com/jazoon-2011-wrapup</id>
     <content type="html"><![CDATA[<p>So, as you might know, the last week I've been in Zurich in order to partecipate to the Jazoon Rookie Award.</p>
 
 <!-- more -->
@@ -130,9 +130,9 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
   
   <entry>
     <title type="html"><![CDATA[PHPDay 2011 wrapup]]></title>
-    <link href="http://odino.org/phpday-2011-wrapup/"/>
+    <link href="http://odino.github.com/phpday-2011-wrapup/"/>
     <updated>2011-06-09T15:33:00+04:00</updated>
-    <id>http://odino.org/phpday-2011-wrapup</id>
+    <id>http://odino.github.com/phpday-2011-wrapup</id>
     <content type="html"><![CDATA[<p>It's been a while since I got back from the PHPDay ( ~1 month ) and the experience definitely deserves a post.</p>
 
 <!-- more -->
@@ -184,9 +184,9 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
   
   <entry>
     <title type="html"><![CDATA[A f****** awesome 2011 PHP Benelux Conference]]></title>
-    <link href="http://odino.org/a-f-awesome-2011-php-benelux-conference/"/>
+    <link href="http://odino.github.com/a-f-awesome-2011-php-benelux-conference/"/>
     <updated>2011-03-06T15:37:00+04:00</updated>
-    <id>http://odino.org/a-f-awesome-2011-php-benelux-conference</id>
+    <id>http://odino.github.com/a-f-awesome-2011-php-benelux-conference</id>
     <content type="html"><![CDATA[<p>I know, I'm a month late, but I need to publish a report about <a href="http://conference.phpbenelux.eu/2011/">this amazing conference</a> which took place in Antwerp, Belgium, in January 2011.</p>
 
 <!-- more -->
@@ -253,9 +253,9 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
   
   <entry>
     <title type="html"><![CDATA[Symfony Live 2011, my POV]]></title>
-    <link href="http://odino.org/symfony-live-2011-my-pov/"/>
+    <link href="http://odino.github.com/symfony-live-2011-my-pov/"/>
     <updated>2011-03-06T15:05:00+04:00</updated>
-    <id>http://odino.org/symfony-live-2011-my-pov</id>
+    <id>http://odino.github.com/symfony-live-2011-my-pov</id>
     <content type="html"><![CDATA[<p>As I have to rest after an intense week, full of conferences and sickness, I post my recap about the Symfony Live, what I liked and what I didn't.</p>
 
 <!-- more -->

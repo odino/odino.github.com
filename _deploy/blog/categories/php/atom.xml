@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: PHP | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/php/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
-    <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
+    <link href="http://odino.github.com/y-u-no-access-whois-informations-in-php/"/>
     <updated>2012-04-16T00:38:00+04:00</updated>
-    <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
+    <id>http://odino.github.com/y-u-no-access-whois-informations-in-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -164,9 +164,9 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   
   <entry>
     <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
-    <link href="http://odino.org/checking-a-domain-s-availability-with-php/"/>
+    <link href="http://odino.github.com/checking-a-domain-s-availability-with-php/"/>
     <updated>2012-03-20T09:49:00+04:00</updated>
-    <id>http://odino.org/checking-a-domain-s-availability-with-php</id>
+    <id>http://odino.github.com/checking-a-domain-s-availability-with-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -298,9 +298,9 @@ are provided under the <code>sample</code> directory.</p>
   
   <entry>
     <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
-    <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <link href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00+04:00</updated>
-    <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
+    <id>http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -714,9 +714,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Launching PHPUnit tests from a browser with Symfony2]]></title>
-    <link href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
+    <link href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
     <updated>2012-02-20T13:41:00+04:00</updated>
-    <id>http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2</id>
+    <id>http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -926,9 +926,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Using the Symfony2 DIC as a standalone component]]></title>
-    <link href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
+    <link href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
     <updated>2012-02-15T20:06:00+04:00</updated>
-    <id>http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
+    <id>http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>

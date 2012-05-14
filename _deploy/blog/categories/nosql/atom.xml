@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: NoSQL | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/nosql/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/nosql/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
-    <link href="http://odino.org/back-in-track-with-orientdb/"/>
+    <link href="http://odino.github.com/back-in-track-with-orientdb/"/>
     <updated>2012-04-20T15:26:00+04:00</updated>
-    <id>http://odino.org/back-in-track-with-orientdb</id>
+    <id>http://odino.github.com/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It's been a while since I don't release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
 back on track and I have a few interesting news.</p>
@@ -153,9 +153,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
-    <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
+    <link href="http://odino.github.com/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
     <updated>2011-05-06T15:42:00+04:00</updated>
-    <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
+    <id>http://odino.github.com/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There's a common goal that NoSQL and ESI share together: consistency.</p>
 
 <p>Since <a href="http://www.slideshare.net/odino/http-cache-pug-rome-03292011/2">the web is inconsistent</a>, we should be able to find some hacks to make it more consistent and satisfy both us, reducing bandwidth, traffic and CPU load, and the end-user, decreasing the latency of our services.</p>
@@ -177,7 +177,7 @@ Notes
   <body></p>
 
 <pre><code>...
-  &lt;esi:include src="http://odino.org/footer.html" /&gt;
+  &lt;esi:include src="http://odino.github.com/footer.html" /&gt;
 ...
 </code></pre>
 
@@ -216,9 +216,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[A simple menu and the relational model collapses]]></title>
-    <link href="http://odino.org/a-simple-menu-and-the-relational-model-collapses/"/>
+    <link href="http://odino.github.com/a-simple-menu-and-the-relational-model-collapses/"/>
     <updated>2011-04-17T16:07:00+04:00</updated>
-    <id>http://odino.org/a-simple-menu-and-the-relational-model-collapses</id>
+    <id>http://odino.github.com/a-simple-menu-and-the-relational-model-collapses</id>
     <content type="html"><![CDATA[<p>Relational sucks, some say.</p>
 
 <p>That's not fair, because we used it for 30 years and we still need it: but there are some particular cases, out there, that relational, and traditional, databases can't handle well.</p>
@@ -311,9 +311,9 @@ select from [28:0, 28:1, 29:0, ...]
   
   <entry>
     <title type="html"><![CDATA[Graph databases: OrientDB to the rescue]]></title>
-    <link href="http://odino.org/graph-databases-orientdb-to-the-rescue/"/>
+    <link href="http://odino.github.com/graph-databases-orientdb-to-the-rescue/"/>
     <updated>2011-04-16T14:02:00+04:00</updated>
-    <id>http://odino.org/graph-databases-orientdb-to-the-rescue</id>
+    <id>http://odino.github.com/graph-databases-orientdb-to-the-rescue</id>
     <content type="html"><![CDATA[<p><a href="http://www.orientechnologies.com/">OrientDB</a> is a graph database written in Java, mainly developed by <a href="http://zion-city.blogspot.com/">Luca Garulli</a>, <a href="http://www.assetdata.it/it/index.php">AssetData</a>'s CTO.</p>
 
 <!-- more -->
@@ -417,9 +417,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[NoSQL day: from enthusiasm to consciousness]]></title>
-    <link href="http://odino.org/nosql-day-from-enthusiasm-to-consciousness/"/>
+    <link href="http://odino.github.com/nosql-day-from-enthusiasm-to-consciousness/"/>
     <updated>2011-03-26T15:11:00+04:00</updated>
-    <id>http://odino.org/nosql-day-from-enthusiasm-to-consciousness</id>
+    <id>http://odino.github.com/nosql-day-from-enthusiasm-to-consciousness</id>
     <content type="html"><![CDATA[<!-- more -->
 
 

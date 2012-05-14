@@ -1,25 +1,56 @@
 ---
 layout: post
-title: "The month of the lead developer"
-date: 2012-05-12 02:21
+title: "The advent of the lead developer"
+date: 2012-05-15 02:21
 comments: true
-categories: 
+categories: [teams]
 published: false
 ---
 
+Sometimes you slowly see that month after month your job is
+changing, and after 5 years you can't even remember about the
+freshman who was writing his first "Hello World!" with
+whatever programing language.
+
 <!-- more -->
 
-prelude
+## Prelude
 
-lead developer vs team leader, my background, 1 post per ogni voce
+It's not a secret that I actually stopped coding for most of my time:
+in my previous experience at DNSEE things werent that different from
+here at Rocket except that with the software stack that we have it's
+nearly impossible to dedicate 8 hours to coding.
+
+This is leading me to a radical change: although I'm actually doing
+the team leader since 2 years now I feel that **the time dedicated
+to coding is really gone** - I mean, when the majority of your time
+is spent on an IDE.
+
+In DNSEE we didn't do actual *code reviews*, we didn't had a
+*product* and the account/PM always had the final word on
+- almost - everything: it was the world of web agencies,
+where pixels matter.
+
+{% img right /images/odino.young.jpg %}
+
+Now that things are different - pretty different, not completely -
+and there are many aspects really depending on IT,being a lead
+developers means renouncing to lot of coding - which is actually fine
+in such this kind of context.
+
+So after 5, almost 6, years working in this industry I thought that
+this was really the right time to share some pills of my daily job,
+leading a team of developers.
+
+As I like to state:
 
 {% blockquote %}
-  Leaders let other leaders emerge
+  [Great] leaders let other leaders emerge
 {% endblockquote %}
 
 ## 1. Find your buddy, grow with him
 
-It may sound quite , but having someone which is facing your
+It may sound quite obvious, but having someone which is facing your
 same problems and situations is maybe the best
 
 ## 2. Call back
@@ -98,4 +129,27 @@ ogni 2/4 settimane analizza gli obiettivi posti e dove siete arrivati, per far c
 
 cerca di seguire un approccio e farli ritrovare in un ritmo prestabilito: siete tutti nerd quindi non amate troppo le sorprese
 
-## 20. 
+## 20. There's a CTO somewhere
+
+fai sempre affidamento al cto e condividi con lui le tue scelte
+
+## 21. Motivate your choices
+
+se fai tdd, perche lo fai: non perdi tempo in inutili pippe e fai testing allo stesso tempo
+
+## 22. Team meetings VS personal meetings
+
+fai i personali cosi qualcuno si puo confidare
+
+## 23. Doubt yourself
+
+fai parlare il tuo team con il cto, spronali a migliorarti e a tirre fuori problemi
+
+## 24. Spread warnings
+
+non uscirtene con ora siamo nei casini, man mano che le situazioni si fanno complicate alza il livllo degli alert
+
+## 25. Isolate from your team
+
+ad un certo punti vattene in vacanza e fai finta che non ci sei: non devono abituarsi a te, lavorare senza di te deve metterli alla prova
+e allo stesso tempo ricaricarvi nel rapporto di crescita

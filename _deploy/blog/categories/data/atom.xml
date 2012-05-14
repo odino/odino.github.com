@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: data | Alessandro Nadalin]]></title>
-  <link href="http://odino.org/blog/categories/data/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2012-05-14T15:18:42+04:00</updated>
-  <id>http://odino.org/</id>
+  <link href="http://odino.github.com/blog/categories/data/atom.xml" rel="self"/>
+  <link href="http://odino.github.com/"/>
+  <updated>2012-05-14T15:23:53+04:00</updated>
+  <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quality isn't always better than quantity]]></title>
-    <link href="http://odino.org/quality-isnt-always-better-than-quality/"/>
+    <link href="http://odino.github.com/quality-isnt-always-better-than-quality/"/>
     <updated>2012-01-25T13:43:00+04:00</updated>
-    <id>http://odino.org/quality-isnt-always-better-than-quality</id>
+    <id>http://odino.github.com/quality-isnt-always-better-than-quality</id>
     <content type="html"><![CDATA[<p>Reading about <a href="http://www.amazon.com/Data-Intensive-Processing-MapReduce-Synthesis-Technologies/dp/1608453421">data processing with MapReduce</a>
 I was astonished when I first encountered the <em><a href="http://books.google.it/books?id=GxFYuVZHG60C&amp;pg=PA134&amp;lpg=PA134&amp;dq=stupid+backoff+algorithm&amp;source=bl&amp;ots=fMzZNlaNaN&amp;sig=mcEdim6-_wZL4aWKebh3s79KMS4&amp;hl=it&amp;sa=X&amp;ei=z_kfT56BG-vP4QSY2N2ODw&amp;ved=0CD0Q6AEwAzgK#v=onepage&amp;q=stupid%20backoff%20algorithm&amp;f=false">Stupid backoff</a></em>
 algorithm's tale.</p>
