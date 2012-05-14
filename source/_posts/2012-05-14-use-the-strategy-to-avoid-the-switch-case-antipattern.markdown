@@ -24,7 +24,7 @@ class Logger
 		$parts = explode('::', $message);
 		$level = $parts[0];
 
-		switch ($var) {
+		switch ($level) {
 		    case 'notice':
 		        ...
 		        break;
