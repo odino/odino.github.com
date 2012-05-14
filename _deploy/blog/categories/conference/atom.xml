@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OSIDays 2011 wrapup]]></title>
+    <link href="http://odino.org/osidays-2011-wrapup/"/>
+    <updated>2011-11-22T15:26:00+04:00</updated>
+    <id>http://odino.org/osidays-2011-wrapup</id>
+    <content type="html"><![CDATA[<p>There we go: I am in Bengaluru for OSIDays, and the conference is about to finish today, after cool and less cool moments.</p>
+
+<!-- more -->
+
+
+<h2>One hour of TDD: from saying hello to PHPUnit to mocking objects</h2>
+
+<p><img class="center" src="/images/osidays.jpg"></p>
+
+<p>With my first talk I've messed a few things up: as I was plugging the VGA adapter to my laptop, the native screen was loosing signal so I needed to do my session with <a href="http://blog.bastian-feder.de/blog.html">Bastian</a>'s laptop (dude, you saved my ass).</p>
+
+<p>The session went pretty well:  I gotta confess that I was a bit scared of showing some real-world code examples, step by step, in a live session, so the audience probably felt my preoccupation... after all, the talk quickly took the right direction, and I was able to show the <strong>implementation of the Dijkstra's algorithm in PHP with test-driven development</strong>.</p>
+
+<p>The presentation is on <a href="http://www.slideshare.net/odino/got-units-osidays">slideshare</a> and you can clone the <a href="https://github.com/odino/osidays">repository on github</a> (slides/code without code/slides are useless).</p>
+
+<h2>RESTful architectures</h2>
+
+<p><img class="right" src="/images/osidays2.jpg"></p>
+
+<p>Oh, that was easy.</p>
+
+<p>Not trying to sound arrogant, but this is probably the 8th time I give this presentation, so I'm pretty used to deliver it.</p>
+
+<p>This edition of <a href="http://www.slideshare.net/odino/rest-in-peace-osidays-2011-india-11212011">REST in peace</a> is already on slideshare, and it contains a few new things from the other, older, presentations: if you followed me during this months of <em>RESTvangelization</em> you'll notice that a few concepts are getting more and more important, like having durable services and taking advantage of the greatest REST architecture, the Web.</p>
+
+<p>The <strong>presentation went well</strong> and a few people actually came after the talk for <strong>having some insights</strong> about implementing a reverse proxy in their architectures and so on...   ...a rails guy even told me we was revisiting his opinion of RoR-powered APIs now :)</p>
+
+<p><img class="center" src="/images/osidays3.jpg"></p>
+
+<p>I was pretty disappointed by the number of people attending the session (~50) but, from what I saw, it was really complex, for the majority of the attendees, to <strong>understand concepts like evolvability and durability</strong> in a country like India, which is the greatest place in the world to outsource <strong>quick'n'dirty software</strong> ( I hope they're fixing it with this conferences and getting a better <em>forma mentis</em> from the software development point of view ).</p>
+
+<p><img class="center" src="/images/osidays4.jpg"></p>
+
+<p>The organization
+Wow, one of the coolest aspects of the conference: they have been able to satisfy every need we had, from transportation to eating, via relaxing in a wonderful hotel.</p>
+
+<h2>Other talks</h2>
+
+<p>I attended a few sessions from other eurospeakers like <a href="http://www.hugohamon.com/en">Hugo Hamon</a>, <a href="http://blog.bastian-feder.de/blog.html">Bastian Feder</a> and the <em>evergreen</em> <a href="http://schlitt.info/.html">Tobias</a>: although I basically knew any concept presented there, I felt how those presentations were needed by the audience here at OSIDays, 'cause they are living the moment that PHP was living 6 years ago.</p>
+
+<p>The point is that when you need to write crappy code, that should be production-ready in 48 hours, you don't test anything, you don't decouple anything, you don't design anything: programmers are now forced to work in this way, and the most proficient ones get hired by great companies like IBM or whatever major.</p>
+
+<p>Participating at these conference should make the average indian developer aware of the fact that he has a possibility: to leverage his skills and try to build complex system, not only outsourced stuff.</p>
+
+<p>I think this is a pretty difficult topic, because only a few of them had a real-world experience on what we call <em>ordinary</em> projects: without seeing them, they think that the procedural and messy way they have is a good compromise to get the job done.</p>
+
+<h2>And now?</h2>
+
+<p><img class="right" src="/images/osidays5.jpg"></p>
+
+<p>I don't talk about my personal life in this blog, so I will not tell you how things went from this point of view: let's just says that now I have 3 free days for visiting a few cities here in the southern part of India...   ...let's hope they will be amazing as a few moments here in Bengaluru.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jazoon 2011 wrapup]]></title>
+    <link href="http://odino.org/jazoon-2011-wrapup/"/>
+    <updated>2011-06-28T15:09:00+04:00</updated>
+    <id>http://odino.org/jazoon-2011-wrapup</id>
+    <content type="html"><![CDATA[<p>So, as you might know, the last week I've been in Zurich in order to partecipate to the Jazoon Rookie Award.</p>
+
+<!-- more -->
+
+
+<p><img class="center" src="/images/jazoon1.jpg"></p>
+
+<h2>The city</h2>
+
+<p>Zurich, gotta say, is a really nice city: it has a lot of green and its quite clean: as Lukas told me, it's not because Swiss people are that respectful, but because the public administration hires lots of scavengers :)</p>
+
+<p>Switzerland is also soooooooooo expensive, and, by the way, my hotel was in what they call "the gold coast of Zurich", the richest part of the city, so as I ordered a plate of ananas at a vegetarian restaurant, I was traumatized when paying: 30 euros or something like that ( note for the me of the future: remember before the departure's flight that Switzerland is not in the UE, so they don't have euros ).</p>
+
+<p><img class="center" src="/images/jazoon2.jpg"></p>
+
+<h2>The conference</h2>
+
+<p><img class="center" src="/images/jazoon3.jpg"></p>
+
+<p>The Jazoon was pretty awesome: I had the opportunity to meet a lot of funny people and we had great time playing at the table-soccer or just chatting about the current state of sw lifecycles and other nerdy stuff.</p>
+
+<p>The organization was really good, because at the hotel everyone knew about our arrival and the conference was easy to reach, with a perfect wi-fi connection and some recreative areas.</p>
+
+<p>And, since I am italian I need to say it, the food was really tasty :)</p>
+
+<h2>The award</h2>
+
+<p><img class="center" src="/images/jazoon4.jpg"></p>
+
+<p>Oh, man, a really really really great experience.</p>
+
+<p>I competed against Benjamin from Karlsruhe and Ivo from Skopje, 2 really cool guys that had really good presentations.</p>
+
+<p>I ranked 2nd with my "REST in peace: a handbook of software waste" and won a Lenovo IdeaPad which is, basically... awesome :)</p>
+
+<h2>Many thanks to...</h2>
+
+<p>The other 2 rookies, we had a few beers and funny moments together, it was well-spent time with those guys.</p>
+
+<p>And, obviously, a particular thank you to Georgios ( I hope the name is ok, George! ), Ivo's mentor - as far as I understood - a really nice person to chat with: we had a few moments to talk and it was really nice to have the opportunity to listen the point of view of such a wise and experienced guy.</p>
+
+<p>Last but not least, a really big "thank you!" to Felix, Jutta and Marco from the organization, it was a pleasure to be invited at such this kind of conference.</p>
+
+<h2>My presentation</h2>
+
+<p>As usual, I post here the presentation, but you can find it on slideshare:</p>
+
+<p><div class="slideshare" id="__ss_8392980"><iframe src="http://www.slideshare.net/slideshow/embed_code/8392980 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHPDay 2011 wrapup]]></title>
+    <link href="http://odino.org/phpday-2011-wrapup/"/>
+    <updated>2011-06-09T15:33:00+04:00</updated>
+    <id>http://odino.org/phpday-2011-wrapup</id>
+    <content type="html"><![CDATA[<p>It's been a while since I got back from the PHPDay ( ~1 month ) and the experience definitely deserves a post.</p>
+
+<!-- more -->
+
+
+<h2>Where, when, how..</h2>
+
+<p>This year's PHPDay has been held in Verona, the wonderful place where Romeo and Juliet had their drama.</p>
+
+<p>The location was the same of the 2009 edition ( which, BTW, was the first conference as a speaker, for me ) with the addition of the third day, just like the last year.</p>
+
+<p>The conference had a first day of workshops and the last 2 days of tutorials and talks: 25 minutes for the former, 45 for the latter.</p>
+
+<h2>Day 1: the german track</h2>
+
+<p>Very curious, the workshop day had an entire track with german speakers: Sebastian Bergmann gave a nice <a href="http://www.phpday.it/2011/session/testing-lamp-applications">overview of PHPUnit 3.5</a> with the addition of a live example testing legacy code.</p>
+
+<p>The guys from Quafoo presented the <a href="http://www.phpday.it/2011/session/any-any-convert-your-documents">document component from the Apache Zeta Components</a>: seems pretty awesome, given that document conversion is something everyone of us faces during his career and everyone of us blamed TCPDF at least once.</p>
+
+<p>Quafoo again showed us their <a href="http://www.phpday.it/2011/session/generic-php-application-installer">application installer</a>, which is an high-level library able to let developers code their own installer according to common needs ( database setup, filesystem configuration and so on ).</p>
+
+<h2>Day 2: tremendous keynote</h2>
+
+<p>My second day started with a topic we're facing in our company: the hard combination between <a href="http://www.phpday.it/2011/session/just-married-user-centred-design-and-agile">agile development and user-centered design</a>.</p>
+
+<p><a href="http://www.phpday.it/2011/session/many-many-no-man-island">Jacopo Romei</a> had an embarassing ( with a positive meaning ) keynote about collaboration and communities: one of the coolest I ever heard, given that I often find keynotes boring.</p>
+
+<p>In the first session of the afternoon I presented the <a href="http://www.phpday.it/2011/session/be-lazy-be-esi-http-caching-and-symfony2-0">HTTP cache inside Symfony2</a>, pretty satisfied about the people listening and their feedbacks.</p>
+
+<p>Then I listened about 2 build systems, <a href="http://www.phpday.it/2011/session/phing-vs-ant-parola-chiave-automatizzare">Phing and Ant</a>: an insteresting italian talk, given that I didn't know that a few code metrics tools are well-integrated with this kind of systems.</p>
+
+<h2>Day 3: leaving Verona with style</h2>
+
+<p>My attention was firstly captured by the <a href="http://www.phpday.it/2011/session/symfony-e-grandi-numeri-si-pu-fare">real-world report about calciomercato.com</a> ( that can be translated in soccertrades.com ), a site, built with symfony 1.4, which scored 4 milions visits in August 2010: definitely impressive.</p>
+
+<p>The talks wasn't obviously focused on the software architecture but on the system architecture behind the website: a cool thing was that they prefered to build 2 separate machine templates ( you usually have 1 VM template, that you scale horizontally ), one used to serve the website and the other for the static assets, some kind of a little CDN.</p>
+
+<p>Giorgio Sironi had an interesting talk about <a href="http://www.phpday.it/2011/session/pursuing-domain-driven-design-practices-php">DDD in PHP</a>: it was a real pity that there were a few guys listening him, because DDD is - obviously - coupled with doing OO right, and PHPers often forget about them both.</p>
+
+<p>During the afternoon I had the great occasion to present, with David, an overview about the <a href="http://www.phpday.it/2011/session/cmf-pain-f">problems relational DBMS have with fuzzy-model softwares</a>, like CMSes: it has been an opportunity to show off that <a href="http://www.dnsee.com/">DNSEE</a> guys are working hard to develop a CMF based on Symfony2 and a NoSQL graph database, OrientDB.</p>
+
+<h2>So what?</h2>
+
+<p>Once again, the best conference I ever attended, did not betrayed my expectations.</p>
+
+<p>If you want to view the slides of the talks, have a look at the <a href="http://joind.in/event/view/472">Joind.in</a> page.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A f****** awesome 2011 PHP Benelux Conference]]></title>
+    <link href="http://odino.org/a-f-awesome-2011-php-benelux-conference/"/>
+    <updated>2011-03-06T15:37:00+04:00</updated>
+    <id>http://odino.org/a-f-awesome-2011-php-benelux-conference</id>
+    <content type="html"><![CDATA[<p>I know, I'm a month late, but I need to publish a report about <a href="http://conference.phpbenelux.eu/2011/">this amazing conference</a> which took place in Antwerp, Belgium, in January 2011.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/with-zuelke.jpg"></p>
+
+<p>It has been one of my favourite conference, and the reasons for such this kind of evaluation are multiple: I try to summarize them here.</p>
+
+<h2>The talks</h2>
+
+<p>This is probably the conference in which I did the rightest moves: almost every talk I attended impressend me so much.</p>
+
+<p>Here's the list:</p>
+
+<ul>
+<li><strong>27 ways to be a better developer</strong> by Ivo Jansch &amp; Lorna Mitchell, a good keynote focusing on real life experience and a few commonly forgotten tips</li>
+<li><strong>Technical Debt</strong> by Elizabeth Naramore, a really cool talk about real life approaches to technical debt</li>
+<li><strong>Project triage &amp; recovery</strong> by Keith Casey, about dealing with technical debt in an OS project</li>
+<li><strong>Benchmarking applications and frameworks</strong> by Paul M. Jones, dealing with the right approach during applications benchmarks</li>
+<li><strong>Charsets and encodings</strong> by Kore Nordmann, in which I learned a lot about a problem I've never faced but...   ...who knows...</li>
+<li><strong>XML vs The new kids on the block</strong> by David Zuelke, a really coll comparation between XML, JSON, HTML5 and YAML, with pros and cons for all of them: contextualization was the leit-motif</li>
+<li><strong>Designing HTTP interfaces and RESTful webservices</strong> by David Zuelke, a f****** awesome talk, and, have to say, the greatest speaker I've ever encountered</li>
+<li><strong>Geolocation and maps with PHP</strong> by Derick Rethans, pretty boring talk about a cool topic</li>
+<li><strong>Zeta Components</strong> by Tobias Schlitt, presenting the Apache project and giving some code examples which turned the crowd on</li>
+</ul>
+
+
+<h2>The organization</h2>
+
+<p>Really awesome.</p>
+
+<p>We had great lunches, an awesome dinner offered by Facebook and almost everyday a free bar.</p>
+
+<p>:-)</p>
+
+<p>The location they choose was ok and the talks organization really pleasant.</p>
+
+<h2>The bowling night</h2>
+
+<p>I should tell a lot about that night, but I'd rather keep some details with those who were there :-)</p>
+
+<p>We had free ber offered by GitHub and a bunch of bowling lanes reserved for the conference attendees.</p>
+
+<p>It was also cool because at this conferences speakers tend to aggregate with theirselves: at this one we had he opportunity to bowl together.</p>
+
+<h2>The italian crew</h2>
+
+<p>Yes, the cool guys.</p>
+
+<p>I've been there with other italian fellas, and we probably were the farest guys from home (except from a few speakers ).</p>
+
+<p>Really great time spent together, and I also appreciated Michelangelo Van Dam, one of the organizers, thanking us, while smoking a cigarette, for coming there.</p>
+
+<p>Definitely going there in 2012.</p>
+
+<h2>There is one more thing...</h2>
+
+<p>Cirpo's beer spill. Amazing.</p>
+
+<p><img class="center" src="/images/beerspill.jpg"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Symfony Live 2011, my POV]]></title>
+    <link href="http://odino.org/symfony-live-2011-my-pov/"/>
+    <updated>2011-03-06T15:05:00+04:00</updated>
+    <id>http://odino.org/symfony-live-2011-my-pov</id>
+    <content type="html"><![CDATA[<p>As I have to rest after an intense week, full of conferences and sickness, I post my recap about the Symfony Live, what I liked and what I didn't.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/symfony.live.jpg"></p>
+
+<p>The whole picture isn't that good but, after all, I however enjoyed the event, which has been attended by, I think, something like 500 people.</p>
+
+<p>For me, it was the first time is Paris and, generally, France, so I could also appreciate a - seems - great culture.</p>
+
+<h2>At lunch</h2>
+
+<p>We had really awful moments at lunch: in 2 days, 2 sandwiches and a catering level non that good.</p>
+
+<p>That wasn't a big problem: in such this kind of conferences what we eat is not so important, but it would give the event a real plus.</p>
+
+<h2>Fabien keynoting</h2>
+
+<p>Ah, another bad moment, and I'm not referring to the technical problem the presentation had: being there, with probably the most wanted session, with no slides, had been an awful decision.</p>
+
+<p>The whole talk has not been so involving, so I was a bit disappointed by this so expected moment.</p>
+
+<h2>The talks</h2>
+
+<p>Something went fine, something really bad: HTTP cache by Fabien was really awesome, as Twig's presentation from Ryan Weaver, but - practically - all the other speakers ( excluding a couple of minors ) weren't able to catch my attention: the level of their talks wasn't the expected one.</p>
+
+<p>This Symfony Live wasn't so technical: I tought I had the opportunity to learn far more than what I actually learned.</p>
+
+<h2>The level</h2>
+
+<p>Apart some really disappointing talks, I was pleased to have the opportunity of listening people like Wage and Weaver, and - obviously - Fabien too.</p>
+
+<p>There was a lot of quality-people at the Symfony Live, and meeting such this kind of developers is not usual.</p>
+
+<h2>Parties</h2>
+
+<p>I wasn't able to attend the first day party, nor GitHub's one the day after, but I'm pretty sure they gave the partecipants a lot of fun: it's really great that fun plays a primary role at this events.</p>
+
+<h2>The location</h2>
+
+<p>A really cool one, but everything got screwed up when we saw the rooms: a gigantic one for the first track, an awfully small one ( 30 people ) for the second track.</p>
+
+<p>I gotta admit that I renounced to follow a couple talks because there was no space in the second room!</p>
+
+<h2>Unconference</h2>
+
+<p>Although I didn't attended any talk of the unconference track I really like when this initiatives happen: really thank to Stefan Koopmanschap for the effort; my friend Jacopo had the opportunity to give a 10-minutes talk.</p>
+
+<h2>A HTML fragments specification</h2>
+
+<p>I had the opportunity to talk with Fabien for five minutes: my aim was to ask him support for one of the things I do really care a lot, a <a href="http://tech.groups.yahoo.com/group/rest-discuss/message/17357">specification for the HTML fragments media type</a>, possibly including also the ESI specification inside it.</p>
+
+<h2>Next year?</h2>
+
+<p>I don't know if I'll be at the Symfony Live 2012: it will totally depend from the schedule that will be published.</p>
+
+<p>But, after all, we all should really thank the organizers: a conference is never easy to plan and manage, and they did an awesome job since months.</p>
+]]></content>
+  </entry>
+  
+</feed>

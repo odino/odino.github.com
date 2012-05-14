@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: profiling | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/profiling/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Profiling with Xdebug and Kcachegrind]]></title>
+    <link href="http://odino.org/profiling-with-xdebug-and-kcachegrind/"/>
+    <updated>2010-09-11T13:40:00+04:00</updated>
+    <id>http://odino.org/profiling-with-xdebug-and-kcachegrind</id>
+    <content type="html"><![CDATA[<p>Here you can find the instructions for installing Xdebug and Kcachegrind to profile and debug PHP applications.</p>
+
+<!-- more -->
+
+
+<p>Supposing that you're using the penguin, with Debian or *buntu, there are a few steps ( very easy steps ) that you have to do in order to set up an environment which helps you on debugging PHP and profiling scripts.</p>
+
+<p>First of all install the software:</p>
+
+<p>```
+sudo apt-get install php5-xdebug</p>
+
+<p>sudo apt-get install kcachegrind
+```</p>
+
+<p>then modify your <code>php.ini</code>:</p>
+
+<p><code>
+sudo gedit /etc/php5/apache2/php.ini
+</code></p>
+
+<p>inserting these lines of code:</p>
+
+<p><code>
+; Xdebug params
+xdebug.remote_enable = On
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir = "/var/benchmark/"
+zend_extension="/usr/lib/php5/20060613+lfs/xdebug.so"
+xdebug.auto_trace = On
+</code></p>
+
+<p>Remember to change, obviously, the values for <code>profiler_output_dir</code> and <code>zend_extension</code>.</p>
+
+<p>TIP: to get <code>zend_extension</code> value use:</p>
+
+<p><code>
+locate xdebug.so
+</code></p>
+
+<p>Then remember to give apache write premissions of the profiler output directory and restart it:</p>
+
+<p><code>
+sudo /etc/init.d/apache2 restart
+</code></p>
+
+<p>Now you can navigate your local applications and find generated files in the output directory: you need to open these files with Kcachegrind and...   ...profile them!</p>
+]]></content>
+  </entry>
+  
+</feed>

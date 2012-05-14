@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Y U NO access WHOIS informations in PHP? - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="This post is part of the &#8221;WHOIS in PHP: consuming the Robowhois API&#8221; series; here is a list of all the articles contained this series: A &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/y-u-no-access-whois-informations-in-php">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Y U NO access WHOIS informations in PHP?</a></h1>
+  <p class="article-date">
+      Monday, 16 April 2012
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><ol class="aseries">
+    <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
+    <li>
+        <a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+    </li>
+    <li>
+        <a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+    </li>
+    <li>
+        <a href="/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+    </li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+
+
+<p>In these days we finalized the last parts of the official
+<a href="https://github.com/robowhois/robowhois-php">PHP client for the Robowhois API</a>
+, and here are the changes for the <code>0.9.0</code> version.</p>
+
+<!-- more -->
+
+
+<h2>Parts and properties API</h2>
+
+<p>As part of our job, we needed to implement the last
+2 API endpoints provided by Robowhois, <code>properties</code>
+and <code>parts</code>.</p>
+
+<p>Everything is documented in the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/README.md">README</a>
+but you can also follow the examples under the <code>sample/</code> directory:</p>
+
+<figure class='code'><figcaption><span>Using the properties API</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Exception</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;vendor/.composer/autoload.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$domain</span> <span class="o">=</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">whoisProperties</span><span class="p">(</span><span class="s1">&#39;robowhois.com&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$domain</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;created_on&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;The following error occurred: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Using the parts API</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Exception</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;vendor/.composer/autoload.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$domain</span> <span class="o">=</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">whoisParts</span><span class="p">(</span><span class="s1">&#39;robowhois.com&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$domain</span><span class="p">[</span><span class="s1">&#39;parts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;The following error occurred: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Magic objects, behaving like arrays</h2>
+
+<p>We implemented the <code>\ArrayObject</code> interface for the objects
+returned by the API, which means that now you can access
+the results of an API call just like an array:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$account</span> <span class="o">=</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">account</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// $account is an instance of Robowhois\Account</span>
+</span><span class='line'><span class="k">echo</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;You have %d API calls left&#39;</span><span class="p">,</span> <span class="nv">$account</span><span class="p">[</span><span class="s1">&#39;credits_remaining&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but, for those like us who like the OO synthax, we implemented
+some magic to let you retrieve those values via getters, which
+are built <em>on-the-fly</em> thanks to PHP&#8217;s <code>__call()</code> method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nv">$account</span><span class="o">-&gt;</span><span class="na">getCreditsRemaining</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Getters are a camelized version of the array keys, and are
+built thanks to the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/composer.json#L28">Doctrine Inflector</a>.</p>
+
+<h2>Mapping the existing API</h2>
+
+<p>We renamed the methods accessing the API in order to 100% reflect
+the ones exposed by the API, also used in the
+<a href="https://github.com/robowhois/robowhois-ruby">Ruby client</a>: so now the
+<code>Robowhois\Robowhois</code> object has:</p>
+
+<ul>
+<li><code>-&gt;account()</code></li>
+<li><code>-&gt;whois()</code></li>
+<li><code>-&gt;whoisProperties()</code></li>
+<li><code>-&gt;whoisParts()</code></li>
+<li><code>-&gt;whoisRecord()</code></li>
+<li><code>-&gt;whoisAvailability()</code></li>
+</ul>
+
+
+<h2>Simplified exceptions</h2>
+
+<p>We initially added tons of exceptions but we eventually
+decide to keep the only <code>Robowhois\Exception</code> class.</p>
+
+<h2>Now?</h2>
+
+<p>Wanna retrieve WHOIS informations in PHP at a
+<a href="http://www.robowhois.com/pricing">decent price</a>?</p>
+
+<p>Start consuming the Robowhois APIs, with PHP.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-16T00:38:00+04:00" pubdate data-updated="true">Monday, 16 April 2012 at 00:38</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/robowhois/'>Robowhois</a>, <a class='category' href='/blog/categories/whois/'>WHOIS</a>, <a class='category' href='/blog/categories/open-source/'>open source</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/search-engines-are-making-the-web-slower/" title="Previous Post: Search engines are making the web slower">&laquo; Search engines are making the web slower</a>
+      
+      
+        <a class="basic-alignment right" href="/back-in-track-with-orientdb/" title="next Post: Back in track with OrientDB">Back in track with OrientDB &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/y-u-no-access-whois-informations-in-php/';
+        var disqus_url = 'http://odino.org/y-u-no-access-whois-informations-in-php/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

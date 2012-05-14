@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Book review: Data-Intensive Text Processing with MapReduce - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="As part of my studies not directly connected to my job,
+in the last month I&#8217;ve finished this interesting book, which
+gives you a good overview &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/book-review-data-intensive-text-processing-with-mapreduce">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Book review: Data-Intensive Text Processing with MapReduce</a></h1>
+  <p class="article-date">
+      Thursday, 23 February 2012
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>As part of my studies not directly connected to my job,
+in the last month I&#8217;ve finished this interesting book, which
+gives you a good overview about
+<a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/mapreduce.book.jpg"></p>
+
+<p><a href="http://www.umiacs.umd.edu/~jimmylin/">Jimmy Lin</a> and Chris
+Dyer nailed this one: the book is really clear and leaves
+room for further studies, maybe more practical ones: the book
+starts with the definition of MapReduce, from the algorithm to
+the execution framework and the analyzes each part of the
+algorithm and theyr variants in some frameworks, like
+Hadoop<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>After studying the components of MapReduce you will
+take a practical look at possible implementations<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>,
+from graph algorithms to the pagerank one: note that there are
+so many references in the book, so if you will be into it, you&#8217;re
+gonna find yourself screwed in a <em>nerdy</em> loop :)</p>
+
+<p>The EM chapter (dealing with <em>expectation-maximization</em> algorithms)
+was pretty difficult for me, as it&#8217;s too much time that I don&#8217;t
+take math <em>that</em> seriously, but I - however - was able to
+follow all the theory explained there.</p>
+
+<p>Something that I really appreciated was the closing remark stating that,
+just like every technology, is not the right pick for every problem -
+think about <strong>stateful</strong> large scale data-processing algorithms.</p>
+
+<p>I strongly recommend you to read such this kind of book: the approach
+followed by the writers is so engineered and some examples they give,
+like the <a href="/quality-isnt-always-better-than-quality/">stupid backoff</a>,
+are pearls for your working experience.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>But please remember, this book is not any kind of Hadoop guide <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Which are code-agnostic, as everything is written in a pretty clear pseudo-code <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-23T12:57:00+04:00" pubdate data-updated="true">Thursday, 23 February 2012 at 12:57</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/mapreduce/'>MapReduce</a>, <a class='category' href='/blog/categories/book/'>book</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/how-to-argue-with-junior-and-stubborn-developers/" title="Previous Post: How to argue with junior and stubborn developers">&laquo; How to argue with junior and stubborn developers</a>
+      
+      
+        <a class="basic-alignment right" href="/scaling-through-hinclude/" title="next Post: Scaling asynchronously through HInclude">Scaling asynchronously through HInclude &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/book-review-data-intensive-text-processing-with-mapreduce/';
+        var disqus_url = 'http://odino.org/book-review-data-intensive-text-processing-with-mapreduce/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

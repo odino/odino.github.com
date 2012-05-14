@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="Symfony2 Routes Sunday, 09 January 2011 at 13:57 | Comments Categories: PHP, Symfony2 Creating Your Own Services for the Symfony2 DIC I want you to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/blog/page/9">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Alessandro Nadalin</a></h1>
+  <p class="article-date">
+      
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/symfony2-routes/">Symfony2 Routes</a></h1>
+        
+        
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-09T13:57:00+04:00" pubdate data-updated="true">Sunday, 09 January 2011 at 13:57</time>
+            
+            | <a href="/symfony2-routes/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/creating-your-own-services-for-the-symfony2-dic/">Creating Your Own Services for the Symfony2 DIC</a></h1>
+        
+        <p>I want you to know how to write a service and let the container handle it for you.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-08T19:50:00+04:00" pubdate data-updated="true">Saturday, 08 January 2011 at 19:50</time>
+            
+            | <a href="/creating-your-own-services-for-the-symfony2-dic/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/peaa/'>PEAA</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/imacro-javascript-loops-with-variables/">iMacro: JavaScript Loops With Variables</a></h1>
+        
+        <p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-01T02:03:00+04:00" pubdate data-updated="true">Wednesday, 01 December 2010 at 02:03</time>
+            
+            | <a href="/imacro-javascript-loops-with-variables/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/versioning-other-behaviours-columns-with-doctrine-versionable/">Versioning Other Behaviours&#8217; Columns With Doctrine Versionable</a></h1>
+        
+        <p>Using doctrine inside symfony is a relief: behaviours, particularly, can save your days.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-23T13:54:00+04:00" pubdate data-updated="true">Tuesday, 23 November 2010 at 13:54</time>
+            
+            | <a href="/versioning-other-behaviours-columns-with-doctrine-versionable/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/doctrine/'>Doctrine</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/the-pomodoro-tecnique-on-your-linux-distro/">The Pomodoro Tecnique on Your Linux Distro</a></h1>
+        
+        <p>Shortening the post - it&#8217;s late and I&#8217;m tired - I&#8217;ve played with <a href="http://gambas.sourceforge.net/en/main.html">Gambas2</a> and its wonderful IDE in order to get in touch with Desktop development, one of those things I&#8217;ve always missed as a programmer.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-01T13:33:00+04:00" pubdate data-updated="true">Monday, 01 November 2010 at 13:33</time>
+            
+            | <a href="/the-pomodoro-tecnique-on-your-linux-distro/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/linux/'>Linux</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/amend-committing-in-svn/">Amend Committing in SVN</a></h1>
+        
+        <p>Amending, in Git, is one of my favourite features: it basically lets you modify your local history ( unpushed ) to correct mistakes. Or, more often, to <strong>add the missing file</strong>.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-30T11:06:00+04:00" pubdate data-updated="true">Saturday, 30 October 2010 at 11:06</time>
+            
+            | <a href="/amend-committing-in-svn/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/svn/'>SVN</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/browsers-rest-too-much-rest-lesser/">Browsers Rest Too Much REST Lesser</a></h1>
+        
+        <p>Today I asked, looking for valid replies, some guys of the <a href="http://roma.grusp.org/">Rome PUG</a>, about cool ways to authenticate a client over a REST architecture.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-29T15:50:00+04:00" pubdate data-updated="true">Friday, 29 October 2010 at 15:50</time>
+            
+            | <a href="/browsers-rest-too-much-rest-lesser/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/rest/'>REST</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/mockups-of-web-authentication-the-rest-rescue/">Mockups of Web Authentication: The REST Rescue</a></h1>
+        
+        <p>As I stated yesterday about how <a href="http://www.odino.org/237/browsers-rest-too-much-rest-lesser">browsers should authenticate the client</a> in order to let server remain stateless ( no session, no cookies, no tokens ) I wanted to show off a more tangible image of the &#8221;<em>authentication sidebar</em>&#8221; I mentioned in the post.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-29T15:15:00+04:00" pubdate data-updated="true">Friday, 29 October 2010 at 15:15</time>
+            
+            | <a href="/mockups-of-web-authentication-the-rest-rescue/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/sfwidgetformchoice-with-spicy-empty-values/">SfWidgetFormChoice* With Spicy Empty Values</a></h1>
+        
+        <p>To pass empty values to the widgets based on choices is really simple with symfony.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-25T11:02:00+04:00" pubdate data-updated="true">Monday, 25 October 2010 at 11:02</time>
+            
+            | <a href="/sfwidgetformchoice-with-spicy-empty-values/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/symfony/'>symfony</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/magento-s-request-doesn-t-collect-get-and-post/">Magento&#8217;s Request Doesn&#8217;t Collect GET and POST</a></h1>
+        
+        
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-25T10:59:00+04:00" pubdate data-updated="true">Monday, 25 October 2010 at 10:59</time>
+            
+            | <a href="/magento-s-request-doesn-t-collect-get-and-post/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/10/">&larr; Older</a>
+    
+    
+    <a class="next" href="/blog/page/8/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+</html>

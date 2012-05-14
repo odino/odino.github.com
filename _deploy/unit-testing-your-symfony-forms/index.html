@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Unit testing your symfony forms - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="Tired of slow test suites? Not enough RAM to satisfy both tests and your browser? Have you ever committed without seeing tests results because &#8220 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/unit-testing-your-symfony-forms">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Unit testing your symfony forms</a></h1>
+  <p class="article-date">
+      Monday, 01 August 2011
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>Tired of slow test suites? Not enough RAM to satisfy both tests and your browser? Have you ever committed without seeing tests results because &#8220;It 18.30!&#8221;?</p>
+
+<p>Good, this one is totally for you.</p>
+
+<!-- more -->
+
+
+<h2>The problem</h2>
+
+<p>You all know how symfony1 test suites become a problem as you have lots of tests: when I say lots, I mean 30, 40 tests, which should not be <em>that</em> huge amount of tests.</p>
+
+<p>A possible solution for this problem is not to test forms with functional tests, when you have tons of:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-&gt;click('Submit', array('form' =&gt; array('name' =&gt; 'Alessandro') ... ))
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'>
+</span><span class='line'>with('form')-&gt;begin()-&gt;
+</span><span class='line'>  hasError(true)-&gt;
+</span><span class='line'>  isError(...)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but to use unit tests.</p>
+
+<p>How could this be possible? Well, thanks to the form framework, all forms, widgets and validators are, obviously, objects, so they are easy to test as a unit.</p>
+
+<p>Let&#8217;s imagine this scenario: I want to test that a form has one and one widget only, in which the user can type multiple email addresses, separated by comma.</p>
+
+<h2>Testing the form</h2>
+
+<p>Create the empty form under <code>lib/form</code> directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MultipleMailForm</span> <span class="k">extends</span> <span class="nx">BaseForm</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s write the test, which checks that the form has 1 widget and 1 validator:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">include</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/../../bootstrap/unit.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$t</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">lime_test</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MultipleMailForm</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$ws</span> <span class="o">=</span> <span class="nv">$f</span><span class="o">-&gt;</span><span class="na">getWidgetSchema</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$vs</span> <span class="o">=</span> <span class="nv">$f</span><span class="o">-&gt;</span><span class="na">getValidatorSchema</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">isa_ok</span><span class="p">(</span><span class="nv">$ws</span><span class="p">[</span><span class="s1">&#39;email_addresses&#39;</span><span class="p">],</span> <span class="s1">&#39;sfWidgetFormInput&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">isa_ok</span><span class="p">(</span><span class="nv">$vs</span><span class="p">[</span><span class="s1">&#39;email_addresses&#39;</span><span class="p">],</span> <span class="s1">&#39;MultipleInlineEmailAddressesValidator&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$ws</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$vs</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the test ( <code>php symfony test:unit MultipleMailForm</code> ): you will se that it&#8217;s gonna fail.</p>
+
+<p>Now implement your feature:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MultipleMailForm</span> <span class="k">extends</span> <span class="nx">BaseForm</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">parent</span><span class="o">::</span><span class="na">configure</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$ws</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getWidgetSchema</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$ws</span><span class="p">[</span><span class="s1">&#39;email_addresses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sfWidgetFormInput</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$vs</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getValidatorSchema</span><span class="p">();</span>
+</span><span class='line'>    <span class="nv">$vs</span><span class="p">[</span><span class="s1">&#39;email_addresses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MultipleInlineEmailAddressesValidator</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create the validator class under lib/validator:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MultipleInlineEmailAddressesValidator</span> <span class="k">extends</span> <span class="nx">sfValidatorEmail</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you re-launch the test, a green bar will appear :)</p>
+
+<p>As you might notice, now the test isn&#8217;t meaningful: we know how many widgets/validators we have but we didn&#8217;t tested in which conditions the form is valid, which kind of data it accepts and so on.</p>
+
+<p>To do so, you have 2 things to do: first, bind the form in the test with an array of values and then check the <code>isValid()</code> method; second, test your custom validator.</p>
+
+<h2>Testing the validator</h2>
+
+<p>Create a test for the validator:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">include</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/../../bootstrap/unit.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$t</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">lime_test</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$v</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MultipleInlineEmailAddressesValidator</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">clean</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalin@mymail.com&#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">fail</span><span class="p">(</span><span class="s1">&#39;The validator accepts a single email address&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">clean</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalin@gmail.com, luca@gmail.com&#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">fail</span><span class="p">(</span><span class="s1">&#39;The validator accepts multiple email addresses&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">clean</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalin@mymail.com,luca@gmail.com&#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">fail</span><span class="p">(</span><span class="s1">&#39;The validator accepts multiple email addresses, without spaces&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">clean</span><span class="p">(</span><span class="s1">&#39; alessandro.nadalin@mymail.com ,    luca@gmail.com  &#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">fail</span><span class="p">(</span><span class="s1">&#39;The validator accepts multiple email addresses, without caring about spaces&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">clean</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalinmymail.com&#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">fail</span><span class="p">(</span><span class="s1">&#39;Exception should be raised&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">(</span><span class="s1">&#39;The validator fails if an address is wrong&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">clean</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalin@mymail.com, luca@gmail.com2&#39;</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">fail</span><span class="p">(</span><span class="s1">&#39;Exception should be raised&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">(</span><span class="s1">&#39;The validator fails if a multiple address is wrong&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which checks the validator under lots of circumstances ( single email, multiple emails, multiple emails some good some wrong, etcetera ): launching it, you should get a red bar.</p>
+
+<p>Now you can implement the validator, overriding the <code>doClean()</code> method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">protected</span> <span class="k">function</span> <span class="nf">doClean</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$addresses</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$emails</span>    <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">foreach</span> <span class="p">(</span><span class="nv">$addresses</span> <span class="k">as</span> <span class="nv">$address</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$emails</span><span class="p">[]</span> <span class="o">=</span> <span class="k">parent</span><span class="o">::</span><span class="na">doClean</span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="nv">$address</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$emails</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Green bar all the way.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-01T14:01:00+04:00" pubdate data-updated="true">Monday, 01 August 2011 at 14:01</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/symfony/'>symfony</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/news-from-the-orient-library-orientdb-query-builder-goes-out/" title="Previous Post: News from the Orient library: OrientDB query-builder goes out">&laquo; News from the Orient library: OrientDB query-builder goes out</a>
+      
+      
+        <a class="basic-alignment right" href="/behaviour-driven-development-in-php/" title="next Post: Behaviour-driven development in PHP">Behaviour-driven development in PHP &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/unit-testing-your-symfony-forms/';
+        var disqus_url = 'http://odino.org/unit-testing-your-symfony-forms/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

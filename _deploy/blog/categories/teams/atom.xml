@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: teams | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/teams/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wanna be hired? Go get yourself a blog and a github profile]]></title>
+    <link href="http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/"/>
+    <updated>2012-03-27T11:32:00+04:00</updated>
+    <id>http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile</id>
+    <content type="html"><![CDATA[<p>As part of my last days in <a href="http://dnsee.com">DNSEE</a> and first days in
+<a href="http://rocket-internet.de">Rocket</a> I'm involved in two recruitment processes
+and after the huge amount of CVs we got for DNSEE after the
+<a href="http://www.codemotion.it/">Codemotion</a> I thought it would be good to
+share some thoughts about <strong>my</strong> recruiting habits.</p>
+
+<!-- more -->
+
+
+<h2>European format</h2>
+
+<p>First of all, <strong>forget about the <a href="http://en.wikipedia.org/wiki/Europass">european CV format</a></strong>:
+it works when you want to work in a body rental Java company and want to
+be identified with a mere number (and if you want to end up like that,
+stop reading this article)<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p><img class="left" src="/images/hipster.glasses.jpg"></p>
+
+<p>Some months ago someone on Twitter was suggesting to move the CV on
+<a href="http://slideshare.net">slideshare</a>, something I really wanted to do - but
+I never took the time to do so: bare in mind that reading a CV can be
+funny at the beginning of the hiring process, but as you get tons of
+applies, it becomes - as everything - a repetitive, thus annoying,
+activity, so putting a bit of creativity on your CV will be considered
+as a huge plus; <strong>the more you attract, the less you'll be considered
+the average</strong>.</p>
+
+<p>The european format just does not work when you need to highlight
+your motivation and expertise you have on interesting practices,
+which is what I basically look for, at least for a first glance.</p>
+
+<h2>It's not where you worked unless it was The Place</h2>
+
+<p><img class="right" src="/images/virgin.jpg"></p>
+
+<p>It's pretty common to see dozens of working experiences in a CV,
+without a deep description of the position held and a summary of
+your daily duties.</p>
+
+<p>Do you think people care about <strong>where</strong> you worked or <strong>what</strong> you did?</p>
+
+<p>Unless you have been working for some major, people won't care about
+your employer because it will never add anything to your profile, it's
+just a (bad) sign that you worked for N years at this place.</p>
+
+<p>What I suggest is to <strong>add various aspects of your working experience</strong>,
+like big customers you had to deal with, good practices like TDD or
+- in general - automated test and what you brought inside the company,
+like a new approach to development or a (new) technology which was
+suitable for their use-case.</p>
+
+<h2>Ideal code VS production one</h2>
+
+<p><blockquote><p>Any developer can show you diamonds, but a few are able not to deliver crap to your customers.</p></blockquote></p>
+
+<p>Let's be honest for a moment: <strong>production code isn't ideal code</strong><sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>Technical debt is something we are used to deal with and it's not <em>that</em> big issue:
+I like when developers admit that under difficult circumstances,
+they took creepy shortcuts to overcome an issue which needed to
+be fixed in a relatively short amount of time.</p>
+
+<p>So, given that you won't show your next employer your production code
+(since it is intellectual property of your current company or customers)
+it would be nice if you show them the top line of your skiils, maybe
+via a Github profile; doing so, you give the chance to take a
+look at your best code.</p>
+
+<p><img class="right" src="/images/hand.jpg"></p>
+
+<h2>Why don't you share your thoughts with me?</h2>
+
+<p>A big plus would be reading your blog wherever - blogspot,
+posterous, etc - to gain confidence with your ideas and
+what you like to talk about when not (necessarily) coding
+for your current company.</p>
+
+<p>Blogging, also once in a month, gives you the possibility
+to be evaluated without the need to do anything: reading your
+posts will make recruiters get in touch with you, as a person,
+your style, coding skills, aims and so on.</p>
+
+<h2>MS Excel, really?</h2>
+
+<p>Please stop mentioning know-how on the following subjects:</p>
+
+<ul>
+<li>MS Word</li>
+<li>MS Excel</li>
+<li>Photoshop</li>
+<li>Dreamweaver</li>
+<li><em>stuff like that</em></li>
+</ul>
+
+
+<p>because they will make you look like <strong>a developer who doesn't understand
+its precise scope</strong>.</p>
+
+<h2>So what?</h2>
+
+<p>Do I have to mention that I would like to see great people joining me
+and <a href="http://www.linkedin.com/company/rocket-internet-gmbh/careers">Rocket</a>
+in Dubai or my former <a href="http://www.linkedin.com/company/dnsee/careers">DNSEE colleagues</a>
+in Rome?</p>
+
+<p>I did it :)</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>I give this advice although I have an Europass CV, but - as I like to say - it's a raped-european-format CV, so not as standard as you might think <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Since production code has a deadline and ideal code is a never-ending refactoring, I won't listen to any objection here <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to argue with junior and stubborn developers]]></title>
+    <link href="http://odino.org/how-to-argue-with-junior-and-stubborn-developers/"/>
+    <updated>2012-02-23T12:00:00+04:00</updated>
+    <id>http://odino.org/how-to-argue-with-junior-and-stubborn-developers</id>
+    <content type="html"><![CDATA[<p>In these days I had a nice chat with
+<a href="http://www.linkedin.com/in/gogebakan">Önder Göğebakan</a> to exchange
+some views about <strong>team leading</strong>: one of the points I loved to face
+was how to deal with arrogant coders that <strong>don't want to consider
+the indications received from their technical lead</strong>.</p>
+
+<!-- more -->
+
+
+<h2>Pulling responsabilites is not that bad</h2>
+
+<p>It makes no difference the reason why the developers is going against your
+opinion/advice/dictation: it may be due to inexperience or attitude, and this
+is not <em>that</em> bad.</p>
+
+<p><img class="right" src="/images/rooster.jpg"></p>
+
+<p>A developer which pulls responsabilities shows a good attitude, as it
+demonstrates that he wants to take a decision based on different variables
+evaluated differently than you: passive coders<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> are just a bad
+smell within your organization, because they won't ever be as productive
+as you might need; don't get me wrong on this: <strong>passive developers are
+a valuable asset</strong>, as you can't rely on a team of cocks, but you
+shouldn't hire too many passives, since, in a team of 4~6 people there
+will be room for 1, maybe 2, washermen.</p>
+
+<p>Push systems are just a bad idea: if you throw duties and responsabilities
+to your developers they won't feel comfortable with them and will suddenly
+fear the assigned tasks; make a developer pull his responsabilities and you
+will be able to work in a strongy energized, motivated, self aware and
+fast growing team<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>If you will ever be in troubles when a proactive developer go against
+your decision, I want to share with you a few thoughts on that.</p>
+
+<h2>Use exampl...your experience</h2>
+
+<p>Being a CTO, team leader, technical fellow or whatever, you gained
+so much experience from your previous "developer's years" that you have
+an unvaluable knowledge about problem solving, and when I say
+unvaluable I mean that there's no inexperienced brain that could
+overcome a seasoned veteran.</p>
+
+<p><img class="left" src="/images/jordan.jpg"></p>
+
+<p>Think about the way you solved that technical problem earlier in your
+career and start adding examples to your cause: don't pretend to
+think that this new problem "it's just the same I saw in <code>some company</code>
+back in 2001", because the developer will think that your are
+just scratching the surface of the issue and will look at you
+with no trust.</p>
+
+<p>When Michael Jordan got back into the NBA for the second time,
+with the partially self-owned team of the Washington Wizards,
+he was 38, and wasn't able to provide the physical strength,
+speed and responsiveness that he had back on his 20s.</p>
+
+<p>Although all of this, the great thing that Mike did was to <strong>take
+advantage of his experience</strong> to overcome youger players and
+rough defenders: without a fully-supporting body, he was able to
+perform great games, with a
+<a href="http://www.basketball-reference.com/boxscores/200112290WAS.html">51-points legendary performance</a>
+against the Charlotte Hornets, just to mention one episode.</p>
+
+<p>At 38.</p>
+
+<p>Don't think your technical knowledge will be as exhaustive as
+during your full-development period, but take advantage of the
+situations occurred during those valuable years.</p>
+
+<h2>Approach the problem from different points of view</h2>
+
+<p><img class="right" src="/images/sheldon.board.jpg"></p>
+
+<p><a href="http://en.wikipedia.org/wiki/Sheldon_Cooper">Sheldon Cooper</a>
+has a huge problem in his life: he's not open to
+look at the situations he faces from perspectives different
+from his own one.</p>
+
+<p>This makes impossible, for him, to solve decisional problems
+taking different looks, from different point of views: one
+aspect of your job is to provide different solutions to the
+same problem instead.</p>
+
+<p>Solutions may be incomplete, or may be not suitable for the
+developer against you, but will help you in gaining trust when
+explaining your points: someone stucked to his view may be
+considered stubborn and not qualificated, but if you are able
+to <strong>provide different pros and cons to different solutions</strong>
+you will get respect from the person at the other side of
+the argument, as you will be recognized not as a firm
+believer, but as a thinker.</p>
+
+<h2>Make spikes</h2>
+
+<p>It may sound inefficient, but spikes are a good way to bring your
+result home: you are not meant to directly write a spike for a
+<em>use case</em> but you should <strong>encourage the counterpart to start
+writing small and rough pieces of code</strong> to test if some of the
+solutions he thiks are gonna work seem to be working fine.</p>
+
+<p><img class="left" src="/images/lego.technic.jpg"></p>
+
+<p>This makes the developer feel that he's  gaining trust from you,
+as he is allowed to actually spend some billable time on his
+implementation, but as some problem comes out ask him how to
+solve it: a good developer may immediately find that he was wrong
+about it, so your problem is solved; if he keeps trying to follow
+this deadly way - maybe for <a href="http://c2.com/cgi/wiki?CowboyCoder">pride</a>
+- just move at the subsequent step, which means making the
+developer recognise he needs help.</p>
+
+<p>Bear in mind that whenever you decide to make a spike, something
+practical actually happens, and it could turn out that the
+implementation you were criticizing may accomplish its duty:
+since no one is perfect prepare your words to congratulate with
+the developer and thank him for the good approach, <strong>without
+feeling embarassed</strong>.</p>
+
+<p><img class="right" src="/images/socrates.gif"></p>
+
+<h2>Consolidate doubts</h2>
+
+<p>With a <a href="http://en.wikipedia.org/wiki/Socratic_method">socratic approach</a>,
+as you see that he is developing some spikes but <strong>comes to
+unacceptable endpoints</strong>, start smashing his beliefs pointing
+out the flaws his design has, the possible problems that you are
+going to face and the limitations that this piece of code will
+bring to his direct components - just to mention a few possible
+type of problems.</p>
+
+<p>I strongly recommend you to read
+<a href="http://en.wikipedia.org/wiki/The_Republic_(Plato)">The Republic</a>,
+by Plato, to understand how the socratic approach works in
+practice: it's a really good practice to <strong>rely on ancient wisdom</strong>
+to solve inter-people issues, as this kind of knowledge is
+transversal to any kind of context.</p>
+
+<h2>Give trust, feed the monster and save him before death</h2>
+
+<p>May 8, 1970: <a href="http://en.wikipedia.org/wiki/Willis_Reed">Willis Reed</a>,
+captain and leader of the
+<a href="http://www.nba.com/knicks/">New York Knickerbockers</a> is
+injured, and the Knicks need to defeat the Los Angeles Lakers
+in game 7 (last game of a 3-3 tied series) to become NBA champions.</p>
+
+<p><img class="right" src="/images/walt.frazier.jpg"></p>
+
+<p>Willis starts the game, sinks down the first two points for New York
+with a perimetral shot and, well, then he stops there.</p>
+
+<p>Your developer is Reed: he's under pressure, feels he can't solve
+the situation but dramatically tries not to drown; <strong>there comes Walt</strong>.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Walt_Frazier">Walt Frazier</a> is a
+tiny little point guard, a decent scorer: he's facing
+LA's <a href="http://en.wikipedia.org/wiki/Jerry_West">Jerry West</a>, one of the
+legends of the NBA, named Mr. Clutch due to his ability to stay
+focused and sink shots in high-pressure conditions.</p>
+
+<p>Walt does not care: inspired by his captain, he puts together an awesome
+performance, scoring 36 points, serving 19 assists and stealing several
+balls from West's hands.</p>
+
+<p>Now it's time - for you - to play as Walt 'Clyde' Frazier: as the developer
+is drowning down you need to come there, <strong>give him the advices</strong> to fix his
+implementation and to get out of that situation, <strong>pair with him</strong> and make
+him feel that <strong>you could also be in that situation</strong>, it's not such a big
+problem: doing this he will firmly listen to you, as you are leading
+him out of troubles, the best way to gain respect from others.</p>
+
+<h2>Gain trust</h2>
+
+<p>The key to lead a team is gain trust from its components: it is rarely acceptable
+that a team leader could lead his team with a cocky behaviour, so you are
+going to fail if your only aim is to do <strong>people management</strong>, and not team
+leading.</p>
+
+<p>Letting people pull responsabilities, giving them trust, analyzing with the
+team the problems which may occur after a decision (an implementation, or
+the change of a process), involving everyone in your job.</p>
+
+<p>As I like to state:</p>
+
+<p><blockquote><p>Great leaders let other leaders emerge.</p></blockquote></p>
+
+<h2>Be humble and step back</h2>
+
+<p>What if you were wrong? It may happen, and it's perfectly acceptable:
+don't be rude when supporting your ideas, because as it turns out
+that you were wrong, this may harm your position.</p>
+
+<p>If you sell yourself as a humble guy, you will get the trust of your
+team, because <strong>they will recognize you as a wise guide</strong>, not a tyrant.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Monkeys <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Worth to mention, the recruiting process plays a big role in this process <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

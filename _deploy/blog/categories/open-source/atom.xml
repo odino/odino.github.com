@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: open source | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/open-source/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Back in track with OrientDB]]></title>
+    <link href="http://odino.org/back-in-track-with-orientdb/"/>
+    <updated>2012-04-20T15:26:00+04:00</updated>
+    <id>http://odino.org/back-in-track-with-orientdb</id>
+    <content type="html"><![CDATA[<p>It's been a while since I don't release any update about
+Orient, the PHP data mapper for OrientDB: we recently got
+back on track and I have a few interesting news.</p>
+
+<!-- more -->
+
+
+<p>I just moved to Dubai, as you may know, so the last couple
+of months have been a huge mess for me, while David was
+doing some <a href="https://github.com/congow/Orient/tree/persistence">major experiments</a>
+for the library: we only had the time, at the end of March,
+to talk about OrientDB and the ODM at the
+<a href="http://www.slideshare.net/ingdavidino/graph-db-inphp">Codemotion</a>.</p>
+
+<p>Since in the last week we restarted pairing together to
+finalize a few open things in the library, I will explain what
+is the current status of Orient.</p>
+
+<h2>Beta-5</h2>
+
+<p>We decided to put back our effort on the <code>beta-5</code> release,
+instead of letting me complete the issues still belonging
+to this version by myself.</p>
+
+<p>In these days we are finalizing the integration tests for
+OrientDB's native data types, and refactoring a bit the
+implementation of the <strong>hydration mechanism</strong>, which will be more
+configurable: we will release an ODM able to let the developer
+decide what to do when an hydration error occurs (in other words,
+you mapped an attribute as integer but in the OrientDB record
+that attribute is mistakenly set as a date): before this
+refactoring process <code>null</code> was returned by default, but now
+you'll be able to decide whether to <a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Formatter/Caster.php#L520">force the casting or raise an exception</a> for these errors.</p>
+
+<p>As we complete these 2 tasks, we will remove the TODOs from
+the codebase and then we will release this version which,
+I remind it for those who are not up-2-date with the library's
+lifecycle, is the one introducing <strong>hydration</strong>, which is the
+ability to run SQL queries against an OrientDB instance and map
+the results as PHP objects.</p>
+
+<p>Similarly to Doctrine2, Orient offers the ability to map objects
+from PHP to OrientDB via annotations:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Congow\Orient\ODM\Mapper\Annotations as ODM;</p>
+
+<p>/<em>*
+* @ODM\Document(class="Address")
+</em>/
+class Address
+{</p>
+
+<pre><code>/**
+ * @ODM\Property(type="link")
+ */
+public $city;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<h2>Doctrine ODM</h2>
+
+<p>From the beginning, we've been committed in finding a way to make
+<a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Contract/Protocol/Adapter.php#L23">interoperability</a>
+a feature of Orient: another side of this issue is the fact that
+we tried to stick to Doctrine2's design for lots of our problems,
+from the implementation of mapping to lazy-loading through
+auto-generated proxy classes.</p>
+
+<p>In the last weeks I pro-actively asked the Doctrine2 community if they
+would be happy in welcoming this project in their community, and the
+responses we received were positive: as a result, after going out with
+the <code>beta-5</code> release we will refactor the library's namespaces and move
+the repository on Github.</p>
+
+<p>There will be lots of things to do, lot of code to refactor, lot of
+complaints from the Doctrine2 core members because of our "strange"
+code, but this is a huge step towards a more robust PHP library
+for OrientDB.</p>
+
+<h2>Beta-6</h2>
+
+<p>After the incubation inside the Doctrine organization we will re-start
+working on the <code>beta-6</code> version, which will bundle <strong>persistence</strong> - the
+ability to persist mapped PHP objects into OrientDB, using a couple
+well known design patterns like the <a href="http://martinfowler.com/eaaCatalog/unitOfWork.html">unit of work</a>
+and the <a href="http://martinfowler.com/eaaCatalog/identityMap.html">identity map</a>.</p>
+
+<p>I won't commit myself in an estimate: <strong>this will take a long time</strong>,
+especially if only me and <a href="http://davidfunaro.com">David</a> will keep
+the good work on this library.</p>
+
+<p>But since we had <strong>huge contributions</strong> from
+<a href="https://github.com/nrk">Daniele Alessandri</a> and
+are gonna be part of the Doctrine community, I bet we will be able to
+deliver what promised in less than then what I currently think.</p>
+
+<h2>RC</h2>
+
+<p>Last but not least, there will be a few planned refactorings and feature
+add-ons that we don't need now but are mandatory for a decent stable
+version, which will come as we roll out our first <code>RC</code>.</p>
+
+<h2>Thanks, again</h2>
+
+<p>I could not keep my effort and motivation constant during
+<a href="https://github.com/congow/Orient/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">this year</a>
+without your many "thank you", your enthusiasm and
+encouraging words: this is what makes me eager to type
+with my fat fingers new LoCs dealing with PHP and NoSQL.</p>
+
+<p>This won't be a library I wrote<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, this is something an entire
+community was waiting for and contributed to.</p>
+
+<p>So, <em>thank y'all</em>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Although I still remember the first commit on Github: I was only wearing my underwear, alone in the hall of my flat <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
+    <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
+    <updated>2012-04-16T00:38:00+04:00</updated>
+    <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>In these days we finalized the last parts of the official
+<a href="https://github.com/robowhois/robowhois-php">PHP client for the Robowhois API</a>
+, and here are the changes for the <code>0.9.0</code> version.</p>
+
+<!-- more -->
+
+
+<h2>Parts and properties API</h2>
+
+<p>As part of our job, we needed to implement the last
+2 API endpoints provided by Robowhois, <code>properties</code>
+and <code>parts</code>.</p>
+
+<p>Everything is documented in the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/README.md">README</a>
+but you can also follow the examples under the <code>sample/</code> directory:</p>
+
+<p>``` php Using the properties API
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require 'vendor/.composer/autoload.php';</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>try {</p>
+
+<pre><code>$domain = $robowhois-&gt;whoisProperties('robowhois.com');
+
+echo $domain['properties']['created_on'] . "\n";
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` php Using the parts API
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require 'vendor/.composer/autoload.php';</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>try {</p>
+
+<pre><code>$domain = $robowhois-&gt;whoisParts('robowhois.com');
+
+echo $domain['parts'][0]['body'] . "\n";
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Magic objects, behaving like arrays</h2>
+
+<p>We implemented the <code>\ArrayObject</code> interface for the objects
+returned by the API, which means that now you can access
+the results of an API call just like an array:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$account = $robowhois->account();</p>
+
+<p>// $account is an instance of Robowhois\Account
+echo sprintf('You have %d API calls left', $account['credits_remaining']);
+```</p>
+
+<p>but, for those like us who like the OO synthax, we implemented
+some magic to let you retrieve those values via getters, which
+are built <em>on-the-fly</em> thanks to PHP's <code>__call()</code> method:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>echo $account->getCreditsRemaining();
+```</p>
+
+<p>Getters are a camelized version of the array keys, and are
+built thanks to the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/composer.json#L28">Doctrine Inflector</a>.</p>
+
+<h2>Mapping the existing API</h2>
+
+<p>We renamed the methods accessing the API in order to 100% reflect
+the ones exposed by the API, also used in the
+<a href="https://github.com/robowhois/robowhois-ruby">Ruby client</a>: so now the
+<code>Robowhois\Robowhois</code> object has:</p>
+
+<ul>
+<li><code>-&gt;account()</code></li>
+<li><code>-&gt;whois()</code></li>
+<li><code>-&gt;whoisProperties()</code></li>
+<li><code>-&gt;whoisParts()</code></li>
+<li><code>-&gt;whoisRecord()</code></li>
+<li><code>-&gt;whoisAvailability()</code></li>
+</ul>
+
+
+<h2>Simplified exceptions</h2>
+
+<p>We initially added tons of exceptions but we eventually
+decide to keep the only <code>Robowhois\Exception</code> class.</p>
+
+<h2>Now?</h2>
+
+<p>Wanna retrieve WHOIS informations in PHP at a
+<a href="http://www.robowhois.com/pricing">decent price</a>?</p>
+
+<p>Start consuming the Robowhois APIs, with PHP.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A PHP library to retrieve WHOIS informations]]></title>
+    <link href="http://odino.org/a-php-library-to-retrieve-whois-informations/"/>
+    <updated>2012-02-03T03:40:00+04:00</updated>
+    <id>http://odino.org/a-php-library-to-retrieve-whois-informations</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>In this days me and my friend <a href="http://davidfunaro.com">David</a> are renewing our committment
+to <em>open source</em>: our next project is going to be an <strong>SDK for a
+WHOIS webservice</strong>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/robodomain.png"></p>
+
+<p>Last week we got in touch with Simone, the mind behind <a href="http://robodomain.com">Robodomain</a>,
+a startup delivering a really useful product, which lets you</p>
+
+<p><blockquote><p>Keep track of all your domains in one place.<br/>Check domain status, log transactions, orders and payments, store notes and enjoy our network tools.</p><footer><strong>Robodomain</strong> <cite><a href='http://robodomain.com'>Official Website</a></cite></footer></blockquote></p>
+
+<p>To be able to develop its own software (in Ruby) he started writing a <a href="http://www.ruby-whois.org/">Gem</a>
+and then realized that this kind of stuff could be useful to other people too: he decided to
+open a public API - you only need to pay a bunch of bucks to use it - and launch a new, free,
+universal WHOIS service that everyone can enjoy.</p>
+
+<p>We are taking the stage in order to develop the official <strong>PHP SDK</strong> for the webservice, so
+- along with the development of <a href="http://github.com/congow/Orient">Orient</a> - you'll read here
+about this new library in the next weeks.</p>
+
+<p>We have just kickstarted the project, designed the first interfaces, implemented a bunch of
+methods and tested them: if you are courious enough you can spot them over the internet, but
+I won't link and share what we developed until our next DevMeeting, in which we will do the
+majority of the work.</p>
+
+<p>However I want you to enjoy a preview of what you will be able to do with it (just some explanatory LOCs):</p>
+
+<p>``` php This is definitely NOT gonna be the code you'll be using, just an example of how things work now
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Http\Client;
+use Buzz\Browser;</p>
+
+<p>$robowhois = new Robowhois($apiKey, new Client(new Browser()));</p>
+
+<p>if ($robowhois->isAvailable("google.com")) {
+  echo "Hey man, go register google.com, seems that it's free!";
+} else {
+  $whois = $robodomain->whoisProperties('google.com');</p>
+
+<p>  echo "Man, you'll need to wait until " . $whois->expiresAt()->format('Y-m-d H:i:s');
+  // $whois->expiresAt() returns a \DateTime object
+}</p>
+
+<p>```</p>
+
+<p>As far as we've already done, this SDK uses Symfony2's <a href="https://github.com/symfony/HttpFoundation">HttpFoundation</a>
+and <a href="https://github.com/kriswallsmith/Buzz">Buzz</a> to properly handle
+communication with the webservice through the HTTP protocol: we are open to any suggestion, so
+if you know a very good HTTP client that could replace Buzz<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> we would be very
+glad to evaluate it.</p>
+
+<p>The standard bootstrap of the library will be also using Symfony2's <a href="https://github.com/symfony/DependencyInjection">dependency injection
+container</a>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Not Zend\Http\Client <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The current status of my work with OrientDB]]></title>
+    <link href="http://odino.org/the-current-status-of-my-work-with-orientdb/"/>
+    <updated>2011-05-24T14:09:00+04:00</updated>
+    <id>http://odino.org/the-current-status-of-my-work-with-orientdb</id>
+    <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
+
+<!-- more -->
+
+
+<p>Great news: <strong>we are compatible with the RC1 version of OrientDB</strong> ( the README on GitHub is not updated, sorry ).</p>
+
+<p>Since the RC2 snapshot has been released, I'll look if something is broken.</p>
+
+<h2>What's new?</h2>
+
+<p>As <a href="http://www.odino.org/348/the-query-builder-for-orientdb">I said</a>, the huge work for the query builder has been done: you can find it in the <code>beta-2</code> tag.</p>
+
+<p>Now we're only waiting integration tests and the resolution of <a href="http://code.google.com/p/orient/issues/detail?id=374&amp;q=quotes">a bug in OrientDB's SQL parser</a>.</p>
+
+<h2>The old stuff?</h2>
+
+<p>I fixed some links from my first post talking about <a href="http://www.odino.org/328/graph-in-php-through-orientdb">OrientDB and PHP</a>, through the binding of the library.</p>
+
+<p>If you want to use it, just use the <code>beta-1</code> tag.</p>
+
+<h2>What's coming?</h2>
+
+<p>We plan to have 4 beta releases in the next 3/4 months:</p>
+
+<ul>
+<li><code>beta-3</code>, which marks the end of the whole query builder, meaning that all the new SQL commands are integrated in the QB and integration tests are done</li>
+<li><code>beta-4</code>, where we will be able to retrieve hydrated records from a query executed with the QB: it obviously includes annotations on your domain POPOs</li>
+<li><code>beta-5</code>, in which you'll be able to manage repository classes</li>
+<li><code>beta-6</code>, when you will be able to persist records through the document manager</li>
+</ul>
+
+
+<h2>Wanna help?</h2>
+
+<p>Help would be really appreciated: not only in writing bunches of code, but also in helping with the design of the whole library; for example, I just asked in OrientDB ML questions about <a href="https://groups.google.com/d/topic/orient-database/0hPWojYPJ9Q/discussion">protocols interoperability in PHP</a>.</p>
+
+<p>Feedbacks on this kind of stuff are really welcome.</p>
+
+<h2>What's ok with this library?</h2>
+
+<p>The aim is to build a general purpose library to manage OrientDB from PHP: having loosely coupled components means that you'll be able to use the query builder to build SQL statements, or the binding to query OrientDB with raw strings through the HTTP protocol.</p>
+
+<p>Keyword: decoupling; that's why we're already thinking about <strong>interoperability</strong>.</p>
+
+<p>Anton Terekhov is building the binding for the <a href="https://github.com/AntonTerekhov/OrientDB-PHP">binary protocol</a>, so we don't want, for example, to force people to use the HTTP one, and that's why the design of the whole library is made preventing coupling between components.</p>
+
+<h2>Ah, I was forgetting about...</h2>
+
+<p>You can download the library and, with phpunit, run the tests ( the integration one, for the binding, are disabled by default, since they require a working instance of OrientDB ) with:</p>
+
+<p><code>
+phpunit --configuration=Test/PHPUnit/phpunit.xml
+</code></p>
+
+<p>from the root of the library.</p>
+
+<p>I've setup also the PHP_CodeSniffer code analysis, just run:</p>
+
+<p><code>
+chmod +x report.sh
+./report.sh
+</code></p>
+
+<p>and look into <code>log/report/index.html</code> with a browser.</p>
+]]></content>
+  </entry>
+  
+</feed>

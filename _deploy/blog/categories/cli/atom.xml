@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CLI | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/cli/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
+    <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <updated>2012-02-21T10:51:00+04:00</updated>
+    <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+	</li>
+	<li>
+		<a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+	</li>
+	<li>
+		<a href="/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+	</li>
+</ol>
+</p>
+
+<p>Today we are going to see the power of Symfony2's
+<a href="https://github.com/symfony/console">Console component</a>,
+which lets us build powerful interactive command line applications
+in pure PHP.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/installer.png"></p>
+
+<p>In this episode we are going to create an interactive shell
+able to generate new composer-based projects: we will have a
+command to define which dependencies we need and another one
+to:</p>
+
+<ul>
+<li>create the installation directory</li>
+<li>download composer</li>
+<li>generate  a <code>composer.json</code> according to the required dependencies</li>
+<li>run a <code>php composer.phar install</code> to install everything</li>
+</ul>
+
+
+<p>The approach we're going to use will be very rough and incomplete: no
+error handling, no decent abstraction, but is intended to give you a
+clue about the potentiality of the CLI tool and to show you how you can
+easily create PHP command line applications without the need to
+write too much good code.</p>
+
+<h2>Approach and installation</h2>
+
+<p>The Symfony2 Console lets use extend the <code>Console\Command\Command</code> class to
+implement your own commands, so we will add a couple custom commands, one to
+<strong>register dependencies</strong> and one to <strong>execute the installation</strong>.</p>
+
+<p>First of all, let create our own <code>composer.json</code>, to download the Console
+and <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Process</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+components:</p>
+
+<p>``` bash composer.json
+{</p>
+
+<pre><code>"require": {
+    "php": "&gt;=5.3.2",
+    "symfony/console": "2.0.10",
+    "symfony/process": "2.0.10"
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>then install everything and create your <code>installer.php</code> script which
+serves as the entry point for the console:</p>
+
+<p>``` bash installing the dependencies
+wget http://getcomposer.org/composer.phar</p>
+
+<p>php composer.phar install
+```</p>
+
+<p>``` php installer.php
+&lt;?php</p>
+
+<p>require 'vendor/.composer/autoload.php';
+require 'Command/DependencyContainer.php';
+require 'Command/Install.php';</p>
+
+<p>use Symfony\Component\Console\Shell;
+use Symfony\Component\Console\Application;</p>
+
+<p>$application            = new Application('Installer', '1.0.0-alpha');
+$dependencyContainer    = new DependencyContainer();
+$application->add($dependencyContainer);
+$application->add(new Install($dependencyContainer));
+$shell = new Shell($application);</p>
+
+<p>$shell->run();
+```</p>
+
+<p>In the <code>installer.php</code> we are instantiating a new interactive shell
+application, adding to it 2 new commands and then we run it: don't try it now,
+as the added command classes don't exist yet.</p>
+
+<h2>A container for the dependencies</h2>
+
+<p>The first custom command we are going to add is a dependency container, which is
+a convenient class storing the dependencies, like <code>symfony/yaml</code>, in an
+attribute, and exposes a <code>getDependencies()</code> method that will be used by the
+installer command to retrieve the dependencies to install.</p>
+
+<p>``` php Command/DependencyContainer.php
+&lt;?php</p>
+
+<p>use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;</p>
+
+<p>class DependencyContainer extends Command
+{</p>
+
+<pre><code>protected $dependencies = array();
+
+public function getDependencies()
+{
+    return $this-&gt;dependencies;
+}
+
+protected function execute(InputInterface $input, OutputInterface $output)
+{
+    $dialog  = $this-&gt;getHelperSet()-&gt;get('dialog');
+    $package = $dialog-&gt;ask($output, '&lt;question&gt;Please enter the name of the package you want to install&lt;/question&gt;');
+
+    if ($package) {
+        $this-&gt;dependencies[] = '"' . $package . '": "master"';
+        $output-&gt;writeln(sprintf('&lt;info&gt;Package %s was succesfully registered&lt;/info&gt;', $package));
+    } else {
+        $output-&gt;writeln('&lt;error&gt;You must insert a package name&lt;/error&gt;');   
+    }
+}
+
+protected function configure()
+{
+    $this
+        -&gt;setName('add-dependency');
+    ;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you see, the command will be called when doing a <code>add-dependency</code> from the console
+and will ask the user to prompt the dependency we wants to add; a basic check is done:</p>
+
+<p>``` php Checking for non-empty input
+&lt;?php
+...</p>
+
+<p>if ($package) {</p>
+
+<pre><code>$this-&gt;dependencies[] = '"' . $package . '": "master"';
+$output-&gt;writeln(sprintf('&lt;info&gt;Package %s was succesfully registered&lt;/info&gt;', $package));
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>$output-&gt;writeln('&lt;error&gt;You must insert a package name&lt;/error&gt;');   
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note that, for being <em>quick'n'dirty</em>, we store the dependencies in the composer way:</p>
+
+<p><code>bash
+"dependencyvendor/dependencyname": "dependencyversion"
+</code></p>
+
+<p>and we use <code>master</code> as the only version available<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>This is it: now we only need to create the command to install everything.</p>
+
+<h2>The installation command</h2>
+
+<p>The <code>Install</code> command will be called with <code>install</code> from the command line, and
+executes 4 sub-tasks to finish the installation process:</p>
+
+<ul>
+<li>create the installation directory</li>
+<li>download composer via <code>wget</code></li>
+<li>generate the <code>composer.json</code> according to the dependencies specified in the
+DependencyContainer</li>
+<li>run the composer traditional installation (<code>php composer.phar install</code>)</li>
+</ul>
+
+
+<p>This command takes a <code>DependencyContainer</code> argument in the constructor
+to extract the dependencies needed to be installed:</p>
+
+<p>``` php Command/Install.php
+&lt;?php</p>
+
+<p>use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Process\Process;</p>
+
+<p>class Install extends Command
+{</p>
+
+<pre><code>protected $installDir;
+protected $failingProcess;
+protected $dependenciesContainer;
+
+public function __construct(DependencyContainer $dependenciesContainer)
+{
+    parent::__construct();
+
+    $this-&gt;dependenciesContainer = $dependenciesContainer;
+}
+
+protected function execute(InputInterface $input, OutputInterface $output)
+{
+    if ($this-&gt;createInstallationDirectory($output)
+     &amp;&amp; $this-&gt;downloadComposer($output)
+     &amp;&amp; $this-&gt;generateJson($output)
+     &amp;&amp; $this-&gt;install($output)) {
+        $output-&gt;writeln('&lt;info&gt;MISSION ACCOMPLISHED&lt;/info&gt;');
+    } else {
+        $output-&gt;writeln('&lt;error&gt;Nasty error happened :\'-(&lt;/error&gt;');
+
+        if ($this-&gt;failingProcess instanceOf Process) {
+            $output-&gt;writeln('&lt;error&gt;%s&lt;/error&gt;', $this-&gt;failingProcess-&gt;getErrorOutput());   
+        }
+    }
+}
+
+protected function configure()
+{
+    $this
+        -&gt;setName('install')
+    ;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>as you see we execute this 4 tasks and, if an error happens, we output an error,
+otherwise a confirmation message tells the user that everything went fine.</p>
+
+<p>If a failure happens, we get the error message thanks to the <code>Process</code> method <code>getErrorOutput()</code>.</p>
+
+<p>Let's see how the tasks are implemented in this class: first of all, we need a <code>createInstallationDirectory()</code>
+method that launches a new <code>mkdir</code> process and returns a boolean value, indicating the
+successfulness of the process; before returning false, the class' internal attribute
+<code>$failingProcess</code> is updated:</p>
+
+<p>``` php
+&lt;?php
+...</p>
+
+<p>protected function createInstallationDirectory(OutputInterface $output)
+{</p>
+
+<pre><code>$dialog             = $this-&gt;getHelperSet()-&gt;get('dialog');
+$this-&gt;installDir   = $dialog-&gt;ask($output, '&lt;question&gt;Please specify a non-existing directory to start the installation&lt;/question&gt;');
+
+if (!is_dir($this-&gt;installDir)) {
+    $mkdir = new Process(sprintf('mkdir -p %s', $this-&gt;installDir));
+    $mkdir-&gt;run();
+
+    if ($mkdir-&gt;isSuccessful()) {
+        $output-&gt;writeln(sprintf('&lt;info&gt;Directory %s succesfully  created&lt;/info&gt;', $this-&gt;installDir));
+
+        return true;
+    }
+}
+
+$this-&gt;failingProcess = $mkdir;
+return false;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>As you see, the user will be asked to provide an <code>$installDir</code> in which we are going
+to execute the whole process.</p>
+
+<p>Now we need to create the <code>downloadComposer()</code> method, which uses <code>wget</code> to put <code>composer.phar</code>
+in the installation directory:</p>
+
+<p>``` php
+&lt;?php
+...</p>
+
+<p>protected function downloadComposer(OutputInterface $output)
+{</p>
+
+<pre><code>$wget = new Process(sprintf('wget getcomposer.org/composer.phar -O %s/composer.phar', $this-&gt;installDir, $this-&gt;installDir));
+$wget-&gt;run();
+
+if ($wget-&gt;isSuccessful()) {
+    $output-&gt;writeln('&lt;info&gt;Downloaded composer in the installation directory&lt;/info&gt;');
+
+    return true;
+}
+
+$this-&gt;failingProcess = $wget;
+return false;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Then we generate a <code>composer.json</code> in the installation directory:</p>
+
+<p>``` php
+&lt;?php
+...</p>
+
+<p>protected function generateJson(OutputInterface $output)
+{</p>
+
+<pre><code>$skeleton       = file_get_contents(__DIR__ . "/../composer.s");
+$dependencies   = implode(',', $this-&gt;dependenciesContainer-&gt;getDependencies());
+$skeleton       = str_replace('PLACEHOLDER', $dependencies, $skeleton);
+
+if (file_put_contents($this-&gt;installDir . "/composer.json", $skeleton)) {
+    $output-&gt;writeln('&lt;info&gt;composer.json has been generated&lt;/info&gt;');
+
+    return true;
+}
+
+return false;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note that you will need a template file to do so:</p>
+
+<p>``` bash composer.s
+{</p>
+
+<pre><code>"require": {
+    PLACEHOLDER
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The last step consists in launching a new process which runs the
+usual composer's installation process on the installation directory:</p>
+
+<p>``` php
+&lt;?php
+...</p>
+
+<p>protected function install(OutputInterface $output)
+{</p>
+
+<pre><code>$install = new Process(sprintf('cd %s &amp;&amp; php composer.phar install', $this-&gt;installDir));
+$install-&gt;run();
+
+if ($install-&gt;isSuccessful()) {
+    $output-&gt;writeln('&lt;info&gt;Packages succesfully installed&lt;/info&gt;');
+
+    return true;
+}
+
+$this-&gt;failingProcess = $install;
+return false;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is the console output for generating a new project which depends on
+<code>symfony/yaml</code> and <code>symfony/dom-crawler</code>:</p>
+
+<p><img class="center" src="/images/shell.png"></p>
+
+<p>The auto-generated <code>composer.json</code> will look like:</p>
+
+<p>``` bash
+{</p>
+
+<pre><code>"require": {
+    "symfony/yaml": "master","symfony/dom-crawler": "master"
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Conclusion</h2>
+
+<p>As said, this implementation is pretty naive and can definitely be improved:
+but with a couple classes and basic logic you are able to write a powerful
+tool that doesn't require a web frontend and runs directly from the command line
+with a pure implementation in PHP, thanks to the Symfony2 components.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>The Process component will be used to execute shell commands directly from PHP <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Tip: if you want, you can add the code to show the user another dialog to indicate the dependency version, and use master as a fallback <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

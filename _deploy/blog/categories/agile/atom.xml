@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: agile | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/agile/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Behaviour-driven development in PHP]]></title>
+    <link href="http://odino.org/behaviour-driven-development-in-php/"/>
+    <updated>2011-08-27T23:32:00+04:00</updated>
+    <id>http://odino.org/behaviour-driven-development-in-php</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a> is an established practice which goes beyond test-driven development, assuming we are working on a agile-prone environment and our requirements are expressed as user stories or something similar: although this requirement is not mandatory, <strong>BDD's power is leveraged by using stories</strong>.</p>
+
+<!-- more -->
+
+
+<p>It basically assumes that instead of focusing on tests, we should start our development process writing down <a href="http://docs.behat.org/quick_intro.html">a story that a parser can translate into a test</a> (a customer cares about features, not tests) a programmer can implement in order to verify that our software respects that story.</p>
+
+<h2>Why BDD?</h2>
+
+<p>It's a pretty unconvenient question :)</p>
+
+<p>Do you know why TDD is extremely powerful? If not, go check it on the web; if so, add to TDD the ability of <strong>writing tests in a ubiquitous language</strong>, letting the team share tests, user-stories and acceptance criteria without the pain of translating an actual story in a functional test that, for example, a customer could never understand.</p>
+
+<h2>Getting started</h2>
+
+<p>I was introduced to BDD by <a href="http://www.linkedin.com/pub/roberto-bettazzoni/2/12b/614">Roberto Bettazzoni</a> at the italian agile day 2010, during a dummy-proof session in which <a href="http://cukes.info/">cucumber</a> was used.</p>
+
+<p>Although you can use Cucumber in your PHP projects (the implementation of the tests, however, should be written in Ruby), Behat is an excellent project which brings native BDD in PHP.</p>
+
+<p>You can - and I recommend it -  <a href="http://pear.behat.org/">install it via PEAR</a>: just make sure you have all the required dependencies by running a simple</p>
+
+<p><code>
+behat
+</code></p>
+
+<p>after the installation: we had our daily WTF last week because <a href="http://mink.behat.org/">Mink</a>, a browser-emulator abstraction layer required by Behat, wasn't properly installed.</p>
+
+<h2>The integration with symfony 1.4</h2>
+
+<p>From <a href="http://www.dnsee.com/">our POV</a>, we use Behat in a pilot project written in symfony: you only need to install <a href="http://www.symfony-project.org/plugins/sfBehatPlugin">sfBehatPlugin</a> and configure the <code>behat.yml</code> file you find under <code>/config</code>:</p>
+
+<p>``` yml
+// behat.yml default config
+default:
+  paths:</p>
+
+<pre><code>features: %%BEHAT_CONFIG_PATH%%/../test/features/frontend
+</code></pre>
+
+<p>  context:</p>
+
+<pre><code>parameters:
+  base_url: ~
+</code></pre>
+
+<p>```</p>
+
+<p>and then you can run</p>
+
+<p><code>
+behat
+</code></p>
+
+<p>from the root of your symfony project: no tests, so let's write something!</p>
+
+<p>In symfony, behat's tests are located under <code>/test/features</code>, and are a <code>.feature</code> file, looking like:</p>
+
+<p>```
+Feature: US-1
+  As anonymous
+  I want to open the homepage
+  in order to know WTF this site is about</p>
+
+<p>Scenario: anonymous user reaches the site's homepage, viewing it without errors
+   Given I am on "homepage"</p>
+
+<pre><code>Then I should see "This website is about crap" in the "body" element
+ And The page loads correctly 
+</code></pre>
+
+<p>```</p>
+
+<p>So, let's examine it:</p>
+
+<ul>
+<li>this "code" should be located in the <code>/test/features/homepageOk.feature</code> file</li>
+<li>the <code>Feature</code> element defines the story you are working on (write it as it appears in your backlog)</li>
+<li>every <code>Scenario</code> block identifies possible declinations for your story (user logs in with good credentials, user tries to log in with incorrect credentials and so on)</li>
+<li>the sentences inside every scenario are the actual testers which are parsed by behat and <strong>translated in actual PHP code</strong></li>
+</ul>
+
+
+<h2>Translated in actual PHP code?</h2>
+
+<p>Yes, because you have a <code>FeatureContext</code> class in which you define some methods that are your tests' implementations: BDD frameworks usually parse your scenarios' lines generating the code you need to implement.</p>
+
+<p>Behat, for example, stores all its testers in the <code>FeatureContext</code> class, and when you write a new scenario, if Behat doesn't know its syntax, it outputs something like:</p>
+
+<p><img class="center" src="/images/behat.png"></p>
+
+<p>so you only need to <em>copy&amp;paste</em> the method in your <code>FeatureContext</code> and implement the method with your logic.</p>
+
+<p>Obviously, BDD frameworks have a set of predefined testers: you can see Behat's ones with</p>
+
+<p><code>
+behat --definitions
+</code></p>
+
+<p>you will see testers like <code>I should see [...]</code> which tests if the given text lies in the response.</p>
+
+<h2>Producing ubiquitous documentation</h2>
+
+<p>The cool thing is that, when you run your BDD test suite, you can export it in a fancy way, making it readable for every project's stakeholder:</p>
+
+<p><code>
+behat --out heyGuysReadThis.html --format html
+</code></p>
+
+<p>obtaining something like:</p>
+
+<p><img class="center" src="/images/behat-report.png"></p>
+
+<h2>I won't be exhaustive, so what's next?</h2>
+
+<p>No focus on how to use (<em>deeply</em> use) Behat here: it will be a matter of another post.</p>
+
+<p>Then we will see how to use <a href="http://capifony.org/">capifony</a> to automatically deploy your symfony applications and produce acceptance criteria tests that will be used by your QA guys in order to test your brand new deployment.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The art of agile development, my review]]></title>
+    <link href="http://odino.org/the-art-of-agile-development-my-review/"/>
+    <updated>2011-03-11T13:43:00+04:00</updated>
+    <id>http://odino.org/the-art-of-agile-development-my-review</id>
+    <content type="html"><![CDATA[<p>I've read this book 2 times, with a 2-years interlude: once when I was running my own company, a really small one, and the second time after <a href="http://www.dnsee.com/">DNSEE</a> started looking for talented developers on the market to join our team, in the middle of 2010.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/art.agile.jpg"></p>
+
+<p>In both cases there were interesting situations while reading the book: firstly I was trying to leverage my skill as a developer and PM, then I was helping a team mix together.</p>
+
+<p>The second time has been really hard, because it really took several months to me to complete it, really dunno why.</p>
+
+<p>Apart from personal thoughts, I would really like to share you some considerations about this book, a really cool one in my honest opinion.</p>
+
+<h2>This book fits very well when...</h2>
+
+<p>...you are a newcomer and want to know about agile development.</p>
+
+<p>It explains very well every transition happening during an agile-based process.</p>
+
+<p>Don't expect to read the latest from the agile universe, like Kanban or notions of LSD: this book is really focused on well-established patterns and processes and will deal with letting you master all the basics of any agile-based <em>doctrine</em>.</p>
+
+<p>This is pretty useful when you can't afford being overwhelmed by notions, a typical situation while being a newbie.</p>
+
+<h2>XP over agile</h2>
+
+<p>The whole book explains <a href="http://www.extremeprogramming.org/">extreme programming</a>, not any other single agile methodology ( like SCRUM, Crystal or whatever ).</p>
+
+<p>This is, IMHO, a pretty winning choice: XP has been widely recognized as the masterpiece - but also as the more difficult - of all the agile methodologies.</p>
+
+<p>Just to be clear: when you know how to deal with the whole team, when your teammates know their responsibilities and are used to XP, each of them will suite perfectly as a SCRUM master ( although they will probably tell you SCRUM seems cheap to them :-) ).</p>
+
+<p>That's why XP is a win-win trade while learning about the agile world.</p>
+
+<h2>General considerations</h2>
+
+<p>The book is really pragmatic and will help you in several situations: I really appreciated that, for every single change it would push you towards, it explains how you should face the change, how you should make other members of the team face it and in which manner, because of any problem, you can ( although you shoudn't ) ignore it.</p>
+
+<h2>What I didn't like</h2>
+
+<p>The only thing I disliked in the book was the chapter's organization: the usage of <em>etudes</em> and final considerations in each chapter sounded reduntant to me.</p>
+
+<p>It may be a problem with me reading it for the second time: in fact, this kind of organization was really helpful to better understand what I was reading, how to adopt it and how to guide the transition <strong>from whatever to agile</strong> the first time I read it.</p>
+
+<h2>Long-term retrospectives</h2>
+
+<p>I read it 2 times for a single reason: to reflect on how I improved myself over 2 years.</p>
+
+<p>How much of the book I introduce in my daily job and how I managed others to face my thoughs.</p>
+
+<p>I really gotta say that reading it for the second time <strong>helped me so much realizing where, and why, I failed</strong>.</p>
+
+<h2>So, is the book right for you?</h2>
+
+<p>Don't you know how to conduct a retrospective? Need to learn what timeboxed iterations are? Can't figure out why refactoring and incremental design are <em>that</em> important? Don't know why you should take decision at the <strong>last responsible moment</strong>? Are you into a team and want to understand how far did you get?</p>
+
+<p>If you can't tame these topics, sure, this book is right for you.</p>
+]]></content>
+  </entry>
+  
+</feed>

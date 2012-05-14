@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Doctrine | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/doctrine/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A CRUD with Symfony2 and Doctrine 2]]></title>
+    <link href="http://odino.org/a-crud-with-symfony2-and-doctrine-2/"/>
+    <updated>2011-02-03T12:00:00+04:00</updated>
+    <id>http://odino.org/a-crud-with-symfony2-and-doctrine-2</id>
+    <content type="html"><![CDATA[<p>A few weeks ago I've made an experiment with Symfony2 and Doctrine 2,
+creating a simple, dummy and no-purpose blog CRUD, the <a href="https://github.com/odino/BlogBundle">BlogBundle</a>.</p>
+
+<!-- more -->
+
+
+<p>As far as you want get in touch with some Sf2 syntax or concepts you
+should keep an eye on it ( it's a matter of a few minutes ): some API
+<strong>have changed or will change</strong>, but the most I've written should be able to
+explain how to do the basic stuff.</p>
+
+<p>Just to redirect you to the proper resources, I would suggest you to look at:</p>
+
+<ul>
+<li>the <a href="https://github.com/odino/BlogBundle/blob/master/Controller/PostController.php">Controller</a></li>
+<li>the <a href="https://github.com/odino/BlogBundle/blob/master/Entity/Post.php">Post</a> entity, mapped with Doctrine 2</li>
+<li>the <a href="https://github.com/odino/BlogBundle/blob/master/Form/Post.php">form</a></li>
+<li>the <a href="https://github.com/odino/BlogBundle/blob/master/Resources/config/routing.yml">routing</a>, that's definitely
+<a href="https://groups.google.com/forum/#!topic/symfony-devs/XwmSUmPp2G4">gonna change</a> in a few weeks ( I'm looking at you, ':' url parameters! )</li>
+<li>some <a href="https://github.com/odino/BlogBundle/tree/master/Resources/views/Default">views</a>
+( although I didn't used twig, my fault )</li>
+</ul>
+
+
+<p>Hope this will help somebody, it's mostly for the sake of ease learning some
+initial concepts.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Versioning other behaviours' columns with Doctrine Versionable]]></title>
+    <link href="http://odino.org/versioning-other-behaviours-columns-with-doctrine-versionable/"/>
+    <updated>2010-11-23T13:54:00+04:00</updated>
+    <id>http://odino.org/versioning-other-behaviours-columns-with-doctrine-versionable</id>
+    <content type="html"><![CDATA[<p>Using doctrine inside symfony is a relief: behaviours, particularly, can save your days.</p>
+
+<!-- more -->
+
+
+<p>The Versionable behaviour, for example, has the ability to manage versions of your model's entities.</p>
+
+<p>``` yml
+Entity:
+  actAs:</p>
+
+<pre><code>Versionable: ~
+</code></pre>
+
+<p>  columns:</p>
+
+<pre><code>name:  { type: varchar(25) }
+</code></pre>
+
+<p>```</p>
+
+<p>In this case every time you're gonna update an entity, it's name is stored in a table called <code>entity_version</code>, and your object is ready to be reverted to a previous version by simply calling:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$entity->revert(X);
+```</p>
+
+<p>where X is the revision number.</p>
+
+<p>But, but, but...</p>
+
+<p>...when using this behaviour with other behaviours you must pay attention at the order of the behaviours in your <code>schema.yml</code>.</p>
+
+<p>``` yml
+Entity:
+  actAs:</p>
+
+<pre><code>Versionable: ~
+Timestampable: ~
+</code></pre>
+
+<p>  columns:</p>
+
+<pre><code>name:  { type: varchar(25) }
+</code></pre>
+
+<p>```</p>
+
+<p>In this case we added the timestampable behaviour, another built-in behaviour which adds <code>created_at</code> and <code>updated_at</code> attributes/columns.</p>
+
+<p>But with this YML, the versioning table will not store the additional columns, because <strong>the Versionable behaviour is declared before the timestampable one</strong>, so you need to <strong>put it after all the behaviours which add columns you want to version</strong>:</p>
+
+<p>``` yml
+Entity:
+  actAs:</p>
+
+<pre><code>Timestampable: ~
+Versionable:  ~
+</code></pre>
+
+<p>  columns:</p>
+
+<pre><code>name:  { type: varchar(25) }
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Custom pagination on different models with symfony and Doctrine]]></title>
+    <link href="http://odino.org/custom-pagination-on-different-models-with-symfony-and-doctrine/"/>
+    <updated>2010-10-24T12:03:00+04:00</updated>
+    <id>http://odino.org/custom-pagination-on-different-models-with-symfony-and-doctrine</id>
+    <content type="html"><![CDATA[<p>As I <a href="http://www.google.it/search?sourceid=chrome&amp;client=ubuntu&amp;channel=cs&amp;ie=UTF-8&amp;q=sfdoctrinepager+different+models">googled</a> and <a href="http://groups.google.it/group/symfony-it/browse_thread/thread/bad5cffee14c60fb?hl=it">asked</a>, and nobody could give me a better solution, I post it, conviced that the following code is <strong>pure crap</strong>.</p>
+
+<!-- more -->
+
+
+<h2>The problem©</h2>
+
+<p>I have a cool schema, which uses both <em>column aggregation</em> and <em>concrete table inheritance</em>, and a simple search engine to develop, which needs to search the field title ( or name ) of every entity, regardless its definition.</p>
+
+<p>This means, for example, that it has to look for the <em>query</em> ( Es. "John" ) in the <code>sfGuardUser</code> model, matching the name column, and also in the <code>Post</code> model, matching the title column.</p>
+
+<p>Worthless to say, I got something like 15 tables: not <em>that</em> much, neither a couple.</p>
+
+<h2>Solution: use Lucene</h2>
+
+<p>Yes, I know: <a href="http://framework.zend.com/manual/en/zend.search.lucene.html">Lucene</a> ( or Solr ) would be the best way to do that; but I can't use it as I forced myself not to use Lucene every time I need a search engine that simple. I need to search for a <strong>single word</strong>, in 15 tables, between something like <strong>400 records</strong>.</p>
+
+<p>Lucene would swear at me if I use it for this kinda purposes.</p>
+
+<h2>Solution2: be a column-aggregation-holic</h2>
+
+<p>Another time: I can't.</p>
+
+<p>The whole schema has different and various fields so I cannot stand a <em>full-of-null</em> record set.</p>
+
+<h2>Solution3: UNIONs</h2>
+
+<p>Here's how I "solved" it, with UNIONs and a custom pagination.</p>
+
+<p><a href="http://www.alessandrolombardi.com/blog/en">Alex</a>, CTO @ DNSEE, said the drawbacks of this approach are justified by the poverty of the SE.</p>
+
+<p>Breaking the concept of <strong>fat models and thin controllers</strong>, I fulfilled my controller with the following code...</p>
+
+<h3>First step: build the UNION</h3>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$WHERE = "WHERE (title LIKE '%{$this->word}%')";</p>
+
+<p>$query = "(
+  SELECT id, title, intro, type, date FROM post $WHERE)
+UNION (
+  SELECT id, title, description, type, date FROM boats $WHERE)
+UNION (
+  SELECT id, title, intro, 'harbour', date FROM harbour $WHERE)
+...
+...
+...
+ORDER BY date DESC ";
+```</p>
+
+<h3>Execute the query</h3>
+
+<p>```php
+&lt;?php</p>
+
+<p>$this->items = Doctrine_Manager::getInstance()->getCurrentConnection()->fetchAssoc($query);
+```</p>
+
+<h2>Prepare the paginator</h2>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$count        = count($this->items);
+$page         = ( $request->getParameter('page') - 1 ) . 0;
+$this->items  = array_slice($this->items, $page, $limit);
+$this->pages  = ceil($count / $limit);
+```</p>
+
+<p>In the view you will only need to render $items and print the pagination:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>for($x = 0; $x &lt; $pages; $++)
+  ...
+  ...
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

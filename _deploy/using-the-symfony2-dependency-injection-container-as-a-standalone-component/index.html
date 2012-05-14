@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using the Symfony2 DIC as a standalone component - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="This post is part of the &#8221;Symfony2 components in your own userland&#8221; series; here is a list of all the articles contained this series: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Using the Symfony2 DIC as a standalone component</a></h1>
+  <p class="article-date">
+      Wednesday, 15 February 2012
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><ol class="aseries">
+    <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
+    <li>
+        <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+    </li>
+    <li>
+        <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+    </li>
+    <li>
+        <a href="/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+    </li>
+</ol>
+
+
+<p>The <a href="https://github.com/symfony/symfony/tree/master/src/Symfony/Component">Symfony2 components</a> are powerful libraries that you can easily integrate in your own code: in this article we will se how to integrate the <a href="https://github.com/symfony/DependencyInjection#readme">dependency injection container</a> in a <em>framework-free</em> PHP small library.</p>
+
+<!-- more -->
+
+
+<h2>Premise</h2>
+
+<p>have you ever heard about the <a href="http://en.wikipedia.org/wiki/QOTD">QOTD protocol</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>?</p>
+
+<p>It&#8217;s a <a href="http://www.ietf.org/rfc/std/std23.txt">standard</a> protocol, defined in
+<a href="http://tools.ietf.org/html/rfc865">RFC-0865</a>, for a dummy client/server interaction that allows
+a server to listen on port 17 and emit a quote in ASCII text whenever a connection
+is opened by a client.</p>
+
+<p>To give you an example, try this from the command line<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>telnet alpha.mike-r.com 17</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote><p>First love is only a little foolishness and a lot of curiosity, no <br/>really self-respecting woman would take advantage of it.</p><footer><strong>George Bernard Shaw</strong> <cite><a href='http://alpha.mike-r.com'>alpha.mike-r.com</a></cite></footer></blockquote>
+
+
+<p>So today we are going to see how to implement a QOTD script in PHP, using Symfony2&#8217;s
+DIC: the mini-library that we are going to write is dummy and really easy, so you won&#8217;t
+get lost following its flow; I won&#8217;t use any autoloader - apart for the DIC stuff - so
+the code will exactly look like the ancient PHP, the one you daily need to refactor.</p>
+
+<h2>QOTD scripts</h2>
+
+<p>We have 3 scripts that compose our small library; the first one is the entry point:</p>
+
+<figure class='code'><figcaption><span>index.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;QOTD.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$qotd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">QOTD</span><span class="p">();</span>
+</span><span class='line'><span class="k">echo</span> <span class="nv">$qotd</span><span class="o">-&gt;</span><span class="na">enchantUs</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and then the QOTD class:</p>
+
+<figure class='code'><figcaption><span>Quotes Of The Day generator class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">QOTD</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="nv">$wtfMode</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="nv">$quotes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="s2">&quot;michael jordan&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s2">&quot;Always turn a negative situation into a positive situation&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s2">&quot;I can accept failure, everyone fails at something. But I can&#39;t accept not trying&quot;</span>
+</span><span class='line'>      <span class="p">),</span>
+</span><span class='line'>      <span class="s2">&quot;Mahatma Gandhi&quot;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s2">&quot;A coward is incapable of exhibiting love; it is the prerogative of the brave&quot;</span>
+</span><span class='line'>      <span class="p">),</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$wtfMode</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wtfMode</span> <span class="o">=</span> <span class="nv">$wtfMode</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">enchantUs</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$authorQuotes</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">quotes</span><span class="p">[</span><span class="nb">array_rand</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">quotes</span><span class="p">)];</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wtfMode</span> <span class="o">===</span> <span class="k">true</span> <span class="o">&amp;&amp;</span> <span class="nb">is_int</span><span class="p">(</span><span class="nb">time</span><span class="p">(</span><span class="k">true</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s2">&quot;WTFed!!!&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="nv">$authorQuotes</span><span class="p">[</span><span class="nb">array_rand</span><span class="p">(</span><span class="nv">$authorQuotes</span><span class="p">)];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, the implementation is trivial: we have an array of <code>$quotes</code> and in the <code>enchantUs()</code>
+method we extract a random quote from that array: note that there is a boolean parameter
+- in the constructor - which enables or disables the <code>WTF mode</code>; when the mode is active, if</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">is_int</span><span class="p">(</span><span class="nb">time</span><span class="p">(</span><span class="k">true</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>is true the QOTD class will output <code>WTFed!!!</code> instead of the usual quote from <code>$quotes</code>.</p>
+
+<p>Let&#8217;s say that we also want to creare a class for Michael Jordan&#8217;s quotes:</p>
+
+<figure class='code'><figcaption><span>Michael Jordan quotes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">JordanQOTD</span> <span class="k">extends</span> <span class="nx">QOTD</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="nv">$quotes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>      <span class="s2">&quot;michael jordan&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s2">&quot;Always turn a negative situation into a positive situation&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s2">&quot;I can accept failure, everyone fails at something. But I can&#39;t accept not trying&quot;</span>
+</span><span class='line'>      <span class="p">),</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which basically restricts the <code>$quotes</code> to MJ&#8217;s ones<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>.</p>
+
+<p>If we want to change the class used to output quotes, we just need to edit the <code>index.php</code>:</p>
+
+<figure class='code'><figcaption><span>index.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;QOTD.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;JordanQOTD.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$qotd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JordanQOTD</span><span class="p">();</span>
+</span><span class='line'><span class="k">echo</span> <span class="nv">$qotd</span><span class="o">-&gt;</span><span class="na">enchantUs</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Enter Symfony2 Dependency Injection Container</h2>
+
+<p>The boss just told us that we&#8217;ll need to implement some more <em>modes</em> and lots of
+person-specific quote classes, with some other logic to decide which QOTD class
+to use and so on: your first decision is to try to parametrize the configuration
+of the QOTD &#8220;service&#8221;, using a DIC ; although the problem and its design are quite
+simple, it would be a good choice to have a single, central point to manage
+services used in your code and their configuration.</p>
+
+<p>First of all, create a <code>composer.json</code> file in the root of your project, to manage
+the dependency to the DIC:</p>
+
+<figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;symfony/dependency-injection&quot;</span>: <span class="s2">&quot;2.0.10&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then download Composer and install the DIC:</p>
+
+<figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget http://getcomposer.org/composer.phar
+</span><span class='line'>
+</span><span class='line'>php composer.phar install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can edit the <code>index.php</code> to add some configuration:</p>
+
+<figure class='code'><figcaption><span>index.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/vendor/.composer/autoload.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;QOTD.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;JordanQOTD.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require</span> <span class="s1">&#39;container.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;QOTD&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">enchantUs</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>container.php</code> uses the Symfony2 DIC to register a <code>QOTD</code> service with
+a <code>QOTD.mode</code> argument:</p>
+
+<figure class='code'><figcaption><span>configuration of the container</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;QOTD&#39;</span><span class="p">,</span> <span class="s1">&#39;%qotd.class%&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%QOTD.mode%&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;qotd.class&#39;</span><span class="p">,</span> <span class="s1">&#39;QOTD&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;QOTD.mode&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For example, we can modify the configuration to enable the WTF mode:</p>
+
+<figure class='code'><figcaption><span>enabling WTF mode</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;QOTD&#39;</span><span class="p">,</span> <span class="s1">&#39;%qotd.class%&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%QOTD.mode%&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;qotd.class&#39;</span><span class="p">,</span> <span class="s1">&#39;QOTD&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;QOTD.mode&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or to change the service class, to only output MJ&#8217;s quotes:</p>
+
+<figure class='code'><figcaption><span>changing the service class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;QOTD&#39;</span><span class="p">,</span> <span class="s1">&#39;%qotd.class%&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%QOTD.mode%&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;qotd.class&#39;</span><span class="p">,</span> <span class="s1">&#39;JordanQOTD&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;QOTD.mode&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you might understand, with a DIC it&#8217;s possible to drastically <strong>change the
+behaviour of your application</strong> editing a configuration file, with a bunch of
+additional lines of code into your own application; another great thing is that
+you can also use different &#8220;languages&#8221; to configure the DIC, for example YAML.</p>
+
+<p>To do so, add the required dependency to composer:</p>
+
+<figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;symfony/dependency-injection&quot;</span>: <span class="s2">&quot;2.0.10&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;symfony/config&quot;</span>: <span class="s2">&quot;2.0.10&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;symfony/yaml&quot;</span>: <span class="s2">&quot;2.0.10&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>php composer.phar update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then edit the <code>container.php</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\YamlFileLoader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;QOTD&#39;</span><span class="p">,</span> <span class="s1">&#39;%qotd.mode%&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%mode%&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YamlFileLoader</span><span class="p">(</span><span class="nv">$container</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="nx">__DIR__</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;container.yml&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and then configure the DIC creating a <code>container.yml</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">services:</span>
+</span><span class='line'><span class="x">  QOTD:</span>
+</span><span class='line'><span class="x">    class: QOTD</span>
+</span><span class='line'><span class="x">    arguments:</span>
+</span><span class='line'><span class="x">      mode: true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://en.wikipedia.org/wiki/INI_file">INI</a> is another - not documented in
+<a href="http://symfony.com/doc/current/book/service_container.html">Symfony2&#8217;s docs</a> - option:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\IniFileLoader</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;QOTD&#39;</span><span class="p">,</span> <span class="s1">&#39;%qotd.class%&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%qotd.mode%&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IniFileLoader</span><span class="p">(</span><span class="nv">$container</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="nx">__DIR__</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;container.ini&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="k">[parameters]</span>
+</span><span class='line'>  <span class="na">qotd.class</span> <span class="o">=</span> <span class="s">&quot;QOTD&quot;</span>
+</span><span class='line'><span class="s">  qotd.mode = 1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you go: with a few lines you have a completely working instance of the
+Symfony2 dependency injection container: organizing dependencies and services&#8217;
+instantiation becomes very easy with this kind of layer and, since its
+implementation is trivial, I recommend you to gain familiarity with this
+component.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Quote Of The Day <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>alpha-mike is the only known public service that implements QOTD protocol <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>This is not an optimal design for resolving such this kind of thing, but we&#8217;ll use it as it&#8217;s fairly simple to understand <a href='#fnref:3' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-15T20:06:00+04:00" pubdate data-updated="true">Wednesday, 15 February 2012 at 20:06</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/retrieving-raw-whois-informations-in-php/" title="Previous Post: Retrieving raw WHOIS informations in PHP">&laquo; Retrieving raw WHOIS informations in PHP</a>
+      
+      
+        <a class="basic-alignment right" href="/launching-phpunit-tests-from-a-browser-with-symfony2/" title="next Post: Launching PHPUnit tests from a browser with Symfony2">Launching PHPUnit tests from a browser with Symfony2 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/';
+        var disqus_url = 'http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: WHOIS | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/whois/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
+    <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
+    <updated>2012-04-16T00:38:00+04:00</updated>
+    <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>In these days we finalized the last parts of the official
+<a href="https://github.com/robowhois/robowhois-php">PHP client for the Robowhois API</a>
+, and here are the changes for the <code>0.9.0</code> version.</p>
+
+<!-- more -->
+
+
+<h2>Parts and properties API</h2>
+
+<p>As part of our job, we needed to implement the last
+2 API endpoints provided by Robowhois, <code>properties</code>
+and <code>parts</code>.</p>
+
+<p>Everything is documented in the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/README.md">README</a>
+but you can also follow the examples under the <code>sample/</code> directory:</p>
+
+<p>``` php Using the properties API
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require 'vendor/.composer/autoload.php';</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>try {</p>
+
+<pre><code>$domain = $robowhois-&gt;whoisProperties('robowhois.com');
+
+echo $domain['properties']['created_on'] . "\n";
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` php Using the parts API
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require 'vendor/.composer/autoload.php';</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>try {</p>
+
+<pre><code>$domain = $robowhois-&gt;whoisParts('robowhois.com');
+
+echo $domain['parts'][0]['body'] . "\n";
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Magic objects, behaving like arrays</h2>
+
+<p>We implemented the <code>\ArrayObject</code> interface for the objects
+returned by the API, which means that now you can access
+the results of an API call just like an array:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$account = $robowhois->account();</p>
+
+<p>// $account is an instance of Robowhois\Account
+echo sprintf('You have %d API calls left', $account['credits_remaining']);
+```</p>
+
+<p>but, for those like us who like the OO synthax, we implemented
+some magic to let you retrieve those values via getters, which
+are built <em>on-the-fly</em> thanks to PHP's <code>__call()</code> method:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>echo $account->getCreditsRemaining();
+```</p>
+
+<p>Getters are a camelized version of the array keys, and are
+built thanks to the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/composer.json#L28">Doctrine Inflector</a>.</p>
+
+<h2>Mapping the existing API</h2>
+
+<p>We renamed the methods accessing the API in order to 100% reflect
+the ones exposed by the API, also used in the
+<a href="https://github.com/robowhois/robowhois-ruby">Ruby client</a>: so now the
+<code>Robowhois\Robowhois</code> object has:</p>
+
+<ul>
+<li><code>-&gt;account()</code></li>
+<li><code>-&gt;whois()</code></li>
+<li><code>-&gt;whoisProperties()</code></li>
+<li><code>-&gt;whoisParts()</code></li>
+<li><code>-&gt;whoisRecord()</code></li>
+<li><code>-&gt;whoisAvailability()</code></li>
+</ul>
+
+
+<h2>Simplified exceptions</h2>
+
+<p>We initially added tons of exceptions but we eventually
+decide to keep the only <code>Robowhois\Exception</code> class.</p>
+
+<h2>Now?</h2>
+
+<p>Wanna retrieve WHOIS informations in PHP at a
+<a href="http://www.robowhois.com/pricing">decent price</a>?</p>
+
+<p>Start consuming the Robowhois APIs, with PHP.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
+    <link href="http://odino.org/checking-a-domain-s-availability-with-php/"/>
+    <updated>2012-03-20T09:49:00+04:00</updated>
+    <id>http://odino.org/checking-a-domain-s-availability-with-php</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>It's been a while I don't blog about the
+<a href="https://github.com/robowhois/robowhois-php">Robowhois PHP client</a> that I'm developing
+together with <a href="http://davidfunaro.com">David</a> so, since we recently released
+the <code>0.8.0</code> version I want to share with you what you can do with it now.</p>
+
+<!-- more -->
+
+
+<h2>Checking a domain's availability</h2>
+
+<p>The <a href="http://docs.robowhois.com/api/whois/">availability API</a> is probably the
+greatest feature of the <a href="http://www.robowhois.com/">Robowhois</a> webservice,
+letting you check for a domain's availability with a simple, uniform HTTP
+request.</p>
+
+<p>``` php Checking if google.com is available
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>if ($robowhois->isAvailable('google.com')) {
+  echo "pretty nice dream, uhm?";
+}
+```</p>
+
+<p>The opposite thing is achieved using the <code>-&gt;isRegistered()</code> method.</p>
+
+<p>You can also retrieve an array as returned from the webservice, by doing:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>if ($availability = $robowhois->whoisAvailability('google.com')) {
+  echo $availability['available'];
+  echo $availability['registered'];
+  echo $availability['daystamp'];
+}
+```</p>
+
+<h2>Retrieve informations about your account</h2>
+
+<p>A <em>must-have</em>, since you should always check how many remaining credits
+you have, the <code>account</code> API lets you retrieve some of your personal data
+from your Robowhois.com account:</p>
+
+<p>``` php Calculating how many left credits you have
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>try {</p>
+
+<pre><code>$credits = $robowhois-&gt;whoisAccount()-&gt;getCreditsRemaining();
+
+    if ($credits &gt; 100) {
+            echo "No problem fella!";
+} else {
+            echo "Time to go shopping looking for new API calls, uhm?";
+}
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Minor things</h2>
+
+<p>We also polished some code, refactored stuff and added some tests (unit and
+integration ones).</p>
+
+<p>For instance, when using the <code>record</code> API, you can retrieve the daystamp of the
+response as <code>DateTime</code> object:</p>
+
+<p>``` php retrieving the daystamp as an object or a string
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>if ($whois = $robowhois->whoisRecord('google.com')) {
+  // returns a DateTime object
+  echo $whois->getDaystamp();</p>
+
+<p>  // formats the DateTime
+  echo $whois->getDaystamp()->format('Y-m-d');</p>
+
+<p>  // returns a string
+  echo $whois->getDaystamp(true);
+}
+```</p>
+
+<p>You can download the <a href="https://github.com/robowhois/robowhois-php/tree/0.8.0">latest tag</a>
+of the library (currently <code>0.8.0</code>) and start using it: the <a href="https://github.com/robowhois/robowhois-php/blob/master/README.md">README</a>
+exhaustively explains what you can do with this small client, and some
+<a href="https://github.com/robowhois/robowhois-php/tree/master/sample">samples</a>
+are provided under the <code>sample</code> directory.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Retrieving raw WHOIS informations in PHP]]></title>
+    <link href="http://odino.org/retrieving-raw-whois-informations-in-php/"/>
+    <updated>2012-02-14T00:58:00+04:00</updated>
+    <id>http://odino.org/retrieving-raw-whois-informations-in-php</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>After something more than a week I'm back here with a first implementation of
+the PHP library I was <a href="/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
+to retrieve WHOIS informations with PHP.</p>
+
+<!-- more -->
+
+
+<p>In the first meeting I had with <a href="http://davidfunaro.com">David</a> we just setup the
+environment (Composer, PHPUnit and so on) and today we've release the
+<a href="https://github.com/robowhois/robowhois-php-client/tree/0.7.0">first tag</a>
+- 0.7.0 - of <a href="https://github.com/robowhois/robowhois-php-client">Robowhois PHP client</a>,
+a PHP library to consume <a href="http://robowhois.com">Robowhois</a> APIs.</p>
+
+<h2>Installation</h2>
+
+<p>The library is assembled with <a href="/managing-php-dependencies-with-composer/">Composer</a>,
+so you only need to follow the canonical steps in order to download the
+required dependencies and use it in your own codebase</p>
+
+<p>``` bash Installing the Robowhois PHP client from the command line
+git clone git@github.com:robowhois/robowhois-php-client.git</p>
+
+<p>wget http://getcomposer.org/composer.phar</p>
+
+<p>php composer.phar install
+```</p>
+
+<p>then you can autoload everything through the auto-generated autoloader
+provided by Composer:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>require 'vendor/.composer/autoload.php';
+```</p>
+
+<h2>Retrieving raw WHOIS responses</h2>
+
+<p>By now we have implemented the most simple API exposed, the <code>whois:index</code>
+one, which returns the raw WHOIS informations associated to a domain.</p>
+
+<p>You can take a look at the example at <code>sample/index.php</code> or try it live:</p>
+
+<p><code>php
+php sample/index.php
+</code></p>
+
+<p>bare in mind that you'll need to sign for a free API key up at Robowhois
+website (as far as I remember, they provide 500 free request, but the annual
+fee for unlimited requests is <strong>very cheap</strong>).</p>
+
+<p>You can also be a bit more creative than the example above:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require 'vendor/.composer/autoload.php';</p>
+
+<p>$robowhois = new Robowhois('INSERT-YOUR-API-KEY-HERE');</p>
+
+<p>try {</p>
+
+<pre><code>// same as $robowhois-&gt;whoisIndex(...)-&gt;getContent()
+echo $robowhois-&gt;whoisIndex('robowhois.com');
+</code></pre>
+
+<p>} catch (Exception\Http\Request\Unauthorized $e) {</p>
+
+<pre><code>echo "WTF did you used a pirated API key?!?!?!";
+</code></pre>
+
+<p>}
+} catch (Exception\Http\Response\NotFound $e) {</p>
+
+<pre><code>echo "OMG 404 happened :-|";
+</code></pre>
+
+<p>}
+} catch (Exception\Http\Response\ServerError $e) {</p>
+
+<pre><code>echo "Server too drunk to fulfill the request";
+</code></pre>
+
+<p>}
+...
+```</p>
+
+<h2>Next release</h2>
+
+<p>In the next meeting - probably next monday - we will implement the <code>account</code> API,
+used to retrieve informations about the client's account - useful for knowing how many
+remaining HTTP requests you have, the <code>whois:availability</code> API, to check whether a
+domain is available or not, and the <code>whois:record</code> API, identical to the one we
+already implemented, but returning a JSON response.</p>
+
+<p>Then... take a look at the <a href="https://github.com/robowhois/robowhois-php-client/issues">issue tracker</a>
+to stay updated about the state of the project: in the next 3 weeks we should
+be able to go out with a stable client for y'all.</p>
+]]></content>
+  </entry>
+  
+</feed>

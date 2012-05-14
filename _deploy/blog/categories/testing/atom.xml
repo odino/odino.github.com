@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: testing | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/testing/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
+    <link href="http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
+    <updated>2012-01-26T11:51:00+04:00</updated>
+    <id>http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
+    <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
+testing mechanism into symfony 1.X</a>
+: in order to make this piece of software as clean and evolvable as possible
+I just isolated it and made a small repo on Github.</p>
+
+<!-- more -->
+
+
+<h2>SfCcTesting</h2>
+
+<p><a href="https://github.com/odino/SfCcTesting">SfCcTesting</a> - <strong>Symfony 1.X
+Client-Crawler Testing</strong> - is a small library (2 classes
+and a configuration file) which lets you write functional tests, in symfony 1.X,
+<em>a là Symfony2</em>.</p>
+
+<p>if you take a look at the <a href="https://github.com/odino/SfCcTesting/blob/master/README.md">repository's README</a>
+you will find the basic instructions to start writing your tests: keep in mind
+that - although it's usable on <em>old-school</em> symfony projects (svn etc) - you
+should install it with Git and manage dependencies and updates with
+<a href="/managing-php-dependencies-with-composer/">Composer</a>.</p>
+
+<p>``` php A PHPUnit functional test for symfony 1.X written thanks to SfCcTesting
+&lt;?php</p>
+
+<p>use odino\SfCcTesting\WebTestCase;</p>
+
+<p>class HomepageTest extends WebTestCase
+{<br/>
+  public function testHelloWorld()
+  {</p>
+
+<pre><code>$client = $this-&gt;createClient();
+$crawler = $client-&gt;get('/');
+
+$this-&gt;assertEquals("Hello world", $crawler-&gt;filter('h1')-&gt;text());
+</code></pre>
+
+<p>  }</p>
+
+<p>  protected function getApplication()
+  {</p>
+
+<pre><code>return 'frontend';
+</code></pre>
+
+<p>  }</p>
+
+<p>  protected function bootstrapSymfony($app)
+  {</p>
+
+<pre><code>include(dirname(__FILE__).'/../../test/bootstrap/functional.php');
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Each test needs to implement 2 protected methods, <code>getApplication()</code> and
+<code>bootstrapSymfony()</code>.</p>
+
+<p>The <code>getApplication</code> method defines the application to bootstrap symfony for,
+and should be defined in an <code>ApplicationWebTestCase</code> class, like in the following
+example:</p>
+
+<p>``` php A base class for testing the backend
+&lt;?php</p>
+
+<p>use odino\SfCcTesting\WebTestCase;</p>
+
+<p>class BackendWebTestCase extends WebTestCase
+{  <br/>
+  protected function getApplication()
+  {</p>
+
+<pre><code>return 'backend';
+</code></pre>
+
+<p>  }</p>
+
+<p>  protected function bootstrapSymfony($app)
+  {</p>
+
+<pre><code>include(dirname(__FILE__).'/../../test/bootstrap/functional.php');
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>so your test files become leaner:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class HomepageTest extends BackendWebTestCase
+{<br/>
+  public function testHelloWorld()
+  {</p>
+
+<pre><code>$client = $this-&gt;createClient();
+$crawler = $client-&gt;get('/');
+
+$this-&gt;assertEquals("Hello world", $crawler-&gt;filter('h1')-&gt;text());
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>The <code>bootstrapSymfony()</code> method, instead, includes the <strong>bootstrap for the symfony
+application in the test environment</strong>; you are <strong>allowed to redefine the location
+of the bootstrap</strong> in order not to force you to follow a unique directory
+structure convention.</p>
+
+<p>The <code>bootstrapSymfony()</code> method should be placed in a <code>BaseWebTestCase</code> of
+our test suite:</p>
+
+<p>``` php A base class for boostrapping the symfony testing environment
+&lt;?php</p>
+
+<p>use odino\SfCcTesting\WebTestCase;</p>
+
+<p>class BaseWebTestCase extends WebTestCase
+{    <br/>
+  protected function bootstrapSymfony($app)
+  {</p>
+
+<pre><code>include(dirname(__FILE__).'/../../test/bootstrap/functional.php');
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>so your different <code>ApplicationWebTestCase</code> can share the same bootstrap file:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use odino\SfCcTesting\WebTestCase;</p>
+
+<p>class BackendWebTestCase extends BaseWebTestCase
+{  <br/>
+  protected function getApplication()
+  {</p>
+
+<pre><code>return 'backend';
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use odino\SfCcTesting\WebTestCase;</p>
+
+<p>class FrontendWebTestCase extends BaseWebTestCase
+{  <br/>
+  protected function getApplication()
+  {</p>
+
+<pre><code>return 'frontend';
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>That's all folks: with just a bunch of lines of code you are able
+to functionally test a symfony 1.X application with the Symfony2
+DomCrawler.</p>
+
+<p><a href="https://github.com/odino/SfCcTesting/issues">Feel free to rant</a> and, if you want,
+you can already rely on this small library via
+<a href="http://packagist.org/packages/odino/SfCcTesting">Packagist</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unit testing your symfony forms]]></title>
+    <link href="http://odino.org/unit-testing-your-symfony-forms/"/>
+    <updated>2011-08-01T14:01:00+04:00</updated>
+    <id>http://odino.org/unit-testing-your-symfony-forms</id>
+    <content type="html"><![CDATA[<p>Tired of slow test suites? Not enough RAM to satisfy both tests and your browser? Have you ever committed without seeing tests results because "It 18.30!"?</p>
+
+<p>Good, this one is totally for you.</p>
+
+<!-- more -->
+
+
+<h2>The problem</h2>
+
+<p>You all know how symfony1 test suites become a problem as you have lots of tests: when I say lots, I mean 30, 40 tests, which should not be <em>that</em> huge amount of tests.</p>
+
+<p>A possible solution for this problem is not to test forms with functional tests, when you have tons of:</p>
+
+<p>```
+->click('Submit', array('form' => array('name' => 'Alessandro') ... ))</p>
+
+<p>...</p>
+
+<p>with('form')->begin()->
+  hasError(true)->
+  isError(...)
+```</p>
+
+<p>but to use unit tests.</p>
+
+<p>How could this be possible? Well, thanks to the form framework, all forms, widgets and validators are, obviously, objects, so they are easy to test as a unit.</p>
+
+<p>Let's imagine this scenario: I want to test that a form has one and one widget only, in which the user can type multiple email addresses, separated by comma.</p>
+
+<h2>Testing the form</h2>
+
+<p>Create the empty form under <code>lib/form</code> directory:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class MultipleMailForm extends BaseForm
+{
+}
+```</p>
+
+<p>Let's write the test, which checks that the form has 1 widget and 1 validator:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>include(dirname(<strong>FILE</strong>).'/../../bootstrap/unit.php');
+$t = new lime_test();
+$f = new MultipleMailForm();
+$ws = $f->getWidgetSchema();
+$vs = $f->getValidatorSchema();</p>
+
+<p>$t->isa_ok($ws['email_addresses'], 'sfWidgetFormInput');
+$t->isa_ok($vs['email_addresses'], 'MultipleInlineEmailAddressesValidator');
+$t->is(1, count($ws));
+$t->is(1, count($vs));
+```</p>
+
+<p>Run the test ( <code>php symfony test:unit MultipleMailForm</code> ): you will se that it's gonna fail.</p>
+
+<p>Now implement your feature:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class MultipleMailForm extends BaseForm
+{
+  public function configure()
+  {</p>
+
+<pre><code>parent::configure();
+
+$ws = $this-&gt;getWidgetSchema();
+$ws['email_addresses'] = new sfWidgetFormInput();
+
+$vs = $this-&gt;getValidatorSchema();
+$vs['email_addresses'] = new MultipleInlineEmailAddressesValidator();
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Create the validator class under lib/validator:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class MultipleInlineEmailAddressesValidator extends sfValidatorEmail
+{
+}
+```</p>
+
+<p>If you re-launch the test, a green bar will appear :)</p>
+
+<p>As you might notice, now the test isn't meaningful: we know how many widgets/validators we have but we didn't tested in which conditions the form is valid, which kind of data it accepts and so on.</p>
+
+<p>To do so, you have 2 things to do: first, bind the form in the test with an array of values and then check the <code>isValid()</code> method; second, test your custom validator.</p>
+
+<h2>Testing the validator</h2>
+
+<p>Create a test for the validator:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>include(dirname(<strong>FILE</strong>).'/../../bootstrap/unit.php');</p>
+
+<p>$t = new lime_test();
+$v = new MultipleInlineEmailAddressesValidator();</p>
+
+<p>try
+{
+  $t->is($v->clean('alessandro.nadalin@mymail.com'), true);
+}
+catch (Exception $e)
+{
+  $t->fail('The validator accepts a single email address');
+}</p>
+
+<p>try
+{
+  $t->is($v->clean('alessandro.nadalin@gmail.com, luca@gmail.com'), true);
+}
+catch (Exception $e)
+{
+  $t->fail('The validator accepts multiple email addresses');
+}</p>
+
+<p>try
+{
+  $t->is($v->clean('alessandro.nadalin@mymail.com,luca@gmail.com'), true);
+}
+catch (Exception $e)
+{
+  $t->fail('The validator accepts multiple email addresses, without spaces');
+}</p>
+
+<p>try
+{
+  $t->is($v->clean(' alessandro.nadalin@mymail.com ,    luca@gmail.com  '), true);
+}
+catch (Exception $e)
+{
+  $t->fail('The validator accepts multiple email addresses, without caring about spaces');
+}</p>
+
+<p>try
+{
+  $t->is($v->clean('alessandro.nadalinmymail.com'), true);
+  $t->fail('Exception should be raised');
+}
+catch (Exception $e)
+{
+  $t->pass('The validator fails if an address is wrong');
+}</p>
+
+<p>try
+{
+  $t->is($v->clean('alessandro.nadalin@mymail.com, luca@gmail.com2'), true);
+  $t->fail('Exception should be raised');
+}
+catch (Exception $e)
+{
+  $t->pass('The validator fails if a multiple address is wrong');
+}
+```</p>
+
+<p>which checks the validator under lots of circumstances ( single email, multiple emails, multiple emails some good some wrong, etcetera ): launching it, you should get a red bar.</p>
+
+<p>Now you can implement the validator, overriding the <code>doClean()</code> method:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>protected function doClean($value)
+{
+  $addresses = explode(',', $value);
+  $emails    = array();</p>
+
+<p>  foreach ($addresses as $address)
+  {</p>
+
+<pre><code>$emails[] = parent::doClean(trim($address)); 
+</code></pre>
+
+<p>  }</p>
+
+<p>  return $emails;
+}
+```</p>
+
+<p>Green bar all the way.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Typing into TinyMCE with Selenium]]></title>
+    <link href="http://odino.org/typing-into-tinymce-with-selenium/"/>
+    <updated>2010-09-11T13:48:00+04:00</updated>
+    <id>http://odino.org/typing-into-tinymce-with-selenium</id>
+    <content type="html"><![CDATA[<p>Since TinyMCE has a questionable behaviour, because it creates an iframe to render the editor, SeleniumIDE has some problems with it.</p>
+
+<!-- more -->
+
+
+<p>If you record a test typing into the editor, then, when you'll run it, it will miserably fail: that's because, when recording the test, Selenium isn't able to detect that you have typed in a iframe.</p>
+
+<p>So, if your form's textarea has the <code>myTextarea</code> id, the iframe TinyMCE will output in order to enrich the textarea will have the same id, with a <code>_ifr</code> suffix.</p>
+
+<p>So you need to tell selenium to focus on that iframe:</p>
+
+<p>``` html
+<tr></p>
+
+<pre><code>&lt;td&gt;focus&lt;/td&gt;
+&lt;td&gt;myTextarea_ifr&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+</code></pre>
+
+<p></tr>
+```</p>
+
+<p>then you'll need to type into the iframe body:</p>
+
+<p>``` html
+<tr></p>
+
+<pre><code>&lt;td&gt;type&lt;/td&gt;
+&lt;td&gt;tinymce&lt;/td&gt;
+&lt;td&gt;My text into TinyMCE&lt;/td&gt;
+</code></pre>
+
+<p></tr>
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Magento and PHPUnit]]></title>
+    <link href="http://odino.org/magento-and-phpunit/"/>
+    <updated>2010-09-11T13:43:00+04:00</updated>
+    <id>http://odino.org/magento-and-phpunit</id>
+    <content type="html"><![CDATA[<p>Although there is a good <a href="http://www.magentocommerce.com/wiki/development/phpunit_integration_with_magento">tutorial about PHPunit and Magento integration</a> and I'd rather using Lime ( the symfony-integrated test engine ) here I'll show you how to set up PHPUnit tests in order to improve the QA of your Magento customizations.</p>
+
+<!-- more -->
+
+
+<p>I'm working on <strong>Ubuntu Jaunty</strong>, so a few steps might be different based on your OS: nevermind, with a bit of patience you'll be able to set up your environment correctly.</p>
+
+<p>First of all let's install <code>PHPUnit</code> from the repo:</p>
+
+<p><code>
+sudo apt-get install phpunit
+</code></p>
+
+<p>You can decide to download PHPUnit from its official website and run a single installation under a magento directory: I prefer having PHPUnit running in my whole environment because I want to test different applications, so I don't have to re-install PHPunit for all of them.</p>
+
+<p>So, now let's set up our environment:</p>
+
+<p><code>
+cd /var/www/magento/
+mkdir test
+mkdir test/unit
+cd test/unit
+sudo gedit phpunit.xml
+</code></p>
+
+<p>and here's how you need to populate the confg file <code>phpunit.xml</code>:</p>
+
+<p>``` xml
+<phpunit></p>
+
+<pre><code>&lt;testsuite name="projectname"&gt;
+    &lt;directory&gt;./&lt;/directory&gt;
+&lt;/testsuite&gt;
+</code></pre>
+
+<p></phpunit>
+```</p>
+
+<p>so now we can create directories and testfiles under <code>/var/www/magento/test/unit</code> and run them with a single command:</p>
+
+<p><code>
+phpunit --configuration phpunit.xml
+</code></p>
+
+<p>But we have no tests now! Let's create, at least, one.</p>
+
+<p>Let's assume we want to test an helper file of a custom module we created, for example a "faq" module.</p>
+
+<p><code>
+mkdir faq
+mkdir faq/helper
+cd faq/helper
+sudo gedit ProjectnameFaqHelperDataTest.php
+</code></p>
+
+<p>So we have to fill that file with the <strong>standard PHPUnit structure</strong>:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<pre><code>require_once 'PHPUnit/Framework.php';
+
+require_once '/var/www/magento/app/Mage.php';
+
+class ProjectnameFaqHelperDataTest extends PHPUnit_Framework_TestCase {
+
+    public function setUp (){
+    }
+
+}
+</code></pre>
+
+<p>?>
+```</p>
+
+<p>Now we need to populate the setup function in order to have he ability to use all Magento functions:</p>
+
+<p>```php
+&lt;?php</p>
+
+<pre><code> public function setUp (){
+
+        Mage::app('default');
+
+        $this-&gt;object = Mage::helper("heart");
+
+    }
+</code></pre>
+
+<p>```</p>
+
+<p>After this we can test the methods of our helper: for example the <code>getUrl()</code> method we've created in order to retrieve the URL of a FAQ from its id:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<pre><code> public function testGetUrl (){
+        $this-&gt;assertEquals('faq/read/id/1/',$this-&gt;object-&gt;getUrl(1));
+    }
+</code></pre>
+
+<p>```</p>
+
+<p>So now we have a test covering our fictional <code>getUrl()</code> method of the class <code>Projectname_Faq_Helper_Data</code> we've created in Magento.</p>
+
+<p>To run the test use the code I wrote some lines above:</p>
+
+<p><code>
+phpunit --configuration phpunit.xml
+</code></p>
+
+<p>If you create other directories and tesfiles under <code>test/unit</code> directory of Magento, using this command all of those will be run by PHPUnit.</p>
+
+<p>That's it!</p>
+]]></content>
+  </entry>
+  
+</feed>

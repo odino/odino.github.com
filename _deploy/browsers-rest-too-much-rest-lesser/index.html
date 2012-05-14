@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Browsers rest too much REST lesser - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="Today I asked, looking for valid replies, some guys of the Rome PUG, about cool ways to authenticate a client over a REST architecture. My &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/browsers-rest-too-much-rest-lesser">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="/">Browsers rest too much REST lesser</a></h1>
+  <p class="article-date">
+      Friday, 29 October 2010
+  </p>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/conferences">Conferences</a></li>
+  <li><a href="http://twitter.com/_odino_">Twitter</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>Today I asked, looking for valid replies, some guys of the <a href="http://roma.grusp.org/">Rome PUG</a>, about cool ways to authenticate a client over a REST architecture.</p>
+
+<!-- more -->
+
+
+<p>My constraints were:</p>
+
+<ul>
+<li>we cannot use any kind of server-side session, &#8216;cause server must be stateless</li>
+<li>we cannot use cookies, because they&#8217;re only implemented in HTTP</li>
+<li>we must think at the resource to identify as a webpage ( this seems stupid, but when I ask for authentication in REST people usually think about authentication in a webservice: no, let&#8217;s think about <strong>any</strong> authentication system, like FaceBook&#8217;s login, which has to <strong>directly interact with a human</strong> )</li>
+</ul>
+
+
+<p>and the obvious answer came out to be &#8220;client sends credentials at each request&#8221;.</p>
+
+<p>Cool? No.</p>
+
+<p>Why is this thing a crap?</p>
+
+<p>Because, nowadays, <em>that thing</em> people use to interact with the server ( the <strong>browser</strong>, the <strong>creepy browser</strong> ) is unable to handle, by itself, the authentication.</p>
+
+<p>I beg your pardon, I mean &#8220;a <strong>decent</strong> authentication&#8221;.</p>
+
+<p>Federico Galassi wrote ages ago about <a href="http://federico.galassi.net/2009/12/31/web-authentication-as-it-should-have-been/">authentication as it should be</a>: the problem that emerges - nowadays - is that browsers can handle <a href="http://en.wikipedia.org/wiki/Basic_access_authentication">Basic HTTP Authentication</a> ( or Digest one ) without letting servers customize</p>
+
+<ul>
+<li>the way the the authentication form was displayed</li>
+<li>the mechanism behind authentication</li>
+<li>the way you can switch between authenticated and non-authenticated requests</li>
+</ul>
+
+
+<h2>The ugly authentication form is not a caprice</h2>
+
+<p>Why don&#8217;t they give you the possibility to customize that ugly form?</p>
+
+<p>And, in addition, why they trigger the basic authentication after a 401, <strong>automathically</strong>?</p>
+
+<p>Because of this look, web agencies don&#8217;t like BHA.</p>
+
+<h2>The mechanism is not a caprice</h2>
+
+<p>Why only username and password?</p>
+
+<p>Why are we forcing websites to use server side authentication because of the lack of potential inside HTTP&#8217;s basic authentication?</p>
+
+<p>Keep in mind homebanking systems, where I <strong>usually login with a username, a password and a external-device-generated token</strong>.</p>
+
+<p>There&#8217;s a plethora of systems that need more than a couple params to authenticate a user.</p>
+
+<h2>Switching states</h2>
+
+<p>Last but not least, modern browsers force you to close and restart them in order to log-out from BHA. Because - awesome - they cache authentication but - aweful - they forget anonymity.</p>
+
+<h2>Authentication as it really should be</h2>
+
+<p>Client must look for a descriptive authentication-method &#8220;wiki&#8221; on the server, where the server, in any format, explains the parameters you must send to authenticate a request.</p>
+
+<p>Something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Authentication:
+</span><span class='line'>  /users:
+</span><span class='line'>    GET:  ~
+</span><span class='line'>    POST:
+</span><span class='line'>      username:
+</span><span class='line'>        string: plain
+</span><span class='line'>      password:
+</span><span class='line'>        string: md5
+</span><span class='line'>      token:
+</span><span class='line'>        integer: plain
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>( this is a YAML response )</p>
+
+<p>At last, the client must be able to communicate with the server for rendering the authentication form <strong>inside</strong> ( or outside&#8230; like a future &#8220;authentication sidebar&#8221;? ) the webpage the browser renders.</p>
+
+<p>Once compiled the form, the client should ping the server on a service which only tells the client if it has succesfully logged in ( and eventually a URL to redirect towards ).</p>
+
+<p>From now on, the user should be able to switch from authenticated and non-authenticated requests from the &#8220;authentication sidebar&#8221;.</p>
+
+<p>Browsers, let&#8217;s do this now.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+<!--      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-29T15:50:00+04:00" pubdate data-updated="true">Friday, 29 October 2010 at 15:50</time>-->
+      
+
+<span class="categories">
+  Categories: 
+  
+    <a class='category' href='/blog/categories/rest/'>REST</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="_odino_">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/mockups-of-web-authentication-the-rest-rescue/" title="Previous Post: Mockups of web authentication: the REST rescue ">&laquo; Mockups of web authentication: the REST rescue </a>
+      
+      
+        <a class="basic-alignment right" href="/amend-committing-in-svn/" title="next Post: Amend committing in SVN">Amend committing in SVN &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/browsers-rest-too-much-rest-lesser/';
+        var disqus_url = 'http://odino.org/browsers-rest-too-much-rest-lesser/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>

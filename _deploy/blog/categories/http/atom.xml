@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/http/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
+    <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
+    <updated>2012-01-27T19:27:00+04:00</updated>
+    <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
+    <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it's gaining
+its <em>momentum</em> due to a good article which explained how you should build
+your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="left" src="/images/http.png"></p>
+
+<h2>HTTP is slowly dying</h2>
+
+<p>This seems to be the conclusion that lot of people had after reading that article:
+SPDY is a newer, faster, more modern protocol and I have no problem in admitting
+that <em>a few</em> parts of the HTTP protocol need to be reviewed<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>: you
+can't simply advocate that HTTP fits <a href="http://lists.w3.org/Archives/Public/www-tag/2011Dec/0034.html">perfectly</a>
+in today's web, that's a <em>de-facto</em> issue.</p>
+
+<h2>SPDY in a nutshell</h2>
+
+<p><img class="right" src="/images/spdy.packet.png"></p>
+
+<p>SPDY is just a <strong>really good protocol implementation</strong>: it supports multiplexing,
+<strong>encourages</strong> content compression, allows servers to <strong>push notifications</strong> and
+lets you prioritize requests, just to mention the hottest features among
+<a href="http://www.chromium.org/spdy/spdy-whitepaper">others</a>.</p>
+
+<p>Amazon is currently shipping its Kindle with a browser that uses this protocol
+to communicate with EC2 instances, <a href="https://wiki.mozilla.org/Platform/Features/SPDY">Firefox 11 will support it</a>
+while - if using a google product - you may already be using SPDY<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:
+the road is long, but SPDY seems to be WWW's <em>next big thing</em>.</p>
+
+<h2>SPDY needs to love HTTP</h2>
+
+<p>Before going out there yelling at HTTP and telling everyone that SPDY will be
+the new, futuristic, what-we-were-missing web protocol I want you to consider a
+few things.</p>
+
+<p>It should not surprise you the fact that SPDY is <a href="http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft2#TOC-HTTP-Layering-over-SPDY">almost-completely</a>
+implementing <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>: <strong>the web relies on
+established semantics</strong>, clients and servers interact based on a series of
+well-known verbs, feedbacks and metadata associated to resources, that are the
+only immanent concept of the web.</p>
+
+<h2>Divide et impera: HTTP's soul is here to stay</h2>
+
+<p><blockquote><p>[We have] 10 years of implementation experience of RFC2616</p><footer><strong>Mark Nottingham</strong> <cite><a href='http://www.w3.org/2001/tag/2012/01/06-minutes#item02'>HTTP Futures and SPDY</a></cite></footer></blockquote></p>
+
+<p>You should really reconsider the HTTP protocol as 2 separate layers: its
+technical implementation and its interface.</p>
+
+<p><blockquote><p>The [HTTP] interface is designed to be efficient for large-grain [...] data transfer, optimizing for the common case of the Web.</p><footer><strong>Roy T. Fielding</strong> <cite><a href='http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_5'>The Uniform Interface</a></cite></footer></blockquote></p>
+
+<p>The technical implementation may be a little updated<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup> but its
+interface was thought to be able to let machine and humans interact with
+resources in the most open, fault-tolerant, scalable, robust way we could have
+ever thought: <strong>without relying on HTTP, SPDY would not work</strong>, not in the ancient,
+not in the modern, not even in the future web.</p>
+
+<p>HTTP 2.0 is close, and <a href="http://www.w3.org/2001/tag/2012/01/06-minutes#item02">the W3C is not blind</a>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>To be kind <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>If you are currently reading this note with Chrome/Chromium, go here: chrome://net-internals/#events&amp;q=type:SPDY_SESSION%20is:active <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Again, to be kind <a href='#fnref:3' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
+    <link href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
+    <updated>2012-01-20T14:15:00+04:00</updated>
+    <id>http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
+    <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
+had in the last months.</p>
+
+<!-- more -->
+
+
+<p>Lots of you probably know <a href="http://www.w3.org/TR/esi-lang">ESI</a>, the specification
+written by <a href="http://www.akamai.com/">Akamai</a> and <a href="http://www.oracle.com/index.html">Oracle</a>
+back in 2001.</p>
+
+<p>It basically consists in a XML dialect which lets <a href="http://en.wikipedia.org/wiki/Reverse_proxy">reverse proxies</a>
+(eg. <a href="https://www.varnish-cache.org/">Varnish</a>) cache fragments of your webpages
+in order not to hit your application for output fragments that can be re-used
+across many clients.</p>
+
+<p>``` html A webpage including an ESI tag
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+
+pile of HTML
+
+...
+
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>A <strong>really good presentation</strong> about ESI is <a href="http://www.slideshare.net/fabpot/caching-on-the-edge/99">Caching On The Edge</a>
+, by <a href="http://fabien.potencier.org/">Fabien Potencier</a>.</p>
+
+<h2>ESI's context</h2>
+
+<p>ESI is a really great technology that recently gained hype, in my ecosystem (PHP),
+thanks to the Symfony2 architecture, fully embracing the HTTP specification:
+consider that Symfony2 has <strong>no application-level caching layer</strong>, so everything
+is done with the HTTP cache, and ESI is the solution for really dynamic webpages.</p>
+
+<p>...but who's responsible of processing ESI fragments? Digging some more, an esi
+processor can be a <a href="http://rack.rubyforge.org/">middleware in your architecture</a>
+, a reverse proxy or a <a href="http://symfony.com/doc/2.0/book/http_cache.html#using-edge-side-includes">software component</a>
+; basically any kind of software implementing the ESI specification.</p>
+
+<p>But hey, all this kind of things are softwares that lie on the server side.</p>
+
+<h2>A different approch</h2>
+
+<p>I was thinking about pushing ESI to the client side:</p>
+
+<p>``` html The response retrieved with the browser would generate lots of subrequests
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>&lt;esi:include src="http://example.com/header.html" /&gt;
+&lt;esi:include src="http://example.com/navigation.html" /&gt;
+&lt;esi:include src="http://example.com/foo.html" /&gt;
+&lt;esi:include src="http://example.com/bar.html" /&gt;
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>Seems a bad idea, since, if the browser is capable to merge different fragments, retrieved
+with different HTTP requests, for assembling a really simple webpage you would
+need to hit your application much more times than with a single request, so there
+is no real need to ask for ESI support in clients, in this scenario.</p>
+
+<p>But there's a <em>real-world</em> application of ESI on the client side that should
+<strong>save lot of traffic</strong> over the internet and <strong>lot of bandwith</strong>.</p>
+
+<p><strong>Rarely-changing output fragments</strong>.</p>
+
+<p>A RCOF - sorry for this bad acronym - is everything that can be <strong>cached for
+relatively long time</strong> (talking more about days than hours), like Facebook's
+footer or your google analytics JS code.</p>
+
+<p><img class="center" src="/images/fb.footer.png"></p>
+
+<h2>The use-case</h2>
+
+<p>Why should we always transport Facebook's footer over the network?</p>
+
+<p>We don't need it: once the user landed on his profile page, as he jumps
+to other FB pages, <strong>the footer it's always the same</strong>, and <strong>should be retrieved from
+the client's cache</strong> instead of being sent over the network.</p>
+
+<p>This means that once you send your response</p>
+
+<p>``` html Your profile page
+<body></p>
+
+<pre><code>&lt;h1&gt;My Profile!&lt;/h1&gt;
+
+...
+
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p></body>
+```</p>
+
+<p>the browser makes an additional request to retrieve the footer and then, on subsequent
+requests, also <strong>on different webpages</strong>, it can use the cached fragment:</p>
+
+<p>``` html Facebook help center
+<body></p>
+
+<pre><code>&lt;h1&gt;Hi n00b, how can we help you?&lt;/h1&gt;
+
+...
+
+&lt;esi:include src="http://example.com/footer.html" /&gt;
+</code></pre>
+
+<p></body>
+```</p>
+
+<p>because it recognizes that fragment has been already retrieved once you requested
+the "Your profile" page.</p>
+
+<p>You probably don't get the great aspect of ESI on the client side, so <strong>carefully
+read the next chapter</strong>.</p>
+
+<h2>A few numbers</h2>
+
+<p>Facebook's footer is about <code>1.4k</code>:</p>
+
+<p>``` html</p>
+
+<div id="pageFooter" data-referrer="page_footer">
+    <div id="contentCurve"></div>
+    <div class="clearfix" id="footerContainer">
+        <div class="mrl lfloat" role="contentinfo">
+            <div class="fsm fwn fcg">
+                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.org/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+            </div>
+        </div>
+        <div class="navigation fsm fwn fcg" role="navigation">
+            <a href="http://www.facebook.com/facebook" accesskey="8" title="Read our blog, discover the resource center, and find job opportunities.">About</a> · <a href="http://www.facebook.com/campaign/landing.php?placement=pf&amp;campaign_id=402047449186&amp;extra_1=auto" title="Advertise on Facebook.">Advertising</a> · <a href="http://www.facebook.com/pages/create.php?ref_type=sitefooter" title="Create a Page">Create a Page</a> · <a href="http://developers.facebook.com/?ref=pf" title="Develop on our platform.">Developers</a> · <a href="http://www.facebook.com/careers/?ref=pf" title="Make your next career move to our awesome company.">Careers</a> · <a href="http://www.facebook.com/privacy/explanation" title="Learn about your privacy and Facebook.">Privacy</a> · <a href="http://www.facebook.com/legal/terms?ref=pf" accesskey="9" title="Review our terms of service.">Terms</a> · <a href="http://www.facebook.com/help/?ref=pf" accesskey="0" title="Visit our Help Center.">
+                Help
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<p>```</p>
+
+<p>while an ESI fragment is <code>0.5k</code>:</p>
+
+<p><code>xml
+&lt;esi:include src="http://facebook.com/footer" /&gt;
+</code></p>
+
+<p>Calculating how much traffic the internet needs to sustain with the 2
+approaches, traditional and ESIsh, is trivial:</p>
+
+<ul>
+<li>Facebook has something more than <a href="http://www.facebook.com/press/info.php?statistics">400M daily users</a></li>
+<li>it has <a href="http://www.alexa.com/siteinfo/facebook.com">12 pageviews per user</a></li>
+<li>retrieving the footer the traditional way, we add <code>1.5k</code> of data each users' request</li>
+<li>retrieving it with ESI, we add <code>1.5k</code> of data for the first users' request,
+<code>0.5k</code> for the consequent ones</li>
+</ul>
+
+
+<p>Then we can extrapolate some data:</p>
+
+<p>``` html Facebook daily pageviews
+daily users * avg pageviews</p>
+
+<p>400M * 12</p>
+
+<p>4800M
+```</p>
+
+<p>``` html Data traffic without client-side ESI
+daily pageviews * footer fragment weight</p>
+
+<p>4800M * 1.4k</p>
+
+<p>~6.25 terabytes
+```</p>
+
+<p>``` html Data traffic with client-side ESI
+(first requests * footer fragment weight) + ((daily pageviews - first pageviews) * ESI tag weight)</p>
+
+<p>(400M * 1.4k) + ((4800M - 400M) * 0.5k)</p>
+
+<p>~2.57 terabytes
+```</p>
+
+<p>So, just for the footer, <strong>facebook could decrease the internet traffic by 2 and a
+half terabytes <em>per day</em></strong>, just looking at its footer.</p>
+
+<p>It's obvious that <strong>this approach rewards facebook</strong> (it processes less stuff on his
+side, whether it uses a reverse proxy as gateway cache or not), ISPs and the final
+user, who's taking advantage of a (more) <strong>lean network</strong>.</p>
+
+<p>If you enlarge your vision, think about sites like Google, LinkedIN, twitter and all
+those web applications which send <strong>useless pieces of HTTP responses over the
+internet</strong>.</p>
+
+<h2>Client side ESI invalidation</h2>
+
+<p>If you are scared about invalidating this kind of cache, the solution would be
+really easy:</p>
+
+<p>``` html Facebook before updating the footer
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+
+pile of FB code
+
+...
+
+&lt;esi:include src="http://example.com/footer.html?v=1" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>``` html Facebook after updating the footer
+<html>
+  <head></p>
+
+<pre><code>...
+</code></pre>
+
+<p>  </head>
+  <body></p>
+
+<pre><code>...
+
+pile of FB code
+
+...
+
+&lt;esi:include src="http://example.com/footer.html?v=2" /&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>Note the <strong>revision change in the ESI tag</strong>, something we already, daily, use for
+managing <a href="http://muffinresearch.co.uk/archives/2008/04/08/automatic-asset-versioning-in-django/">static assets' caching</a>.</p>
+
+<h2>This is not a panacea</h2>
+
+<p>I don't wanna sound arrogant proposing this tecnique, but I would really like to
+<strong>get feedbacks about such this kind of approach</strong>: as stated, this can be a
+great plus for the global network but its <strong>limited to RCOF</strong>.</p>
+
+<p>The only aspect I haven't considered yet is the second HTTP request the browser
+needs to do to retrieve the fragment, once, parsing the response, it finds an ESI
+tag: since I really don't know how to calculate how it affects the network,
+so any kind of help would be appreciated.</p>
+
+<p>The aim of this post is to consider if <strong>browser vendors should really start thinking
+about implementing ESI processors</strong> directly in their products, for a better, faster
+and leaner web.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP saves time, saves money, saves you]]></title>
+    <link href="http://odino.org/http-saves-time-saves-money-saves-you/"/>
+    <updated>2011-09-21T10:33:00+04:00</updated>
+    <id>http://odino.org/http-saves-time-saves-money-saves-you</id>
+    <content type="html"><![CDATA[<p>It Italy, as usual, our govern is a mess when talking about <em>{insert any topic here}</em>: today's topic will be... <strong>webservices, saving money, time and providing an efficient service to the citizens</strong>.</p>
+
+<!-- more -->
+
+
+<h2>Veryfing a VAT number</h2>
+
+<p>A requirement in your projects could be to verify, when a user subscribes to your service, which is intended for business owners, his VAT number.</p>
+
+<p>The italian govern has such a service in the form of a <a href="http://www1.agenziaentrate.it/servizi/vies/vies.htm">webpage</a>, thus thought for humans: they don't offer a specific webservice but that's not a problem, as I can submit the form ( it uses GET, which is exactly meant for the purpose ) with an HTTP request. Cool.</p>
+
+<h2>Doing HTTP wrong</h2>
+
+<p>So the first thing that came to my mind was to use cURL to verify the service:</p>
+
+<p><code>bash
+curl -I -X GET http://www1.agenziaentrate.it/servizi/vies/transazione.htm -d "s=IT&amp;p=02524130305" -G
+</code></p>
+
+<p>where <code>s</code> is the country of the company and <code>p</code> its VAT number (bare in mind that the VAT number used here is wrong, as it was the one of my first company, now closed).</p>
+
+<p>Bare in mind that:</p>
+
+<p><code>bash
+GET /vats?s=IT&amp;p=02524130305
+</code></p>
+
+<p>logically equals to</p>
+
+<p><code>
+GET /vats/IT/02524130305
+</code></p>
+
+<p>The result?</p>
+
+<p><code>
+HTTP/1.1 200 OK
+Date: Wed, 21 Sep 2011 13:02:25 GMT
+Server: Apache
+X-Powered-By: PHP/4.3.11
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html
+</code></p>
+
+<p>First of all, let's try not to be angry for that <code>X-Powered-By</code> header right there: let's just ignore it :-|</p>
+
+<p>Then... Oh, wow, <code>200 OK</code>.</p>
+
+<h2>Why is this so bad?</h2>
+
+<p>At first glance, it seemed weird to me, but I tought that they, for some reasons, considered my old company's VAT number still valid, but then I realized <strong>how much noob an entire IT department can be</strong> so I started suspecting that the system was <strong>responding 200 to every request</strong>.</p>
+
+<p>Guess what, I was right.</p>
+
+<p>I repeated the cURL call omitting the <code>-I</code> option (retrieve headers only) and saw the entire response body: in a table, beautiful as the sun, <code>VAT number not found</code>.</p>
+
+<p>So, if I need to verify the existence of a VAT number with the tools provided by my govern, I need to <strong>parse an entire HTML document</strong>, <strong>look for a DOM element</strong> ( <code>table#feedback &gt; td</code> and stuff like that ), <strong>parse the resulting string</strong> and... oh, I'm already annoyed by describing the steps to do it!</p>
+
+<p>Take a look at the pseudo-code for this implementation:</p>
+
+<p>```
+vat = request.get('vat')
+vatVerifyService = new ItalianGovernVatService</p>
+
+<p>vatResponse = vatVerifyService.check(vat)</p>
+
+<p>if (vatResponse) {
+  body = varResponse.getBody()</p>
+
+<p>  // parse the body
+  // look for a DOM attribute,
+  // which will change as they update the website with a new fancy markup
+  // then evaluate the resulting string
+}
+```</p>
+
+<p>and your code if you keep HTTP in consideration:</p>
+
+<p>```
+vat = request.get('vat')
+vatVerifyService = new ItalianGovernVatService</p>
+
+<p>vatResponse = vatVerifyService.check(vat)
+// vatResponse.getCode() tells you if the VAT is good or not
+```</p>
+
+<p>Ok, this resource is not intended to be a <em>machine-consumed</em> service but:</p>
+
+<ul>
+<li>using the proper HTTP status code would have saved my time</li>
+<li>using the proper HTTP status code helps you expose a resource that, in some cases like this one, can be useful to both human-beings and computer programs, without writing any line of code, thus without wasting money</li>
+</ul>
+
+
+<p>Adapt your resources and domain application protocols to HTTP: this is the only way to save your and your consumers' money and time in the modern web.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Symfony2, HTTP cache & the good parts of both of'em]]></title>
+    <link href="http://odino.org/symfony-2-http-cache/"/>
+    <updated>2011-05-15T23:27:00+04:00</updated>
+    <id>http://odino.org/symfony-2-http-cache</id>
+    <content type="html"><![CDATA[<p>If you missed my talk about HTTP caching and Symfony2 at the PHPDay, here are the slides that I published friday.</p>
+
+<!-- more -->
+
+
+<p><div class="slideshare" id="__ss_7954490"><iframe src="http://www.slideshare.net/slideshow/embed_code/7954490 " width="800" height="720" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The current vague state of PUT and DELETE in HTML5]]></title>
+    <link href="http://odino.org/the-current-vague-state-of-put-and-delete-in-html5/"/>
+    <updated>2011-05-06T13:01:00+04:00</updated>
+    <id>http://odino.org/the-current-vague-state-of-put-and-delete-in-html5</id>
+    <content type="html"><![CDATA[<p>If you followed my <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011">REST in peace</a> presentation, you probably noted that I was <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011/180">a bit angry against HTML5</a>.</p>
+
+<!-- more -->
+
+
+<p>The story is pretty straightforward: the original working draft included also PUT and DELETE verbs in the forms' method attribute, while, one year ago, <a href="http://www.w3.org/TR/2010/WD-html5-diff-20101019/#changes-2010-06-24">an update to the draft removed them</a>.</p>
+
+<p>A month ago <a href="http://twitter.com/#!/_odino_/status/53555681088905217">I announced</a> that the working group was reconsidering its decision <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=10671#c8">after the suggestions of Mike Amundsen</a>: shortly after, we have a new proposal, which carries on the <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0259.html">management of HTTP headers in the forms</a>.</p>
+
+<p>I still don't know if the proposal will be implemented in HTML5, but imagine a world with:</p>
+
+<p>``` html HTTP headers in HTML forms
+<form action="/users/1" method="PUT"></p>
+
+<pre><code>&lt;input type="header" name="Authorization" value="BASIC"/&gt;
+&lt;input type="hidden" name="realm" value="authorized@server.example.com"/&gt;
+
+&lt;input type="text" name="username"/&gt;
+&lt;input type="email" name="username"/&gt;
+&lt;input type="password" name="password"/&gt;
+    ...
+</code></pre>
+
+<p></form>
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

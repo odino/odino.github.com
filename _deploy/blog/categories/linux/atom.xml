@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Installing and configuring Varnish on Ubuntu]]></title>
+    <link href="http://odino.org/installing-and-configuring-varnish-on-ubuntu/"/>
+    <updated>2011-02-09T02:29:00+04:00</updated>
+    <id>http://odino.org/installing-and-configuring-varnish-on-ubuntu</id>
+    <content type="html"><![CDATA[<p>On a brand new debian/*ubuntu distro, there are only a couple steps to do in order to make Varnish <del>act as a proxy</del> do its job in front of apache.</p>
+
+<!-- more -->
+
+
+<p>Installation:</p>
+
+<p><code>
+sudo apt-get install varnish
+</code></p>
+
+<p>then you need to configure it to listen to the <code>:80</code> port, editing <code>/etc/default/varnish</code>:</p>
+
+<p>```
+DAEMON_OPTS="-a :80 \</p>
+
+<pre><code>         -T localhost:6082 \
+         -f /etc/varnish/default.vcl \
+         -S /etc/varnish/secret \
+         -s file,/var/lib/varnish/$INSTANCE/varnish_storage.bin,1G"
+</code></pre>
+
+<p>```</p>
+
+<p>and telling it to forward requests to apache ( we're gonna make it listen to the <code>8090</code> ), into the <code>/etc/varnish/default.vcl</code>:</p>
+
+<p>```
+backend apache {</p>
+
+<pre><code>    .host = "127.0.0.1";
+    .port = "8090";
+</code></pre>
+
+<p>}
+sub vcl_fetch {</p>
+
+<pre><code>    remove req.http.X-Forwarded-For;
+    set    req.http.X-Forwarded-For = req.http.rlnclientipaddr;
+    return(deliver);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Then it's time to tell apache it has to listen to a new port, in <code>/etc/apache2/ports.conf</code>:</p>
+
+<p><code>
+NameVirtualHost *:8090
+Listen 127.0.0.1:8090
+</code></p>
+
+<p>Make sure the hosts in your <code>/etc/apache2/httpd.conf</code> listen to <code>:*</code> or <code>:8090</code>, then you can start the services:</p>
+
+<p><code>
+/etc/init.d/apache2 start
+/etc/init.d/varnish start
+</code></p>
+
+<p>Now you have varnish responding to all the hosts on the <code>:80</code>: if you experience some troubles try to go deeper with this <a href="http://www.howtoforge.com:8080/putting-varnish-in-front-of-apache-on-ubuntu-debian">extended guide</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tar: web.tar: Wrote only X of Y bytes]]></title>
+    <link href="http://odino.org/tar-web-tar-wrote-only-x-of-y-bytes/"/>
+    <updated>2011-02-02T12:16:00+04:00</updated>
+    <id>http://odino.org/tar-web-tar-wrote-only-x-of-y-bytes</id>
+    <content type="html"><![CDATA[<p>So you are trying to compress a directory or whatever file on your disk, probably from SSH, and experience no useful errors?</p>
+
+<!-- more -->
+
+
+<p>I <strong>really hate</strong> this kind of error reports:</p>
+
+<p><code>
+tar: web.tar: Wrote only 6144 of 10240 bytes
+tar: Error is not recoverable: exiting now
+</code></p>
+
+<p>That's <em>tar</em>.</p>
+
+<p>If you try Gzip, it will say that there's not enough disk space: but if you have no clue about that, or can't use Gzip, try a</p>
+
+<p><code>
+df -h
+</code></p>
+
+<p>to find out that it really is a disk space issue.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Pomodoro Tecnique on your Linux distro]]></title>
+    <link href="http://odino.org/the-pomodoro-tecnique-on-your-linux-distro/"/>
+    <updated>2010-11-01T13:33:00+04:00</updated>
+    <id>http://odino.org/the-pomodoro-tecnique-on-your-linux-distro</id>
+    <content type="html"><![CDATA[<p>Shortening the post - it's late and I'm tired - I've played with <a href="http://gambas.sourceforge.net/en/main.html">Gambas2</a> and its wonderful IDE in order to get in touch with Desktop development, one of those things I've always missed as a programmer.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/pomodoro.jpg"></p>
+
+<p>So, in order to solve a dilemma I've always had with my ubuntu, I started - and finished - to develop a small applet based on the Pomodoro Tecnique.</p>
+
+<p>The whole code is on GitHub.</p>
+
+<h2>How does it work?</h2>
+
+<p>You can start a 25 minutes pomodoro, which will play a click/clock ring for its entire duration.</p>
+
+<p><img class="center" src="/images/pomodoro_start.png"></p>
+
+<p>In addition, in the last minute, a bell every 15 seconds will notice the upcoming end of the pomodoro.</p>
+
+<p>After the 25 minutes the applet will "launch" a five minutes pause:</p>
+
+<p><img class="center" src="/images/pomodoro_pause.png"></p>
+
+<p>which will terminate asking you wheter to start another pomodoro or not.</p>
+
+<h2>Available packages</h2>
+
+<p>Packages are available for:</p>
+
+<ul>
+<li><a href="/downloads/pomodoro/pomodorome_1.0.2-1_all.deb">Debian</a></li>
+<li><a href="/downloads/pomodoro/pomodorome-1.0.2-1suse.noarch.rpm">openSUSE</a></li>
+<li><a href="/downloads/pomodoro/pomodorome-1.0.2-1mdv.noarch.rpm">Mandriva</a></li>
+<li><a href="/downloads/pomodoro/pomodorome-1.0.2-1.noarch.rpm">Fedora/CentOS/RedHat</a></li>
+<li><a href="/downloads/pomodoro/pomodorome-1.0.2-1.deb">Ubuntu</a></li>
+</ul>
+
+
+<p>and I also provide an <a href="/downloads/pomodoro/pomodoro_me.gambas.zip">executable</a>, for those who already have the Gambas interpreter and don't want to install the whole package.</p>
+
+<p>For Ubuntuers: the applet will be accessible from <code>Applications &gt; Office</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mysql/mysqldump: command not found on CentOS]]></title>
+    <link href="http://odino.org/mysql-mysqldump-command-not-found-on-centos/"/>
+    <updated>2010-10-13T10:42:00+04:00</updated>
+    <id>http://odino.org/mysql-mysqldump-command-not-found-on-centos</id>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<p>Not found? Try looking at:</p>
+
+<p><code>
+/usr/local/mysql/bin/
+</code></p>
+
+<p>God, I'm a real <a href="http://www.sideshowandsyrana.com/wp-content/uploads/2009/05/noob.jpg">noob</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

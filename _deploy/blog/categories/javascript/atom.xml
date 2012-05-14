@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2012-05-14T14:31:12+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iMacro: JavaScript loops with variables]]></title>
+    <link href="http://odino.org/imacro-javascript-loops-with-variables/"/>
+    <updated>2010-12-01T02:03:00+04:00</updated>
+    <id>http://odino.org/imacro-javascript-loops-with-variables</id>
+    <content type="html"><![CDATA[<p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/imacro.png"></p>
+
+<p>It can be used as a <a href="http://c2.com/cgi/wiki?FunctionalTest">functional testing</a> tool, like <a href="http://seleniumhq.org/">Selenium</a> ( although Selenium is really better ), or as a showcase/annoying operation tool.</p>
+
+<p>Today I faced it for the first time with the need to bomb URLs progressively, some bombing kinda like:</p>
+
+<p>GET /news/1
+GET /news/2
+GET /news/3
+for 16K urls¹.</p>
+
+<p>Basically, what I needed was a loop with a variable.</p>
+
+<p>Unfortunately, iMacro doesn't natively support for loops, but has bridges for any kind of language ( VBS, PHP, JavaScript... ) so I only needed to use a JS script ( which can be direcly run on iMacro's web interface):</p>
+
+<p><code>javascript
+for (i = 0; i &lt; N; i++)
+{
+  iimSet('-var_ID', i);
+  iimPlay("/home/odino/iMacros/Macros/BombingIsCool.iim");
+}
+</code></p>
+
+<p>the <code>BombingIsCoolMacro</code> simply goes to an URL with the imported variable ( ID ):</p>
+
+<p><code>bash
+URL GOTO=http://mydomain.com/news/
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
