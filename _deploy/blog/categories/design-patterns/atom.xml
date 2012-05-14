@@ -4,7 +4,7 @@
   <title><![CDATA[Category: design patterns | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/design-patterns/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2012-05-14T01:54:34+04:00</updated>
+  <updated>2012-05-14T14:29:55+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -39,7 +39,7 @@ it.</p>
     $parts = explode('::', $message);
     $level = $parts[0];
 
-    switch ($var) {
+    switch ($level) {
         case 'notice':
             ...
             break;
