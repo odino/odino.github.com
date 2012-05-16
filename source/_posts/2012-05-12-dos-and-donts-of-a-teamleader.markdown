@@ -7,6 +7,8 @@ categories: [teams]
 published: false
 ---
 
+{% img right /images/odino.young.jpg My first "Hello World", while still%nla teenager: forgot 'echo'.%nlDebugged no output for hours.|200 %}
+
 Sometimes you slowly see that month after month your job is
 changing, and after 5 years you can't even remember about the
 freshman who was writing his first "Hello World!" with
@@ -30,8 +32,6 @@ In DNSEE we didn't do actual *code reviews*, we didn't had a
 *product* and the account/PM always had the final word on
 - almost - everything: it was the world of web agencies,
 where pixels matter.
-
-{% img right /images/odino.young.jpg %}
 
 Now that things are different - pretty different, not completely -
 and there are many aspects really depending on IT,being a lead
