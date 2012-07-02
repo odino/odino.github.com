@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://odino.github.com/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://odino.github.com/"/>
-  <updated>2012-05-14T15:23:53+04:00</updated>
+  <updated>2012-07-02T14:00:09+04:00</updated>
   <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Going beyond HTTP at IPC in October]]></title>
+    <link href="http://odino.github.com/going-beyond-http-at-ipc-in-october/"/>
+    <updated>2012-07-02T13:31:00+04:00</updated>
+    <id>http://odino.github.com/going-beyond-http-at-ipc-in-october</id>
+    <content type="html"><![CDATA[<p>Just a quick one: seems that in October I'll need to travel
+all my way back to Europe to speak at the
+<a href="http://phpconference.com/">international PHP Conference</a> 2012
+in its winter edition.</p>
+
+<p>Subject? Oh, something that I <em>really</em> love:</p>
+
+<p><blockquote><p>For years we've been used to the HTTP protocol, one of the reasons behind the web's success, a protocol able to scale up to bilion of requests and beyond.<br/>But there's more we can achieve, leveraging HTTP/1.1 hidden feature, taking a look at HTTP/2.0 and SPDY, the Google-proposed new protocol which is already making web faster.</p></p><p><p>Back to the basics: what enpowers and will enpower the web?</p></blockquote></p>
+
+<p>Still to be confirmed - flights, leave days, date - but I should be able
+to make it for the first time among the germans.</p>
+
+<p>Hope to see you there!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OSIDays 2011 wrapup]]></title>
@@ -248,72 +269,6 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
 <p>Cirpo's beer spill. Amazing.</p>
 
 <p><img class="center" src="/images/beerspill.jpg"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Symfony Live 2011, my POV]]></title>
-    <link href="http://odino.github.com/symfony-live-2011-my-pov/"/>
-    <updated>2011-03-06T15:05:00+04:00</updated>
-    <id>http://odino.github.com/symfony-live-2011-my-pov</id>
-    <content type="html"><![CDATA[<p>As I have to rest after an intense week, full of conferences and sickness, I post my recap about the Symfony Live, what I liked and what I didn't.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="/images/symfony.live.jpg"></p>
-
-<p>The whole picture isn't that good but, after all, I however enjoyed the event, which has been attended by, I think, something like 500 people.</p>
-
-<p>For me, it was the first time is Paris and, generally, France, so I could also appreciate a - seems - great culture.</p>
-
-<h2>At lunch</h2>
-
-<p>We had really awful moments at lunch: in 2 days, 2 sandwiches and a catering level non that good.</p>
-
-<p>That wasn't a big problem: in such this kind of conferences what we eat is not so important, but it would give the event a real plus.</p>
-
-<h2>Fabien keynoting</h2>
-
-<p>Ah, another bad moment, and I'm not referring to the technical problem the presentation had: being there, with probably the most wanted session, with no slides, had been an awful decision.</p>
-
-<p>The whole talk has not been so involving, so I was a bit disappointed by this so expected moment.</p>
-
-<h2>The talks</h2>
-
-<p>Something went fine, something really bad: HTTP cache by Fabien was really awesome, as Twig's presentation from Ryan Weaver, but - practically - all the other speakers ( excluding a couple of minors ) weren't able to catch my attention: the level of their talks wasn't the expected one.</p>
-
-<p>This Symfony Live wasn't so technical: I tought I had the opportunity to learn far more than what I actually learned.</p>
-
-<h2>The level</h2>
-
-<p>Apart some really disappointing talks, I was pleased to have the opportunity of listening people like Wage and Weaver, and - obviously - Fabien too.</p>
-
-<p>There was a lot of quality-people at the Symfony Live, and meeting such this kind of developers is not usual.</p>
-
-<h2>Parties</h2>
-
-<p>I wasn't able to attend the first day party, nor GitHub's one the day after, but I'm pretty sure they gave the partecipants a lot of fun: it's really great that fun plays a primary role at this events.</p>
-
-<h2>The location</h2>
-
-<p>A really cool one, but everything got screwed up when we saw the rooms: a gigantic one for the first track, an awfully small one ( 30 people ) for the second track.</p>
-
-<p>I gotta admit that I renounced to follow a couple talks because there was no space in the second room!</p>
-
-<h2>Unconference</h2>
-
-<p>Although I didn't attended any talk of the unconference track I really like when this initiatives happen: really thank to Stefan Koopmanschap for the effort; my friend Jacopo had the opportunity to give a 10-minutes talk.</p>
-
-<h2>A HTML fragments specification</h2>
-
-<p>I had the opportunity to talk with Fabien for five minutes: my aim was to ask him support for one of the things I do really care a lot, a <a href="http://tech.groups.yahoo.com/group/rest-discuss/message/17357">specification for the HTML fragments media type</a>, possibly including also the ESI specification inside it.</p>
-
-<h2>Next year?</h2>
-
-<p>I don't know if I'll be at the Symfony Live 2012: it will totally depend from the schedule that will be published.</p>
-
-<p>But, after all, we all should really thank the organizers: a conference is never easy to plan and manage, and they did an awesome job since months.</p>
 ]]></content>
   </entry>
   

@@ -11,6 +11,8 @@ all my way back to Europe to speak at the
 [international PHP Conference](http://phpconference.com/) 2012
 in its winter edition.
 
+<!-- more -->
+
 Subject? Oh, something that I *really* love:
 
 {% blockquote %}
