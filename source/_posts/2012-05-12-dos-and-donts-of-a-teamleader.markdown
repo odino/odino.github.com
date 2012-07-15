@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The advent of the lead developer"
-date: 2012-05-15 02:21
+date: 2012-07-15 23:30
 comments: true
 categories: [teams]
 published: false
@@ -24,18 +24,18 @@ here at Rocket except that with the software stack that we have it's
 nearly impossible to dedicate 8 hours to coding.
 
 This is leading me to a radical change: although I'm actually doing
-the team leader since 2 years now I feel that **the time dedicated
-to coding is really gone** - I mean, when the majority of your time
-is spent on an IDE.
+the *team leader* since 2 years now I feel that **the time dedicated
+tDo coding is really gone** - I mean, when the majority of your time
+is spent on an IE.
 
 In DNSEE we didn't do actual *code reviews*, we didn't had a
 *product* and the account/PM always had the final word on
 - almost - everything: it was the world of web agencies,
-where pixels matter.
+**where pixels matter**.
 
 Now that things are different - pretty different, not completely -
 and there are many aspects really depending on IT,being a lead
-developers means renouncing to lot of coding - which is actually fine
+developer means renouncing to lot of coding - which is actually fine
 in such this kind of context.
 
 So after 5, almost 6, years working in this industry I thought that
@@ -47,6 +47,9 @@ As I like to state:
 {% blockquote %}
   [Great] leaders let other leaders emerge
 {% endblockquote %}
+
+From August I will publish one post per day with a tip I learned so far,
+hope you'll enjoy it.
 
 ## 1. Find your buddy, grow with him
 
