@@ -8,7 +8,7 @@ sharing: false
 footer: true
 ---
 
-{% img right http://www.odino.org/images/alex.jpg Me as of 2011 %}
+{% img right /images/alex.jpg Me as of 2011 %}
 
 I'm currently living in
 Dubai where I am permanently employed for [Rocket Internet](http://www.rocket-internet.de), as a lead developer.
