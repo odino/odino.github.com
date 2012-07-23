@@ -4,7 +4,7 @@ title: "Where is Agile?"
 date: 2012-07-23 20:20
 comments: true
 categories: [agile]
-published: false
+published: true
 ---
 
 I'm a pragmatic programmer, not a pragmatic agilist.
