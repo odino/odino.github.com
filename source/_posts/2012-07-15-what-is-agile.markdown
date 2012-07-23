@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Where is Agile?"
-date: 2012-07-15 23:42
+date: 2012-07-23 20:20
 comments: true
 categories: [agile]
 published: false
@@ -10,11 +10,13 @@ published: false
 I'm a pragmatic programmer, not a pragmatic agilist.
 
 If I had to be a pragmatic agilist during my career,
-I'd have been fired at least 2 times, and that's why.
+I'd have been fired several times, and that's why.
 
 <!-- more -->
 
 ## The Agile rape
+
+{% img right /images/televangelist.jpg %}
 
 We hear the word *Agile* everywhere, thanks to the fact that
 this is a concept 10 years old, brought to the public by some
@@ -22,7 +24,7 @@ of the **greatest minds in computer engineering**, who could also
 describe [interesting things](http://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420)
 other than a cool way to have more fun and be more productive at work.
 
-Let's face it: the word *Agile* has been raped over the past
+Let's face it: the word "*Agile*"" has been raped over the past
 5 years.
 This is not because it became mainstream and everyone 
 wanted to adopt it, it's because once it was about to
@@ -52,6 +54,8 @@ it seem to work: nonetheless, SCRUM is failing and will continue failing
 in preserving and communicating the legacy of the agile
 principles, values and patterns.
 
+{% img right /images/rugby-scrum.jpg %}
+
 The problem with SCRUM is not SCRUM itself, because I
 think it *may* work in some contexts, but to the way
 people interpret it and implement it in their own
@@ -78,10 +82,9 @@ Yes, the last one is a merely pure personal observation:
 still, there's no doubt about the certification itself,
 which I find pretty overestimated.
 
-(Formally) **Certifying processes that don't have formal
-approaches** is purely counter-intuitive.
-
-Sorry, agile processes are not formal{% fn_ref 2 %}.
+[Formally] **Certifying processes that don't have formal
+approaches** is purely counter-intuitive: sorry, agile
+processes are not formal{% fn_ref 2 %}.
 
 All in all the history of SCRUM and its adopters teaches
 us that a few big corporations are willing to make a step
@@ -152,6 +155,8 @@ the most credibile solutions to your problems.
 They have to be the bottleneck between a management's
 childish dreams and reality.
 
+{% img right /images/bottleneck.jpg %}
+
 Still, **agile is a bottleneck**.
 
 Be fine with it, that's why agilists tend to enpower
@@ -169,17 +174,17 @@ facebook ads for a mini-site if you dont have the right
 servers to handle the groundbreaking traffic which
 will come from ads themselves" ).
 
-I once worker in a company where the CEO thought we could
+I once worked in a company where the CEO thought we could
 do whatever technologic project people would have
 asked for: the CTO - pretty seasoned - was battling
 everyday to get this guy understand that a salesman
 cannot sell projects he doesn't know, at all - and yes,
-that salesman what that CEO{% fn_ref 5 %}.
+that salesman was the CEO{% fn_ref 5 %}.
 
 It's funny how management tend to prove itself as the
 dumbest department ever: you hire *some-area* professionals,
 you pay them lot of money, you hear what they say,
-you ignore them{% fn_ref 6 %}.
+you eventually ignore them{% fn_ref 6 %}.
 
 Results?
 
@@ -191,7 +196,7 @@ Still, **your problem with IT is you**, not IT itself.
 Now ask IT guys if they would like to work the agile way: 80%
 of them will just tell you "of course" (at least in europe).
 Now ask IT guys how many of them work in a company which
-truly promotes agile deveopment, following **both 
+truly promotes agile development, following **both 
 processes and values**: 15% of them will get back to you
 with a positive answer.
 
@@ -200,12 +205,46 @@ departments don't have the decisional power to
 make their job better, easier and safer from
 a business perspective{% fn_ref 7 %}.
 
+{% img left /images/celtics.jpeg %}
+
 ## Agile is not a reality
 
-oggigiorno cio che e' agile e' effimero, senza anima
-tutto l'agile che sentiamo e' in realta' chiacchera
-agile e' mainstream ma non e' una realta'
-agile come attacco a triangolo, ti servono gli uomini giusti e capita 6 anni su 30 di carriera (double team)
+Today I hear too many people talking about agile{% fn_ref 8 %}
+while too few organizations succesfully implement it
+in their own processes: simply, **agile is mainstream but not a
+reality**.
+
+You need the right people to truly integrate and implement
+an agile methodology, this is a simple fact, and "*the
+right people*" doesn't always mean experts, but people
+who truly believe in agile values.
+
+[Phil Jackson](http://en.wikipedia.org/wiki/Phil_Jackson)
+won 11 NBA titles while coaching Chicago (11)
+and the Los Angeles Lakers (5), always using the [triangle offense](http://en.wikipedia.org/wiki/Triangle_offense).
+
+Look at his teams:
+
+* Scottie Pippen, Michael Jordan and Dennis Rodman in his runs with the Bulls
+* Kobe Bryant, Shaquille O'Neal and Derek Fisher with his first Lakers
+
+{% img right /images/red-auerbach.jpg %}
+
+Simply, he was preaching the triangle offense and had the
+right men at the right time.
+
+[Red Auerbach](http://en.wikipedia.org/wiki/Red_Auerbach),
+the Boston Celtics legend, built several
+( as a coach first as well as GM later ) teams
+devoted to team-playing, respect and pride.
+Counting up to 10 NBA titles.
+
+He had Larry "The Legend" Bird, Kevin McHale, Robert
+Parish, Glenn "Doc" Rivers, Bill Russel... I should stop:
+he simply - again - had the right people.
+
+**You** say it's a coincidence: less words, more
+people.
 
 {% footnotes %}
   {% fn Don't be so enthusiast: in 2 years what happened to the agile software development will happen to LSD %}
@@ -215,4 +254,5 @@ agile come attacco a triangolo, ti servono gli uomini giusti e capita 6 anni su 
   {% fn Now, that company is about to implode, guess why %}
   {% fn It's funny how I was surprised - joining Rocket - when PMs and MDs were really about to follow your advices :) some of my previous experiences were really too far from this %}
   {% fn Keep in mind that leveraging the technical quality of IT products ( like agile does ) means delivering software without a vendor's lock-in: as a result, agilists trust their job and try to deliver the best artifact they can, since they would be replaceable at any time of the process -- see, everything for the customer's advantage %}
+  {% fn Myself included %}
 {% endfootnotes %}

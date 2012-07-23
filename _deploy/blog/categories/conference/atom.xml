@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://odino.github.com/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://odino.github.com/"/>
-  <updated>2012-07-02T14:07:31+04:00</updated>
+  <updated>2012-07-23T19:47:44+04:00</updated>
   <id>http://odino.github.com/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speaking at IPC 2012]]></title>
+    <link href="http://odino.github.com/speaking-at-ipc-2012/"/>
+    <updated>2012-07-23T19:34:00+04:00</updated>
+    <id>http://odino.github.com/speaking-at-ipc-2012</id>
+    <content type="html"><![CDATA[<p>Now it's official: in October I will be
+in Mainz for <a href="http://phpconference.com/">IPC 2012</a>.</p>
+
+<!-- more -->
+
+
+<p>No doubts anymore: I will be present - for my first time -
+at the most prestigious<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> european PHP conference,
+a travel more than 6 thousand kilometers long:</p>
+
+<iframe width="750" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=FWObgQEd3exLAylFxtlqSUNfPjFiUSmEUG7mvQ%3BFZ7U-gId1dd9ACl5E98zLpG9RzGgG9sQ1dQiBA&amp;q=from+Dubai+to+Mainz&amp;aq=&amp;sll=32.93158,33.8919&amp;sspn=21.939821,46.538086&amp;ie=UTF8&amp;t=m&amp;saddr=Dubai&amp;daddr=Mainz&amp;ll=37.0008,31.761065&amp;spn=26.13436,47.12413&amp;output=embed"></iframe>
+
+
+<p>I will bring with me a new talk<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, which
+mainly deals with protocols:</p>
+
+<ul>
+<li>history of <code>HTTP</code></li>
+<li>hiddent features of <code>HTTP/1.1</code></li>
+<li>what should we expect from <code>HTTP/2.0</code></li>
+<li>how <code>SPDY</code> is revolutionizing web protocols</li>
+</ul>
+
+
+<p>If you'll be there, dont hesitate and drop me a line
+at <em>alessandro.nadalin@gmail.com</em>, it will be a good
+opportunity to have a chat about PHP and the
+<a href="/moving-to-dubai/">Middle East</a>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Not a lot of doubts about this, which doesnt automatically make it the best european PHP conference: my memories of the PHP Benelux Conference 2011 are still alive <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>"HTTP colon slash slash: end of an era?" <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Going beyond HTTP at IPC in October]]></title>
@@ -203,75 +249,6 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
 <p>Once again, the best conference I ever attended, did not betrayed my expectations.</p>
 
 <p>If you want to view the slides of the talks, have a look at the <a href="http://joind.in/event/view/472">Joind.in</a> page.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A f****** awesome 2011 PHP Benelux Conference]]></title>
-    <link href="http://odino.github.com/a-f-awesome-2011-php-benelux-conference/"/>
-    <updated>2011-03-06T15:37:00+04:00</updated>
-    <id>http://odino.github.com/a-f-awesome-2011-php-benelux-conference</id>
-    <content type="html"><![CDATA[<p>I know, I'm a month late, but I need to publish a report about <a href="http://conference.phpbenelux.eu/2011/">this amazing conference</a> which took place in Antwerp, Belgium, in January 2011.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="/images/with-zuelke.jpg"></p>
-
-<p>It has been one of my favourite conference, and the reasons for such this kind of evaluation are multiple: I try to summarize them here.</p>
-
-<h2>The talks</h2>
-
-<p>This is probably the conference in which I did the rightest moves: almost every talk I attended impressend me so much.</p>
-
-<p>Here's the list:</p>
-
-<ul>
-<li><strong>27 ways to be a better developer</strong> by Ivo Jansch &amp; Lorna Mitchell, a good keynote focusing on real life experience and a few commonly forgotten tips</li>
-<li><strong>Technical Debt</strong> by Elizabeth Naramore, a really cool talk about real life approaches to technical debt</li>
-<li><strong>Project triage &amp; recovery</strong> by Keith Casey, about dealing with technical debt in an OS project</li>
-<li><strong>Benchmarking applications and frameworks</strong> by Paul M. Jones, dealing with the right approach during applications benchmarks</li>
-<li><strong>Charsets and encodings</strong> by Kore Nordmann, in which I learned a lot about a problem I've never faced but...   ...who knows...</li>
-<li><strong>XML vs The new kids on the block</strong> by David Zuelke, a really coll comparation between XML, JSON, HTML5 and YAML, with pros and cons for all of them: contextualization was the leit-motif</li>
-<li><strong>Designing HTTP interfaces and RESTful webservices</strong> by David Zuelke, a f****** awesome talk, and, have to say, the greatest speaker I've ever encountered</li>
-<li><strong>Geolocation and maps with PHP</strong> by Derick Rethans, pretty boring talk about a cool topic</li>
-<li><strong>Zeta Components</strong> by Tobias Schlitt, presenting the Apache project and giving some code examples which turned the crowd on</li>
-</ul>
-
-
-<h2>The organization</h2>
-
-<p>Really awesome.</p>
-
-<p>We had great lunches, an awesome dinner offered by Facebook and almost everyday a free bar.</p>
-
-<p>:-)</p>
-
-<p>The location they choose was ok and the talks organization really pleasant.</p>
-
-<h2>The bowling night</h2>
-
-<p>I should tell a lot about that night, but I'd rather keep some details with those who were there :-)</p>
-
-<p>We had free ber offered by GitHub and a bunch of bowling lanes reserved for the conference attendees.</p>
-
-<p>It was also cool because at this conferences speakers tend to aggregate with theirselves: at this one we had he opportunity to bowl together.</p>
-
-<h2>The italian crew</h2>
-
-<p>Yes, the cool guys.</p>
-
-<p>I've been there with other italian fellas, and we probably were the farest guys from home (except from a few speakers ).</p>
-
-<p>Really great time spent together, and I also appreciated Michelangelo Van Dam, one of the organizers, thanking us, while smoking a cigarette, for coming there.</p>
-
-<p>Definitely going there in 2012.</p>
-
-<h2>There is one more thing...</h2>
-
-<p>Cirpo's beer spill. Amazing.</p>
-
-<p><img class="center" src="/images/beerspill.jpg"></p>
 ]]></content>
   </entry>
   
