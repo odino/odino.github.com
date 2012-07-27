@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: OrientDB | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/orientdb/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/orientdb/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
-    <link href="http://odino.github.com/back-in-track-with-orientdb/"/>
+    <link href="http://www.odino.org/back-in-track-with-orientdb/"/>
     <updated>2012-04-20T15:26:00+04:00</updated>
-    <id>http://odino.github.com/back-in-track-with-orientdb</id>
+    <id>http://www.odino.org/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It's been a while since I don't release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
 back on track and I have a few interesting news.</p>
@@ -153,9 +153,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Getting back on OrientDB]]></title>
-    <link href="http://odino.github.com/getting-back-on-orientdb/"/>
+    <link href="http://www.odino.org/getting-back-on-orientdb/"/>
     <updated>2012-01-03T17:16:00+04:00</updated>
-    <id>http://odino.github.com/getting-back-on-orientdb</id>
+    <id>http://www.odino.org/getting-back-on-orientdb</id>
     <content type="html"><![CDATA[<p>It's been a while since I don't give any update about
 <a href="https://github.com/congow/Orient">Orient</a>,
 the library we are developing to work with
@@ -186,9 +186,9 @@ which is the last one before going RC, introducing <strong>persistence</strong> 
   
   <entry>
     <title type="html"><![CDATA[A warm welcome to Orient beta-4: data-mapping and much more]]></title>
-    <link href="http://odino.github.com/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more/"/>
+    <link href="http://www.odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more/"/>
     <updated>2011-09-20T16:13:00+04:00</updated>
-    <id>http://odino.github.com/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more</id>
+    <id>http://www.odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more</id>
     <content type="html"><![CDATA[<p>After a great, as usual, monday-mini-hackaton with my colleague <a href="http://davidfunaro.com/">David</a>, I'm happy to announce that Orient has reached its fourth beta: instead of a generic post, I will describe here, step by step, which amazing things you'll be able to do with this new release :)</p>
 
 <!-- more -->
@@ -348,9 +348,9 @@ $query->truncate('myClass', true); // truncates cluster "myClass"
   
   <entry>
     <title type="html"><![CDATA[News from the Orient library: OrientDB query-builder goes out]]></title>
-    <link href="http://odino.github.com/news-from-the-orient-library-orientdb-query-builder-goes-out/"/>
+    <link href="http://www.odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out/"/>
     <updated>2011-07-31T15:19:00+04:00</updated>
-    <id>http://odino.github.com/news-from-the-orient-library-orientdb-query-builder-goes-out</id>
+    <id>http://www.odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out</id>
     <content type="html"><![CDATA[<p>There are times to celebrate, like this one, that I was expecting since 2 months; a moment I delayed because of an amount of things that you can't even imagine.</p>
 
 <!-- more -->
@@ -479,9 +479,9 @@ doxygen Docs/orient.d
   
   <entry>
     <title type="html"><![CDATA[Get prepared for OrientDB's query builder ]]></title>
-    <link href="http://odino.github.com/get-prepared-for-orientdb-s-query-builder/"/>
+    <link href="http://www.odino.org/get-prepared-for-orientdb-s-query-builder/"/>
     <updated>2011-06-03T13:46:00+04:00</updated>
-    <id>http://odino.github.com/get-prepared-for-orientdb-s-query-builder</id>
+    <id>http://www.odino.org/get-prepared-for-orientdb-s-query-builder</id>
     <content type="html"><![CDATA[<p>As you can see on <a href="https://github.com/odino/Orient/commits/master">Github</a>, today we fixed all the minor issues of the beta-3 milestone of the <a href="https://github.com/odino/Orient">Orient</a> library ( a set of tools to manage OrientDB in PHP ).</p>
 
 <!-- more -->

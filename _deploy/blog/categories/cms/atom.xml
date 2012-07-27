@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: CMS | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/cms/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/cms/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Retrieve top rated products in Magento]]></title>
-    <link href="http://odino.github.com/retrieve-top-rated-products-in-magento/"/>
+    <link href="http://www.odino.org/retrieve-top-rated-products-in-magento/"/>
     <updated>2010-09-11T13:52:00+04:00</updated>
-    <id>http://odino.github.com/retrieve-top-rated-products-in-magento</id>
+    <id>http://www.odino.org/retrieve-top-rated-products-in-magento</id>
     <content type="html"><![CDATA[<p>Here you learn how to display top rated products using an helper function and a snippet of a <code>.phtml</code> block.</p>
 
 <!-- more -->
@@ -97,9 +97,9 @@ $products = Mage::helper('heart')->getTopRatedProducts(5);</p>
   
   <entry>
     <title type="html"><![CDATA[How to discover if a site has been built with Joomla!]]></title>
-    <link href="http://odino.github.com/how-to-discover-if-a-site-has-been-built-with-joomla/"/>
+    <link href="http://www.odino.org/how-to-discover-if-a-site-has-been-built-with-joomla/"/>
     <updated>2010-09-11T13:44:00+04:00</updated>
-    <id>http://odino.github.com/how-to-discover-if-a-site-has-been-built-with-joomla</id>
+    <id>http://www.odino.org/how-to-discover-if-a-site-has-been-built-with-joomla</id>
     <content type="html"><![CDATA[<p>Today I've updated my customers' requests' list with a particular one from an hair stylist products' reseller.</p>
 
 <!-- more -->

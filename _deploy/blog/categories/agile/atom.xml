@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: agile | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/agile/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/agile/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Where is Agile?]]></title>
-    <link href="http://odino.github.com/what-is-agile/"/>
+    <link href="http://www.odino.org/what-is-agile/"/>
     <updated>2012-07-23T20:20:00+04:00</updated>
-    <id>http://odino.github.com/what-is-agile</id>
+    <id>http://www.odino.org/what-is-agile</id>
     <content type="html"><![CDATA[<p>I'm a pragmatic programmer, not a pragmatic agilist.</p>
 
 <p>If I had to be a pragmatic agilist during my career,
@@ -281,9 +281,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Behaviour-driven development in PHP]]></title>
-    <link href="http://odino.github.com/behaviour-driven-development-in-php/"/>
+    <link href="http://www.odino.org/behaviour-driven-development-in-php/"/>
     <updated>2011-08-27T23:32:00+04:00</updated>
-    <id>http://odino.github.com/behaviour-driven-development-in-php</id>
+    <id>http://www.odino.org/behaviour-driven-development-in-php</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a> is an established practice which goes beyond test-driven development, assuming we are working on a agile-prone environment and our requirements are expressed as user stories or something similar: although this requirement is not mandatory, <strong>BDD's power is leveraged by using stories</strong>.</p>
 
 <!-- more -->
@@ -406,9 +406,9 @@ behat --out heyGuysReadThis.html --format html
   
   <entry>
     <title type="html"><![CDATA[The art of agile development, my review]]></title>
-    <link href="http://odino.github.com/the-art-of-agile-development-my-review/"/>
+    <link href="http://www.odino.org/the-art-of-agile-development-my-review/"/>
     <updated>2011-03-11T13:43:00+04:00</updated>
-    <id>http://odino.github.com/the-art-of-agile-development-my-review</id>
+    <id>http://www.odino.org/the-art-of-agile-development-my-review</id>
     <content type="html"><![CDATA[<p>I've read this book 2 times, with a 2-years interlude: once when I was running my own company, a really small one, and the second time after <a href="http://www.dnsee.com/">DNSEE</a> started looking for talented developers on the market to join our team, in the middle of 2010.</p>
 
 <!-- more -->

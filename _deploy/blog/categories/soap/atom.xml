@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: SOAP | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/soap/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/soap/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Roy Fielding on SOAP in the W3C context]]></title>
-    <link href="http://odino.github.com/roy-fielding-on-soap-in-the-w3c-context/"/>
+    <link href="http://www.odino.org/roy-fielding-on-soap-in-the-w3c-context/"/>
     <updated>2012-01-27T15:20:00+04:00</updated>
-    <id>http://odino.github.com/roy-fielding-on-soap-in-the-w3c-context</id>
+    <id>http://www.odino.org/roy-fielding-on-soap-in-the-w3c-context</id>
     <content type="html"><![CDATA[<!-- more -->
 
 

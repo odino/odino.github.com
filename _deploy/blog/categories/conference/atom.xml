@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/conference/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/conference/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Speaking at IPC 2012]]></title>
-    <link href="http://odino.github.com/speaking-at-ipc-2012/"/>
+    <link href="http://www.odino.org/speaking-at-ipc-2012/"/>
     <updated>2012-07-23T19:34:00+04:00</updated>
-    <id>http://odino.github.com/speaking-at-ipc-2012</id>
+    <id>http://www.odino.org/speaking-at-ipc-2012</id>
     <content type="html"><![CDATA[<p>Now it's official: in October I will be
 in Mainz for <a href="http://phpconference.com/">IPC 2012</a>.</p>
 
@@ -61,9 +61,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Going beyond HTTP at IPC in October]]></title>
-    <link href="http://odino.github.com/going-beyond-http-at-ipc-in-october/"/>
+    <link href="http://www.odino.org/going-beyond-http-at-ipc-in-october/"/>
     <updated>2012-07-02T13:31:00+04:00</updated>
-    <id>http://odino.github.com/going-beyond-http-at-ipc-in-october</id>
+    <id>http://www.odino.org/going-beyond-http-at-ipc-in-october</id>
     <content type="html"><![CDATA[<p>Just a quick one: seems that in October I'll need to travel
 all my way back to Europe to speak at the
 <a href="http://phpconference.com/">international PHP Conference</a> 2012
@@ -85,9 +85,9 @@ to make it for the first time among the germans.</p>
   
   <entry>
     <title type="html"><![CDATA[OSIDays 2011 wrapup]]></title>
-    <link href="http://odino.github.com/osidays-2011-wrapup/"/>
+    <link href="http://www.odino.org/osidays-2011-wrapup/"/>
     <updated>2011-11-22T15:26:00+04:00</updated>
-    <id>http://odino.github.com/osidays-2011-wrapup</id>
+    <id>http://www.odino.org/osidays-2011-wrapup</id>
     <content type="html"><![CDATA[<p>There we go: I am in Bengaluru for OSIDays, and the conference is about to finish today, after cool and less cool moments.</p>
 
 <!-- more -->
@@ -144,9 +144,9 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
   
   <entry>
     <title type="html"><![CDATA[Jazoon 2011 wrapup]]></title>
-    <link href="http://odino.github.com/jazoon-2011-wrapup/"/>
+    <link href="http://www.odino.org/jazoon-2011-wrapup/"/>
     <updated>2011-06-28T15:09:00+04:00</updated>
-    <id>http://odino.github.com/jazoon-2011-wrapup</id>
+    <id>http://www.odino.org/jazoon-2011-wrapup</id>
     <content type="html"><![CDATA[<p>So, as you might know, the last week I've been in Zurich in order to partecipate to the Jazoon Rookie Award.</p>
 
 <!-- more -->
@@ -200,9 +200,9 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
   
   <entry>
     <title type="html"><![CDATA[PHPDay 2011 wrapup]]></title>
-    <link href="http://odino.github.com/phpday-2011-wrapup/"/>
+    <link href="http://www.odino.org/phpday-2011-wrapup/"/>
     <updated>2011-06-09T15:33:00+04:00</updated>
-    <id>http://odino.github.com/phpday-2011-wrapup</id>
+    <id>http://www.odino.org/phpday-2011-wrapup</id>
     <content type="html"><![CDATA[<p>It's been a while since I got back from the PHPDay ( ~1 month ) and the experience definitely deserves a post.</p>
 
 <!-- more -->

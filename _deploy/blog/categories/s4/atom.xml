@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: S4 | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/s4/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/s4/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Yahoo's S4 stream computing platform]]></title>
-    <link href="http://odino.github.com/yahoo-s-s4-stream-computing-platform/"/>
+    <link href="http://www.odino.org/yahoo-s-s4-stream-computing-platform/"/>
     <updated>2011-06-02T12:29:00+04:00</updated>
-    <id>http://odino.github.com/yahoo-s-s4-stream-computing-platform</id>
+    <id>http://www.odino.org/yahoo-s-s4-stream-computing-platform</id>
     <content type="html"><![CDATA[<p>The internet had a huge bump during the late '90s, and all the majors needed something web-scale in order to conquer the 'net.</p>
 
 <!-- more -->

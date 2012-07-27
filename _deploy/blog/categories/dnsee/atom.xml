@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: DNSEE | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/dnsee/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/dnsee/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The "new" development here in DNSEE: BDD and much more]]></title>
-    <link href="http://odino.github.com/the-new-development-here-in-dnsee-bdd-and-much-more/"/>
+    <link href="http://www.odino.org/the-new-development-here-in-dnsee-bdd-and-much-more/"/>
     <updated>2011-10-03T12:34:00+04:00</updated>
-    <id>http://odino.github.com/the-new-development-here-in-dnsee-bdd-and-much-more</id>
+    <id>http://www.odino.org/the-new-development-here-in-dnsee-bdd-and-much-more</id>
     <content type="html"><![CDATA[<p>It's been a couple months that we <strong>renewed a few aspects of our experience</strong>, as developers, here at DNSEE, introducing a few practices that common software factories ignore: we - and I - don't know if these practices will always be fine for our daily job but, as far as we saw, things are just working fine.</p>
 
 <!-- more -->

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Orient | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/orient/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/orient/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The current status of my work with OrientDB]]></title>
-    <link href="http://odino.github.com/the-current-status-of-my-work-with-orientdb/"/>
+    <link href="http://www.odino.org/the-current-status-of-my-work-with-orientdb/"/>
     <updated>2011-05-24T14:09:00+04:00</updated>
-    <id>http://odino.github.com/the-current-status-of-my-work-with-orientdb</id>
+    <id>http://www.odino.org/the-current-status-of-my-work-with-orientdb</id>
     <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
 
 <!-- more -->

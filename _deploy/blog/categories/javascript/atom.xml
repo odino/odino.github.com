@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/javascript/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -14,10 +14,131 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Logging JavaScript errors]]></title>
+    <link href="http://www.odino.org/logging-javascript-errors/"/>
+    <updated>2012-07-27T09:00:00+04:00</updated>
+    <id>http://www.odino.org/logging-javascript-errors</id>
+    <content type="html"><![CDATA[<p>In one of my latest posts I talked about
+<a href="/using-monolog-for-php-error-reporting-on-new-relic/">using Monolog to remotely log stuff on New Relic</a>:
+getting a bit deeper on log management
+systems, here's how we managed to report
+JavaScript errors on our logs.</p>
+
+<!-- more -->
+
+
+<h2>A note on JavaScript errors</h2>
+
+<p>It may not sound obvious, but errors,
+in JavaScript, can be pretty nasty, since
+it's an - almost completely<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> - client-dependent
+technology that can react differently to
+your code based on the client's platform.</p>
+
+<p>Cross-browser testing may not always be
+performed <em>that</em> accurately, so you should
+definitely start tracking JS error that may
+happen of different clients.</p>
+
+<h2>The concept</h2>
+
+<p>This is <strong>totally not an idea of mine</strong>: it
+comes from a pretty smart <a href="http://devblog.pipelinedeals.com/pipelinedeals-dev-blog/2012/2/12/javascript-error-reporting-for-fun-and-profit-1.html">blog post which illustrates the main concept</a>:
+when a JS error is encountered, you trigger an HTTP request
+to a URL that collect the data transmitted
+within that request and logs it with
+server-side code.</p>
+
+<p>``` javascript How to trigger JS error reporting
+window.MaximumErrorCount = 5;</p>
+
+<p>window.onerror = function(errorMsg, file, lineNumber) {
+  window.errorCount || (window.errorCount = 0);</p>
+
+<p>  if (window.errorCount &lt;= window.MaximumErrorCount) {</p>
+
+<pre><code>jQuery.post('/jsError/', {
+    errorMessage:   errorMsg, 
+    file:           file, 
+    url:            window.location.href, 
+    lineNumber:     lineNumber, 
+    ua:             navigator.userAgent
+});
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>So, at the end, you only need to add some basic
+server-side code to handle the reported data:</p>
+
+<p>``` php How to handle reported informations
+&lt;?php</p>
+
+<p>class ErrorController extends Controller
+{</p>
+
+<pre><code>const MESSAGE_LOG_JAVASCRIPT = 'A javascript error "%s" has been encountered at the URL %s on file %s:%s by an agent of type %s';
+
+public function logJavaScriptAction($postData)
+{
+    $logMessage = sprintf(
+        self::MESSAGE_LOG_JAVASCRIPT,
+        $postData['errorMessage'],
+        $postData['url'],
+        $postData['file'],
+        $postData['lineNumber'],
+        $postData['ua']
+    );
+
+    $this-&gt;getLogger()-&gt;addError($logMessage);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>You may want to write some additional
+code to only report errors that you should
+really fix: based on the user-agent, for
+example, you can ignore errors triggered
+on <code>MSIE 7.0</code>/<code>MSIE 6.0</code>.</p>
+
+<h2>All in all...</h2>
+
+<p>This has been a great solution for us,
+since we could easily keep track of JS
+code which was causing errors due to:</p>
+
+<ul>
+<li>lack of compatibility between developers'/users'
+platforms</li>
+<li>typos and small errors</li>
+<li>tricky situations in which our code depends on
+3rd party scripts that would break our functionality
+whenever they are not available/cause an error upon
+execution</li>
+</ul>
+
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>NodeJS <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[iMacro: JavaScript loops with variables]]></title>
-    <link href="http://odino.github.com/imacro-javascript-loops-with-variables/"/>
+    <link href="http://www.odino.org/imacro-javascript-loops-with-variables/"/>
     <updated>2010-12-01T02:03:00+04:00</updated>
-    <id>http://odino.github.com/imacro-javascript-loops-with-variables</id>
+    <id>http://www.odino.org/imacro-javascript-loops-with-variables</id>
     <content type="html"><![CDATA[<p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
 
 <!-- more -->

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Github | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/github/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <title><![CDATA[Category: github | Alessandro Nadalin]]></title>
+  <link href="http://www.odino.org/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -14,54 +14,145 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Contributing to the Zend Framework via GitHub]]></title>
-    <link href="http://odino.github.com/contributing-to-the-zend-framework-via-github/"/>
-    <updated>2011-07-18T13:05:00+04:00</updated>
-    <id>http://odino.github.com/contributing-to-the-zend-framework-via-github</id>
-    <content type="html"><![CDATA[<p>So, I managed to integrate <a href="https://github.com/zendframework/zf2/commit/fe60cf8deb9888adfc7757dcec536dd24c021653">some crap I daily write into the Zend Framework 2</a> git repository, and here's how to do that.</p>
+    <title type="html"><![CDATA[Bootstrap of a Travis-CI test-machine]]></title>
+    <link href="http://www.odino.org/bootstrap-of-a-travis-ci-test-machine/"/>
+    <updated>2012-07-27T07:00:00+04:00</updated>
+    <id>http://www.odino.org/bootstrap-of-a-travis-ci-test-machine</id>
+    <content type="html"><![CDATA[<p><a href="http://travis-ci.org/">Travis-CI</a> is an awesome open source service which
+makes continuos integration really easy in the context
+of <em>github-hosted</em> projects.</p>
 
 <!-- more -->
 
 
-<h2>Code</h2>
+<p>Developing Orient, I found out about Travis when one of
+the 3 active guys actively collaborating to the project,
+<a href="https://github.com/nrk">Daniele</a> created his own fork of the library to create
+the CI environment on Travis.</p>
 
-<p>The "real" repository of the ZF2 isn't on Github but, someway, they are managing to integrate <a href="https://github.com/zendframework/zf2">pull requests from the Github mirror</a> to the <a href="http://git.zendframework.com/?a=summary&amp;p=zf">real repo hosted by Zend Technologies</a>.</p>
+<h2>More than testing</h2>
 
-<p>Thanks to this, you only need to fork it and work on what you'd like to change, improve or implement.</p>
+<p>Travis doesn't only provide a machine in which you can
+continuosly running tests, it gives you a <strong>free</strong> VM
+which you can <strong>freely</strong> manage in the context of testing
+an application: although they don't actually give you a "real" VM, they provide
+you an <strong>temporary VM</strong> which gets bootstrapped following
+your indications and executes the tasks that <strong>you</strong>
+indicate: in that sense, Travis gives you VMs
+<em>on-demand</em>.</p>
 
-<p>From my viewpoint, I needed to integrate into the <code>Zend\Service\Twitter</code> an API to retrieve the users who retweeted a certain tweet, identified by an ID.</p>
+<p>So think about it: it's not only about testing, it's about
+having an environment ready to do anything you want for
+your own project, like running reports.</p>
 
-<p>So, first thing you should do is take a <a href="https://github.com/zendframework/zf2/blob/fe60cf8deb9888adfc7757dcec536dd24c021653/tests/Zend/Service/Twitter/TwitterTest.php">look at the tests of the class you are working on</a> to confidently understand how the hell your code can be tested: after doing so, you can <a href="https://github.com/zendframework/zf2/blob/fe60cf8deb9888adfc7757dcec536dd24c021653/tests/Zend/Service/Twitter/TwitterTest.php#L604">write a test</a> which should cover your functionality.</p>
+<h2>A real world example</h2>
 
-<p>Then you can run your tests with PHPUnit:</p>
+<p>For <a href="http://github.com/congow/Orient">Orient</a>, Daniele managed to setup a quite clever
+bootstrap script.</p>
 
-<p><code>bash Launching your test with PHPUnit
-phpunit --bootstrap tests/Bootstrap.php tests/Zend/Service/Twitter/TwitterTest.php
+<p>We have a quite comprehensive test-suite which you can
+execute with the single <code>phpunit</code> command, from the root
+of the library, but it just executes tests which dont
+directly talk to OrientDB.</p>
+
+<p>To execute the full test-suite, including integration
+tests, you just need to pass the test directory to the
+CLI:</p>
+
+<p><code>php
+phpunit test/
 </code></p>
 
-<p>and see that something is failing :)</p>
+<p>but you'll need a working instance of OrientDB, with
+predefined admin credentials (<code>admin</code>/<code>admin</code>) listening
+on port <code>:2480</code>.</p>
 
-<p>So, here's the actual work, you can implement your functionality using ZF2 coding standards without messing around things: in my case, it was all about <a href="https://github.com/zendframework/zf2/blob/fe60cf8deb9888adfc7757dcec536dd24c021653/library/Zend/Service/Twitter.php#L906">less than 5 LoCs</a>.</p>
+<p>So our challenge was to use Travis and being able to trigger
+the integration tests.</p>
 
-<h2>Formalities</h2>
+<p>In the <code>.travis.yml</code> configuration file, we have:</p>
 
-<p>Good: you have just done a work for the PHP community, and you are ready to ask an integration in the real ZF2 codebase: be aware, you need a couple formalities for completing the job.</p>
+<p>```
+language: php
+php:
+  - 5.3
+  - 5.4
+before_script:
+  - sh -c ./bin/initialize-ci.sh 1.0rc6
+script: phpunit test/
+notifications:
+  email:</p>
 
-<p>First of all, download the <a href="http://framework.zend.com/cla">CLA</a> ( contributor license agreement ): print, fill, scan and send it to <code>cla@zend.com</code>.</p>
+<pre><code>- ...@gmail.com
+</code></pre>
 
-<p>If this seems weird to you, consider the fact that you are just signing a paper telling that you are not submitting copyrighted code and so on: so, Zend Framework, is just basically defending itself from jackasses :)</p>
+<p>```</p>
 
-<p>Try to understand it, please.</p>
+<p>So, as you see, we have a bash script which
+takes care of everything:</p>
 
-<p>After that, you'll be contacted from a lady at Zend Technologies asking to create an account on ZF bug tracker: 2 minutes and you're done.</p>
+<p>``` bash ./bin/initialize-ci.sh 1.0rc6</p>
 
-<h2>Github</h2>
+<h1>!/bin/sh</h1>
 
-<p>Ready to go?</p>
+<p>PARENT_DIR=$(dirname $(cd "$(dirname "$0")"; pwd))
+CI_DIR="$PARENT_DIR/ci-stuff/environment"</p>
 
-<p>Go to your github forked repository and <a href="https://github.com/zendframework/zf2/pull/221">create a pull request</a>, better if you include a couple of informations with it.</p>
+<p>ODB_VERSION=${1:-"1.0rc6"}
+ODB_PACKAGE="orientdb-${ODB_VERSION}"
+ODB_DIR="${CI_DIR}/${ODB_PACKAGE}"
+ODB_LAUNCHER="${ODB_DIR}/bin/server.sh"</p>
 
-<p>That's all, folks!</p>
+<p>echo "=== Initializing CI environment ==="</p>
+
+<p>cd "$PARENT_DIR"</p>
+
+<p>. "$PARENT_DIR/bin/odb-shared.sh"</p>
+
+<p>if [ ! -d "$CI_DIR" ]; then
+  # Fetch the stuff needed to run the CI session.
+  git clone --quiet git://gist.github.com/1370152.git $CI_DIR</p>
+
+<p>  # Download and extract OrientDB
+  echo "--- Downloading OrientDB v${ODB_VERSION} ---"
+  odb_download "http://orient.googlecode.com/files/${ODB_PACKAGE}.zip" $CI_DIR
+  unzip -q "${CI_DIR}/${ODB_PACKAGE}.zip" -d $ODB_DIR &amp;&amp; chmod +x $ODB_LAUNCHER</p>
+
+<p>  # Copy the configuration file and the demo database
+  echo "--- Setting up OrientDB ---"
+  tar xf $CI_DIR/databases.tar.gz -C "${ODB_DIR}/"
+  cp $PARENT_DIR/ci-stuff/orientdb-server-config.xml "${ODB_DIR}/config/"
+  cp $PARENT_DIR/ci-stuff/orientdb-server-log.properties "${ODB_DIR}/config/"
+else
+  echo "!!! Directory $CI_DIR exists, skipping downloads !!!"
+fi</p>
+
+<h1>Start OrientDB in background.</h1>
+
+<p>echo "--- Starting an instance of OrientDB ---"
+sh -c $ODB_LAUNCHER </dev/null &>/dev/null &amp;</p>
+
+<h1>Wait a bit for OrientDB to finish the initialization phase.</h1>
+
+<p>sleep 5
+printf "\n=== The CI environment has been initialized ===\n"
+```</p>
+
+<p>I think the script speaks for itsef: we directly download
+OrientDB from the official website, de-compress it, configure
+OrientDB with our standard configuration file and launch the
+ODB server, outputting in <code>/dev/null</code>.</p>
+
+<p>Now, all of this happens everytime someone commits to the <code>master</code>
+on Github: pretty easy, simple but so powerful.</p>
+
+<p>I really recommend you to start having a look at Travi-CI
+and how you can benefit from a CI server, fully configurable,
+for free, for the sake of your own code.</p>
+
+<p>One last note: yes, all of this comes for free, but if you use
+Travis you should really consider making a donation to
+show the guys behind the project <a href="http://love.travis-ci.org/">your love</a>.</p>
 ]]></content>
   </entry>
   

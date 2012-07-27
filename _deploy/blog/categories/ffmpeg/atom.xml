@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ffmpeg | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/ffmpeg/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/ffmpeg/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[FFMPEG: get a thumbnail from a video with PHP]]></title>
-    <link href="http://odino.github.com/ffmpeg-get-a-thumbnail-from-a-video-with-php/"/>
+    <link href="http://www.odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php/"/>
     <updated>2010-09-11T10:28:00+04:00</updated>
-    <id>http://odino.github.com/ffmpeg-get-a-thumbnail-from-a-video-with-php</id>
+    <id>http://www.odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php</id>
     <content type="html"><![CDATA[<p>Here's a simple tutorial in order to <strong>extract a thumbnail from a video</strong> using FFMPEG and PHP.</p>
 
 <!-- more -->

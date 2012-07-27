@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: testing | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/testing/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/testing/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -14,10 +14,153 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Bootstrap of a Travis-CI test-machine]]></title>
+    <link href="http://www.odino.org/bootstrap-of-a-travis-ci-test-machine/"/>
+    <updated>2012-07-27T07:00:00+04:00</updated>
+    <id>http://www.odino.org/bootstrap-of-a-travis-ci-test-machine</id>
+    <content type="html"><![CDATA[<p><a href="http://travis-ci.org/">Travis-CI</a> is an awesome open source service which
+makes continuos integration really easy in the context
+of <em>github-hosted</em> projects.</p>
+
+<!-- more -->
+
+
+<p>Developing Orient, I found out about Travis when one of
+the 3 active guys actively collaborating to the project,
+<a href="https://github.com/nrk">Daniele</a> created his own fork of the library to create
+the CI environment on Travis.</p>
+
+<h2>More than testing</h2>
+
+<p>Travis doesn't only provide a machine in which you can
+continuosly running tests, it gives you a <strong>free</strong> VM
+which you can <strong>freely</strong> manage in the context of testing
+an application: although they don't actually give you a "real" VM, they provide
+you an <strong>temporary VM</strong> which gets bootstrapped following
+your indications and executes the tasks that <strong>you</strong>
+indicate: in that sense, Travis gives you VMs
+<em>on-demand</em>.</p>
+
+<p>So think about it: it's not only about testing, it's about
+having an environment ready to do anything you want for
+your own project, like running reports.</p>
+
+<h2>A real world example</h2>
+
+<p>For <a href="http://github.com/congow/Orient">Orient</a>, Daniele managed to setup a quite clever
+bootstrap script.</p>
+
+<p>We have a quite comprehensive test-suite which you can
+execute with the single <code>phpunit</code> command, from the root
+of the library, but it just executes tests which dont
+directly talk to OrientDB.</p>
+
+<p>To execute the full test-suite, including integration
+tests, you just need to pass the test directory to the
+CLI:</p>
+
+<p><code>php
+phpunit test/
+</code></p>
+
+<p>but you'll need a working instance of OrientDB, with
+predefined admin credentials (<code>admin</code>/<code>admin</code>) listening
+on port <code>:2480</code>.</p>
+
+<p>So our challenge was to use Travis and being able to trigger
+the integration tests.</p>
+
+<p>In the <code>.travis.yml</code> configuration file, we have:</p>
+
+<p>```
+language: php
+php:
+  - 5.3
+  - 5.4
+before_script:
+  - sh -c ./bin/initialize-ci.sh 1.0rc6
+script: phpunit test/
+notifications:
+  email:</p>
+
+<pre><code>- ...@gmail.com
+</code></pre>
+
+<p>```</p>
+
+<p>So, as you see, we have a bash script which
+takes care of everything:</p>
+
+<p>``` bash ./bin/initialize-ci.sh 1.0rc6</p>
+
+<h1>!/bin/sh</h1>
+
+<p>PARENT_DIR=$(dirname $(cd "$(dirname "$0")"; pwd))
+CI_DIR="$PARENT_DIR/ci-stuff/environment"</p>
+
+<p>ODB_VERSION=${1:-"1.0rc6"}
+ODB_PACKAGE="orientdb-${ODB_VERSION}"
+ODB_DIR="${CI_DIR}/${ODB_PACKAGE}"
+ODB_LAUNCHER="${ODB_DIR}/bin/server.sh"</p>
+
+<p>echo "=== Initializing CI environment ==="</p>
+
+<p>cd "$PARENT_DIR"</p>
+
+<p>. "$PARENT_DIR/bin/odb-shared.sh"</p>
+
+<p>if [ ! -d "$CI_DIR" ]; then
+  # Fetch the stuff needed to run the CI session.
+  git clone --quiet git://gist.github.com/1370152.git $CI_DIR</p>
+
+<p>  # Download and extract OrientDB
+  echo "--- Downloading OrientDB v${ODB_VERSION} ---"
+  odb_download "http://orient.googlecode.com/files/${ODB_PACKAGE}.zip" $CI_DIR
+  unzip -q "${CI_DIR}/${ODB_PACKAGE}.zip" -d $ODB_DIR &amp;&amp; chmod +x $ODB_LAUNCHER</p>
+
+<p>  # Copy the configuration file and the demo database
+  echo "--- Setting up OrientDB ---"
+  tar xf $CI_DIR/databases.tar.gz -C "${ODB_DIR}/"
+  cp $PARENT_DIR/ci-stuff/orientdb-server-config.xml "${ODB_DIR}/config/"
+  cp $PARENT_DIR/ci-stuff/orientdb-server-log.properties "${ODB_DIR}/config/"
+else
+  echo "!!! Directory $CI_DIR exists, skipping downloads !!!"
+fi</p>
+
+<h1>Start OrientDB in background.</h1>
+
+<p>echo "--- Starting an instance of OrientDB ---"
+sh -c $ODB_LAUNCHER </dev/null &>/dev/null &amp;</p>
+
+<h1>Wait a bit for OrientDB to finish the initialization phase.</h1>
+
+<p>sleep 5
+printf "\n=== The CI environment has been initialized ===\n"
+```</p>
+
+<p>I think the script speaks for itsef: we directly download
+OrientDB from the official website, de-compress it, configure
+OrientDB with our standard configuration file and launch the
+ODB server, outputting in <code>/dev/null</code>.</p>
+
+<p>Now, all of this happens everytime someone commits to the <code>master</code>
+on Github: pretty easy, simple but so powerful.</p>
+
+<p>I really recommend you to start having a look at Travi-CI
+and how you can benefit from a CI server, fully configurable,
+for free, for the sake of your own code.</p>
+
+<p>One last note: yes, all of this comes for free, but if you use
+Travis you should really consider making a donation to
+show the guys behind the project <a href="http://love.travis-ci.org/">your love</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
-    <link href="http://odino.github.com/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
+    <link href="http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
     <updated>2012-01-26T11:51:00+04:00</updated>
-    <id>http://odino.github.com/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
+    <id>http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
     <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
 testing mechanism into symfony 1.X</a>
 : in order to make this piece of software as clean and evolvable as possible
@@ -200,9 +343,9 @@ you can already rely on this small library via
   
   <entry>
     <title type="html"><![CDATA[Unit testing your symfony forms]]></title>
-    <link href="http://odino.github.com/unit-testing-your-symfony-forms/"/>
+    <link href="http://www.odino.org/unit-testing-your-symfony-forms/"/>
     <updated>2011-08-01T14:01:00+04:00</updated>
-    <id>http://odino.github.com/unit-testing-your-symfony-forms</id>
+    <id>http://www.odino.org/unit-testing-your-symfony-forms</id>
     <content type="html"><![CDATA[<p>Tired of slow test suites? Not enough RAM to satisfy both tests and your browser? Have you ever committed without seeing tests results because "It 18.30!"?</p>
 
 <p>Good, this one is totally for you.</p>
@@ -401,9 +544,9 @@ catch (Exception $e)
   
   <entry>
     <title type="html"><![CDATA[Typing into TinyMCE with Selenium]]></title>
-    <link href="http://odino.github.com/typing-into-tinymce-with-selenium/"/>
+    <link href="http://www.odino.org/typing-into-tinymce-with-selenium/"/>
     <updated>2010-09-11T13:48:00+04:00</updated>
-    <id>http://odino.github.com/typing-into-tinymce-with-selenium</id>
+    <id>http://www.odino.org/typing-into-tinymce-with-selenium</id>
     <content type="html"><![CDATA[<p>Since TinyMCE has a questionable behaviour, because it creates an iframe to render the editor, SeleniumIDE has some problems with it.</p>
 
 <!-- more -->
@@ -443,9 +586,9 @@ catch (Exception $e)
   
   <entry>
     <title type="html"><![CDATA[Magento and PHPUnit]]></title>
-    <link href="http://odino.github.com/magento-and-phpunit/"/>
+    <link href="http://www.odino.org/magento-and-phpunit/"/>
     <updated>2010-09-11T13:43:00+04:00</updated>
-    <id>http://odino.github.com/magento-and-phpunit</id>
+    <id>http://www.odino.org/magento-and-phpunit</id>
     <content type="html"><![CDATA[<p>Although there is a good <a href="http://www.magentocommerce.com/wiki/development/phpunit_integration_with_magento">tutorial about PHPunit and Magento integration</a> and I'd rather using Lime ( the symfony-integrated test engine ) here I'll show you how to set up PHPUnit tests in order to improve the QA of your Magento customizations.</p>
 
 <!-- more -->

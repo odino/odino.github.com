@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -14,10 +14,636 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Logging JavaScript errors]]></title>
+    <link href="http://www.odino.org/logging-javascript-errors/"/>
+    <updated>2012-07-27T09:00:00+04:00</updated>
+    <id>http://www.odino.org/logging-javascript-errors</id>
+    <content type="html"><![CDATA[<p>In one of my latest posts I talked about
+<a href="http://www.odino.org/using-monolog-for-php-error-reporting-on-new-relic/">using Monolog to remotely log stuff on New Relic</a>:
+getting a bit deeper on log management
+systems, here&#8217;s how we managed to report
+JavaScript errors on our logs.</p>
+
+<!-- more -->
+
+
+<h2>A note on JavaScript errors</h2>
+
+<p>It may not sound obvious, but errors,
+in JavaScript, can be pretty nasty, since
+it&#8217;s an - almost completely<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> - client-dependent
+technology that can react differently to
+your code based on the client&#8217;s platform.</p>
+
+<p>Cross-browser testing may not always be
+performed <em>that</em> accurately, so you should
+definitely start tracking JS error that may
+happen of different clients.</p>
+
+<h2>The concept</h2>
+
+<p>This is <strong>totally not an idea of mine</strong>: it
+comes from a pretty smart <a href="http://devblog.pipelinedeals.com/pipelinedeals-dev-blog/2012/2/12/javascript-error-reporting-for-fun-and-profit-1.html">blog post which illustrates the main concept</a>:
+when a JS error is encountered, you trigger an HTTP request
+to a URL that collect the data transmitted
+within that request and logs it with
+server-side code.</p>
+
+<figure class='code'><figcaption><span>How to trigger JS error reporting</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">MaximumErrorCount</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">lineNumber</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nb">window</span><span class="p">.</span><span class="nx">errorCount</span> <span class="o">||</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">errorCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">errorCount</span> <span class="o">&lt;=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">MaximumErrorCount</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">jQuery</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/jsError/&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">errorMessage</span><span class="o">:</span>   <span class="nx">errorMsg</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">file</span><span class="o">:</span>           <span class="nx">file</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">url</span><span class="o">:</span>           <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">lineNumber</span><span class="o">:</span>     <span class="nx">lineNumber</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">ua</span><span class="o">:</span>             <span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, at the end, you only need to add some basic
+server-side code to handle the reported data:</p>
+
+<figure class='code'><figcaption><span>How to handle reported informations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">ErrorController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">MESSAGE_LOG_JAVASCRIPT</span> <span class="o">=</span> <span class="s1">&#39;A javascript error &quot;%s&quot; has been encountered at the URL %s on file %s:%s by an agent of type %s&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">logJavaScriptAction</span><span class="p">(</span><span class="nv">$postData</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$logMessage</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span>
+</span><span class='line'>          <span class="nx">self</span><span class="o">::</span><span class="na">MESSAGE_LOG_JAVASCRIPT</span><span class="p">,</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;errorMessage&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;lineNumber&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;ua&#39;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addError</span><span class="p">(</span><span class="nv">$logMessage</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You may want to write some additional
+code to only report errors that you should
+really fix: based on the user-agent, for
+example, you can ignore errors triggered
+on <code>MSIE 7.0</code>/<code>MSIE 6.0</code>.</p>
+
+<h2>All in all&#8230;</h2>
+
+<p>This has been a great solution for us,
+since we could easily keep track of JS
+code which was causing errors due to:</p>
+
+<ul>
+<li>lack of compatibility between developers&#8217;/users&#8217;
+platforms</li>
+<li>typos and small errors</li>
+<li>tricky situations in which our code depends on
+3rd party scripts that would break our functionality
+whenever they are not available/cause an error upon
+execution</li>
+</ul>
+
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>NodeJS <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Monolog for PHP error reporting on New Relic]]></title>
+    <link href="http://www.odino.org/using-monolog-for-php-error-reporting-on-new-relic/"/>
+    <updated>2012-07-27T08:00:00+04:00</updated>
+    <id>http://www.odino.org/using-monolog-for-php-error-reporting-on-new-relic</id>
+    <content type="html"><![CDATA[<p>I <strong>do</strong> really like <a href="http://newrelic.com/">New Relic</a>, a real-time
+error reporting solution available for many
+platforms, so a few days ago I decided to
+integrate it with <a href="https://github.com/Seldaek/monolog/">Monolog</a>, the other
+main logging tool that we use here at
+Rocket.</p>
+
+<!-- more -->
+
+
+<p>The idea behind it is very simple: since
+New Relic is not always available on
+development platforms, you first verify
+that the PHP extension is loaded, then,
+if it is, log a report on New Relic:
+if the extension is not available, another
+logging handler will act as a fallback.</p>
+
+<p>To reach our goal we will simply need the
+New Relic PHP extension, Monolog and the
+Symfony2 <a href="http://symfony.com/doc/current/book/service_container.html">dependency injection container</a>.</p>
+
+<h2>Catching the error and reporting it</h2>
+
+<p>Let&#8217;s start with a real world example, you
+have a controller action that receives some
+<code>POST</code> data and throws an exception whenever
+the input data is missing some values<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<figure class='code'><figcaption><span>A simple action</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">Application\Webservice</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Application\MVC\Controller</span> <span class="k">as</span> <span class="nx">BaseController</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Application\Webservice\Exception</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Controller</span> <span class="k">extends</span> <span class="nx">BaseController</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">updateDatabaseData</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validateData</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">// ...</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;logger.new-relic&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">(),</span> <span class="nv">$data</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, at this point, we just need to define the <code>logger.new-relic</code>
+service in the DIC configuration file:</p>
+
+<figure class='code'><figcaption><span>The DIC configuration file</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">logger.new-relic</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="s">&quot;Monolog\\Logger&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;new-relic&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="p-Indicator">[</span> <span class="nv">pushHandler</span><span class="p-Indicator">,</span> <span class="p-Indicator">[</span><span class="err">@</span><span class="nv">log.handler.new-relic</span><span class="p-Indicator">]</span> <span class="p-Indicator">]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">log.handler.new-relic</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="s">&quot;\\Application\\Log\\Handler\\NewRelic&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="p-Indicator">[</span> <span class="nv">setFallbackHandler</span><span class="p-Indicator">,</span> <span class="p-Indicator">[</span><span class="err">@</span><span class="nv">log.handler.standard</span><span class="p-Indicator">]</span> <span class="p-Indicator">]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">log.handler.standard</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="s">&quot;Monolog\\Handler\\StreamHandler&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">stream</span><span class="p-Indicator">:</span> <span class="s">&quot;/tmp/error-log.txt&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see we define a Monolog logger designed
+specifically for New Relic (<code>logger.new-relic</code>)
+and an handler that will try to log everything
+on the remote NR server: this handler also has a
+fallback handler, if the New Relic PHP extension is
+not available, which is configurable directly
+within the YAML file (<code>log.handler.error</code>).</p>
+
+<h2>The log handler</h2>
+
+<p>The New Relic handler is <strong>really</strong>
+straightforward:</p>
+
+<figure class='code'><figcaption><span>The New Relic log handler</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Class used to log on New Relic.</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">Application\Log\Handler</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Monolog\Handler\AbstractProcessingHandler</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Monolog\Handler</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">NewRelic</span> <span class="k">extends</span> <span class="nx">AbstractProcessingHandler</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$fallbackHandler</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Logs a $record on New Relic, providing additional parameters from the</span>
+</span><span class='line'><span class="sd">     * record&#39;s context.</span>
+</span><span class='line'><span class="sd">     * If the New Relic extension is not available and a fallback handler is</span>
+</span><span class='line'><span class="sd">     * provided, it will simply log the error with a fallback.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @param array $record </span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="k">function</span> <span class="nf">write</span><span class="p">(</span><span class="k">array</span> <span class="nv">$record</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">extension_loaded</span><span class="p">(</span><span class="s1">&#39;newrelic&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">newrelic_notice_error</span><span class="p">(</span><span class="nv">$record</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$record</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$parameter</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">newrelic_add_custom_parameter</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$parameter</span><span class="p">);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fallbackHandler</span> <span class="nx">instanceOf</span> <span class="nx">AbstractProcessingHandler</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fallbackHandler</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="nv">$record</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Sets the fallback handler to be used to log informations if the New Relic</span>
+</span><span class='line'><span class="sd">     * extension is not available.</span>
+</span><span class='line'><span class="sd">     *</span>
+</span><span class='line'><span class="sd">     * @param Monolog\Handler\AbstractProcessingHandler $handler </span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setFallbackHandler</span><span class="p">(</span><span class="nx">AbstractProcessingHandler</span> <span class="nv">$handler</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fallbackHandler</span> <span class="o">=</span> <span class="nv">$handler</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, the code is pretty simple: we implement the <code>write</code> method
+of <code>AbstractProcessingHandler</code> in our <code>New Relic</code> class,
+using New Relic&#8217;s low level functions to notice the
+error and add some more informations about the
+context surrounding the exception: the fallback
+handler will take stage only if the New Relic
+extension isn&#8217;t loaded.</p>
+
+<h2>Log systems and analysis</h2>
+
+<p>Simple but pretty useful: if you use either
+New Relic or Monolog I strongly recommend you
+to integrate into your log management system
+the missing tool since:</p>
+
+<ul>
+<li>New Relic serves as a nice reporting tool,
+giving you an overview of the amount of
+errors logged over some time, letting you
+define tresholds for error reporting and
+grouping errors to measure the impact a code
+change can have on your applications<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup></li>
+<li>Monolog gives you a great abstraction and
+log handlers, which can very easily ease
+your job in taking the right action for
+different types of errors<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>
+(as you saw, with the DIC it&#8217;s pure joy to
+instantiate and use different handlers based
+on a configuration file)</li>
+</ul>
+
+
+<p>At Rocket Turkey &amp; MENA we really care about logs:
+being a product-based company, <strong>a bug in our
+system is a bug on our core business</strong>, so we need
+to easily be able to spot problems.</p>
+
+<p>So far, using Monolog and New Relic as both standalone and combined
+products has been a very good choice, since with
+New Relic with have a pretty overview about
+error reporting, while Monolog gives us the
+ability to easily debug problems in our
+integrations, since solving problems with all
+the data we track with it it&#8217;s really easier,
+and if we need to change logs&#8217; format or add new data
+to the logs because we notice that it would speed
+up troubleshooting and log analysis, making
+the change is relatively easy, since it&#8217;s a
+really well OOP-written library.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Bare in mind that I will be very brief in my examples, so you won&#8217;t learn how to bootstrap the DIC here, for example <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I say applications since, as you may know, in New Relic you can handle multiple machines to be registered as different applications (like frontend/backend/mail server/cron slave/gateway) <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>In fact,whenever an email is not delivered by your email sever, it&#8217;s not a problem, but when you start seeing that the amount of mails that are not delivered are too much, you may consider to use a critical handler, specifically designed to send an SMS/email to some contacts <a href='#fnref:3' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bootstrap of a Travis-CI test-machine]]></title>
+    <link href="http://www.odino.org/bootstrap-of-a-travis-ci-test-machine/"/>
+    <updated>2012-07-27T07:00:00+04:00</updated>
+    <id>http://www.odino.org/bootstrap-of-a-travis-ci-test-machine</id>
+    <content type="html"><![CDATA[<p><a href="http://travis-ci.org/">Travis-CI</a> is an awesome open source service which
+makes continuos integration really easy in the context
+of <em>github-hosted</em> projects.</p>
+
+<!-- more -->
+
+
+<p>Developing Orient, I found out about Travis when one of
+the 3 active guys actively collaborating to the project,
+<a href="https://github.com/nrk">Daniele</a> created his own fork of the library to create
+the CI environment on Travis.</p>
+
+<h2>More than testing</h2>
+
+<p>Travis doesn&#8217;t only provide a machine in which you can
+continuosly running tests, it gives you a <strong>free</strong> VM
+which you can <strong>freely</strong> manage in the context of testing
+an application: although they don&#8217;t actually give you a &#8220;real&#8221; VM, they provide
+you an <strong>temporary VM</strong> which gets bootstrapped following
+your indications and executes the tasks that <strong>you</strong>
+indicate: in that sense, Travis gives you VMs
+<em>on-demand</em>.</p>
+
+<p>So think about it: it&#8217;s not only about testing, it&#8217;s about
+having an environment ready to do anything you want for
+your own project, like running reports.</p>
+
+<h2>A real world example</h2>
+
+<p>For <a href="http://github.com/congow/Orient">Orient</a>, Daniele managed to setup a quite clever
+bootstrap script.</p>
+
+<p>We have a quite comprehensive test-suite which you can
+execute with the single <code>phpunit</code> command, from the root
+of the library, but it just executes tests which dont
+directly talk to OrientDB.</p>
+
+<p>To execute the full test-suite, including integration
+tests, you just need to pass the test directory to the
+CLI:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">phpunit test/</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but you&#8217;ll need a working instance of OrientDB, with
+predefined admin credentials (<code>admin</code>/<code>admin</code>) listening
+on port <code>:2480</code>.</p>
+
+<p>So our challenge was to use Travis and being able to trigger
+the integration tests.</p>
+
+<p>In the <code>.travis.yml</code> configuration file, we have:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">language: php</span>
+</span><span class='line'><span class="x">php:</span>
+</span><span class='line'><span class="x">  - 5.3</span>
+</span><span class='line'><span class="x">  - 5.4</span>
+</span><span class='line'><span class="x">before_script:</span>
+</span><span class='line'><span class="x">  - sh -c ./bin/initialize-ci.sh 1.0rc6</span>
+</span><span class='line'><span class="x">script: phpunit test/</span>
+</span><span class='line'><span class="x">notifications:</span>
+</span><span class='line'><span class="x">  email:</span>
+</span><span class='line'><span class="x">    - ...@gmail.com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, as you see, we have a bash script which
+takes care of everything:</p>
+
+<figure class='code'><figcaption><span>./bin/initialize-ci.sh 1.0rc6</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">PARENT_DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="k">$(</span><span class="nb">cd</span> <span class="s2">&quot;$(dirname &quot;</span><span class="nv">$0</span><span class="s2">&quot;)&quot;</span>; <span class="nb">pwd</span><span class="k">))</span>
+</span><span class='line'><span class="nv">CI_DIR</span><span class="o">=</span><span class="s2">&quot;$PARENT_DIR/ci-stuff/environment&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">ODB_VERSION</span><span class="o">=</span><span class="k">${</span><span class="nv">1</span><span class="k">:-</span><span class="s2">&quot;1.0rc6&quot;</span><span class="k">}</span>
+</span><span class='line'><span class="nv">ODB_PACKAGE</span><span class="o">=</span><span class="s2">&quot;orientdb-${ODB_VERSION}&quot;</span>
+</span><span class='line'><span class="nv">ODB_DIR</span><span class="o">=</span><span class="s2">&quot;${CI_DIR}/${ODB_PACKAGE}&quot;</span>
+</span><span class='line'><span class="nv">ODB_LAUNCHER</span><span class="o">=</span><span class="s2">&quot;${ODB_DIR}/bin/server.sh&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;=== Initializing CI environment ===&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">cd</span> <span class="s2">&quot;$PARENT_DIR&quot;</span>
+</span><span class='line'>
+</span><span class='line'>. <span class="s2">&quot;$PARENT_DIR/bin/odb-shared.sh&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">&quot;$CI_DIR&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>  <span class="c"># Fetch the stuff needed to run the CI session.</span>
+</span><span class='line'>  git clone --quiet git://gist.github.com/1370152.git <span class="nv">$CI_DIR</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c"># Download and extract OrientDB</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;--- Downloading OrientDB v${ODB_VERSION} ---&quot;</span>
+</span><span class='line'>  odb_download <span class="s2">&quot;http://orient.googlecode.com/files/${ODB_PACKAGE}.zip&quot;</span> <span class="nv">$CI_DIR</span>
+</span><span class='line'>  unzip -q <span class="s2">&quot;${CI_DIR}/${ODB_PACKAGE}.zip&quot;</span> -d <span class="nv">$ODB_DIR</span> <span class="o">&amp;&amp;</span> chmod +x <span class="nv">$ODB_LAUNCHER</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c"># Copy the configuration file and the demo database</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;--- Setting up OrientDB ---&quot;</span>
+</span><span class='line'>  tar xf <span class="nv">$CI_DIR</span>/databases.tar.gz -C <span class="s2">&quot;${ODB_DIR}/&quot;</span>
+</span><span class='line'>  cp <span class="nv">$PARENT_DIR</span>/ci-stuff/orientdb-server-config.xml <span class="s2">&quot;${ODB_DIR}/config/&quot;</span>
+</span><span class='line'>  cp <span class="nv">$PARENT_DIR</span>/ci-stuff/orientdb-server-log.properties <span class="s2">&quot;${ODB_DIR}/config/&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;!!! Directory $CI_DIR exists, skipping downloads !!!&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Start OrientDB in background.</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;--- Starting an instance of OrientDB ---&quot;</span>
+</span><span class='line'>sh -c <span class="nv">$ODB_LAUNCHER</span> &lt;/dev/null &amp;&gt;/dev/null &amp;
+</span><span class='line'>
+</span><span class='line'><span class="c"># Wait a bit for OrientDB to finish the initialization phase.</span>
+</span><span class='line'>sleep 5
+</span><span class='line'><span class="nb">printf</span> <span class="s2">&quot;\n=== The CI environment has been initialized ===\n&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think the script speaks for itsef: we directly download
+OrientDB from the official website, de-compress it, configure
+OrientDB with our standard configuration file and launch the
+ODB server, outputting in <code>/dev/null</code>.</p>
+
+<p>Now, all of this happens everytime someone commits to the <code>master</code>
+on Github: pretty easy, simple but so powerful.</p>
+
+<p>I really recommend you to start having a look at Travi-CI
+and how you can benefit from a CI server, fully configurable,
+for free, for the sake of your own code.</p>
+
+<p>One last note: yes, all of this comes for free, but if you use
+Travis you should really consider making a donation to
+show the guys behind the project <a href="http://love.travis-ci.org/">your love</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Where is Agile?]]></title>
-    <link href="http://odino.github.com/what-is-agile/"/>
+    <link href="http://www.odino.org/what-is-agile/"/>
     <updated>2012-07-23T20:20:00+04:00</updated>
-    <id>http://odino.github.com/what-is-agile</id>
+    <id>http://www.odino.org/what-is-agile</id>
     <content type="html"><![CDATA[<p>I&#8217;m a pragmatic programmer, not a pragmatic agilist.</p>
 
 <p>If I had to be a pragmatic agilist during my career,
@@ -28,7 +654,7 @@ I&#8217;d have been fired several times, and that&#8217;s why.</p>
 
 <h2>The Agile rape</h2>
 
-<p><img class="right" src="http://odino.github.com/images/televangelist.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/televangelist.jpg"></p>
 
 <p>We hear the word <em>Agile</em> everywhere, thanks to the fact that
 this is a concept 10 years old, brought to the public by some
@@ -66,7 +692,7 @@ it seem to work: nonetheless, SCRUM is failing and will continue failing
 in preserving and communicating the legacy of the agile
 principles, values and patterns.</p>
 
-<p><img class="right" src="http://odino.github.com/images/rugby-scrum.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/rugby-scrum.jpg"></p>
 
 <p>The problem with SCRUM is not SCRUM itself, because I
 think it <em>may</em> work in some contexts, but to the way
@@ -170,7 +796,7 @@ the most credibile solutions to your problems.
 They have to be the bottleneck between a management&#8217;s
 childish dreams and reality.</p>
 
-<p><img class="right" src="http://odino.github.com/images/bottleneck.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/bottleneck.jpg"></p>
 
 <p>Still, <strong>agile is a bottleneck</strong>.</p>
 
@@ -223,7 +849,7 @@ departments don&#8217;t have the decisional power to
 make their job better, easier and safer from
 a business perspective<sup id='fnref:7'><a href='#fn:7' rel='footnote'>7</a></sup>.</p>
 
-<p><img class="left" src="http://odino.github.com/images/celtics.jpeg"></p>
+<p><img class="left" src="http://www.odino.org/images/celtics.jpeg"></p>
 
 <h2>Agile is not a reality</h2>
 
@@ -249,7 +875,7 @@ and the Los Angeles Lakers (5), always using the <a href="http://en.wikipedia.or
 </ul>
 
 
-<p><img class="right" src="http://odino.github.com/images/red-auerbach.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/red-auerbach.jpg"></p>
 
 <p>Simply, he was preaching the triangle offense and had the
 right men at the right time.</p>
@@ -281,9 +907,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Speaking at IPC 2012]]></title>
-    <link href="http://odino.github.com/speaking-at-ipc-2012/"/>
+    <link href="http://www.odino.org/speaking-at-ipc-2012/"/>
     <updated>2012-07-23T19:34:00+04:00</updated>
-    <id>http://odino.github.com/speaking-at-ipc-2012</id>
+    <id>http://www.odino.org/speaking-at-ipc-2012</id>
     <content type="html"><![CDATA[<p>Now it&#8217;s official: in October I will be
 in Mainz for <a href="http://phpconference.com/">IPC 2012</a>.</p>
 
@@ -311,7 +937,7 @@ mainly deals with protocols:</p>
 <p>If you&#8217;ll be there, dont hesitate and drop me a line
 at <em>alessandro.nadalin@gmail.com</em>, it will be a good
 opportunity to have a chat about PHP and the
-<a href="http://odino.github.com/moving-to-dubai/">Middle East</a>.</p>
+<a href="http://www.odino.org/moving-to-dubai/">Middle East</a>.</p>
 
 <div class="footnotes">
 <span>
@@ -327,9 +953,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Going beyond HTTP at IPC in October]]></title>
-    <link href="http://odino.github.com/going-beyond-http-at-ipc-in-october/"/>
+    <link href="http://www.odino.org/going-beyond-http-at-ipc-in-october/"/>
     <updated>2012-07-02T13:31:00+04:00</updated>
-    <id>http://odino.github.com/going-beyond-http-at-ipc-in-october</id>
+    <id>http://www.odino.org/going-beyond-http-at-ipc-in-october</id>
     <content type="html"><![CDATA[<p>Just a quick one: seems that in October I&#8217;ll need to travel
 all my way back to Europe to speak at the
 <a href="http://phpconference.com/">international PHP Conference</a> 2012
@@ -352,9 +978,9 @@ to make it for the first time among the germans.</p>
   
   <entry>
     <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>
-    <link href="http://odino.github.com/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
+    <link href="http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
     <updated>2012-05-14T00:28:00+04:00</updated>
-    <id>http://odino.github.com/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
+    <id>http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
     <content type="html"><![CDATA[<p>In PHP we have tons of bad constructs/functions that don&#8217;t actually
 help newcomers on writing good code: the <code>SWITCH/CASE</code> statement is one
 of those that I hate the most, although very few developers rely on
@@ -484,9 +1110,9 @@ for that specific method.</p>
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
-    <link href="http://odino.github.com/back-in-track-with-orientdb/"/>
+    <link href="http://www.odino.org/back-in-track-with-orientdb/"/>
     <updated>2012-04-20T15:26:00+04:00</updated>
-    <id>http://odino.github.com/back-in-track-with-orientdb</id>
+    <id>http://www.odino.org/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It&#8217;s been a while since I don&#8217;t release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
 back on track and I have a few interesting news.</p>
@@ -634,22 +1260,22 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
-    <link href="http://odino.github.com/y-u-no-access-whois-informations-in-php/"/>
+    <link href="http://www.odino.org/y-u-no-access-whois-informations-in-php/"/>
     <updated>2012-04-16T00:38:00+04:00</updated>
-    <id>http://odino.github.com/y-u-no-access-whois-informations-in-php</id>
+    <id>http://www.odino.org/y-u-no-access-whois-informations-in-php</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://www.odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://www.odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://www.odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
@@ -814,9 +1440,9 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   
   <entry>
     <title type="html"><![CDATA[Search engines are making the web slower]]></title>
-    <link href="http://odino.github.com/search-engines-are-making-the-web-slower/"/>
+    <link href="http://www.odino.org/search-engines-are-making-the-web-slower/"/>
     <updated>2012-04-07T10:00:00+04:00</updated>
-    <id>http://odino.github.com/search-engines-are-making-the-web-slower</id>
+    <id>http://www.odino.org/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way
 it is now: <strong>search engines are making it slower</strong> and
@@ -878,9 +1504,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Wanna be hired? Go get yourself a blog and a github profile]]></title>
-    <link href="http://odino.github.com/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/"/>
+    <link href="http://www.odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/"/>
     <updated>2012-03-27T11:32:00+04:00</updated>
-    <id>http://odino.github.com/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile</id>
+    <id>http://www.odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile</id>
     <content type="html"><![CDATA[<p>As part of my last days in <a href="http://dnsee.com">DNSEE</a> and first days in
 <a href="http://rocket-internet.de">Rocket</a> I&#8217;m involved in two recruitment processes
 and after the huge amount of CVs we got for DNSEE after the
@@ -897,7 +1523,7 @@ it works when you want to work in a body rental Java company and want to
 be identified with a mere number (and if you want to end up like that,
 stop reading this article)<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
 
-<p><img class="left" src="http://odino.github.com/images/hipster.glasses.jpg"></p>
+<p><img class="left" src="http://www.odino.org/images/hipster.glasses.jpg"></p>
 
 <p>Some months ago someone on Twitter was suggesting to move the CV on
 <a href="http://slideshare.net">slideshare</a>, something I really wanted to do - but
@@ -914,7 +1540,7 @@ which is what I basically look for, at least for a first glance.</p>
 
 <h2>It&#8217;s not where you worked unless it was The Place</h2>
 
-<p><img class="right" src="http://odino.github.com/images/virgin.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/virgin.jpg"></p>
 
 <p>It&#8217;s pretty common to see dozens of working experiences in a CV,
 without a deep description of the position held and a summary of
@@ -950,7 +1576,7 @@ it would be nice if you show them the top line of your skiils, maybe
 via a Github profile; doing so, you give the chance to take a
 look at your best code.</p>
 
-<p><img class="right" src="http://odino.github.com/images/hand.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/hand.jpg"></p>
 
 <h2>Why don&#8217;t you share your thoughts with me?</h2>
 
@@ -1005,22 +1631,22 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
-    <link href="http://odino.github.com/checking-a-domain-s-availability-with-php/"/>
+    <link href="http://www.odino.org/checking-a-domain-s-availability-with-php/"/>
     <updated>2012-03-20T09:49:00+04:00</updated>
-    <id>http://odino.github.com/checking-a-domain-s-availability-with-php</id>
+    <id>http://www.odino.org/checking-a-domain-s-availability-with-php</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://www.odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://www.odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://www.odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
@@ -1186,9 +1812,9 @@ are provided under the <code>sample</code> directory.</p>
   
   <entry>
     <title type="html"><![CDATA[Moving to Dubai]]></title>
-    <link href="http://odino.github.com/moving-to-dubai/"/>
+    <link href="http://www.odino.org/moving-to-dubai/"/>
     <updated>2012-03-05T10:00:00+04:00</updated>
-    <id>http://odino.github.com/moving-to-dubai</id>
+    <id>http://www.odino.org/moving-to-dubai</id>
     <content type="html"><![CDATA[<p>Yes, you got it.</p>
 
 <!-- more -->
@@ -1213,11 +1839,11 @@ I&#8217;m just <strong>so excited</strong> to start this new challenge.</p>
   
   <entry>
     <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
-    <link href="http://odino.github.com/scaling-through-hinclude/"/>
+    <link href="http://www.odino.org/scaling-through-hinclude/"/>
     <updated>2012-02-24T10:50:00+04:00</updated>
-    <id>http://odino.github.com/scaling-through-hinclude</id>
+    <id>http://www.odino.org/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it&#8217;s been a while that I spread the idea of
-having <a href="http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
+having <a href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
 someone pointed out that a good solution, technically
 different from the one I personally proposed, would
 be to use JavaScript to and asynchronous sub-requests.</p>
@@ -1243,7 +1869,7 @@ network, as you need, at least, to hit the reverse proxy,
 which then handles the composition on a resource with
 sub-resources.</p>
 
-<p>As I <a href="http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day/">stated earlier</a>,
+<p>As I <a href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/">stated earlier</a>,
 this is not an optimal approach for every <em>use-case</em>, so you
 definitely should try to use local caches (your users) to
 scale better.</p>
@@ -1503,9 +2129,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Book review: Data-Intensive Text Processing with MapReduce]]></title>
-    <link href="http://odino.github.com/book-review-data-intensive-text-processing-with-mapreduce/"/>
+    <link href="http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce/"/>
     <updated>2012-02-23T12:57:00+04:00</updated>
-    <id>http://odino.github.com/book-review-data-intensive-text-processing-with-mapreduce</id>
+    <id>http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce</id>
     <content type="html"><![CDATA[<p>As part of my studies not directly connected to my job,
 in the last month I&#8217;ve finished this interesting book, which
 gives you a good overview about
@@ -1514,7 +2140,7 @@ gives you a good overview about
 <!-- more -->
 
 
-<p><img class="right" src="http://odino.github.com/images/mapreduce.book.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/mapreduce.book.jpg"></p>
 
 <p><a href="http://www.umiacs.umd.edu/~jimmylin/">Jimmy Lin</a> and Chris
 Dyer nailed this one: the book is really clear and leaves
@@ -1541,7 +2167,7 @@ think about <strong>stateful</strong> large scale data-processing algorithms.</p
 
 <p>I strongly recommend you to read such this kind of book: the approach
 followed by the writers is so engineered and some examples they give,
-like the <a href="http://odino.github.com/quality-isnt-always-better-than-quality/">stupid backoff</a>,
+like the <a href="http://www.odino.org/quality-isnt-always-better-than-quality/">stupid backoff</a>,
 are pearls for your working experience.</p>
 
 <div class="footnotes">
@@ -1560,9 +2186,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[How to argue with junior and stubborn developers]]></title>
-    <link href="http://odino.github.com/how-to-argue-with-junior-and-stubborn-developers/"/>
+    <link href="http://www.odino.org/how-to-argue-with-junior-and-stubborn-developers/"/>
     <updated>2012-02-23T12:00:00+04:00</updated>
-    <id>http://odino.github.com/how-to-argue-with-junior-and-stubborn-developers</id>
+    <id>http://www.odino.org/how-to-argue-with-junior-and-stubborn-developers</id>
     <content type="html"><![CDATA[<p>In these days I had a nice chat with
 <a href="http://www.linkedin.com/in/gogebakan">Önder Göğebakan</a> to exchange
 some views about <strong>team leading</strong>: one of the points I loved to face
@@ -1578,7 +2204,7 @@ the indications received from their technical lead</strong>.</p>
 opinion/advice/dictation: it may be due to inexperience or attitude, and this
 is not <em>that</em> bad.</p>
 
-<p><img class="right" src="http://odino.github.com/images/rooster.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/rooster.jpg"></p>
 
 <p>A developer which pulls responsabilities shows a good attitude, as it
 demonstrates that he wants to take a decision based on different variables
@@ -1606,7 +2232,7 @@ an unvaluable knowledge about problem solving, and when I say
 unvaluable I mean that there&#8217;s no inexperienced brain that could
 overcome a seasoned veteran.</p>
 
-<p><img class="left" src="http://odino.github.com/images/jordan.jpg"></p>
+<p><img class="left" src="http://www.odino.org/images/jordan.jpg"></p>
 
 <p>Think about the way you solved that technical problem earlier in your
 career and start adding examples to your cause: don&#8217;t pretend to
@@ -1635,7 +2261,7 @@ situations occurred during those valuable years.</p>
 
 <h2>Approach the problem from different points of view</h2>
 
-<p><img class="right" src="http://odino.github.com/images/sheldon.board.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/sheldon.board.jpg"></p>
 
 <p><a href="http://en.wikipedia.org/wiki/Sheldon_Cooper">Sheldon Cooper</a>
 has a huge problem in his life: he&#8217;s not open to
@@ -1664,7 +2290,7 @@ result home: you are not meant to directly write a spike for a
 writing small and rough pieces of code</strong> to test if some of the
 solutions he thiks are gonna work seem to be working fine.</p>
 
-<p><img class="left" src="http://odino.github.com/images/lego.technic.jpg"></p>
+<p><img class="left" src="http://www.odino.org/images/lego.technic.jpg"></p>
 
 <p>This makes the developer feel that he&#8217;s  gaining trust from you,
 as he is allowed to actually spend some billable time on his
@@ -1682,7 +2308,7 @@ since no one is perfect prepare your words to congratulate with
 the developer and thank him for the good approach, <strong>without
 feeling embarassed</strong>.</p>
 
-<p><img class="right" src="http://odino.github.com/images/socrates.gif"></p>
+<p><img class="right" src="http://www.odino.org/images/socrates.gif"></p>
 
 <h2>Consolidate doubts</h2>
 
@@ -1709,7 +2335,7 @@ captain and leader of the
 injured, and the Knicks need to defeat the Los Angeles Lakers
 in game 7 (last game of a 3-3 tied series) to become NBA champions.</p>
 
-<p><img class="right" src="http://odino.github.com/images/walt.frazier.jpg"></p>
+<p><img class="right" src="http://www.odino.org/images/walt.frazier.jpg"></p>
 
 <p>Willis starts the game, sinks down the first two points for New York
 with a perimetral shot and, well, then he stops there.</p>
@@ -1775,19 +2401,19 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
-    <link href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <link href="http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00+04:00</updated>
-    <id>http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli</id>
+    <id>http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+        <a href="http://www.odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
     </li>
     <li>
-        <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+        <a href="http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
     </li>
     <li>
-        <a href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+        <a href="http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
     </li>
 </ol>
 
@@ -1800,7 +2426,7 @@ in pure PHP.</p>
 <!-- more -->
 
 
-<p><img class="right" src="http://odino.github.com/images/installer.png"></p>
+<p><img class="right" src="http://www.odino.org/images/installer.png"></p>
 
 <p>In this episode we are going to create an interactive shell
 able to generate new composer-based projects: we will have a
@@ -1828,7 +2454,7 @@ implement your own commands, so we will add a couple custom commands, one to
 <strong>register dependencies</strong> and one to <strong>execute the installation</strong>.</p>
 
 <p>First of all, let create our own <code>composer.json</code>, to download the Console
-and <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Process</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+and <a href="http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Process</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
 components:</p>
 
 <figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2319,7 +2945,7 @@ usual composer&#8217;s installation process on the installation directory:</p>
 <p>This is the console output for generating a new project which depends on
 <code>symfony/yaml</code> and <code>symfony/dom-crawler</code>:</p>
 
-<p><img class="center" src="http://odino.github.com/images/shell.png"></p>
+<p><img class="center" src="http://www.odino.org/images/shell.png"></p>
 
 <p>The auto-generated <code>composer.json</code> will look like:</p>
 
@@ -2359,19 +2985,19 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Launching PHPUnit tests from a browser with Symfony2]]></title>
-    <link href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
+    <link href="http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
     <updated>2012-02-20T13:41:00+04:00</updated>
-    <id>http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2</id>
+    <id>http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+        <a href="http://www.odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
     </li>
     <li>
-        <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+        <a href="http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
     </li>
     <li>
-        <a href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+        <a href="http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
     </li>
 </ol>
 
@@ -2601,7 +3227,7 @@ the <code>stop</code> attribute to the JSON object it outputs:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><img class="center" src="http://odino.github.com/images/phpunit-process.png"></p>
+<p><img class="center" src="http://www.odino.org/images/phpunit-process.png"></p>
 
 <h2>Benefits from the Process component</h2>
 
@@ -2656,19 +3282,19 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Using the Symfony2 DIC as a standalone component]]></title>
-    <link href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
+    <link href="http://www.odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/"/>
     <updated>2012-02-15T20:06:00+04:00</updated>
-    <id>http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
+    <id>http://www.odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.github.com/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+        <a href="http://www.odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
     </li>
     <li>
-        <a href="http://odino.github.com/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+        <a href="http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
     </li>
     <li>
-        <a href="http://odino.github.com/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+        <a href="http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
     </li>
 </ol>
 
@@ -3127,28 +3753,28 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Retrieving raw WHOIS informations in PHP]]></title>
-    <link href="http://odino.github.com/retrieving-raw-whois-informations-in-php/"/>
+    <link href="http://www.odino.org/retrieving-raw-whois-informations-in-php/"/>
     <updated>2012-02-14T00:58:00+04:00</updated>
-    <id>http://odino.github.com/retrieving-raw-whois-informations-in-php</id>
+    <id>http://www.odino.org/retrieving-raw-whois-informations-in-php</id>
     <content type="html"><![CDATA[<ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
-        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+        <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
     </li>
     <li>
-        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+        <a href="http://www.odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
     </li>
     <li>
-        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+        <a href="http://www.odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
     </li>
   <li>
-    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+    <a href="http://www.odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
   </li>
 </ol>
 
 
 <p>After something more than a week I&#8217;m back here with a first implementation of
-the PHP library I was <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
+the PHP library I was <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
 to retrieve WHOIS informations with PHP.</p>
 
 <!-- more -->
@@ -3162,7 +3788,7 @@ a PHP library to consume <a href="http://robowhois.com">Robowhois</a> APIs.</p>
 
 <h2>Installation</h2>
 
-<p>The library is assembled with <a href="http://odino.github.com/managing-php-dependencies-with-composer/">Composer</a>,
+<p>The library is assembled with <a href="http://www.odino.org/managing-php-dependencies-with-composer/">Composer</a>,
 so you only need to follow the canonical steps in order to download the
 required dependencies and use it in your own codebase</p>
 
@@ -3269,215 +3895,6 @@ already implemented, but returning a JSON response.</p>
 <p>Then&#8230; take a look at the <a href="https://github.com/robowhois/robowhois-php-client/issues">issue tracker</a>
 to stay updated about the state of the project: in the next 3 weeks we should
 be able to go out with a stable client for y&#8217;all.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A PHP library to retrieve WHOIS informations]]></title>
-    <link href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/"/>
-    <updated>2012-02-03T03:40:00+04:00</updated>
-    <id>http://odino.github.com/a-php-library-to-retrieve-whois-informations</id>
-    <content type="html"><![CDATA[<ol class="aseries">
-    <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
-    <li>
-        <a href="http://odino.github.com/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
-    </li>
-    <li>
-        <a href="http://odino.github.com/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
-    </li>
-    <li>
-        <a href="http://odino.github.com/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
-    </li>
-  <li>
-    <a href="http://odino.github.com/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
-  </li>
-</ol>
-
-
-<p>In this days me and my friend <a href="http://davidfunaro.com">David</a> are renewing our committment
-to <em>open source</em>: our next project is going to be an <strong>SDK for a
-WHOIS webservice</strong>.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="http://odino.github.com/images/robodomain.png"></p>
-
-<p>Last week we got in touch with Simone, the mind behind <a href="http://robodomain.com">Robodomain</a>,
-a startup delivering a really useful product, which lets you</p>
-
-<blockquote><p>Keep track of all your domains in one place.<br/>Check domain status, log transactions, orders and payments, store notes and enjoy our network tools.</p><footer><strong>Robodomain</strong> <cite><a href='http://robodomain.com'>Official Website</a></cite></footer></blockquote>
-
-
-<p>To be able to develop its own software (in Ruby) he started writing a <a href="http://www.ruby-whois.org/">Gem</a>
-and then realized that this kind of stuff could be useful to other people too: he decided to
-open a public API - you only need to pay a bunch of bucks to use it - and launch a new, free,
-universal WHOIS service that everyone can enjoy.</p>
-
-<p>We are taking the stage in order to develop the official <strong>PHP SDK</strong> for the webservice, so
-- along with the development of <a href="http://github.com/congow/Orient">Orient</a> - you&#8217;ll read here
-about this new library in the next weeks.</p>
-
-<p>We have just kickstarted the project, designed the first interfaces, implemented a bunch of
-methods and tested them: if you are courious enough you can spot them over the internet, but
-I won&#8217;t link and share what we developed until our next DevMeeting, in which we will do the
-majority of the work.</p>
-
-<p>However I want you to enjoy a preview of what you will be able to do with it (just some explanatory LOCs):</p>
-
-<figure class='code'><figcaption><span>This is definitely NOT gonna be the code you&#8217;ll be using, just an example of how things work now</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Http\Client</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Buzz\Browser</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="nv">$apiKey</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">(</span><span class="k">new</span> <span class="nx">Browser</span><span class="p">()));</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">isAvailable</span><span class="p">(</span><span class="s2">&quot;google.com&quot;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="s2">&quot;Hey man, go register google.com, seems that it&#39;s free!&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$whois</span> <span class="o">=</span> <span class="nv">$robodomain</span><span class="o">-&gt;</span><span class="na">whoisProperties</span><span class="p">(</span><span class="s1">&#39;google.com&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">echo</span> <span class="s2">&quot;Man, you&#39;ll need to wait until &quot;</span> <span class="o">.</span> <span class="nv">$whois</span><span class="o">-&gt;</span><span class="na">expiresAt</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="c1">// $whois-&gt;expiresAt() returns a \DateTime object</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As far as we&#8217;ve already done, this SDK uses Symfony2&#8217;s <a href="https://github.com/symfony/HttpFoundation">HttpFoundation</a>
-and <a href="https://github.com/kriswallsmith/Buzz">Buzz</a> to properly handle
-communication with the webservice through the HTTP protocol: we are open to any suggestion, so
-if you know a very good HTTP client that could replace Buzz<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> we would be very
-glad to evaluate it.</p>
-
-<p>The standard bootstrap of the library will be also using Symfony2&#8217;s <a href="https://github.com/symfony/DependencyInjection">dependency injection
-container</a>.</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>Not Zend\Http\Client <a href='#fnref:1' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
-    <link href="http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
-    <updated>2012-01-27T19:27:00+04:00</updated>
-    <id>http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
-    <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&#8217;s gaining
-its <em>momentum</em> due to a good article which explained how you should build
-your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
-
-<!-- more -->
-
-
-<p><img class="left" src="http://odino.github.com/images/http.png"></p>
-
-<h2>HTTP is slowly dying</h2>
-
-<p>This seems to be the conclusion that lot of people had after reading that article:
-SPDY is a newer, faster, more modern protocol and I have no problem in admitting
-that <em>a few</em> parts of the HTTP protocol need to be reviewed<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>: you
-can&#8217;t simply advocate that HTTP fits <a href="http://lists.w3.org/Archives/Public/www-tag/2011Dec/0034.html">perfectly</a>
-in today&#8217;s web, that&#8217;s a <em>de-facto</em> issue.</p>
-
-<h2>SPDY in a nutshell</h2>
-
-<p><img class="right" src="http://odino.github.com/images/spdy.packet.png"></p>
-
-<p>SPDY is just a <strong>really good protocol implementation</strong>: it supports multiplexing,
-<strong>encourages</strong> content compression, allows servers to <strong>push notifications</strong> and
-lets you prioritize requests, just to mention the hottest features among
-<a href="http://www.chromium.org/spdy/spdy-whitepaper">others</a>.</p>
-
-<p>Amazon is currently shipping its Kindle with a browser that uses this protocol
-to communicate with EC2 instances, <a href="https://wiki.mozilla.org/Platform/Features/SPDY">Firefox 11 will support it</a>
-while - if using a google product - you may already be using SPDY<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:
-the road is long, but SPDY seems to be WWW&#8217;s <em>next big thing</em>.</p>
-
-<h2>SPDY needs to love HTTP</h2>
-
-<p>Before going out there yelling at HTTP and telling everyone that SPDY will be
-the new, futuristic, what-we-were-missing web protocol I want you to consider a
-few things.</p>
-
-<p>It should not surprise you the fact that SPDY is <a href="http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft2#TOC-HTTP-Layering-over-SPDY">almost-completely</a>
-implementing <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>: <strong>the web relies on
-established semantics</strong>, clients and servers interact based on a series of
-well-known verbs, feedbacks and metadata associated to resources, that are the
-only immanent concept of the web.</p>
-
-<h2>Divide et impera: HTTP&#8217;s soul is here to stay</h2>
-
-<blockquote><p>[We have] 10 years of implementation experience of RFC2616</p><footer><strong>Mark Nottingham</strong> <cite><a href='http://www.w3.org/2001/tag/2012/01/06-minutes#item02'>HTTP Futures and SPDY</a></cite></footer></blockquote>
-
-
-<p>You should really reconsider the HTTP protocol as 2 separate layers: its
-technical implementation and its interface.</p>
-
-<blockquote><p>The [HTTP] interface is designed to be efficient for large-grain [&#8230;] data transfer, optimizing for the common case of the Web.</p><footer><strong>Roy T. Fielding</strong> <cite><a href='http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_5'>The Uniform Interface</a></cite></footer></blockquote>
-
-
-<p>The technical implementation may be a little updated<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup> but its
-interface was thought to be able to let machine and humans interact with
-resources in the most open, fault-tolerant, scalable, robust way we could have
-ever thought: <strong>without relying on HTTP, SPDY would not work</strong>, not in the ancient,
-not in the modern, not even in the future web.</p>
-
-<p>HTTP 2.0 is close, and <a href="http://www.w3.org/2001/tag/2012/01/06-minutes#item02">the W3C is not blind</a>.</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>To be kind <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>If you are currently reading this note with Chrome/Chromium, go here: chrome://net-internals/#events&q=type:SPDY_SESSION%20is:active <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Again, to be kind <a href='#fnref:3' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Roy Fielding on SOAP in the W3C context]]></title>
-    <link href="http://odino.github.com/roy-fielding-on-soap-in-the-w3c-context/"/>
-    <updated>2012-01-27T15:20:00+04:00</updated>
-    <id>http://odino.github.com/roy-fielding-on-soap-in-the-w3c-context</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<p>I found an old but interesting entry in the WWW-talk mailing list:</p>
-
-<p><img class="right" src="http://odino.github.com/images/royfielding.png"></p>
-
-<blockquote><p>The only reason SOAP remains in the W3C for standardization is because all of the other forums either rejected the concept out of hand or refused to rubber-stamp a poor implementation of a bad idea.<br/>If this thing is going to be called Web Services, then I insist that it actually have something to do with the Web.<br/>If not, I&#8217;d rather have the WS-I group responsible for abusing the marketplace with yet another CORBA/DCOM than have the W3C waste its effort pandering to the whims of marketing consultants.<br/>I am not here to accommodate the requirements of mass hysteria.</p><footer><strong>Roy T. Fielding</strong> <cite><a href='http://lists.w3.org/Archives/Public/www-tag/2002Apr/0235.html'>WWW-talk Mailing List</a></cite></footer></blockquote>
-
-
-<p>:-)</p>
 ]]></content>
   </entry>
   

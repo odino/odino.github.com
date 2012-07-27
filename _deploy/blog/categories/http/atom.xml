@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/http/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/http/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
-    <link href="http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
+    <link href="http://www.odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
     <updated>2012-01-27T19:27:00+04:00</updated>
-    <id>http://odino.github.com/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
+    <id>http://www.odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it's gaining
 its <em>momentum</em> due to a good article which explained how you should build
 your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
@@ -92,9 +92,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
-    <link href="http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day/"/>
+    <link href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
     <updated>2012-01-20T14:15:00+04:00</updated>
-    <id>http://odino.github.com/edge-side-includes-how-to-spare-terabytes-every-day</id>
+    <id>http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
 
@@ -247,7 +247,7 @@ read the next chapter</strong>.</p>
     <div class="clearfix" id="footerContainer">
         <div class="mrl lfloat" role="contentinfo">
             <div class="fsm fwn fcg">
-                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.github.com/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+                <span> Facebook © 2012</span> · <a rel="dialog" href="http://www.odino.org/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
             </div>
         </div>
         <div class="navigation fsm fwn fcg" role="navigation">
@@ -389,9 +389,9 @@ and leaner web.</p>
   
   <entry>
     <title type="html"><![CDATA[HTTP saves time, saves money, saves you]]></title>
-    <link href="http://odino.github.com/http-saves-time-saves-money-saves-you/"/>
+    <link href="http://www.odino.org/http-saves-time-saves-money-saves-you/"/>
     <updated>2011-09-21T10:33:00+04:00</updated>
-    <id>http://odino.github.com/http-saves-time-saves-money-saves-you</id>
+    <id>http://www.odino.org/http-saves-time-saves-money-saves-you</id>
     <content type="html"><![CDATA[<p>It Italy, as usual, our govern is a mess when talking about <em>{insert any topic here}</em>: today's topic will be... <strong>webservices, saving money, time and providing an efficient service to the citizens</strong>.</p>
 
 <!-- more -->
@@ -493,9 +493,9 @@ vatVerifyService = new ItalianGovernVatService</p>
   
   <entry>
     <title type="html"><![CDATA[Symfony2, HTTP cache & the good parts of both of'em]]></title>
-    <link href="http://odino.github.com/symfony-2-http-cache/"/>
+    <link href="http://www.odino.org/symfony-2-http-cache/"/>
     <updated>2011-05-15T23:27:00+04:00</updated>
-    <id>http://odino.github.com/symfony-2-http-cache</id>
+    <id>http://www.odino.org/symfony-2-http-cache</id>
     <content type="html"><![CDATA[<p>If you missed my talk about HTTP caching and Symfony2 at the PHPDay, here are the slides that I published friday.</p>
 
 <!-- more -->
@@ -507,9 +507,9 @@ vatVerifyService = new ItalianGovernVatService</p>
   
   <entry>
     <title type="html"><![CDATA[The current vague state of PUT and DELETE in HTML5]]></title>
-    <link href="http://odino.github.com/the-current-vague-state-of-put-and-delete-in-html5/"/>
+    <link href="http://www.odino.org/the-current-vague-state-of-put-and-delete-in-html5/"/>
     <updated>2011-05-06T13:01:00+04:00</updated>
-    <id>http://odino.github.com/the-current-vague-state-of-put-and-delete-in-html5</id>
+    <id>http://www.odino.org/the-current-vague-state-of-put-and-delete-in-html5</id>
     <content type="html"><![CDATA[<p>If you followed my <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011">REST in peace</a> presentation, you probably noted that I was <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011/180">a bit angry against HTML5</a>.</p>
 
 <!-- more -->

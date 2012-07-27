@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: graphdb | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.com/blog/categories/graphdb/atom.xml" rel="self"/>
-  <link href="http://odino.github.com/"/>
-  <updated>2012-07-23T21:45:07+04:00</updated>
-  <id>http://odino.github.com/</id>
+  <link href="http://www.odino.org/blog/categories/graphdb/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2012-07-27T06:59:01+04:00</updated>
+  <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[GraphDB in PHP: time for the serious stuff]]></title>
-    <link href="http://odino.github.com/graphdb-in-php-time-for-the-serious-stuff/"/>
+    <link href="http://www.odino.org/graphdb-in-php-time-for-the-serious-stuff/"/>
     <updated>2011-10-25T12:09:00+04:00</updated>
-    <id>http://odino.github.com/graphdb-in-php-time-for-the-serious-stuff</id>
+    <id>http://www.odino.org/graphdb-in-php-time-for-the-serious-stuff</id>
     <content type="html"><![CDATA[<p>This weekend I've been, for the first time in my life, in Poland, to speak at their national PHP conference.</p>
 
 <p>We - as I was co-speaking with <a href="http://davidfunaro.com/">David</a> - introduced to the audience the fantastic ecosystem of graph databases, which are storage system using graphs as their primary data structures.</p>
