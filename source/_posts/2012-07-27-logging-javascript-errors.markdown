@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "Logging JavaScript errors"
-date: 2012-07-27 05:10
+date: 2012-07-27 09:00
 comments: true
 categories: [JavaScript, log management]
-published: false
 ---
 
-In one of my last posts I talked about
+In one of my latest posts I talked about
 [using Monolog to remotely log stuff on New Relic](/using-monolog-for-php-error-reporting-on-new-relic/):
 getting a bit deeper on log management
 systems, here's how we managed to report
@@ -31,15 +30,13 @@ happen of different clients.
 ## The concept
 
 This is **totally not an idea of mine**: it
-comes from a pretty smart [blog post which illustrates the main concept]():
+comes from a pretty smart [blog post which illustrates the main concept](http://devblog.pipelinedeals.com/pipelinedeals-dev-blog/2012/2/12/javascript-error-reporting-for-fun-and-profit-1.html):
 when a JS error is encountered, you trigger an HTTP request
 to a URL that collect the data transmitted
 within that request and logs it with
 server-side code.
 
 ``` javascript How to trigger JS error reporting
-jQuery(function() { window.documentIsReady = true; });
-
 window.MaximumErrorCount = 5;
 
 window.onerror = function(errorMsg, file, lineNumber) {

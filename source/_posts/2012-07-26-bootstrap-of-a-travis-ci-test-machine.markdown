@@ -1,47 +1,40 @@
 ---
 layout: post
 title: "Bootstrap of a Travis-CI test-machine"
-date: 2012-07-26 21:16
+date: 2012-07-27 07:00
 comments: true
-categories: [testing]
-published: false
+categories: [testing, github]
 ---
 
-[Travis-CI]() is an awesome open source service which
+[Travis-CI](http://travis-ci.org/) is an awesome open source service which
 makes continuos integration really easy in the context
 of *github-hosted* projects.
 
 <!-- more -->
 
-It's not like travis is only limited to github projects
-(verify), but you can get the best of it using its
-github integration.
-
 Developing Orient, I found out about Travis when one of
 the 3 active guys actively collaborating to the project,
-[Daniele]() created his own fork of the library to create
+[Daniele](https://github.com/nrk) created his own fork of the library to create
 the CI environment on Travis.
 
 ## More than testing
 
-Travis doesnt only provide a machine in which you can
+Travis doesn't only provide a machine in which you can
 continuosly running tests, it gives you a **free** VM
-which you can freely manage in the context of testing
-an application.
-
-Ok, they don't actually give you a VM, but they provide
-you an **environment** which gets bootstrapped following
+which you can **freely** manage in the context of testing
+an application: although they don't actually give you a "real" VM, they provide
+you an **temporary VM** which gets bootstrapped following
 your indications and executes the tasks that **you**
 indicate: in that sense, Travis gives you VMs
 *on-demand*.
 
 So think about it: it's not only about testing, it's about
 having an environment ready to do anything you want for
-your own project.
+your own project, like running reports.
 
 ## A real world example
 
-For [Orient](), Daniele managed to setup a quite clever
+For [Orient](http://github.com/congow/Orient), Daniele managed to setup a quite clever
 bootstrap script.
 
 We have a quite comprehensive test-suite which you can
@@ -59,10 +52,10 @@ phpunit test/
 
 but you'll need a working instance of OrientDB, with
 predefined admin credentials (`admin`/`admin`) listening
-to port `:2480`.
+on port `:2480`.
 
-So our challenge was to use Travis being able to trigger
-also the integration tests.
+So our challenge was to use Travis and being able to trigger
+the integration tests.
 
 In the `.travis.yml` configuration file, we have:
 
@@ -135,9 +128,9 @@ Now, all of this happens everytime someone commits to the `master`
 on Github: pretty easy, simple but so powerful.
 
 I really recommend you to start having a look at Travi-CI
-and how you can benefit of a CI server, fully configurable,
+and how you can benefit from a CI server, fully configurable,
 for free, for the sake of your own code.
 
 One last note: yes, all of this comes for free, but if you use
 Travis you should really consider making a donation to
-show the guys behind the project [your love]().
+show the guys behind the project [your love](http://love.travis-ci.org/).

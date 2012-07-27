@@ -1,16 +1,15 @@
 ---
 layout: post
 title: "Using Monolog for PHP error reporting on New Relic"
-date: 2012-07-26 22:24
+date: 2012-07-27 08:00
 comments: true
 categories: [PHP, Monolog, New Relic, log management]
-published: false
 ---
 
-I **do** really like [New Relic](), a real-time
+I **do** really like [New Relic](http://newrelic.com/), a real-time
 error reporting solution available for many
 platforms, so a few days ago I decided to
-integrate it with [Monolog](), the other
+integrate it with [Monolog](https://github.com/Seldaek/monolog/), the other
 main logging tool that we use here at
 Rocket.
 
@@ -26,7 +25,7 @@ logging handler will act as a fallback.
 
 To reach our goal we will simply need the
 New Relic PHP extension, Monolog and the
-Symfony2 [dependency injection container]().
+Symfony2 [dependency injection container](http://symfony.com/doc/current/book/service_container.html).
 
 ## Catching the error and reporting it
 
@@ -174,10 +173,9 @@ on a configuration file)
 At Rocket Turkey & MENA we really care about logs:
 being a product-based company, **a bug in our
 system is a bug on our core business**, so we need
-to esily be able to spot where we're encountering
-problems.
+to easily be able to spot problems.
 
-So far, using Monolog and New Relic as standalone
+So far, using Monolog and New Relic as both standalone and combined
 products has been a very good choice, since with
 New Relic with have a pretty overview about
 error reporting, while Monolog gives us the
