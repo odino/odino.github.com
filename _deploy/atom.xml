@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-07-28T03:04:49+04:00</updated>
+  <updated>2012-07-28T04:13:36+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How refactoring influenced the World Wide Web]]></title>
+    <link href="http://www.odino.org/three-times-and-refactor/"/>
+    <updated>2012-07-28T02:58:00+04:00</updated>
+    <id>http://www.odino.org/three-times-and-refactor</id>
+    <content type="html"><![CDATA[<p>You&#8217;re about to read
+how the concept behind a
+<a href="http://sourcemaking.com/refactoring/when-should-you-refactor">refactoring tecnique</a>
+gave us the internet:</p>
+
+<!-- more -->
+
+
+
+
+<blockquote><p>Because people at CERN came from universities all over the world, they brought with them all types of computers. Not just Unix, Mac and PC: there were all kinds of big mainframe computer and medium sized computers running all sorts of software[: to retrieve informations] you had to log on to different computers [and] often it was just easier to go and ask people when they were having coffee.</p><p>I actually wrote some programs to take information from one system and convert it so it could be inserted into another system. More than once. And when you are a programmer, and you solve one problem and then you solve one that&#8217;s very similar, you often think, &#8220;Isn&#8217;t there a better way? Can&#8217;t we just fix this problem for good?&#8221; That became &#8220;Can&#8217;t we convert every information system so that it looks like part of some imaginary information system which everyone can read?&#8221; And that became the WWW.</p><footer><strong>Tim Berners Lee</strong> <cite><a href='http://www.w3.org/People/Berners-Lee/Kids.html#What'>Tim&#8217;s Kids FAQ</a></cite></footer></blockquote>
+
+
+<p>Meditate about it the
+next time you&#8217;ll stick to something
+boring because fixing it seems
+unpractical.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Logging JavaScript errors]]></title>
@@ -3748,153 +3773,6 @@ Notes
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Retrieving raw WHOIS informations in PHP]]></title>
-    <link href="http://www.odino.org/retrieving-raw-whois-informations-in-php/"/>
-    <updated>2012-02-14T00:58:00+04:00</updated>
-    <id>http://www.odino.org/retrieving-raw-whois-informations-in-php</id>
-    <content type="html"><![CDATA[<ol class="aseries">
-    <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
-    <li>
-        <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
-    </li>
-    <li>
-        <a href="http://www.odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
-    </li>
-    <li>
-        <a href="http://www.odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
-    </li>
-  <li>
-    <a href="http://www.odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
-  </li>
-</ol>
-
-
-<p>After something more than a week I&#8217;m back here with a first implementation of
-the PHP library I was <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
-to retrieve WHOIS informations with PHP.</p>
-
-<!-- more -->
-
-
-<p>In the first meeting I had with <a href="http://davidfunaro.com">David</a> we just setup the
-environment (Composer, PHPUnit and so on) and today we&#8217;ve release the
-<a href="https://github.com/robowhois/robowhois-php-client/tree/0.7.0">first tag</a>
-- 0.7.0 - of <a href="https://github.com/robowhois/robowhois-php-client">Robowhois PHP client</a>,
-a PHP library to consume <a href="http://robowhois.com">Robowhois</a> APIs.</p>
-
-<h2>Installation</h2>
-
-<p>The library is assembled with <a href="http://www.odino.org/managing-php-dependencies-with-composer/">Composer</a>,
-so you only need to follow the canonical steps in order to download the
-required dependencies and use it in your own codebase</p>
-
-<figure class='code'><figcaption><span>Installing the Robowhois PHP client from the command line</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git@github.com:robowhois/robowhois-php-client.git
-</span><span class='line'>
-</span><span class='line'>wget http://getcomposer.org/composer.phar
-</span><span class='line'>
-</span><span class='line'>php composer.phar install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>then you can autoload everything through the auto-generated autoloader
-provided by Composer:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">require</span> <span class="s1">&#39;vendor/.composer/autoload.php&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Retrieving raw WHOIS responses</h2>
-
-<p>By now we have implemented the most simple API exposed, the <code>whois:index</code>
-one, which returns the raw WHOIS informations associated to a domain.</p>
-
-<p>You can take a look at the example at <code>sample/index.php</code> or try it live:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">php sample/index.php</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>bare in mind that you&#8217;ll need to sign for a free API key up at Robowhois
-website (as far as I remember, they provide 500 free request, but the annual
-fee for unlimited requests is <strong>very cheap</strong>).</p>
-
-<p>You can also be a bit more creative than the example above:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Exception</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">require</span> <span class="s1">&#39;vendor/.composer/autoload.php&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// same as $robowhois-&gt;whoisIndex(...)-&gt;getContent()</span>
-</span><span class='line'>    <span class="k">echo</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">whoisIndex</span><span class="p">(</span><span class="s1">&#39;robowhois.com&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception\Http\Request\Unauthorized</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;WTF did you used a pirated API key?!?!?!&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception\Http\Response\NotFound</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;OMG 404 happened :-|&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception\Http\Response\ServerError</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;Server too drunk to fulfill the request&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Next release</h2>
-
-<p>In the next meeting - probably next monday - we will implement the <code>account</code> API,
-used to retrieve informations about the client&#8217;s account - useful for knowing how many
-remaining HTTP requests you have, the <code>whois:availability</code> API, to check whether a
-domain is available or not, and the <code>whois:record</code> API, identical to the one we
-already implemented, but returning a JSON response.</p>
-
-<p>Then&#8230; take a look at the <a href="https://github.com/robowhois/robowhois-php-client/issues">issue tracker</a>
-to stay updated about the state of the project: in the next 3 weeks we should
-be able to go out with a stable client for y&#8217;all.</p>
 ]]></content>
   </entry>
   
