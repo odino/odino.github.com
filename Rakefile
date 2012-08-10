@@ -1,3 +1,7 @@
+# encoding: utf-8
+LANG="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
+
 require "rubygems"
 require "bundler/setup"
 require "stringex"
@@ -382,9 +386,9 @@ task :list do
 end
 
 # usage rake new_page[my-new-page] or rake new_page[my-new-page.html] or rake new_page (defaults to "new-page.markdown")
-desc "List all posts with an asterisk if it's published. Advanced usage: 'rake list_posts[pub|unpub]'"
+desc "List all posts with an asterisk if it's published. Advanced usage: 'rake list_posts'"
 task :list_posts, :type do |t, args|
-  type = args.type
+  type = get_stdin("(pub|unpub): ")
   
   result = ""
   Dir.glob("#{source_dir}/#{posts_dir}/*.markdown").sort.each do |post|
