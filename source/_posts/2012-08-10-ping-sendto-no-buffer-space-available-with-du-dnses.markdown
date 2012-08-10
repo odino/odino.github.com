@@ -13,7 +13,7 @@ no internet connection since last night.
 <!-- more -->
 
 Chrome is telling me that the DNS lookup
-failed, and since I know, here in UAE,
+fails, and since I know, here in UAE,
 problems with [DU](http://www.du.ae/en/default?gclid=COC_7Jvd3LECFUp76wodgB0Apg) DNSes are pretty frequent,
 I thought I just needed to use different DNS
 servers.
@@ -24,12 +24,12 @@ Google Public DNS ( `8.8.8.8` and `8.8.4.4` )
 without any good feedback, I thought it could be
 something out of my jurisdiction :)
 
-Pissed off, I told myself to try to ping the DNS
+Pissed off, I tried to ping the DNS
 servers manually:
 
 ``` bash
-ping 8.8.4.4          
-PING 8.8.4.4 (8.8.4.4): 56 data bytes
+ping 8.8.8.8          
+PING 8.8.8.8 (8.8.8.8): 56 data bytes
 ping: sendto: No buffer space available
 ping: sendto: No buffer space available
 ```
