@@ -4,5 +4,4 @@ source/_posts/2012-01-24-building-fault-tolerant-api-clients.markdown
 Someone says computer science degrees are useless
 Katas are funny, moreover when you're a newbie
 Inline comments lead to extracted methods: spiega perche gli inline comments sarebbero in realta' spunti per nuovi metodi
-atlassian
-test
+atlassian very bad experience
