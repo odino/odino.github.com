@@ -6,6 +6,7 @@ $(document).ready(function(){
 	frontPageImg.css('margin-right', '0.9em');
 
 	displayImageCaption();
+	navigationHover();
 });
 
 var displayImageCaption = function() {
@@ -23,4 +24,24 @@ var displayImageCaption = function() {
 			caption.css('top', top);
 		}
 	})
+};
+
+var navigationHover = function(){
+	$('ul.main-navigation img').each(function(){
+		$(this).addClass('borderOff');
+	});
+	$('ul.main-navigation img').bind('mouseover', function(){
+		var image = $(this).attr('alt') + '.png';
+
+		$(this).attr('src', '/images/navigation/hover/' + image);
+		$(this).removeClass('borderOff');
+		$(this).addClass('borderOn');
+	});
+	$('ul.main-navigation img').bind('mouseout', function(){
+		var image = $(this).attr('alt') + '.png';
+
+		$(this).attr('src', '/images/navigation/' + image);
+		$(this).removeClass('borderOn');
+		$(this).addClass('borderOff');
+	});
 };

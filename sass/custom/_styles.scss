@@ -16,7 +16,6 @@ html {
 
 #main #content {
     margin-right: 0;
-    margin-top: 30px;
 }
 
 header[role="banner"] {
@@ -181,4 +180,20 @@ ol.aseries
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
    padding: 10px;
+}
+
+ul.main-navigation li {
+    padding: auto;
+    margin: auto;
+    width: 16%;
+}
+
+.borderOn {
+    border-bottom: 3px dashed black;
+    padding-bottom: 10px;
+}
+
+.borderOff {
+    border-bottom: 3px solid white;
+    padding-bottom: 10px;
 }
