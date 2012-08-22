@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Human-readable user agents for JavaScript error reporting"
-date: 2012-08-19 01:36
+date: 2012-08-22 09:40
 comments: true
 categories: [JavaScript, log management]
-published: false
+published: true
 ---
 
 Some time ago I published a few posts
@@ -19,8 +19,10 @@ across multiple browsers.
 
 <!-- more -->
 
+## User agents, the gotchas
+
 With JavaScript, it's pretty easy to detect
-the user agent from a client (you just need
+the user agent from a client ( you just need
 to access `navigator.userAgent`), the problem
 is that user agents are one of the most incredible
 *gotchas* in web development.
@@ -40,7 +42,9 @@ you should convert user agents in a human-readable
 format for the people who are going to debug
 the frontend.
 
-Luckily, [useragentstring](http://www.useragentstring.com/) is a service which allows
+## Converting user agents with remote calls
+
+Luckily, [UserAgentString](http://www.useragentstring.com/) is a service which allows
 you to query them whenever you need to retrieve useful
 and **meaningful** informations from a user agent string;
 combined with [Guzzle](http://guzzlephp.org/), you can directly have meaningful
@@ -115,8 +119,9 @@ if ($userAgent) {
 }
 ```
 
-That's pretty easy, even easier if you use the dependency
-injection container of Symfony2, where you can just do the instantiation
+That's pretty easy, even easier if you use the
+[dependency injection container of Symfony2](/using-the-symfony2-dependency-injection-container-as-a-standalone-component/),
+where you can just do the instantiation
 in a config file:
 
 ``` bash container.yml
@@ -135,6 +140,47 @@ services:
 $container->get('useragent.converter')->lookup($ua);
 ```
 
-Caching... scrivi di una cache di frontend
+## Caching
 
-devi mettera posto due esempi e un link a inizio pagina su Guzzle, cerca PUT_EXAMPLE_HERE
+At this point it becomes obvious that you should put
+a **caching layer** in front of the `UserAgentConverter`
+since you don't want to always query a remote service
+to retrieve informations that you already have:
+something like Redis should perfectly do the job,
+as a cache - in this scenario - is essential, needs
+to be as fast as hell and you don't need a SLA with it,
+so if the Redis server is down you are gracefully
+degradating: at the same time, Memcache can be a good candidate
+to substitute Redis, but remember that you will
+renounce to persistence, since you won't be able to
+store informations on the disk as you would
+do with Redis.
+
+The implementations is very trivial:
+
+``` php Adding a caching layer to our code
+<?php
+
+$ua         = 'Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1';
+$cache      = new CacheProvider();
+$userAgent  = $cache->lookup($ua)
+
+if (!$userAgent) {
+	$uaService  = new Vendor\Service\UserAgentConverter(new Guzzle\Http\Client());
+	$userAgent  = $uaService->lookup($ua);
+}
+
+if ($userAgent) {
+	$cache->store($ua, $userAgent);
+
+	// outputs "Firefox 14.0.1 on Windows 7"
+	echo sprintf(
+	    "%s %d on %s", 
+	    $userAgent['agent_name'],
+	    $userAgent['agent_version'],
+	    $userAgent['os_name']
+	);
+}
+```
+
+
