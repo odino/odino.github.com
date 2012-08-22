@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-08-22T08:46:55+04:00</updated>
+  <updated>2012-08-22T09:42:15+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Human-readable user agents for JavaScript error reporting]]></title>
+    <link href="http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting/"/>
+    <updated>2012-08-22T09:40:00+04:00</updated>
+    <id>http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting</id>
+    <content type="html"><![CDATA[<p>Some time ago I published a few posts
+on logging, one on how to <a href="/logging-javascript-errors/">report JavaScript errors</a> and another one
+which illustrates how to <a href="/using-monolog-for-php-error-reporting-on-new-relic/">log on New Relic with Monolog</a>.</p>
+
+<p>In this post I'd like to go even
+further with JavaScript error logging
+and tell you how we - at <a href="http://namshi.com">Namshi</a> -
+are trying to ease frontend debugging
+across multiple browsers.</p>
+
+<!-- more -->
+
+
+<h2>User agents, the gotchas</h2>
+
+<p>With JavaScript, it's pretty easy to detect
+the user agent from a client ( you just need
+to access <code>navigator.userAgent</code>), the problem
+is that user agents are one of the most incredible
+<em>gotchas</em> in web development.</p>
+
+<p>For example, how would you guess that</p>
+
+<p><code>
+Mozilla/5.0
+(Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4)
+Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1
+</code></p>
+
+<p>represents Firefox 14 on Windows 7?</p>
+
+<p>Let me tell you, <strong>you wouldn't</strong>, that's why
+you should convert user agents in a human-readable
+format for the people who are going to debug
+the frontend.</p>
+
+<h2>Converting user agents with remote calls</h2>
+
+<p>Luckily, <a href="http://www.useragentstring.com/">UserAgentString</a> is a service which allows
+you to query them whenever you need to retrieve useful
+and <strong>meaningful</strong> informations from a user agent string;
+combined with <a href="http://guzzlephp.org/">Guzzle</a>, you can directly have meaningful
+JavaScript errors' reports with a few lines of code.</p>
+
+<p>For example, this is a simple class which retrieves the informations from
+the service:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>namespace Vendor\Service;</p>
+
+<p>use Guzzle\Http\ClientInterface;</p>
+
+<p>class UserAgentConverter
+{</p>
+
+<pre><code>const URL_USERAGENT_API = 'http://www.useragentstring.com/';
+const BROWSER_INFO      = '%s %s on %s';
+
+protected $client;
+
+/**
+ * Instantiates the service and injects the HTTP client that will be used
+ * to perform requests.
+ * 
+ * @param ClientInterface $client 
+ */
+public function __construct(ClientInterface $client)
+{
+    $this-&gt;client = $client;
+}
+
+/**
+ * Retrieves a human-readable string identifying the $userAgent for error
+ * reporting (ie Internet Explorer 8 on Windows 7).
+ * 
+ * @param string $userAgent
+ * @return string|null
+ */
+public function lookup($userAgent)
+{
+    $request  = $this-&gt;client-&gt;post(self::URL_USERAGENT_API, null, sprintf('uas=%s&amp;getJSON=all', $userAgent));
+    $response = $request-&gt;send();
+
+    if ($response-&gt;getStatusCode() === 200) {
+        return json_decode($response-&gt;getBody(true), true);
+    }
+
+    return null;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>and you can use it like this:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$ua         = 'Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1';
+$uaService  = new Vendor\Service\UserAgentConverter(new Guzzle\Http\Client());
+$userAgent  = $uaService->lookup($ua);</p>
+
+<p>if ($userAgent) {</p>
+
+<pre><code>// outputs "Firefox 14.0.1 on Windows 7"
+echo sprintf(
+    "%s %d on %s", 
+    $userAgent['agent_name'],
+    $userAgent['agent_version'],
+    $userAgent['os_name']
+);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>That's pretty easy, even easier if you use the
+<a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">dependency injection container of Symfony2</a>,
+where you can just do the instantiation
+in a config file:</p>
+
+<p>``` bash container.yml
+services:
+  http.client:</p>
+
+<pre><code>class: "Guzzle\\Http\\Client"
+</code></pre>
+
+<p>  useragent.converter:</p>
+
+<pre><code>class: "Vendor\\Service\\UserAgentConverter"
+arguments:
+  client: @http.client
+</code></pre>
+
+<p>```</p>
+
+<p>``` php The one liner to get the user agent's informations
+&lt;?php</p>
+
+<p>$container->get('useragent.converter')->lookup($ua);
+```</p>
+
+<h2>Caching</h2>
+
+<p>At this point it becomes obvious that you should put
+a <strong>caching layer</strong> in front of the <code>UserAgentConverter</code>
+since you don't want to always query a remote service
+to retrieve informations that you already have:
+something like Redis should perfectly do the job,
+as a cache - in this scenario - is essential, needs
+to be as fast as hell and you don't need a SLA with it,
+so if the Redis server is down you are gracefully
+degradating: at the same time, Memcache can be a good candidate
+to substitute Redis, but remember that you will
+renounce to persistence, since you won't be able to
+store informations on the disk as you would
+do with Redis.</p>
+
+<p>The implementations is very trivial:</p>
+
+<p>``` php Adding a caching layer to our code
+&lt;?php</p>
+
+<p>$ua         = 'Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1';
+$cache      = new CacheProvider();
+$userAgent  = $cache->lookup($ua)</p>
+
+<p>if (!$userAgent) {</p>
+
+<pre><code>$uaService  = new Vendor\Service\UserAgentConverter(new Guzzle\Http\Client());
+$userAgent  = $uaService-&gt;lookup($ua);
+</code></pre>
+
+<p>}</p>
+
+<p>if ($userAgent) {</p>
+
+<pre><code>$cache-&gt;store($ua, $userAgent);
+
+// outputs "Firefox 14.0.1 on Windows 7"
+echo sprintf(
+    "%s %d on %s", 
+    $userAgent['agent_name'],
+    $userAgent['agent_version'],
+    $userAgent['os_name']
+);
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Logging JavaScript errors]]></title>

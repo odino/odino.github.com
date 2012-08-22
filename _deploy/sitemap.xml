@@ -497,6 +497,10 @@
         <lastmod>2012-08-10T13:58:12+04:00</lastmod>
     </url>
     <url>
+        <loc>http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting/</loc>
+        <lastmod>2012-08-22T09:41:28+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://www.odino.org/404.html</loc>
         <lastmod>2012-08-10T13:00:31+04:00</lastmod>
     </url>
@@ -506,7 +510,7 @@
     </url>
     <url>
         <loc>http://www.odino.org/blog/archives/</loc>
-        <lastmod>2012-08-10T13:58:12+04:00</lastmod>
+        <lastmod>2012-08-22T09:41:28+04:00</lastmod>
     </url>
     <url>
         <loc>http://www.odino.org/conferences/</loc>
@@ -518,6 +522,6 @@
     </url>
     <url>
         <loc>http://www.odino.org/</loc>
-        <lastmod>2012-08-10T13:58:12+04:00</lastmod>
+        <lastmod>2012-08-22T09:41:28+04:00</lastmod>
     </url>
 </urlset>

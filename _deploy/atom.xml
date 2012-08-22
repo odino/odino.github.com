@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-08-22T08:46:55+04:00</updated>
+  <updated>2012-08-22T09:42:15+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,286 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Human-readable user agents for JavaScript error reporting]]></title>
+    <link href="http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting/"/>
+    <updated>2012-08-22T09:40:00+04:00</updated>
+    <id>http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting</id>
+    <content type="html"><![CDATA[<p>Some time ago I published a few posts
+on logging, one on how to <a href="http://www.odino.org/logging-javascript-errors/">report JavaScript errors</a> and another one
+which illustrates how to <a href="http://www.odino.org/using-monolog-for-php-error-reporting-on-new-relic/">log on New Relic with Monolog</a>.</p>
+
+<p>In this post I&#8217;d like to go even
+further with JavaScript error logging
+and tell you how we - at <a href="http://namshi.com">Namshi</a> -
+are trying to ease frontend debugging
+across multiple browsers.</p>
+
+<!-- more -->
+
+
+<h2>User agents, the gotchas</h2>
+
+<p>With JavaScript, it&#8217;s pretty easy to detect
+the user agent from a client ( you just need
+to access <code>navigator.userAgent</code>), the problem
+is that user agents are one of the most incredible
+<em>gotchas</em> in web development.</p>
+
+<p>For example, how would you guess that</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mozilla/5.0
+</span><span class='line'>(Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4)
+</span><span class='line'>Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>represents Firefox 14 on Windows 7?</p>
+
+<p>Let me tell you, <strong>you wouldn&#8217;t</strong>, that&#8217;s why
+you should convert user agents in a human-readable
+format for the people who are going to debug
+the frontend.</p>
+
+<h2>Converting user agents with remote calls</h2>
+
+<p>Luckily, <a href="http://www.useragentstring.com/">UserAgentString</a> is a service which allows
+you to query them whenever you need to retrieve useful
+and <strong>meaningful</strong> informations from a user agent string;
+combined with <a href="http://guzzlephp.org/">Guzzle</a>, you can directly have meaningful
+JavaScript errors&#8217; reports with a few lines of code.</p>
+
+<p>For example, this is a simple class which retrieves the informations from
+the service:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">Vendor\Service</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Guzzle\Http\ClientInterface</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UserAgentConverter</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">const</span> <span class="no">URL_USERAGENT_API</span> <span class="o">=</span> <span class="s1">&#39;http://www.useragentstring.com/&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="no">BROWSER_INFO</span>      <span class="o">=</span> <span class="s1">&#39;%s %s on %s&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$client</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Instantiates the service and injects the HTTP client that will be used</span>
+</span><span class='line'><span class="sd">     * to perform requests.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @param ClientInterface $client </span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">ClientInterface</span> <span class="nv">$client</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client</span> <span class="o">=</span> <span class="nv">$client</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Retrieves a human-readable string identifying the $userAgent for error</span>
+</span><span class='line'><span class="sd">     * reporting (ie Internet Explorer 8 on Windows 7).</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @param string $userAgent</span>
+</span><span class='line'><span class="sd">     * @return string|null</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">lookup</span><span class="p">(</span><span class="nv">$userAgent</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$request</span>  <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">URL_USERAGENT_API</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;uas=%s&amp;getJSON=all&#39;</span><span class="p">,</span> <span class="nv">$userAgent</span><span class="p">));</span>
+</span><span class='line'>        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">(</span><span class="k">true</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and you can use it like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ua</span>         <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$uaService</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Vendor\Service\UserAgentConverter</span><span class="p">(</span><span class="k">new</span> <span class="nx">Guzzle\Http\Client</span><span class="p">());</span>
+</span><span class='line'><span class="nv">$userAgent</span>  <span class="o">=</span> <span class="nv">$uaService</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$userAgent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// outputs &quot;Firefox 14.0.1 on Windows 7&quot;</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nb">sprintf</span><span class="p">(</span>
+</span><span class='line'>      <span class="s2">&quot;%s %d on %s&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_name&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_version&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;os_name&#39;</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s pretty easy, even easier if you use the
+<a href="http://www.odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">dependency injection container of Symfony2</a>,
+where you can just do the instantiation
+in a config file:</p>
+
+<figure class='code'><figcaption><span>container.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>services:
+</span><span class='line'>  http.client:
+</span><span class='line'>    class: <span class="s2">&quot;Guzzle\\Http\\Client&quot;</span>
+</span><span class='line'>  useragent.converter:
+</span><span class='line'>    class: <span class="s2">&quot;Vendor\\Service\\UserAgentConverter&quot;</span>
+</span><span class='line'>    arguments:
+</span><span class='line'>      client: @http.client
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>The one liner to get the user agent&#8217;s informations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;useragent.converter&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Caching</h2>
+
+<p>At this point it becomes obvious that you should put
+a <strong>caching layer</strong> in front of the <code>UserAgentConverter</code>
+since you don&#8217;t want to always query a remote service
+to retrieve informations that you already have:
+something like Redis should perfectly do the job,
+as a cache - in this scenario - is essential, needs
+to be as fast as hell and you don&#8217;t need a SLA with it,
+so if the Redis server is down you are gracefully
+degradating: at the same time, Memcache can be a good candidate
+to substitute Redis, but remember that you will
+renounce to persistence, since you won&#8217;t be able to
+store informations on the disk as you would
+do with Redis.</p>
+
+<p>The implementations is very trivial:</p>
+
+<figure class='code'><figcaption><span>Adding a caching layer to our code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ua</span>         <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$cache</span>      <span class="o">=</span> <span class="k">new</span> <span class="nx">CacheProvider</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$userAgent</span>  <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$userAgent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$uaService</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Vendor\Service\UserAgentConverter</span><span class="p">(</span><span class="k">new</span> <span class="nx">Guzzle\Http\Client</span><span class="p">());</span>
+</span><span class='line'>  <span class="nv">$userAgent</span>  <span class="o">=</span> <span class="nv">$uaService</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$userAgent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">store</span><span class="p">(</span><span class="nv">$ua</span><span class="p">,</span> <span class="nv">$userAgent</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// outputs &quot;Firefox 14.0.1 on Windows 7&quot;</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nb">sprintf</span><span class="p">(</span>
+</span><span class='line'>      <span class="s2">&quot;%s %d on %s&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_name&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_version&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;os_name&#39;</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ping: sendto: No buffer space available with DU DNSes]]></title>
@@ -2542,221 +2822,6 @@ Notes
 </span>
     <ol>
         <li id='fn:1'>But please remember, this book is not any kind of Hadoop guide <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Which are code-agnostic, as everything is written in a pretty clear pseudo-code <a href='#fnref:2' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to argue with junior and stubborn developers]]></title>
-    <link href="http://www.odino.org/how-to-argue-with-junior-and-stubborn-developers/"/>
-    <updated>2012-02-23T12:00:00+04:00</updated>
-    <id>http://www.odino.org/how-to-argue-with-junior-and-stubborn-developers</id>
-    <content type="html"><![CDATA[<p>In these days I had a nice chat with
-<a href="http://www.linkedin.com/in/gogebakan">Önder Göğebakan</a> to exchange
-some views about <strong>team leading</strong>: one of the points I loved to face
-was how to deal with arrogant coders that <strong>don&#8217;t want to consider
-the indications received from their technical lead</strong>.</p>
-
-<!-- more -->
-
-
-<h2>Pulling responsabilites is not that bad</h2>
-
-<p>It makes no difference the reason why the developers is going against your
-opinion/advice/dictation: it may be due to inexperience or attitude, and this
-is not <em>that</em> bad.</p>
-
-<p><img class="right" src="http://www.odino.org/images/rooster.jpg"></p>
-
-<p>A developer which pulls responsabilities shows a good attitude, as it
-demonstrates that he wants to take a decision based on different variables
-evaluated differently than you: passive coders<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> are just a bad
-smell within your organization, because they won&#8217;t ever be as productive
-as you might need; don&#8217;t get me wrong on this: <strong>passive developers are
-a valuable asset</strong>, as you can&#8217;t rely on a team of cocks, but you
-shouldn&#8217;t hire too many passives, since, in a team of 4~6 people there
-will be room for 1, maybe 2, washermen.</p>
-
-<p>Push systems are just a bad idea: if you throw duties and responsabilities
-to your developers they won&#8217;t feel comfortable with them and will suddenly
-fear the assigned tasks; make a developer pull his responsabilities and you
-will be able to work in a strongy energized, motivated, self aware and
-fast growing team<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
-
-<p>If you will ever be in troubles when a proactive developer go against
-your decision, I want to share with you a few thoughts on that.</p>
-
-<h2>Use exampl&#8230;your experience</h2>
-
-<p>Being a CTO, team leader, technical fellow or whatever, you gained
-so much experience from your previous &#8220;developer&#8217;s years&#8221; that you have
-an unvaluable knowledge about problem solving, and when I say
-unvaluable I mean that there&#8217;s no inexperienced brain that could
-overcome a seasoned veteran.</p>
-
-<p><img class="left" src="http://www.odino.org/images/jordan.jpg"></p>
-
-<p>Think about the way you solved that technical problem earlier in your
-career and start adding examples to your cause: don&#8217;t pretend to
-think that this new problem &#8220;it&#8217;s just the same I saw in <code>some company</code>
-back in 2001&#8221;, because the developer will think that your are
-just scratching the surface of the issue and will look at you
-with no trust.</p>
-
-<p>When Michael Jordan got back into the NBA for the second time,
-with the partially self-owned team of the Washington Wizards,
-he was 38, and wasn&#8217;t able to provide the physical strength,
-speed and responsiveness that he had back on his 20s.</p>
-
-<p>Although all of this, the great thing that Mike did was to <strong>take
-advantage of his experience</strong> to overcome youger players and
-rough defenders: without a fully-supporting body, he was able to
-perform great games, with a
-<a href="http://www.basketball-reference.com/boxscores/200112290WAS.html">51-points legendary performance</a>
-against the Charlotte Hornets, just to mention one episode.</p>
-
-<p>At 38.</p>
-
-<p>Don&#8217;t think your technical knowledge will be as exhaustive as
-during your full-development period, but take advantage of the
-situations occurred during those valuable years.</p>
-
-<h2>Approach the problem from different points of view</h2>
-
-<p><img class="right" src="http://www.odino.org/images/sheldon.board.jpg"></p>
-
-<p><a href="http://en.wikipedia.org/wiki/Sheldon_Cooper">Sheldon Cooper</a>
-has a huge problem in his life: he&#8217;s not open to
-look at the situations he faces from perspectives different
-from his own one.</p>
-
-<p>This makes impossible, for him, to solve decisional problems
-taking different looks, from different point of views: one
-aspect of your job is to provide different solutions to the
-same problem instead.</p>
-
-<p>Solutions may be incomplete, or may be not suitable for the
-developer against you, but will help you in gaining trust when
-explaining your points: someone stucked to his view may be
-considered stubborn and not qualificated, but if you are able
-to <strong>provide different pros and cons to different solutions</strong>
-you will get respect from the person at the other side of
-the argument, as you will be recognized not as a firm
-believer, but as a thinker.</p>
-
-<h2>Make spikes</h2>
-
-<p>It may sound inefficient, but spikes are a good way to bring your
-result home: you are not meant to directly write a spike for a
-<em>use case</em> but you should <strong>encourage the counterpart to start
-writing small and rough pieces of code</strong> to test if some of the
-solutions he thiks are gonna work seem to be working fine.</p>
-
-<p><img class="left" src="http://www.odino.org/images/lego.technic.jpg"></p>
-
-<p>This makes the developer feel that he&#8217;s  gaining trust from you,
-as he is allowed to actually spend some billable time on his
-implementation, but as some problem comes out ask him how to
-solve it: a good developer may immediately find that he was wrong
-about it, so your problem is solved; if he keeps trying to follow
-this deadly way - maybe for <a href="http://c2.com/cgi/wiki?CowboyCoder">pride</a>
-- just move at the subsequent step, which means making the
-developer recognise he needs help.</p>
-
-<p>Bear in mind that whenever you decide to make a spike, something
-practical actually happens, and it could turn out that the
-implementation you were criticizing may accomplish its duty:
-since no one is perfect prepare your words to congratulate with
-the developer and thank him for the good approach, <strong>without
-feeling embarassed</strong>.</p>
-
-<p><img class="right" src="http://www.odino.org/images/socrates.gif"></p>
-
-<h2>Consolidate doubts</h2>
-
-<p>With a <a href="http://en.wikipedia.org/wiki/Socratic_method">socratic approach</a>,
-as you see that he is developing some spikes but <strong>comes to
-unacceptable endpoints</strong>, start smashing his beliefs pointing
-out the flaws his design has, the possible problems that you are
-going to face and the limitations that this piece of code will
-bring to his direct components - just to mention a few possible
-type of problems.</p>
-
-<p>I strongly recommend you to read
-<a href="http://en.wikipedia.org/wiki/The_Republic_(Plato)">The Republic</a>,
-by Plato, to understand how the socratic approach works in
-practice: it&#8217;s a really good practice to <strong>rely on ancient wisdom</strong>
-to solve inter-people issues, as this kind of knowledge is
-transversal to any kind of context.</p>
-
-<h2>Give trust, feed the monster and save him before death</h2>
-
-<p>May 8, 1970: <a href="http://en.wikipedia.org/wiki/Willis_Reed">Willis Reed</a>,
-captain and leader of the
-<a href="http://www.nba.com/knicks/">New York Knickerbockers</a> is
-injured, and the Knicks need to defeat the Los Angeles Lakers
-in game 7 (last game of a 3-3 tied series) to become NBA champions.</p>
-
-<p><img class="right" src="http://www.odino.org/images/walt.frazier.jpg"></p>
-
-<p>Willis starts the game, sinks down the first two points for New York
-with a perimetral shot and, well, then he stops there.</p>
-
-<p>Your developer is Reed: he&#8217;s under pressure, feels he can&#8217;t solve
-the situation but dramatically tries not to drown; <strong>there comes Walt</strong>.</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Walt_Frazier">Walt Frazier</a> is a
-tiny little point guard, a decent scorer: he&#8217;s facing
-LA&#8217;s <a href="http://en.wikipedia.org/wiki/Jerry_West">Jerry West</a>, one of the
-legends of the NBA, named Mr. Clutch due to his ability to stay
-focused and sink shots in high-pressure conditions.</p>
-
-<p>Walt does not care: inspired by his captain, he puts together an awesome
-performance, scoring 36 points, serving 19 assists and stealing several
-balls from West&#8217;s hands.</p>
-
-<p>Now it&#8217;s time - for you - to play as Walt &#8216;Clyde&#8217; Frazier: as the developer
-is drowning down you need to come there, <strong>give him the advices</strong> to fix his
-implementation and to get out of that situation, <strong>pair with him</strong> and make
-him feel that <strong>you could also be in that situation</strong>, it&#8217;s not such a big
-problem: doing this he will firmly listen to you, as you are leading
-him out of troubles, the best way to gain respect from others.</p>
-
-<h2>Gain trust</h2>
-
-<p>The key to lead a team is gain trust from its components: it is rarely acceptable
-that a team leader could lead his team with a cocky behaviour, so you are
-going to fail if your only aim is to do <strong>people management</strong>, and not team
-leading.</p>
-
-<p>Letting people pull responsabilities, giving them trust, analyzing with the
-team the problems which may occur after a decision (an implementation, or
-the change of a process), involving everyone in your job.</p>
-
-<p>As I like to state:</p>
-
-<blockquote><p>Great leaders let other leaders emerge.</p></blockquote>
-
-
-<h2>Be humble and step back</h2>
-
-<p>What if you were wrong? It may happen, and it&#8217;s perfectly acceptable:
-don&#8217;t be rude when supporting your ideas, because as it turns out
-that you were wrong, this may harm your position.</p>
-
-<p>If you sell yourself as a humble guy, you will get the trust of your
-team, because <strong>they will recognize you as a wise guide</strong>, not a tyrant.</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>Monkeys <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Worth to mention, the recruiting process plays a big role in this process <a href='#fnref:2' rev='footnote'>↩</a></li>
     </ol>
 </div>
 
