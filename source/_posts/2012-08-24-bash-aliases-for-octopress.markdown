@@ -93,6 +93,32 @@ Saves all your local changes committing
 and pushing everything on the remote `source`
 branch:
 
+``` bash
+~/Sites/odino.github.com (source ✘)✹✭ ᐅ octosave "partial article"
 
+[source 572b571] partial article
+ 62 files changed, 159 insertions(+), 61 deletions(-)
+ create mode 100644 source/_posts/2012-08-24-bash-aliases-for-octopress.markdown
+Counting objects: 255, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (129/129), done.
+Writing objects: 100% (129/129), 12.45 KiB, done.
+Total 129 (delta 64), reused 0 (delta 0)
+To git@github.com:odino/odino.github.com.git
+   35d5d41..572b571  source -> source
+```
 
 ## octodeploy
+
+``` bash
+octodeploy () {
+        git add . && git commit -m "$@" && git push origin source && rake generate && rake deploy
+}
+```
+
+Same as `octosave`, but - additionally - it deploys
+all of your changes via `rake deploy`.
+
+This task is useful when you're locally done and
+want to publish your changes:
+
