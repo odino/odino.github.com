@@ -3,8 +3,8 @@ layout: post
 title: "Shell aliases for Octopress"
 date: 2012-08-24 11:02
 comments: true
-categories: [octopress, shell]
-published: false
+categories: [octopress, shell, ZSH]
+published: true
 ---
 
 A few days ago I moved to [ZSH](http://en.wikipedia.org/wiki/Z_shell) 
@@ -52,7 +52,7 @@ octopost () {
 This task let's you create a new post and
 automatically launches Octopress' preview mode:
 
-``` shell
+``` bash
 ~/Sites/odino.github.com (source ✘)✹ ᐅ octopost
 
 Enter a title for your post: bash aliases for octopress
@@ -122,3 +122,56 @@ all of your changes via `rake deploy`.
 This task is useful when you're locally done and
 want to publish your changes:
 
+``` bash
+~/Sites/odino.github.com (source ✔) ᐅ octodeploy "publishing changes"
+
+[source 43e08b3] publishing changes
+ 1 files changed, 27 insertions(+), 1 deletions(-)
+Counting objects: 9, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 848 bytes, done.
+Total 5 (delta 4), reused 0 (delta 0)
+To git@github.com:odino/odino.github.com.git
+   572b571..43e08b3  source -> source
+## Generating Site with Jekyll
+unchanged sass/screen.scss
+/Users/odino/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `<top (required)>': iconv will be deprecated in the future, use String#encode instead.
+Configuration from /Users/odino/Sites/odino.github.com/_config.yml
+Building site: source -> public
+AliasGenerator loading...
+Processing 120 post(s) for aliases...
+Processing 18 page(s) for aliases...
+Successfully generated site: source -> public
+## Found posts in preview mode, regenerating files ...
+## Generating Site with Jekyll
+unchanged sass/screen.scss
+/Users/odino/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `<top (required)>': iconv will be deprecated in the future, use String#encode instead.
+Configuration from /Users/odino/Sites/odino.github.com/_config.yml
+Building site: source -> public
+AliasGenerator loading...
+Processing 120 post(s) for aliases...
+Processing 18 page(s) for aliases...
+Successfully generated site: source -> public
+## Deploying branch to Github Pages 
+
+## copying public to _deploy
+cp -r public/. _deploy
+cd _deploy
+
+## Commiting: Site updated at 2012-08-24 07:22:23 UTC
+[master 3151733] Site updated at 2012-08-24 07:22:23 UTC
+ 70 files changed, 70 insertions(+), 70 deletions(-)
+
+## Pushing generated _deploy website
+Counting objects: 284, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (143/143), done.
+Writing objects: 100% (143/143), 12.25 KiB, done.
+Total 143 (delta 70), reused 0 (delta 0)
+To git@github.com:odino/odino.github.com.git
+   78287e6..3151733  master -> master
+
+## Github Pages deploy complete
+cd -
+```
