@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-09-03T12:09:03+04:00</updated>
+  <updated>2012-09-21T02:19:43+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Automated tests are a help, not a solution]]></title>
+    <link href="http://www.odino.org/automated-tests-are-a-help-not-a-solution/"/>
+    <updated>2012-09-21T01:57:00+04:00</updated>
+    <id>http://www.odino.org/automated-tests-are-a-help-not-a-solution</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bootstrap of a Travis-CI test-machine]]></title>
@@ -581,128 +590,6 @@ catch (Exception $e)
 
 <p></tr>
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Magento and PHPUnit]]></title>
-    <link href="http://www.odino.org/magento-and-phpunit/"/>
-    <updated>2010-09-11T13:43:00+04:00</updated>
-    <id>http://www.odino.org/magento-and-phpunit</id>
-    <content type="html"><![CDATA[<p>Although there is a good <a href="http://www.magentocommerce.com/wiki/development/phpunit_integration_with_magento">tutorial about PHPunit and Magento integration</a> and I'd rather using Lime ( the symfony-integrated test engine ) here I'll show you how to set up PHPUnit tests in order to improve the QA of your Magento customizations.</p>
-
-<!-- more -->
-
-
-<p>I'm working on <strong>Ubuntu Jaunty</strong>, so a few steps might be different based on your OS: nevermind, with a bit of patience you'll be able to set up your environment correctly.</p>
-
-<p>First of all let's install <code>PHPUnit</code> from the repo:</p>
-
-<p><code>
-sudo apt-get install phpunit
-</code></p>
-
-<p>You can decide to download PHPUnit from its official website and run a single installation under a magento directory: I prefer having PHPUnit running in my whole environment because I want to test different applications, so I don't have to re-install PHPunit for all of them.</p>
-
-<p>So, now let's set up our environment:</p>
-
-<p><code>
-cd /var/www/magento/
-mkdir test
-mkdir test/unit
-cd test/unit
-sudo gedit phpunit.xml
-</code></p>
-
-<p>and here's how you need to populate the confg file <code>phpunit.xml</code>:</p>
-
-<p>``` xml
-<phpunit></p>
-
-<pre><code>&lt;testsuite name="projectname"&gt;
-    &lt;directory&gt;./&lt;/directory&gt;
-&lt;/testsuite&gt;
-</code></pre>
-
-<p></phpunit>
-```</p>
-
-<p>so now we can create directories and testfiles under <code>/var/www/magento/test/unit</code> and run them with a single command:</p>
-
-<p><code>
-phpunit --configuration phpunit.xml
-</code></p>
-
-<p>But we have no tests now! Let's create, at least, one.</p>
-
-<p>Let's assume we want to test an helper file of a custom module we created, for example a "faq" module.</p>
-
-<p><code>
-mkdir faq
-mkdir faq/helper
-cd faq/helper
-sudo gedit ProjectnameFaqHelperDataTest.php
-</code></p>
-
-<p>So we have to fill that file with the <strong>standard PHPUnit structure</strong>:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<pre><code>require_once 'PHPUnit/Framework.php';
-
-require_once '/var/www/magento/app/Mage.php';
-
-class ProjectnameFaqHelperDataTest extends PHPUnit_Framework_TestCase {
-
-    public function setUp (){
-    }
-
-}
-</code></pre>
-
-<p>?>
-```</p>
-
-<p>Now we need to populate the setup function in order to have he ability to use all Magento functions:</p>
-
-<p>```php
-&lt;?php</p>
-
-<pre><code> public function setUp (){
-
-        Mage::app('default');
-
-        $this-&gt;object = Mage::helper("heart");
-
-    }
-</code></pre>
-
-<p>```</p>
-
-<p>After this we can test the methods of our helper: for example the <code>getUrl()</code> method we've created in order to retrieve the URL of a FAQ from its id:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<pre><code> public function testGetUrl (){
-        $this-&gt;assertEquals('faq/read/id/1/',$this-&gt;object-&gt;getUrl(1));
-    }
-</code></pre>
-
-<p>```</p>
-
-<p>So now we have a test covering our fictional <code>getUrl()</code> method of the class <code>Projectname_Faq_Helper_Data</code> we've created in Magento.</p>
-
-<p>To run the test use the code I wrote some lines above:</p>
-
-<p><code>
-phpunit --configuration phpunit.xml
-</code></p>
-
-<p>If you create other directories and tesfiles under <code>test/unit</code> directory of Magento, using this command all of those will be run by PHPUnit.</p>
-
-<p>That's it!</p>
 ]]></content>
   </entry>
   
