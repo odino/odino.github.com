@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Optimizing loading times with images' lazy loading"
-date: 2012-08-22 09:46
+date: 2012-09-21 07:45
 comments: true
 categories: [performances, JavaScript]
 published: false

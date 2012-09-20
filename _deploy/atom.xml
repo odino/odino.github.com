@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-08-24T11:22:06+04:00</updated>
+  <updated>2012-09-03T12:09:03+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,272 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Shell aliases for Octopress]]></title>
+    <link href="http://www.odino.org/bash-aliases-for-octopress/"/>
+    <updated>2012-08-24T11:02:00+04:00</updated>
+    <id>http://www.odino.org/bash-aliases-for-octopress</id>
+    <content type="html"><![CDATA[<p>A few days ago I moved to <a href="http://en.wikipedia.org/wiki/Z_shell">ZSH</a>
+from bash, since my friend David was pushing me to try it:
+after a few days I really have to say
+that there is no reason not to switch
+- mainly for the git integration and
+double-tab behaviour - and I also
+created a few <em>aliases</em> that work like
+a charm in Octopress.</p>
+
+<!-- more -->
+
+
+<p>The majority of them would also work in
+bash, but I remember I had to make
+<a href="https://github.com/imathis/octopress/issues/117">some changes</a>
+to make Octopress work with ZSH, so
+you may want to have a look at that discussion first.</p>
+
+<p>Bare in mind that all of this aliases need to be put in
+the <code>~/.zshrc</code> file.</p>
+
+<h2>octopreview</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">octopreview</span><span class="o">=</span><span class="s1">&#39;rake preview&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Starts Octopress&#8217; preview mode:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹✭ ᐅ octopreview
+</span><span class='line'>
+</span><span class='line'>Starting to watch <span class="nb">source </span>with Jekyll and Compass. Starting Rack on port 4000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octopost</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octopost <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  rake new_post <span class="o">&amp;&amp;</span> octopreview;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This task let&#8217;s you create a new post and
+automatically launches Octopress&#8217; preview mode:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹ ᐅ octopost
+</span><span class='line'>
+</span><span class='line'>Enter a title <span class="k">for </span>your post: bash aliases <span class="k">for </span>octopress
+</span><span class='line'>mkdir -p <span class="nb">source</span>/_posts
+</span><span class='line'>Creating new post: <span class="nb">source</span>/_posts/2012-08-24-bash-aliases-for-octopress.markdown
+</span><span class='line'>Starting to watch <span class="nb">source </span>with Jekyll and Compass. Starting Rack on port 4000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octostat</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octostat <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  rake list_posts;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Based on this <a href="http://tonytonyjan.github.com/2012/05/02/list-all-posts-rake-task-for-octopress/">rake task</a>
+that I <a href="https://github.com/odino/odino.github.com/blob/source/Rakefile#L388">slightly modified for ZSH</a>,
+this lets you find out which posts are published/unpublished
+in your blog:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹✭ ᐅ octostat
+</span><span class='line'>
+</span><span class='line'><span class="o">(</span>pub|unpub<span class="o">)</span>: unpub
+</span><span class='line'>2012-08-24-bash-aliases-for-octopress.markdown
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octosave</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octosave <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;$@&quot;</span> <span class="o">&amp;&amp;</span> git push origin <span class="nb">source</span>;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Saves all your local changes committing
+and pushing everything on the remote <code>source</code>
+branch:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹✭ ᐅ octosave <span class="s2">&quot;partial article&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="nb">source </span>572b571<span class="o">]</span> partial article
+</span><span class='line'> 62 files changed, 159 insertions<span class="o">(</span>+<span class="o">)</span>, 61 deletions<span class="o">(</span>-<span class="o">)</span>
+</span><span class='line'> create mode 100644 <span class="nb">source</span>/_posts/2012-08-24-bash-aliases-for-octopress.markdown
+</span><span class='line'>Counting objects: 255, <span class="k">done</span>.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% <span class="o">(</span>129/129<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Writing objects: 100% <span class="o">(</span>129/129<span class="o">)</span>, 12.45 KiB, <span class="k">done</span>.
+</span><span class='line'>Total 129 <span class="o">(</span>delta 64<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+</span><span class='line'>To git@github.com:odino/odino.github.com.git
+</span><span class='line'>   35d5d41..572b571  <span class="nb">source</span> -&gt; <span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octodeploy</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octodeploy <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;$@&quot;</span> <span class="o">&amp;&amp;</span> git push origin <span class="nb">source</span> <span class="o">&amp;&amp;</span> rake generate <span class="o">&amp;&amp;</span> rake deploy
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Same as <code>octosave</code>, but - additionally - it deploys
+all of your changes via <code>rake deploy</code>.</p>
+
+<p>This task is useful when you&#8217;re locally done and
+want to publish your changes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✔<span class="o">)</span> ᐅ octodeploy <span class="s2">&quot;publishing changes&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="nb">source </span>43e08b3<span class="o">]</span> publishing changes
+</span><span class='line'> 1 files changed, 27 insertions<span class="o">(</span>+<span class="o">)</span>, 1 deletions<span class="o">(</span>-<span class="o">)</span>
+</span><span class='line'>Counting objects: 9, <span class="k">done</span>.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Writing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, 848 bytes, <span class="k">done</span>.
+</span><span class='line'>Total 5 <span class="o">(</span>delta 4<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+</span><span class='line'>To git@github.com:odino/odino.github.com.git
+</span><span class='line'>   572b571..43e08b3  <span class="nb">source</span> -&gt; <span class="nb">source</span>
+</span><span class='line'><span class="c">## Generating Site with Jekyll</span>
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>/Users/odino/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;: iconv will be deprecated in the future, use String#encode instead.</span>
+</span><span class='line'><span class="s1">Configuration from /Users/odino/Sites/odino.github.com/_config.yml</span>
+</span><span class='line'><span class="s1">Building site: source -&gt; public</span>
+</span><span class='line'><span class="s1">AliasGenerator loading...</span>
+</span><span class='line'><span class="s1">Processing 120 post(s) for aliases...</span>
+</span><span class='line'><span class="s1">Processing 18 page(s) for aliases...</span>
+</span><span class='line'><span class="s1">Successfully generated site: source -&gt; public</span>
+</span><span class='line'><span class="s1">## Found posts in preview mode, regenerating files ...</span>
+</span><span class='line'><span class="s1">## Generating Site with Jekyll</span>
+</span><span class='line'><span class="s1">unchanged sass/screen.scss</span>
+</span><span class='line'><span class="s1">/Users/odino/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;&#39;</span>: iconv will be deprecated in the future, use String#encode instead.
+</span><span class='line'>Configuration from /Users/odino/Sites/odino.github.com/_config.yml
+</span><span class='line'>Building site: <span class="nb">source</span> -&gt; public
+</span><span class='line'>AliasGenerator loading...
+</span><span class='line'>Processing 120 post<span class="o">(</span>s<span class="o">)</span> <span class="k">for </span>aliases...
+</span><span class='line'>Processing 18 page<span class="o">(</span>s<span class="o">)</span> <span class="k">for </span>aliases...
+</span><span class='line'>Successfully generated site: <span class="nb">source</span> -&gt; public
+</span><span class='line'><span class="c">## Deploying branch to Github Pages </span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## copying public to _deploy</span>
+</span><span class='line'>cp -r public/. _deploy
+</span><span class='line'><span class="nb">cd </span>_deploy
+</span><span class='line'>
+</span><span class='line'><span class="c">## Commiting: Site updated at 2012-08-24 07:22:23 UTC</span>
+</span><span class='line'><span class="o">[</span>master 3151733<span class="o">]</span> Site updated at 2012-08-24 07:22:23 UTC
+</span><span class='line'> 70 files changed, 70 insertions<span class="o">(</span>+<span class="o">)</span>, 70 deletions<span class="o">(</span>-<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## Pushing generated _deploy website</span>
+</span><span class='line'>Counting objects: 284, <span class="k">done</span>.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% <span class="o">(</span>143/143<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Writing objects: 100% <span class="o">(</span>143/143<span class="o">)</span>, 12.25 KiB, <span class="k">done</span>.
+</span><span class='line'>Total 143 <span class="o">(</span>delta 70<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+</span><span class='line'>To git@github.com:odino/odino.github.com.git
+</span><span class='line'>   78287e6..3151733  master -&gt; master
+</span><span class='line'>
+</span><span class='line'><span class="c">## Github Pages deploy complete</span>
+</span><span class='line'><span class="nb">cd</span> -
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Human-readable user agents for JavaScript error reporting]]></title>
@@ -2765,63 +3031,6 @@ Notes
 </span>
     <ol>
         <li id='fn:1'>You should know him for his contributions to the HTTP specification, httpbis, cache channels and - in general - the HTTP cache <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Recently Matt Cutts came out with the assertion that Googlebot is capable to understand basic JS redirects, so&#8230; there&#8217;s hope <a href='#fnref:2' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Book review: Data-Intensive Text Processing with MapReduce]]></title>
-    <link href="http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce/"/>
-    <updated>2012-02-23T12:57:00+04:00</updated>
-    <id>http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce</id>
-    <content type="html"><![CDATA[<p>As part of my studies not directly connected to my job,
-in the last month I&#8217;ve finished this interesting book, which
-gives you a good overview about
-<a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="http://www.odino.org/images/mapreduce.book.jpg"></p>
-
-<p><a href="http://www.umiacs.umd.edu/~jimmylin/">Jimmy Lin</a> and Chris
-Dyer nailed this one: the book is really clear and leaves
-room for further studies, maybe more practical ones: the book
-starts with the definition of MapReduce, from the algorithm to
-the execution framework and the analyzes each part of the
-algorithm and theyr variants in some frameworks, like
-Hadoop<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<p>After studying the components of MapReduce you will
-take a practical look at possible implementations<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>,
-from graph algorithms to the pagerank one: note that there are
-so many references in the book, so if you will be into it, you&#8217;re
-gonna find yourself screwed in a <em>nerdy</em> loop :)</p>
-
-<p>The EM chapter (dealing with <em>expectation-maximization</em> algorithms)
-was pretty difficult for me, as it&#8217;s too much time that I don&#8217;t
-take math <em>that</em> seriously, but I - however - was able to
-follow all the theory explained there.</p>
-
-<p>Something that I really appreciated was the closing remark stating that,
-just like every technology, is not the right pick for every problem -
-think about <strong>stateful</strong> large scale data-processing algorithms.</p>
-
-<p>I strongly recommend you to read such this kind of book: the approach
-followed by the writers is so engineered and some examples they give,
-like the <a href="http://www.odino.org/quality-isnt-always-better-than-quality/">stupid backoff</a>,
-are pearls for your working experience.</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>But please remember, this book is not any kind of Hadoop guide <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Which are code-agnostic, as everything is written in a pretty clear pseudo-code <a href='#fnref:2' rev='footnote'>↩</a></li>
     </ol>
 </div>
 

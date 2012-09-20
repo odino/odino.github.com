@@ -501,6 +501,10 @@
         <lastmod>2012-08-22T09:41:28+04:00</lastmod>
     </url>
     <url>
+        <loc>http://www.odino.org/bash-aliases-for-octopress/</loc>
+        <lastmod>2012-08-24T11:26:35+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://www.odino.org/404.html</loc>
         <lastmod>2012-08-10T13:00:31+04:00</lastmod>
     </url>
@@ -510,7 +514,7 @@
     </url>
     <url>
         <loc>http://www.odino.org/blog/archives/</loc>
-        <lastmod>2012-08-22T09:41:28+04:00</lastmod>
+        <lastmod>2012-08-24T11:26:35+04:00</lastmod>
     </url>
     <url>
         <loc>http://www.odino.org/conferences/</loc>
@@ -522,6 +526,6 @@
     </url>
     <url>
         <loc>http://www.odino.org/</loc>
-        <lastmod>2012-08-22T09:41:28+04:00</lastmod>
+        <lastmod>2012-08-24T11:26:35+04:00</lastmod>
     </url>
 </urlset>
