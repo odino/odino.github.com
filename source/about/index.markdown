@@ -11,7 +11,7 @@ footer: true
 {% img right /images/alex.jpg Me as of 2011 %}
 
 I'm currently living in
-Dubai where I am permanently employed for [Rocket Internet](http://www.rocket-internet.de), as a lead developer.
+Dubai where I am permanently employed by [Rocket Internet](http://www.rocket-internet.de) for its venture [Namshi](http://namshi.com), as a lead developer.
 
 I like to play with the [Symfony framework](http://www.symfony.com), 
 [OrientDB](http://www.orientechnologies.com/),
@@ -62,4 +62,4 @@ of that [beautiful country](http://www.flickr.com/photos/alessandrolombardi/6438
 which I visited for a [conference](http://2011.osidays.com/speakers)
 * I love Rome, but I feel like it's not the right place to raise my (future) children
 * I have a *personal* blog, in italian, called [nerdiario](http://www.nerdiario.it) ("*nerd-diary*")
-* In March, 2012, I've moved to Dubai
+* In March, 2012, I moved to Dubai
