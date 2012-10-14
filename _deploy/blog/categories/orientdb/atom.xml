@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OrientDB | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/orientdb/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-09-21T02:23:50+04:00</updated>
+  <updated>2012-09-21T12:19:49+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[So yes, I'm writing a book]]></title>
+    <link href="http://www.odino.org/so-yes-im-writing-a-book/"/>
+    <updated>2012-09-21T08:00:00+04:00</updated>
+    <id>http://www.odino.org/so-yes-im-writing-a-book</id>
+    <content type="html"><![CDATA[<p>As announced on twitter a few days back, it seems
+that the time has come for me to step up and start
+dealing with printed paper.</p>
+
+<!-- more -->
+
+
+<p>It's not something I've never talked about,
+and especially in the last 9 months I wanted
+to start something towards this direction -
+my draft of
+<a href="https://leanpub.com/rest-webservices-php">REST webservices in PHP</a>
+is still there ideed.</p>
+
+<p><img class="right" src="/images/garulli-nadalin.jpeg"></p>
+
+<p>At the same time, even though self-publishing
+is easier and provides good motivation at first,
+<strong>is not very attractive on the long run</strong>,
+for both the author and the reader: yes, you
+get to reach a wide audience, yes, they can
+learn in a really cheap way<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+but writing a <strong>real</strong> book is way different.
+It's a statement, a printed statement: it is
+<strong>just different</strong>.</p>
+
+<p>The chance has come quite quickly, as I will be
+<strong>co-author</strong> of a book by
+<a href="http://www.manning.com/">Manning Publications Co.</a>,
+which is a very important editor when it comes to
+the language with the J.</p>
+
+<p>Isn't it strange? I am a seasoned lead developer
+on the LAMP stack but I will write a book dealing with a tool
+that has something to do with Java: there a reason,
+of course, behind this.</p>
+
+<p>And probably you have already guessed it.</p>
+
+<p><span class='pullquote-right' data-pullquote='OrientDB is not just a NoSQL graphDB, it is a brand new way to think about storage engines'>
+Long story short, <a href="http://www.linkedin.com/in/garulli">Luca Garulli</a><sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>,
+the brilliant mind who gave
+OrientDB, a sensational document-graph database, to the world, needed
+some more fat fingers helping him for the first ever
+book on the topic, and being directly connected to Luca
+- as he used to work with my previous CTO,
+<a href="http://www.linkedin.com/in/alexlombardi">Alex</a>, we
+both attended the 2011 NoSQL Day and we've spent
+some time together when I was living in Rome -
+made us decide to try to make it together: I feel we
+are a perfect match, given my <em>youngsta</em> passion and his
+endless commitment to his baby.</p>
+
+<p>Fact is that OrientDB is not just a NoSQL graphDB, it is a brand new way to think about storage engines in 2012 , when we already proved that relational databases won't fit all the scenarios out there,
+that <a href="http://couchdb.apache.org/">document DBs over HTTP</a>
+aren't a long-term solution and that we live in a world
+where <strong>linked data is a first class citizen in our lives</strong>,
+not just somewhere in the internets.
+</span></p>
+
+<p>Our challenge is to evangelize this new frontier for
+data storage: I'm sure it will be a long but succesfull
+way.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Usually cheap: some books on LeanPub were even sold for 50 USD <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I could write a separate chapter on Luca. Let's just say that meeting him gave me the confidence that even without a college degree you can be a game-changer in your field. <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
@@ -474,26 +555,6 @@ doxygen Docs/orient.d
 <p>then you can look at <code>Docs/html</code> to read the generated documentation.</p>
 
 <p>So, what are you waiting for? Go out there and <a href="https://github.com/congow/Orient">get oriented</a>!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Get prepared for OrientDB's query builder ]]></title>
-    <link href="http://www.odino.org/get-prepared-for-orientdb-s-query-builder/"/>
-    <updated>2011-06-03T13:46:00+04:00</updated>
-    <id>http://www.odino.org/get-prepared-for-orientdb-s-query-builder</id>
-    <content type="html"><![CDATA[<p>As you can see on <a href="https://github.com/odino/Orient/commits/master">Github</a>, today we fixed all the minor issues of the beta-3 milestone of the <a href="https://github.com/odino/Orient">Orient</a> library ( a set of tools to manage OrientDB in PHP ).</p>
-
-<!-- more -->
-
-
-<p>Since the only thing left is to write the query-builder integration tests ( which will directly speak with OrientDB ), we are confident that the next release, the <a href="https://github.com/odino/Orient/issues?milestone=1&amp;state=open">beta-3</a>, will happend during this weekend.</p>
-
-<p>Writing the remaining tests will take a man-day circa so, since I'm pretty focused on releasing as early as possible, we should see this component coming out soon.</p>
-
-<p>For those of you who don't know what is gonna come in this release ( which is not "official" but intended for early adopters ), I can tell you that the main thing will be the query-builder and nothing more: the QB is an OO library in order to build OrientDB SQL commands with a nice fluent interface, in Doctrine 1 style.</p>
-
-<p>By the way: in <a href="http://www.dnsee.com/">DNSEE</a> we are currently setting-up our brand strategies to expose this and other products ( mainly the CMF ), so, in a few weeks, you should be able to reach something like components.dnsee.com ;-)</p>
 ]]></content>
   </entry>
   
