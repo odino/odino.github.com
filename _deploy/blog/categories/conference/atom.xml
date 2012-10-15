@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-09-21T12:19:49+04:00</updated>
+  <updated>2012-10-14T21:49:56+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
+    <link href="http://www.odino.org/ready-for-europe-ipc-and-pizzas/"/>
+    <updated>2012-10-14T21:21:00+04:00</updated>
+    <id>http://www.odino.org/ready-for-europe-ipc-and-pizzas</id>
+    <content type="html"><![CDATA[<p>In 24 hourse I'll be on a plane which is gonna bring
+me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
+in Mainz.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/ipc-slide.png"></p>
+
+<p>I'm pretty excited since this will be my first visit
+to the old continent since I moved to Dubai - almost 7 months ago -
+and I'm glad I'll do that for IPC, with a brief <em>pit-stop</em> in Italy -
+unfortunately not in Rome.</p>
+
+<p>At IPC I will talk about REST, with an - I hope -
+interesting introduction about this architectural style, anti-patterns
+and a few tips on how to implement REST's constraints in our
+architectures.</p>
+
+<p>I will also have another chance to talk, and I'm <strong>seriously</strong>
+excited about it, since, for the first time, I get the chance to
+talk about the foundation of our lives in the modern era (<em>homo internectus</em>),
+the <strong>HTTP protocol</strong>: I will talk a little bit about why we needed it,
+with some historical notion about the web's foundation, what SPDY
+brings on the table and the recent <strong>revolutions</strong> around <code>HTTP/2.0</code>.</p>
+
+<p>On the 17th evening I will catch a flight for Venice (via Wien) and then
+I'll spend some time with the rest of the family, good thing if you also
+consider that for the first time in 4 years they're gonna see me for my birthday.</p>
+
+<p><img class="left" src="/images/ale_idiot.jpeg"></p>
+
+<p>But Italy doesn't mean that I'm going to relax <strong>at all</strong>, as I will
+finally meet all the guys from the <a href="http://friuli.grusp.org/">PHP User Group Friuli</a>,
+the 2nd PHP user group in Italy (considering numbers and history), that
+I personally founded along with <a href="http://www.mvassociati.it/it/il-team">Steve&amp;Stefano</a> and <a href="http://it.linkedin.com/in/dlondero">Daniel</a> in front of a pizza,
+but never got to join during their
+monthly meetings, as I was already based in Rome at that time.</p>
+
+<p>There is no plan about that meeting, as the topic will be "<em>Alessandro Nadalin in tour</em>":
+if you are a developer, a technology enthusiast or simply a student come
+and join us in Codroipo, as I will also talk about abroad work experiences as well
+as scout and recruit for some companies (yes, not only <strong>my</strong> company).</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Speaking at IPC 2012]]></title>
@@ -195,60 +248,6 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
 <p>As usual, I post here the presentation, but you can find it on slideshare:</p>
 
 <p><div class="slideshare" id="__ss_8392980"><iframe src="http://www.slideshare.net/slideshow/embed_code/8392980 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHPDay 2011 wrapup]]></title>
-    <link href="http://www.odino.org/phpday-2011-wrapup/"/>
-    <updated>2011-06-09T15:33:00+04:00</updated>
-    <id>http://www.odino.org/phpday-2011-wrapup</id>
-    <content type="html"><![CDATA[<p>It's been a while since I got back from the PHPDay ( ~1 month ) and the experience definitely deserves a post.</p>
-
-<!-- more -->
-
-
-<h2>Where, when, how..</h2>
-
-<p>This year's PHPDay has been held in Verona, the wonderful place where Romeo and Juliet had their drama.</p>
-
-<p>The location was the same of the 2009 edition ( which, BTW, was the first conference as a speaker, for me ) with the addition of the third day, just like the last year.</p>
-
-<p>The conference had a first day of workshops and the last 2 days of tutorials and talks: 25 minutes for the former, 45 for the latter.</p>
-
-<h2>Day 1: the german track</h2>
-
-<p>Very curious, the workshop day had an entire track with german speakers: Sebastian Bergmann gave a nice <a href="http://www.phpday.it/2011/session/testing-lamp-applications">overview of PHPUnit 3.5</a> with the addition of a live example testing legacy code.</p>
-
-<p>The guys from Quafoo presented the <a href="http://www.phpday.it/2011/session/any-any-convert-your-documents">document component from the Apache Zeta Components</a>: seems pretty awesome, given that document conversion is something everyone of us faces during his career and everyone of us blamed TCPDF at least once.</p>
-
-<p>Quafoo again showed us their <a href="http://www.phpday.it/2011/session/generic-php-application-installer">application installer</a>, which is an high-level library able to let developers code their own installer according to common needs ( database setup, filesystem configuration and so on ).</p>
-
-<h2>Day 2: tremendous keynote</h2>
-
-<p>My second day started with a topic we're facing in our company: the hard combination between <a href="http://www.phpday.it/2011/session/just-married-user-centred-design-and-agile">agile development and user-centered design</a>.</p>
-
-<p><a href="http://www.phpday.it/2011/session/many-many-no-man-island">Jacopo Romei</a> had an embarassing ( with a positive meaning ) keynote about collaboration and communities: one of the coolest I ever heard, given that I often find keynotes boring.</p>
-
-<p>In the first session of the afternoon I presented the <a href="http://www.phpday.it/2011/session/be-lazy-be-esi-http-caching-and-symfony2-0">HTTP cache inside Symfony2</a>, pretty satisfied about the people listening and their feedbacks.</p>
-
-<p>Then I listened about 2 build systems, <a href="http://www.phpday.it/2011/session/phing-vs-ant-parola-chiave-automatizzare">Phing and Ant</a>: an insteresting italian talk, given that I didn't know that a few code metrics tools are well-integrated with this kind of systems.</p>
-
-<h2>Day 3: leaving Verona with style</h2>
-
-<p>My attention was firstly captured by the <a href="http://www.phpday.it/2011/session/symfony-e-grandi-numeri-si-pu-fare">real-world report about calciomercato.com</a> ( that can be translated in soccertrades.com ), a site, built with symfony 1.4, which scored 4 milions visits in August 2010: definitely impressive.</p>
-
-<p>The talks wasn't obviously focused on the software architecture but on the system architecture behind the website: a cool thing was that they prefered to build 2 separate machine templates ( you usually have 1 VM template, that you scale horizontally ), one used to serve the website and the other for the static assets, some kind of a little CDN.</p>
-
-<p>Giorgio Sironi had an interesting talk about <a href="http://www.phpday.it/2011/session/pursuing-domain-driven-design-practices-php">DDD in PHP</a>: it was a real pity that there were a few guys listening him, because DDD is - obviously - coupled with doing OO right, and PHPers often forget about them both.</p>
-
-<p>During the afternoon I had the great occasion to present, with David, an overview about the <a href="http://www.phpday.it/2011/session/cmf-pain-f">problems relational DBMS have with fuzzy-model softwares</a>, like CMSes: it has been an opportunity to show off that <a href="http://www.dnsee.com/">DNSEE</a> guys are working hard to develop a CMF based on Symfony2 and a NoSQL graph database, OrientDB.</p>
-
-<h2>So what?</h2>
-
-<p>Once again, the best conference I ever attended, did not betrayed my expectations.</p>
-
-<p>If you want to view the slides of the talks, have a look at the <a href="http://joind.in/event/view/472">Joind.in</a> page.</p>
 ]]></content>
   </entry>
   

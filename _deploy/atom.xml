@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-09-21T12:19:49+04:00</updated>
+  <updated>2012-10-14T21:49:56+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
+    <link href="http://www.odino.org/ready-for-europe-ipc-and-pizzas/"/>
+    <updated>2012-10-14T21:21:00+04:00</updated>
+    <id>http://www.odino.org/ready-for-europe-ipc-and-pizzas</id>
+    <content type="html"><![CDATA[<p>In 24 hourse I&#8217;ll be on a plane which is gonna bring
+me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
+in Mainz.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="http://www.odino.org/images/ipc-slide.png"></p>
+
+<p>I&#8217;m pretty excited since this will be my first visit
+to the old continent since I moved to Dubai - almost 7 months ago -
+and I&#8217;m glad I&#8217;ll do that for IPC, with a brief <em>pit-stop</em> in Italy -
+unfortunately not in Rome.</p>
+
+<p>At IPC I will talk about REST, with an - I hope -
+interesting introduction about this architectural style, anti-patterns
+and a few tips on how to implement REST&#8217;s constraints in our
+architectures.</p>
+
+<p>I will also have another chance to talk, and I&#8217;m <strong>seriously</strong>
+excited about it, since, for the first time, I get the chance to
+talk about the foundation of our lives in the modern era (<em>homo internectus</em>),
+the <strong>HTTP protocol</strong>: I will talk a little bit about why we needed it,
+with some historical notion about the web&#8217;s foundation, what SPDY
+brings on the table and the recent <strong>revolutions</strong> around <code>HTTP/2.0</code>.</p>
+
+<p>On the 17th evening I will catch a flight for Venice (via Wien) and then
+I&#8217;ll spend some time with the rest of the family, good thing if you also
+consider that for the first time in 4 years they&#8217;re gonna see me for my birthday.</p>
+
+<p><img class="left" src="http://www.odino.org/images/ale_idiot.jpeg"></p>
+
+<p>But Italy doesn&#8217;t mean that I&#8217;m going to relax <strong>at all</strong>, as I will
+finally meet all the guys from the <a href="http://friuli.grusp.org/">PHP User Group Friuli</a>,
+the 2nd PHP user group in Italy (considering numbers and history), that
+I personally founded along with <a href="http://www.mvassociati.it/it/il-team">Steve&amp;Stefano</a> and <a href="http://it.linkedin.com/in/dlondero">Daniel</a> in front of a pizza,
+but never got to join during their
+monthly meetings, as I was already based in Rome at that time.</p>
+
+<p>There is no plan about that meeting, as the topic will be &#8221;<em>Alessandro Nadalin in tour</em>&#8221;:
+if you are a developer, a technology enthusiast or simply a student come
+and join us in Codroipo, as I will also talk about abroad work experiences as well
+as scout and recruit for some companies (yes, not only <strong>my</strong> company).</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[So yes, I'm writing a book]]></title>
@@ -2779,187 +2832,6 @@ Notes
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
-    <link href="http://www.odino.org/checking-a-domain-s-availability-with-php/"/>
-    <updated>2012-03-20T09:49:00+04:00</updated>
-    <id>http://www.odino.org/checking-a-domain-s-availability-with-php</id>
-    <content type="html"><![CDATA[<ol class="aseries">
-    <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
-    <li>
-        <a href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
-    </li>
-    <li>
-        <a href="http://www.odino.org/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
-    </li>
-    <li>
-        <a href="http://www.odino.org/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
-    </li>
-  <li>
-    <a href="http://www.odino.org/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
-  </li>
-</ol>
-
-
-<p>It&#8217;s been a while I don&#8217;t blog about the
-<a href="https://github.com/robowhois/robowhois-php">Robowhois PHP client</a> that I&#8217;m developing
-together with <a href="http://davidfunaro.com">David</a> so, since we recently released
-the <code>0.8.0</code> version I want to share with you what you can do with it now.</p>
-
-<!-- more -->
-
-
-<h2>Checking a domain&#8217;s availability</h2>
-
-<p>The <a href="http://docs.robowhois.com/api/whois/">availability API</a> is probably the
-greatest feature of the <a href="http://www.robowhois.com/">Robowhois</a> webservice,
-letting you check for a domain&#8217;s availability with a simple, uniform HTTP
-request.</p>
-
-<figure class='code'><figcaption><span>Checking if google.com is available</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">isAvailable</span><span class="p">(</span><span class="s1">&#39;google.com&#39;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="s2">&quot;pretty nice dream, uhm?&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The opposite thing is achieved using the <code>-&gt;isRegistered()</code> method.</p>
-
-<p>You can also retrieve an array as returned from the webservice, by doing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$availability</span> <span class="o">=</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">whoisAvailability</span><span class="p">(</span><span class="s1">&#39;google.com&#39;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$availability</span><span class="p">[</span><span class="s1">&#39;available&#39;</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$availability</span><span class="p">[</span><span class="s1">&#39;registered&#39;</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$availability</span><span class="p">[</span><span class="s1">&#39;daystamp&#39;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Retrieve informations about your account</h2>
-
-<p>A <em>must-have</em>, since you should always check how many remaining credits
-you have, the <code>account</code> API lets you retrieve some of your personal data
-from your Robowhois.com account:</p>
-
-<figure class='code'><figcaption><span>Calculating how many left credits you have</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$credits</span> <span class="o">=</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">whoisAccount</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getCreditsRemaining</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nv">$credits</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>              <span class="k">echo</span> <span class="s2">&quot;No problem fella!&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>              <span class="k">echo</span> <span class="s2">&quot;Time to go shopping looking for new API calls, uhm?&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">echo</span> <span class="s2">&quot;The following error occurred: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Minor things</h2>
-
-<p>We also polished some code, refactored stuff and added some tests (unit and
-integration ones).</p>
-
-<p>For instance, when using the <code>record</code> API, you can retrieve the daystamp of the
-response as <code>DateTime</code> object:</p>
-
-<figure class='code'><figcaption><span>retrieving the daystamp as an object or a string</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Robowhois\Robowhois</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$robowhois</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Robowhois</span><span class="p">(</span><span class="s1">&#39;INSERT-YOUR-API-KEY-HERE&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$whois</span> <span class="o">=</span> <span class="nv">$robowhois</span><span class="o">-&gt;</span><span class="na">whoisRecord</span><span class="p">(</span><span class="s1">&#39;google.com&#39;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="c1">// returns a DateTime object</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$whois</span><span class="o">-&gt;</span><span class="na">getDaystamp</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// formats the DateTime</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$whois</span><span class="o">-&gt;</span><span class="na">getDaystamp</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">// returns a string</span>
-</span><span class='line'>  <span class="k">echo</span> <span class="nv">$whois</span><span class="o">-&gt;</span><span class="na">getDaystamp</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can download the <a href="https://github.com/robowhois/robowhois-php/tree/0.8.0">latest tag</a>
-of the library (currently <code>0.8.0</code>) and start using it: the <a href="https://github.com/robowhois/robowhois-php/blob/master/README.md">README</a>
-exhaustively explains what you can do with this small client, and some
-<a href="https://github.com/robowhois/robowhois-php/tree/master/sample">samples</a>
-are provided under the <code>sample</code> directory.</p>
 ]]></content>
   </entry>
   

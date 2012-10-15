@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-09-21T12:19:49+04:00</updated>
+  <updated>2012-10-14T21:49:56+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
+    <link href="http://www.odino.org/ready-for-europe-ipc-and-pizzas/"/>
+    <updated>2012-10-14T21:21:00+04:00</updated>
+    <id>http://www.odino.org/ready-for-europe-ipc-and-pizzas</id>
+    <content type="html"><![CDATA[<p>In 24 hourse I'll be on a plane which is gonna bring
+me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
+in Mainz.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/ipc-slide.png"></p>
+
+<p>I'm pretty excited since this will be my first visit
+to the old continent since I moved to Dubai - almost 7 months ago -
+and I'm glad I'll do that for IPC, with a brief <em>pit-stop</em> in Italy -
+unfortunately not in Rome.</p>
+
+<p>At IPC I will talk about REST, with an - I hope -
+interesting introduction about this architectural style, anti-patterns
+and a few tips on how to implement REST's constraints in our
+architectures.</p>
+
+<p>I will also have another chance to talk, and I'm <strong>seriously</strong>
+excited about it, since, for the first time, I get the chance to
+talk about the foundation of our lives in the modern era (<em>homo internectus</em>),
+the <strong>HTTP protocol</strong>: I will talk a little bit about why we needed it,
+with some historical notion about the web's foundation, what SPDY
+brings on the table and the recent <strong>revolutions</strong> around <code>HTTP/2.0</code>.</p>
+
+<p>On the 17th evening I will catch a flight for Venice (via Wien) and then
+I'll spend some time with the rest of the family, good thing if you also
+consider that for the first time in 4 years they're gonna see me for my birthday.</p>
+
+<p><img class="left" src="/images/ale_idiot.jpeg"></p>
+
+<p>But Italy doesn't mean that I'm going to relax <strong>at all</strong>, as I will
+finally meet all the guys from the <a href="http://friuli.grusp.org/">PHP User Group Friuli</a>,
+the 2nd PHP user group in Italy (considering numbers and history), that
+I personally founded along with <a href="http://www.mvassociati.it/it/il-team">Steve&amp;Stefano</a> and <a href="http://it.linkedin.com/in/dlondero">Daniel</a> in front of a pizza,
+but never got to join during their
+monthly meetings, as I was already based in Rome at that time.</p>
+
+<p>There is no plan about that meeting, as the topic will be "<em>Alessandro Nadalin in tour</em>":
+if you are a developer, a technology enthusiast or simply a student come
+and join us in Codroipo, as I will also talk about abroad work experiences as well
+as scout and recruit for some companies (yes, not only <strong>my</strong> company).</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Monolog for PHP error reporting on New Relic]]></title>
@@ -924,218 +977,6 @@ Notes
 </span>
 	<ol>
 		<li id='fn:1'>The Process component will be used to execute shell commands directly from PHP <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Tip: if you want, you can add the code to show the user another dialog to indicate the dependency version, and use master as a fallback <a href='#fnref:2' rev='footnote'>↩</a></li>
-	</ol>
-</div>
-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Launching PHPUnit tests from a browser with Symfony2]]></title>
-    <link href="http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/"/>
-    <updated>2012-02-20T13:41:00+04:00</updated>
-    <id>http://www.odino.org/launching-phpunit-tests-from-a-browser-with-symfony2</id>
-    <content type="html"><![CDATA[<p><ol class="aseries">
-	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
-	<li>
-		<a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
-	</li>
-	<li>
-		<a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
-	</li>
-	<li>
-		<a href="/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
-	</li>
-</ol>
-</p>
-
-<p>Today we are going to launch interactive PHPUnit tests thanks to the
-Symfony2 <a href="https://github.com/symfony/Process">Process</a> component.</p>
-
-<!-- more -->
-
-
-<h2>Premise</h2>
-
-<p>This article will show you how to build a script to run your unit tests
-from a browser and render the output to the webpage: since the aim
-of this series of articles is to show you how easily you can integrate
-Symfony2 code into your own projects, I will use nasty scripts to
-accomplish our requirements.</p>
-
-<h2>The approach</h2>
-
-<p>Our approach will be very basic and dummy: we are goint to execute a shell
-command from PHP, write each output buffers into a file and poll the file
-from the frontend to progressively read its content.</p>
-
-<h2>Into the mix</h2>
-
-<p>To do so, let's create a JS-loving <code>index.php</code> file:</p>
-
-<p>``` html The entry point of out application
-<html>
-  <body></p>
-
-<pre><code>&lt;h1&gt;PHPUnit web tests&lt;/h1&gt;
-&lt;a href="#" id="run"&gt;
-  Run tests
-&lt;/a&gt;
-&lt;div id="output"&gt;&lt;/div&gt;
-
-&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" &gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
-  $(document).ready(function(){
-    var getOutput = function(){
-      $.ajax({
-        url: "output.php",
-        success: function(data) {
-          $('#output').html(data.content);
-
-          if (data.stop != 1) {
-            getOutput();
-          }
-        }
-      });
-    };
-    $('#run').click(function(){
-      $.ajax({
-        url: "process.php",
-      });
-      getOutput();
-    });
-  });
-&lt;/script&gt;
-</code></pre>
-
-<p>  </body>
-</html>
-```</p>
-
-<p>As you see, as you click on the <code>Run tests</code> link you will fire an event that:</p>
-
-<ul>
-<li>makes a <code>GET</code> call to <code>process.php</code></li>
-<li>makes a recursive <code>GET</code> request to <code>output.php</code>, until the output object
-does not contain the <code>stop</code> attribute</li>
-</ul>
-
-
-<p>The output script is really easy:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>$fileName = sys_get_temp_dir() . '/test.output.txt';
-header('Content-Type: application/json');</p>
-
-<p>if (file_exists($fileName)) {
-  $f = file_get_contents(sys_get_temp_dir() . '/test.output.txt');</p>
-
-<p>  echo json_encode(array('content' => $f));<br/>
-} else {
-  $f = file_get_contents(sys_get_temp_dir() . '/test.output.txt.f');</p>
-
-<p>  echo json_encode(array('content' => $f, 'stop' => 1));
-  unlink($f);
-}
-```</p>
-
-<p>As you see, each time we call this script, it reads the content of the <code>test.output.txt</code>
-file in the temporary directory of your system: if it doesn't find it, it reads the
-<code>test.output.txt.f</code> file<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<h2>Enter Process</h2>
-
-<p>In our final step, let's install the Process component:</p>
-
-<p>``` bash composer.json
-{</p>
-
-<pre><code>"require": {
-    "php": "&gt;=5.3.2",
-    "symfony/process": "2.0.10"
-}
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
-
-<p>```
-wget http://getcomposer.org/composer.phar</p>
-
-<p>php composer.phar install
-```</p>
-
-<p>then we can create our <code>process.php</code> script:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>require <strong>DIR</strong> . '/vendor/.composer/autoload.php';</p>
-
-<p>use Symfony\Component\Process\Process;</p>
-
-<p>$file = sys_get_temp_dir() . '/test.output.txt';</p>
-
-<p>$handle   = fopen($file, 'w+');
-$process  = new Process('phpunit -c /home/foor/bar/phpunit.xml /home/foo/bar');
-$process->run(function ($type, $buffer) use($handle) {
-  fwrite($handle, nl2br($buffer));
-});</p>
-
-<p>fclose($handle);</p>
-
-<p>rename($file, $file . ".f");
-```</p>
-
-<p>As you see we are launching the test suite and, at each buffer, thanks to a
-lambda, we write a new chunk to the file: at the end of the process the
-<code>txt</code> file gets renamed, so the <code>output.php</code> script knows that it needs to
-notify the frontend that he's not required to poll it anymore, adding
-the <code>stop</code> attribute to the JSON object it outputs:</p>
-
-<p>``` php fragment of output.php
-&lt;?php</p>
-
-<p>echo json_encode(array('content' => $f, 'stop' => 1));
-```</p>
-
-<p><img class="center" src="/images/phpunit-process.png"></p>
-
-<h2>Benefits from the Process component</h2>
-
-<p><blockquote><p>I can do that crap with shell_exec() too!</p></blockquote></p>
-
-<p>There are some advantages of using Process instead of writing your own command
-executor: first of all, if you don't want to take care of the subtle <strong>differences
-between the different platforms</strong> everything is done for you;
-then <strong>error handling becomes very easy</strong> since you are able to catch all the buffers:</p>
-
-<p>``` php
-&lt;?php
-...</p>
-
-<p>$process->run(function ($type, $buffer) {</p>
-
-<pre><code>if ('err' === $type) {
-    echo 'Something nasty happened';
-          syslog(LOG_ERR, $buffer);
-} else {
-    echo $buffer;
-}
-</code></pre>
-
-<p>});
-```</p>
-
-<p><div class="footnotes">
-<span>
-Notes
-</span>
-	<ol>
-		<li id='fn:1'>Flaw here: no error handling when the .f file is not found <a href='#fnref:1' rev='footnote'>↩</a></li>
 	</ol>
 </div>
 </p>
