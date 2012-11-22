@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NoSQL | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/nosql/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
     <link href="http://www.odino.org/back-in-track-with-orientdb/"/>
-    <updated>2012-04-20T15:26:00+04:00</updated>
+    <updated>2012-04-20T15:26:00+03:00</updated>
     <id>http://www.odino.org/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It's been a while since I don't release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
@@ -154,7 +154,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
     <link href="http://www.odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
-    <updated>2011-05-06T15:42:00+04:00</updated>
+    <updated>2011-05-06T15:42:00+03:00</updated>
     <id>http://www.odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There's a common goal that NoSQL and ESI share together: consistency.</p>
 
@@ -217,7 +217,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[A simple menu and the relational model collapses]]></title>
     <link href="http://www.odino.org/a-simple-menu-and-the-relational-model-collapses/"/>
-    <updated>2011-04-17T16:07:00+04:00</updated>
+    <updated>2011-04-17T16:07:00+03:00</updated>
     <id>http://www.odino.org/a-simple-menu-and-the-relational-model-collapses</id>
     <content type="html"><![CDATA[<p>Relational sucks, some say.</p>
 
@@ -312,7 +312,7 @@ select from [28:0, 28:1, 29:0, ...]
   <entry>
     <title type="html"><![CDATA[Graph databases: OrientDB to the rescue]]></title>
     <link href="http://www.odino.org/graph-databases-orientdb-to-the-rescue/"/>
-    <updated>2011-04-16T14:02:00+04:00</updated>
+    <updated>2011-04-16T14:02:00+03:00</updated>
     <id>http://www.odino.org/graph-databases-orientdb-to-the-rescue</id>
     <content type="html"><![CDATA[<p><a href="http://www.orientechnologies.com/">OrientDB</a> is a graph database written in Java, mainly developed by <a href="http://zion-city.blogspot.com/">Luca Garulli</a>, <a href="http://www.assetdata.it/it/index.php">AssetData</a>'s CTO.</p>
 
@@ -418,7 +418,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[NoSQL day: from enthusiasm to consciousness]]></title>
     <link href="http://www.odino.org/nosql-day-from-enthusiasm-to-consciousness/"/>
-    <updated>2011-03-26T15:11:00+04:00</updated>
+    <updated>2011-03-26T15:11:00+03:00</updated>
     <id>http://www.odino.org/nosql-day-from-enthusiasm-to-consciousness</id>
     <content type="html"><![CDATA[<!-- more -->
 

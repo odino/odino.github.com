@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Bootstrap of a Travis-CI test-machine]]></title>
     <link href="http://www.odino.org/bootstrap-of-a-travis-ci-test-machine/"/>
-    <updated>2012-07-27T07:00:00+04:00</updated>
+    <updated>2012-07-27T07:00:00+03:00</updated>
     <id>http://www.odino.org/bootstrap-of-a-travis-ci-test-machine</id>
     <content type="html"><![CDATA[<p><a href="http://travis-ci.org/">Travis-CI</a> is an awesome open source service which
 makes continuos integration really easy in the context
@@ -159,7 +159,7 @@ show the guys behind the project <a href="http://love.travis-ci.org/">your love<
   <entry>
     <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
     <link href="http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
-    <updated>2012-01-26T11:51:00+04:00</updated>
+    <updated>2012-01-26T11:51:00+03:00</updated>
     <id>http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
     <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
 testing mechanism into symfony 1.X</a>
@@ -344,7 +344,7 @@ you can already rely on this small library via
   <entry>
     <title type="html"><![CDATA[Unit testing your symfony forms]]></title>
     <link href="http://www.odino.org/unit-testing-your-symfony-forms/"/>
-    <updated>2011-08-01T14:01:00+04:00</updated>
+    <updated>2011-08-01T14:01:00+03:00</updated>
     <id>http://www.odino.org/unit-testing-your-symfony-forms</id>
     <content type="html"><![CDATA[<p>Tired of slow test suites? Not enough RAM to satisfy both tests and your browser? Have you ever committed without seeing tests results because "It 18.30!"?</p>
 
@@ -545,7 +545,7 @@ catch (Exception $e)
   <entry>
     <title type="html"><![CDATA[Typing into TinyMCE with Selenium]]></title>
     <link href="http://www.odino.org/typing-into-tinymce-with-selenium/"/>
-    <updated>2010-09-11T13:48:00+04:00</updated>
+    <updated>2010-09-11T13:48:00+03:00</updated>
     <id>http://www.odino.org/typing-into-tinymce-with-selenium</id>
     <content type="html"><![CDATA[<p>Since TinyMCE has a questionable behaviour, because it creates an iframe to render the editor, SeleniumIDE has some problems with it.</p>
 
@@ -587,7 +587,7 @@ catch (Exception $e)
   <entry>
     <title type="html"><![CDATA[Magento and PHPUnit]]></title>
     <link href="http://www.odino.org/magento-and-phpunit/"/>
-    <updated>2010-09-11T13:43:00+04:00</updated>
+    <updated>2010-09-11T13:43:00+03:00</updated>
     <id>http://www.odino.org/magento-and-phpunit</id>
     <content type="html"><![CDATA[<p>Although there is a good <a href="http://www.magentocommerce.com/wiki/development/phpunit_integration_with_magento">tutorial about PHPunit and Magento integration</a> and I'd rather using Lime ( the symfony-integrated test engine ) here I'll show you how to set up PHPUnit tests in order to improve the QA of your Magento customizations.</p>
 

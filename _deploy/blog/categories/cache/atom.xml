@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cache | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/cache/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
     <link href="http://www.odino.org/scaling-through-hinclude/"/>
-    <updated>2012-02-24T10:50:00+04:00</updated>
+    <updated>2012-02-24T10:50:00+03:00</updated>
     <id>http://www.odino.org/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it's been a while that I spread the idea of
 having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
@@ -251,7 +251,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Application-level caching: fight the right battle ]]></title>
     <link href="http://www.odino.org/application-level-caching-fight-the-right-battle/"/>
-    <updated>2011-11-22T15:01:00+04:00</updated>
+    <updated>2011-11-22T15:01:00+03:00</updated>
     <id>http://www.odino.org/application-level-caching-fight-the-right-battle</id>
     <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
 
@@ -351,7 +351,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Some common questions about Edge Side Includes]]></title>
     <link href="http://www.odino.org/some-common-questions-about-edge-side-includes/"/>
-    <updated>2011-05-30T15:07:00+04:00</updated>
+    <updated>2011-05-30T15:07:00+03:00</updated>
     <id>http://www.odino.org/some-common-questions-about-edge-side-includes</id>
     <content type="html"><![CDATA[<p>After my <a href="http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011">REST in (a mobile) peace</a> talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so "standard", here's a parade of little things to know about <a href="http://en.wikipedia.org/wiki/Edge_Side_Includes">ESI</a>.</p>
 
@@ -428,7 +428,7 @@ Content-Type: application/xhtml+xml;profile=esi
   <entry>
     <title type="html"><![CDATA[REST better: HTTP cache]]></title>
     <link href="http://www.odino.org/rest-better-http-cache/"/>
-    <updated>2011-03-17T14:12:00+04:00</updated>
+    <updated>2011-03-17T14:12:00+03:00</updated>
     <id>http://www.odino.org/rest-better-http-cache</id>
     <content type="html"><![CDATA[<p>HTTP has a widely-ignored <a href="http://tools.ietf.org/html/rfc2616#section-13">cache specification</a> which helps us implementing fast, scaleable and fault-tolerant services.</p>
 
@@ -690,7 +690,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Don't rape HTTP: If-(None-)Match & the 412 HTTP status code]]></title>
     <link href="http://www.odino.org/don-t-rape-http-if-none-match-the-412-http-status-code/"/>
-    <updated>2011-03-06T00:08:00+04:00</updated>
+    <updated>2011-03-06T00:08:00+03:00</updated>
     <id>http://www.odino.org/don-t-rape-http-if-none-match-the-412-http-status-code</id>
     <content type="html"><![CDATA[<p>HTTP has a problem: it gets raped everyday.</p>
 

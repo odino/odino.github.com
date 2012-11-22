@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ffmpeg | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/ffmpeg/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[FFMPEG: get a thumbnail from a video with PHP]]></title>
     <link href="http://www.odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php/"/>
-    <updated>2010-09-11T10:28:00+04:00</updated>
+    <updated>2010-09-11T10:28:00+03:00</updated>
     <id>http://www.odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php</id>
     <content type="html"><![CDATA[<p>Here's a simple tutorial in order to <strong>extract a thumbnail from a video</strong> using FFMPEG and PHP.</p>
 

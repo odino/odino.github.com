@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Robowhois | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/robowhois/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
     <link href="http://www.odino.org/y-u-no-access-whois-informations-in-php/"/>
-    <updated>2012-04-16T00:38:00+04:00</updated>
+    <updated>2012-04-16T00:38:00+03:00</updated>
     <id>http://www.odino.org/y-u-no-access-whois-informations-in-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
@@ -165,7 +165,7 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   <entry>
     <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
     <link href="http://www.odino.org/checking-a-domain-s-availability-with-php/"/>
-    <updated>2012-03-20T09:49:00+04:00</updated>
+    <updated>2012-03-20T09:49:00+03:00</updated>
     <id>http://www.odino.org/checking-a-domain-s-availability-with-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
@@ -299,7 +299,7 @@ are provided under the <code>sample</code> directory.</p>
   <entry>
     <title type="html"><![CDATA[Retrieving raw WHOIS informations in PHP]]></title>
     <link href="http://www.odino.org/retrieving-raw-whois-informations-in-php/"/>
-    <updated>2012-02-14T00:58:00+04:00</updated>
+    <updated>2012-02-14T00:58:00+03:00</updated>
     <id>http://www.odino.org/retrieving-raw-whois-informations-in-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>

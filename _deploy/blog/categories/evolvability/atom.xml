@@ -4,7 +4,7 @@
   <title><![CDATA[Category: evolvability | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/evolvability/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[XML vs JSON for real]]></title>
     <link href="http://www.odino.org/xml-vs-json-for-real/"/>
-    <updated>2011-04-17T13:23:00+04:00</updated>
+    <updated>2011-04-17T13:23:00+03:00</updated>
     <id>http://www.odino.org/xml-vs-json-for-real</id>
     <content type="html"><![CDATA[<p>Since somebody, on Twitter, didn't appreciated my examples in the <a href="http://www.odino.org/320/long-live-xml-too-sorry-for-json-fanboyz">JSON vs XML</a> fight ( and I just want to remember everybody that I'm not for the former or the latter, <strong>without context</strong> ), here I post an example that should be a <em>for-real</em> case in favour of XML, applied in the context of evolving a system without breaking existing clients.</p>
 

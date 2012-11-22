@@ -4,7 +4,7 @@
   <title><![CDATA[Category: design patterns | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/design-patterns/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>
     <link href="http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
-    <updated>2012-05-14T00:28:00+04:00</updated>
+    <updated>2012-05-14T00:28:00+03:00</updated>
     <id>http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
     <content type="html"><![CDATA[<p>In PHP we have tons of bad constructs/functions that don't actually
 help newcomers on writing good code: the <code>SWITCH/CASE</code> statement is one

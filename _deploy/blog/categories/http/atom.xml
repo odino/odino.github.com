@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/http/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,9 +14,104 @@
 
   
   <entry>
+    <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
+    <link href="http://www.odino.org/the-state-of-http-slash-2-dot-0/"/>
+    <updated>2012-10-15T23:45:00+03:00</updated>
+    <id>http://www.odino.org/the-state-of-http-slash-2-dot-0</id>
+    <content type="html"><![CDATA[<p>With a few days of delay I'm here reporting and commenting
+the last <strong>revolutions</strong> about the protocol of the web,
+its upcoming groundbreaking new version and its state.</p>
+
+<!-- more -->
+
+
+<p>A few days back <a href="http://www.mnot.net/">Mark Nottingham</a> announced that the
+group is <a href="https://twitter.com/mnot/status/253175410383278081">officially working on the new draft of <code>HTTP/2.0</code></a>:
+even though rumors about the shape of this new version were
+going on since a couple years, this <strong>official</strong>
+news brings some fresh hope on the topic.</p>
+
+<p>As the HTTP protocol was always directly influenced
+by great minds (<a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a> and <a href="http://en.wikipedia.org/wiki/Roy_Fielding">Roy Fielding</a>, just
+to mention a couple names) when I first heard about
+Mark taking the responsability to publish <code>HTTP/2.0</code> I
+was pretty sure something great would have come out of
+his mind.</p>
+
+<p>I wasn't wrong.</p>
+
+<p>It's been 13 years since HTTP doesnt see a major change
+in its specification (recent changes are the addition of
+the <code>PATCH</code> method, for example, but we're talking about
+<strong>minor</strong> stuff) and SPDY - a new protocol created by Google -
+came out in the recent history of the web with a disruptive
+force.</p>
+
+<p>HTTP needed something.</p>
+
+<h2>SPDY</h2>
+
+<p>But before having a look at what <code>HTTP/2.0</code> will look like,
+let's mention the good things that SPDY brings on the table:</p>
+
+<ul>
+<li>prioritization: it allows to send different requests and
+tell the server to prioritize some of them</li>
+<li>multiplexing: allows parallel requests and asynchronous
+responses, unlike <em>pipelining</em> which is bound to multiple
+requests/responses at the same time</li>
+<li>server push: servers can now push resources to the client
+without them having to ask for</li>
+<li>better performances: extended compression is one of the
+key FTW of SPDY</li>
+</ul>
+
+
+<p>But there is one things that SPDY doesn't change at all:
+the <strong>interface</strong> between the machines.</p>
+
+<p>As recognized worldwide, the HTTP protocol was an almost
+perfect example of M2M interface which allows servers
+and clients to follow DAPs (<em>domain-application protocols</em>)
+according to a loosely coupled interface - the protocol itself,
+with its verbs, semantics and workflows<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>So SPDY, recognizing the perfection of the contract that HTTP
+puts among clients and servers, isn't a real new protocol, it's
+a <strong>better implementation of the same interface</strong>.</p>
+
+<h2>HTTP/2.0 is an evolution of an evolution</h2>
+
+<p>No wonder, then, in reading the words of Nottingham, as, after
+all, he "just" announced that <a href="http://lists.w3.org/Archives/Public/ietf-http-wg/2012OctDec/0004.html"><code>HTTP/2.0</code> will be <strong>based on SPDY</strong></a>:
+a great news that is basically telling you the "don't reinvent the wheel"
+principle is even applied at the foundation of the web<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>The layers will definitely be different, but, again, I think
+that having a newer version of our beloved protocol, based on a
+specification which already improves it and adds tons of new and
+interesting features, is going to be <strong>a game-changer for web
+applications</strong>.</p>
+
+<p>Will we see <code>HTTP/2.0</code> being deployed with multiplexing, server push,
+prioritization and extended compression next year?</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>No wonder why Roy Fielding, after having heavily influenced the HTTP protocol and the Apache ecosystem, came out with REST, an architectural style meant for long-living and scalable architectures <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>So, think about it, why do you need to re-write huge portions of code when better FOSS is out there? <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
     <link href="http://www.odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
-    <updated>2012-01-27T19:27:00+04:00</updated>
+    <updated>2012-01-27T19:27:00+03:00</updated>
     <id>http://www.odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it's gaining
 its <em>momentum</em> due to a good article which explained how you should build
@@ -93,7 +188,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
     <link href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
-    <updated>2012-01-20T14:15:00+04:00</updated>
+    <updated>2012-01-20T14:15:00+03:00</updated>
     <id>http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
@@ -390,7 +485,7 @@ and leaner web.</p>
   <entry>
     <title type="html"><![CDATA[HTTP saves time, saves money, saves you]]></title>
     <link href="http://www.odino.org/http-saves-time-saves-money-saves-you/"/>
-    <updated>2011-09-21T10:33:00+04:00</updated>
+    <updated>2011-09-21T10:33:00+03:00</updated>
     <id>http://www.odino.org/http-saves-time-saves-money-saves-you</id>
     <content type="html"><![CDATA[<p>It Italy, as usual, our govern is a mess when talking about <em>{insert any topic here}</em>: today's topic will be... <strong>webservices, saving money, time and providing an efficient service to the citizens</strong>.</p>
 
@@ -494,7 +589,7 @@ vatVerifyService = new ItalianGovernVatService</p>
   <entry>
     <title type="html"><![CDATA[Symfony2, HTTP cache & the good parts of both of'em]]></title>
     <link href="http://www.odino.org/symfony-2-http-cache/"/>
-    <updated>2011-05-15T23:27:00+04:00</updated>
+    <updated>2011-05-15T23:27:00+03:00</updated>
     <id>http://www.odino.org/symfony-2-http-cache</id>
     <content type="html"><![CDATA[<p>If you missed my talk about HTTP caching and Symfony2 at the PHPDay, here are the slides that I published friday.</p>
 
@@ -502,39 +597,6 @@ vatVerifyService = new ItalianGovernVatService</p>
 
 
 <p><div class="slideshare" id="__ss_7954490"><iframe src="http://www.slideshare.net/slideshow/embed_code/7954490 " width="800" height="720" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The current vague state of PUT and DELETE in HTML5]]></title>
-    <link href="http://www.odino.org/the-current-vague-state-of-put-and-delete-in-html5/"/>
-    <updated>2011-05-06T13:01:00+04:00</updated>
-    <id>http://www.odino.org/the-current-vague-state-of-put-and-delete-in-html5</id>
-    <content type="html"><![CDATA[<p>If you followed my <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011">REST in peace</a> presentation, you probably noted that I was <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011/180">a bit angry against HTML5</a>.</p>
-
-<!-- more -->
-
-
-<p>The story is pretty straightforward: the original working draft included also PUT and DELETE verbs in the forms' method attribute, while, one year ago, <a href="http://www.w3.org/TR/2010/WD-html5-diff-20101019/#changes-2010-06-24">an update to the draft removed them</a>.</p>
-
-<p>A month ago <a href="http://twitter.com/#!/_odino_/status/53555681088905217">I announced</a> that the working group was reconsidering its decision <a href="http://www.w3.org/Bugs/Public/show_bug.cgi?id=10671#c8">after the suggestions of Mike Amundsen</a>: shortly after, we have a new proposal, which carries on the <a href="http://lists.w3.org/Archives/Public/public-html/2011Apr/0259.html">management of HTTP headers in the forms</a>.</p>
-
-<p>I still don't know if the proposal will be implemented in HTML5, but imagine a world with:</p>
-
-<p>``` html HTTP headers in HTML forms
-<form action="/users/1" method="PUT"></p>
-
-<pre><code>&lt;input type="header" name="Authorization" value="BASIC"/&gt;
-&lt;input type="hidden" name="realm" value="authorized@server.example.com"/&gt;
-
-&lt;input type="text" name="username"/&gt;
-&lt;input type="email" name="username"/&gt;
-&lt;input type="password" name="password"/&gt;
-    ...
-</code></pre>
-
-<p></form>
-```</p>
 ]]></content>
   </entry>
   

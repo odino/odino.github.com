@@ -4,7 +4,7 @@
   <title><![CDATA[Category: symfony | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/symfony/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
     <link href="http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
-    <updated>2012-01-26T11:51:00+04:00</updated>
+    <updated>2012-01-26T11:51:00+03:00</updated>
     <id>http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
     <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
 testing mechanism into symfony 1.X</a>
@@ -201,7 +201,7 @@ you can already rely on this small library via
   <entry>
     <title type="html"><![CDATA[Functional testing symfony 1.X with PHPUnit: the Symfony2 way]]></title>
     <link href="http://www.odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
-    <updated>2012-01-26T00:45:00+04:00</updated>
+    <updated>2012-01-26T00:45:00+03:00</updated>
     <id>http://www.odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
     <content type="html"><![CDATA[<p>In the process of starting a brand new project here at
 <a href="http://www.dnsee.com">DNSEE</a>, me and my colleague
@@ -556,7 +556,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Unit testing your symfony forms]]></title>
     <link href="http://www.odino.org/unit-testing-your-symfony-forms/"/>
-    <updated>2011-08-01T14:01:00+04:00</updated>
+    <updated>2011-08-01T14:01:00+03:00</updated>
     <id>http://www.odino.org/unit-testing-your-symfony-forms</id>
     <content type="html"><![CDATA[<p>Tired of slow test suites? Not enough RAM to satisfy both tests and your browser? Have you ever committed without seeing tests results because "It 18.30!"?</p>
 
@@ -757,7 +757,7 @@ catch (Exception $e)
   <entry>
     <title type="html"><![CDATA[Integrating Zend Framework 2 in Symfony 1.4]]></title>
     <link href="http://www.odino.org/integrating-zend-framework-2-in-symfony-1-4/"/>
-    <updated>2011-07-21T14:14:00+04:00</updated>
+    <updated>2011-07-21T14:14:00+03:00</updated>
     <id>http://www.odino.org/integrating-zend-framework-2-in-symfony-1-4</id>
     <content type="html"><![CDATA[<p>With PHP 5.3 the <a href="http://blog.webspecies.co.uk/2011-05-23/the-new-era-of-php-frameworks.html">new era of PHP frameworks</a> has begun, and things are really, for example, simpler to integrate, thanks to the <a href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR0</a>, which is the standard autoloader adopted by the community.</p>
 
@@ -810,7 +810,7 @@ class twitterActions extends sfActions
   <entry>
     <title type="html"><![CDATA[SfWidgetFormChoice* with spicy empty values]]></title>
     <link href="http://www.odino.org/sfwidgetformchoice-with-spicy-empty-values/"/>
-    <updated>2010-10-25T11:02:00+04:00</updated>
+    <updated>2010-10-25T11:02:00+03:00</updated>
     <id>http://www.odino.org/sfwidgetformchoice-with-spicy-empty-values</id>
     <content type="html"><![CDATA[<p>To pass empty values to the widgets based on choices is really simple with symfony.</p>
 

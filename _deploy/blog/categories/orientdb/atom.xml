@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OrientDB | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/orientdb/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-14T21:49:56+04:00</updated>
+  <updated>2012-10-16T00:23:35+03:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[So yes, I'm writing a book]]></title>
     <link href="http://www.odino.org/so-yes-im-writing-a-book/"/>
-    <updated>2012-09-21T08:00:00+04:00</updated>
+    <updated>2012-09-21T08:00:00+03:00</updated>
     <id>http://www.odino.org/so-yes-im-writing-a-book</id>
     <content type="html"><![CDATA[<p>As announced on twitter a few days back, it seems
 that the time has come for me to step up and start
@@ -97,7 +97,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
     <link href="http://www.odino.org/back-in-track-with-orientdb/"/>
-    <updated>2012-04-20T15:26:00+04:00</updated>
+    <updated>2012-04-20T15:26:00+03:00</updated>
     <id>http://www.odino.org/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It's been a while since I don't release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
@@ -235,7 +235,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Getting back on OrientDB]]></title>
     <link href="http://www.odino.org/getting-back-on-orientdb/"/>
-    <updated>2012-01-03T17:16:00+04:00</updated>
+    <updated>2012-01-03T17:16:00+03:00</updated>
     <id>http://www.odino.org/getting-back-on-orientdb</id>
     <content type="html"><![CDATA[<p>It's been a while since I don't give any update about
 <a href="https://github.com/congow/Orient">Orient</a>,
@@ -268,7 +268,7 @@ which is the last one before going RC, introducing <strong>persistence</strong> 
   <entry>
     <title type="html"><![CDATA[A warm welcome to Orient beta-4: data-mapping and much more]]></title>
     <link href="http://www.odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more/"/>
-    <updated>2011-09-20T16:13:00+04:00</updated>
+    <updated>2011-09-20T16:13:00+03:00</updated>
     <id>http://www.odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more</id>
     <content type="html"><![CDATA[<p>After a great, as usual, monday-mini-hackaton with my colleague <a href="http://davidfunaro.com/">David</a>, I'm happy to announce that Orient has reached its fourth beta: instead of a generic post, I will describe here, step by step, which amazing things you'll be able to do with this new release :)</p>
 
@@ -430,7 +430,7 @@ $query->truncate('myClass', true); // truncates cluster "myClass"
   <entry>
     <title type="html"><![CDATA[News from the Orient library: OrientDB query-builder goes out]]></title>
     <link href="http://www.odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out/"/>
-    <updated>2011-07-31T15:19:00+04:00</updated>
+    <updated>2011-07-31T15:19:00+03:00</updated>
     <id>http://www.odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out</id>
     <content type="html"><![CDATA[<p>There are times to celebrate, like this one, that I was expecting since 2 months; a moment I delayed because of an amount of things that you can't even imagine.</p>
 
