@@ -4,7 +4,7 @@
   <title><![CDATA[Category: webservice | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/webservice/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-16T00:23:35+03:00</updated>
+  <updated>2012-11-23T03:53:29+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
     <link href="http://www.odino.org/hypermedia-services-beyond-rest-architectures/"/>
-    <updated>2012-01-24T03:22:00+03:00</updated>
+    <updated>2012-01-24T03:22:00+04:00</updated>
     <id>http://www.odino.org/hypermedia-services-beyond-rest-architectures</id>
     <content type="html"><![CDATA[<p>RESTafarians should support the abandon of the
 original term - REpresentational State Transfer -  in favour of

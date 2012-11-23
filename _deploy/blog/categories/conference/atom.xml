@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-16T00:23:35+03:00</updated>
+  <updated>2012-11-23T03:53:29+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,9 +14,35 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
+    <link href="http://www.odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
+    <updated>2012-10-16T15:11:00+04:00</updated>
+    <id>http://www.odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
+    <content type="html"><![CDATA[<p>Yesterday, from Doha's international airport, I
+got the chance to blog about the latest changes
+surrounding the upcoming major version of the
+protocol of the web, <code>HTTP/2.0</code>.</p>
+
+<p>Today I gave, at the International PHPConference in
+Mainz, an overview about HTTP (<code>0.9</code>, <code>1.0</code>, <code>1.1</code>), SPDY
+and <code>HTTP/2.0</code> itself.</p>
+
+<!-- more -->
+
+
+<p>There's not that much to say, as the presentation is already
+on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">Slideshare</a> and I'm embedding it here, other than a thing
+the guys here in Germany already heard a lot: <strong>go back to
+the basics</strong>.</p>
+
+<p><div class="slideshare" id="__ss_14749994"><iframe src="http://www.slideshare.net/slideshow/embed_code/14749994 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
     <link href="http://www.odino.org/ready-for-europe-ipc-and-pizzas/"/>
-    <updated>2012-10-14T21:21:00+03:00</updated>
+    <updated>2012-10-14T21:21:00+04:00</updated>
     <id>http://www.odino.org/ready-for-europe-ipc-and-pizzas</id>
     <content type="html"><![CDATA[<p>In 24 hourse I'll be on a plane which is gonna bring
 me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
@@ -69,7 +95,7 @@ as scout and recruit for some companies (yes, not only <strong>my</strong> compa
   <entry>
     <title type="html"><![CDATA[Speaking at IPC 2012]]></title>
     <link href="http://www.odino.org/speaking-at-ipc-2012/"/>
-    <updated>2012-07-23T19:34:00+03:00</updated>
+    <updated>2012-07-23T19:34:00+04:00</updated>
     <id>http://www.odino.org/speaking-at-ipc-2012</id>
     <content type="html"><![CDATA[<p>Now it's official: in October I will be
 in Mainz for <a href="http://phpconference.com/">IPC 2012</a>.</p>
@@ -115,7 +141,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Going beyond HTTP at IPC in October]]></title>
     <link href="http://www.odino.org/going-beyond-http-at-ipc-in-october/"/>
-    <updated>2012-07-02T13:31:00+03:00</updated>
+    <updated>2012-07-02T13:31:00+04:00</updated>
     <id>http://www.odino.org/going-beyond-http-at-ipc-in-october</id>
     <content type="html"><![CDATA[<p>Just a quick one: seems that in October I'll need to travel
 all my way back to Europe to speak at the
@@ -139,7 +165,7 @@ to make it for the first time among the germans.</p>
   <entry>
     <title type="html"><![CDATA[OSIDays 2011 wrapup]]></title>
     <link href="http://www.odino.org/osidays-2011-wrapup/"/>
-    <updated>2011-11-22T15:26:00+03:00</updated>
+    <updated>2011-11-22T15:26:00+04:00</updated>
     <id>http://www.odino.org/osidays-2011-wrapup</id>
     <content type="html"><![CDATA[<p>There we go: I am in Bengaluru for OSIDays, and the conference is about to finish today, after cool and less cool moments.</p>
 
@@ -192,62 +218,6 @@ Wow, one of the coolest aspects of the conference: they have been able to satisf
 <p><img class="right" src="/images/osidays5.jpg"></p>
 
 <p>I don't talk about my personal life in this blog, so I will not tell you how things went from this point of view: let's just says that now I have 3 free days for visiting a few cities here in the southern part of India...   ...let's hope they will be amazing as a few moments here in Bengaluru.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Jazoon 2011 wrapup]]></title>
-    <link href="http://www.odino.org/jazoon-2011-wrapup/"/>
-    <updated>2011-06-28T15:09:00+03:00</updated>
-    <id>http://www.odino.org/jazoon-2011-wrapup</id>
-    <content type="html"><![CDATA[<p>So, as you might know, the last week I've been in Zurich in order to partecipate to the Jazoon Rookie Award.</p>
-
-<!-- more -->
-
-
-<p><img class="center" src="/images/jazoon1.jpg"></p>
-
-<h2>The city</h2>
-
-<p>Zurich, gotta say, is a really nice city: it has a lot of green and its quite clean: as Lukas told me, it's not because Swiss people are that respectful, but because the public administration hires lots of scavengers :)</p>
-
-<p>Switzerland is also soooooooooo expensive, and, by the way, my hotel was in what they call "the gold coast of Zurich", the richest part of the city, so as I ordered a plate of ananas at a vegetarian restaurant, I was traumatized when paying: 30 euros or something like that ( note for the me of the future: remember before the departure's flight that Switzerland is not in the UE, so they don't have euros ).</p>
-
-<p><img class="center" src="/images/jazoon2.jpg"></p>
-
-<h2>The conference</h2>
-
-<p><img class="center" src="/images/jazoon3.jpg"></p>
-
-<p>The Jazoon was pretty awesome: I had the opportunity to meet a lot of funny people and we had great time playing at the table-soccer or just chatting about the current state of sw lifecycles and other nerdy stuff.</p>
-
-<p>The organization was really good, because at the hotel everyone knew about our arrival and the conference was easy to reach, with a perfect wi-fi connection and some recreative areas.</p>
-
-<p>And, since I am italian I need to say it, the food was really tasty :)</p>
-
-<h2>The award</h2>
-
-<p><img class="center" src="/images/jazoon4.jpg"></p>
-
-<p>Oh, man, a really really really great experience.</p>
-
-<p>I competed against Benjamin from Karlsruhe and Ivo from Skopje, 2 really cool guys that had really good presentations.</p>
-
-<p>I ranked 2nd with my "REST in peace: a handbook of software waste" and won a Lenovo IdeaPad which is, basically... awesome :)</p>
-
-<h2>Many thanks to...</h2>
-
-<p>The other 2 rookies, we had a few beers and funny moments together, it was well-spent time with those guys.</p>
-
-<p>And, obviously, a particular thank you to Georgios ( I hope the name is ok, George! ), Ivo's mentor - as far as I understood - a really nice person to chat with: we had a few moments to talk and it was really nice to have the opportunity to listen the point of view of such a wise and experienced guy.</p>
-
-<p>Last but not least, a really big "thank you!" to Felix, Jutta and Marco from the organization, it was a pleasure to be invited at such this kind of conference.</p>
-
-<h2>My presentation</h2>
-
-<p>As usual, I post here the presentation, but you can find it on slideshare:</p>
-
-<p><div class="slideshare" id="__ss_8392980"><iframe src="http://www.slideshare.net/slideshow/embed_code/8392980 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
 ]]></content>
   </entry>
   

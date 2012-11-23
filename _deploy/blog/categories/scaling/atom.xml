@@ -4,7 +4,7 @@
   <title><![CDATA[Category: scaling | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/scaling/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-16T00:23:35+03:00</updated>
+  <updated>2012-11-23T03:53:29+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Search engines are making the web slower]]></title>
     <link href="http://www.odino.org/search-engines-are-making-the-web-slower/"/>
-    <updated>2012-04-07T10:00:00+03:00</updated>
+    <updated>2012-04-07T10:00:00+04:00</updated>
     <id>http://www.odino.org/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way
@@ -78,7 +78,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
     <link href="http://www.odino.org/scaling-through-hinclude/"/>
-    <updated>2012-02-24T10:50:00+03:00</updated>
+    <updated>2012-02-24T10:50:00+04:00</updated>
     <id>http://www.odino.org/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it's been a while that I spread the idea of
 having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
@@ -313,7 +313,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
     <link href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
-    <updated>2012-01-20T14:15:00+03:00</updated>
+    <updated>2012-01-20T14:15:00+04:00</updated>
     <id>http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
@@ -610,7 +610,7 @@ and leaner web.</p>
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
     <link href="http://www.odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
-    <updated>2011-05-06T15:42:00+03:00</updated>
+    <updated>2011-05-06T15:42:00+04:00</updated>
     <id>http://www.odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There's a common goal that NoSQL and ESI share together: consistency.</p>
 

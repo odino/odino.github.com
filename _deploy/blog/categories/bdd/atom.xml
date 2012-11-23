@@ -4,7 +4,7 @@
   <title><![CDATA[Category: BDD | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/bdd/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-16T00:23:35+03:00</updated>
+  <updated>2012-11-23T03:53:29+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The "new" development here in DNSEE: BDD and much more]]></title>
     <link href="http://www.odino.org/the-new-development-here-in-dnsee-bdd-and-much-more/"/>
-    <updated>2011-10-03T12:34:00+03:00</updated>
+    <updated>2011-10-03T12:34:00+04:00</updated>
     <id>http://www.odino.org/the-new-development-here-in-dnsee-bdd-and-much-more</id>
     <content type="html"><![CDATA[<p>It's been a couple months that we <strong>renewed a few aspects of our experience</strong>, as developers, here at DNSEE, introducing a few practices that common software factories ignore: we - and I - don't know if these practices will always be fine for our daily job but, as far as we saw, things are just working fine.</p>
 
@@ -99,7 +99,7 @@ cap deploy deploy:migrate
   <entry>
     <title type="html"><![CDATA[Behaviour-driven development in PHP]]></title>
     <link href="http://www.odino.org/behaviour-driven-development-in-php/"/>
-    <updated>2011-08-27T23:32:00+03:00</updated>
+    <updated>2011-08-27T23:32:00+04:00</updated>
     <id>http://www.odino.org/behaviour-driven-development-in-php</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a> is an established practice which goes beyond test-driven development, assuming we are working on a agile-prone environment and our requirements are expressed as user stories or something similar: although this requirement is not mandatory, <strong>BDD's power is leveraged by using stories</strong>.</p>
 

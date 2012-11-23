@@ -8,11 +8,11 @@ published: false
 ---
 
 It has almost been a baby's delivery, but we eventually made it:
-the PHP [ODM](http://css.dzone.com/articles/era-object-document-mapping) for [OrientDB](http://code.google.com/p/orient/) has finally reached its 5th beta.
+the PHP [ODM](http://css.dzone.com/articles/era-object-document-mapping) for [OrientDB](http://code.google.com/p/orient/) has finally reached its **5th beta**.
 
 <!-- more -->
 
-Thanks to the huge effort of David and the push from Marco we
+Thanks to the huge effort of [David Funaro](http://davidfunaro.com) and the push from [Marco Pivetta](https://twitter.com/Ocramius) we
 have just released the `beta-5` version of this library, which lets
 you work with the infamous GraphDB in PHP: there is a plethora of
 changes and some news about the future of the library, so I'll try
@@ -36,12 +36,12 @@ userland code.
 This has been the case for our filesystem classes, that - as they were first very simple
 but tended to grow - have now been replaced with the [Symfony2 finder](http://symfony.com/doc/2.0/components/finder.html).
 
-At the same time we also added the [ClassLoader component](http://symfony.com/doc/2.0/components/class_loader.html), which [replaces
-our old PSR-0 compatible basic autoloader](https://github.com/congow/Orient/blob/beta-5/test/PHPUnit/bootstrap.php).
+At the same time we also added the [ClassLoader component](http://symfony.com/doc/2.0/components/class_loader.html), which replaces
+our old [PSR-0 compatible basic autoloader](https://github.com/congow/Orient/blob/beta-5/test/PHPUnit/bootstrap.php).
 
 ## Compatibility with the stable OrientDB 1.2.0
 
-Since OrientDB is stable [since months](http://www.h-online.com/open/news/item/NoSQL-Document-Graph-database-OrientDB-1-0-released-1576260.html),
+OrientDB is stable [since months](http://www.h-online.com/open/news/item/NoSQL-Document-Graph-database-OrientDB-1-0-released-1576260.html),
 we couldn't release a version of our library without
 upgrading the compatibility to OrientDB (we were still at version `1.0-rc6`):
 we are now compatible with OrientDB `1.2.0`.
@@ -72,6 +72,8 @@ by just using the correct fetchplan:
 <?php
 
 $post = $this->manager->find('27:0', '*:-1');
+
+var_dump($post->getComments(); // an array of objects, no lazy-loading
 ```
 
 ## Repositories
@@ -96,7 +98,12 @@ $user = $repository->find($id);
 
 Since one of our aims is to be as compatible
 as possible with Doctrine's ODMs, we integrated
-the [*Persistence* interfaces from Doctrine 2](https://github.com/congow/Orient/issues/71).
+the [*Persistence* interfaces from Doctrine 2](https://github.com/congow/Orient/issues/71):
+most of the methods are not implemented yet (`throw new Exception()`),
+as actual persistence should come in `beta-6`/`rc-1`, but
+the good news is that when retrieving objects from the DB
+you can still use the same APIs that the Doctrine ODMs
+provide you.
 
 ## Integration tests
 
@@ -117,8 +124,8 @@ The way we [generate proxies](https://github.com/nrk/Orient/commit/0bed0196f83c6
 most interesting parts of the library:
 with this release we changed the way we
 do it in order to provide
-a more flexible and straightforward
-mechanism for doing lazy-loading.
+a **more flexible and straightforward
+mechanism for doing lazy-loading**.
 
 Usually when you retrieve a record in OrientDB
 you won't have related records:
@@ -237,22 +244,22 @@ an extra-query to retrieve the lazy-loaded record.
 
 ## Support of sessions in the HTTP client
 
-[Daniele](https://github.com/nrk) took his time to add [native support for cookies](https://github.com/congow/Orient/pull/118) in the
+[Daniele Alessandri](https://github.com/nrk) took his time to add [native support for cookies](https://github.com/congow/Orient/pull/118) in the
 HTTP client which is used in the native HTTP binding: thanks
 to this we can decide whether to re-use an existing session
 while querying the DB.
 
-## Simplified the requirements
+## Simplified requirements
 
 We have now removed [APC as a requirement](https://github.com/nrk/Orient/commit/bc8f94e7c07147aec1c0c4ed852b7b9d02f4a96c) for the library: since it
 was an easy fix we thought it makes sense not to force everyone to have
 APC installed everywhere{% fn_ref 2 %}.
 
-### Contributions
+## Contributions
 
 I've been pretty busy over the last months, but
 the efforts of the already-mentioned Daniele and
-[David](http://davidfunaro.com) have been [huge](https://github.com/congow/Orient/graphs/contributors?from=2012-03-31&to=2012-11-18&type=c)
+David have been [huge](https://github.com/congow/Orient/graphs/contributors?from=2012-03-31&to=2012-11-18&type=c)
 to release `beta-5`: I virtually clap my hands
 for them, as they are the main reason behind all
 of this progress.
@@ -270,7 +277,7 @@ integrate the library into their organization:
 as agreed months ago, there shouldn't be a big
 problem in doing so.
 
-As this will be the first ODM for a GraphDB,
+As this will be **the first ODM for a GraphDB**,
 everyone is pretty excited about it:
 
 * we will get more support and contributions for the library itself
@@ -287,8 +294,8 @@ productive, intense and full of changes, but
 I'd realy like to suggest you one thing before
 leaving you: **use this library**.
 
-Even though the ODM is not finished yet, HTTP binding
-and Query Builder are already at a stable version:
+Even though the ODM is not finished yet, **HTTP binding
+and Query Builder are already at a stable stage**:
 the first one is **already faster** than the [binary-protocol implementation](https://github.com/AntonTerekhov/OrientDB-PHP),
 while the second one is a very convenient library to
 help you **saving a lot of time** when writing OrientDB's

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: performances | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/performances/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-10-16T00:23:35+03:00</updated>
+  <updated>2012-11-23T03:53:29+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Optimizing loading times with images' lazy loading]]></title>
     <link href="http://www.odino.org/optimizing-loading-times-with-images-lazy-loading/"/>
-    <updated>2012-09-21T07:45:00+03:00</updated>
+    <updated>2012-09-21T07:45:00+04:00</updated>
     <id>http://www.odino.org/optimizing-loading-times-with-images-lazy-loading</id>
     <content type="html"><![CDATA[<p>Sometimes I like to forget that I'm
 mainly involved in other things and
@@ -137,7 +137,7 @@ $(window).scroll(function() {
   <entry>
     <title type="html"><![CDATA[Search engines are making the web slower]]></title>
     <link href="http://www.odino.org/search-engines-are-making-the-web-slower/"/>
-    <updated>2012-04-07T10:00:00+03:00</updated>
+    <updated>2012-04-07T10:00:00+04:00</updated>
     <id>http://www.odino.org/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way
