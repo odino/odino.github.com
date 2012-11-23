@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "OrientDB ODM beta 5: repositories, compatibility with 1.2.0 and more stability"
-date: 2012-11-19 09:10
+date: 2012-11-23 09:10
 comments: true
 categories: [OrientDB, Orient, ODM, PHP]
-published: false
+published: true
 ---
 
 It has almost been a baby's delivery, but we eventually made it:
