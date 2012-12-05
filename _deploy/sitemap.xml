@@ -525,6 +525,12 @@
         <lastmod>2012-10-16T17:18:39+04:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://www.odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability/
+        </loc>
+        <lastmod>2012-11-23T10:57:37+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://www.odino.org/404.html</loc>
         <lastmod>2012-08-10T13:00:31+04:00</lastmod>
     </url>
@@ -534,7 +540,7 @@
     </url>
     <url>
         <loc>http://www.odino.org/blog/archives/</loc>
-        <lastmod>2012-10-16T17:18:39+04:00</lastmod>
+        <lastmod>2012-11-23T10:57:37+04:00</lastmod>
     </url>
     <url>
         <loc>http://www.odino.org/conferences/</loc>
@@ -546,6 +552,6 @@
     </url>
     <url>
         <loc>http://www.odino.org/</loc>
-        <lastmod>2012-10-16T17:18:39+04:00</lastmod>
+        <lastmod>2012-11-23T10:57:37+04:00</lastmod>
     </url>
 </urlset>
