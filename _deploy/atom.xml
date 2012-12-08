@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-12-05T12:31:41+04:00</updated>
+  <updated>2012-12-08T16:06:58+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
+    <link href="http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
+    <updated>2012-12-08T15:56:00+04:00</updated>
+    <id>http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
+    <content type="html"><![CDATA[<p>During October of the last year, my and my ex-colleague David
+took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
+with a talk about graph databases, OrientDB and how to integrate it
+in PHP.</p>
+
+<!-- more -->
+
+
+<p>I recently found out that the videos recorded at the conference
+finally made it to Vimeo: enjoy some tarzan english!</p>
+
+<iframe src="http://player.vimeo.com/video/53451968?badge=0" width="720" height="600" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Coding bureaucracy]]></title>
@@ -2751,138 +2774,6 @@ in its winter edition.</p>
 to make it for the first time among the germans.</p>
 
 <p>Hope to see you there!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>
-    <link href="http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
-    <updated>2012-05-14T00:28:00+04:00</updated>
-    <id>http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
-    <content type="html"><![CDATA[<p>In PHP we have tons of bad constructs/functions that don&#8217;t actually
-help newcomers on writing good code: the <code>SWITCH/CASE</code> statement is one
-of those that I hate the most, although very few developers rely on
-it.</p>
-
-<!-- more -->
-
-
-<p>The statement is pretty straightfoward</p>
-
-<figure class='code'><figcaption><span>Simple SWITCH/CASE statement</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Logger</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">logMessage</span><span class="p">(</span><span class="nv">$message</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL::The system encountered a problem&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="nv">$parts</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
-</span><span class='line'>      <span class="nv">$level</span> <span class="o">=</span> <span class="nv">$parts</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">switch</span> <span class="p">(</span><span class="nv">$level</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">case</span> <span class="s1">&#39;notice&#39;</span><span class="o">:</span>
-</span><span class='line'>              <span class="o">...</span>
-</span><span class='line'>              <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">case</span> <span class="s1">&#39;critical&#39;</span><span class="o">:</span>
-</span><span class='line'>              <span class="o">...</span>
-</span><span class='line'>              <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">case</span> <span class="s1">&#39;catastrophe&#39;</span><span class="o">:</span>
-</span><span class='line'>              <span class="o">...</span>
-</span><span class='line'>              <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and is intended to make multiple IFs more readable.</p>
-
-<p>It may seem useful, but at first you should recognize that <strong>multiple
-IFs are already a bad smell</strong>, so, from the beginning there is something
-with a code trying to make them look nicer.</p>
-
-<p>The <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy pattern</a>,
-one of my favourites, is a simple but powerful way to avoid writing
-procedural code that relies on IFs.</p>
-
-<p>The main concept is that you should contextualize the application&#8217;s
-workflow at runtime, deciding which steps (methods) to run based on
-data which is external to the method itself.</p>
-
-<figure class='code'><figcaption><span>silly implementation of Strategy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Logger</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">logMessage</span><span class="p">(</span><span class="nv">$message</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL::The system encountered a problem&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="nv">$parts</span>  <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
-</span><span class='line'>      <span class="nv">$level</span>  <span class="o">=</span> <span class="nv">$parts</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>      <span class="nv">$method</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;log%sMessage&#39;</span><span class="p">,</span> <span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$level</span><span class="p">));</span>
-</span><span class='line'>      <span class="nv">$output</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$method</span><span class="p">(</span><span class="nv">$parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In this way we are able to isolate and keep clean the implementations
-of the methods, thus the logic behind the application.</p>
-
-<p>This means that we only need to implement submethods:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">logNoticeMessage</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">logCriticalMessage</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">logCatastropheMessage</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If this doesn&#8217;t seem important to you, consider this scenario:
-you are shipping a library with the <code>SWITCH/CASE</code> in the first example;
-what would happen if another developer using that library would only
-like to edit the logic when a <code>catastrophe</code> message is received?</p>
-
-<p>Yes, he would need to override the entire <code>logMessage</code> method,
-<strong>loosing the possibility to benefit of future software updates</strong>
-for that specific method.</p>
 ]]></content>
   </entry>
   

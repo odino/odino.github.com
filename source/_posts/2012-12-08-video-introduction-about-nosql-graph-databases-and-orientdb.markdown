@@ -6,7 +6,7 @@ comments: true
 categories: [conference, OrientDB, NoSQL]
 ---
 
-During October of the last year, my and my ex-colleague David
+During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the [polish PHP Conference](http://phpcon.pl/2011/pl/)
 with a talk about graph databases, OrientDB and how to integrate it
 in PHP.

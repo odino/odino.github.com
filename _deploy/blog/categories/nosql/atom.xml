@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NoSQL | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/nosql/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-12-05T12:31:41+04:00</updated>
+  <updated>2012-12-08T16:06:58+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
+    <link href="http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
+    <updated>2012-12-08T15:56:00+04:00</updated>
+    <id>http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
+    <content type="html"><![CDATA[<p>During October of the last year, my and my ex-colleague David
+took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
+with a talk about graph databases, OrientDB and how to integrate it
+in PHP.</p>
+
+<!-- more -->
+
+
+<p>I recently found out that the videos recorded at the conference
+finally made it to Vimeo: enjoy some tarzan english!</p>
+
+<iframe src="http://player.vimeo.com/video/53451968?badge=0" width="720" height="600" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
@@ -412,64 +435,6 @@ Notes
 	</ol>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[NoSQL day: from enthusiasm to consciousness]]></title>
-    <link href="http://www.odino.org/nosql-day-from-enthusiasm-to-consciousness/"/>
-    <updated>2011-03-26T15:11:00+04:00</updated>
-    <id>http://www.odino.org/nosql-day-from-enthusiasm-to-consciousness</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<p><img class="center" src="/images/nosqldaylogo.jpg"></p>
-
-<p>The <a href="http://www.nosqlday.it/">NoSQL day</a> has been an amazing 1-day/1-track conference held in Brescia, Italy, yesterday.</p>
-
-<p>I went there because in <a href="http://www.dnsee.com/">DNSEE</a> we are facing huge problems with the design of a software in which we thought MySQL would fit without many matters: so, given that non-relational databases are getting very popular, me and <a href="http://www.davidfunaro.com/">David</a> decided we should attend this event.</p>
-
-<h2>What we had, have, will have and how we use them</h2>
-
-<p>The event starts with the keynote of Gabriele Lana, which briefly explains the history of the DB as we know it.</p>
-
-<p>Luca Bonmasser continues explaining (No)SQL antipatterns: the session was great, because it highlighted tons of use-cases which we solve with the relational model but don't need it; we basically add to a complex and heavy-constrained system data that should not belong to that domain, like messaging queues or configuration parameters.</p>
-
-<p>Then it comes The Net Planet ( a firm represented by <a href="http://www.linkedin.com/pub/flavio-percoco-premoli/b/61/457">Flavio Percoco</a> and Alberto Paro ), which introduces MongoDB to the crowd, coupled with <a href="http://www.elasticsearch.org/">ElasticSearch</a>, a system built to solve research issues.</p>
-
-<p>I didn't enjoyed it so much because they didn't dig into Mongo but mainly explained the common infrastructure they use on their products/systems.</p>
-
-<h2>Technologic contextualization</h2>
-
-<p><a href="http://twitter.com/#!/antirez">Antirez</a>, creator of <a href="http://redis.io/">Redis</a>, had an amazing talk about his product and the NoSQL panorama: he was really capable to enjoy the crowd and contextualize NoSQL solutions' use cases.</p>
-
-<p>I really appreciated that he specified the limitations of Redis and other non-relational databases: as far as Redis is concerned, he told us that the cases where it fits really well are <strong>caching</strong>, <strong>messaging queues</strong> and <strong>fast computations</strong> ( like intersections between datasets ).</p>
-
-<p>We also had the opportunity to talk with him at lunch: a very cool personality :)</p>
-
-<p><img class="right" src="/images/nosqlday-antirez.jpg"></p>
-
-<p>Just after lunch, Gabriele Lana had his 2nd talk, soooo technical, about his 2-years long experience with MongoDB, explaining to the attendees a few tricks and howtos when dealing with this product.</p>
-
-<p>It was a pity that we were in heavy digestion... ;-)</p>
-
-<h2>OrientDB</h2>
-
-<p><img class="left" src="/images/nosqlday-garulli.jpg"></p>
-
-<p><a href="http://zion-city.blogspot.com/">Luca Garulli</a> introduced to the conference <a href="http://www.orientechnologies.com/">OrientDB</a>, a <strong>fast and scalable graphdb</strong> for the masses, written in Java with 2 interfaces, binary and HTTP.</p>
-
-<p>Although I knew Orient ( and I will <a href="https://github.com/odino/Orient">know it better</a> ), it was great to listen the creator of this cool product explaining all the features that would probably solve a lot of the problems I mentioned at the beginning of this post.</p>
-
-<h2>What did the NoSQL day gave us?</h2>
-
-<p>The consciousness about this technology: buzzwords are often abused, and time after time every technology is marked as <strong>definitive</strong>, because the <strong>one size fits all rule</strong> hasn't penetrated in software engineering yet.</p>
-
-<p>So this kind of events are the glue between a technology and its proper usage, because they introduce you to a new world as well as they boost your productivity.</p>
-
-<h2>Next big thing</h2>
-
-<p>We will have our first <strong>Node.js conference in Italy</strong> in september and I can't wait for it: so... Thanks and kudos to <a href="http://www.webdebs.org/">WebDeBs</a>, the organizers of the "for real" conferences!</p>
 ]]></content>
   </entry>
   

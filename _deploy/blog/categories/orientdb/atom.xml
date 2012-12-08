@@ -4,7 +4,7 @@
   <title><![CDATA[Category: OrientDB | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/orientdb/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-12-05T12:31:41+04:00</updated>
+  <updated>2012-12-08T16:06:58+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
+    <link href="http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
+    <updated>2012-12-08T15:56:00+04:00</updated>
+    <id>http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
+    <content type="html"><![CDATA[<p>During October of the last year, my and my ex-colleague David
+took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
+with a talk about graph databases, OrientDB and how to integrate it
+in PHP.</p>
+
+<!-- more -->
+
+
+<p>I recently found out that the videos recorded at the conference
+finally made it to Vimeo: enjoy some tarzan english!</p>
+
+<iframe src="http://player.vimeo.com/video/53451968?badge=0" width="720" height="600" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OrientDB ODM beta 5: repositories, compatibility with 1.2.0 and more stability]]></title>
@@ -600,168 +623,6 @@ which is the last one before going RC, introducing <strong>persistence</strong> 
 
 <p>Uh, well, <a href="http://code.google.com/p/orient/wiki/Y2011">happy 2012</a>: this year we
  will see some great things from OrientDB and its ecosystem!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A warm welcome to Orient beta-4: data-mapping and much more]]></title>
-    <link href="http://www.odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more/"/>
-    <updated>2011-09-20T16:13:00+04:00</updated>
-    <id>http://www.odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more</id>
-    <content type="html"><![CDATA[<p>After a great, as usual, monday-mini-hackaton with my colleague <a href="http://davidfunaro.com/">David</a>, I'm happy to announce that Orient has reached its fourth beta: instead of a generic post, I will describe here, step by step, which amazing things you'll be able to do with this new release :)</p>
-
-<!-- more -->
-
-
-<h2>Data mapping all the way</h2>
-
-<p>The biggest feature of this beta-4 is the amount of work done in the Data Mapper: you are now able to hydrate POPOs with a few data types:</p>
-
-<ul>
-<li>boolean</li>
-<li>binary</li>
-<li>date|datetime</li>
-<li>embedded record|list|set|map</li>
-<li>integer|float</li>
-<li>link, link set|list|map</li>
-<li>byte, long, short and double</li>
-<li>string</li>
-</ul>
-
-
-<p>To map them, with annotations, is pretty easy:</p>
-
-<p>``` php Mapping in Orient
-&lt;?php</p>
-
-<p>class IGottaMap extends IShouldaMap
-{</p>
-
-<pre><code>/**
- * @ODM\Property(name="toMap", type="float")
- */
-protected $to_map;
-</code></pre>
-
-<p>  ...
-}
-```</p>
-
-<p>where <code>name</code> is the name of the attribute in OrientDB and type the porting of <a href="http://code.google.com/p/orient/wiki/Types">OrientDB types</a> in PHP: primitive types are pretty similar ( float is <code>float</code>, integer is a value casted with <code>(int)</code> and so on ).</p>
-
-<h2>We be lazy</h2>
-
-<p>Lazy loading has already been implemented: this means that, if you hydrate through the mapper an object with no related record, but only references to them like</p>
-
-<p><code>
-Object:
-  rid: 1:1
-  description: my awesome description!
-  related_record: 2:1
-</code></p>
-
-<p>and you call <code>$object-&gt;getRelatedRecord()</code> the related record is lazily fetched.</p>
-
-<p>Orient's lazy loading is a mix between <a href="http://blog.verraes.net/2011/05/lazy-loading-with-closures/">Closure-based</a> and <a href="http://www.odino.org/383/w.doctrine-project.org/docs/orm/2.0/en/reference/working-with-objects.html#entity-object-graph-traversal">code-generation-based</a> LL: once we started trying the Closure implementation, we noticed that there were too many limitations from a developer's point of view ( too much end-developer code to write ), so we started looking at Doctrine2's implementation, which is done using <strong>code generation through proxy classes</strong>.</p>
-
-<p>The idea is really awesome ( I will blog about that later on ) and we were about to start implementing code generation while we realized that using Proxy classes would have seriously limited Orient potentialities: since we don't always know the class of the records connected to our sample record, we could not implement a proxy without forcing the user to explicit the "class" of the related records, which rapes one of the most interesting features of OrientDB, cluster ( = table ) inheritance.</p>
-
-<p>Cluster inheritance means that if I have a record of type <code>Menu</code>, he can have a relations <code>Items</code> with records of type <code>ExternalLink</code>, <code>NewsLink</code>, <code>ProductLink</code> and so on ( an issue I already discussed ): since we don't want to use OrientDB in the wrong way - because the motivation which pushed us to use OrientDB was that we were using RDBMS for doing the wrong things - we decided to pollute the end-developer's resulting POPOs instead of loosing such a feature.</p>
-
-<p>Polluting POPOs means that, if you want to retrieve a link, or a series of links, you have 2 choices for writing your getters:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>public function getFriends()
-{</p>
-
-<pre><code>return call_user_func($this-&gt;friends);
-</code></pre>
-
-<p>}</p>
-
-<p>```
-or</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>public function getFriends()
-{</p>
-
-<pre><code>$friends = $this-&gt;friends;
-
-return $friends();
-</code></pre>
-
-<p>}
-```</p>
-
-<p>We also thought about something like:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>/<em>*
- * @ODM\Property(name="items", type="linklist", classes="ExternalLink, ProductLink, NewsLink, BlaBlaLink, ...")
-</em>/
-protected $items;
-```</p>
-
-<p>which would have eventually helped us in implementing Doctrine2's proxies, but, as you see, things become ridicolous as your domain grows.</p>
-
-<p>If you want to take a deep look at Orient's lazy loading, just bare in mind that it's implemented using simple, generic purpose Proxy objects that you "execute" ( <code>call_user_func()</code> ) with <a href="https://github.com/congow/Orient/blob/beta-4/src/Congow/Orient/ODM/Proxy.php#L44">PHP 5.3's <code>__invoke</code> magic method</a>.</p>
-
-<h2>Persisting cURL</h2>
-
-<p>Thanks to <a href="https://github.com/nrk">Daniele Assandri</a>'s <a href="https://github.com/congow/Orient/commit/d77c4ec401dae73ae2625bc154a46054219920a3">patch</a>, we managed <a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Http/Client/Curl.php#L78">not to restart the curl client</a> at every requests of the HTTP binding: this means <strong>faster requests, thus faster responses</strong>.</p>
-
-<h2>Code coverage</h2>
-
-<p>In a couple of intense coding sessions we managed to cover almost every class of the library with a unit test: this does not mean we have 100% code-coverage and the software is bug-free, but that's a good starting point.</p>
-
-<p><img class="center" src="/images/cc-beta-4.png"></p>
-
-<h2>New SQL commands</h2>
-
-<p>We added the <code>TRUNCATE</code> command, which is used to truncate records, classes or - also - clusters:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>$query = new Congow\Orient\Query();</p>
-
-<p>$query->truncate('#12:1'); // truncates record 12:1
-$query->truncate('myClass;); // truncates class "myClass"
-$query->truncate('myClass', true); // truncates cluster "myClass"
-```</p>
-
-<h2>Put quality back into LoCs</h2>
-
-<p>We are not PHP gurus ( I will never define myself guru in any context ) but we tried to follow a few metrics in order to mantain the internal quality of the software pretty high: if you take a look at what PHPLoC outputs, you will notice that <strong>cyclomatic complexity is low</strong> and <strong>static methods are not as used as you might think</strong>:</p>
-
-<p><img class="center" src="/images/phploc-beta-4.png"></p>
-
-<h2>Removed constructors from interfaces</h2>
-
-<p>Since PHP allows you to insert a constructor in an interface, we started <a href="https://github.com/congow/Orient/tree/master/src/Congow/Orient/Contract">adding them</a>, but we eventually noticed that they limit extensibility.</p>
-
-<h2>Compatibility with OrientDB RC4</h2>
-
-<p>Ok ok, <strong>RC5 is out, and we will adjust the compatibility with it in the beta-5 release</strong>: the good news is that, as OrientDB goes on, we don't stop and <strong>tests are always green</strong> :)</p>
-
-<h2>Minor tweaks to the mapper</h2>
-
-<p>Like, for exampe, <a href="https://github.com/congow/Orient/issues/40">less coupling to the HTTP protocol</a> and an <a href="https://github.com/congow/Orient/issues/44">interface for protocol adapters</a>: the latter is one of the most crucial parts of the library, because the adapter let's you <strong>use the data mapper and the query builder with any protocol supported by OrientDB</strong> ( HTTP or binary ).</p>
-
-<h2>What's next?</h2>
-
-<p>We're already working on the beta-5 release, which will be a <strong>relaxing release</strong> ( a few refactorings, a couple of other issues ): bare in mind that <a href="https://github.com/doctrine/common/tree/master/lib/Doctrine/Common/Persistence">implementing doctrine/common's persistence interfaces is in our plans</a>, and will probably become real in this next beta.</p>
-
-<p>The next one, beta-6, will deal with the last hard thing, <strong>persisting POPOs to OrientDB</strong>: probably the most difficult thing in the whole library, we are thinking about implementing the <a href="http://martinfowler.com/eaaCatalog/unitOfWork.html">Unit Of Work</a> there.</p>
-
-<p>So, so, so... May I say that the first RC is targeted during Christmas? :) I said it!</p>
 ]]></content>
   </entry>
   

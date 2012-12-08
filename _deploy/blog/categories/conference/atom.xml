@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-12-05T12:31:41+04:00</updated>
+  <updated>2012-12-08T16:06:58+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
+    <link href="http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
+    <updated>2012-12-08T15:56:00+04:00</updated>
+    <id>http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
+    <content type="html"><![CDATA[<p>During October of the last year, my and my ex-colleague David
+took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
+with a talk about graph databases, OrientDB and how to integrate it
+in PHP.</p>
+
+<!-- more -->
+
+
+<p>I recently found out that the videos recorded at the conference
+finally made it to Vimeo: enjoy some tarzan english!</p>
+
+<iframe src="http://player.vimeo.com/video/53451968?badge=0" width="720" height="600" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+
+<p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
@@ -159,65 +182,6 @@ in its winter edition.</p>
 to make it for the first time among the germans.</p>
 
 <p>Hope to see you there!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OSIDays 2011 wrapup]]></title>
-    <link href="http://www.odino.org/osidays-2011-wrapup/"/>
-    <updated>2011-11-22T15:26:00+04:00</updated>
-    <id>http://www.odino.org/osidays-2011-wrapup</id>
-    <content type="html"><![CDATA[<p>There we go: I am in Bengaluru for OSIDays, and the conference is about to finish today, after cool and less cool moments.</p>
-
-<!-- more -->
-
-
-<h2>One hour of TDD: from saying hello to PHPUnit to mocking objects</h2>
-
-<p><img class="center" src="/images/osidays.jpg"></p>
-
-<p>With my first talk I've messed a few things up: as I was plugging the VGA adapter to my laptop, the native screen was loosing signal so I needed to do my session with <a href="http://blog.bastian-feder.de/blog.html">Bastian</a>'s laptop (dude, you saved my ass).</p>
-
-<p>The session went pretty well:  I gotta confess that I was a bit scared of showing some real-world code examples, step by step, in a live session, so the audience probably felt my preoccupation... after all, the talk quickly took the right direction, and I was able to show the <strong>implementation of the Dijkstra's algorithm in PHP with test-driven development</strong>.</p>
-
-<p>The presentation is on <a href="http://www.slideshare.net/odino/got-units-osidays">slideshare</a> and you can clone the <a href="https://github.com/odino/osidays">repository on github</a> (slides/code without code/slides are useless).</p>
-
-<h2>RESTful architectures</h2>
-
-<p><img class="right" src="/images/osidays2.jpg"></p>
-
-<p>Oh, that was easy.</p>
-
-<p>Not trying to sound arrogant, but this is probably the 8th time I give this presentation, so I'm pretty used to deliver it.</p>
-
-<p>This edition of <a href="http://www.slideshare.net/odino/rest-in-peace-osidays-2011-india-11212011">REST in peace</a> is already on slideshare, and it contains a few new things from the other, older, presentations: if you followed me during this months of <em>RESTvangelization</em> you'll notice that a few concepts are getting more and more important, like having durable services and taking advantage of the greatest REST architecture, the Web.</p>
-
-<p>The <strong>presentation went well</strong> and a few people actually came after the talk for <strong>having some insights</strong> about implementing a reverse proxy in their architectures and so on...   ...a rails guy even told me we was revisiting his opinion of RoR-powered APIs now :)</p>
-
-<p><img class="center" src="/images/osidays3.jpg"></p>
-
-<p>I was pretty disappointed by the number of people attending the session (~50) but, from what I saw, it was really complex, for the majority of the attendees, to <strong>understand concepts like evolvability and durability</strong> in a country like India, which is the greatest place in the world to outsource <strong>quick'n'dirty software</strong> ( I hope they're fixing it with this conferences and getting a better <em>forma mentis</em> from the software development point of view ).</p>
-
-<p><img class="center" src="/images/osidays4.jpg"></p>
-
-<p>The organization
-Wow, one of the coolest aspects of the conference: they have been able to satisfy every need we had, from transportation to eating, via relaxing in a wonderful hotel.</p>
-
-<h2>Other talks</h2>
-
-<p>I attended a few sessions from other eurospeakers like <a href="http://www.hugohamon.com/en">Hugo Hamon</a>, <a href="http://blog.bastian-feder.de/blog.html">Bastian Feder</a> and the <em>evergreen</em> <a href="http://schlitt.info/.html">Tobias</a>: although I basically knew any concept presented there, I felt how those presentations were needed by the audience here at OSIDays, 'cause they are living the moment that PHP was living 6 years ago.</p>
-
-<p>The point is that when you need to write crappy code, that should be production-ready in 48 hours, you don't test anything, you don't decouple anything, you don't design anything: programmers are now forced to work in this way, and the most proficient ones get hired by great companies like IBM or whatever major.</p>
-
-<p>Participating at these conference should make the average indian developer aware of the fact that he has a possibility: to leverage his skills and try to build complex system, not only outsourced stuff.</p>
-
-<p>I think this is a pretty difficult topic, because only a few of them had a real-world experience on what we call <em>ordinary</em> projects: without seeing them, they think that the procedural and messy way they have is a good compromise to get the job done.</p>
-
-<h2>And now?</h2>
-
-<p><img class="right" src="/images/osidays5.jpg"></p>
-
-<p>I don't talk about my personal life in this blog, so I will not tell you how things went from this point of view: let's just says that now I have 3 free days for visiting a few cities here in the southern part of India...   ...let's hope they will be amazing as a few moments here in Bengaluru.</p>
 ]]></content>
   </entry>
   
