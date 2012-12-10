@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-12-08T16:06:58+04:00</updated>
+  <updated>2012-12-08T16:10:31+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -18,7 +18,7 @@
     <link href="http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
     <updated>2012-12-08T15:56:00+04:00</updated>
     <id>http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
-    <content type="html"><![CDATA[<p>During October of the last year, my and my ex-colleague David
+    <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
 with a talk about graph databases, OrientDB and how to integrate it
 in PHP.</p>
