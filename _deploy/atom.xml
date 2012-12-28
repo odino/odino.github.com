@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://www.odino.org/atom.xml" rel="self"/>
   <link href="http://www.odino.org/"/>
-  <updated>2012-12-08T16:10:31+04:00</updated>
+  <updated>2012-12-28T23:27:15+04:00</updated>
   <id>http://www.odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Please welcome the Doctrine2 OrientDB ODM]]></title>
+    <link href="http://www.odino.org/please-welcome-the-doctrine-orientdb-odm/"/>
+    <updated>2012-12-28T23:12:00+04:00</updated>
+    <id>http://www.odino.org/please-welcome-the-doctrine-orientdb-odm</id>
+    <content type="html"><![CDATA[<p>It took almost 2 years from the
+<a href="https://github.com/doctrine/orientdb-odm/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">first commit</a>,
+but <a href="http://www.orientdb.org/">OrientDB</a>&#8217;s <a href="https://github.com/doctrine/orientdb-odm">PHP ODM</a>
+has been finally moved to the
+<a href="https://github.com/doctrine/">Doctrine</a>
+organization.</p>
+
+<!-- more -->
+
+
+<h2>New daddy</h2>
+
+<p>I&#8217;ve blogged <a href="http://www.odino.org/blog/categories/orientdb/">so many times</a>
+about an imminent
+integration into the Doctrine ecosystem, but
+due to the workload of our contributors and
+some major issues we wanted to solve before this,
+we were only able to seriously approach the
+Doctrine team today.</p>
+
+<p>This is a very good news, as we will be able
+to take advantage of the experience of all the
+doctrine contributors as well as have a bigger stage
+where we can show the ODM: the biggest part of the
+ODM is still pending (persistence), but
+HTTP binding, query builder and object
+hydration are working like a charm, and the few
+bugs that we face in <a href="https://github.com/odino/sharah">real-world scenarios</a>
+are solved in a matter of minutes.</p>
+
+<h2>And now?</h2>
+
+<p>All the namespaces have been changed, so the old
+<code>Congow\Orient</code> has been replaced by
+<code>Doctrine\ODM\OrientDB</code> and <code>Doctrine\OrientDB</code>:
+if you were already using the library, you will need
+to work on the migration a bit.</p>
+
+<p>You may also want to have a look at the new
+<a href="https://packagist.org/packages/doctrine/orientdb-odm">Packagist page</a>,
+as it contains the references to the new repository.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
@@ -2749,31 +2798,6 @@ Notes
     </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Going beyond HTTP at IPC in October]]></title>
-    <link href="http://www.odino.org/going-beyond-http-at-ipc-in-october/"/>
-    <updated>2012-07-02T13:31:00+04:00</updated>
-    <id>http://www.odino.org/going-beyond-http-at-ipc-in-october</id>
-    <content type="html"><![CDATA[<p>Just a quick one: seems that in October I&#8217;ll need to travel
-all my way back to Europe to speak at the
-<a href="http://phpconference.com/">international PHP Conference</a> 2012
-in its winter edition.</p>
-
-<!-- more -->
-
-
-<p>Subject? Oh, something that I <em>really</em> love:</p>
-
-<blockquote><p>For years we&#8217;ve been used to the HTTP protocol, one of the reasons behind the web&#8217;s success, a protocol able to scale up to bilion of requests and beyond.<br/>But there&#8217;s more we can achieve, leveraging HTTP/1.1 hidden feature, taking a look at HTTP/2.0 and SPDY, the Google-proposed new protocol which is already making web faster.</p><p>Back to the basics: what enpowers and will enpower the web?</p></blockquote>
-
-
-<p>Still to be confirmed - flights, leave days, date - but I should be able
-to make it for the first time among the germans.</p>
-
-<p>Hope to see you there!</p>
 ]]></content>
   </entry>
   

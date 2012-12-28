@@ -15,6 +15,8 @@ Here's a summary of the most important ones:
 
 {% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
+* [HTTP colon slash slash: end of the road](http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road), presented at
+the International PHP Conference 2012 in Mainz (GER), dealing with the history of the `HTTP` protocol, a look at `SPDY` and `HTTP/2.0`
 * [Got units?](http://www.slideshare.net/odino/got-units-osidays), presented at
 OSIDays 2011 in Bengaluru (IND), an introductive talk about implementing Dijkstra's
 algorithm in PHP with **test-driven development**
