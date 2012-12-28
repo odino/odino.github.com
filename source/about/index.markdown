@@ -23,8 +23,8 @@ I love to share my experience and
 thoughts about **agile development** with colleagues as much as I like to 
 [talk across many events](conferences) and
 contribute to some open source projects: the most important of them is
-[Orient](http://github.com/congow/Orient), which is a **Data Mapper for OrientDB**
-written in PHP.
+[doctrine\orientdb-odm](http://github.com/doctrine/orientdb-odm), which is a **Data Mapper for OrientDB**
+written in PHP, which I started to write in 2011 and got to gain some attention.
 
 If you want to get in touch with me, write a few lines to
 `alessandro.nadalin@gmail.com`.
