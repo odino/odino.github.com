@@ -223,18 +223,189 @@ public, you dont need getters / setters.
 The property-level annotation has 3 parameters:
 
 * **type**: defines the type of the property in OrientDB
-( boolean, link, linklist, string, integer, etc )
+( `boolean`, `link`, `linklist`, `string`, `integer`, etc )
 * **name**: the name of the attribute in the OrientDB class
 (you might have a PHP property called `$createdAt` and in OrientDB
 you call it `created_at`)
-* **notnull**: defines whether the property can be `null` or not
-
-## Repositories
+* **notnull**: defines whether the property can be `null` or not{% fn_ref 1 %}
 
 ## What about controllers?
 
+You can access the ODM from within
+controllers of your application by
+just using the container:
+
+``` php PROJECT/Controller/User.php
+<?php
+
+namespace PROJECT\Controller;
+
+use Project\Entity\User;
+
+class UserController
+{
+	public function somethingAction()
+	{
+		$user 		= new User();
+		$manager    = $this->getService('odm');
+
+		$manager->...
+	}
+}
+```
+
+## Repositories
+
+At this point, after boostrapping the environment and creating your first entity,
+you might want to play with the repository in your controllers, to
+manipulate and retrieve collections:
+
+``` php PROJECT/Controller/User.php
+<?php 
+
+$manager    	= $this->getService('odm');
+$userRepository = $manager->getRepository('PROJECT\Entity\User')
+```
+
+then, with the repository, you can start retrieving objects:
+
+``` php Using the repository
+<?php
+
+// find all users
+$userRepository->findAll();
+
+// find one user given its RID
+$userRepository->find($rid);
+
+// find all users with the nick "overlord"
+$userRepository->findByNick("overlord");
+
+// find the user with the nick "TheOnlyOverlord"
+$userRepository->findOneByNick("TheOnlyOverlord");
+
+// find jack's wife
+$jack  = $userRepository->findOneByName("Jack");
+$wifey = $userRepository->findOneBySpouse($jack); // spouse is an attribute of type "link"
+```
+
+and it's not over, since you can, of course, add
+**custom repository classes**.
+
+Custom repositories must be located in the entity's folder
+and follow the naming convention `EntitytheymapRepository`:
+for our `User` entity, we would need to create a `UserRepository`
+class in `%base-dir%/src/PROJECT/Entity/`:
+
+``` php PROJECT\Entity\UserRepository
+<?php
+
+namespace PROJECT\Entity;
+
+use Doctrine\ODM\OrientDB\Repository;
+
+class UserRepository extends Repository
+{
+    /**
+     * Retrieves a random user.
+     * 
+     * @return \PROJECT\Entity\User
+     */
+    public function findRandomUser()
+    {
+        return array_rand($this->findAll());
+    }
+}
+```
+
+so then you can call your new methods over repositories:
+
+``` php Using custom repositories
+<?php
+
+$manager->getRepository('PROJECT\Entity\User')->findRandomUser();
+```
+
 ## Can I haz raw queries?
+
+Entities and repositories are good, but what about
+adding some `SQL+`{% fn_ref 2 %} to the mix?
+
+That's very easy, thanks to the **query builder**
+that's packed with the ODM:
+
+``` php Example queries
+<?php
+
+use Doctrine\OrientDB\Query\Query;
+
+// instantiate a query object
+$query = new Query();
+
+// simple SELECT
+$query->from(array('user'))->where('nick = ?', $nick);
+
+// throwing some spice into the mix
+$query->orWhere('attribute = ?', $attribute)
+	  ->orWhere('(this IS NULL OR that IS NOT NULL)')
+	  ->limit(10)
+	  ->orderBy(...);
+
+// SELECTing a single record
+$query->from(array($rid));
+
+// SELECTing two records
+$query->from(array($rid1, $rid2));
+```
+
+When you manipulate the `$query` object you are basically
+creating an SQL query with an object-oriented fluent interface;
+to eventually execute the query, just pass the object to
+the `Manager`:
+
+``` php Executing a query
+<?php
+
+$query = new Query();
+$query->from(array('user'))->where('gender = ?', "male");
+
+$males = $manager->execute($query);
+```
 
 ## Point being, how do you save data?
 
 ## From the trenches
+
+We've been very active since a couple months,
+and we've actually been able to roll out some major
+bugfixes and improvements (more than 10 in the last
+few weeks):
+
+* [bug] repositories [filtering by multiple criterias](https://github.com/doctrine/orientdb-odm/issues/138)
+* [improvement] [custom repository](https://github.com/doctrine/orientdb-odm/issues/139) classes
+* [improvement] added ability to [map timestamps](https://github.com/doctrine/orientdb-odm/issues/141) as DateTime objects
+* [bug] unable to [update attributes if they are a collection](https://github.com/doctrine/orientdb-odm/issues/144)
+* [bug] support for [INSERTing collections](https://github.com/doctrine/orientdb-odm/commit/cbd9c3250d1fd6fc7ec1f39566b91d1f0e1531f2)
+* [bug] proxy classes dont [import signatures](https://github.com/doctrine/orientdb-odm/issues/147)
+* [improvement] `findBy*` and `findOneBy*` ["magic" methods](https://github.com/doctrine/orientdb-odm/issues/149)
+* [improvement] [fetchplans in `find*`](https://github.com/doctrine/orientdb-odm/issues/150) methods of repositories
+* [new] following `SQL+`, added [`REBUILD INDEX` command](https://github.com/doctrine/orientdb-odm/issues/99)
+
+I would not advise you to install one of the old tags,
+or even the last one, which brings the namespace
+changes for the incubation in the Doctrine
+organization, but to install it directly from master
+via composer:
+
+``` json
+"doctrine/orientdb-odm": "dev-master",
+```
+
+as we are constantly doing bugfixes and so on,
+I would day you would get an update - at least -
+every week.
+
+{% footnotes %}
+	{% fn Be aware that if you are retrieving a property which is NULL in the DB and you don't declare it as NULLable, an exception will be thrown (and there is an issue to improve the exception message https://github.com/doctrine/orientdb-odm/issues/152) %}
+	{% fn OrientDB's QL is called SQL+, as it looks like SQL but has some major improvements, as it's very developer-friendly %}
+{% endfootnotes %}
