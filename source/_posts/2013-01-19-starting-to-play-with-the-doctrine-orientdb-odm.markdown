@@ -4,7 +4,7 @@ title: "Starting to play with the Doctrine OrientDB ODM"
 date: 2013-01-20 23:00
 comments: true
 categories: [Doctrine, OrientDB, orientdb-odm]
-published: false
+published: true
 ---
 
 Since I am actively playing around with it, I
