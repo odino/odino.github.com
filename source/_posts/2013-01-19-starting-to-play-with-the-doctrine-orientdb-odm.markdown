@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Starting to play with the Doctrine OrientDB ODM"
-date: 2013-01-19 11:50
+date: 2013-01-20 23:00
 comments: true
 categories: [Doctrine, OrientDB, orientdb-odm]
 published: false
@@ -118,8 +118,6 @@ $loader->registerNamespaces(array(
 ));
 
 $loader->register();
-
-require __DIR__.'/../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
 ```
 
 You should set the autoloader for `Doctrine\OrientDB\Proxy`
@@ -374,6 +372,22 @@ $males = $manager->execute($query);
 
 ## Point being, how do you save data?
 
+Since persistence is not already handled by the `Manager`,
+you will need to use raw queries for now:
+
+``` php Saving data
+<?php
+
+$user = array(
+  'name' => 'Jack'
+);
+
+$query = new Query();
+$query->insert()->into('user')->fields(array_keys($user))->values($user);
+
+$manager->execute($query);
+```
+
 ## From the trenches
 
 We've been very active since a couple months,
@@ -381,15 +395,15 @@ and we've actually been able to roll out some major
 bugfixes and improvements (more than 10 in the last
 few weeks):
 
-* [bug] repositories [filtering by multiple criterias](https://github.com/doctrine/orientdb-odm/issues/138)
-* [improvement] [custom repository](https://github.com/doctrine/orientdb-odm/issues/139) classes
-* [improvement] added ability to [map timestamps](https://github.com/doctrine/orientdb-odm/issues/141) as DateTime objects
-* [bug] unable to [update attributes if they are a collection](https://github.com/doctrine/orientdb-odm/issues/144)
-* [bug] support for [INSERTing collections](https://github.com/doctrine/orientdb-odm/commit/cbd9c3250d1fd6fc7ec1f39566b91d1f0e1531f2)
-* [bug] proxy classes dont [import signatures](https://github.com/doctrine/orientdb-odm/issues/147)
-* [improvement] `findBy*` and `findOneBy*` ["magic" methods](https://github.com/doctrine/orientdb-odm/issues/149)
-* [improvement] [fetchplans in `find*`](https://github.com/doctrine/orientdb-odm/issues/150) methods of repositories
-* [new] following `SQL+`, added [`REBUILD INDEX` command](https://github.com/doctrine/orientdb-odm/issues/99)
+* repositories [filtering by multiple criterias](https://github.com/doctrine/orientdb-odm/issues/138)
+* [custom repository](https://github.com/doctrine/orientdb-odm/issues/139) classes
+* added ability to [map timestamps](https://github.com/doctrine/orientdb-odm/issues/141) as DateTime objects
+* unable to [update attributes if they are a collection](https://github.com/doctrine/orientdb-odm/issues/144)
+* support for [INSERTing collections](https://github.com/doctrine/orientdb-odm/commit/cbd9c3250d1fd6fc7ec1f39566b91d1f0e1531f2)
+* proxy classes dont [import signatures](https://github.com/doctrine/orientdb-odm/issues/147)
+* `findBy*` and `findOneBy*` ["magic" methods](https://github.com/doctrine/orientdb-odm/issues/149)
+* [fetchplans in `find*`](https://github.com/doctrine/orientdb-odm/issues/150) methods of repositories
+* following `SQL+`, added [`REBUILD INDEX` command](https://github.com/doctrine/orientdb-odm/issues/99)
 
 I would not advise you to install one of the old tags,
 or even the last one, which brings the namespace
@@ -401,9 +415,11 @@ via composer:
 "doctrine/orientdb-odm": "dev-master",
 ```
 
-as we are constantly doing bugfixes and so on,
-I would day you would get an update - at least -
-every week.
+as we are constantly doing bugfixes and so on
+(I would day you would get an update - at least -
+every week).
+
+That is it, now **start playing around!**
 
 {% footnotes %}
 	{% fn Be aware that if you are retrieving a property which is NULL in the DB and you don't declare it as NULLable, an exception will be thrown (and there is an issue to improve the exception message https://github.com/doctrine/orientdb-odm/issues/152) %}
