@@ -55,11 +55,17 @@ I would have needed a real job
 * Gimme some drums or a guitar, I still should be able to play something 
 * with [Jacopo](http://www.agiledevelopment.it/), I've been part of the 
 [Frog crew](http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc6/179422_1744393780288_1552073836_1746666_5292395_n.jpg) during Santa Marinella's 2010/2011 Este24 winter championship
-* I've changed **5 houses in 3 years**
+* I've changed **6 houses in the last 3 years**
 * I'm fascinated by [indian food](http://a8.sphotos.ak.fbcdn.net/hphotos-ak-snc7/390052_2597546188565_1552073836_2665338_114963098_n.jpg) and almost
 [everything](http://a3.sphotos.ak.fbcdn.net/hphotos-ak-snc7/319666_2596714327769_1552073836_2664926_1543548191_n.jpg)
 of that [beautiful country](http://www.flickr.com/photos/alessandrolombardi/6438543299/in/set-72157628237175419),
 which I visited for a [conference](http://2011.osidays.com/speakers)
 * I love Rome, but I feel like it's not the right place to raise my (future) children
 * I have a *personal* blog, in italian, called [nerdiario](http://www.nerdiario.it) ("*nerd-diary*")
-* In March, 2012, I moved to Dubai
+* In March 2012 I relocated to Dubai
+* I'm [writing a book](/so-yes-im-writing-a-book/)
+* religiously, I used to be agnostic
+* even though I know that I am (mentally) prone to relocations, I'm finding myself pretty well in Dubai
+* I absolutely suck at photography, which is probably [my dad's biggest passion](http://www.flickr.com/people/franconadalin59/) nowadays
+* I grew up knowing my parents never had a single interaction with the web: now, my mom uses Facebook like a 15yo and my dad entertains a Tumblr blog
+* I quit with cigarettes in late 2012
