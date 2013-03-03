@@ -11,7 +11,8 @@ footer: true
 {% img right /images/alex.jpg Me as of 2011 %}
 
 I'm currently living in
-Dubai where I am permanently employed by [Rocket Internet](http://www.rocket-internet.de) for its venture [Namshi](http://namshi.com), as a lead developer.
+Dubai where I am employed by [Rocket Internet](http://www.rocket-internet.de) for its venture [Namshi](http://namshi.com),
+as Head of Development.
 
 I like to play with the [Symfony framework](http://www.symfony.com), 
 [OrientDB](http://www.orientechnologies.com/),
@@ -69,3 +70,4 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I absolutely suck at photography, which is probably [my dad's biggest passion](http://www.flickr.com/people/franconadalin59/) nowadays
 * I grew up knowing my parents never had a single interaction with the web: now, my mom uses Facebook like a 15yo and my dad entertains a Tumblr blog
 * I quit with cigarettes in late 2012
+* I'm totally informal
