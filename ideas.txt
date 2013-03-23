@@ -1,7 +1,4 @@
 HTML5 cache: useless regression or a new paradigm for the web?
-source/_posts/2012-02-27-the-perfect-architecture.markdown
-source/_posts/2012-01-24-building-fault-tolerant-api-clients.markdown
 Someone says computer science degrees are useless
-Katas are funny, moreover when you're a newbie
 Inline comments lead to extracted methods: spiega perche gli inline comments sarebbero in realta' spunti per nuovi metodi
 atlassian very bad experience
