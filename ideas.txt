@@ -1,4 +1,3 @@
-HTML5 cache: useless regression or a new paradigm for the web?
 Someone says computer science degrees are useless
 Inline comments lead to extracted methods: spiega perche gli inline comments sarebbero in realta' spunti per nuovi metodi
 atlassian very bad experience
