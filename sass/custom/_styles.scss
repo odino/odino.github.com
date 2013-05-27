@@ -1,199 +1,52 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
-li {
-    margin-left: 50px;
+#content {
+	background-color: #E34D4D;
 }
 
-html {
-    background: #fff;
+#bio-picture {
+	border-radius: 10%;
+	padding-right: 0px;	
+	margin-right: 10px;	
 }
 
-.front-title p img {
-    width: 150px;
-    
+[role="banner"] {
+	background-image: url(https://si0.twimg.com/profile_background_images/403045150/generate_shared_stripe.png);
+	border: 5px double black;
 }
 
-#main #content {
-    margin-right: 0;
+
+#main {
+	border: 2px double #591414;
 }
 
-header[role="banner"] {
-    text-align: center;
-    padding-bottom: 0em;
-    background: #fff;
-    font-size: 1.6em;
-    padding-top: 0.5em;
+[role="banner"] h1 {
+	padding-left: 15px;
+	padding-right: 15px;
+	background-color: #fff;
+	font-size:	60px;
 }
 
-article[role="article"] header {
-    padding-top: 0em;
-    text-align: center;
-    font-size: 1em;
+#topmenu {
+	list-style-type: none;
+	margin-top: 45px;
+	word-spacing: 0.5em;
+	width: 100%;
 }
 
-a {
-    text-decoration: none;
+#topmenu a {
+	text-decoration: none;
+	padding: 10px;
+	color: #5E5E5E;
 }
 
-a:hover {
-    text-decoration: underline;
+#topmenu a:hover, body header h1 a {
+	color: #cc0033;
 }
 
-.no-sidebar, #main, #content { border-right: 0; }
-
-article {
-    padding-top: 0;
-}
-
-a, a:visited {
-  color: #940000;
-}
-
-a:hover {
-    color: #DE0000;
-}
-
-nav a, nav a:visited {
-    color: #9A9A9A;
-}
-
-nav a:hover {
-    color: #111;
-    text-decoration: none;
-}
-
-.front-title {
-    width:50%;
-    float: right;
-    margin-top: 0em;
-    text-align: left;
-    padding-left: 2em;
-}
-
-article header p {
-    color: #7E8683;
-}
-
-.front-title span {
-    font-style: italic;
-}
-
-.front-title h1 {
-    margin: 0;
-}
-
-#content .blog-index article h1 {
-    font-size: 1.5em;
-}
-
-.blog-index .meta
-{
-    width: 50%;
-    margin-top: 0.4em;
-}
-
-.front-meta {
-    text-align: right;
-}
-
-.blog-index article {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #E5E6E6;
-}
-
-.blog-index > article > .entry-content {
-    width: 50%;
-    float:right;
-}
-
-#content .blog-index article {
-    padding-top: 0.3em;
-}
-
-body div {
-    border: 0;
-}
-
-footer span.categories {
-    border-top: 1px solid #E5E6E6;
-    width: 100%;
-    display: block;
-    padding-top: 0.5em;
-}
-
-p.article-date {
-    font-size: 0.5em;
-    margin-bottom: 0;
-    padding-top: 0.5em;
-    color: #9A9A9A;
-}
-
-sup, sub {
-	padding: 0 0.2em;
+#topmenu li {
 	display: inline;
-}
-
-.footnotes {
-    font-size: 0.8em;
-    border-top: 1px solid #E5E6E6;
-    color: #6B6B6B;
-    padding-top: 15px;
-    padding-left: 15px;
-}
-
-.footnotes span {
-    font-size: 1em;
-    text-transform: uppercase;
-}
-
-.slideshare {
-  width: 100%;
-}
-
-ol.aseries {
-	display: none;
-}
-
-article.hentry ol.aseries {
-	display: 						block;
-}
-
-ol.aseries
-{
-	list-style-type: upper-roman;
-	padding-left: 7em;
-	padding-top: 2em;
-	padding-bottom: 2em;
-	padding-right: 2em;
-	background: image-url('notes.png') center left no-repeat;
-  border-bottom: 2px dashed #8F8F8F;
-  width: 75%;
-}
-
-.imageCaption p {
-   position: absolute;
-   right: 64px;
-   color: white;
-   font: bold 24px/45px Helvetica, Sans-Serif;
-   letter-spacing: -1px;
-   background: rgb(0, 0, 0); /* fallback color */
-   background: rgba(0, 0, 0, 0.7);
-   padding: 10px;
-}
-
-ul.main-navigation li {
-    padding: auto;
-    margin: auto;
-    width: 16%;
-}
-
-.borderOn {
-    border-bottom: 3px dashed black;
-    padding-bottom: 10px;
-}
-
-.borderOff {
-    border-bottom: 3px solid white;
-    padding-bottom: 10px;
+	background-color: #fff;
+	font-size: 1.7em;
 }

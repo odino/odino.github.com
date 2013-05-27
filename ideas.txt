@@ -1,2 +1,21 @@
 Someone says computer science degrees are useless
+
 Inline comments lead to extracted methods: spiega perche gli inline comments sarebbero in realta' spunti per nuovi metodi
+
+From zero to 2 and a half milion messages per day through RabbitMQ
+
+Unified logging is a holy graal in SOA and messaging systems
+
+How we are transitioning from legay to TDD
+
+Symfony2 for an old school PHP developer: Twig
+
+Symfony2 for an old school PHP developer: Entities
+
+Symfony2 for an old school PHP developer: migrations
+
+Symfony2 for an old school PHP developer: testing
+
+Symfony2 for an old school PHP developer: isolated tests
+
+Symfony2 for an old school PHP developer: routing
