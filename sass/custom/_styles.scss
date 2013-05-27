@@ -2,7 +2,16 @@
 // Add styles here to make changes without digging in too much
 
 #content {
-	background-color: #E34D4D;
+	background-color: #FFFEF0;
+	color: #000;
+}
+
+a:visited, a {
+	color: #D11111;
+}
+
+a:hover {
+	color: #E38634;
 }
 
 #bio-picture {
@@ -38,11 +47,15 @@
 #topmenu a {
 	text-decoration: none;
 	padding: 10px;
-	color: #5E5E5E;
+	color: #000;
 }
 
-#topmenu a:hover, body header h1 a {
+#topmenu a:hover {
 	color: #cc0033;
+}
+
+body header h1 a, body header h1 a:visited {
+	color: #000;
 }
 
 #topmenu li {
