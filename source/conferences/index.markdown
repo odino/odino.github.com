@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Alessandro Nadalin's talks"
+title: "Talks"
 showtitle: Conferences
 comments: false
 sidebar: false

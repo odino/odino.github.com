@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "About Alessandro Nadalin"
+title: "About"
 showtitle: About
 comments: false
 sidebar: false
