@@ -1,8 +1,12 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+body {
+	max-width: 100%;
+}
+
 #content {
-	background-color: #FFFEF0;
+	background-color: #fff;
 	color: #000;
 }
 
