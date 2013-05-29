@@ -29,6 +29,10 @@ a:hover {
 	border: 5px double black;
 }
 
+#blog-archives article h1 a, #blog-archives article  h1 a:visited, #blog-archives article time, #blog-archives h2 {
+	color: black;
+}
+
 
 #main {
 	border: 2px double #591414;
