@@ -19,6 +19,12 @@ features to your SCM?
 
 <!-- more -->
 
+This article gives an overview of the constraints
+and preferences that we wanted to implement
+in our SOA, which is mainly done with Symfony2,
+but most of it can be read in a
+framework/language-agnostic key.
+
 ## Problems
 
 We can at least identify 3 problems which pop
