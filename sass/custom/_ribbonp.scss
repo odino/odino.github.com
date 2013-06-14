@@ -1,91 +1,3 @@
-// This File is imported last, and will override other styles in the cascade
-// Add styles here to make changes without digging in too much
-
-body {
-	max-width: 100%;
-}
-
-#content {
-	background-color: #fff;
-	color: #000;
-}
-
-a:visited, a {
-	color: #D11111;
-}
-
-a:hover {
-	color: #E38634;
-}
-
-#bio-picture {
-	border-radius: 10%;
-	padding-right: 0px;	
-	margin-right: 10px;	
-}
-
-[role="banner"] {
-	background-image: url(https://si0.twimg.com/profile_background_images/403045150/generate_shared_stripe.png);
-	border: 5px double black;
-}
-
-#blog-archives article h1 a, #blog-archives article  h1 a:visited, #blog-archives article time, #blog-archives h2 {
-	color: black;
-}
-
-
-#main {
-	border: 2px double #591414;
-}
-
-[role="banner"] h1 {
-	padding-left: 15px;
-	padding-right: 15px;
-	background-color: #fff;
-	font-size:	2.5em;
-}
-
-#topmenu {
-	list-style-type: none;
-	margin-top: 45px;
-	word-spacing: 0.5em;
-	width: 100%;
-}
-
-#topmenu a {
-	text-decoration: none;
-	padding: 10px;
-	color: #000;
-}
-
-#topmenu a:hover {
-	color: #cc0033;
-}
-
-body header h1 a, body header h1 a:visited {
-	color: #000;
-}
-
-#topmenu li {
-	display: inline;
-	background-color: #fff;
-	font-size: 1.7em;
-}
-
-ul, ol {
-	margin-left: 1.3em;
-}
-
-.footnotes {
-	font-size: 0.75em;
-	padding-left: 2%;
-	border-top: 2px dashed #D6D6D6;
-}
-
-.footnotes span {
-	font-weight: bold;
-}
-
 /*
 The MIT License (MIT)
 Copyright (c) 2013 Aaron Huang <github.com/aar0nTw>
@@ -112,7 +24,6 @@ p.info {
     position: relative;
     background: $light-blue;
     padding: $block-padding;
-    padding-top: 4%;
     margin: 1em auto;
     z-index:9;
     font-size: 13pt;
@@ -151,8 +62,4 @@ p.info {
             border-right-color: $dark-red;
         }
     }
-}
-
-.data-gist {
-    display: none;
 }
