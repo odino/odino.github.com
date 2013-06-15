@@ -228,7 +228,7 @@ public function indexAction($name)
 
 then edit the twig template:
 
-{% include_code [src/Application/HelloBundle/Resource/views/Hello/index.twig] [lang:html] dic.twig %}
+{% include_code [src/Application/HelloBundle/Resource/views/Hello/index.twig] lang:html %}
 
 So, let's see it in action:
 
