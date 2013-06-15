@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Integrating Twig in your legacy PHP code"
-date: 2013-06-14 05:25
+date: 2013-06-15 23:15
 comments: true
 categories: [twig, PHP, legacy]
-published: false
+published: true
 ---
 
 It might happen that you are working
@@ -177,7 +177,9 @@ a base layout made of a very clean HTML structure:
 ``` php Base layout of your framework
 <html>
 	<head>
-		<?php echo $head; ?>
+		<title><?php echo $title; ?></title>
+		...
+		...
 	</head>
 	<body>
 		<?php echo $content; ?>
@@ -191,9 +193,11 @@ HTMLs with Twig, you can simply add a couple blocks:
 ``` php 
 <html>
 	<head>
-		{ % block head % }
-			<?php echo $head; ?>
-		{ % endblock % }
+		<title>
+			{ % block title % }<?php echo $title; ?>{ % endblock % }
+		</title>
+		...
+		...
 	</head>
 	<body>
 		{ % block content % }
@@ -233,17 +237,139 @@ class Framework_Base_Controller
 	}
 }
 ```
+And then override the content with your own twig template:
 
-Let's say that our Twig template for the `MyController::indexAction`
-looks like this:
-
-``` yaml
-{ % block head % }
-	<title>My Controller Page</title>
+``` bash path/to/twig/templates/templateName.twig
+{ % block title % }
+	About: this is our about page
 { % endblock % }
 ```
 
-## Global templates
+After you setup everything, you will realize that
+there is a huge problem here: since Twig doesn't allow
+to declare blocks Twig, you can use the `block` tag!
+
+To overcome the problem, you can simply add a new tag,
+`partial`:
+
+``` php The new tag is implemented via a token parser
+<?php
+
+/**
+ * Token parser for the twig engine that adds support to redefinable blocks,
+ * under the 'partial' alias.
+ * 
+ * IE:
+ * { % partial myPartial % }First{ % endpartial %}
+ * { % partial myPartial % }Second{ % endpartial %}
+ * 
+ * will render "Second".
+ * 
+ * This is needed since the { % block % } tag doesnt support redefining blocks
+ * with the string loader, it just supports it via inheritance.
+ */
+class PartialTokenParser extends Twig_TokenParser_Block
+{
+    /**
+     * Parses the twig token in order to replace the 'partial' block.
+     * 
+     * @param Twig_Token $token
+     * @return Twig_Node_BlockReference
+     * @throws Twig_Error_Syntax
+     */
+    public function parse(Twig_Token $token)
+    {
+        $lineno = $token->getLine();
+        $stream = $this->parser->getStream();
+        $name = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
+        $this->parser->setBlock($name, $block = new Twig_Node_Block($name, new Twig_Node(array()), $lineno));
+        $this->parser->pushLocalScope();
+        $this->parser->pushBlockStack($name);
+
+        if ($stream->test(Twig_Token::BLOCK_END_TYPE)) {
+            $stream->next();
+
+            $body = $this->parser->subparse(array($this, 'decideBlockEnd'), true);
+            if ($stream->test(Twig_Token::NAME_TYPE)) {
+                $value = $stream->next()->getValue();
+
+                if ($value != $name) {
+                    throw new Twig_Error_Syntax(sprintf("Expected endblock for block '$name' (but %s given)", $value), $stream->getCurrent()->getLine(), $stream->getFilename());
+                }
+            }
+        } else {
+            $body = new Twig_Node(array(
+                new Twig_Node_Print($this->parser->getExpressionParser()->parseExpression(), $lineno),
+            ));
+        }
+        $stream->expect(Twig_Token::BLOCK_END_TYPE);
+
+        $block->setNode('body', $body);
+        $this->parser->popBlockStack();
+        $this->parser->popLocalScope();
+
+        return new Twig_Node_BlockReference($name, $lineno, $this->getTag());
+    }
+
+    /**
+     * Returns the tag this parses will look for.
+     * 
+     * @return string
+     */
+    public function getTag()
+    {
+        return 'partial';
+    }
+    
+    /**
+     * Decides when to stop parsing for an open 'partial' tag.
+     * 
+     * @param Twig_Token $token
+     * @return bool
+     */
+    public function decideBlockEnd(Twig_Token $token)
+    {
+        return $token->test('endpartial');
+    }
+}
+```
+
+Then you just need to tell the Twig environment to
+add this token parser:
+
+``` php While bootstrapping Twig:
+<?php
+
+$twig = new Twig_Environment(new Twig_Loader_String(), array(
+	'autoescape' => false,
+));
+$twig->addTokenParser(new PartialTokenParser());
+```
+
+and at this point you can use it in your templates:
+
+``` php 
+<html>
+	<head>
+		<title>
+			{ % partial title % }<?php echo $title; ?>{ % endpartial % }
+		</title>
+		...
+		...
+	</head>
+	<body>
+		{ % partial content % }
+			<?php echo $content; ?>
+		{ % endpartial% }
+	</body>
+</html>
+```
+
+``` bash path/to/twig/templates/templateName.twig
+{ % partial title % }
+	About: this is our about page
+{ % endpartial % }
+```
 
 ## So?
 
@@ -257,8 +383,8 @@ Since I never dug **that deep** into
 Twig it might be that some things
 could be done in a cleaner way, so if
 you have suggestions or feedbacks I would
-strongly encourage you to go in
-berserk mode in the comments section below.
+strongly encourage you to go
+*berserk mode* in the comments section below.
 
 {% footnotes %}
 	{% fn Being PHP or something like Smarty or xTemplate %}
