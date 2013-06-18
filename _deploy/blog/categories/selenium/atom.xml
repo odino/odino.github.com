@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: selenium | Alessandro Nadalin]]></title>
+  <link href="http://www.odino.org/blog/categories/selenium/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2013-06-18T12:39:22+04:00</updated>
+  <id>http://www.odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using Selenium and Symfony2 to help your frontend developers coding without risks]]></title>
+    <link href="http://www.odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
+    <updated>2013-03-10T11:39:00+04:00</updated>
+    <id>http://www.odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
+    <content type="html"><![CDATA[<p>Since testing is one of those practices
+that many consider <em>boring</em> (unless a major
+catastrophe happens), you should help people
+is easing their job while testing.</p>
+
+<p>Today I am going to show the approach that
+we just kickstarted, at Namshi, in order to
+help designers and developers testing
+frontend changes in a more automated, thus
+easier, way.</p>
+
+<!-- more -->
+
+
+<p>Thanks to the <a href="https://github.com/namshi/NamshiVoyeurBundle">NamshiVoyeurBundle</a>,
+it is really easy to start increasing
+the efficiency of your testing department,
+even if coders do not want to write
+automated tests.</p>
+
+<p>The bundle, that you can use <strong>inside a Symfony2
+application</strong>, is actually very small and can be
+extrapolated to be integrated in other frameworks
+(like ZF2 or Cake).</p>
+
+<p>The idea is very simple: you take some screenshots
+of a website, deploy a new version, take another set of
+screenshots (at the same URLs) and then compare
+them, generating an image diff.</p>
+
+<p>After you install the <code>NamshiVoyeurBundle</code> (via composer),
+it is really easy to start taking screenshots;
+you just have to configure a few services
+and some parameters:</p>
+
+<p>```yml Configuring the bundle
+parameters:</p>
+
+<pre><code>namshi_voyeur:
+  browsers:
+    - firefox
+    - safari
+    - chrome
+  urls:
+    homepage:     "/"
+    new-arrivals: "new-products"
+    women:        "women-shoes"
+  shots_dir: "/Users/you/Downloads/screenshots"
+  base_url:       "http://en-ae.namshi.com/"
+</code></pre>
+
+<p>services:</p>
+
+<pre><code>safari:
+    class:  Behat\Mink\Driver\Selenium2Driver
+    calls:
+      - [start]
+    arguments:
+      browser: safari
+firefox:
+    class:  Behat\Mink\Driver\Selenium2Driver
+    calls:
+      - [start]
+chrome:
+    class:  Behat\Mink\Driver\Selenium2Driver
+    calls:
+      - [start]
+    arguments:
+      browser: chrome
+</code></pre>
+
+<p>```</p>
+
+<p>This configuration basically tells Voyeur that
+you will be taking screenshots of three URLs:</p>
+
+<ul>
+<li><code>http://en-ae.namshi.com/</code></li>
+<li><code>http://en-ae.namshi.com/new-products</code></li>
+<li><code>http://en-ae.namshi.com/women-shoes</code></li>
+</ul>
+
+
+<p>with safari, firefox and google chrome.</p>
+
+<p>To run the Voyeur, use the <code>cli</code>:</p>
+
+<p><code>bash
+php app/console namshi:voyeur
+</code></p>
+
+<p>Screenshots will be saved at <code>/Users/you/Downloads/screenshots</code>.</p>
+
+<p>At this point, after you deployed a new version of the code,
+run the Voyeur again, and you will be reay to generate the
+diffs between the screenshots:</p>
+
+<p><code>bash
+php app/console namshi:voyeur:diff /Users/you/Downloads/screenshots/firefox/2013/03/10/1200 /Users/you/Downloads/screenshots/firefox/2013/03/10/1205
+</code></p>
+
+<p>Diffs will be generated at <code>/Users/you/Downloads/screenshots/firefox/2013/03/10/1205/diff</code>.</p>
+
+<p>That&rsquo;s it: now you can start having a look at what changed and
+ask your developers to do the same, even on their local
+machine, before committing any changes.</p>
+]]></content>
+  </entry>
+  
+</feed>

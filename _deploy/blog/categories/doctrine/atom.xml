@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: doctrine | Alessandro Nadalin]]></title>
+  <link href="http://www.odino.org/blog/categories/doctrine/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2013-06-18T12:39:22+04:00</updated>
+  <id>http://www.odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
+    <link href="http://www.odino.org/doctrine-80-percent-faster/"/>
+    <updated>2013-04-21T10:54:00+04:00</updated>
+    <id>http://www.odino.org/doctrine-80-percent-faster</id>
+    <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
+caught my attention last week, and I want to
+share its insights with you.</p>
+
+<!-- more -->
+
+
+<p>The good <a href="https://github.com/Ocramius">Marco Pivetta</a>
+took initiative in adding proxy generation for hydrators,
+and in <a href="https://github.com/Ocramius/ProxyManager/pull/29">a lonely branch</a>
+he&rsquo;s pretty far with the progress on the matter: his
+latest tests show that the <a href="https://travis-ci.org/Ocramius/ProxyManager/jobs/6485136#L127">hydration process is improved by 80%</a>
+which is a very good news, considered metadata-based
+software usually need to find a way to drastically
+improve performances because of the basic lack of
+performances due to having to read metadata.</p>
+
+<p>Hoping to see this changes integrated in a stable
+branch very soon!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
+    <link href="http://www.odino.org/making-the-orientdb-odm-5-times-faster/"/>
+    <updated>2013-01-25T17:39:00+04:00</updated>
+    <id>http://www.odino.org/making-the-orientdb-odm-5-times-faster</id>
+    <content type="html"><![CDATA[<p>Today, after heavily testing performances
+on a project, I pushed some small but
+precious changes to the
+<a href="https://github.com/doctrine/orientdb-odm">orientdb-odm</a>.</p>
+
+<!-- more -->
+
+
+<h2>Prelude</h2>
+
+<p><blockquote><p>Premature optimization is the root of all evil</p><footer><strong>Donald Knuth <a href="http://c2.com/cgi/wiki?PrematureOptimization">http://c2.com/cgi/wiki?PrematureOptimization</a> C2 wiki</strong></footer></blockquote></p>
+
+<p>In these days I was testing performances of a
+service I am building with
+<a href="https://github.com/nuvolabase/orientdb">OrientDB</a>
+and the doctrine ODM that
+<a href="/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
+
+<p>Following one of the golden rules for software
+architects, we didn&rsquo;t paid attention to performances &ndash; at first &ndash;
+but rather went for a design which would allow us
+to inject behaviours and easily change portions of code
+(also thanks to the <a href="https://travis-ci.org/doctrine/orientdb-odm">test suite</a>),
+I knew that I would have noticed huge flaws at
+performance level when testing it with
+<strong>production data</strong>.</p>
+
+<p>A few days ago we committed fetchplans for repository
+classes, but it wasnt enough: rather then concentrating
+on which data we should fetch, I realized one major
+improvement could be applied on how we <strong>map</strong> data.</p>
+
+<h2>The golden rule</h2>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>How we did it</h2>
+
+<p>With a <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec">single commit</a>
+&ndash; there&rsquo;s always room for improvements &ndash; the ODM is now able
+to hydrate objects <strong>5 times faster</strong>: when you hydrate similar
+objects from OrientDB (for example, 2 records that share the same
+attributes' values, like <code>is_published</code> or <code>country</code>), there is
+no need to duplicate operations, so we added a <a href="https://github.com/doctrine/orientdb-odm/blob/df875c946e02a9c84eee22f0c86e0a3b06bd70ec/src/Doctrine/OrientDB/Util/Inflector/Cached.php">cached inflector</a>
+(with an in-memory / single request cache) and did some other
+improvements to the <code>Mapper</code>:</p>
+
+<ul>
+<li>cached the relations between <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L297">PHP classes and OrientDB classes</a> (if 2 records of the same OrientDB class are hydrated, there is only one single <em>search</em> operation to find the PHP class that should map them)</li>
+<li>cached the <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L223">casting of properties</a> (if 2 objects have the same value for the <code>is_published</code> attribute, casting is done once)</li>
+<li>cached <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L466">properties' annotations</a> (property-level annotations are inspected once per class)</li>
+</ul>
+
+
+<p>There is no rocket science in what we did, but benchmarks ensure that
+it&rsquo;s a <strong>huge performance improvement</strong>.</p>
+
+<h2>By the way, we used Webgrind</h2>
+
+<p><img class="right" src="/images/webgrind.png"></p>
+
+<p>Doing almost all of my work from a Mac, I kind of
+missed <a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
+for profiling, so I was looking for an
+alternative (no, installing
+<a href="https://github.com/facebook/xhprof">XHPROF</a> isn&rsquo;t an alternative at 2 in the morning)
+and I found Webgrind (which is cross-platform), a web profiler
+that requires zero setup:
+you basically just need to provide it access from the webserver
+and, by opening it with a browser, the application automatically
+launches and parses the cachegrind files generated by XDebug.</p>
+
+<p>Webgrind&rsquo;s code is a bit of a mess, but then, the
+result is still pretty good &ndash; you get a good overview
+of the expensiveness of your calls as well as a
+call graph compiled in <a href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>,
+which is a de-facto standard for graph generation.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Please welcome the Doctrine2 OrientDB ODM]]></title>
+    <link href="http://www.odino.org/please-welcome-the-doctrine-orientdb-odm/"/>
+    <updated>2012-12-28T23:12:00+04:00</updated>
+    <id>http://www.odino.org/please-welcome-the-doctrine-orientdb-odm</id>
+    <content type="html"><![CDATA[<p>It took almost 2 years from the
+<a href="https://github.com/doctrine/orientdb-odm/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">first commit</a>,
+but <a href="http://www.orientdb.org/">OrientDB</a>&rsquo;s <a href="https://github.com/doctrine/orientdb-odm">PHP ODM</a>
+has been finally moved to the
+<a href="https://github.com/doctrine/">Doctrine</a>
+organization.</p>
+
+<!-- more -->
+
+
+<h2>New daddy</h2>
+
+<p>I&rsquo;ve blogged <a href="/blog/categories/orientdb/">so many times</a>
+about an imminent
+integration into the Doctrine ecosystem, but
+due to the workload of our contributors and
+some major issues we wanted to solve before this,
+we were only able to seriously approach the
+Doctrine team today.</p>
+
+<p>This is a very good news, as we will be able
+to take advantage of the experience of all the
+doctrine contributors as well as have a bigger stage
+where we can show the ODM: the biggest part of the
+ODM is still pending (persistence), but
+HTTP binding, query builder and object
+hydration are working like a charm, and the few
+bugs that we face in <a href="https://github.com/odino/sharah">real-world scenarios</a>
+are solved in a matter of minutes.</p>
+
+<h2>And now?</h2>
+
+<p>All the namespaces have been changed, so the old
+<code>Congow\Orient</code> has been replaced by
+<code>Doctrine\ODM\OrientDB</code> and <code>Doctrine\OrientDB</code>:
+if you were already using the library, you will need
+to work on the migration a bit.</p>
+
+<p>You may also want to have a look at the new
+<a href="https://packagist.org/packages/doctrine/orientdb-odm">Packagist page</a>,
+as it contains the references to the new repository.</p>
+]]></content>
+  </entry>
+  
+</feed>

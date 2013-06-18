@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: legacy | Alessandro Nadalin]]></title>
+  <link href="http://www.odino.org/blog/categories/legacy/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2013-06-18T12:39:22+04:00</updated>
+  <id>http://www.odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating Twig in your legacy code, Part 2: a less wild approach]]></title>
+    <link href="http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
+    <updated>2013-06-18T12:07:00+04:00</updated>
+    <id>http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
+    <content type="html"><![CDATA[<p>In my last post I wrote about
+<a href="/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
+with a really <strong>wild</strong>
+approach.</p>
+
+<p>Today I came up with a better
+solution that lets you take advantage
+of Twig full features without any hack
+(like the <code>partial</code> tag I was
+talking about in my previous post).</p>
+
+<!-- more -->
+
+
+<p>Instead of parsing the generated output
+as a string with Twig, we can store it
+into a template, which lets us use
+features like <code>use</code>, <code>extends</code>, <code>include</code>,
+thing that is almost impossible &ndash; in a clean way &ndash;
+if we use the Twig string loader:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{
+  public function render($templateName, array $parameters = array())
+  {</p>
+
+<pre><code>  // ....
+  // do stuff to render your template
+  // we have the HTML output in the $templateOutput variable
+  // ...
+
+    $twig = new Twig_Environment(new Twig_Loader_String(), array(
+      'autoescape' =&gt; false,
+  ));
+
+    return $twig-&gt;render($templateOutput, $parameters);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Instead of using the <code>Twig_String_Loader</code> we would use an array
+loader, and store <code>$templateOutput</code> in a unique template, called <code>__MAIN__</code>.</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{
+  public function render($templateName, array $parameters = array())
+  {</p>
+
+<pre><code>  // ....
+  // do stuff to render your template
+  // we have the HTML output in the $templateOutput variable
+  // ...
+
+  $finder     = new Symfony\Component\Finder\Finder();
+  $templates  = array();
+
+  foreach ($finder-&gt;in('/path/to/twig/templates') as $file) {
+      if (!$file-&gt;isDir()) {
+          $templates[$file-&gt;getRelativePathName()] = $file-&gt;getContents();
+      }
+  }
+
+  $loader = new Twig_Loader_Array($templates);
+  $loader-&gt;setTemplate('__MAIN__', $templateOutput);
+
+  $twig = new Twig_Environment($loader, array(
+      'autoescape' =&gt; false,
+  ));
+
+  try {
+      return $this-&gt;twig-&gt;render($templateName, Alice_Component_Registry::getAll());
+  } catch (Twig_Error_Loader $e) {
+      return $this-&gt;twig-&gt;render("__MAIN__", Alice_Component_Registry::getAll());
+  }
+</code></pre>
+
+<p>  }
+}
+```
+And that&rsquo;s it!</p>
+
+<p>Now you can write your own <code>$templateName</code>:</p>
+
+<p>``` bash /path/to/twig/templates/$templateName
+{ % extends &lsquo;<strong>MAIN</strong>&rsquo; % }</p>
+
+<p>{ % use &lsquo;whatever&rsquo; % }</p>
+
+<p>{ % block somewhat % }</p>
+
+<pre><code>some content
+</code></pre>
+
+<p>{ % endblock % }
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating Twig in your legacy PHP code]]></title>
+    <link href="http://www.odino.org/integrating-twig-in-your-legacy-php-code/"/>
+    <updated>2013-06-15T23:15:00+04:00</updated>
+    <id>http://www.odino.org/integrating-twig-in-your-legacy-php-code</id>
+    <content type="html"><![CDATA[<p>It might happen that you are working
+on a legacy code that is years old,
+with its own templating mechanism<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+that doesn&rsquo;t really allow you to take
+advantage of the benefits that a structured
+and object-oriented engine like
+<a href="http://twig.sensiolabs.org/">Twig</a>.</p>
+
+<p>In this situations, when a complete replacement
+would cost too much to your organization,
+you can take advantage of a <em>wild</em> integration between
+this advanced template engine and your
+existing code.</p>
+
+<!-- more -->
+
+
+<p><p class='info info' data-title='Outdated'></p></p><p><pre><code>This article is outdated! A better approach was described here:<br/>http://integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/<br/></code></pre></p><p><p></p></p>
+
+<h2>Approach</h2>
+
+<p>The main idea is that you should anyway
+have a man function which outputs
+what is being rendered on the view, so that
+you can capture that output and parse it via
+Twig, something like a <code>render</code> function
+in your controllers:</p>
+
+<p>``` php Example controller
+&lt;?php</p>
+
+<p>class My_Controller extends Framework_Base_Controller
+{</p>
+
+<pre><code>public function indexAction()
+{
+    // ....
+    // do stuff
+    // ...
+
+    return $this-&gt;render('my_template', $parametersForTheView);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` php Example of a base controller
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{</p>
+
+<pre><code>public function render($templateName, array $parameters = array())
+{
+    // ....
+    // do stuff to render your template
+    // ...
+
+    return $templateOutput;
+
+    // will become
+    return $this-&gt;twig-&gt;render($templateOutput);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>At this point the only thing that
+you need is to inject the Twig engine
+into your base controller and parse the
+output of your legacy templates with Twig<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>// your actual rendering:
+return $this->twig->render($templateOutput);</p>
+
+<p>// which means:
+return $this->twig->render(&lsquo;<html><head><title>Hello world</title>&hellip;</html>&rsquo;);</p>
+
+<p>// so that you can actually write twig in your templates:
+return $this->twig->render(&lsquo;<html><head><title>{ % block title % }Hello world{ % endblock % }</title>&hellip;</html>&rsquo;);
+```</p>
+
+<p><p class='info warning' data-title='Attention'>The &lsquo;block&rsquo; tag in the example above is having a space between curly brackets and the percentage char since my blog engine (octopress) doesn&rsquo;t allow those tags them in code blocks.<br/>In all of the next examples you will see Twig tags written like that.</p></p>
+
+<h2>Rendering content via Twig</h2>
+
+<p>To integrate Twig in your application
+it it really a matter of a few minutes:
+first, you will have to download and move
+the library inside your codebase, then,
+thanks to the PSR-0 autoloading (here we
+will be using Symfony2&rsquo;s autoloader, but
+you can use any PSR-0 compliant autoloader) you just
+need to include it and setup Twig&rsquo;s own
+autoloader:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>require_once <strong>DIR</strong>.&lsquo;/vendor/symfony/Symfony/Component/ClassLoader/UniversalClassLoader.php&rsquo;;</p>
+
+<p>use Symfony\Component\ClassLoader\UniversalClassLoader;</p>
+
+<p>$loader = new UniversalClassLoader();
+$loader->register();</p>
+
+<p>$loader->registerNamespaces(array(</p>
+
+<pre><code>'Twig' =&gt; __DIR__ . '/vendor/twig/lib/',
+</code></pre>
+
+<p>));</p>
+
+<p>require_once <strong>DIR</strong> . &lsquo;/vendor/twig/lib/Twig/Autoloader.php&rsquo;;
+Twig_Autoloader::register();
+```</p>
+
+<p>At this point, let&rsquo;s get back to our <code>render</code>
+function, which we will need to modify in order
+to include Twig:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{</p>
+
+<pre><code>public function render($templateName, array $parameters = array())
+{
+    // ....
+    // do stuff to render your template
+    // we have the HTML output in the $templateOutput variable
+    // ...
+
+    $twig = new Twig_Environment(new Twig_Loader_String(), array(
+        'autoescape' =&gt; false,
+    ));
+
+    return $twig-&gt;render($templateOutput, $parameters);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>At this point we would be already able to write
+Twig code inside our templates:</p>
+
+<p>``` php my_index.html
+{ % set posts = registry.get(&lsquo;blog_post&rsquo;).findByUser($user.id) % }</p>
+
+<p>
+    { % for post in posts % }
+        ...
+    { % else % }
+        This user didn't write any post
+    { % endfor % }
+</p>
+
+
+<p>```</p>
+
+<h2>A new tag</h2>
+
+<p>Unfortunately, to support some kind of
+inheritance, which is one of the greatest
+features of Twig, the situation becomes a little
+bit trickier: first of all, we will need to add
+to the parsed HTML some extra content to override
+blocks, then we will need to create a new Twig
+token parser in order to allow declaring multiple
+blocks with the same name, which is not allowed by the
+<code>block</code> tag.</p>
+
+<p>Let&rsquo;s say that all of your templates are including
+a base layout made of a very clean HTML structure:</p>
+
+<p>``` php Base layout of your framework
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;title&gt;&lt;?php echo $title; ?&gt;&lt;/title&gt;
+    ...
+    ...
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php echo $content; ?&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>At this point, since we are able to parse generated
+HTMLs with Twig, you can simply add a couple blocks:</p>
+
+<p>``` php
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;title&gt;
+        { % block title % }&lt;?php echo $title; ?&gt;{ % endblock % }
+    &lt;/title&gt;
+    ...
+    ...
+&lt;/head&gt;
+&lt;body&gt;
+    { % block content % }
+        &lt;?php echo $content; ?&gt;
+    { % endblock% }
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>After we do it, how can we override these blocks
+differently from each controllers' actions?
+You simply include other Twig content at the end of the
+generated HTML:</p>
+
+<p>``` php Adding support for basic inheritance
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{</p>
+
+<pre><code>public function render($templateName, array $parameters = array())
+{
+    // ....
+    // do stuff to render your template
+    // we have the HTML output in the $templateOutput variable
+    // ...
+
+    $twig = new Twig_Environment(new Twig_Loader_String(), array(
+        'autoescape' =&gt; false,
+    ));
+    $twigTemplate = sprintf("path/to/twig/templates/%s.twig", $templateName;
+
+    if (file_exists($twigTemplate))) {
+        $templateOutput .= file_get_contents($twigTemplate);
+    }
+
+    return $twig-&gt;render($templateOutput, $parameters);
+}
+</code></pre>
+
+<p>}
+```
+And then override the content with your own twig template:</p>
+
+<p>``` bash path/to/twig/templates/templateName.twig
+{ % block title % }</p>
+
+<pre><code>About: this is our about page
+</code></pre>
+
+<p>{ % endblock % }
+```</p>
+
+<p>After you setup everything, you will realize that
+there is a huge problem here: since Twig doesn&rsquo;t allow
+to declare blocks Twig, you can use the <code>block</code> tag!</p>
+
+<p>To overcome the problem, you can simply add a new tag,
+<code>partial</code>:</p>
+
+<p>``` php The new tag is implemented via a token parser
+&lt;?php</p>
+
+<p>/<em>*
+ * Token parser for the twig engine that adds support to redefinable blocks,
+ * under the &lsquo;partial&rsquo; alias.
+ *
+ * IE:
+ * { % partial myPartial % }First{ % endpartial %}
+ * { % partial myPartial % }Second{ % endpartial %}
+ *
+ * will render &ldquo;Second&rdquo;.
+ *
+ * This is needed since the { % block % } tag doesnt support redefining blocks
+ * with the string loader, it just supports it via inheritance.
+ </em>/
+class PartialTokenParser extends Twig_TokenParser_Block
+{</p>
+
+<pre><code>/**
+ * Parses the twig token in order to replace the 'partial' block.
+ * 
+ * @param Twig_Token $token
+ * @return Twig_Node_BlockReference
+ * @throws Twig_Error_Syntax
+ */
+public function parse(Twig_Token $token)
+{
+    $lineno = $token-&gt;getLine();
+    $stream = $this-&gt;parser-&gt;getStream();
+    $name = $stream-&gt;expect(Twig_Token::NAME_TYPE)-&gt;getValue();
+    $this-&gt;parser-&gt;setBlock($name, $block = new Twig_Node_Block($name, new Twig_Node(array()), $lineno));
+    $this-&gt;parser-&gt;pushLocalScope();
+    $this-&gt;parser-&gt;pushBlockStack($name);
+
+    if ($stream-&gt;test(Twig_Token::BLOCK_END_TYPE)) {
+        $stream-&gt;next();
+
+        $body = $this-&gt;parser-&gt;subparse(array($this, 'decideBlockEnd'), true);
+        if ($stream-&gt;test(Twig_Token::NAME_TYPE)) {
+            $value = $stream-&gt;next()-&gt;getValue();
+
+            if ($value != $name) {
+                throw new Twig_Error_Syntax(sprintf("Expected endblock for block '$name' (but %s given)", $value), $stream-&gt;getCurrent()-&gt;getLine(), $stream-&gt;getFilename());
+            }
+        }
+    } else {
+        $body = new Twig_Node(array(
+            new Twig_Node_Print($this-&gt;parser-&gt;getExpressionParser()-&gt;parseExpression(), $lineno),
+        ));
+    }
+    $stream-&gt;expect(Twig_Token::BLOCK_END_TYPE);
+
+    $block-&gt;setNode('body', $body);
+    $this-&gt;parser-&gt;popBlockStack();
+    $this-&gt;parser-&gt;popLocalScope();
+
+    return new Twig_Node_BlockReference($name, $lineno, $this-&gt;getTag());
+}
+
+/**
+ * Returns the tag this parses will look for.
+ * 
+ * @return string
+ */
+public function getTag()
+{
+    return 'partial';
+}
+
+/**
+ * Decides when to stop parsing for an open 'partial' tag.
+ * 
+ * @param Twig_Token $token
+ * @return bool
+ */
+public function decideBlockEnd(Twig_Token $token)
+{
+    return $token-&gt;test('endpartial');
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Then you just need to tell the Twig environment to
+add this token parser:</p>
+
+<p>``` php While bootstrapping Twig:
+&lt;?php</p>
+
+<p>$twig = new Twig_Environment(new Twig_Loader_String(), array(</p>
+
+<pre><code>'autoescape' =&gt; false,
+</code></pre>
+
+<p>));
+$twig->addTokenParser(new PartialTokenParser());
+```</p>
+
+<p>and at this point you can use it in your templates:</p>
+
+<p>``` php
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;title&gt;
+        { % partial title % }&lt;?php echo $title; ?&gt;{ % endpartial % }
+    &lt;/title&gt;
+    ...
+    ...
+&lt;/head&gt;
+&lt;body&gt;
+    { % partial content % }
+        &lt;?php echo $content; ?&gt;
+    { % endpartial% }
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>``` bash path/to/twig/templates/templateName.twig
+{ % partial title % }</p>
+
+<pre><code>About: this is our about page
+</code></pre>
+
+<p>{ % endpartial % }
+```</p>
+
+<h2>So?</h2>
+
+<p>If you spot any typo /
+mistake please do let me know: I wrote the
+example code adapting the one I had from a previous
+project so it might be that something slipped my
+mind.</p>
+
+<p>Since I never dug <strong>that deep</strong> into
+Twig it might be that some things
+could be done in a cleaner way, so if
+you have suggestions or feedbacks I would
+strongly encourage you to go
+<em>berserk mode</em> in the comments section below.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Being PHP or something like Smarty or xTemplate <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Unfortunately, to do so we will have to turn off Twig's default escaping strategy <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

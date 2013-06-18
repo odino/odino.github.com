@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Integrating Twig in your legacy code, Part 2: a less wild approach - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="In my last post I wrote about
+integrating Twig into your legacy code
+with a really wild
+approach. Today I came up with a better
+solution that lets &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <img id="bio-picture" src="https://lh6.googleusercontent.com/-YgvT5_ULkUk/AAAAAAAAAAI/AAAAAAAAAWY/lIfaFw-9ZQo/s120-c/photo.jpg" />
+  <h1><a href="/">Alessandro Nadalin</a></h1>
+</hgroup>
+
+<ul id="topmenu">
+	<li>
+		<a href="/about" >
+			about
+		</a>
+	</li>
+	<li>
+		<a href="/conferences" >
+			conferences
+		</a>
+	</li>
+	<li>
+		<a href="http://twitter.com/_odino_" >
+			twitter
+		</a>
+	</li>
+	<li>
+		<a href="/archives" >
+			archives
+		</a>
+	</li>
+</ul>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Integrating Twig in Your Legacy Code, Part 2: A Less Wild Approach</h1>
+    
+  </header>
+
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/twig/'>Twig</a>, <a class='category' href='/blog/categories/legacy/'>legacy</a>
+  
+</span>
+
+
+<div class="entry-content"><p>In my last post I wrote about
+<a href="/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
+with a really <strong>wild</strong>
+approach.</p>
+
+<p>Today I came up with a better
+solution that lets you take advantage
+of Twig full features without any hack
+(like the <code>partial</code> tag I was
+talking about in my previous post).</p>
+
+<!-- more -->
+
+
+<p>Instead of parsing the generated output
+as a string with Twig, we can store it
+into a template, which lets us use
+features like <code>use</code>, <code>extends</code>, <code>include</code>,
+thing that is almost impossible &ndash; in a clean way &ndash;
+if we use the Twig string loader:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Framework_Base_Controller</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">render</span><span class="p">(</span><span class="nv">$templateName</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ....</span>
+</span><span class='line'>      <span class="c1">// do stuff to render your template</span>
+</span><span class='line'>      <span class="c1">// we have the HTML output in the $templateOutput variable</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">$twig</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Twig_Environment</span><span class="p">(</span><span class="k">new</span> <span class="nx">Twig_Loader_String</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;autoescape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span><span class='line'>      <span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$templateOutput</span><span class="p">,</span> <span class="nv">$parameters</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of using the <code>Twig_String_Loader</code> we would use an array
+loader, and store <code>$templateOutput</code> in a unique template, called <code>__MAIN__</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Framework_Base_Controller</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">render</span><span class="p">(</span><span class="nv">$templateName</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ....</span>
+</span><span class='line'>      <span class="c1">// do stuff to render your template</span>
+</span><span class='line'>      <span class="c1">// we have the HTML output in the $templateOutput variable</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$finder</span>     <span class="o">=</span> <span class="k">new</span> <span class="nx">Symfony\Component\Finder\Finder</span><span class="p">();</span>
+</span><span class='line'>      <span class="nv">$templates</span>  <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">foreach</span> <span class="p">(</span><span class="nv">$finder</span><span class="o">-&gt;</span><span class="na">in</span><span class="p">(</span><span class="s1">&#39;/path/to/twig/templates&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="na">isDir</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nv">$templates</span><span class="p">[</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="na">getRelativePathName</span><span class="p">()]</span> <span class="o">=</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">getContents</span><span class="p">();</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Twig_Loader_Array</span><span class="p">(</span><span class="nv">$templates</span><span class="p">);</span>
+</span><span class='line'>        <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;__MAIN__&#39;</span><span class="p">,</span> <span class="nv">$templateOutput</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$twig</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Twig_Environment</span><span class="p">(</span><span class="nv">$loader</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>          <span class="s1">&#39;autoescape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span><span class='line'>      <span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$templateName</span><span class="p">,</span> <span class="nx">Alice_Component_Registry</span><span class="o">::</span><span class="na">getAll</span><span class="p">());</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Twig_Error_Loader</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s2">&quot;__MAIN__&quot;</span><span class="p">,</span> <span class="nx">Alice_Component_Registry</span><span class="o">::</span><span class="na">getAll</span><span class="p">());</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&rsquo;s it!</p>
+
+<p>Now you can write your own <code>$templateName</code>:</p>
+
+<figure class='code'><figcaption><span>/path/to/twig/templates/$templateName</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span> % extends <span class="s1">&#39;__MAIN__&#39;</span> % <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span> % use <span class="s1">&#39;whatever&#39;</span> % <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span> % block somewhat % <span class="o">}</span>
+</span><span class='line'>  some content
+</span><span class='line'><span class="o">{</span> % endblock % <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T12:07:00+04:00" pubdate data-updated="true">Tuesday, 18 June 2013 at 12:07</time>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/" data-via="_odino_" data-counturl="http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/integrating-twig-in-your-legacy-php-code/" title="Previous Post: Integrating Twig in your legacy PHP code">&laquo; Integrating Twig in your legacy PHP code</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Alessandro Nadalin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/';
+        var disqus_url = 'http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/aharris.js"></script>
+
+</body>
+</html>

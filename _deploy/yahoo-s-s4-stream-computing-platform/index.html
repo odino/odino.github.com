@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Yahoo's S4 stream computing platform - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="The internet had a huge bump during the late &lsquo;90s, and all the majors needed something web-scale in order to conquer the &#8216;net. Google, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.odino.org/yahoo-s-s4-stream-computing-platform/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <img id="bio-picture" src="https://lh6.googleusercontent.com/-YgvT5_ULkUk/AAAAAAAAAAI/AAAAAAAAAWY/lIfaFw-9ZQo/s120-c/photo.jpg" />
+  <h1><a href="/">Alessandro Nadalin</a></h1>
+</hgroup>
+
+<ul id="topmenu">
+	<li>
+		<a href="/about" >
+			about
+		</a>
+	</li>
+	<li>
+		<a href="/conferences" >
+			conferences
+		</a>
+	</li>
+	<li>
+		<a href="http://twitter.com/_odino_" >
+			twitter
+		</a>
+	</li>
+	<li>
+		<a href="/archives" >
+			archives
+		</a>
+	</li>
+</ul>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Yahoo's S4 Stream Computing Platform</h1>
+    
+  </header>
+
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/s4/'>S4</a>
+  
+</span>
+
+
+<div class="entry-content"><p>The internet had a huge bump during the late &lsquo;90s, and all the majors needed something web-scale in order to conquer the &#8216;net.</p>
+
+<!-- more -->
+
+
+<p>Google, after its launch, suddenly became the king of the web, destroying the competitors year by year.</p>
+
+<p>Far from being a simple search engine, it evolved giving us incredible services, like Gmail and Docs: web-ready and web-scale services able to endure massive traffic and data-exchange.</p>
+
+<p>Furthermore, the search engine was accumulating an extraordinary amount of records and it probably needed a brand new algorithm to index and process its contents.</p>
+
+<p>It was 2004, and Google came out with <a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>, a new way of thinking the distribution of the workload.</p>
+
+<h2>Beyond MapReduce</h2>
+
+<p>MapReduce rocks, everybody thought.</p>
+
+<p>But then the problems came out: MR is solid and ass-kicking when you need to process tons of permanent data; when you need to do huge batch operations you should use it, nobody hesitates.</p>
+
+<p>But there is a scenario where MR probably isn&rsquo;t the best choice for your needs: processing huge streams of data.</p>
+
+<h2>Enters S4</h2>
+
+<p><a href="http://www.s4.io/">S4</a> &ndash; I really don&rsquo;t know the reason behind this name &ndash; is a framework developed by Yahoo for processing continuoos streams of data.</p>
+
+<p>Its entire architecture is thought to obviusly be event-driven, where computational units, known as <em>processing elements</em> (PE), process and possibly re-dispatch events emitted by the internal framework.</p>
+
+<p>It already supports client adapters and an high level API, so you should be able to integrate with the platform in any language you want to: unfortunately, the docs have a PERL example :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-02T12:29:00+04:00" pubdate data-updated="true">Thursday, 02 June 2011 at 12:29</time>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.odino.org/yahoo-s-s4-stream-computing-platform/" data-via="_odino_" data-counturl="http://www.odino.org/yahoo-s-s4-stream-computing-platform/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/the-problem-with-non-hypermedia-driven-webservices/" title="Previous Post: The problem with non hypermedia-driven webservices">&laquo; The problem with non hypermedia-driven webservices</a>
+      
+      
+        <a class="basic-alignment right" href="/get-prepared-for-orientdb-s-query-builder/" title="Next Post: Get prepared for OrientDB's query builder ">Get prepared for OrientDB's query builder  &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Alessandro Nadalin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.odino.org/yahoo-s-s4-stream-computing-platform/';
+        var disqus_url = 'http://www.odino.org/yahoo-s-s4-stream-computing-platform/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/aharris.js"></script>
+
+</body>
+</html>

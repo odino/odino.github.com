@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: book | Alessandro Nadalin]]></title>
+  <link href="http://www.odino.org/blog/categories/book/atom.xml" rel="self"/>
+  <link href="http://www.odino.org/"/>
+  <updated>2013-06-18T12:39:22+04:00</updated>
+  <id>http://www.odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[So yes, I'm writing a book]]></title>
+    <link href="http://www.odino.org/so-yes-im-writing-a-book/"/>
+    <updated>2012-09-21T08:00:00+04:00</updated>
+    <id>http://www.odino.org/so-yes-im-writing-a-book</id>
+    <content type="html"><![CDATA[<p>As announced on twitter a few days back, it seems
+that the time has come for me to step up and start
+dealing with printed paper.</p>
+
+<!-- more -->
+
+
+<p>It&rsquo;s not something I&rsquo;ve never talked about,
+and especially in the last 9 months I wanted
+to start something towards this direction &ndash;
+my draft of
+<a href="https://leanpub.com/rest-webservices-php">REST webservices in PHP</a>
+is still there ideed.</p>
+
+<p><img class="right" src="/images/garulli-nadalin.jpeg"></p>
+
+<p>At the same time, even though self-publishing
+is easier and provides good motivation at first,
+<strong>is not very attractive on the long run</strong>,
+for both the author and the reader: yes, you
+get to reach a wide audience, yes, they can
+learn in a really cheap way<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+but writing a <strong>real</strong> book is way different.
+It&rsquo;s a statement, a printed statement: it is
+<strong>just different</strong>.</p>
+
+<p>The chance has come quite quickly, as I will be
+<strong>co-author</strong> of a book by
+<a href="http://www.manning.com/">Manning Publications Co.</a>,
+which is a very important editor when it comes to
+the language with the J.</p>
+
+<p>Isn&rsquo;t it strange? I am a seasoned lead developer
+on the LAMP stack but I will write a book dealing with a tool
+that has something to do with Java: there a reason,
+of course, behind this.</p>
+
+<p>And probably you have already guessed it.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>Our challenge is to evangelize this new frontier for
+data storage: I&rsquo;m sure it will be a long but succesfull
+way.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Usually cheap: some books on LeanPub were even sold for 50 USD <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I could write a separate chapter on Luca. Let&rsquo;s just say that meeting him gave me the confidence that even without a college degree you can be a game-changer in your field. <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book review: Data-Intensive Text Processing with MapReduce]]></title>
+    <link href="http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce/"/>
+    <updated>2012-02-23T12:57:00+04:00</updated>
+    <id>http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce</id>
+    <content type="html"><![CDATA[<p>As part of my studies not directly connected to my job,
+in the last month I&rsquo;ve finished this interesting book, which
+gives you a good overview about
+<a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/mapreduce.book.jpg"></p>
+
+<p><a href="http://www.umiacs.umd.edu/~jimmylin/">Jimmy Lin</a> and Chris
+Dyer nailed this one: the book is really clear and leaves
+room for further studies, maybe more practical ones: the book
+starts with the definition of MapReduce, from the algorithm to
+the execution framework and the analyzes each part of the
+algorithm and theyr variants in some frameworks, like
+Hadoop<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>After studying the components of MapReduce you will
+take a practical look at possible implementations<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>,
+from graph algorithms to the pagerank one: note that there are
+so many references in the book, so if you will be into it, you&rsquo;re
+gonna find yourself screwed in a <em>nerdy</em> loop :)</p>
+
+<p>The EM chapter (dealing with <em>expectation-maximization</em> algorithms)
+was pretty difficult for me, as it&rsquo;s too much time that I don&rsquo;t
+take math <em>that</em> seriously, but I &ndash; however &ndash; was able to
+follow all the theory explained there.</p>
+
+<p>Something that I really appreciated was the closing remark stating that,
+just like every technology, is not the right pick for every problem &ndash;
+think about <strong>stateful</strong> large scale data-processing algorithms.</p>
+
+<p>I strongly recommend you to read such this kind of book: the approach
+followed by the writers is so engineered and some examples they give,
+like the <a href="/quality-isnt-always-better-than-quality/">stupid backoff</a>,
+are pearls for your working experience.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>But please remember, this book is not any kind of Hadoop guide <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Which are code-agnostic, as everything is written in a pretty clear pseudo-code <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[REST in practice, my review]]></title>
+    <link href="http://www.odino.org/rest-in-practice-my-review/"/>
+    <updated>2011-03-26T23:24:00+04:00</updated>
+    <id>http://www.odino.org/rest-in-practice-my-review</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m home after the <a href="http://www.nosqlday.it/">NoSQL day</a> in Brescia, a great community-driven event, that I will recap on the next post: since I went to Brescia by train ( 4 + 4 hours ) I had the opportunity, after 20 days on intense love for this book, to finish it, so I publish my thoughts about.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/rip.jpg"></p>
+
+<p>I decided to buy this book because of its subtitle, <strong>hypermedia and system architectures</strong>, since I&rsquo;m exploring the world of media types, hypermedia formats and how they improve semantics and evolvability, I was wondering if it could gave me a good overview about the right implementation of hypermedia-driven services.</p>
+
+<h2>Richardson maturity model</h2>
+
+<p>This book has a great start, driving you from level 0 to 3 of the <a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Richardson Maturity Model</a>: you&rsquo;ll be guided from writing an HTTP-tunneling service to an hypermedia-driven one, with the intermediate of an HTTP-loving CRUD.</p>
+
+<p>These are fundamental steps because you will basically climb a mountain discovering:</p>
+
+<ul>
+<li>how to write an HTTP-tunnel</li>
+<li>how to write a better HTTP tunnel</li>
+<li>how an HTTP-loving CRUD works</li>
+<li>how to implement the <a href="http://en.wikipedia.org/wiki/HATEOAS">hypermedia tenet</a> in your services</li>
+</ul>
+
+
+<h2>Caching</h2>
+
+<p>An entire chapter was dedicated on <a href="http://www.odino.org/301/rest-better-http-cache">caching strategies</a>, in order to explain how to scale well from this point of view.</p>
+
+<p>Starting from the explicit admission of <strong>WWW&rsquo;s weak consistency</strong>, the book guides you through HTTP&rsquo;s cache specification and how to correctly implement HTTP&rsquo;s cache on your system: it deserves a mention the fact that the authors explained really well why <strong>cache invalidation is bad for the web</strong> ( invalidation assumed that the server should know the state of N clients ).</p>
+
+<h2>AtomMix</h2>
+
+<p>In the middle of this, the book starts to tightly couple with the Atom format and the AtomPub publishing protocol: it explains very well how to use Atom as a flexible and extensible format, and AtomPub to re-use a common but valid workflow for your Domain Application Protocol.</p>
+
+<h2>A soft end</h2>
+
+<p>The last chapters are both interesting and soft to read: they deal with web security, semantics, <strong>SOAP</strong> and the <strong>WS-* world</strong>.</p>
+
+<p>I really liked how it compares web oriented architectures to SOAP and WS, because it doesn&rsquo;t yell at anyone and doesn&rsquo;t blame ( too much :-P ) that world.</p>
+
+<p>Security chapter deals with the OpenID and OAuth protocols but didn&rsquo;t really convinced me: I&rsquo;m probably not so well documented about them to get into what the book tried to explain; semantics was a great chapter instead: <a href="http://en.wikipedia.org/wiki/Web_Ontology_Language">OWL</a>, <a href="http://en.wikipedia.org/wiki/Resource_Description_Framework">RDF</a> and <a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL</a> are well integrated with the code you previously built.</p>
+
+<h2>Is it the right book for me?</h2>
+
+<p>If you don&rsquo;t know anything about REST, you probably need it: it explains very well how ( and <strong>why</strong> ) to implement a semantic hypermedia-driven service from nOOb to master. There&rsquo;s so much theory that you will find it really explanatory.</p>
+
+<p>If you know this architectural style but want to get deeper into it, like me, the book won&rsquo;t disappoint you too: I lacked at security and semantics and was courious about authors' vision about hypermedia, so this book was really helpful to me.</p>
+
+<p>There are a lot of code examples, in both .NET and Java ( I scrolled some pages really fast :) ), so you won&rsquo;t miss <em>that</em> part.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The art of agile development, my review]]></title>
+    <link href="http://www.odino.org/the-art-of-agile-development-my-review/"/>
+    <updated>2011-03-11T13:43:00+04:00</updated>
+    <id>http://www.odino.org/the-art-of-agile-development-my-review</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve read this book 2 times, with a 2-years interlude: once when I was running my own company, a really small one, and the second time after <a href="http://www.dnsee.com/">DNSEE</a> started looking for talented developers on the market to join our team, in the middle of 2010.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/art.agile.jpg"></p>
+
+<p>In both cases there were interesting situations while reading the book: firstly I was trying to leverage my skill as a developer and PM, then I was helping a team mix together.</p>
+
+<p>The second time has been really hard, because it really took several months to me to complete it, really dunno why.</p>
+
+<p>Apart from personal thoughts, I would really like to share you some considerations about this book, a really cool one in my honest opinion.</p>
+
+<h2>This book fits very well when&hellip;</h2>
+
+<p>&hellip;you are a newcomer and want to know about agile development.</p>
+
+<p>It explains very well every transition happening during an agile-based process.</p>
+
+<p>Don&rsquo;t expect to read the latest from the agile universe, like Kanban or notions of LSD: this book is really focused on well-established patterns and processes and will deal with letting you master all the basics of any agile-based <em>doctrine</em>.</p>
+
+<p>This is pretty useful when you can&rsquo;t afford being overwhelmed by notions, a typical situation while being a newbie.</p>
+
+<h2>XP over agile</h2>
+
+<p>The whole book explains <a href="http://www.extremeprogramming.org/">extreme programming</a>, not any other single agile methodology ( like SCRUM, Crystal or whatever ).</p>
+
+<p>This is, IMHO, a pretty winning choice: XP has been widely recognized as the masterpiece &ndash; but also as the more difficult &ndash; of all the agile methodologies.</p>
+
+<p>Just to be clear: when you know how to deal with the whole team, when your teammates know their responsibilities and are used to XP, each of them will suite perfectly as a SCRUM master ( although they will probably tell you SCRUM seems cheap to them :&ndash;) ).</p>
+
+<p>That&rsquo;s why XP is a win-win trade while learning about the agile world.</p>
+
+<h2>General considerations</h2>
+
+<p>The book is really pragmatic and will help you in several situations: I really appreciated that, for every single change it would push you towards, it explains how you should face the change, how you should make other members of the team face it and in which manner, because of any problem, you can ( although you shoudn&rsquo;t ) ignore it.</p>
+
+<h2>What I didn&rsquo;t like</h2>
+
+<p>The only thing I disliked in the book was the chapter&rsquo;s organization: the usage of <em>etudes</em> and final considerations in each chapter sounded reduntant to me.</p>
+
+<p>It may be a problem with me reading it for the second time: in fact, this kind of organization was really helpful to better understand what I was reading, how to adopt it and how to guide the transition <strong>from whatever to agile</strong> the first time I read it.</p>
+
+<h2>Long-term retrospectives</h2>
+
+<p>I read it 2 times for a single reason: to reflect on how I improved myself over 2 years.</p>
+
+<p>How much of the book I introduce in my daily job and how I managed others to face my thoughs.</p>
+
+<p>I really gotta say that reading it for the second time <strong>helped me so much realizing where, and why, I failed</strong>.</p>
+
+<h2>So, is the book right for you?</h2>
+
+<p>Don&rsquo;t you know how to conduct a retrospective? Need to learn what timeboxed iterations are? Can&rsquo;t figure out why refactoring and incremental design are <em>that</em> important? Don&rsquo;t know why you should take decision at the <strong>last responsible moment</strong>? Are you into a team and want to understand how far did you get?</p>
+
+<p>If you can&rsquo;t tame these topics, sure, this book is right for you.</p>
+]]></content>
+  </entry>
+  
+</feed>

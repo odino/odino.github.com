@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Behaviour-driven development in PHP - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="BDD is an established practice which goes beyond test-driven development, assuming we are working on a agile-prone environment and our requirements &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.odino.org/behaviour-driven-development-in-php/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <img id="bio-picture" src="https://lh6.googleusercontent.com/-YgvT5_ULkUk/AAAAAAAAAAI/AAAAAAAAAWY/lIfaFw-9ZQo/s120-c/photo.jpg" />
+  <h1><a href="/">Alessandro Nadalin</a></h1>
+</hgroup>
+
+<ul id="topmenu">
+	<li>
+		<a href="/about" >
+			about
+		</a>
+	</li>
+	<li>
+		<a href="/conferences" >
+			conferences
+		</a>
+	</li>
+	<li>
+		<a href="http://twitter.com/_odino_" >
+			twitter
+		</a>
+	</li>
+	<li>
+		<a href="/archives" >
+			archives
+		</a>
+	</li>
+</ul>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Behaviour-driven Development in PHP</h1>
+    
+  </header>
+
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bdd/'>BDD</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/agile/'>agile</a>
+  
+</span>
+
+
+<div class="entry-content"><p><a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a> is an established practice which goes beyond test-driven development, assuming we are working on a agile-prone environment and our requirements are expressed as user stories or something similar: although this requirement is not mandatory, <strong>BDD&rsquo;s power is leveraged by using stories</strong>.</p>
+
+<!-- more -->
+
+
+<p>It basically assumes that instead of focusing on tests, we should start our development process writing down <a href="http://docs.behat.org/quick_intro.html">a story that a parser can translate into a test</a> (a customer cares about features, not tests) a programmer can implement in order to verify that our software respects that story.</p>
+
+<h2>Why BDD?</h2>
+
+<p>It&rsquo;s a pretty unconvenient question :)</p>
+
+<p>Do you know why TDD is extremely powerful? If not, go check it on the web; if so, add to TDD the ability of <strong>writing tests in a ubiquitous language</strong>, letting the team share tests, user-stories and acceptance criteria without the pain of translating an actual story in a functional test that, for example, a customer could never understand.</p>
+
+<h2>Getting started</h2>
+
+<p>I was introduced to BDD by <a href="http://www.linkedin.com/pub/roberto-bettazzoni/2/12b/614">Roberto Bettazzoni</a> at the italian agile day 2010, during a dummy-proof session in which <a href="http://cukes.info/">cucumber</a> was used.</p>
+
+<p>Although you can use Cucumber in your PHP projects (the implementation of the tests, however, should be written in Ruby), Behat is an excellent project which brings native BDD in PHP.</p>
+
+<p>You can &ndash; and I recommend it &ndash;  <a href="http://pear.behat.org/">install it via PEAR</a>: just make sure you have all the required dependencies by running a simple</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>behat</span></code></pre></td></tr></table></div></figure>
+
+
+<p>after the installation: we had our daily WTF last week because <a href="http://mink.behat.org/">Mink</a>, a browser-emulator abstraction layer required by Behat, wasn&rsquo;t properly installed.</p>
+
+<h2>The integration with symfony 1.4</h2>
+
+<p>From <a href="http://www.dnsee.com/">our POV</a>, we use Behat in a pilot project written in symfony: you only need to install <a href="http://www.symfony-project.org/plugins/sfBehatPlugin">sfBehatPlugin</a> and configure the <code>behat.yml</code> file you find under <code>/config</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">// behat.yml default config</span>
+</span><span class='line'><span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">features</span><span class="p-Indicator">:</span> <span class="err">%%</span><span class="l-Scalar-Plain">BEHAT_CONFIG_PATH%%/../test/features/frontend</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">context</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and then you can run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">behat</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>from the root of your symfony project: no tests, so let&rsquo;s write something!</p>
+
+<p>In symfony, behat&rsquo;s tests are located under <code>/test/features</code>, and are a <code>.feature</code> file, looking like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">Feature</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">US-1</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">As anonymous</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">I want to open the homepage</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">in order to know WTF this site is about</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">Scenario</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">anonymous user reaches the site&#39;s homepage, viewing it without errors</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">Given I am on &quot;homepage&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">Then I should see &quot;This website is about crap&quot; in the &quot;body&quot; element</span>
+</span><span class='line'>     <span class="l-Scalar-Plain">And The page loads correctly</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, let&rsquo;s examine it:</p>
+
+<ul>
+<li>this &ldquo;code&rdquo; should be located in the <code>/test/features/homepageOk.feature</code> file</li>
+<li>the <code>Feature</code> element defines the story you are working on (write it as it appears in your backlog)</li>
+<li>every <code>Scenario</code> block identifies possible declinations for your story (user logs in with good credentials, user tries to log in with incorrect credentials and so on)</li>
+<li>the sentences inside every scenario are the actual testers which are parsed by behat and <strong>translated in actual PHP code</strong></li>
+</ul>
+
+
+<h2>Translated in actual PHP code?</h2>
+
+<p>Yes, because you have a <code>FeatureContext</code> class in which you define some methods that are your tests&#8217; implementations: BDD frameworks usually parse your scenarios&#8217; lines generating the code you need to implement.</p>
+
+<p>Behat, for example, stores all its testers in the <code>FeatureContext</code> class, and when you write a new scenario, if Behat doesn&rsquo;t know its syntax, it outputs something like:</p>
+
+<p><img class="center" src="/images/behat.png"></p>
+
+<p>so you only need to <em>copy&amp;paste</em> the method in your <code>FeatureContext</code> and implement the method with your logic.</p>
+
+<p>Obviously, BDD frameworks have a set of predefined testers: you can see Behat&rsquo;s ones with</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">behat --definitions</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>you will see testers like <code>I should see [...]</code> which tests if the given text lies in the response.</p>
+
+<h2>Producing ubiquitous documentation</h2>
+
+<p>The cool thing is that, when you run your BDD test suite, you can export it in a fancy way, making it readable for every project&rsquo;s stakeholder:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">behat --out heyGuysReadThis.html --format html</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>obtaining something like:</p>
+
+<p><img class="center" src="/images/behat-report.png"></p>
+
+<h2>I won&rsquo;t be exhaustive, so what&rsquo;s next?</h2>
+
+<p>No focus on how to use (<em>deeply</em> use) Behat here: it will be a matter of another post.</p>
+
+<p>Then we will see how to use <a href="http://capifony.org/">capifony</a> to automatically deploy your symfony applications and produce acceptance criteria tests that will be used by your QA guys in order to test your brand new deployment.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-27T23:32:00+04:00" pubdate data-updated="true">Saturday, 27 August 2011 at 23:32</time>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.odino.org/behaviour-driven-development-in-php/" data-via="_odino_" data-counturl="http://www.odino.org/behaviour-driven-development-in-php/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/unit-testing-your-symfony-forms/" title="Previous Post: Unit testing your symfony forms">&laquo; Unit testing your symfony forms</a>
+      
+      
+        <a class="basic-alignment right" href="/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/" title="Next Post: The shortest path problem in PHP: demystifying Dijkstra's algorithm">The shortest path problem in PHP: demystifying Dijkstra's algorithm &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Alessandro Nadalin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.odino.org/behaviour-driven-development-in-php/';
+        var disqus_url = 'http://www.odino.org/behaviour-driven-development-in-php/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/aharris.js"></script>
+
+</body>
+</html>
