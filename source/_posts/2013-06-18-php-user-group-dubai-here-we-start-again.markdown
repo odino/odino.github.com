@@ -40,7 +40,7 @@ PHPUnit
 
 So, if you are a PHP developer based in the UAE
 - not necessarily Dubai - why don't you subscribe
-to our [PHP User Group Dubai google group](groups.google.com/forum/?fromgroups#!forum/php-user-group-dubai) and
+to our [PHP User Group Dubai google group](http://groups.google.com/forum/?fromgroups#!forum/php-user-group-dubai) and
 introduce yourself? Do you want to understand why testing your applications manually it's a waste of your energies and of money of your company? Do you know about [Twig](http://twig.sensiolabs.org)? Have you ever tried developing an application with [AngularJS](http://angularjs.org/) and some HTTP APIs as the backend of that app? How can you [integrate the JWS authentication mechanism in your PHP code](/securing-your-http-api-with-javascript-object-signing-and-encryption/)?
 
 It would be great to see you at the next meeting!{% fn_ref 1 %}
