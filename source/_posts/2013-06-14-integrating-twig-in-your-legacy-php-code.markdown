@@ -23,6 +23,11 @@ existing code.
 
 <!-- more -->
 
+{% ribbonp info Outdated %}
+	This article is outdated! A better approach was described here:
+	http://integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/
+{% endribbonp %}
+
 ## Approach
 
 The main idea is that you should anyway
