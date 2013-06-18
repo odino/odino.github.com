@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: CLI | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/cli/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/cli/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
-    <link href="http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <link href="http://odino.github.io/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00+04:00</updated>
-    <id>http://www.odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
+    <id>http://odino.github.io/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>

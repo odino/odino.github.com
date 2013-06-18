@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: symfony. PHP | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/symfony-php/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/symfony-php/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Basic HTTP authentication on a symfony backend]]></title>
-    <link href="http://www.odino.org/basic-http-authentication-on-a-symfony-backend/"/>
+    <link href="http://odino.github.io/basic-http-authentication-on-a-symfony-backend/"/>
     <updated>2010-09-17T11:09:00+04:00</updated>
-    <id>http://www.odino.org/basic-http-authentication-on-a-symfony-backend</id>
+    <id>http://odino.github.io/basic-http-authentication-on-a-symfony-backend</id>
     <content type="html"><![CDATA[<p>Since I&rsquo;m not a ninja from this point of view, any better solution is welcome.</p>
 
 <!-- more -->

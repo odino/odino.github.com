@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/javascript/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
-    <link href="http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
+    <link href="http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
     <updated>2013-06-04T00:31:00+04:00</updated>
-    <id>http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
+    <id>http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
 is to <strong>secure HTTP API</strong> that interact with client-side
@@ -183,9 +183,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Optimizing loading times with images' lazy loading]]></title>
-    <link href="http://www.odino.org/optimizing-loading-times-with-images-lazy-loading/"/>
+    <link href="http://odino.github.io/optimizing-loading-times-with-images-lazy-loading/"/>
     <updated>2012-09-21T07:45:00+04:00</updated>
-    <id>http://www.odino.org/optimizing-loading-times-with-images-lazy-loading</id>
+    <id>http://odino.github.io/optimizing-loading-times-with-images-lazy-loading</id>
     <content type="html"><![CDATA[<p>Sometimes I like to forget that I&rsquo;m
 mainly involved in other things and
 get my hands dirty with low-level
@@ -304,9 +304,9 @@ $(window).scroll(function() {
   
   <entry>
     <title type="html"><![CDATA[Human-readable user agents for JavaScript error reporting]]></title>
-    <link href="http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting/"/>
+    <link href="http://odino.github.io/human-readable-user-agents-for-javascript-error-reporting/"/>
     <updated>2012-08-22T09:40:00+04:00</updated>
-    <id>http://www.odino.org/human-readable-user-agents-for-javascript-error-reporting</id>
+    <id>http://odino.github.io/human-readable-user-agents-for-javascript-error-reporting</id>
     <content type="html"><![CDATA[<p>Some time ago I published a few posts
 on logging, one on how to <a href="/logging-javascript-errors/">report JavaScript errors</a> and another one
 which illustrates how to <a href="/using-monolog-for-php-error-reporting-on-new-relic/">log on New Relic with Monolog</a>.</p>
@@ -506,9 +506,9 @@ echo sprintf(
   
   <entry>
     <title type="html"><![CDATA[Logging JavaScript errors]]></title>
-    <link href="http://www.odino.org/logging-javascript-errors/"/>
+    <link href="http://odino.github.io/logging-javascript-errors/"/>
     <updated>2012-07-27T09:00:00+04:00</updated>
-    <id>http://www.odino.org/logging-javascript-errors</id>
+    <id>http://odino.github.io/logging-javascript-errors</id>
     <content type="html"><![CDATA[<p>In one of my latest posts I talked about
 <a href="/using-monolog-for-php-error-reporting-on-new-relic/">using Monolog to remotely log stuff on New Relic</a>:
 getting a bit deeper on log management
@@ -627,9 +627,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[iMacro: JavaScript loops with variables]]></title>
-    <link href="http://www.odino.org/imacro-javascript-loops-with-variables/"/>
+    <link href="http://odino.github.io/imacro-javascript-loops-with-variables/"/>
     <updated>2010-12-01T02:03:00+04:00</updated>
-    <id>http://www.odino.org/imacro-javascript-loops-with-variables</id>
+    <id>http://odino.github.io/imacro-javascript-loops-with-variables</id>
     <content type="html"><![CDATA[<p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
 
 <!-- more -->

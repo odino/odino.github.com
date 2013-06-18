@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/http/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/http/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
-    <link href="http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
+    <link href="http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
     <updated>2013-06-04T00:31:00+04:00</updated>
-    <id>http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
+    <id>http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
 is to <strong>secure HTTP API</strong> that interact with client-side
@@ -183,9 +183,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
-    <link href="http://www.odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
+    <link href="http://odino.github.io/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
     <updated>2012-10-16T15:11:00+04:00</updated>
-    <id>http://www.odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
+    <id>http://odino.github.io/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>Yesterday, from Doha&rsquo;s international airport, I
 got the chance to blog about the latest changes
 surrounding the upcoming major version of the
@@ -209,9 +209,9 @@ the basics</strong>.</p>
   
   <entry>
     <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
-    <link href="http://www.odino.org/the-state-of-http-slash-2-dot-0/"/>
+    <link href="http://odino.github.io/the-state-of-http-slash-2-dot-0/"/>
     <updated>2012-10-15T23:45:00+04:00</updated>
-    <id>http://www.odino.org/the-state-of-http-slash-2-dot-0</id>
+    <id>http://odino.github.io/the-state-of-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>With a few days of delay I&rsquo;m here reporting and commenting
 the last <strong>revolutions</strong> about the protocol of the web,
 its upcoming groundbreaking new version and its state.</p>
@@ -304,9 +304,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
-    <link href="http://www.odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
+    <link href="http://odino.github.io/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
     <updated>2012-01-27T19:27:00+04:00</updated>
-    <id>http://www.odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
+    <id>http://odino.github.io/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&rsquo;s gaining
 its <em>momentum</em> due to a good article which explained how you should build
 your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
@@ -381,9 +381,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
-    <link href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
+    <link href="http://odino.github.io/edge-side-includes-how-to-spare-terabytes-every-day/"/>
     <updated>2012-01-20T14:15:00+04:00</updated>
-    <id>http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
+    <id>http://odino.github.io/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
 
@@ -536,7 +536,7 @@ read the next chapter</strong>.</p>
     <div class="clearfix" id="footerContainer">
         <div class="mrl lfloat" role="contentinfo">
             <div class="fsm fwn fcg">
-                <span> Facebook © 2012</span> · <a rel="dialog" href="http://www.odino.org/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.github.io/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
             </div>
         </div>
         <div class="navigation fsm fwn fcg" role="navigation">

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: AJAX | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/ajax/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/ajax/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
-    <link href="http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
+    <link href="http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
     <updated>2013-06-04T00:31:00+04:00</updated>
-    <id>http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
+    <id>http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
 is to <strong>secure HTTP API</strong> that interact with client-side

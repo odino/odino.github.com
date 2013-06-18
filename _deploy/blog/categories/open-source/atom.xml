@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: open source | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/open-source/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/open-source/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
-    <link href="http://www.odino.org/back-in-track-with-orientdb/"/>
+    <link href="http://odino.github.io/back-in-track-with-orientdb/"/>
     <updated>2012-04-20T15:26:00+04:00</updated>
-    <id>http://www.odino.org/back-in-track-with-orientdb</id>
+    <id>http://odino.github.io/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It&rsquo;s been a while since I don&rsquo;t release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
 back on track and I have a few interesting news.</p>
@@ -153,9 +153,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
-    <link href="http://www.odino.org/y-u-no-access-whois-informations-in-php/"/>
+    <link href="http://odino.github.io/y-u-no-access-whois-informations-in-php/"/>
     <updated>2012-04-16T00:38:00+04:00</updated>
-    <id>http://www.odino.org/y-u-no-access-whois-informations-in-php</id>
+    <id>http://odino.github.io/y-u-no-access-whois-informations-in-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -302,9 +302,9 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   
   <entry>
     <title type="html"><![CDATA[A PHP library to retrieve WHOIS informations]]></title>
-    <link href="http://www.odino.org/a-php-library-to-retrieve-whois-informations/"/>
+    <link href="http://odino.github.io/a-php-library-to-retrieve-whois-informations/"/>
     <updated>2012-02-03T03:40:00+04:00</updated>
-    <id>http://www.odino.org/a-php-library-to-retrieve-whois-informations</id>
+    <id>http://odino.github.io/a-php-library-to-retrieve-whois-informations</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>
@@ -395,9 +395,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[The current status of my work with OrientDB]]></title>
-    <link href="http://www.odino.org/the-current-status-of-my-work-with-orientdb/"/>
+    <link href="http://odino.github.io/the-current-status-of-my-work-with-orientdb/"/>
     <updated>2011-05-24T14:09:00+04:00</updated>
-    <id>http://www.odino.org/the-current-status-of-my-work-with-orientdb</id>
+    <id>http://odino.github.io/the-current-status-of-my-work-with-orientdb</id>
     <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
 
 <!-- more -->

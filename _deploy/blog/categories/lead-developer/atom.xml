@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: lead developer | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/lead-developer/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/lead-developer/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Namshi is looking for a new Lead Developer!]]></title>
-    <link href="http://www.odino.org/namshi-is-looking-for-a-new-lead-developer/"/>
+    <link href="http://odino.github.io/namshi-is-looking-for-a-new-lead-developer/"/>
     <updated>2013-02-21T19:28:00+04:00</updated>
-    <id>http://www.odino.org/namshi-is-looking-for-a-new-lead-developer</id>
+    <id>http://odino.github.io/namshi-is-looking-for-a-new-lead-developer</id>
     <content type="html"><![CDATA[<p>As some of you know, I am currently employed by
 <a href="http://en-ae.namshi.com/">Namshi</a>, a
 <a href="http://www.rocket-internet.de/">Rocket Internet</a>

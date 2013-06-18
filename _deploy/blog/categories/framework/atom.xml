@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: framework | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/framework/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/framework/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
-    <link href="http://www.odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
+    <link href="http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework/"/>
     <updated>2013-05-27T22:16:00+04:00</updated>
-    <id>http://www.odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
+    <id>http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
 this framework was a very trivial decision

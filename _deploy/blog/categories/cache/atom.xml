@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: cache | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/cache/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/cache/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
-    <link href="http://www.odino.org/scaling-through-hinclude/"/>
+    <link href="http://odino.github.io/scaling-through-hinclude/"/>
     <updated>2012-02-24T10:50:00+04:00</updated>
-    <id>http://www.odino.org/scaling-through-hinclude</id>
+    <id>http://odino.github.io/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it&rsquo;s been a while that I spread the idea of
 having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
 someone pointed out that a good solution, technically
@@ -59,7 +59,7 @@ include the JS and add a namespace declaration to your documents:</p>
   <html xmlns:hx="http://purl.org/NET/hinclude"></p>
 
 <pre><code>&lt;head&gt;
-  &lt;script src="http://www.odino.org/lib/hinclude.js"
+  &lt;script src="http://odino.github.io/lib/hinclude.js"
    type="text/javascript"&gt;&lt;/script&gt;
 </code></pre>
 
@@ -69,7 +69,7 @@ include the JS and add a namespace declaration to your documents:</p>
 only need to <strong>add an hinclude tag</strong>:</p>
 
 <p><code>html
-&lt;hx:include src="http://www.odino.org/header.html"&gt;&lt;/hx:include&gt;
+&lt;hx:include src="http://odino.github.io/header.html"&gt;&lt;/hx:include&gt;
 </code></p>
 
 <p>You can specify a default content &ndash; if the user has not javascript
@@ -250,9 +250,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Application-level caching: fight the right battle ]]></title>
-    <link href="http://www.odino.org/application-level-caching-fight-the-right-battle/"/>
+    <link href="http://odino.github.io/application-level-caching-fight-the-right-battle/"/>
     <updated>2011-11-22T15:01:00+04:00</updated>
-    <id>http://www.odino.org/application-level-caching-fight-the-right-battle</id>
+    <id>http://odino.github.io/application-level-caching-fight-the-right-battle</id>
     <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
 
 <blockquote><p>Why do you hate application-level caches?</p></blockquote>
@@ -350,9 +350,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Some common questions about Edge Side Includes]]></title>
-    <link href="http://www.odino.org/some-common-questions-about-edge-side-includes/"/>
+    <link href="http://odino.github.io/some-common-questions-about-edge-side-includes/"/>
     <updated>2011-05-30T15:07:00+04:00</updated>
-    <id>http://www.odino.org/some-common-questions-about-edge-side-includes</id>
+    <id>http://odino.github.io/some-common-questions-about-edge-side-includes</id>
     <content type="html"><![CDATA[<p>After my <a href="http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011">REST in (a mobile) peace</a> talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so &ldquo;standard&rdquo;, here&rsquo;s a parade of little things to know about <a href="http://en.wikipedia.org/wiki/Edge_Side_Includes">ESI</a>.</p>
 
 <!-- more -->
@@ -427,9 +427,9 @@ Content-Type: application/xhtml+xml;profile=esi
   
   <entry>
     <title type="html"><![CDATA[REST better: HTTP cache]]></title>
-    <link href="http://www.odino.org/rest-better-http-cache/"/>
+    <link href="http://odino.github.io/rest-better-http-cache/"/>
     <updated>2011-03-17T14:12:00+04:00</updated>
-    <id>http://www.odino.org/rest-better-http-cache</id>
+    <id>http://odino.github.io/rest-better-http-cache</id>
     <content type="html"><![CDATA[<p>HTTP has a widely-ignored <a href="http://tools.ietf.org/html/rfc2616#section-13">cache specification</a> which helps us implementing fast, scaleable and fault-tolerant services.</p>
 
 <!-- more -->
@@ -689,9 +689,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Don't rape HTTP: If-(None-)Match & the 412 HTTP status code]]></title>
-    <link href="http://www.odino.org/don-t-rape-http-if-none-match-the-412-http-status-code/"/>
+    <link href="http://odino.github.io/don-t-rape-http-if-none-match-the-412-http-status-code/"/>
     <updated>2011-03-06T00:08:00+04:00</updated>
-    <id>http://www.odino.org/don-t-rape-http-if-none-match-the-412-http-status-code</id>
+    <id>http://odino.github.io/don-t-rape-http-if-none-match-the-412-http-status-code</id>
     <content type="html"><![CDATA[<p>HTTP has a problem: it gets raped everyday.</p>
 
 <p>Seriously, <strong>every single day</strong>.</p>

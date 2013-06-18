@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: TDD | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/tdd/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/tdd/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Automated tests from a novice's perspective]]></title>
-    <link href="http://www.odino.org/automated-tests-from-a-novice-perspective/"/>
+    <link href="http://odino.github.io/automated-tests-from-a-novice-perspective/"/>
     <updated>2013-05-27T22:01:00+04:00</updated>
-    <id>http://www.odino.org/automated-tests-from-a-novice-perspective</id>
+    <id>http://odino.github.io/automated-tests-from-a-novice-perspective</id>
     <content type="html"><![CDATA[<p>Today I got one of those moments of pride
 when one of our developers, who is working
 since &ndash; roughly &ndash; a year, decided to send an

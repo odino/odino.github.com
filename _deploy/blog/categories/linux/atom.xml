@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Linux | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Installing and configuring Varnish on Ubuntu]]></title>
-    <link href="http://www.odino.org/installing-and-configuring-varnish-on-ubuntu/"/>
+    <link href="http://odino.github.io/installing-and-configuring-varnish-on-ubuntu/"/>
     <updated>2011-02-09T02:29:00+04:00</updated>
-    <id>http://www.odino.org/installing-and-configuring-varnish-on-ubuntu</id>
+    <id>http://odino.github.io/installing-and-configuring-varnish-on-ubuntu</id>
     <content type="html"><![CDATA[<p>On a brand new debian/*ubuntu distro, there are only a couple steps to do in order to make Varnish <del>act as a proxy</del> do its job in front of apache.</p>
 
 <!-- more -->
@@ -82,9 +82,9 @@ Listen 127.0.0.1:8090
   
   <entry>
     <title type="html"><![CDATA[tar: web.tar: Wrote only X of Y bytes]]></title>
-    <link href="http://www.odino.org/tar-web-tar-wrote-only-x-of-y-bytes/"/>
+    <link href="http://odino.github.io/tar-web-tar-wrote-only-x-of-y-bytes/"/>
     <updated>2011-02-02T12:16:00+04:00</updated>
-    <id>http://www.odino.org/tar-web-tar-wrote-only-x-of-y-bytes</id>
+    <id>http://odino.github.io/tar-web-tar-wrote-only-x-of-y-bytes</id>
     <content type="html"><![CDATA[<p>So you are trying to compress a directory or whatever file on your disk, probably from SSH, and experience no useful errors?</p>
 
 <!-- more -->
@@ -111,9 +111,9 @@ df -h
   
   <entry>
     <title type="html"><![CDATA[The Pomodoro Tecnique on your Linux distro]]></title>
-    <link href="http://www.odino.org/the-pomodoro-tecnique-on-your-linux-distro/"/>
+    <link href="http://odino.github.io/the-pomodoro-tecnique-on-your-linux-distro/"/>
     <updated>2010-11-01T13:33:00+04:00</updated>
-    <id>http://www.odino.org/the-pomodoro-tecnique-on-your-linux-distro</id>
+    <id>http://odino.github.io/the-pomodoro-tecnique-on-your-linux-distro</id>
     <content type="html"><![CDATA[<p>Shortening the post &ndash; it&rsquo;s late and I&rsquo;m tired &ndash; I&rsquo;ve played with <a href="http://gambas.sourceforge.net/en/main.html">Gambas2</a> and its wonderful IDE in order to get in touch with Desktop development, one of those things I&rsquo;ve always missed as a programmer.</p>
 
 <!-- more -->
@@ -160,9 +160,9 @@ df -h
   
   <entry>
     <title type="html"><![CDATA[mysql/mysqldump: command not found on CentOS]]></title>
-    <link href="http://www.odino.org/mysql-mysqldump-command-not-found-on-centos/"/>
+    <link href="http://odino.github.io/mysql-mysqldump-command-not-found-on-centos/"/>
     <updated>2010-10-13T10:42:00+04:00</updated>
-    <id>http://www.odino.org/mysql-mysqldump-command-not-found-on-centos</id>
+    <id>http://odino.github.io/mysql-mysqldump-command-not-found-on-centos</id>
     <content type="html"><![CDATA[<!-- more -->
 
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: New Relic | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/new-relic/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/new-relic/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Monolog for PHP error reporting on New Relic]]></title>
-    <link href="http://www.odino.org/using-monolog-for-php-error-reporting-on-new-relic/"/>
+    <link href="http://odino.github.io/using-monolog-for-php-error-reporting-on-new-relic/"/>
     <updated>2012-07-27T08:00:00+04:00</updated>
-    <id>http://www.odino.org/using-monolog-for-php-error-reporting-on-new-relic</id>
+    <id>http://odino.github.io/using-monolog-for-php-error-reporting-on-new-relic</id>
     <content type="html"><![CDATA[<p>I <strong>do</strong> really like <a href="http://newrelic.com/">New Relic</a>, a real-time
 error reporting solution available for many
 platforms, so a few days ago I decided to

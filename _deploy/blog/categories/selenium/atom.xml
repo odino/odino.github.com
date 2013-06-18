@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: selenium | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/selenium/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/selenium/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Selenium and Symfony2 to help your frontend developers coding without risks]]></title>
-    <link href="http://www.odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
+    <link href="http://odino.github.io/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
     <updated>2013-03-10T11:39:00+04:00</updated>
-    <id>http://www.odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
+    <id>http://odino.github.io/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
     <content type="html"><![CDATA[<p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major
 catastrophe happens), you should help people

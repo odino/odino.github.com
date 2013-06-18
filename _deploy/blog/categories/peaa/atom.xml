@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: PEAA | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/peaa/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/peaa/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Creating your own services for the Symfony2 DIC]]></title>
-    <link href="http://www.odino.org/creating-your-own-services-for-the-symfony2-dic/"/>
+    <link href="http://odino.github.io/creating-your-own-services-for-the-symfony2-dic/"/>
     <updated>2011-01-08T19:50:00+04:00</updated>
-    <id>http://www.odino.org/creating-your-own-services-for-the-symfony2-dic</id>
+    <id>http://odino.github.io/creating-your-own-services-for-the-symfony2-dic</id>
     <content type="html"><![CDATA[<p>I want you to know how to write a service and let the container handle it for you.</p>
 
 <!-- more -->

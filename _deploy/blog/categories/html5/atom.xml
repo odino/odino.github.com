@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: HTML5 | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/html5/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/html5/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The current vague state of PUT and DELETE in HTML5]]></title>
-    <link href="http://www.odino.org/the-current-vague-state-of-put-and-delete-in-html5/"/>
+    <link href="http://odino.github.io/the-current-vague-state-of-put-and-delete-in-html5/"/>
     <updated>2011-05-06T13:01:00+04:00</updated>
-    <id>http://www.odino.org/the-current-vague-state-of-put-and-delete-in-html5</id>
+    <id>http://odino.github.io/the-current-vague-state-of-put-and-delete-in-html5</id>
     <content type="html"><![CDATA[<p>If you followed my <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011">REST in peace</a> presentation, you probably noted that I was <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011/180">a bit angry against HTML5</a>.</p>
 
 <!-- more -->

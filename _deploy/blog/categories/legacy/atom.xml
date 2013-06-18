@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: legacy | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/legacy/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/legacy/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Integrating Twig in your legacy code, Part 2: a less wild approach]]></title>
-    <link href="http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
+    <link href="http://odino.github.io/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
     <updated>2013-06-18T12:07:00+04:00</updated>
-    <id>http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
+    <id>http://odino.github.io/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
     <content type="html"><![CDATA[<p>In my last post I wrote about
 <a href="/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
 with a really <strong>wild</strong>
@@ -126,9 +126,9 @@ And that&rsquo;s it!</p>
   
   <entry>
     <title type="html"><![CDATA[Integrating Twig in your legacy PHP code]]></title>
-    <link href="http://www.odino.org/integrating-twig-in-your-legacy-php-code/"/>
+    <link href="http://odino.github.io/integrating-twig-in-your-legacy-php-code/"/>
     <updated>2013-06-15T23:15:00+04:00</updated>
-    <id>http://www.odino.org/integrating-twig-in-your-legacy-php-code</id>
+    <id>http://odino.github.io/integrating-twig-in-your-legacy-php-code</id>
     <content type="html"><![CDATA[<p>It might happen that you are working
 on a legacy code that is years old,
 with its own templating mechanism<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>

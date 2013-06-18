@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Github | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/github/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Contributing to the Zend Framework via GitHub]]></title>
-    <link href="http://www.odino.org/contributing-to-the-zend-framework-via-github/"/>
+    <link href="http://odino.github.io/contributing-to-the-zend-framework-via-github/"/>
     <updated>2011-07-18T13:05:00+04:00</updated>
-    <id>http://www.odino.org/contributing-to-the-zend-framework-via-github</id>
+    <id>http://odino.github.io/contributing-to-the-zend-framework-via-github</id>
     <content type="html"><![CDATA[<p>So, I managed to integrate <a href="https://github.com/zendframework/zf2/commit/fe60cf8deb9888adfc7757dcec536dd24c021653">some crap I daily write into the Zend Framework 2</a> git repository, and here&rsquo;s how to do that.</p>
 
 <!-- more -->

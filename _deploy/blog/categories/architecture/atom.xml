@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: architecture | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/architecture/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/architecture/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
-    <link href="http://www.odino.org/refactoring-your-architecture-go-for-soa/"/>
+    <link href="http://odino.github.io/refactoring-your-architecture-go-for-soa/"/>
     <updated>2013-03-23T17:35:00+04:00</updated>
-    <id>http://www.odino.org/refactoring-your-architecture-go-for-soa</id>
+    <id>http://odino.github.io/refactoring-your-architecture-go-for-soa</id>
     <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>
 that helps most of his affiliates with know-how
@@ -166,9 +166,9 @@ approach and the vision we had in our own context.</p>
   
   <entry>
     <title type="html"><![CDATA[Application-level caching: fight the right battle ]]></title>
-    <link href="http://www.odino.org/application-level-caching-fight-the-right-battle/"/>
+    <link href="http://odino.github.io/application-level-caching-fight-the-right-battle/"/>
     <updated>2011-11-22T15:01:00+04:00</updated>
-    <id>http://www.odino.org/application-level-caching-fight-the-right-battle</id>
+    <id>http://odino.github.io/application-level-caching-fight-the-right-battle</id>
     <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
 
 <blockquote><p>Why do you hate application-level caches?</p></blockquote>

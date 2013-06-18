@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: PHPUnit | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/phpunit/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/phpunit/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
-    <link href="http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
+    <link href="http://odino.github.io/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
     <updated>2012-01-26T11:51:00+04:00</updated>
-    <id>http://www.odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
+    <id>http://odino.github.io/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
     <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
 testing mechanism into symfony 1.X</a>
 : in order to make this piece of software as clean and evolvable as possible
@@ -200,9 +200,9 @@ you can already rely on this small library via
   
   <entry>
     <title type="html"><![CDATA[Functional testing symfony 1.X with PHPUnit: the Symfony2 way]]></title>
-    <link href="http://www.odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
+    <link href="http://odino.github.io/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
     <updated>2012-01-26T00:45:00+04:00</updated>
-    <id>http://www.odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
+    <id>http://odino.github.io/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
     <content type="html"><![CDATA[<p>In the process of starting a brand new project here at
 <a href="http://www.dnsee.com">DNSEE</a>, me and my colleague
 <a href="http://www.linkedin.com/in/matteobiagetti">Matteo</a> decided
@@ -555,9 +555,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Headers already sent... what's up PHPUnit?]]></title>
-    <link href="http://www.odino.org/headers-already-sent-what-s-up-phpunit/"/>
+    <link href="http://odino.github.io/headers-already-sent-what-s-up-phpunit/"/>
     <updated>2010-09-11T13:50:00+04:00</updated>
-    <id>http://www.odino.org/headers-already-sent-what-s-up-phpunit</id>
+    <id>http://odino.github.io/headers-already-sent-what-s-up-phpunit</id>
     <content type="html"><![CDATA[<p>Here we go with a simple workaround to resolve a bad error that you can encounter with PHPUnit: <code>headers already sent</code> and failure of the tests.</p>
 
 <!-- more -->
@@ -624,9 +624,9 @@ phpunit --configuration phpunit.xml
   
   <entry>
     <title type="html"><![CDATA[Magento and PHPUnit]]></title>
-    <link href="http://www.odino.org/magento-and-phpunit/"/>
+    <link href="http://odino.github.io/magento-and-phpunit/"/>
     <updated>2010-09-11T13:43:00+04:00</updated>
-    <id>http://www.odino.org/magento-and-phpunit</id>
+    <id>http://odino.github.io/magento-and-phpunit</id>
     <content type="html"><![CDATA[<p>Although there is a good <a href="http://www.magentocommerce.com/wiki/development/phpunit_integration_with_magento">tutorial about PHPunit and Magento integration</a> and I&rsquo;d rather using Lime ( the symfony-integrated test engine ) here I&rsquo;ll show you how to set up PHPUnit tests in order to improve the QA of your Magento customizations.</p>
 
 <!-- more -->

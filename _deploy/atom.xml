@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -14,11 +14,11 @@
   
   <entry>
     <title type="html"><![CDATA[Integrating Twig in your legacy code, Part 2: a less wild approach]]></title>
-    <link href="http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
+    <link href="http://odino.github.io/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
     <updated>2013-06-18T12:07:00+04:00</updated>
-    <id>http://www.odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
+    <id>http://odino.github.io/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
     <content type="html"><![CDATA[<p>In my last post I wrote about
-<a href="http://www.odino.org/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
+<a href="http://odino.github.io/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
 with a really <strong>wild</strong>
 approach.</p>
 
@@ -176,9 +176,9 @@ loader, and store <code>$templateOutput</code> in a unique template, called <cod
   
   <entry>
     <title type="html"><![CDATA[Integrating Twig in your legacy PHP code]]></title>
-    <link href="http://www.odino.org/integrating-twig-in-your-legacy-php-code/"/>
+    <link href="http://odino.github.io/integrating-twig-in-your-legacy-php-code/"/>
     <updated>2013-06-15T23:15:00+04:00</updated>
-    <id>http://www.odino.org/integrating-twig-in-your-legacy-php-code</id>
+    <id>http://odino.github.io/integrating-twig-in-your-legacy-php-code</id>
     <content type="html"><![CDATA[<p>It might happen that you are working
 on a legacy code that is years old,
 with its own templating mechanism<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
@@ -815,11 +815,11 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
-    <link href="http://www.odino.org/configuring-a-symfony2-application-to-support-soa/"/>
+    <link href="http://odino.github.io/configuring-a-symfony2-application-to-support-soa/"/>
     <updated>2013-06-06T13:00:00+04:00</updated>
-    <id>http://www.odino.org/configuring-a-symfony2-application-to-support-soa</id>
+    <id>http://odino.github.io/configuring-a-symfony2-application-to-support-soa</id>
     <content type="html"><![CDATA[<p>When you think in terms of
-<a href="http://www.odino.org/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>
+<a href="http://odino.github.io/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>
 one of the tricky things is to decide
 how to organize your development workflow
 in order to develop <strong>architecture</strong>,
@@ -969,7 +969,7 @@ installing the dependencies via composer and so on).</p>
 
 <h2>Software lifecycle</h2>
 
-<p><img class="left" src="http://www.odino.org/images/cylinders.png"></p>
+<p><img class="left" src="http://odino.github.io/images/cylinders.png"></p>
 
 <p>Ah, good old SCM problems!</p>
 
@@ -1023,7 +1023,7 @@ itself (only on the servers which host the services to be updated with that tag)
 when you rollback, you rollback the entire architecture to a specific
 version.</p>
 
-<p><img class="left" src="http://www.odino.org/images/baby-birds.jpg"></p>
+<p><img class="left" src="http://odino.github.io/images/baby-birds.jpg"></p>
 
 <p>This seems to go against what I preached earlier, while talking
 about deployments, but the truth is that you want to be on the safe side
@@ -1044,11 +1044,11 @@ one, leaving the unluckiest ones defenseless against their own fate.</p>
 
 <h2>Configuring new services in Symfony2</h2>
 
-<p><img class="right" src="http://www.odino.org/images/cubic-architecture.jpg"></p>
+<p><img class="right" src="http://odino.github.io/images/cubic-architecture.jpg"></p>
 
 <p>This post has to come to an end dealing with Symfony2,
 since, in our experience,
-<a href="http://www.odino.org/why-we-choose-symfony2-over-any-other-php-framework/">we have decided to go SOA with this framework</a>:
+<a href="http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework/">we have decided to go SOA with this framework</a>:
 all in all, we found that due to the integration with capistrano
 and the concept of bundles, together with the ability to have
 per-bundle specific hostnames, this framework is pretty friendly
@@ -1122,9 +1122,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
-    <link href="http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
+    <link href="http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
     <updated>2013-06-04T00:31:00+04:00</updated>
-    <id>http://www.odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
+    <id>http://odino.github.io/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
 is to <strong>secure HTTP API</strong> that interact with client-side
@@ -1158,7 +1158,7 @@ entities are quite extensive and not very straightforward,
 so for further details you should <strong>really</strong> give them
 a look.</p>
 
-<p><img class="right" src="http://www.odino.org/images/jws.png"></p>
+<p><img class="right" src="http://odino.github.io/images/jws.png"></p>
 
 <h2>JWT</h2>
 
@@ -1185,7 +1185,7 @@ public keys.</p>
 
 <h2>Use case: how to authenticate stateless AJAX calls?</h2>
 
-<p><img class="left" src="http://www.odino.org/images/jsw-auth.png"></p>
+<p><img class="left" src="http://odino.github.io/images/jsw-auth.png"></p>
 
 <p>One of the needs that you might have is to,
 from JavaScript, make authenticated HTTP calls to
@@ -1312,9 +1312,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
-    <link href="http://www.odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
+    <link href="http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework/"/>
     <updated>2013-05-27T22:16:00+04:00</updated>
-    <id>http://www.odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
+    <id>http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
 this framework was a very trivial decision
@@ -1335,7 +1335,7 @@ then for the developers.</p>
 
 <h2>Testing</h2>
 
-<p><img class="right" src="http://www.odino.org/images/behat.png"></p>
+<p><img class="right" src="http://odino.github.io/images/behat.png"></p>
 
 <p>We are firm believers in automated test practices,
 and providing a layer that integrates very easily
@@ -1387,7 +1387,7 @@ informations in order to ease debugging.</p>
 providing a way more powerful, extensible
 toolbar and an integrated profiler.</p>
 
-<p><img class="right" src="http://www.odino.org/images/symfony2-profiler.png"></p>
+<p><img class="right" src="http://odino.github.io/images/symfony2-profiler.png"></p>
 
 <p>Database inspection will let you realize
 how many queries you are running and see the
@@ -1415,7 +1415,7 @@ would we keep using counterproductive tools?</p>
 <h2>Doctrine 2</h2>
 
 <p>It is no news that we, at Namshi,
-<a href="http://www.odino.org/refactoring-your-architecture-go-for-soa/">are working with a Service-Oriented Architecture</a>,
+<a href="http://odino.github.io/refactoring-your-architecture-go-for-soa/">are working with a Service-Oriented Architecture</a>,
 and we are highly benefiting from the easy
 integration that Symfony2 provides for
 Doctrine.</p>
@@ -1428,7 +1428,7 @@ webservices or messaging queues, services
 can simply access the data stored <em>somewhere</em>
 by other ones.</p>
 
-<p><img class="left" src="http://www.odino.org/images/doctrine-cli.png"></p>
+<p><img class="left" src="http://odino.github.io/images/doctrine-cli.png"></p>
 
 <p>Well, Doctrine 2 is the cherry on top of the
 cake to access that <em>somewhere</em>: natively
@@ -1673,7 +1673,7 @@ they learn? How many structural changes
 would they be able to do on your application without
 introducing regressions?</p>
 
-<p><img class="right" src="http://www.odino.org/images/best-practice.jpg"></p>
+<p><img class="right" src="http://odino.github.io/images/best-practice.jpg"></p>
 
 <p>For startups, by the way, a huge plus comes from
 the fact that being highly decoupled, Symfony2 helps
@@ -1743,9 +1743,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Automated tests from a novice's perspective]]></title>
-    <link href="http://www.odino.org/automated-tests-from-a-novice-perspective/"/>
+    <link href="http://odino.github.io/automated-tests-from-a-novice-perspective/"/>
     <updated>2013-05-27T22:01:00+04:00</updated>
-    <id>http://www.odino.org/automated-tests-from-a-novice-perspective</id>
+    <id>http://odino.github.io/automated-tests-from-a-novice-perspective</id>
     <content type="html"><![CDATA[<p>Today I got one of those moments of pride
 when one of our developers, who is working
 since &ndash; roughly &ndash; a year, decided to send an
@@ -1759,9 +1759,9 @@ tests for the first weeks of his career:</p>
   
   <entry>
     <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
-    <link href="http://www.odino.org/doctrine-80-percent-faster/"/>
+    <link href="http://odino.github.io/doctrine-80-percent-faster/"/>
     <updated>2013-04-21T10:54:00+04:00</updated>
-    <id>http://www.odino.org/doctrine-80-percent-faster</id>
+    <id>http://odino.github.io/doctrine-80-percent-faster</id>
     <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
 caught my attention last week, and I want to
 share its insights with you.</p>
@@ -1786,9 +1786,9 @@ branch very soon!</p>
   
   <entry>
     <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://www.odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
+    <link href="http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
     <updated>2013-03-29T18:08:00+04:00</updated>
-    <id>http://www.odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
+    <id>http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
     <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
 people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
 in Turin my 1-year experience in Namshi, one of
@@ -1797,7 +1797,7 @@ Rocket Internet&rsquo;s ventures in the Middle East.</p>
 <!-- more -->
 
 
-<p><img class="left" src="http://www.odino.org/images/phptostart2013.jpg"></p>
+<p><img class="left" src="http://odino.github.io/images/phptostart2013.jpg"></p>
 
 <p>Luckily, this was a great opportunity to meet some good
 old friends and the talk went very well: of course,
@@ -1829,9 +1829,9 @@ version compared to the ones I used in Rome:</p>
   
   <entry>
     <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
-    <link href="http://www.odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
+    <link href="http://odino.github.io/a-brief-visit-to-the-cold-lands-of-italy/"/>
     <updated>2013-03-29T14:14:00+04:00</updated>
-    <id>http://www.odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
+    <id>http://odino.github.io/a-brief-visit-to-the-cold-lands-of-italy</id>
     <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
 back in Italy, since I was missing my friends in Rome
 since <strong>exactly</strong> a year and the last time my parents saw me it
@@ -1868,9 +1868,9 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   
   <entry>
     <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
-    <link href="http://www.odino.org/refactoring-your-architecture-go-for-soa/"/>
+    <link href="http://odino.github.io/refactoring-your-architecture-go-for-soa/"/>
     <updated>2013-03-23T17:35:00+04:00</updated>
-    <id>http://www.odino.org/refactoring-your-architecture-go-for-soa</id>
+    <id>http://odino.github.io/refactoring-your-architecture-go-for-soa</id>
     <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>
 that helps most of his affiliates with know-how
@@ -1963,7 +1963,7 @@ be <strong>very useful</strong> when you need to kickstart a new, small and simp
 API</li>
 <li>HTTP API: services that semantically expose their domain model
 in terms of resources, embracing the HTTP specification</li>
-<li><a href="http://www.odino.org/hypermedia-services-beyond-rest-architectures/">REST</a>: hypermedia services</li>
+<li><a href="http://odino.github.io/hypermedia-services-beyond-rest-architectures/">REST</a>: hypermedia services</li>
 <li>SOAP: services using strict interfaces between clients and servers,
 following the SOAP spec</li>
 </ul>
@@ -2019,9 +2019,9 @@ approach and the vision we had in our own context.</p>
   
   <entry>
     <title type="html"><![CDATA[Symfony2 console: permission denied during autocompletion]]></title>
-    <link href="http://www.odino.org/symfony2-console-permission-denied-during-autocompletion/"/>
+    <link href="http://odino.github.io/symfony2-console-permission-denied-during-autocompletion/"/>
     <updated>2013-03-11T10:11:00+04:00</updated>
-    <id>http://www.odino.org/symfony2-console-permission-denied-during-autocompletion</id>
+    <id>http://odino.github.io/symfony2-console-permission-denied-during-autocompletion</id>
     <content type="html"><![CDATA[<p>Yesterday I faced a pretty cryptic issue
 while using the Symfony2 console (<code>app/console</code>).</p>
 
@@ -2042,9 +2042,9 @@ easy to fix, since the problem is that
   
   <entry>
     <title type="html"><![CDATA[Using Selenium and Symfony2 to help your frontend developers coding without risks]]></title>
-    <link href="http://www.odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
+    <link href="http://odino.github.io/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
     <updated>2013-03-10T11:39:00+04:00</updated>
-    <id>http://www.odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
+    <id>http://odino.github.io/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
     <content type="html"><![CDATA[<p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major
 catastrophe happens), you should help people
@@ -2183,9 +2183,9 @@ machine, before committing any changes.</p>
   
   <entry>
     <title type="html"><![CDATA[Namshi is looking for a new Lead Developer!]]></title>
-    <link href="http://www.odino.org/namshi-is-looking-for-a-new-lead-developer/"/>
+    <link href="http://odino.github.io/namshi-is-looking-for-a-new-lead-developer/"/>
     <updated>2013-02-21T19:28:00+04:00</updated>
-    <id>http://www.odino.org/namshi-is-looking-for-a-new-lead-developer</id>
+    <id>http://odino.github.io/namshi-is-looking-for-a-new-lead-developer</id>
     <content type="html"><![CDATA[<p>As some of you know, I am currently employed by
 <a href="http://en-ae.namshi.com/">Namshi</a>, a
 <a href="http://www.rocket-internet.de/">Rocket Internet</a>
@@ -2252,9 +2252,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[PHP: 'The script tried to execute a method or access a property of an incomplete object']]></title>
-    <link href="http://www.odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
+    <link href="http://odino.github.io/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
     <updated>2013-01-31T13:28:00+04:00</updated>
-    <id>http://www.odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
+    <id>http://odino.github.io/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
     <content type="html"><![CDATA[<p>Have you ever got this error in PHP? I bet no, never.</p>
 
 <!-- more -->
@@ -2287,10 +2287,10 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Profiling PHP applications from the browser]]></title>
-    <link href="http://www.odino.org/profiling-php-applications-from-the-browser/"/>
+    <link href="http://odino.github.io/profiling-php-applications-from-the-browser/"/>
     <updated>2013-01-25T22:38:00+04:00</updated>
-    <id>http://www.odino.org/profiling-php-applications-from-the-browser</id>
-    <content type="html"><![CDATA[<p>In my <a href="http://www.odino.org/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
+    <id>http://odino.github.io/profiling-php-applications-from-the-browser</id>
+    <content type="html"><![CDATA[<p>In my <a href="http://odino.github.io/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
 <a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
 a web-based profiler for PHP:
 now I&rsquo;d like to spend some more time
@@ -2301,7 +2301,7 @@ when profiling an application</strong>.</p>
 <!-- more -->
 
 
-<p><img class="right" src="http://www.odino.org/images/webgrind-call-graph-detail.png"></p>
+<p><img class="right" src="http://odino.github.io/images/webgrind-call-graph-detail.png"></p>
 
 <h2>Profiling in a few words</h2>
 
@@ -2313,7 +2313,7 @@ the scope of the language is very clear and
 even though we <strong>might</strong> need to profile, once
 in a while, it&rsquo;s unlikely that we will end up
 having problems like
-<a href="http://www.odino.org/book-review-data-intensive-text-processing-with-mapreduce/">optimizing MapReduce algorhitms</a>.</p>
+<a href="http://odino.github.io/book-review-data-intensive-text-processing-with-mapreduce/">optimizing MapReduce algorhitms</a>.</p>
 
 <p>But sometimes we <strong>do</strong> need to profile,
 and this will bring on the table bottlenecks of
@@ -2434,7 +2434,7 @@ set up a virtual host for it:</p>
 
 <h2>Looking at the results</h2>
 
-<p><img class="right" src="http://www.odino.org/images/webgrind-select-file.png"></p>
+<p><img class="right" src="http://odino.github.io/images/webgrind-select-file.png"></p>
 
 <p>Once your application runs, XDebug will generate
 the cachegrind files that Webgrind will analyze:
@@ -2452,7 +2452,7 @@ it will give you a direct overview on how much time
 a function takes rather than having this value as a percentage
 compared to the entire application&rsquo;s run.</p>
 
-<p><img class="center" src="http://www.odino.org/images/webgrind-expensive-call.png"></p>
+<p><img class="center" src="http://odino.github.io/images/webgrind-expensive-call.png"></p>
 
 <p>If you order results by <code>Total inclusive cost</code>, you will
 exactly see which ones are the most expensive functions
@@ -2467,7 +2467,7 @@ you can investigate further by clicking on a function,
 action that will open the call stack after that function
 is called:</p>
 
-<p><img class="center" src="http://www.odino.org/images/webgrind-call-stack.png"></p>
+<p><img class="center" src="http://odino.github.io/images/webgrind-call-stack.png"></p>
 
 <p>as you see, the problems, here, lies in
 <code>Doctrine\ODM\OrientDB\Mapper::createDocument</code> (<code>6.2</code> seconds)
@@ -2480,7 +2480,7 @@ and <code>Doctrine\ODM\OrientDB\Mapper::findClassMappingInDirectories</code>
 optimal changes in your application, run it with the
 profiler enabled once more and have a look at the results:</p>
 
-<p><img class="center" src="http://www.odino.org/images/webgrind-after-optimization.png"></p>
+<p><img class="center" src="http://odino.github.io/images/webgrind-after-optimization.png"></p>
 
 <p>As you see, after I tweaked my code,
 <code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> is not even the
@@ -2491,7 +2491,7 @@ taking <code>~1</code> and <code>~0.1</code> seconds.</p>
 
 <h2>The call graph</h2>
 
-<p><img class="right" src="http://www.odino.org/images/webgrind-call-graph.png"></p>
+<p><img class="right" src="http://odino.github.io/images/webgrind-call-graph.png"></p>
 
 <p>Another interesting feature of Webgrind<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>
 is the ability to generate a <strong>call graph</strong> to visualize
@@ -2572,9 +2572,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
-    <link href="http://www.odino.org/making-the-orientdb-odm-5-times-faster/"/>
+    <link href="http://odino.github.io/making-the-orientdb-odm-5-times-faster/"/>
     <updated>2013-01-25T17:39:00+04:00</updated>
-    <id>http://www.odino.org/making-the-orientdb-odm-5-times-faster</id>
+    <id>http://odino.github.io/making-the-orientdb-odm-5-times-faster</id>
     <content type="html"><![CDATA[<p>Today, after heavily testing performances
 on a project, I pushed some small but
 precious changes to the
@@ -2594,7 +2594,7 @@ precious changes to the
 service I am building with
 <a href="https://github.com/nuvolabase/orientdb">OrientDB</a>
 and the doctrine ODM that
-<a href="http://www.odino.org/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
+<a href="http://odino.github.io/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
 
 <p>Following one of the golden rules for software
 architects, we didn&rsquo;t paid attention to performances &ndash; at first &ndash;
@@ -2649,7 +2649,7 @@ it&rsquo;s a <strong>huge performance improvement</strong>.</p>
 
 <h2>By the way, we used Webgrind</h2>
 
-<p><img class="right" src="http://www.odino.org/images/webgrind.png"></p>
+<p><img class="right" src="http://odino.github.io/images/webgrind.png"></p>
 
 <p>Doing almost all of my work from a Mac, I kind of
 missed <a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
@@ -2672,9 +2672,9 @@ which is a de-facto standard for graph generation.</p>
   
   <entry>
     <title type="html"><![CDATA[Starting to play with the Doctrine OrientDB ODM]]></title>
-    <link href="http://www.odino.org/starting-to-play-with-the-doctrine-orientdb-odm/"/>
+    <link href="http://odino.github.io/starting-to-play-with-the-doctrine-orientdb-odm/"/>
     <updated>2013-01-20T23:00:00+04:00</updated>
-    <id>http://www.odino.org/starting-to-play-with-the-doctrine-orientdb-odm</id>
+    <id>http://odino.github.io/starting-to-play-with-the-doctrine-orientdb-odm</id>
     <content type="html"><![CDATA[<p>Since I am actively playing around with it, I
 wanted to share some snippets to use the
 <a href="https://github.com/doctrine/orientdb-odm">Doctrine OrientDB ODM</a>
@@ -3336,9 +3336,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Please welcome the Doctrine2 OrientDB ODM]]></title>
-    <link href="http://www.odino.org/please-welcome-the-doctrine-orientdb-odm/"/>
+    <link href="http://odino.github.io/please-welcome-the-doctrine-orientdb-odm/"/>
     <updated>2012-12-28T23:12:00+04:00</updated>
-    <id>http://www.odino.org/please-welcome-the-doctrine-orientdb-odm</id>
+    <id>http://odino.github.io/please-welcome-the-doctrine-orientdb-odm</id>
     <content type="html"><![CDATA[<p>It took almost 2 years from the
 <a href="https://github.com/doctrine/orientdb-odm/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">first commit</a>,
 but <a href="http://www.orientdb.org/">OrientDB</a>&rsquo;s <a href="https://github.com/doctrine/orientdb-odm">PHP ODM</a>
@@ -3351,7 +3351,7 @@ organization.</p>
 
 <h2>New daddy</h2>
 
-<p>I&rsquo;ve blogged <a href="http://www.odino.org/blog/categories/orientdb/">so many times</a>
+<p>I&rsquo;ve blogged <a href="http://odino.github.io/blog/categories/orientdb/">so many times</a>
 about an imminent
 integration into the Doctrine ecosystem, but
 due to the workload of our contributors and
@@ -3385,9 +3385,9 @@ as it contains the references to the new repository.</p>
   
   <entry>
     <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
-    <link href="http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
+    <link href="http://odino.github.io/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
     <updated>2012-12-08T15:56:00+04:00</updated>
-    <id>http://www.odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
+    <id>http://odino.github.io/video-introduction-about-nosql-graph-databases-and-orientdb</id>
     <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
 with a talk about graph databases, OrientDB and how to integrate it
@@ -3408,9 +3408,9 @@ finally made it to Vimeo: enjoy some tarzan english!</p>
   
   <entry>
     <title type="html"><![CDATA[Coding bureaucracy]]></title>
-    <link href="http://www.odino.org/coding-bureaucracy/"/>
+    <link href="http://odino.github.io/coding-bureaucracy/"/>
     <updated>2012-12-05T12:23:00+04:00</updated>
-    <id>http://www.odino.org/coding-bureaucracy</id>
+    <id>http://odino.github.io/coding-bureaucracy</id>
     <content type="html"><![CDATA[<p>An interesting quote from an ex-Microsoft:
 it can take up to <strong>several months</strong>
 before you get an approval over a

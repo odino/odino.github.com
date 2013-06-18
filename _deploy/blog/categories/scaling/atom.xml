@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: scaling | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/scaling/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/scaling/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Search engines are making the web slower]]></title>
-    <link href="http://www.odino.org/search-engines-are-making-the-web-slower/"/>
+    <link href="http://odino.github.io/search-engines-are-making-the-web-slower/"/>
     <updated>2012-04-07T10:00:00+04:00</updated>
-    <id>http://www.odino.org/search-engines-are-making-the-web-slower</id>
+    <id>http://odino.github.io/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way
 it is now: <strong>search engines are making it slower</strong> and
@@ -77,9 +77,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
-    <link href="http://www.odino.org/scaling-through-hinclude/"/>
+    <link href="http://odino.github.io/scaling-through-hinclude/"/>
     <updated>2012-02-24T10:50:00+04:00</updated>
-    <id>http://www.odino.org/scaling-through-hinclude</id>
+    <id>http://odino.github.io/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it&rsquo;s been a while that I spread the idea of
 having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
 someone pointed out that a good solution, technically
@@ -121,7 +121,7 @@ include the JS and add a namespace declaration to your documents:</p>
   <html xmlns:hx="http://purl.org/NET/hinclude"></p>
 
 <pre><code>&lt;head&gt;
-  &lt;script src="http://www.odino.org/lib/hinclude.js"
+  &lt;script src="http://odino.github.io/lib/hinclude.js"
    type="text/javascript"&gt;&lt;/script&gt;
 </code></pre>
 
@@ -131,7 +131,7 @@ include the JS and add a namespace declaration to your documents:</p>
 only need to <strong>add an hinclude tag</strong>:</p>
 
 <p><code>html
-&lt;hx:include src="http://www.odino.org/header.html"&gt;&lt;/hx:include&gt;
+&lt;hx:include src="http://odino.github.io/header.html"&gt;&lt;/hx:include&gt;
 </code></p>
 
 <p>You can specify a default content &ndash; if the user has not javascript
@@ -312,9 +312,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
-    <link href="http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
+    <link href="http://odino.github.io/edge-side-includes-how-to-spare-terabytes-every-day/"/>
     <updated>2012-01-20T14:15:00+04:00</updated>
-    <id>http://www.odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
+    <id>http://odino.github.io/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
 
@@ -467,7 +467,7 @@ read the next chapter</strong>.</p>
     <div class="clearfix" id="footerContainer">
         <div class="mrl lfloat" role="contentinfo">
             <div class="fsm fwn fcg">
-                <span> Facebook © 2012</span> · <a rel="dialog" href="http://www.odino.org/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.github.io/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
             </div>
         </div>
         <div class="navigation fsm fwn fcg" role="navigation">
@@ -609,9 +609,9 @@ and leaner web.</p>
   
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
-    <link href="http://www.odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
+    <link href="http://odino.github.io/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
     <updated>2011-05-06T15:42:00+04:00</updated>
-    <id>http://www.odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
+    <id>http://odino.github.io/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There&rsquo;s a common goal that NoSQL and ESI share together: consistency.</p>
 
 <p>Since <a href="http://www.slideshare.net/odino/http-cache-pug-rome-03292011/2">the web is inconsistent</a>, we should be able to find some hacks to make it more consistent and satisfy both us, reducing bandwidth, traffic and CPU load, and the end-user, decreasing the latency of our services.</p>
@@ -633,7 +633,7 @@ and leaner web.</p>
   <body></p>
 
 <pre><code>...
-  &lt;esi:include src="http://www.odino.org/footer.html" /&gt;
+  &lt;esi:include src="http://odino.github.io/footer.html" /&gt;
 ...
 </code></pre>
 

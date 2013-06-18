@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: design patterns | Alessandro Nadalin]]></title>
-  <link href="http://www.odino.org/blog/categories/design-patterns/atom.xml" rel="self"/>
-  <link href="http://www.odino.org/"/>
-  <updated>2013-06-18T12:39:22+04:00</updated>
-  <id>http://www.odino.org/</id>
+  <link href="http://odino.github.io/blog/categories/design-patterns/atom.xml" rel="self"/>
+  <link href="http://odino.github.io/"/>
+  <updated>2013-06-18T12:47:27+04:00</updated>
+  <id>http://odino.github.io/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>
-    <link href="http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
+    <link href="http://odino.github.io/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
     <updated>2012-05-14T00:28:00+04:00</updated>
-    <id>http://www.odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
+    <id>http://odino.github.io/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
     <content type="html"><![CDATA[<p>In PHP we have tons of bad constructs/functions that don&rsquo;t actually
 help newcomers on writing good code: the <code>SWITCH/CASE</code> statement is one
 of those that I hate the most, although very few developers rely on
