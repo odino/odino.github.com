@@ -4,6 +4,7 @@ title: "Integrating Twig in your legacy code, Part 2: a less wild approach"
 date: 2013-06-18 12:07
 comments: true
 categories:  [Twig, PHP, legacy]
+published: true
 ---
 
 In my last post I wrote about
