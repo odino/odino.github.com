@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: php | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/php/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
-    <link href="http://odino.github.io/doctrine-80-percent-faster/"/>
+    <link href="http://odino.org/doctrine-80-percent-faster/"/>
     <updated>2013-04-21T10:54:00+04:00</updated>
-    <id>http://odino.github.io/doctrine-80-percent-faster</id>
+    <id>http://odino.org/doctrine-80-percent-faster</id>
     <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
 caught my attention last week, and I want to
 share its insights with you.</p>
@@ -42,9 +42,9 @@ branch very soon!</p>
   
   <entry>
     <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
-    <link href="http://odino.github.io/a-brief-visit-to-the-cold-lands-of-italy/"/>
+    <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
     <updated>2013-03-29T14:14:00+04:00</updated>
-    <id>http://odino.github.io/a-brief-visit-to-the-cold-lands-of-italy</id>
+    <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
     <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
 back in Italy, since I was missing my friends in Rome
 since <strong>exactly</strong> a year and the last time my parents saw me it
@@ -81,9 +81,9 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   
   <entry>
     <title type="html"><![CDATA[PHP: 'The script tried to execute a method or access a property of an incomplete object']]></title>
-    <link href="http://odino.github.io/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
+    <link href="http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
     <updated>2013-01-31T13:28:00+04:00</updated>
-    <id>http://odino.github.io/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
+    <id>http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
     <content type="html"><![CDATA[<p>Have you ever got this error in PHP? I bet no, never.</p>
 
 <!-- more -->
@@ -116,9 +116,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Profiling PHP applications from the browser]]></title>
-    <link href="http://odino.github.io/profiling-php-applications-from-the-browser/"/>
+    <link href="http://odino.org/profiling-php-applications-from-the-browser/"/>
     <updated>2013-01-25T22:38:00+04:00</updated>
-    <id>http://odino.github.io/profiling-php-applications-from-the-browser</id>
+    <id>http://odino.org/profiling-php-applications-from-the-browser</id>
     <content type="html"><![CDATA[<p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
 <a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
 a web-based profiler for PHP:
@@ -360,9 +360,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
-    <link href="http://odino.github.io/making-the-orientdb-odm-5-times-faster/"/>
+    <link href="http://odino.org/making-the-orientdb-odm-5-times-faster/"/>
     <updated>2013-01-25T17:39:00+04:00</updated>
-    <id>http://odino.github.io/making-the-orientdb-odm-5-times-faster</id>
+    <id>http://odino.org/making-the-orientdb-odm-5-times-faster</id>
     <content type="html"><![CDATA[<p>Today, after heavily testing performances
 on a project, I pushed some small but
 precious changes to the

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: recruiting | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/recruiting/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/recruiting/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
+    <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
     <updated>2013-03-29T18:08:00+04:00</updated>
-    <id>http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
+    <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
     <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
 people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
 in Turin my 1-year experience in Namshi, one of

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/conference/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
+    <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
     <updated>2013-03-29T18:08:00+04:00</updated>
-    <id>http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
+    <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
     <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
 people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
 in Turin my 1-year experience in Namshi, one of
@@ -58,9 +58,9 @@ version compared to the ones I used in Rome:</p>
   
   <entry>
     <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
-    <link href="http://odino.github.io/a-brief-visit-to-the-cold-lands-of-italy/"/>
+    <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
     <updated>2013-03-29T14:14:00+04:00</updated>
-    <id>http://odino.github.io/a-brief-visit-to-the-cold-lands-of-italy</id>
+    <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
     <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
 back in Italy, since I was missing my friends in Rome
 since <strong>exactly</strong> a year and the last time my parents saw me it
@@ -97,9 +97,9 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   
   <entry>
     <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
-    <link href="http://odino.github.io/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
+    <link href="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
     <updated>2012-12-08T15:56:00+04:00</updated>
-    <id>http://odino.github.io/video-introduction-about-nosql-graph-databases-and-orientdb</id>
+    <id>http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
     <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
 with a talk about graph databases, OrientDB and how to integrate it
@@ -120,9 +120,9 @@ finally made it to Vimeo: enjoy some tarzan english!</p>
   
   <entry>
     <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
-    <link href="http://odino.github.io/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
+    <link href="http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
     <updated>2012-10-16T15:11:00+04:00</updated>
-    <id>http://odino.github.io/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
+    <id>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>Yesterday, from Doha&rsquo;s international airport, I
 got the chance to blog about the latest changes
 surrounding the upcoming major version of the
@@ -146,9 +146,9 @@ the basics</strong>.</p>
   
   <entry>
     <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
-    <link href="http://odino.github.io/ready-for-europe-ipc-and-pizzas/"/>
+    <link href="http://odino.org/ready-for-europe-ipc-and-pizzas/"/>
     <updated>2012-10-14T21:21:00+04:00</updated>
-    <id>http://odino.github.io/ready-for-europe-ipc-and-pizzas</id>
+    <id>http://odino.org/ready-for-europe-ipc-and-pizzas</id>
     <content type="html"><![CDATA[<p>In 24 hourse I&rsquo;ll be on a plane which is gonna bring
 me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
 in Mainz.</p>

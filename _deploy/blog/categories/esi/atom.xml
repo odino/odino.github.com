@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ESI | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/esi/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/esi/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
-    <link href="http://odino.github.io/edge-side-includes-how-to-spare-terabytes-every-day/"/>
+    <link href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
     <updated>2012-01-20T14:15:00+04:00</updated>
-    <id>http://odino.github.io/edge-side-includes-how-to-spare-terabytes-every-day</id>
+    <id>http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
 
@@ -170,7 +170,7 @@ read the next chapter</strong>.</p>
     <div class="clearfix" id="footerContainer">
         <div class="mrl lfloat" role="contentinfo">
             <div class="fsm fwn fcg">
-                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.github.io/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
+                <span> Facebook © 2012</span> · <a rel="dialog" href="http://odino.org/ajax/intl/language_dialog.php?uri=http%3A%2F%2Fwww.facebook.com%2Fpress%2Finfo.php%3Fstatistics" title="Use Facebook in another language.">English (US)</a>
             </div>
         </div>
         <div class="navigation fsm fwn fcg" role="navigation">
@@ -312,9 +312,9 @@ and leaner web.</p>
   
   <entry>
     <title type="html"><![CDATA[Some common questions about Edge Side Includes]]></title>
-    <link href="http://odino.github.io/some-common-questions-about-edge-side-includes/"/>
+    <link href="http://odino.org/some-common-questions-about-edge-side-includes/"/>
     <updated>2011-05-30T15:07:00+04:00</updated>
-    <id>http://odino.github.io/some-common-questions-about-edge-side-includes</id>
+    <id>http://odino.org/some-common-questions-about-edge-side-includes</id>
     <content type="html"><![CDATA[<p>After my <a href="http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011">REST in (a mobile) peace</a> talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so &ldquo;standard&rdquo;, here&rsquo;s a parade of little things to know about <a href="http://en.wikipedia.org/wiki/Edge_Side_Includes">ESI</a>.</p>
 
 <!-- more -->
@@ -389,9 +389,9 @@ Content-Type: application/xhtml+xml;profile=esi
   
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
-    <link href="http://odino.github.io/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
+    <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
     <updated>2011-05-06T15:42:00+04:00</updated>
-    <id>http://odino.github.io/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
+    <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There&rsquo;s a common goal that NoSQL and ESI share together: consistency.</p>
 
 <p>Since <a href="http://www.slideshare.net/odino/http-cache-pug-rome-03292011/2">the web is inconsistent</a>, we should be able to find some hacks to make it more consistent and satisfy both us, reducing bandwidth, traffic and CPU load, and the end-user, decreasing the latency of our services.</p>
@@ -413,7 +413,7 @@ Content-Type: application/xhtml+xml;profile=esi
   <body></p>
 
 <pre><code>...
-  &lt;esi:include src="http://odino.github.io/footer.html" /&gt;
+  &lt;esi:include src="http://odino.org/footer.html" /&gt;
 ...
 </code></pre>
 

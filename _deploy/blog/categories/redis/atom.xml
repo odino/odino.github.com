@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Redis | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/redis/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/redis/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Redis slow with PHP? Think again!]]></title>
-    <link href="http://odino.github.io/redis-slow-with-php-think-again/"/>
+    <link href="http://odino.org/redis-slow-with-php-think-again/"/>
     <updated>2011-01-25T13:56:00+04:00</updated>
-    <id>http://odino.github.io/redis-slow-with-php-think-again</id>
+    <id>http://odino.org/redis-slow-with-php-think-again</id>
     <content type="html"><![CDATA[<p>So <a href="http://www.odino.org/275/approaching-a-cmf-architecture-with-symfony">you have a problem</a> and think that a NoSQL solution should work for you.</p>
 
 <p>Good.</p>

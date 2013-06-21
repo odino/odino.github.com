@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Orient | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/orient/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/orient/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[OrientDB ODM beta 5: repositories, compatibility with 1.2.0 and more stability]]></title>
-    <link href="http://odino.github.io/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability/"/>
+    <link href="http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability/"/>
     <updated>2012-11-23T09:10:00+04:00</updated>
-    <id>http://odino.github.io/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability</id>
+    <id>http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability</id>
     <content type="html"><![CDATA[<p>It has almost been a baby&rsquo;s delivery, but we eventually made it:
 the PHP <a href="http://css.dzone.com/articles/era-object-document-mapping">ODM</a> for <a href="http://code.google.com/p/orient/">OrientDB</a> has finally reached its <strong>5th beta</strong>.</p>
 
@@ -353,9 +353,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[The current status of my work with OrientDB]]></title>
-    <link href="http://odino.github.io/the-current-status-of-my-work-with-orientdb/"/>
+    <link href="http://odino.org/the-current-status-of-my-work-with-orientdb/"/>
     <updated>2011-05-24T14:09:00+04:00</updated>
-    <id>http://odino.github.io/the-current-status-of-my-work-with-orientdb</id>
+    <id>http://odino.org/the-current-status-of-my-work-with-orientdb</id>
     <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
 
 <!-- more -->

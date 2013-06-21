@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: www | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/www/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/www/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How refactoring influenced the World Wide Web]]></title>
-    <link href="http://odino.github.io/three-times-and-refactor/"/>
+    <link href="http://odino.org/three-times-and-refactor/"/>
     <updated>2012-07-28T02:58:00+04:00</updated>
-    <id>http://odino.github.io/three-times-and-refactor</id>
+    <id>http://odino.org/three-times-and-refactor</id>
     <content type="html"><![CDATA[<p>You&rsquo;re about to read
 how the concept behind a
 <a href="http://sourcemaking.com/refactoring/when-should-you-refactor">refactoring tecnique</a>

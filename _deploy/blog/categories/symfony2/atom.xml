@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Symfony2 | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/symfony2/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/symfony2/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
-    <link href="http://odino.github.io/configuring-a-symfony2-application-to-support-soa/"/>
+    <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
     <updated>2013-06-06T13:00:00+04:00</updated>
-    <id>http://odino.github.io/configuring-a-symfony2-application-to-support-soa</id>
+    <id>http://odino.org/configuring-a-symfony2-application-to-support-soa</id>
     <content type="html"><![CDATA[<p>When you think in terms of
 <a href="/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>
 one of the tricky things is to decide
@@ -286,9 +286,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
-    <link href="http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework/"/>
+    <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
     <updated>2013-05-27T22:16:00+04:00</updated>
-    <id>http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework</id>
+    <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
 this framework was a very trivial decision
@@ -684,9 +684,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Symfony2 console: permission denied during autocompletion]]></title>
-    <link href="http://odino.github.io/symfony2-console-permission-denied-during-autocompletion/"/>
+    <link href="http://odino.org/symfony2-console-permission-denied-during-autocompletion/"/>
     <updated>2013-03-11T10:11:00+04:00</updated>
-    <id>http://odino.github.io/symfony2-console-permission-denied-during-autocompletion</id>
+    <id>http://odino.org/symfony2-console-permission-denied-during-autocompletion</id>
     <content type="html"><![CDATA[<p>Yesterday I faced a pretty cryptic issue
 while using the Symfony2 console (<code>app/console</code>).</p>
 
@@ -707,9 +707,9 @@ chmod +x app/console
   
   <entry>
     <title type="html"><![CDATA[Using Selenium and Symfony2 to help your frontend developers coding without risks]]></title>
-    <link href="http://odino.github.io/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
+    <link href="http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
     <updated>2013-03-10T11:39:00+04:00</updated>
-    <id>http://odino.github.io/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
+    <id>http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
     <content type="html"><![CDATA[<p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major
 catastrophe happens), you should help people
@@ -821,9 +821,9 @@ machine, before committing any changes.</p>
   
   <entry>
     <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
-    <link href="http://odino.github.io/install-composer-dependencies-with-the-symfony2-cli/"/>
+    <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00+04:00</updated>
-    <id>http://odino.github.io/install-composer-dependencies-with-the-symfony2-cli</id>
+    <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>
 	<li>

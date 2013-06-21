@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Namshi | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/namshi/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/namshi/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
-    <link href="http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework/"/>
+    <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
     <updated>2013-05-27T22:16:00+04:00</updated>
-    <id>http://odino.github.io/why-we-choose-symfony2-over-any-other-php-framework</id>
+    <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
 this framework was a very trivial decision
@@ -413,9 +413,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
+    <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
     <updated>2013-03-29T18:08:00+04:00</updated>
-    <id>http://odino.github.io/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
+    <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
     <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
 people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
 in Turin my 1-year experience in Namshi, one of
@@ -456,9 +456,9 @@ version compared to the ones I used in Rome:</p>
   
   <entry>
     <title type="html"><![CDATA[Namshi is looking for a new Lead Developer!]]></title>
-    <link href="http://odino.github.io/namshi-is-looking-for-a-new-lead-developer/"/>
+    <link href="http://odino.org/namshi-is-looking-for-a-new-lead-developer/"/>
     <updated>2013-02-21T19:28:00+04:00</updated>
-    <id>http://odino.github.io/namshi-is-looking-for-a-new-lead-developer</id>
+    <id>http://odino.org/namshi-is-looking-for-a-new-lead-developer</id>
     <content type="html"><![CDATA[<p>As some of you know, I am currently employed by
 <a href="http://en-ae.namshi.com/">Namshi</a>, a
 <a href="http://www.rocket-internet.de/">Rocket Internet</a>

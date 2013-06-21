@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: REST | Alessandro Nadalin]]></title>
-  <link href="http://odino.github.io/blog/categories/rest/atom.xml" rel="self"/>
-  <link href="http://odino.github.io/"/>
-  <updated>2013-06-18T16:20:23+04:00</updated>
-  <id>http://odino.github.io/</id>
+  <link href="http://odino.org/blog/categories/rest/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-18T16:38:16+04:00</updated>
+  <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
-    <link href="http://odino.github.io/hypermedia-services-beyond-rest-architectures/"/>
+    <link href="http://odino.org/hypermedia-services-beyond-rest-architectures/"/>
     <updated>2012-01-24T03:22:00+04:00</updated>
-    <id>http://odino.github.io/hypermedia-services-beyond-rest-architectures</id>
+    <id>http://odino.org/hypermedia-services-beyond-rest-architectures</id>
     <content type="html"><![CDATA[<p>RESTafarians should support the abandon of the
 original term &ndash; REpresentational State Transfer &ndash;  in favour of
 some fresh new words.</p>
@@ -155,7 +155,7 @@ receive a <code>405 Method Not Allowed</code> back.</p>
 <p>and that they are not bound to (X)HTML documents:</p>
 
 <p><code>xml Atom link indicating how to edit a resource
-&lt;link href="http://odino.github.io/personas/100" rel="edit" type="application/json"&gt;Modify this!&lt;/link&gt;
+&lt;link href="http://odino.org/personas/100" rel="edit" type="application/json"&gt;Modify this!&lt;/link&gt;
 </code></p>
 
 <p><a href="http://ietfreport.isoc.org/idref/draft-nottingham-http-cache-channels/">Cache channels</a>
@@ -241,7 +241,7 @@ Location: /api/personas/24
 <p><ul>
   <li></p>
 
-<pre><code>&lt;a href="http://odino.github.io/products/5" rel="update" ... &gt;Product 1&lt;/a&gt;
+<pre><code>&lt;a href="http://odino.org/products/5" rel="update" ... &gt;Product 1&lt;/a&gt;
 </code></pre>
 
 <p>  </li>
@@ -275,9 +275,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Less REST, more hypermedia]]></title>
-    <link href="http://odino.github.io/less-rest-more-hypermedia/"/>
+    <link href="http://odino.org/less-rest-more-hypermedia/"/>
     <updated>2011-12-19T23:40:00+04:00</updated>
-    <id>http://odino.github.io/less-rest-more-hypermedia</id>
+    <id>http://odino.org/less-rest-more-hypermedia</id>
     <content type="html"><![CDATA[<p>From an entry into the <a href="http://tech.groups.yahoo.com/group/rest-discuss/message/18085">REST-discuss mailing list</a>:</p>
 
 <p><blockquote><p>We all know, many APIs and some frameworks labelled with the term &ldquo;REST&rdquo;, do<br/>not support hypermedia (or less so called RESTful) mechanisms.<br/>The term is (andlikely will be) very overloaded in the IT industrie.</p></p><p><p>I think, it is time to push forward terms like &ldquo;hypermedia service/API&rdquo; or<br/>&ldquo;hypermedia-aware client&rdquo;. Instead of saying &ldquo;hey i have a RESTful API&rdquo;, tell<br/>the people &ldquo;i have a hypermedia API!&rdquo;.</p></blockquote></p>
@@ -290,9 +290,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[Resources about HATEOAS]]></title>
-    <link href="http://odino.github.io/resources-about-hateoas/"/>
+    <link href="http://odino.org/resources-about-hateoas/"/>
     <updated>2011-07-16T13:50:00+04:00</updated>
-    <id>http://odino.github.io/resources-about-hateoas</id>
+    <id>http://odino.org/resources-about-hateoas</id>
     <content type="html"><![CDATA[<p>Since <a href="http://matteo.vaccari.name/">Matteo</a>, an italian XP coach and university teacher, <a href="http://twitter.com/#!/xpmatteo/status/81392376928665600">asked me where he could find some free resources about HATEOAS</a> for his students, I thought the thing deserves a post.</p>
 
 <!-- more -->
@@ -336,9 +336,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[REST in peace, again]]></title>
-    <link href="http://odino.github.io/rest-in-peace-again/"/>
+    <link href="http://odino.org/rest-in-peace-again/"/>
     <updated>2011-07-12T23:17:00+04:00</updated>
-    <id>http://odino.github.io/rest-in-peace-again</id>
+    <id>http://odino.org/rest-in-peace-again</id>
     <content type="html"><![CDATA[<p>Yesterday I was in Turin for the PHP.TO.START in Turin, a good event organized by the <a href="http://blog.indigenidigitali.com/">Indigeni Digitali</a> network and <a href="http://www.skuola.net/">skuola.net</a>.</p>
 
 <!-- more -->
@@ -352,9 +352,9 @@ Notes
   
   <entry>
     <title type="html"><![CDATA[It's client's fault]]></title>
-    <link href="http://odino.github.io/it-s-client-s-fault/"/>
+    <link href="http://odino.org/it-s-client-s-fault/"/>
     <updated>2011-04-21T12:50:00+04:00</updated>
-    <id>http://odino.github.io/it-s-client-s-fault</id>
+    <id>http://odino.org/it-s-client-s-fault</id>
     <content type="html"><![CDATA[<!-- more -->
 
 
