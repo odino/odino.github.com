@@ -3,7 +3,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-18T16:38:16+04:00</updated>
+  <updated>2013-06-21T04:40:04+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Desktop notifications for PHPUnit tests on Ubuntu]]></title>
+    <link href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/"/>
+    <updated>2013-06-21T03:48:00+04:00</updated>
+    <id>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://odino.org/images/phpunit-notification-ko.png"></p>
+
+<p>As everyone knows, automated tests are great
+since they let you test a system without the need
+of proactively checking anything: you launch your suite
+and you get a feedback; moreover, systems like Jenkins or Travis-CI allow you
+to even forget about checking the status of
+a build since they can do all of this work for you:
+the problem, instead, happens when you need
+to run the tests locally, as you always need to
+check the shell to know if he tests passed or failed.</p>
+
+<p>A solution would be to launch the tests and mind
+your own business, instead of having to check the CLI
+output, waiting for a notification that tells
+use about the tests&#8217; result.</p>
+
+<!-- more -->
+
+
+<h2>Notifications to the rescue</h2>
+
+<p>A very simple program, written for Linux, can help
+you with this task: it&rsquo;s <code>notify-send</code>.</p>
+
+<p>Given that you have PHPUnit installed via composer
+(so the binary is accessible at <code>./vendor/bin/phpunit</code>)
+you can simply use a small shell function that can
+sends notifications about the tests&#8217; results, that I
+put on <a href="https://github.com/odino/phpunit-notifications">Github</a>.</p>
+
+<h2>Installation</h2>
+
+<p>Clone the repository and add the shell function to your
+shell profile<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd wherever
+</span><span class='line'>
+</span><span class='line'>git clone git@github.com:odino/phpunit-notifications.git
+</span><span class='line'>
+</span><span class='line'>chmod +x phpunit-notifications/phpunit-notifications.sh
+</span><span class='line'>
+</span><span class='line'>echo 'source wherever/phpunit-notifications/phpunit-notifications.sh' &gt;&gt; ~/.zshrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage</h2>
+
+<p>At this point you can open a new shell and run your tests with
+the <code>phpunit</code> commmand:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/projects/my-project
+</span><span class='line'>
+</span><span class='line'>phpunit
+</span><span class='line'>
+</span><span class='line'>// or
+</span><span class='line'>
+</span><span class='line'>phpunit -c config
+</span><span class='line'>
+</span><span class='line'>// or
+</span><span class='line'>
+</span><span class='line'>phpunit tests/My/Example/ClassTest.php</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="left" src="http://odino.org/images/phpunit-notification-ok.png"></p>
+
+<p>and see that as soon as the tests are over you will
+see one of those usual notifications on the top right
+of your screen, hopefully telling you that the automated
+tests suite is greener than ever.</p>
+
+<p>The <code>notify-send</code> utility is probably not available on
+Macs, but I guess you can just replace it with <code>growlnotify</code>.</p>
+
+<p>If you are interested into digging deeper into the topic,
+I would suggest you to read a very nice article from
+Giulio Di Donato which explains how to <a href="http://welcometothebundle.com/automate-test-and-code-inspection-in-php-with-guard-and-symfony2/">run PHPUnit tests for Symfony2 as soon as any file in your filesystem changes, and get the same type of notifications</a>:
+even though I personally think this approach is a little
+bit too extreme<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>, it is anyhow interesting as
+it pushes automation and time-management to their best limits.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Or, for example, to empty the tables of the right database after each test (there are different databases for each website) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I am personally using ZSH: https://github.com/robbyrussell/oh-my-zsh <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>If you modify 5 files and your test suite is 30secs long, woul will already have to wait 2 and a half minutes <a href='#fnref:3' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP User Group Dubai, here we start again!]]></title>
@@ -3440,29 +3557,6 @@ to work on the migration a bit.</p>
 <p>You may also want to have a look at the new
 <a href="https://packagist.org/packages/doctrine/orientdb-odm">Packagist page</a>,
 as it contains the references to the new repository.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
-    <link href="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
-    <updated>2012-12-08T15:56:00+04:00</updated>
-    <id>http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
-    <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
-took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
-with a talk about graph databases, OrientDB and how to integrate it
-in PHP.</p>
-
-<!-- more -->
-
-
-<p>I recently found out that the videos recorded at the conference
-finally made it to Vimeo: enjoy some tarzan english!</p>
-
-<iframe src="http://player.vimeo.com/video/53451968?badge=0" width="720" height="600" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-
-<p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
 ]]></content>
   </entry>
   

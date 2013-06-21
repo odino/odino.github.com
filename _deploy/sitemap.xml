@@ -617,12 +617,16 @@
         <lastmod>2013-06-18T16:19:49+04:00</lastmod>
     </url>
     <url>
+        <loc>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/</loc>
+        <lastmod>2013-06-21T04:38:47+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://odino.org/404.html</loc>
         <lastmod>2013-06-15T03:22:01+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/archives/</loc>
-        <lastmod>2013-06-18T16:19:49+04:00</lastmod>
+        <lastmod>2013-06-21T04:38:47+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/robots.txt</loc>
@@ -630,7 +634,7 @@
     </url>
     <url>
         <loc>http://odino.org/</loc>
-        <lastmod>2013-06-18T16:19:49+04:00</lastmod>
+        <lastmod>2013-06-21T04:38:47+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/conferences/</loc>
@@ -646,10 +650,10 @@
     </url>
     <url>
         <loc>http://odino.org/blog/archives/</loc>
-        <lastmod>2013-06-18T16:19:49+04:00</lastmod>
+        <lastmod>2013-06-21T04:38:47+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/blog/</loc>
-        <lastmod>2013-06-18T16:19:49+04:00</lastmod>
+        <lastmod>2013-06-21T04:38:47+04:00</lastmod>
     </url>
 </urlset>
