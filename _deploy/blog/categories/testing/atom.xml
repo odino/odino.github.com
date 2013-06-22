@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-21T04:40:04+04:00</updated>
+  <updated>2013-06-21T18:40:52+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -28,7 +28,7 @@ to even forget about checking the status of
 a build since they can do all of this work for you:
 the problem, instead, happens when you need
 to run the tests locally, as you always need to
-check the shell to know if he tests passed or failed.</p>
+check the shell to know whether the tests passed or not.</p>
 
 <p>A solution would be to launch the tests and mind
 your own business, instead of having to check the CLI
