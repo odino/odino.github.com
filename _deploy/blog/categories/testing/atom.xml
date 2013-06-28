@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-21T18:40:52+04:00</updated>
+  <updated>2013-06-28T14:30:27+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -640,145 +640,36 @@ machine, before committing any changes.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Bootstrap of a Travis-CI test-machine]]></title>
-    <link href="http://odino.org/bootstrap-of-a-travis-ci-test-machine/"/>
-    <updated>2012-07-27T07:00:00+04:00</updated>
-    <id>http://odino.org/bootstrap-of-a-travis-ci-test-machine</id>
-    <content type="html"><![CDATA[<p><a href="http://travis-ci.org/">Travis-CI</a> is an awesome open source service which
-makes continuos integration really easy in the context
-of <em>github-hosted</em> projects.</p>
+    <title type="html"><![CDATA[Automated tests are a help, not a solution]]></title>
+    <link href="http://odino.org/automated-tests-are-a-help-not-a-solution/"/>
+    <updated>2012-10-17T04:57:00+04:00</updated>
+    <id>http://odino.org/automated-tests-are-a-help-not-a-solution</id>
+    <content type="html"><![CDATA[<p>As I&rsquo;ve been mainly involved in the PHP ecosystem,
+in the past 5 years, I saw some deep changes in it,
+from being a bunch of cowboy coders to getting
+more Java-like than ever: even though the language
+itself would never be able to look like Java (
+luckily, I&rsquo;d say) developers and vendors decided
+that it was time to change application development
+in PHP, providing tools (ie. PHPUnit, Zend Framework, Symfony2)
+and practices (TDD) to make PHP
+look way more cool.</p>
 
 <!-- more -->
 
 
-<p>Developing Orient, I found out about Travis when one of
-the 3 active guys actively collaborating to the project,
-<a href="https://github.com/nrk">Daniele</a> created his own fork of the library to create
-the CI environment on Travis.</p>
+<p>The drawback of this is that PHP developers become pretty
+spoiled in a few years: from <em>let&rsquo;s-deploy-and-hope-it&rsquo;s-gonna-work</em>
+we came to the point that everyone is advocating automated
+testing, continuos integration and deployment.</p>
 
-<h2>More than testing</h2>
+<p>As always, people like to think that <strong>one size fits all</strong>.</p>
 
-<p>Travis doesn&rsquo;t only provide a machine in which you can
-continuosly running tests, it gives you a <strong>free</strong> VM
-which you can <strong>freely</strong> manage in the context of testing
-an application: although they don&rsquo;t actually give you a &ldquo;real&rdquo; VM, they provide
-you an <strong>temporary VM</strong> which gets bootstrapped following
-your indications and executes the tasks that <strong>you</strong>
-indicate: in that sense, Travis gives you VMs
-<em>on-demand</em>.</p>
+<h2>Deal with the market</h2>
 
-<p>So think about it: it&rsquo;s not only about testing, it&rsquo;s about
-having an environment ready to do anything you want for
-your own project, like running reports.</p>
+<h2>I&rsquo;ll tell you one truth</h2>
 
-<h2>A real world example</h2>
-
-<p>For <a href="http://github.com/congow/Orient">Orient</a>, Daniele managed to setup a quite clever
-bootstrap script.</p>
-
-<p>We have a quite comprehensive test-suite which you can
-execute with the single <code>phpunit</code> command, from the root
-of the library, but it just executes tests which dont
-directly talk to OrientDB.</p>
-
-<p>To execute the full test-suite, including integration
-tests, you just need to pass the test directory to the
-CLI:</p>
-
-<p><code>php
-phpunit test/
-</code></p>
-
-<p>but you&rsquo;ll need a working instance of OrientDB, with
-predefined admin credentials (<code>admin</code>/<code>admin</code>) listening
-on port <code>:2480</code>.</p>
-
-<p>So our challenge was to use Travis and being able to trigger
-the integration tests.</p>
-
-<p>In the <code>.travis.yml</code> configuration file, we have:</p>
-
-<p>```
-language: php
-php:
-  &ndash; 5.3
-  &ndash; 5.4
-before_script:
-  &ndash; sh -c ./bin/initialize-ci.sh 1.0rc6
-script: phpunit test/
-notifications:
-  email:</p>
-
-<pre><code>- ...@gmail.com
-</code></pre>
-
-<p>```</p>
-
-<p>So, as you see, we have a bash script which
-takes care of everything:</p>
-
-<p>``` bash ./bin/initialize-ci.sh 1.0rc6</p>
-
-<h1>!/bin/sh</h1>
-
-<p>PARENT_DIR=$(dirname $(cd &ldquo;$(dirname &rdquo;$0")&ldquo;; pwd))
-CI_DIR=&rdquo;$PARENT_DIR/ci-stuff/environment"</p>
-
-<p>ODB_VERSION=${1:&ndash;&ldquo;1.0rc6&rdquo;}
-ODB_PACKAGE=&ldquo;orientdb-${ODB_VERSION}&rdquo;
-ODB_DIR=&ldquo;${CI_DIR}/${ODB_PACKAGE}&rdquo;
-ODB_LAUNCHER=&ldquo;${ODB_DIR}/bin/server.sh&rdquo;</p>
-
-<p>echo &ldquo;=== Initializing CI environment ===&rdquo;</p>
-
-<p>cd &ldquo;$PARENT_DIR&rdquo;</p>
-
-<p>. &ldquo;$PARENT_DIR/bin/odb-shared.sh&rdquo;</p>
-
-<p>if [ ! -d &ldquo;$CI_DIR&rdquo; ]; then
-  # Fetch the stuff needed to run the CI session.
-  git clone &mdash;quiet git://gist.github.com/1370152.git $CI_DIR</p>
-
-<p>  # Download and extract OrientDB
-  echo &ldquo;&mdash;&ndash; Downloading OrientDB v${ODB_VERSION} &mdash;&ndash;&rdquo;
-  odb_download &ldquo;<a href="http://orient.googlecode.com/files/$">http://orient.googlecode.com/files/$</a>{ODB_PACKAGE}.zip&rdquo; $CI_DIR
-  unzip -q &ldquo;${CI_DIR}/${ODB_PACKAGE}.zip&rdquo; -d $ODB_DIR &amp;&amp; chmod +x $ODB_LAUNCHER</p>
-
-<p>  # Copy the configuration file and the demo database
-  echo &ldquo;&mdash;&ndash; Setting up OrientDB &mdash;&ndash;&rdquo;
-  tar xf $CI_DIR/databases.tar.gz -C &ldquo;${ODB_DIR}/&rdquo;
-  cp $PARENT_DIR/ci-stuff/orientdb-server-config.xml &ldquo;${ODB_DIR}/config/&rdquo;
-  cp $PARENT_DIR/ci-stuff/orientdb-server-log.properties &ldquo;${ODB_DIR}/config/&rdquo;
-else
-  echo &ldquo;!!! Directory $CI_DIR exists, skipping downloads !!!&rdquo;
-fi</p>
-
-<h1>Start OrientDB in background.</h1>
-
-<p>echo &ldquo;&mdash;&ndash; Starting an instance of OrientDB &mdash;&ndash;&rdquo;
-sh -c $ODB_LAUNCHER </dev/null &>/dev/null &amp;</p>
-
-<h1>Wait a bit for OrientDB to finish the initialization phase.</h1>
-
-<p>sleep 5
-printf &ldquo;\n=== The CI environment has been initialized ===\n&rdquo;
-```</p>
-
-<p>I think the script speaks for itsef: we directly download
-OrientDB from the official website, de-compress it, configure
-OrientDB with our standard configuration file and launch the
-ODB server, outputting in <code>/dev/null</code>.</p>
-
-<p>Now, all of this happens everytime someone commits to the <code>master</code>
-on Github: pretty easy, simple but so powerful.</p>
-
-<p>I really recommend you to start having a look at Travi-CI
-and how you can benefit from a CI server, fully configurable,
-for free, for the sake of your own code.</p>
-
-<p>One last note: yes, all of this comes for free, but if you use
-Travis you should really consider making a donation to
-show the guys behind the project <a href="http://love.travis-ci.org/">your love</a>.</p>
+<h2>Automated tests are a practice, not your goal</h2>
 ]]></content>
   </entry>
   

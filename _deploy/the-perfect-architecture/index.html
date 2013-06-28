@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The perfect architecture? - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  <meta name="description" content="In order to take extreme advantage of the HTTP cache on
+both local and shared caches, here&rsquo;s my vision of a
+really solid, powerful and scalable &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/the-perfect-architecture/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <img id="bio-picture" src="https://lh6.googleusercontent.com/-YgvT5_ULkUk/AAAAAAAAAAI/AAAAAAAAAWY/lIfaFw-9ZQo/s120-c/photo.jpg" />
+  <h1><a href="/">Alessandro Nadalin</a></h1>
+</hgroup>
+
+<ul id="topmenu">
+	<li>
+		<a href="/about" >
+			about
+		</a>
+	</li>
+	<li>
+		<a href="/conferences" >
+			conferences
+		</a>
+	</li>
+	<li>
+		<a href="http://twitter.com/_odino_" >
+			twitter
+		</a>
+	</li>
+	<li>
+		<a href="/archives" >
+			archives
+		</a>
+	</li>
+</ul>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Perfect Architecture?</h1>
+    
+  </header>
+
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/scalability/'>scalability</a>
+  
+</span>
+
+
+<div class="entry-content"><p>In order to take extreme advantage of the HTTP cache on
+both local and shared caches, here&rsquo;s my vision of a
+really solid, powerful and scalable architecture.</p>
+
+<!-- more -->
+
+
+<h2>Components: bye bye ESI</h2>
+
+<p>I love ESI but I feel that <a href="http://127.0.0.1:4000/scaling-through-hinclude/">HInclude</a> is a better
+solution for scaling out: there are a few open questions
+but the idea I have is that ESI is way less powerful
+than fully taking advantage of clients.</p>
+
+<p>Our architecture is composed by:</p>
+
+<ul>
+<li>the origin server</li>
+<li>a reverse proxy</li>
+<li>HInclude<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup></li>
+<li><code>stale</code> headers</li>
+</ul>
+
+
+<h2>First user</h2>
+
+<h2>A second user</h2>
+
+<h2>When it stales</h2>
+
+<h2>Why it scales</h2>
+
+<h2>Room for improvements</h2>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Although HInclude is not an architectural element, it plays a huge part here, so it needs to be mentioned. Same would have been for Edge Side Includes. <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-27T23:42:00+04:00" pubdate data-updated="true">Monday, 27 February 2012 at 23:42</time>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/the-perfect-architecture/" data-via="_odino_" data-counturl="http://odino.org/the-perfect-architecture/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/scaling-through-hinclude/" title="Previous Post: Scaling asynchronously through HInclude">&laquo; Scaling asynchronously through HInclude</a>
+      
+      
+        <a class="basic-alignment right" href="/moving-to-dubai/" title="Next Post: Moving to Dubai">Moving to Dubai &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Alessandro Nadalin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/the-perfect-architecture/';
+        var disqus_url = 'http://odino.org/the-perfect-architecture/';
+        var disqus_title = 'The perfect architecture?';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/aharris.js"></script>
+
+</body>
+</html>

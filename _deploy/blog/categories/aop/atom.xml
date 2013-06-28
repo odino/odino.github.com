@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: AOP | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/aop/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-28T14:30:27+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Aspect-oriented logging with the Proxy pattern]]></title>
+    <link href="http://odino.org/aspect-oriented-logging-with-the-proxy-pattern/"/>
+    <updated>2012-11-23T10:39:00+04:00</updated>
+    <id>http://odino.org/aspect-oriented-logging-with-the-proxy-pattern</id>
+    <content type="html"><![CDATA[<p>One of the <strong>key</strong>-missing features
+of PHP is the poor support that you
+get from the language in terms of
+<a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">Aspect Oriented Programming</a>:
+essentially, there is no easy way
+to distribute modules (or <em>aspects</em>)
+of your application (it is usually done
+with metaprogramming).</p>
+
+<p>However, thanks to the <a href="/proxy-pattern-lazy-loading/">Proxy pattern</a>
+and a <a href="http://fabien.potencier.org/article/12/do-you-need-a-dependency-injection-container">dependency-injection container</a>,
+we can provide a layer supporting a bit
+of AOP: in this article we will find out how
+to, silently, implement <em>logging</em>
+without modifying the behaviour of the classes
+of your PHP application.</p>
+]]></content>
+  </entry>
+  
+</feed>

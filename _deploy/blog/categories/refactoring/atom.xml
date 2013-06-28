@@ -4,7 +4,7 @@
   <title><![CDATA[Category: refactoring | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/refactoring/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-21T18:40:52+04:00</updated>
+  <updated>2013-06-28T14:30:27+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Towards better code avoiding inline comments]]></title>
+    <link href="http://odino.org/towards-better-code-avoiding-inline-comments/"/>
+    <updated>2013-03-23T17:40:00+04:00</updated>
+    <id>http://odino.org/towards-better-code-avoiding-inline-comments</id>
+    <content type="html"><![CDATA[<p>One of the things I&rsquo;m very concerned of is to be
+a replaceable element in a development team: this
+often translates into producing clean code that
+another good developer can immediately understand.</p>
+
+<p>In this post I will share why I am against inline
+comments inside your code.</p>
+
+<!-- more -->
+
+
+<p>Over 6 years of caree I ran across different opinions
+towards inline comments:</p>
+
+<ul>
+<li><em>newcomers</em> usually advocate that they are good,
+and new programmers will benefit of a very detailed
+explanation of the code</li>
+<li>most of the programmers are still pro-inline-comments
+since they mention the fact that otherwise you wouldn&rsquo;t
+remember</li>
+</ul>
+
+
+<p>DDD, shouldnt have comments</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>

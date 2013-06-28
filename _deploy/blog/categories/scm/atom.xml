@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SCM | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/scm/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2013-06-28T14:30:27+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OrientDB goes GitFlow]]></title>
+    <link href="http://odino.org/orientdb-goes-gitflow/"/>
+    <updated>2013-06-08T14:46:00+04:00</updated>
+    <id>http://odino.org/orientdb-goes-gitflow</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>

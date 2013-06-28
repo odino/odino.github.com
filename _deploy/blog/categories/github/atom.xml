@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-21T18:40:52+04:00</updated>
+  <updated>2013-06-28T14:30:27+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Atlassian hosted services how to ruin a beautiful issue-tracker]]></title>
+    <link href="http://odino.org/atlassian-hosted-services-how-to-ruin-a-beautiful-issue-tracker/"/>
+    <updated>2012-05-17T14:10:00+04:00</updated>
+    <id>http://odino.org/atlassian-hosted-services-how-to-ruin-a-beautiful-issue-tracker</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Contributing to the Zend Framework via GitHub]]></title>
