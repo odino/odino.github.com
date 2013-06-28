@@ -2,8 +2,13 @@
 // Add styles here to make changes without digging in too much
 
 body {
-	max-width: 70%;
         font-family: "PT Serif",Georgia,Times,"Times New Roman",serif;
+}
+
+@media (max-width: 1000px) {
+  body {
+    	max-width: 70%;
+  }
 }
 
 #topmenu {
