@@ -3,7 +3,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-28T14:30:27+04:00</updated>
+  <updated>2013-06-28T14:42:09+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -1095,263 +1095,6 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[example-tags]]></title>
-    <link href="http://odino.org/example-tags/"/>
-    <updated>2013-06-11T11:32:00+04:00</updated>
-    <id>http://odino.org/example-tags</id>
-    <content type="html"><![CDATA[<p class='info info' data-title='PROTIP'>A very nice thing that comes out of a dependency injection container is the ability to override service definitions: thanks to this, in Symfony2 we can avoid writing environmen-dependent domain code.</p>
-
-
-
-
-<div class='embed tweet'><blockquote class="twitter-tweet"><p>Best analogy I find so far for explain concept of ScrumMaster to new devops is Tooth Fairy.</p>&mdash; DevOps Borat (@DEVOPS_BORAT) <a href="https://twitter.com/DEVOPS_BORAT/statuses/159849628819402752">January 19, 2012</a></blockquote>
-<script async src="http://odino.org//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Avoiding coupling to the application environment in Symfony2]]></title>
-    <link href="http://odino.org/avoiding-coupling-to-the-application-environment-in-symfony2/"/>
-    <updated>2013-06-09T10:52:00+04:00</updated>
-    <id>http://odino.org/avoiding-coupling-to-the-application-environment-in-symfony2</id>
-    <content type="html"><![CDATA[<p>A very nice thing that come out of a dependency injection container
-is the ability to override service definitions: thanks
-to this, in Symfony2 we can avoid writing environment-dependent
-domain code.</p>
-
-<!-- more -->
-
-
-<p><a href="http://richardmiller.co.uk/2013/05/28/symfony2-avoiding-coupling-applications-to-the-environment/">Richard Miller</a>,
-engineer at SensioLabs UK, came out, a few days ago,
-with an idea on how to decouple the application from the
-environment, in order to avoid writing
-environment specific code like:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Mailer</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">()</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;kernel.environment&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;prod&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="nb">mail</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In my opinion, there is still room for
-improvement, as you can actually use the
-<code>config_%ENV%.yml</code> files to achieve better
-isolation:</p>
-
-<figure class='code'><figcaption><span>config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mailer:
-</span><span class='line'>  class: <span class="s2">&quot;Acme\Mailer&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nx">Acme</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Mailer</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">()</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="nb">mail</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&rsquo;s say that now, for testing purposes you
-want to test the mailer in the <code>test</code>
-environment:</p>
-
-<figure class='code'><figcaption><span>config_test.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>mailer:
-</span><span class='line'>  class: <span class="s2">&quot;Acme\Test\Mailer\Working&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nx">Acme\Test</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Acme\Mailer</span> <span class="k">as</span> <span class="nx">BaseMailer</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Mailer</span> <span class="k">extends</span> <span class="nx">BaseMailer</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">()</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Basically, these new mailer classes act as stub
-for your tests:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nx">Acme\AcmeBundle\Tests\Controller</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Liip\FunctionalTestBundle\Test\WebTestCase</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">SampleTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAnEmailGetsSent</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$client</span>                 <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
-</span><span class='line'>        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/api/mail&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OrientDB goes GitFlow]]></title>
-    <link href="http://odino.org/orientdb-goes-gitflow/"/>
-    <updated>2013-06-08T14:46:00+04:00</updated>
-    <id>http://odino.org/orientdb-goes-gitflow</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Benchmarking different CDN providers]]></title>
-    <link href="http://odino.org/benchmarking-different-cdn-providers/"/>
-    <updated>2013-06-07T05:36:00+04:00</updated>
-    <id>http://odino.org/benchmarking-different-cdn-providers</id>
-    <content type="html"><![CDATA[<p>When you decide to go with a CDN for
-the static assets of your web applications,
-you will of course consider different
-providers: while making this choice,
-2 very simple and mature tools become
-very important to make the right choice.</p>
-
-<!-- more -->
-
-
-<h2>Akamai or not Akamai?</h2>
-
-<p>As everyone knows, Akamai is the biggest
-and most reliable CDN provider in the market,
-but the downside of using it is that,
-unless you come up with big numbers
-(and bigger bills) you won&rsquo;t be able
-to discuss custom agreements.
-For example, if you would need
-to scale up with performances
-during a specific peak hour of the day,
-and rest the rest of the day, I doubt
-you would be able to get around a tailored
-solution with Akamai<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<p>The general rule, anyhow, is to go
-for Akamai as long as your budget allows you
-to do so, but there might be certain
-situations (as said budget as well as
-geographical needs &ndash; Akamai is <strong>almost</strong>
-everywhere) where you want to check
-with 3 or 4 different CDN providers
-before closing your research: in
-these moments what you should do is
-to ask for temporary accounts and start
-benchmarking each provider.</p>
-
-<p>For this purpose, <a href="http://httpd.apache.org/docs/2.2/programs/ab.html">Apache Benchmark</a> and
-<a href="http://www.joedog.org/siege-home/">Siege</a>
-will be, among others, you swiss-army
-knife.</p>
-
-<h2>Apache Benchmark</h2>
-
-<h2>Siege</h2>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>But I can&#8217;t really say that&#8217;s true at 100%: you should always check with your trusted Akamai salesman ;-) <a href='#fnref:1' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
     <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
     <updated>2013-06-06T13:00:00+04:00</updated>
@@ -2405,39 +2148,6 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Towards better code avoiding inline comments]]></title>
-    <link href="http://odino.org/towards-better-code-avoiding-inline-comments/"/>
-    <updated>2013-03-23T17:40:00+04:00</updated>
-    <id>http://odino.org/towards-better-code-avoiding-inline-comments</id>
-    <content type="html"><![CDATA[<p>One of the things I&rsquo;m very concerned of is to be
-a replaceable element in a development team: this
-often translates into producing clean code that
-another good developer can immediately understand.</p>
-
-<p>In this post I will share why I am against inline
-comments inside your code.</p>
-
-<!-- more -->
-
-
-<p>Over 6 years of caree I ran across different opinions
-towards inline comments:</p>
-
-<ul>
-<li><em>newcomers</em> usually advocate that they are good,
-and new programmers will benefit of a very detailed
-explanation of the code</li>
-<li>most of the programmers are still pro-inline-comments
-since they mention the fact that otherwise you wouldn&rsquo;t
-remember</li>
-</ul>
-
-
-<p>DDD, shouldnt have comments</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
     <link href="http://odino.org/refactoring-your-architecture-go-for-soa/"/>
     <updated>2013-03-23T17:35:00+04:00</updated>
@@ -2749,6 +2459,1159 @@ diffs between the screenshots:</p>
 <p>That&rsquo;s it: now you can start having a look at what changed and
 ask your developers to do the same, even on their local
 machine, before committing any changes.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Namshi is looking for a new Lead Developer!]]></title>
+    <link href="http://odino.org/namshi-is-looking-for-a-new-lead-developer/"/>
+    <updated>2013-02-21T19:28:00+04:00</updated>
+    <id>http://odino.org/namshi-is-looking-for-a-new-lead-developer</id>
+    <content type="html"><![CDATA[<p>As some of you know, I am currently employed by
+<a href="http://en-ae.namshi.com/">Namshi</a>, a
+<a href="http://www.rocket-internet.de/">Rocket Internet</a>
+venture, here in Dubai, since almost a year: recently,
+our CTO <a href="http://halilkoklu.de/">Halil</a> decided to move forward
+and start a new adventure pretty far from here
+so, as part of me taking care of other things than
+development, we are looking for a new Lead Developer
+who can strive, with the team, towards excellence.</p>
+
+<!-- more -->
+
+
+<p>We are in the process of building new applications
+and API to move towards a SOA architecture, using
+cutting-edge libraries (like <a href="http://symfony.com/">Symfony2</a>), tools
+(like <a href="http://behat.org/">Behat</a> and <a href="http://getcomposer.org/">Composer</a>) and practices.</p>
+
+<p>The Job Description is still on his way but I can
+post here some of the competencies that we are
+looking forward to warmly welcome in the crazy Namshi
+family:</p>
+
+<ul>
+<li>enterprise practices and patterns, such as automated testing, pair programming</li>
+<li>HTTP webservices</li>
+<li>you buzz around the PHP5.3+ ecosystem, from the Symfony2 components to tools such as Composer</li>
+<li>you have Git for breakfast</li>
+<li>RDBMS (MySQL, Percona)</li>
+<li>can deal with pre-PHP5.3 frameworks (Zend 1 and Yii)</li>
+<li>Solr and/or Memcached</li>
+<li>passionate about open source and ideally contributing to it.</li>
+</ul>
+
+
+<p>The salary reflects the demand of skills that we are looking for, and
+you will be responsible of the day-to-day development of our
+applications.</p>
+
+<p>Just to mention: the United Arab Emirated are a tax-free country,
+the weather is amazing (even though for a couple months, during the summer,
+its <strong>really</strong> hot) and it&rsquo;s an all-around country, meaning that if you
+want, you can enjoy the glamorous side of Dubai or, if you dont feel like<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+you can head towards the old town and enjoy the cultural meshup made
+of Indonesia, Thai and Indian food or Arab heritage.</p>
+
+<p>I rushed this post, I know, so you can ask for more informations
+in the comments or, even better, drop me an email at
+<em>alex.nadalin@namshi.com</em>.</p>
+
+<p>Cheers!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Like me <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP: 'The script tried to execute a method or access a property of an incomplete object']]></title>
+    <link href="http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
+    <updated>2013-01-31T13:28:00+04:00</updated>
+    <id>http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
+    <content type="html"><![CDATA[<p>Have you ever got this error in PHP? I bet no, never.</p>
+
+<!-- more -->
+
+
+<p>Basically, it happens when you serialize an object
+of class <code>A</code> and try to unserialize it when class
+<code>A</code> doesn&rsquo;t exist anymore.</p>
+
+<h2>How (the hell) do I get there?</h2>
+
+<p>If you are working with auto-generated proxy classes,
+store objects in the session and then clear your
+cache, once you retrieve an object from the session
+you are going to face it. A solution is to
+re-generate all the proxies before retrieving objects
+from the session<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>in an ideal world, at every deployment you clear and re-generate proxies <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Profiling PHP applications from the browser]]></title>
+    <link href="http://odino.org/profiling-php-applications-from-the-browser/"/>
+    <updated>2013-01-25T22:38:00+04:00</updated>
+    <id>http://odino.org/profiling-php-applications-from-the-browser</id>
+    <content type="html"><![CDATA[<p>In my <a href="http://odino.org/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
+<a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
+a web-based profiler for PHP:
+now I&rsquo;d like to spend some more time
+giving an overview on how to install
+and use it, as well as <strong>what to look for
+when profiling an application</strong>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="http://odino.org/images/webgrind-call-graph-detail.png"></p>
+
+<h2>Profiling in a few words</h2>
+
+<p>As PHP developers, we are rarely used to
+profiling: essentially, most of our
+applications are not bound to extensive
+CPU usage or insanely huge data-processing operations;
+the scope of the language is very clear and
+even though we <strong>might</strong> need to profile, once
+in a while, it&rsquo;s unlikely that we will end up
+having problems like
+<a href="http://odino.org/book-review-data-intensive-text-processing-with-mapreduce/">optimizing MapReduce algorhitms</a>.</p>
+
+<p>But sometimes we <strong>do</strong> need to profile,
+and this will bring on the table bottlenecks of
+your applications: within a session of inspection,
+you will likely find optimizations that would lead to
+a <code>20/30%</code> faster execution time, by just changing
+your backend (PHP) code<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<h2>Why Webgrind</h2>
+
+<p>Among all the available profilers for PHP, I
+choose to go with Webgrind for a bunch of reasons:</p>
+
+<ul>
+<li>nowadays, I am mostly developing on a Mac<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, so
+<a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
+wasn&rsquo;t an option</li>
+<li>I didn&rsquo;t want to install <a href="https://github.com/facebook/xhprof">XHPROF</a>
+as it usually takes a few minutes,
+even though is probably the best profiler for PHP: facebook uses it
+<strong>in production</strong>, and it&rsquo;s able to generate a lot of reports that
+would make you face performance optimizations from various perspectives</li>
+<li>Webgrind offers a zero-setup installation</li>
+</ul>
+
+
+<h2>Installation with XDebug</h2>
+
+<p><a href="http://xdebug.org/">XDebug</a> is a must for profiling, as it&rsquo;s
+the tool through which we can generate the
+<a href="http://valgrind.org/docs/manual/cg-manual.html">Cachegrind</a> files, that are basically reports
+on the costs of your application&rsquo;s calls.</p>
+
+<p>To enable XDebug&rsquo;s profiling you will have to
+tweak your <code>php.ini</code>&rsquo;s configuration:</p>
+
+<figure class='code'><figcaption><span>Enabling profiling with XDebug</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>xdebug.profiler_enable <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Beware that profiling each request your application
+processes can be an expensive job (pages that
+would usually load in 2/3 seconds can take up to
+10 seconds), so you should &ndash; instead of enabling
+the profiler by default &ndash; activate the <code>enable_trigger</code>
+directive, which will make XDebug profile your application
+only if a specific <code>GET</code> or <code>POST</code> parameter is specified
+within the request:</p>
+
+<figure class='code'><figcaption><span>Using the XDebug profiler in enable trigger mode</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>xdebug.profiler_enable <span class="o">=</span> 0
+</span><span class='line'>xdebug.profiler_enable_trigger <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dont forget to restart apache once you made the changes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apachectl restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By visiting your application and specifying a special
+<code>GET</code> parameter in the URL, you will run your first
+profiled PHP response: supposing that you want to
+profile the code that runs <code>http://dev.project.com</code>,
+just visit <code>http://dev.project.com?XDEBUG_PROFILE=true</code></p>
+
+<p>Once you&rsquo;re done with the XDebug configuration, it&rsquo;s
+time to install Webgrind:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /path/to/your/home/projects
+</span><span class='line'>
+</span><span class='line'>git clone git://github.com/jokkedk/webgrind.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it!</p>
+
+<p>You can now access Webgrind at
+<code>127.0.0.1/webgrind</code> or &ndash; if you prefer &ndash;
+set up a virtual host for it:</p>
+
+<figure class='code'><figcaption><span>Setting up the virtualhost at</span><a href='http://webgrind/'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;VirtualHost *:80&gt;
+</span><span class='line'>    DocumentRoot <span class="s2">&quot;/path/to/your/home/projects/webgrind&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    ServerName webgrind
+</span><span class='line'>
+</span><span class='line'>    &lt;Directory <span class="s2">&quot;/path/to/your/home/projects/webgrind&quot;</span>&gt;
+</span><span class='line'>        Options Indexes FollowSymLinks MultiViews
+</span><span class='line'>        AllowOverride all
+</span><span class='line'>        Order allow,deny
+</span><span class='line'>        Allow from all
+</span><span class='line'>    &lt;/Directory&gt;
+</span><span class='line'>&lt;/VirtualHost&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and have Webgrind running at
+<code>http://webgrind/</code>.</p>
+
+<h2>Looking at the results</h2>
+
+<p><img class="right" src="http://odino.org/images/webgrind-select-file.png"></p>
+
+<p>Once your application runs, XDebug will generate
+the cachegrind files that Webgrind will analyze:
+after each PHP response is served from your application,
+you can inspect the results from the Webgrind interface,
+by just selecting the first file of the list:
+it might take some time for Webgrind to generate the
+first report, as cachegrind files can easily size up to
+100/200 megabytes (files below <code>~50MB</code> will be read in
+10 seconds or so).</p>
+
+<p>When the report is generated, you will see the results: I
+strongly recommend to generate a report in <strong>milliseconds</strong>, as
+it will give you a direct overview on how much time
+a function takes rather than having this value as a percentage
+compared to the entire application&rsquo;s run.</p>
+
+<p><img class="center" src="http://odino.org/images/webgrind-expensive-call.png"></p>
+
+<p>If you order results by <code>Total inclusive cost</code>, you will
+exactly see which ones are the most expensive functions
+of your applications: in the example, you will see that the
+<code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> method really
+kills the performances of my application (<code>10.6</code> seconds).</p>
+
+<p>Having this kind of report is not really useful, as
+usually you need to dig deeper to understand which
+exact step is making that function taking all that time:
+you can investigate further by clicking on a function,
+action that will open the call stack after that function
+is called:</p>
+
+<p><img class="center" src="http://odino.org/images/webgrind-call-stack.png"></p>
+
+<p>as you see, the problems, here, lies in
+<code>Doctrine\ODM\OrientDB\Mapper::createDocument</code> (<code>6.2</code> seconds)
+and <code>Doctrine\ODM\OrientDB\Mapper::findClassMappingInDirectories</code>
+(<code>4.3</code> seconds), so there you have the explanation why
+<code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> takes more than
+10 seconds.</p>
+
+<p>Then, take your time to investigate even further and make the
+optimal changes in your application, run it with the
+profiler enabled once more and have a look at the results:</p>
+
+<p><img class="center" src="http://odino.org/images/webgrind-after-optimization.png"></p>
+
+<p>As you see, after I tweaked my code,
+<code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> is not even the
+most expensive function at all (<code>Sharah\Controller::getPartial</code> is),
+and the previously performance-killer methods, which
+would take <code>~6</code> and <code>~4</code> seconds, are now respectively
+taking <code>~1</code> and <code>~0.1</code> seconds.</p>
+
+<h2>The call graph</h2>
+
+<p><img class="right" src="http://odino.org/images/webgrind-call-graph.png"></p>
+
+<p>Another interesting feature of Webgrind<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>
+is the ability to generate a <strong>call graph</strong> to visualize
+bottlenecks in the application: by having a look
+at the graph you will have a top-down overview on
+how much execution time (expressed in percentage)
+a function will take.</p>
+
+<p>When you look at it, you should question
+every step of the graph and ask yourself is that
+specific function should really take that amount
+of time.</p>
+
+<p>For example:</p>
+
+<ul>
+<li>if a controller takes <code>20%</code> of the time to run (called <code>TTR</code> from now on),
+it might be that you have a design flaw, as it should be
+the most expensive part of your application, calling
+the models and rendering the view (which are <strong>included</strong> in
+the calculated <code>TTR</code>)</li>
+<li>if a model&rsquo;s method is taking <code>60% TTR</code>, there is a bad smell:
+how come that just retrieving data <strong>once</strong> is taking
+more than half of the <code>TTR</code>?</li>
+<li>if bootstrapping the application takes <code>15% TTR</code>, then
+it&rsquo;s fine, as that is usually the time a well-abstracted
+framework needs to provide you a solid foundation to develop
+on top of</li>
+</ul>
+
+
+<p>In the image above, you will see that <code>87%</code>
+of the execution time is taken by the controller&rsquo;s
+action (which is fine) and then equally
+distributed (<code>10/20%</code>) across various other
+functions that controller calls.</p>
+
+<h2>Conclusions</h2>
+
+<p><span class='pullquote-right' data-pullquote='sometimes the best design
+is probably unpractical to perform
+really well'>
+This is not an extensive guide on profiling,
+neither a fair comparison of PHP profilers
+(as I said, I picked Webgrind, last night, more
+because of the stress-free installation rather than
+its actual capabilities<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup>), but I
+hope it can give you a good quickstart guide
+to start optimizing bottlenecks in your
+applications.</p>
+
+<p>One thing that I would really like to
+point out is to <strong>stop useless optimizations</strong>:
+there is no need to &ldquo;drop double quotes
+in favour of single quotes&rdquo; because those
+are such small optimizations that you
+will <strong> never</strong> feel in your application;
+create <a href="http://www.slideshare.net/arnoschn/rasmus-think-again-agile-framework-happy-php-developer-presentation-625122/73">useful benchmarks</a>
+and always question your choices: running
+a solid benchmark and profiling your
+application properly will also
+tell you that sometimes the best design
+is probably unpractical to perform
+really well.
+</span></p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Beware that for high-scale applications you should focus on bigger and deeper improvements: see http://odino.org/rest-better-http-cache/ <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Shame on me, I know <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Which is implemented in every profiler I used so far <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>If you want to seriously profile your PHP application, go for XHPROF <a href='#fnref:4' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
+    <link href="http://odino.org/making-the-orientdb-odm-5-times-faster/"/>
+    <updated>2013-01-25T17:39:00+04:00</updated>
+    <id>http://odino.org/making-the-orientdb-odm-5-times-faster</id>
+    <content type="html"><![CDATA[<p>Today, after heavily testing performances
+on a project, I pushed some small but
+precious changes to the
+<a href="https://github.com/doctrine/orientdb-odm">orientdb-odm</a>.</p>
+
+<!-- more -->
+
+
+<h2>Prelude</h2>
+
+<blockquote><p>Premature optimization is the root of all evil</p><footer><strong>Donald Knuth</strong> <cite><a href='http://c2.com/cgi/wiki?PrematureOptimization'>C2 Wiki</a></cite></footer></blockquote>
+
+
+<p></p>
+
+<p>In these days I was testing performances of a
+service I am building with
+<a href="https://github.com/nuvolabase/orientdb">OrientDB</a>
+and the doctrine ODM that
+<a href="http://odino.org/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
+
+<p>Following one of the golden rules for software
+architects, we didn&rsquo;t paid attention to performances &ndash; at first &ndash;
+but rather went for a design which would allow us
+to inject behaviours and easily change portions of code
+(also thanks to the <a href="https://travis-ci.org/doctrine/orientdb-odm">test suite</a>),
+I knew that I would have noticed huge flaws at
+performance level when testing it with
+<strong>production data</strong>.</p>
+
+<p>A few days ago we committed fetchplans for repository
+classes, but it wasnt enough: rather then concentrating
+on which data we should fetch, I realized one major
+improvement could be applied on how we <strong>map</strong> data.</p>
+
+<h2>The golden rule</h2>
+
+<p><span class='pullquote-right' data-pullquote='abstraction comes with a cost:
+slow performances'>
+When you write a OXM (object-something mapper) you will
+shortly understand that a huge portion of your job
+consist into abstract your design, to ease
+integration of multiple components into your application:
+repositories, the object manager, POXO, the data mapper,
+proxy classes and so on.</p>
+
+<p>Of course, abstraction comes with a cost:
+slow performances, so one of the first things that you do is starting
+to <strong>cache everything</strong>.
+</span></p>
+
+<h2>How we did it</h2>
+
+<p>With a <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec">single commit</a>
+&ndash; there&rsquo;s always room for improvements &ndash; the ODM is now able
+to hydrate objects <strong>5 times faster</strong>: when you hydrate similar
+objects from OrientDB (for example, 2 records that share the same
+attributes&#8217; values, like <code>is_published</code> or <code>country</code>), there is
+no need to duplicate operations, so we added a <a href="https://github.com/doctrine/orientdb-odm/blob/df875c946e02a9c84eee22f0c86e0a3b06bd70ec/src/Doctrine/OrientDB/Util/Inflector/Cached.php">cached inflector</a>
+(with an in-memory / single request cache) and did some other
+improvements to the <code>Mapper</code>:</p>
+
+<ul>
+<li>cached the relations between <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L297">PHP classes and OrientDB classes</a> (if 2 records of the same OrientDB class are hydrated, there is only one single <em>search</em> operation to find the PHP class that should map them)</li>
+<li>cached the <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L223">casting of properties</a> (if 2 objects have the same value for the <code>is_published</code> attribute, casting is done once)</li>
+<li>cached <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L466">properties&#8217; annotations</a> (property-level annotations are inspected once per class)</li>
+</ul>
+
+
+<p>There is no rocket science in what we did, but benchmarks ensure that
+it&rsquo;s a <strong>huge performance improvement</strong>.</p>
+
+<h2>By the way, we used Webgrind</h2>
+
+<p><img class="right" src="http://odino.org/images/webgrind.png"></p>
+
+<p>Doing almost all of my work from a Mac, I kind of
+missed <a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
+for profiling, so I was looking for an
+alternative (no, installing
+<a href="https://github.com/facebook/xhprof">XHPROF</a> isn&rsquo;t an alternative at 2 in the morning)
+and I found Webgrind (which is cross-platform), a web profiler
+that requires zero setup:
+you basically just need to provide it access from the webserver
+and, by opening it with a browser, the application automatically
+launches and parses the cachegrind files generated by XDebug.</p>
+
+<p>Webgrind&rsquo;s code is a bit of a mess, but then, the
+result is still pretty good &ndash; you get a good overview
+of the expensiveness of your calls as well as a
+call graph compiled in <a href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>,
+which is a de-facto standard for graph generation.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Starting to play with the Doctrine OrientDB ODM]]></title>
+    <link href="http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/"/>
+    <updated>2013-01-20T23:00:00+04:00</updated>
+    <id>http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm</id>
+    <content type="html"><![CDATA[<p>Since I am actively playing around with it, I
+wanted to share some snippets to use the
+<a href="https://github.com/doctrine/orientdb-odm">Doctrine OrientDB ODM</a>
+in your PHP applications.</p>
+
+<!-- more -->
+
+
+<h2>Prelude</h2>
+
+<p>In the last few weeks I&rsquo;ve started working,
+for fun <strong>and</strong> profit, to a personal project,
+nothing really exciting as of now.</p>
+
+<p>The thing is, since I wanted to get back on some
+cool piece of software, I decided to go for
+OrientDB for the persistence and a
+mini-framework <em>a-la</em> Symfony2 as foundation for the
+PHP application &ndash; I actually considered NodeJS first,
+but I need a prototype in 2 months so&hellip;</p>
+
+<p>Point being, I&rsquo;d like to share with you my basic
+approach to the OrientDB ODM.</p>
+
+<h2>The container</h2>
+
+<p>Given I&rsquo;ve been inspired to Symfony2,
+instantiating the main ODM classes
+happens in the DIC:</p>
+
+<figure class='code'><figcaption><span>container.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">orientdb.binding.parameters</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\OrientDB\Binding\BindingParameters</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">127.0.0.1</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">2480</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">admin</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">admin</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">DBNAME</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">orientdb.binding</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\OrientDB\Binding\HttpBinding</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">orientdb.binding.parameters</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">odm</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\ODM\OrientDB\Manager</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">mapper</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">odm.mapper</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">binding</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">orientdb.binding</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">odm.mapper</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\ODM\OrientDB\Mapper</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">documentProxyDirectory</span><span class="p-Indicator">:</span> <span class="err">%</span><span class="l-Scalar-Plain">base-dir%/tmp/</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">annotationReader</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">odm.annotation-reader</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">setDocumentDirectories</span><span class="p-Indicator">,</span> <span class="p-Indicator">[</span> <span class="err">%</span><span class="nv">base-dir%/src/PROJECT/Entity/</span> <span class="p-Indicator">:</span> <span class="s">&quot;PROJECT</span><span class="err">\</span><span class="s">Entity&quot;</span> <span class="p-Indicator">]</span> <span class="p-Indicator">]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">odm.annotation-reader</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\ODM\OrientDB\Mapper\Annotations\Reader</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">cacheReader</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">cache.array</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">cache.array</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\Common\Cache\ArrayCache</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">base-dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/Users/odino/Sites/PROJECT</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, you need:</p>
+
+<ul>
+<li>the <code>Manager</code>, which requires a <code>Mapper</code> and a connection to
+OrientDB through a binding class implementing the
+<code>Doctrine\OrientDB\Binding\BindingInterface</code></li>
+<li>the <code>Mapper</code>, which requires a directory where it can write
+proxy classes (for lazy loading), and an annotation reader
+(this is not required, I&rsquo;ll explain it later), plus a source
+directory to locate entities</li>
+<li>the <code>HttpBinding</code>, used by the <code>Manager</code>, that does raw
+queries to the OrientDB server</li>
+<li>the <code>Annotations\Reader</code></li>
+<li>a cache implementing the interface <code>Doctrine\Common\Cache\Cache</code>:
+in dev environments it is needed since <code>ApcCache</code> is the default
+one, and you would need to flush APC every time you change an
+annotation in your entities (we will probably change it and put
+<code>ArrayCache</code> by default, so that you will need to tweak the live
+environment, not the dev one)</li>
+</ul>
+
+
+<h2>Autoloading</h2>
+
+<p>The autoloading is straightforward, thanks to the <code>PSR-0</code>; the
+only thing that you should keep in mind is that you will need
+to specify a separate autoloader for proxy classes, since they can
+be generated wherever you want (ideally, in a temporary folder,
+since they should be removed every time you deploy):</p>
+
+<figure class='code'><figcaption><span>autoload.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\ClassLoader\UniversalClassLoader</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UniversalClassLoader</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerNamespaces</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;Symfony&#39;</span>                       <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/symfony/symfony/src&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\Common&#39;</span>               <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/doctrine/common/lib&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\OrientDB&#39;</span>             <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/doctrine/orientdb-odm/src&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\ODM\OrientDB&#39;</span>         <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/doctrine/orientdb-odm/src&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\OrientDB\Proxy&#39;</span>       <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../tmp&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should set the autoloader for <code>Doctrine\OrientDB\Proxy</code>
+accordingly to the argument <code>documentProxyDirectory</code> of the
+<code>odm.mapper</code> service.</p>
+
+<h2>Entities</h2>
+
+<p>Following what we specified in the <code>container.yml</code>,
+entities should be located in
+<code>%base-dir%/src/PROJECT/Entity/</code> and follow the namespace
+<code>PROJECT\Entity</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">PROJECT\Entity</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Doctrine\ODM\OrientDB\Mapper\Annotations</span> <span class="k">as</span> <span class="nx">ODM</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd">* @ODM\Document(class=&quot;user&quot;)</span>
+</span><span class='line'><span class="sd">*/</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(name=&quot;@rid&quot;, type=&quot;string&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$rid</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(type=&quot;string&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$email</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(type=&quot;string&quot;, notnull=&quot;false&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$nick</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(type=&quot;linklist&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$addresses</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Returns the nickname of the user, or his email if he has no nick set.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @return string</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getNick</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nick</span> <span class="o">?:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEmail</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setNick</span><span class="p">(</span><span class="nv">$nick</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nick</span> <span class="o">=</span> <span class="nv">$nick</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getEmail</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setEmail</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAddresses</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addresses</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setAddresses</span><span class="p">(</span><span class="nv">$adresses</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addresses</span> <span class="o">=</span> <span class="nv">$addresses</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRid</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rid</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setRid</span><span class="p">(</span><span class="nv">$rid</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rid</span> <span class="o">=</span> <span class="nv">$rid</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, mapping an entity is pretty easy:
+the first annotation is at class level, to define
+which OrientDB classes are mapped by the entity,
+then for every property that you want to be
+persisted / hydrated, you define another annotation and
+public getters / setters; if you want the property to be
+public, you dont need getters / setters.</p>
+
+<p>The property-level annotation has 3 parameters:</p>
+
+<ul>
+<li><strong>type</strong>: defines the type of the property in OrientDB
+( <code>boolean</code>, <code>link</code>, <code>linklist</code>, <code>string</code>, <code>integer</code>, etc )</li>
+<li><strong>name</strong>: the name of the attribute in the OrientDB class
+(you might have a PHP property called <code>$createdAt</code> and in OrientDB
+you call it <code>created_at</code>)</li>
+<li><strong>notnull</strong>: defines whether the property can be <code>null</code> or not<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup></li>
+</ul>
+
+
+<h2>What about controllers?</h2>
+
+<p>You can access the ODM from within
+controllers of your application by
+just using the container:</p>
+
+<figure class='code'><figcaption><span>PROJECT/Controller/User.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">PROJECT\Controller</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Project\Entity\User</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UserController</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">somethingAction</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$user</span>       <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">();</span>
+</span><span class='line'>      <span class="nv">$manager</span>    <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getService</span><span class="p">(</span><span class="s1">&#39;odm&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$manager</span><span class="o">-&gt;...</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Repositories</h2>
+
+<p>At this point, after boostrapping the environment and creating your first entity,
+you might want to play with the repository in your controllers, to
+manipulate and retrieve collections:</p>
+
+<figure class='code'><figcaption><span>PROJECT/Controller/User.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span>      <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getService</span><span class="p">(</span><span class="s1">&#39;odm&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$userRepository</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="s1">&#39;PROJECT\Entity\User&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then, with the repository, you can start retrieving objects:</p>
+
+<figure class='code'><figcaption><span>Using the repository</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find all users</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find one user given its RID</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$rid</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find all users with the nick &quot;overlord&quot;</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findByNick</span><span class="p">(</span><span class="s2">&quot;overlord&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find the user with the nick &quot;TheOnlyOverlord&quot;</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneByNick</span><span class="p">(</span><span class="s2">&quot;TheOnlyOverlord&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find jack&#39;s wife</span>
+</span><span class='line'><span class="nv">$jack</span>  <span class="o">=</span> <span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneByName</span><span class="p">(</span><span class="s2">&quot;Jack&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$wifey</span> <span class="o">=</span> <span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneBySpouse</span><span class="p">(</span><span class="nv">$jack</span><span class="p">);</span> <span class="c1">// spouse is an attribute of type &quot;link&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and it&rsquo;s not over, since you can, of course, add
+<strong>custom repository classes</strong>.</p>
+
+<p>Custom repositories must be located in the entity&rsquo;s folder
+and follow the naming convention <code>EntitytheymapRepository</code>:
+for our <code>User</code> entity, we would need to create a <code>UserRepository</code>
+class in <code>%base-dir%/src/PROJECT/Entity/</code>:</p>
+
+<figure class='code'><figcaption><span>PROJECT\Entity\UserRepository</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">PROJECT\Entity</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Doctrine\ODM\OrientDB\Repository</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UserRepository</span> <span class="k">extends</span> <span class="nx">Repository</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Retrieves a random user.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @return \PROJECT\Entity\User</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">findRandomUser</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nb">array_rand</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>so then you can call your new methods over repositories:</p>
+
+<figure class='code'><figcaption><span>Using custom repositories</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="s1">&#39;PROJECT\Entity\User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">findRandomUser</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Can I haz raw queries?</h2>
+
+<p>Entities and repositories are good, but what about
+adding some <code>SQL+</code><sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup> to the mix?</p>
+
+<p>That&rsquo;s very easy, thanks to the <strong>query builder</strong>
+that&rsquo;s packed with the ODM:</p>
+
+<figure class='code'><figcaption><span>Example queries</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Doctrine\OrientDB\Query\Query</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// instantiate a query object</span>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// simple SELECT</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;nick = ?&#39;</span><span class="p">,</span> <span class="nv">$nick</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// throwing some spice into the mix</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">orWhere</span><span class="p">(</span><span class="s1">&#39;attribute = ?&#39;</span><span class="p">,</span> <span class="nv">$attribute</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">orWhere</span><span class="p">(</span><span class="s1">&#39;(this IS NULL OR that IS NOT NULL)&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// SELECTing a single record</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$rid</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// SELECTing two records</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$rid1</span><span class="p">,</span> <span class="nv">$rid2</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you manipulate the <code>$query</code> object you are basically
+creating an SQL query with an object-oriented fluent interface;
+to eventually execute the query, just pass the object to
+the <code>Manager</code>:</p>
+
+<figure class='code'><figcaption><span>Executing a query</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender = ?&#39;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$males</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Point being, how do you save data?</h2>
+
+<p>Since persistence is not already handled by the <code>Manager</code>,
+you will need to use raw queries for now:</p>
+
+<figure class='code'><figcaption><span>Saving data</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$user</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>  <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Jack&#39;</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">into</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fields</span><span class="p">(</span><span class="nb">array_keys</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">values</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>From the trenches</h2>
+
+<p>We&rsquo;ve been very active since a couple months,
+and we&rsquo;ve actually been able to roll out some major
+bugfixes and improvements (more than 10 in the last
+few weeks):</p>
+
+<ul>
+<li>repositories <a href="https://github.com/doctrine/orientdb-odm/issues/138">filtering by multiple criterias</a></li>
+<li><a href="https://github.com/doctrine/orientdb-odm/issues/139">custom repository</a> classes</li>
+<li>added ability to <a href="https://github.com/doctrine/orientdb-odm/issues/141">map timestamps</a> as DateTime objects</li>
+<li>unable to <a href="https://github.com/doctrine/orientdb-odm/issues/144">update attributes if they are a collection</a></li>
+<li>support for <a href="https://github.com/doctrine/orientdb-odm/commit/cbd9c3250d1fd6fc7ec1f39566b91d1f0e1531f2">INSERTing collections</a></li>
+<li>proxy classes dont <a href="https://github.com/doctrine/orientdb-odm/issues/147">import signatures</a></li>
+<li><code>findBy*</code> and <code>findOneBy*</code> <a href="https://github.com/doctrine/orientdb-odm/issues/149">&ldquo;magic&rdquo; methods</a></li>
+<li><a href="https://github.com/doctrine/orientdb-odm/issues/150">fetchplans in <code>find*</code></a> methods of repositories</li>
+<li>following <code>SQL+</code>, added <a href="https://github.com/doctrine/orientdb-odm/issues/99"><code>REBUILD INDEX</code> command</a></li>
+</ul>
+
+
+<p>I would not advise you to install one of the old tags,
+or even the last one, which brings the namespace
+changes for the incubation in the Doctrine
+organization, but to install it directly from master
+via composer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="s2">&quot;doctrine/orientdb-odm&quot;</span><span class="err">:</span> <span class="s2">&quot;dev-master&quot;</span><span class="err">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as we are constantly doing bugfixes and so on
+(I would day you would get an update &ndash; at least &ndash;
+every week).</p>
+
+<p>That is it, now <strong>start playing around!</strong></p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Be aware that if you are retrieving a property which is NULL in the DB and you don&#8217;t declare it as NULLable, an exception will be thrown (and there is an issue to improve the exception message https://github.com/doctrine/orientdb-odm/issues/152) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>OrientDB&#8217;s QL is called SQL+, as it looks like SQL but has some major improvements, as it&#8217;s very developer-friendly <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
 ]]></content>
   </entry>
   

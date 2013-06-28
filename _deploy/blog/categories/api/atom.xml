@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-06-28T14:30:27+04:00</updated>
+  <updated>2013-06-28T14:42:09+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -178,70 +178,6 @@ Notes
 	</ol>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Building fault-tolerant API clients]]></title>
-    <link href="http://odino.org/building-fault-tolerant-api-clients/"/>
-    <updated>2012-01-24T12:19:00+04:00</updated>
-    <id>http://odino.org/building-fault-tolerant-api-clients</id>
-    <content type="html"><![CDATA[<p><img class="right" src="/images/broken.chain.jpg"></p>
-
-<p>One of the crucial aspects in consuming a webservice is <strong>fault tolerance</strong>, the ability
-to <a href="http://en.wikipedia.org/wiki/Fault-tolerant_system">handle application/network/unpredictable errors</a>
-and provide <strong>graceful degradation</strong> to the software&rsquo;s flow.</p>
-
-<!-- more -->
-
-
-<p>By default, developers tend to like extensive documentation that gets outdated in a moment,
-since they think they are protected against integration errors thanks to the fact that <strong>the
-parts involved in the integration share the same knowledge about the messaging interface</strong>.</p>
-
-<p>This is a good approach, since we share a common interface and agree on that kind of contract,
-but what if we need to change the interface due to an evolution of the domain?</p>
-
-<p>I mean, think at the simplest example ever &ndash; an API for some store&rsquo;s products:</p>
-
-<p><code>bash GET /products/12
-{
-  "name":   "Darth Vader's puppet"
-  "price":  "12"
-}
-</code></p>
-
-<p>is it clear that if the seller needs to implement multi-currency payments ( evolution of the
-domain ) some clients will break:</p>
-
-<p>``` bash Implementation of multi-currency: a JSON attribute becomes an array
-{
-  &ldquo;name&rdquo;:  &ldquo;Darth Vader&rsquo;s puppet&rdquo;,
-  &ldquo;price&rdquo;:  {</p>
-
-<pre><code>"EUR":   12,
-"USD":   18
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<h2>Rely on established meanings</h2>
-
-<h2>Getting the right representation</h2>
-
-<h2>Semantically parsing resources</h2>
-
-<h2>Fragmentation</h2>
-
-<h2>Changing URLs</h2>
-
-<p><blockquote><p>[A world without HATEOAS is]<br/>like a database without foreign keys,<br/>like CORBA without object IDs,<br/>like COM without interface pointers.</p><footer><strong>Paul Prescod <a href="http://www.prescod.net/rest/importance_of_uris.html">http://www.prescod.net/rest/importance_of_uris.html</a> A World without references</strong></footer></blockquote></p>
-
-<h2>Proxy caching</h2>
-
-<p>First of all you need</p>
 ]]></content>
   </entry>
   
