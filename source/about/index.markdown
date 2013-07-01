@@ -12,7 +12,7 @@ footer: true
 
 I'm currently living in
 Dubai where I am employed by [Rocket Internet](http://www.rocket-internet.de) for its venture [Namshi](http://namshi.com),
-as Head of Development.
+as VP - Technology.
 
 I like to play with the [Symfony framework](http://www.symfony.com), 
 [OrientDB](http://www.orientechnologies.com/),
@@ -71,3 +71,4 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I grew up knowing my parents never had a single interaction with the web: now, my mom uses Facebook like a 15yo and my dad entertains a Tumblr blog
 * I quit with cigarettes in late 2012
 * I'm totally informal
+* In my first 15 months at Namshi I covered 3 positions: Lead Develop, Head of Development and VP - Technology
