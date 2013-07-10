@@ -71,7 +71,7 @@ Just to give a very rough and simple example on how this
 library works, let's see how you can trigger a notification
 via **both** email (with PHP's `mail` function{% fn_ref 1 %})
 and the `notify-send` utility available on ubuntu (I've already spoke
-about in [a previous post](/desktop-notifications-for-phpunit-tests-on-ubuntu/)).
+about it in [a previous post](/desktop-notifications-for-phpunit-tests-on-ubuntu/)).
 
 First of all, we would need to create a *plain-old-php-class*
 representing the notification, which implements 2 interfaces:
@@ -264,7 +264,7 @@ php app/console rabbitmq:consumer -w notification
 
 I've tried to write a pretty extensive
 [README](https://github.com/namshi/notificator/) that you can use as a reference, on Github
-(check the [tests](https://github.com/namshi/notificator/tree/master/src/tests), as well, to get an idea of the internals):
+(check the [tests](https://github.com/namshi/notificator/tree/master/tests), as well, to get an idea of the internals):
 if you spot any typo or mistake, don't hesitate to
 reach out and point it out.
 

@@ -9,10 +9,11 @@
   <meta name="author" content="Alessandro Nadalin">
 
   
-  <meta name="description" content="This weekend I finally had the chance to
-work a couple hours on the namshi/emailvision
-library, which lets you integrate CampaignCommander
-as (email &hellip;">
+  <meta name="description" content="While implementing various pieces of our
+Service-Oriented Architecture
+we, at Namshi,
+realized that a central notification
+service would have been &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +83,74 @@ as (email &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/">Notificator, Sending Notifications Through PHP in a Clean and Lightweight Way</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-11T01:20:00+04:00" pubdate data-updated="true">Thursday, 11 July 2013 at 01:20</time>
+      
+       | <a href="/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/foss/'>FOSS</a>, <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/rabbitmq/'>RabbitMQ</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>, <a class='category' href='/blog/categories/messaging/'>messaging</a>, <a class='category' href='/blog/categories/notifications/'>notifications</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>While implementing various pieces of our
+<a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
+we, at <a href="http://en-ae.namshi.com">Namshi</a>,
+realized that a central notification
+service would have been very good in order
+to abstract the way we notify our customers
+and everyone in the company (ie. skype messages
+when a task is due a certain date).</p>
+
+<p>We initially implemented all of this
+<a href="/configuring-a-symfony2-application-to-support-soa/">inside a Symfony2 bundle</a>,
+but soon realized that we could
+abstract and generalize our implementation
+in order to extract it into a library for the public
+domain, and that&rsquo;s how
+<a href="https://github.com/namshi/notificator">notificator</a>
+was born.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -641,60 +710,6 @@ then for the developers.</p>
     <footer>
       <a rel="full-article" href="/why-we-choose-symfony2-over-any-other-php-framework/">Read on &rarr;</a>
     </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/automated-tests-from-a-novice-perspective/">Automated Tests From a Novice&#8217;s Perspective</a></h1>
-    
-  </header>
-
-
-  
-    <p class="meta">
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-27T22:01:00+04:00" pubdate data-updated="true">Monday, 27 May 2013 at 22:01</time>
-      
-       | <a href="/automated-tests-from-a-novice-perspective/#disqus_thread">Comments</a>
-      
-    </p>
-  
-  
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
-  
-</span>
-
-
-  <div class="entry-content"><p>Today I got one of those moments of pride
-when one of our developers, who is working
-since &ndash; roughly &ndash; a year, decided to send an
-email to the team after working on automated
-tests for the first weeks of his career:</p>
-
-<blockquote><p>Automated testing is great idea </p><p>If you have a ticket which requires a lot of changes (20 files, for example) Automated tests are very helpful and save your time, it saves about 30% of your time; even if it&#8217;s still not perfect, its good<br/>For example look at this PR [link to a PR on Github], if i want to test all cases i need about half a day but it only took half an hour</p></blockquote>
-
-</div>
-  
   
 
 

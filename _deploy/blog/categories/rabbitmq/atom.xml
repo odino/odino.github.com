@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RabbitMQ | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/rabbitmq/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-07-01T14:23:29+04:00</updated>
+  <updated>2013-07-11T02:27:14+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,316 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
+    <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
+    <updated>2013-07-11T01:20:00+04:00</updated>
+    <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
+    <content type="html"><![CDATA[<p>While implementing various pieces of our
+<a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
+we, at <a href="http://en-ae.namshi.com">Namshi</a>,
+realized that a central notification
+service would have been very good in order
+to abstract the way we notify our customers
+and everyone in the company (ie. skype messages
+when a task is due a certain date).</p>
+
+<p>We initially implemented all of this
+<a href="/configuring-a-symfony2-application-to-support-soa/">inside a Symfony2 bundle</a>,
+but soon realized that we could
+abstract and generalize our implementation
+in order to extract it into a library for the public
+domain, and that&rsquo;s how
+<a href="https://github.com/namshi/notificator">notificator</a>
+was born.</p>
+
+<!-- more -->
+
+
+<h2>Aim of the library: a monolog-like implementation for notifications</h2>
+
+<p>The aim of this library is to provide a very
+clean abstraction for a task, handling notifications,
+that can be spread across multiple channels (for example
+emails, skype messages, desktop notifications, &hellip;):
+by following this target, we soon realized that by merging
+together 2 simple things, <a href="https://github.com/Seldaek/monolog">Monolog</a>
+and the concept of <a href="http://en.wikipedia.org/wiki/Observer_pattern">event dispatching</a>,
+we could have easily reached our goal.</p>
+
+<p>Honestly, it&rsquo;s true that you can achieve the same goal with
+Monolog, but the problem, there, is that it&rsquo;s a library
+specifically built for logging, thus, when your domain
+deals with simple notifications, your code would really
+be inexpressive.</p>
+
+<p>Even though <strong>Notificator is way simpler</strong>, we took a lot
+of inspiration from Monolog: for example, the concept of
+handlers is a total steal ;&ndash;)</p>
+
+<h2>Installation</h2>
+
+<p>The library is available via composer,
+as you can see from its
+<a href="https://packagist.org/packages/namshi/notificator">packagist page</a>.</p>
+
+<p>Using semantic versioning, I recommend you
+to pick a minor release (<code>1.0</code>, for example)
+and stick to it in your <code>composer.json</code>:
+what we try to do is that, if there is a BC break
+in the API, we increase the minor version (<code>1.0.X</code> to <code>1.1.X</code>, for example).</p>
+
+<p>At the end, you <strong>should</strong> require it like this:</p>
+
+<p><code>
+"namshi/notificator": "1.0.*"
+</code></p>
+
+<h2>Hello world! example</h2>
+
+<p>Just to give a very rough and simple example on how this
+library works, let&rsquo;s see how you can trigger a notification
+via <strong>both</strong> email (with PHP&rsquo;s <code>mail</code> function<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>)
+and the <code>notify-send</code> utility available on ubuntu (I&rsquo;ve already spoke
+about in <a href="/desktop-notifications-for-phpunit-tests-on-ubuntu/">a previous post</a>).</p>
+
+<p>First of all, we would need to create a <em>plain-old-php-class</em>
+representing the notification, which implements 2 interfaces:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Namshi\Notificator\Notification;
+use Namshi\Notificator\NotificationInterface;</p>
+
+<p>interface NotifySendNotificationInterface extends NotificationInterface
+{</p>
+
+<pre><code>public function getMessage();
+</code></pre>
+
+<p>}</p>
+
+<p>interface EmailNotificationInterface extends NotificationInterface
+{</p>
+
+<pre><code>public function getAddress();
+public function getSubject();
+public function getBody();
+</code></pre>
+
+<p>}</p>
+
+<p>class DoubleNotification extends Notification implements NotifySendNotificationInterface, EmailNotificationInterface
+{</p>
+
+<pre><code>protected $address;
+protected $body;
+protected $subject;
+
+public function __construct($address, $subject, $body, array $parameters = array())
+{
+    parent::__construct($parameters);
+
+    $this-&gt;address  = $address;
+    $this-&gt;body     = $body;
+    $this-&gt;subject  = $subject;
+}
+
+public function getAddress()
+{
+    return $this-&gt;address;
+}
+
+public function getSubject()
+{
+    return $this-&gt;subject;
+}
+
+public function getBody()
+{
+    return $this-&gt;body;
+}
+
+public function getMessage()
+{
+    return $this-&gt;getBody();
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>At this point we need 2 notification handlers, which
+will separately handle the notification:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Namshi\Notificator\Notification\Handler\HandlerInterface;
+use Namshi\Notificator\NotificationInterface;</p>
+
+<p>class NotifySendNotificationHandler implements HandlerInterface
+{</p>
+
+<pre><code>public function shouldHandle(NotificationInterface $notification)
+{
+    return $notification instanceOf NotifySendNotificationInterface;
+}
+
+public function handle(NotificationInterface $notification)
+{
+    shell_exec(sprintf('notify-send "%s"', $notification-&gt;getMessage()));
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class EmailNotificationHandler implements HandlerInterface
+{</p>
+
+<pre><code>public function shouldHandle(NotificationInterface $notification)
+{
+    return $notification instanceOf EmailNotificationInterface;
+}
+
+public function handle(NotificationInterface $notification)
+{
+    mail($notification-&gt;getAddress(), $notification-&gt;getSubject(), $notification-&gt;getBody());
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>We&rsquo;re basically there: with a bunch of code we can now trigger
+a notification both via email and <code>notify-send</code>:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>// create the manager and assign handlers to it
+use Namshi\Notificator\Manager;</p>
+
+<p>$manager = new Manager();
+$manager->addHandler(new NotifySendNotificationHandler());
+$manager->addHandler(new EmailNotificationHandler());</p>
+
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#97;&#108;&#101;&#x73;&#x73;&#x61;&#110;&#100;&#114;&#111;&#x2e;&#110;&#x61;&#100;&#97;&#108;&#105;&#110;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x61;&#108;&#x65;&#115;&#115;&#97;&#x6e;&#x64;&#x72;&#x6f;&#46;&#x6e;&#97;&#x64;&#x61;&#x6c;&#x69;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+
+<p>//  trigger the notification
+$manager->trigger($notification);
+```</p>
+
+<p><img class="right" src="/images/notification-email.png"></p>
+
+<p>At this point, if you run this example<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, you should
+see a notification popping up on your desktop and, in a few seconds,
+you will also receive an email to the address you&rsquo;ve given, with the subject
+&ldquo;Test email&rdquo; and &ldquo;Hello!&rdquo; in the body.</p>
+
+<p>By the way, if you want to see some examples on
+how the library works, <a href="https://github.com/namshi/notificator/tree/master/examples">check them out on github</a>.</p>
+
+<h2>Sending notifications via RabbitMQ</h2>
+
+<p>It is no news that we heavily rely on
+<a href="http://odino.org/refactoring-your-architecture-go-for-soa/">RabbitMQ in our SOA</a>,
+so it&rsquo;s pretty obvious that, to implement the notification service,
+we send messages containing the notifications, that will
+be intercepted by our notification service, which relies on
+Notificator.</p>
+
+<p>To do so, we take advantage of the great job done by
+<a href="https://twitter.com/old_sound">Alvaro Videla</a>
+on RabbitMQ for PHP and Symfony2, through the
+<a href="https://github.com/videlalvaro/php-amqplib">PHP AMQP library</a>
+and the <a href="https://github.com/videlalvaro/RabbitMqBundle">RabbitMQ bundle</a>.</p>
+
+<p>If you are familiar with them, you know that in order to consume messages,
+you have to declare your consumer as a callback of the actual, generic
+rabbitmq consumer, through the <code>config.yml</code> file:</p>
+
+<p>``` yaml app/config/config.yml
+old_sound_rabbit_mq:</p>
+
+<pre><code>consumers:
+    notification:
+        connection: default
+        exchange_options: {name: 'notifications', type: direct}
+        queue_options:    {name: 'notifications'}
+        callback:         namshi.notification.consumer
+</code></pre>
+
+<p>services:</p>
+
+<pre><code>namshi.notification.consumer:
+    class: Namshi\Notificator\Messaging\RabbitMQ\Symfony2\Consumer
+    arguments: [@namshi.notification.manager]
+namshi.notification.manager:
+    class: Namshi\Notificator\Manager
+    calls:
+      - [addhandler, [@namshi.notification.handler.notify_send] ]
+namshi.notification.handler.notify_send:
+    class: Namshi\Notificator\Notification\Handler\NotifySend
+</code></pre>
+
+<p>```</p>
+
+<p>We already provide a <a href="https://github.com/namshi/notificator/blob/master/src/Namshi/Notificator/Messaging/RabbitMQ/Symfony2/Consumer.php">very basic consumer callback</a>
+to be used with the RabbitMQ bundle.</p>
+
+<p>The main idea behind this is that the publisher serializes the notification
+and sends it through RabbitMQ, while the consumer unserializes and
+triggers it through the <code>Manager</code>. The publisher code would be very, very simple:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$publisher = $container->get(&lsquo;old_sound_rabbit_mq.notifications_producer&rsquo;);</p>
+
+<p>$notification = new MySampleNotification(&ldquo;man, this comes from RabbitMQ and Symfony2!&rdquo;);</p>
+
+<p>$publisher->publish(serialize($notification));
+```</p>
+
+<p>and to start consuming messages you would only need to
+start the consumer:</p>
+
+<p><code>
+php app/console rabbitmq:consumer -w notification
+</code></p>
+
+<h2>FOSS</h2>
+
+<p>I&rsquo;ve tried to write a pretty extensive
+<a href="https://github.com/namshi/notificator/">README</a> that you can use as a reference, on Github
+(check the <a href="https://github.com/namshi/notificator/tree/master/src/tests">tests</a>, as well, to get an idea of the internals):
+if you spot any typo or mistake, don&rsquo;t hesitate to
+reach out and point it out.</p>
+
+<p>This library is part of the efforts,
+from <a href="https://github.com/namshi">Namshi</a>,
+to be able to give back to the
+OSS community as much as possible: you
+are therefore strongly encouraged to open a PR
+or express your opinion if you find that something
+should be fixed or could be improved (there&rsquo;s a lot
+of room for improvement, starting by implementing
+many more <a href="https://github.com/namshi/notificator/tree/master/src/Namshi/Notificator/Notification/Handler">handlers</a>).</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Only used for its simplicity here, please do not use it in production, use stuff like SwiftMailer instead! <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I mostly took the example code from the README of the library on github, so forgive me if there are synthax errors or some typo. You can anyhow have a look at the examples (in the examples/ folder) to check some working code <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
