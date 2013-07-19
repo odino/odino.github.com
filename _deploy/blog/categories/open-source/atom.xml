@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Open Source | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: open source | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/open-source/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-07-11T02:38:45+04:00</updated>
+  <updated>2013-07-13T18:06:30+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,312 +14,624 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
-    <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
-    <updated>2013-07-11T01:20:00+04:00</updated>
-    <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
-    <content type="html"><![CDATA[<p>While implementing various pieces of our
-<a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
-we, at <a href="http://en-ae.namshi.com">Namshi</a>,
-realized that a central notification
-service would have been very good in order
-to abstract the way we notify our customers
-and everyone in the company (ie. skype messages
-when a task is due a certain date).</p>
+    <title type="html"><![CDATA[Using Emailvision's CampaignCommander APIs from PHP]]></title>
+    <link href="http://odino.org/using-emailvisions-campaigncommander-apis-from-php/"/>
+    <updated>2013-06-28T18:38:00+04:00</updated>
+    <id>http://odino.org/using-emailvisions-campaigncommander-apis-from-php</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/emailvision-template.png"></p>
 
-<p>We initially implemented all of this
-<a href="/configuring-a-symfony2-application-to-support-soa/">inside a Symfony2 bundle</a>,
-but soon realized that we could
-abstract and generalize our implementation
-in order to extract it into a library for the public
-domain, and that&rsquo;s how
-<a href="https://github.com/namshi/notificator">notificator</a>
-was born.</p>
+<p>This weekend I finally had the chance to
+work a couple hours on the <code>namshi/emailvision</code>
+library, which lets you integrate CampaignCommander
+as (email) notification solution in your
+PHP projects.</p>
+
+<p>I already had a proof-of-concept of this library since weeks,
+and it was already pushed to Github, but since I had no
+valid API account to do some integration tests, I
+could not really &ldquo;publicize&rdquo; it.</p>
+
+<p>Right now I refactored the library and added a couple integration
+tests which are working flawlessy, so, in this post, I&rsquo;m
+going to show you how easy it is to send emails with
+Emailvision&rsquo;s solution directly from PHP.</p>
 
 <!-- more -->
 
 
-<h2>Aim of the library: a monolog-like implementation for notifications</h2>
-
-<p>The aim of this library is to provide a very
-clean abstraction for a task, handling notifications,
-that can be spread across multiple channels (for example
-emails, skype messages, desktop notifications, &hellip;):
-by following this target, we soon realized that by merging
-together 2 simple things, <a href="https://github.com/Seldaek/monolog">Monolog</a>
-and the concept of <a href="http://en.wikipedia.org/wiki/Observer_pattern">event dispatching</a>,
-we could have easily reached our goal.</p>
-
-<p>Honestly, it&rsquo;s true that you can achieve the same goal with
-Monolog, but the problem, there, is that it&rsquo;s a library
-specifically built for logging, thus, when your domain
-deals with simple notifications, your code would really
-be inexpressive.</p>
-
-<p>Even though <strong>Notificator is way simpler</strong>, we took a lot
-of inspiration from Monolog: for example, the concept of
-handlers is a total steal ;&ndash;)</p>
-
 <h2>Installation</h2>
 
-<p>The library is available via composer,
-as you can see from its
-<a href="https://packagist.org/packages/namshi/notificator">packagist page</a>.</p>
+<p>As usual with the latest libraries built for PHP,
+the installation can simply be done with composer,
+as the library itself is available over
+<a href="https://packagist.org/packages/namshi/emailvision">packagist</a>:</p>
 
-<p>Using semantic versioning, I recommend you
-to pick a minor release (<code>1.0</code>, for example)
-and stick to it in your <code>composer.json</code>:
-what we try to do is that, if there is a BC break
-in the API, we increase the minor version (<code>1.0.X</code> to <code>1.1.X</code>, for example).</p>
-
-<p>At the end, you <strong>should</strong> require it like this:</p>
-
-<p><code>
-"namshi/notificator": "1.0.*"
+<p><code>bash composer.json
+"namshi/emailvision": "dev-master"
 </code></p>
 
-<h2>Hello world! example</h2>
+<p>then you simply have to run a <code>php composer.phar update</code> and
+you can start utilizing it in your codebase (the namespace is
+<code>Namshi\Emailvision</code>, as this library has been built in the
+context of our company, <a href="http://en-ae.namshi.com">namshi.com</a>).</p>
 
-<p>Just to give a very rough and simple example on how this
-library works, let&rsquo;s see how you can trigger a notification
-via <strong>both</strong> email (with PHP&rsquo;s <code>mail</code> function<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>)
-and the <code>notify-send</code> utility available on ubuntu (I&rsquo;ve already spoke
-about it in <a href="/desktop-notifications-for-phpunit-tests-on-ubuntu/">a previous post</a>).</p>
+<p>As of today, the latest stable release is <code>1.0.0</code>, which is the
+one we recommend to run in production &ndash; keep an eye on packagist
+if we come up with changes, but I bet it won&rsquo;t change that much
+in the near future, as emailvision&rsquo;s API is pretty simple.</p>
 
-<p>First of all, we would need to create a <em>plain-old-php-class</em>
-representing the notification, which implements 2 interfaces:</p>
+<h2>Usage</h2>
 
-<p>``` php
-&lt;?php</p>
-
-<p>use Namshi\Notificator\Notification;
-use Namshi\Notificator\NotificationInterface;</p>
-
-<p>interface NotifySendNotificationInterface extends NotificationInterface
-{</p>
-
-<pre><code>public function getMessage();
-</code></pre>
-
-<p>}</p>
-
-<p>interface EmailNotificationInterface extends NotificationInterface
-{</p>
-
-<pre><code>public function getAddress();
-public function getSubject();
-public function getBody();
-</code></pre>
-
-<p>}</p>
-
-<p>class DoubleNotification extends Notification implements NotifySendNotificationInterface, EmailNotificationInterface
-{</p>
-
-<pre><code>protected $address;
-protected $body;
-protected $subject;
-
-public function __construct($address, $subject, $body, array $parameters = array())
-{
-    parent::__construct($parameters);
-
-    $this-&gt;address  = $address;
-    $this-&gt;body     = $body;
-    $this-&gt;subject  = $subject;
-}
-
-public function getAddress()
-{
-    return $this-&gt;address;
-}
-
-public function getSubject()
-{
-    return $this-&gt;subject;
-}
-
-public function getBody()
-{
-    return $this-&gt;body;
-}
-
-public function getMessage()
-{
-    return $this-&gt;getBody();
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<p>At this point we need 2 notification handlers, which
-will separately handle the notification:</p>
+<p>After you configure transactional email templates in the
+CampaignCommander web interface, you just need to keep in mind
+(and in your code) the unique identifier and the security tag
+of the template; the rest is very straightforward:</p>
 
 <p>``` php
 &lt;?php</p>
 
-<p>use Namshi\Notificator\Notification\Handler\HandlerInterface;
-use Namshi\Notificator\NotificationInterface;</p>
+<p>use Namshi\Emailvision\Client;</p>
 
-<p>class NotifySendNotificationHandler implements HandlerInterface
-{</p>
+<p>$config = array(</p>
 
-<pre><code>public function shouldHandle(NotificationInterface $notification)
-{
-    return $notification instanceOf NotifySendNotificationInterface;
-}
-
-public function handle(NotificationInterface $notification)
-{
-    shell_exec(sprintf('notify-send "%s"', $notification-&gt;getMessage()));
-}
+<pre><code>'random'            =&gt; 'UNIQUE_IDENTIFIER',
+'encrypt'           =&gt; 'SECURITY_TAG',
+'senddate'          =&gt; new \DateTime(),
+'uidkey'            =&gt; 'EMAIL',
+'stype'             =&gt; 'NOTHING',
 </code></pre>
 
-<p>}</p>
+<p>);</p>
 
-<p>class EmailNotificationHandler implements HandlerInterface
-{</p>
-
-<pre><code>public function shouldHandle(NotificationInterface $notification)
-{
-    return $notification instanceOf EmailNotificationInterface;
-}
-
-public function handle(NotificationInterface $notification)
-{
-    mail($notification-&gt;getAddress(), $notification-&gt;getSubject(), $notification-&gt;getBody());
-}
-</code></pre>
-
-<p>}
+<p>$emailvisionClient = new Client($config);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#115;&#x6f;&#109;&#101;&#x6f;&#x6e;&#101;&#64;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#109;">&#x73;&#111;&#109;&#x65;&#111;&#110;&#x65;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#109;</a>&rdquo;);
 ```</p>
 
-<p>We&rsquo;re basically there: with a bunch of code we can now trigger
-a notification both via email and <code>notify-send</code>:</p>
+<p>The nice thing here is that Emailvision lets you schedule
+emails, so you can just play with the <code>senddate</code> parameter
+and set it to the future &ndash; just be aware that it needs to
+be a <code>DateTime</code> instance:</p>
 
 <p>``` php
 &lt;?php</p>
 
-<p>// create the manager and assign handlers to it
-use Namshi\Notificator\Manager;</p>
+<p>use Namshi\Emailvision\Client;</p>
 
-<p>$manager = new Manager();
-$manager->addHandler(new NotifySendNotificationHandler());
-$manager->addHandler(new EmailNotificationHandler());</p>
+<p>$date = new \DateTime(&lsquo;2025-01-01 12:45:00&rsquo;);</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x61;&#108;&#x65;&#115;&#x73;&#x61;&#x6e;&#x64;&#114;&#111;&#x2e;&#x6e;&#x61;&#100;&#x61;&#x6c;&#105;&#110;&#64;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#111;&#109;">&#x61;&#108;&#101;&#x73;&#x73;&#x61;&#x6e;&#100;&#114;&#x6f;&#x2e;&#110;&#x61;&#100;&#97;&#108;&#x69;&#x6e;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$config = array(</p>
 
-<p>//  trigger the notification
-$manager->trigger($notification);
+<pre><code>'random'            =&gt; 'UNIQUE_IDENTIFIER',
+'encrypt'           =&gt; 'SECURITY_TAG',
+'senddate'          =&gt;  $date,
+'uidkey'            =&gt; 'EMAIL',
+'stype'             =&gt; 'NOTHING',
+</code></pre>
+
+<p>);</p>
+
+<p>$emailvisionClient = new Client($config);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x73;&#111;&#109;&#101;&#111;&#x6e;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#x73;&#x6f;&#x6d;&#101;&#x6f;&#110;&#101;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>&rdquo;);
 ```</p>
 
-<p><img class="right" src="/images/notification-email.png"></p>
+<p>This code will tell CampaignCommander to trigger
+the email on the 1st of January 2025, at 12:45.</p>
 
-<p>At this point, if you run this example<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, you should
-see a notification popping up on your desktop and, in a few seconds,
-you will also receive an email to the address you&rsquo;ve given, with the subject
-&ldquo;Test email&rdquo; and &ldquo;Hello!&rdquo; in the body.</p>
+<h2>Dynamic content in your emails</h2>
 
-<p>By the way, if you want to see some examples on
-how the library works, <a href="https://github.com/namshi/notificator/tree/master/examples">check them out on github</a>.</p>
+<p>If we would stop here, the library would be pretty
+useless, since the power of transactional emails
+is to be able to serve dynamic content: in fact, the API
+allows you to pass as much variables as you want
+that can be configured and used in the email templates
+you&rsquo;ve created in emailvision&rsquo;s web interface.</p>
 
-<h2>Sending notifications via RabbitMQ</h2>
+<p>To do so, once you call the <code>sendEmail</code> method of the
+client, just pass an array of variables (strings) as second
+argument:</p>
 
-<p>It is no news that we heavily rely on
-<a href="http://odino.org/refactoring-your-architecture-go-for-soa/">RabbitMQ in our SOA</a>,
-so it&rsquo;s pretty obvious that, to implement the notification service,
-we send messages containing the notifications, that will
-be intercepted by our notification service, which relies on
-Notificator.</p>
+<p>``` php
+&lt;?php</p>
 
-<p>To do so, we take advantage of the great job done by
-<a href="https://twitter.com/old_sound">Alvaro Videla</a>
-on RabbitMQ for PHP and Symfony2, through the
-<a href="https://github.com/videlalvaro/php-amqplib">PHP AMQP library</a>
-and the <a href="https://github.com/videlalvaro/RabbitMqBundle">RabbitMQ bundle</a>.</p>
+<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#x73;&#111;&#109;&#101;&#x6f;&#x6e;&#101;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;">&#x73;&#x6f;&#109;&#101;&#111;&#x6e;&#101;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a>&rdquo;, array(</p>
 
-<p>If you are familiar with them, you know that in order to consume messages,
-you have to declare your consumer as a callback of the actual, generic
-rabbitmq consumer, through the <code>config.yml</code> file:</p>
-
-<p>``` yaml app/config/config.yml
-old_sound_rabbit_mq:</p>
-
-<pre><code>consumers:
-    notification:
-        connection: default
-        exchange_options: {name: 'notifications', type: direct}
-        queue_options:    {name: 'notifications'}
-        callback:         namshi.notification.consumer
+<pre><code>'name' =&gt; 'Alex!',
 </code></pre>
 
-<p>services:</p>
+<p>));
+```</p>
 
-<pre><code>namshi.notification.consumer:
-    class: Namshi\Notificator\Messaging\RabbitMQ\Symfony2\Consumer
-    arguments: [@namshi.notification.manager]
-namshi.notification.manager:
-    class: Namshi\Notificator\Manager
-    calls:
-      - [addhandler, [@namshi.notification.handler.notify_send] ]
-namshi.notification.handler.notify_send:
-    class: Namshi\Notificator\Notification\Handler\NotifySend
+<p>and then you will start receiving personalized emails:</p>
+
+<p><img class="center" src="/images/emailvision-received.png"></p>
+
+<h2>Running the tests</h2>
+
+<p>Of course, we&rsquo;ve added some unit and <strong>integration</strong>
+tests which let us refactor the library and add
+functionalities to it without regressions; to run
+the test suite, just use <code>phpunit</code>:</p>
+
+<p>``` bash
+cd /path/to/namshi/emailvision</p>
+
+<p>phpunit
+```</p>
+
+<p>You will notice that even though the tests should contain
+some actual HTTP calls, they are very fast: this is because,
+unless you provide some real credentials for emailvision,
+integration tests aren&rsquo;t run by default.</p>
+
+<p>To run them, you will have to create a new dummy email template
+on CampaignCommander and store the credentials you get
+after saving it and the email address that is going to
+receive the test emails in a file named <code>emailvision.config</code>
+in your system&rsquo;s temporary folder (you can get it by
+running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
+
+<p>``` php /tmp/emailvision.config
+&lt;?php</p>
+
+<p>$encrypt    = &lsquo;email_template_security_tag&rsquo;;
+$random     = &lsquo;email_template_unique_id&rsquo;;
+$email  = &lsquo;<a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#121;&#111;&#x75;&#x72;&#x2e;&#97;&#x64;&#x64;&#x72;&#101;&#x73;&#x73;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#121;&#111;&#117;&#114;&#x2e;&#x61;&#x64;&#100;&#114;&#x65;&#115;&#x73;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a>&rsquo;;
+```</p>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Back in track with OrientDB]]></title>
+    <link href="http://odino.org/back-in-track-with-orientdb/"/>
+    <updated>2012-04-20T15:26:00+04:00</updated>
+    <id>http://odino.org/back-in-track-with-orientdb</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s been a while since I don&rsquo;t release any update about
+Orient, the PHP data mapper for OrientDB: we recently got
+back on track and I have a few interesting news.</p>
+
+<!-- more -->
+
+
+<p>I just moved to Dubai, as you may know, so the last couple
+of months have been a huge mess for me, while David was
+doing some <a href="https://github.com/congow/Orient/tree/persistence">major experiments</a>
+for the library: we only had the time, at the end of March,
+to talk about OrientDB and the ODM at the
+<a href="http://www.slideshare.net/ingdavidino/graph-db-inphp">Codemotion</a>.</p>
+
+<p>Since in the last week we restarted pairing together to
+finalize a few open things in the library, I will explain what
+is the current status of Orient.</p>
+
+<h2>Beta-5</h2>
+
+<p>We decided to put back our effort on the <code>beta-5</code> release,
+instead of letting me complete the issues still belonging
+to this version by myself.</p>
+
+<p>In these days we are finalizing the integration tests for
+OrientDB&rsquo;s native data types, and refactoring a bit the
+implementation of the <strong>hydration mechanism</strong>, which will be more
+configurable: we will release an ODM able to let the developer
+decide what to do when an hydration error occurs (in other words,
+you mapped an attribute as integer but in the OrientDB record
+that attribute is mistakenly set as a date): before this
+refactoring process <code>null</code> was returned by default, but now
+you&rsquo;ll be able to decide whether to <a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Formatter/Caster.php#L520">force the casting or raise an exception</a> for these errors.</p>
+
+<p>As we complete these 2 tasks, we will remove the TODOs from
+the codebase and then we will release this version which,
+I remind it for those who are not up-2-date with the library&rsquo;s
+lifecycle, is the one introducing <strong>hydration</strong>, which is the
+ability to run SQL queries against an OrientDB instance and map
+the results as PHP objects.</p>
+
+<p>Similarly to Doctrine2, Orient offers the ability to map objects
+from PHP to OrientDB via annotations:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Congow\Orient\ODM\Mapper\Annotations as ODM;</p>
+
+<p>/<em>*
+* @ODM\Document(class=&ldquo;Address&rdquo;)
+</em>/
+class Address
+{</p>
+
+<pre><code>/**
+ * @ODM\Property(type="link")
+ */
+public $city;
 </code></pre>
+
+<p>}</p>
 
 <p>```</p>
 
-<p>We already provide a <a href="https://github.com/namshi/notificator/blob/master/src/Namshi/Notificator/Messaging/RabbitMQ/Symfony2/Consumer.php">very basic consumer callback</a>
-to be used with the RabbitMQ bundle.</p>
+<h2>Doctrine ODM</h2>
 
-<p>The main idea behind this is that the publisher serializes the notification
-and sends it through RabbitMQ, while the consumer unserializes and
-triggers it through the <code>Manager</code>. The publisher code would be very, very simple:</p>
+<p>From the beginning, we&rsquo;ve been committed in finding a way to make
+<a href="https://github.com/congow/Orient/blob/master/src/Congow/Orient/Contract/Protocol/Adapter.php#L23">interoperability</a>
+a feature of Orient: another side of this issue is the fact that
+we tried to stick to Doctrine2&rsquo;s design for lots of our problems,
+from the implementation of mapping to lazy-loading through
+auto-generated proxy classes.</p>
 
-<p>``` php
-&lt;?php</p>
+<p>In the last weeks I pro-actively asked the Doctrine2 community if they
+would be happy in welcoming this project in their community, and the
+responses we received were positive: as a result, after going out with
+the <code>beta-5</code> release we will refactor the library&rsquo;s namespaces and move
+the repository on Github.</p>
 
-<p>$publisher = $container->get(&lsquo;old_sound_rabbit_mq.notifications_producer&rsquo;);</p>
+<p>There will be lots of things to do, lot of code to refactor, lot of
+complaints from the Doctrine2 core members because of our &ldquo;strange&rdquo;
+code, but this is a huge step towards a more robust PHP library
+for OrientDB.</p>
 
-<p>$notification = new MySampleNotification(&ldquo;man, this comes from RabbitMQ and Symfony2!&rdquo;);</p>
+<h2>Beta-6</h2>
 
-<p>$publisher->publish(serialize($notification));
-```</p>
+<p>After the incubation inside the Doctrine organization we will re-start
+working on the <code>beta-6</code> version, which will bundle <strong>persistence</strong> &ndash; the
+ability to persist mapped PHP objects into OrientDB, using a couple
+well known design patterns like the <a href="http://martinfowler.com/eaaCatalog/unitOfWork.html">unit of work</a>
+and the <a href="http://martinfowler.com/eaaCatalog/identityMap.html">identity map</a>.</p>
 
-<p>and to start consuming messages you would only need to
-start the consumer:</p>
+<p>I won&rsquo;t commit myself in an estimate: <strong>this will take a long time</strong>,
+especially if only me and <a href="http://davidfunaro.com">David</a> will keep
+the good work on this library.</p>
 
-<p><code>
-php app/console rabbitmq:consumer -w notification
-</code></p>
+<p>But since we had <strong>huge contributions</strong> from
+<a href="https://github.com/nrk">Daniele Alessandri</a> and
+are gonna be part of the Doctrine community, I bet we will be able to
+deliver what promised in less than then what I currently think.</p>
 
-<h2>FOSS</h2>
+<h2>RC</h2>
 
-<p>I&rsquo;ve tried to write a pretty extensive
-<a href="https://github.com/namshi/notificator/">README</a> that you can use as a reference, on Github
-(check the <a href="https://github.com/namshi/notificator/tree/master/tests">tests</a>, as well, to get an idea of the internals):
-if you spot any typo or mistake, don&rsquo;t hesitate to
-reach out and point it out.</p>
+<p>Last but not least, there will be a few planned refactorings and feature
+add-ons that we don&rsquo;t need now but are mandatory for a decent stable
+version, which will come as we roll out our first <code>RC</code>.</p>
 
-<p>This library is part of the efforts,
-from <a href="https://github.com/namshi">Namshi</a>,
-to be able to give back to the
-OSS community as much as possible: you
-are therefore strongly encouraged to open a PR
-or express your opinion if you find that something
-should be fixed or could be improved (there&rsquo;s a lot
-of room for improvement, starting by implementing
-many more <a href="https://github.com/namshi/notificator/tree/master/src/Namshi/Notificator/Notification/Handler">handlers</a>).</p>
+<h2>Thanks, again</h2>
+
+<p>I could not keep my effort and motivation constant during
+<a href="https://github.com/congow/Orient/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">this year</a>
+without your many &ldquo;thank you&rdquo;, your enthusiasm and
+encouraging words: this is what makes me eager to type
+with my fat fingers new LoCs dealing with PHP and NoSQL.</p>
+
+<p>This won&rsquo;t be a library I wrote<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, this is something an entire
+community was waiting for and contributed to.</p>
+
+<p>So, <em>thank y'all</em>.</p>
 
 <p><div class="footnotes">
 <span>
 Notes
 </span>
 	<ol>
-		<li id='fn:1'>Only used for its simplicity here, please do not use it in production, use stuff like SwiftMailer instead! <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I mostly took the example code from the README of the library on github, so forgive me if there are synthax errors or some typo. You can anyhow have a look at the examples (in the examples/ folder) to check some working code <a href='#fnref:2' rev='footnote'>↩</a></li>
+		<li id='fn:1'>Although I still remember the first commit on Github: I was only wearing my underwear, alone in the hall of my flat <a href='#fnref:1' rev='footnote'>↩</a></li>
 	</ol>
 </div>
 </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
+    <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
+    <updated>2012-04-16T00:38:00+04:00</updated>
+    <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>In these days we finalized the last parts of the official
+<a href="https://github.com/robowhois/robowhois-php">PHP client for the Robowhois API</a>
+, and here are the changes for the <code>0.9.0</code> version.</p>
+
+<!-- more -->
+
+
+<h2>Parts and properties API</h2>
+
+<p>As part of our job, we needed to implement the last
+2 API endpoints provided by Robowhois, <code>properties</code>
+and <code>parts</code>.</p>
+
+<p>Everything is documented in the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/README.md">README</a>
+but you can also follow the examples under the <code>sample/</code> directory:</p>
+
+<p>``` php Using the properties API
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require &lsquo;vendor/.composer/autoload.php&rsquo;;</p>
+
+<p>$robowhois = new Robowhois(&lsquo;INSERT-YOUR-API-KEY-HERE&rsquo;);</p>
+
+<p>try {</p>
+
+<pre><code>$domain = $robowhois-&gt;whoisProperties('robowhois.com');
+
+echo $domain['properties']['created_on'] . "\n";
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` php Using the parts API
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Exception;</p>
+
+<p>require &lsquo;vendor/.composer/autoload.php&rsquo;;</p>
+
+<p>$robowhois = new Robowhois(&lsquo;INSERT-YOUR-API-KEY-HERE&rsquo;);</p>
+
+<p>try {</p>
+
+<pre><code>$domain = $robowhois-&gt;whoisParts('robowhois.com');
+
+echo $domain['parts'][0]['body'] . "\n";
+</code></pre>
+
+<p>} catch (Exception $e) {</p>
+
+<pre><code>echo "The following error occurred: " . $e-&gt;getMessage();
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Magic objects, behaving like arrays</h2>
+
+<p>We implemented the <code>\ArrayObject</code> interface for the objects
+returned by the API, which means that now you can access
+the results of an API call just like an array:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$account = $robowhois->account();</p>
+
+<p>// $account is an instance of Robowhois\Account
+echo sprintf(&lsquo;You have %d API calls left&rsquo;, $account[&lsquo;credits_remaining&rsquo;]);
+```</p>
+
+<p>but, for those like us who like the OO synthax, we implemented
+some magic to let you retrieve those values via getters, which
+are built <em>on-the-fly</em> thanks to PHP&rsquo;s <code>__call()</code> method:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>echo $account->getCreditsRemaining();
+```</p>
+
+<p>Getters are a camelized version of the array keys, and are
+built thanks to the
+<a href="https://github.com/robowhois/robowhois-php/blob/master/composer.json#L28">Doctrine Inflector</a>.</p>
+
+<h2>Mapping the existing API</h2>
+
+<p>We renamed the methods accessing the API in order to 100% reflect
+the ones exposed by the API, also used in the
+<a href="https://github.com/robowhois/robowhois-ruby">Ruby client</a>: so now the
+<code>Robowhois\Robowhois</code> object has:</p>
+
+<ul>
+<li><code>-&gt;account()</code></li>
+<li><code>-&gt;whois()</code></li>
+<li><code>-&gt;whoisProperties()</code></li>
+<li><code>-&gt;whoisParts()</code></li>
+<li><code>-&gt;whoisRecord()</code></li>
+<li><code>-&gt;whoisAvailability()</code></li>
+</ul>
+
+
+<h2>Simplified exceptions</h2>
+
+<p>We initially added tons of exceptions but we eventually
+decide to keep the only <code>Robowhois\Exception</code> class.</p>
+
+<h2>Now?</h2>
+
+<p>Wanna retrieve WHOIS informations in PHP at a
+<a href="http://www.robowhois.com/pricing">decent price</a>?</p>
+
+<p>Start consuming the Robowhois APIs, with PHP.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A PHP library to retrieve WHOIS informations]]></title>
+    <link href="http://odino.org/a-php-library-to-retrieve-whois-informations/"/>
+    <updated>2012-02-03T03:40:00+04:00</updated>
+    <id>http://odino.org/a-php-library-to-retrieve-whois-informations</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
+	<li>
+		<a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+	</li>
+	<li>
+		<a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+	</li>
+	<li>
+		<a href="/checking-a-domain-s-availability-with-php/">Checking a domain's availability with PHP</a>
+	</li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+</p>
+
+<p>In this days me and my friend <a href="http://davidfunaro.com">David</a> are renewing our committment
+to <em>open source</em>: our next project is going to be an <strong>SDK for a
+WHOIS webservice</strong>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/robodomain.png"></p>
+
+<p>Last week we got in touch with Simone, the mind behind <a href="http://robodomain.com">Robodomain</a>,
+a startup delivering a really useful product, which lets you</p>
+
+<p><blockquote><p>Keep track of all your domains in one place.<br/>Check domain status, log transactions, orders and payments, store notes and enjoy our network tools.</p><footer><strong>Robodomain <a href="http://robodomain.com">http://robodomain.com</a> Official website</strong></footer></blockquote></p>
+
+<p>To be able to develop its own software (in Ruby) he started writing a <a href="http://www.ruby-whois.org/">Gem</a>
+and then realized that this kind of stuff could be useful to other people too: he decided to
+open a public API &ndash; you only need to pay a bunch of bucks to use it &ndash; and launch a new, free,
+universal WHOIS service that everyone can enjoy.</p>
+
+<p>We are taking the stage in order to develop the official <strong>PHP SDK</strong> for the webservice, so
+&ndash; along with the development of <a href="http://github.com/congow/Orient">Orient</a> &ndash; you&rsquo;ll read here
+about this new library in the next weeks.</p>
+
+<p>We have just kickstarted the project, designed the first interfaces, implemented a bunch of
+methods and tested them: if you are courious enough you can spot them over the internet, but
+I won&rsquo;t link and share what we developed until our next DevMeeting, in which we will do the
+majority of the work.</p>
+
+<p>However I want you to enjoy a preview of what you will be able to do with it (just some explanatory LOCs):</p>
+
+<p>``` php This is definitely NOT gonna be the code you&rsquo;ll be using, just an example of how things work now
+&lt;?php</p>
+
+<p>use Robowhois\Robowhois;
+use Robowhois\Http\Client;
+use Buzz\Browser;</p>
+
+<p>$robowhois = new Robowhois($apiKey, new Client(new Browser()));</p>
+
+<p>if ($robowhois->isAvailable(&ldquo;google.com&rdquo;)) {
+  echo &ldquo;Hey man, go register google.com, seems that it&rsquo;s free!&rdquo;;
+} else {
+  $whois = $robodomain->whoisProperties(&lsquo;google.com&rsquo;);</p>
+
+<p>  echo &ldquo;Man, you&rsquo;ll need to wait until &rdquo; . $whois->expiresAt()&ndash;>format(&lsquo;Y-m-d H:i:s&rsquo;);
+  // $whois->expiresAt() returns a \DateTime object
+}</p>
+
+<p>```</p>
+
+<p>As far as we&rsquo;ve already done, this SDK uses Symfony2&rsquo;s <a href="https://github.com/symfony/HttpFoundation">HttpFoundation</a>
+and <a href="https://github.com/kriswallsmith/Buzz">Buzz</a> to properly handle
+communication with the webservice through the HTTP protocol: we are open to any suggestion, so
+if you know a very good HTTP client that could replace Buzz<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> we would be very
+glad to evaluate it.</p>
+
+<p>The standard bootstrap of the library will be also using Symfony2&rsquo;s <a href="https://github.com/symfony/DependencyInjection">dependency injection
+container</a>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Not Zend\Http\Client <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The current status of my work with OrientDB]]></title>
+    <link href="http://odino.org/the-current-status-of-my-work-with-orientdb/"/>
+    <updated>2011-05-24T14:09:00+04:00</updated>
+    <id>http://odino.org/the-current-status-of-my-work-with-orientdb</id>
+    <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
+
+<!-- more -->
+
+
+<p>Great <a href="news:">news:</a> <strong>we are compatible with the RC1 version of OrientDB</strong> ( the README on GitHub is not updated, sorry ).</p>
+
+<p>Since the RC2 snapshot has been released, I&rsquo;ll look if something is broken.</p>
+
+<h2>What&rsquo;s new?</h2>
+
+<p>As <a href="http://www.odino.org/348/the-query-builder-for-orientdb">I said</a>, the huge work for the query builder has been done: you can find it in the <code>beta-2</code> tag.</p>
+
+<p>Now we&rsquo;re only waiting integration tests and the resolution of <a href="http://code.google.com/p/orient/issues/detail?id=374&amp;q=quotes">a bug in OrientDB&rsquo;s SQL parser</a>.</p>
+
+<h2>The old stuff?</h2>
+
+<p>I fixed some links from my first post talking about <a href="http://www.odino.org/328/graph-in-php-through-orientdb">OrientDB and PHP</a>, through the binding of the library.</p>
+
+<p>If you want to use it, just use the <code>beta-1</code> tag.</p>
+
+<h2>What&rsquo;s coming?</h2>
+
+<p>We plan to have 4 beta releases in the next &frac34; months:</p>
+
+<ul>
+<li><code>beta-3</code>, which marks the end of the whole query builder, meaning that all the new SQL commands are integrated in the QB and integration tests are done</li>
+<li><code>beta-4</code>, where we will be able to retrieve hydrated records from a query executed with the QB: it obviously includes annotations on your domain POPOs</li>
+<li><code>beta-5</code>, in which you&rsquo;ll be able to manage repository classes</li>
+<li><code>beta-6</code>, when you will be able to persist records through the document manager</li>
+</ul>
+
+
+<h2>Wanna help?</h2>
+
+<p>Help would be really appreciated: not only in writing bunches of code, but also in helping with the design of the whole library; for example, I just asked in OrientDB ML questions about <a href="https://groups.google.com/d/topic/orient-database/0hPWojYPJ9Q/discussion">protocols interoperability in PHP</a>.</p>
+
+<p>Feedbacks on this kind of stuff are really welcome.</p>
+
+<h2>What&rsquo;s ok with this library?</h2>
+
+<p>The aim is to build a general purpose library to manage OrientDB from PHP: having loosely coupled components means that you&rsquo;ll be able to use the query builder to build SQL statements, or the binding to query OrientDB with raw strings through the HTTP protocol.</p>
+
+<p>Keyword: decoupling; that&rsquo;s why we&rsquo;re already thinking about <strong>interoperability</strong>.</p>
+
+<p>Anton Terekhov is building the binding for the <a href="https://github.com/AntonTerekhov/OrientDB-PHP">binary protocol</a>, so we don&rsquo;t want, for example, to force people to use the HTTP one, and that&rsquo;s why the design of the whole library is made preventing coupling between components.</p>
+
+<h2>Ah, I was forgetting about&hellip;</h2>
+
+<p>You can download the library and, with phpunit, run the tests ( the integration one, for the binding, are disabled by default, since they require a working instance of OrientDB ) with:</p>
+
+<p><code>
+phpunit --configuration=Test/PHPUnit/phpunit.xml
+</code></p>
+
+<p>from the root of the library.</p>
+
+<p>I&rsquo;ve setup also the PHP_CodeSniffer code analysis, just run:</p>
+
+<p><code>
+chmod +x report.sh
+./report.sh
+</code></p>
+
+<p>and look into <code>log/report/index.html</code> with a browser.</p>
 ]]></content>
   </entry>
   
