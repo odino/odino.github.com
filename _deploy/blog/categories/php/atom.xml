@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: php | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: PHP | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-07-13T18:06:30+04:00</updated>
+  <updated>2013-08-01T05:30:45+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,432 +14,36 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
-    <link href="http://odino.org/doctrine-80-percent-faster/"/>
-    <updated>2013-04-21T10:54:00+04:00</updated>
-    <id>http://odino.org/doctrine-80-percent-faster</id>
-    <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
-caught my attention last week, and I want to
-share its insights with you.</p>
+    <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
+    <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
+    <updated>2013-08-01T05:24:00+04:00</updated>
+    <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
+    <content type="html"><![CDATA[<p>At the end of August I will
+be travelling to reach SF and
+the <a href="http://cakefest.org/">CakeFest</a>, the annual
+conference about
+<a href="http://cakephp.org/">CakePHP</a>.</p>
 
 <!-- more -->
 
 
-<p>The good <a href="https://github.com/Ocramius">Marco Pivetta</a>
-took initiative in adding proxy generation for hydrators,
-and in <a href="https://github.com/Ocramius/ProxyManager/pull/29">a lonely branch</a>
-he&rsquo;s pretty far with the progress on the matter: his
-latest tests show that the <a href="https://travis-ci.org/Ocramius/ProxyManager/jobs/6485136#L127">hydration process is improved by 80%</a>
-which is a very good news, considered metadata-based
-software usually need to find a way to drastically
-improve performances because of the basic lack of
-performances due to having to read metadata.</p>
-
-<p>Hoping to see this changes integrated in a stable
-branch very soon!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
-    <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
-    <updated>2013-03-29T14:14:00+04:00</updated>
-    <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
-back in Italy, since I was missing my friends in Rome
-since <strong>exactly</strong> a year and the last time my parents saw me it
-was 6 months ago.</p>
-
-<!-- more -->
-
-
-<p>Fun thing is, since I can&rsquo;t miss the opportunity
-of getting back in touch with a few people, I will
-be joining 4 tech events:</p>
-
-<ul>
-<li><a href="http://rome.codemotionworld.com/">Codemotion</a> &ndash; already happened, I was there on the 23rd &ndash; the conference open to
-all the programming languages, in Rome</li>
-<li><a href="http://roma.grusp.org/">PHP User group Rome</a>, a meetup that is held monthly, for one of
-the user groups that I helped launching here in Italy, again in Rome, where I gave
-a talk about assembling a mid-sized PHP team</li>
-<li><a href="http://www.phptostart.it/">PHP.TO.START</a> &ndash; happening <strong>right now </strong>&ndash; a yearly event for the
-north-western italian PHP community, where I&rsquo;ll be presenting the same talk I had at
-the PUG Rome</li>
-<li><a href="http://friuli.grusp.org/">PHP User Group Friuli</a>, another meetup organized by one of the
-italian PHP User Groups, where I&rsquo;ll be presenting an <em>unknown</em> topic (at least for now)</li>
-</ul>
-
-
-<p>An <strong>important thing</strong>: I am actively recruiting for our company,
-<a href="http://en-ae.namshi.com/careers/technology/">Namshi</a>, so if you
-are interested in one of the open positions that we have right now
-(in particular, Lead Developer and PHP Developer), feel free to approach
-me if you find me at the upcoming events (in Turin and Udine).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHP: 'The script tried to execute a method or access a property of an incomplete object']]></title>
-    <link href="http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
-    <updated>2013-01-31T13:28:00+04:00</updated>
-    <id>http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
-    <content type="html"><![CDATA[<p>Have you ever got this error in PHP? I bet no, never.</p>
-
-<!-- more -->
-
-
-<p>Basically, it happens when you serialize an object
-of class <code>A</code> and try to unserialize it when class
-<code>A</code> doesn&rsquo;t exist anymore.</p>
-
-<h2>How (the hell) do I get there?</h2>
-
-<p>If you are working with auto-generated proxy classes,
-store objects in the session and then clear your
-cache, once you retrieve an object from the session
-you are going to face it. A solution is to
-re-generate all the proxies before retrieving objects
-from the session<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<p><div class="footnotes">
-<span>
-Notes
-</span>
-	<ol>
-		<li id='fn:1'>in an ideal world, at every deployment you clear and re-generate proxies <a href='#fnref:1' rev='footnote'>↩</a></li>
-	</ol>
-</div>
-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Profiling PHP applications from the browser]]></title>
-    <link href="http://odino.org/profiling-php-applications-from-the-browser/"/>
-    <updated>2013-01-25T22:38:00+04:00</updated>
-    <id>http://odino.org/profiling-php-applications-from-the-browser</id>
-    <content type="html"><![CDATA[<p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
-<a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
-a web-based profiler for PHP:
-now I&rsquo;d like to spend some more time
-giving an overview on how to install
-and use it, as well as <strong>what to look for
-when profiling an application</strong>.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="/images/webgrind-call-graph-detail.png"></p>
-
-<h2>Profiling in a few words</h2>
-
-<p>As PHP developers, we are rarely used to
-profiling: essentially, most of our
-applications are not bound to extensive
-CPU usage or insanely huge data-processing operations;
-the scope of the language is very clear and
-even though we <strong>might</strong> need to profile, once
-in a while, it&rsquo;s unlikely that we will end up
-having problems like
-<a href="/book-review-data-intensive-text-processing-with-mapreduce/">optimizing MapReduce algorhitms</a>.</p>
-
-<p>But sometimes we <strong>do</strong> need to profile,
-and this will bring on the table bottlenecks of
-your applications: within a session of inspection,
-you will likely find optimizations that would lead to
-a <code>20/30%</code> faster execution time, by just changing
-your backend (PHP) code<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<h2>Why Webgrind</h2>
-
-<p>Among all the available profilers for PHP, I
-choose to go with Webgrind for a bunch of reasons:</p>
-
-<ul>
-<li>nowadays, I am mostly developing on a Mac<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, so
-<a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
-wasn&rsquo;t an option</li>
-<li>I didn&rsquo;t want to install <a href="https://github.com/facebook/xhprof">XHPROF</a>
-as it usually takes a few minutes,
-even though is probably the best profiler for PHP: facebook uses it
-<strong>in production</strong>, and it&rsquo;s able to generate a lot of reports that
-would make you face performance optimizations from various perspectives</li>
-<li>Webgrind offers a zero-setup installation</li>
-</ul>
-
-
-<h2>Installation with XDebug</h2>
-
-<p><a href="http://xdebug.org/">XDebug</a> is a must for profiling, as it&rsquo;s
-the tool through which we can generate the
-<a href="http://valgrind.org/docs/manual/cg-manual.html">Cachegrind</a> files, that are basically reports
-on the costs of your application&rsquo;s calls.</p>
-
-<p>To enable XDebug&rsquo;s profiling you will have to
-tweak your <code>php.ini</code>&rsquo;s configuration:</p>
-
-<p><code>bash Enabling profiling with XDebug
-xdebug.profiler_enable = 1
-</code></p>
-
-<p>Beware that profiling each request your application
-processes can be an expensive job (pages that
-would usually load in 2/3 seconds can take up to
-10 seconds), so you should &ndash; instead of enabling
-the profiler by default &ndash; activate the <code>enable_trigger</code>
-directive, which will make XDebug profile your application
-only if a specific <code>GET</code> or <code>POST</code> parameter is specified
-within the request:</p>
-
-<p><code>bash Using the XDebug profiler in enable trigger mode
-xdebug.profiler_enable = 0
-xdebug.profiler_enable_trigger = 1
-</code></p>
-
-<p>Dont forget to restart apache once you made the changes:</p>
-
-<p><code>bash
-sudo apachectl restart
-</code></p>
-
-<p>By visiting your application and specifying a special
-<code>GET</code> parameter in the URL, you will run your first
-profiled PHP response: supposing that you want to
-profile the code that runs <code>http://dev.project.com</code>,
-just visit <code>http://dev.project.com?XDEBUG_PROFILE=true</code></p>
-
-<p>Once you&rsquo;re done with the XDebug configuration, it&rsquo;s
-time to install Webgrind:</p>
-
-<p>``` bash
-cd /path/to/your/home/projects</p>
-
-<p>git clone git://github.com/jokkedk/webgrind.git
-```</p>
-
-<p>That&rsquo;s it!</p>
-
-<p>You can now access Webgrind at
-<code>127.0.0.1/webgrind</code> or &ndash; if you prefer &ndash;
-set up a virtual host for it:</p>
-
-<p>``` bash Setting up the virtualhost at <a href="http://webgrind/">http://webgrind/</a>
-<VirtualHost *:80></p>
-
-<pre><code>DocumentRoot "/path/to/your/home/projects/webgrind"
-
-ServerName webgrind
-
-&lt;Directory "/path/to/your/home/projects/webgrind"&gt;
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride all
-    Order allow,deny
-    Allow from all
-&lt;/Directory&gt;
-</code></pre>
-
-<p></VirtualHost>
-```</p>
-
-<p>and have Webgrind running at
-<code>http://webgrind/</code>.</p>
-
-<h2>Looking at the results</h2>
-
-<p><img class="right" src="/images/webgrind-select-file.png"></p>
-
-<p>Once your application runs, XDebug will generate
-the cachegrind files that Webgrind will analyze:
-after each PHP response is served from your application,
-you can inspect the results from the Webgrind interface,
-by just selecting the first file of the list:
-it might take some time for Webgrind to generate the
-first report, as cachegrind files can easily size up to
-100/200 megabytes (files below <code>~50MB</code> will be read in
-10 seconds or so).</p>
-
-<p>When the report is generated, you will see the results: I
-strongly recommend to generate a report in <strong>milliseconds</strong>, as
-it will give you a direct overview on how much time
-a function takes rather than having this value as a percentage
-compared to the entire application&rsquo;s run.</p>
-
-<p><img class="center" src="/images/webgrind-expensive-call.png"></p>
-
-<p>If you order results by <code>Total inclusive cost</code>, you will
-exactly see which ones are the most expensive functions
-of your applications: in the example, you will see that the
-<code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> method really
-kills the performances of my application (<code>10.6</code> seconds).</p>
-
-<p>Having this kind of report is not really useful, as
-usually you need to dig deeper to understand which
-exact step is making that function taking all that time:
-you can investigate further by clicking on a function,
-action that will open the call stack after that function
-is called:</p>
-
-<p><img class="center" src="/images/webgrind-call-stack.png"></p>
-
-<p>as you see, the problems, here, lies in
-<code>Doctrine\ODM\OrientDB\Mapper::createDocument</code> (<code>6.2</code> seconds)
-and <code>Doctrine\ODM\OrientDB\Mapper::findClassMappingInDirectories</code>
-(<code>4.3</code> seconds), so there you have the explanation why
-<code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> takes more than
-10 seconds.</p>
-
-<p>Then, take your time to investigate even further and make the
-optimal changes in your application, run it with the
-profiler enabled once more and have a look at the results:</p>
-
-<p><img class="center" src="/images/webgrind-after-optimization.png"></p>
-
-<p>As you see, after I tweaked my code,
-<code>Doctrine\ODM\OrientDB\Mapper::hydrate</code> is not even the
-most expensive function at all (<code>Sharah\Controller::getPartial</code> is),
-and the previously performance-killer methods, which
-would take <code>~6</code> and <code>~4</code> seconds, are now respectively
-taking <code>~1</code> and <code>~0.1</code> seconds.</p>
-
-<h2>The call graph</h2>
-
-<p><img class="right" src="/images/webgrind-call-graph.png"></p>
-
-<p>Another interesting feature of Webgrind<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>
-is the ability to generate a <strong>call graph</strong> to visualize
-bottlenecks in the application: by having a look
-at the graph you will have a top-down overview on
-how much execution time (expressed in percentage)
-a function will take.</p>
-
-<p>When you look at it, you should question
-every step of the graph and ask yourself is that
-specific function should really take that amount
-of time.</p>
-
-<p>For example:</p>
-
-<ul>
-<li>if a controller takes <code>20%</code> of the time to run (called <code>TTR</code> from now on),
-it might be that you have a design flaw, as it should be
-the most expensive part of your application, calling
-the models and rendering the view (which are <strong>included</strong> in
-the calculated <code>TTR</code>)</li>
-<li>if a model&rsquo;s method is taking <code>60% TTR</code>, there is a bad smell:
-how come that just retrieving data <strong>once</strong> is taking
-more than half of the <code>TTR</code>?</li>
-<li>if bootstrapping the application takes <code>15% TTR</code>, then
-it&rsquo;s fine, as that is usually the time a well-abstracted
-framework needs to provide you a solid foundation to develop
-on top of</li>
-</ul>
-
-
-<p>In the image above, you will see that <code>87%</code>
-of the execution time is taken by the controller&rsquo;s
-action (which is fine) and then equally
-distributed (<code>10/20%</code>) across various other
-functions that controller calls.</p>
-
-<h2>Conclusions</h2>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<p><div class="footnotes">
-<span>
-Notes
-</span>
-	<ol>
-		<li id='fn:1'>Beware that for high-scale applications you should focus on bigger and deeper improvements: see http://odino.org/rest-better-http-cache/ <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Shame on me, I know <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Which is implemented in every profiler I used so far <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>If you want to seriously profile your PHP application, go for XHPROF <a href='#fnref:4' rev='footnote'>↩</a></li>
-	</ol>
-</div>
-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
-    <link href="http://odino.org/making-the-orientdb-odm-5-times-faster/"/>
-    <updated>2013-01-25T17:39:00+04:00</updated>
-    <id>http://odino.org/making-the-orientdb-odm-5-times-faster</id>
-    <content type="html"><![CDATA[<p>Today, after heavily testing performances
-on a project, I pushed some small but
-precious changes to the
-<a href="https://github.com/doctrine/orientdb-odm">orientdb-odm</a>.</p>
-
-<!-- more -->
-
-
-<h2>Prelude</h2>
-
-<p><blockquote><p>Premature optimization is the root of all evil</p><footer><strong>Donald Knuth <a href="http://c2.com/cgi/wiki?PrematureOptimization">http://c2.com/cgi/wiki?PrematureOptimization</a> C2 wiki</strong></footer></blockquote></p>
-
-<p>In these days I was testing performances of a
-service I am building with
-<a href="https://github.com/nuvolabase/orientdb">OrientDB</a>
-and the doctrine ODM that
-<a href="/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
-
-<p>Following one of the golden rules for software
-architects, we didn&rsquo;t paid attention to performances &ndash; at first &ndash;
-but rather went for a design which would allow us
-to inject behaviours and easily change portions of code
-(also thanks to the <a href="https://travis-ci.org/doctrine/orientdb-odm">test suite</a>),
-I knew that I would have noticed huge flaws at
-performance level when testing it with
-<strong>production data</strong>.</p>
-
-<p>A few days ago we committed fetchplans for repository
-classes, but it wasnt enough: rather then concentrating
-on which data we should fetch, I realized one major
-improvement could be applied on how we <strong>map</strong> data.</p>
-
-<h2>The golden rule</h2>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<h2>How we did it</h2>
-
-<p>With a <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec">single commit</a>
-&ndash; there&rsquo;s always room for improvements &ndash; the ODM is now able
-to hydrate objects <strong>5 times faster</strong>: when you hydrate similar
-objects from OrientDB (for example, 2 records that share the same
-attributes' values, like <code>is_published</code> or <code>country</code>), there is
-no need to duplicate operations, so we added a <a href="https://github.com/doctrine/orientdb-odm/blob/df875c946e02a9c84eee22f0c86e0a3b06bd70ec/src/Doctrine/OrientDB/Util/Inflector/Cached.php">cached inflector</a>
-(with an in-memory / single request cache) and did some other
-improvements to the <code>Mapper</code>:</p>
-
-<ul>
-<li>cached the relations between <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L297">PHP classes and OrientDB classes</a> (if 2 records of the same OrientDB class are hydrated, there is only one single <em>search</em> operation to find the PHP class that should map them)</li>
-<li>cached the <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L223">casting of properties</a> (if 2 objects have the same value for the <code>is_published</code> attribute, casting is done once)</li>
-<li>cached <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L466">properties' annotations</a> (property-level annotations are inspected once per class)</li>
-</ul>
-
-
-<p>There is no rocket science in what we did, but benchmarks ensure that
-it&rsquo;s a <strong>huge performance improvement</strong>.</p>
-
-<h2>By the way, we used Webgrind</h2>
-
-<p><img class="right" src="/images/webgrind.png"></p>
-
-<p>Doing almost all of my work from a Mac, I kind of
-missed <a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
-for profiling, so I was looking for an
-alternative (no, installing
-<a href="https://github.com/facebook/xhprof">XHPROF</a> isn&rsquo;t an alternative at 2 in the morning)
-and I found Webgrind (which is cross-platform), a web profiler
-that requires zero setup:
-you basically just need to provide it access from the webserver
-and, by opening it with a browser, the application automatically
-launches and parses the cachegrind files generated by XDebug.</p>
-
-<p>Webgrind&rsquo;s code is a bit of a mess, but then, the
-result is still pretty good &ndash; you get a good overview
-of the expensiveness of your calls as well as a
-call graph compiled in <a href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>,
-which is a de-facto standard for graph generation.</p>
+<p>Funny thing is, I have two talks
+and none of them deals with Cake, <strong>at all</strong> :)</p>
+
+<p>I will be talking about the
+evolution of Web Protocols, in
+particular HTTP/2.0 and SPDY, in a
+remake of the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">talk I gave the IPC</a>,
+in Mainz, last year.</p>
+
+<p>My second talk will be a <em>new entry</em>, a
+collection of tips, advices and tricks
+in order to manage a SOA, learnt <strong>the hard
+way</strong>.</p>
+
+<p>If you are going to be around San Francisco
+in the first days of Semptember, feel free to
+ping me!</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-07-13T18:06:30+04:00</updated>
+  <updated>2013-08-01T05:30:45+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,186 +14,36 @@
 
   
   <entry>
-    <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
-    <updated>2013-03-29T18:08:00+04:00</updated>
-    <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
-    <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
-people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
-in Turin my 1-year experience in Namshi, one of
-Rocket Internet&rsquo;s ventures in the Middle East.</p>
+    <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
+    <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
+    <updated>2013-08-01T05:24:00+04:00</updated>
+    <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
+    <content type="html"><![CDATA[<p>At the end of August I will
+be travelling to reach SF and
+the <a href="http://cakefest.org/">CakeFest</a>, the annual
+conference about
+<a href="http://cakephp.org/">CakePHP</a>.</p>
 
 <!-- more -->
 
 
-<p><img class="left" src="/images/phptostart2013.jpg"></p>
+<p>Funny thing is, I have two talks
+and none of them deals with Cake, <strong>at all</strong> :)</p>
 
-<p>Luckily, this was a great opportunity to meet some good
-old friends and the talk went very well: of course,
-the reharsal at the <a href="http://roma.grusp.org">PHP User Group in Rome</a>
-earlier this week was a bless.</p>
+<p>I will be talking about the
+evolution of Web Protocols, in
+particular HTTP/2.0 and SPDY, in a
+remake of the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">talk I gave the IPC</a>,
+in Mainz, last year.</p>
 
-<p>It basically deals with the phases that I experienced
-with our team in Namshi, with some spicy details on
-recruiting (from looking for talents to conducting
-interviews), how to <strong>change processes to help people improving</strong>
-(and not change people to improve processes) and
-a big picture on what we were able to plan and achieve
-in this year together, from a technical point of view.</p>
+<p>My second talk will be a <em>new entry</em>, a
+collection of tips, advices and tricks
+in order to manage a SOA, learnt <strong>the hard
+way</strong>.</p>
 
-<p>At the end of the talk I invited everyone interested, and
-I will repeat myself here, to look for the open positions
-on <a href="http://en-ae.namshi.com/careers/">our careers site</a>,
-since we are currently hiring a Lead Developer and a
-PHP Developer (a junior or an intermediate, it&rsquo;s more
-about the approach rather than the hands-on experience).</p>
-
-<p>Here are the slides of the talk, in a slightly better (and more colored)
-version compared to the ones I used in Rome:</p>
-
-<iframe src="http://www.slideshare.net/odino/slideshelf" width="760px" height="570px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:none;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
-    <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
-    <updated>2013-03-29T14:14:00+04:00</updated>
-    <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
-back in Italy, since I was missing my friends in Rome
-since <strong>exactly</strong> a year and the last time my parents saw me it
-was 6 months ago.</p>
-
-<!-- more -->
-
-
-<p>Fun thing is, since I can&rsquo;t miss the opportunity
-of getting back in touch with a few people, I will
-be joining 4 tech events:</p>
-
-<ul>
-<li><a href="http://rome.codemotionworld.com/">Codemotion</a> &ndash; already happened, I was there on the 23rd &ndash; the conference open to
-all the programming languages, in Rome</li>
-<li><a href="http://roma.grusp.org/">PHP User group Rome</a>, a meetup that is held monthly, for one of
-the user groups that I helped launching here in Italy, again in Rome, where I gave
-a talk about assembling a mid-sized PHP team</li>
-<li><a href="http://www.phptostart.it/">PHP.TO.START</a> &ndash; happening <strong>right now </strong>&ndash; a yearly event for the
-north-western italian PHP community, where I&rsquo;ll be presenting the same talk I had at
-the PUG Rome</li>
-<li><a href="http://friuli.grusp.org/">PHP User Group Friuli</a>, another meetup organized by one of the
-italian PHP User Groups, where I&rsquo;ll be presenting an <em>unknown</em> topic (at least for now)</li>
-</ul>
-
-
-<p>An <strong>important thing</strong>: I am actively recruiting for our company,
-<a href="http://en-ae.namshi.com/careers/technology/">Namshi</a>, so if you
-are interested in one of the open positions that we have right now
-(in particular, Lead Developer and PHP Developer), feel free to approach
-me if you find me at the upcoming events (in Turin and Udine).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
-    <link href="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
-    <updated>2012-12-08T15:56:00+04:00</updated>
-    <id>http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
-    <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
-took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
-with a talk about graph databases, OrientDB and how to integrate it
-in PHP.</p>
-
-<!-- more -->
-
-
-<p>I recently found out that the videos recorded at the conference
-finally made it to Vimeo: enjoy some tarzan english!</p>
-
-<iframe src="http://player.vimeo.com/video/53451968?badge=0" width="720" height="600" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-
-<p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
-    <link href="http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
-    <updated>2012-10-16T15:11:00+04:00</updated>
-    <id>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
-    <content type="html"><![CDATA[<p>Yesterday, from Doha&rsquo;s international airport, I
-got the chance to blog about the latest changes
-surrounding the upcoming major version of the
-protocol of the web, <code>HTTP/2.0</code>.</p>
-
-<p>Today I gave, at the International PHPConference in
-Mainz, an overview about HTTP (<code>0.9</code>, <code>1.0</code>, <code>1.1</code>), SPDY
-and <code>HTTP/2.0</code> itself.</p>
-
-<!-- more -->
-
-
-<p>There&rsquo;s not that much to say, as the presentation is already
-on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">Slideshare</a> and I&rsquo;m embedding it here, other than a thing
-the guys here in Germany already heard a lot: <strong>go back to
-the basics</strong>.</p>
-
-<p><div class="slideshare" id="__ss_14749994"><iframe src="http://www.slideshare.net/slideshow/embed_code/14749994 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
-    <link href="http://odino.org/ready-for-europe-ipc-and-pizzas/"/>
-    <updated>2012-10-14T21:21:00+04:00</updated>
-    <id>http://odino.org/ready-for-europe-ipc-and-pizzas</id>
-    <content type="html"><![CDATA[<p>In 24 hourse I&rsquo;ll be on a plane which is gonna bring
-me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
-in Mainz.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="/images/ipc-slide.png"></p>
-
-<p>I&rsquo;m pretty excited since this will be my first visit
-to the old continent since I moved to Dubai &ndash; almost 7 months ago &ndash;
-and I&rsquo;m glad I&rsquo;ll do that for IPC, with a brief <em>pit-stop</em> in Italy &ndash;
-unfortunately not in Rome.</p>
-
-<p>At IPC I will talk about REST, with an &ndash; I hope &ndash;
-interesting introduction about this architectural style, anti-patterns
-and a few tips on how to implement REST&rsquo;s constraints in our
-architectures.</p>
-
-<p>I will also have another chance to talk, and I&rsquo;m <strong>seriously</strong>
-excited about it, since, for the first time, I get the chance to
-talk about the foundation of our lives in the modern era (<em>homo internectus</em>),
-the <strong>HTTP protocol</strong>: I will talk a little bit about why we needed it,
-with some historical notion about the web&rsquo;s foundation, what SPDY
-brings on the table and the recent <strong>revolutions</strong> around <code>HTTP/2.0</code>.</p>
-
-<p>On the 17th evening I will catch a flight for Venice (via Wien) and then
-I&rsquo;ll spend some time with the rest of the family, good thing if you also
-consider that for the first time in 4 years they&rsquo;re gonna see me for my birthday.</p>
-
-<p><img class="left" src="/images/ale_idiot.jpeg"></p>
-
-<p>But Italy doesn&rsquo;t mean that I&rsquo;m going to relax <strong>at all</strong>, as I will
-finally meet all the guys from the <a href="http://friuli.grusp.org/">PHP User Group Friuli</a>,
-the 2nd PHP user group in Italy (considering numbers and history), that
-I personally founded along with <a href="http://www.mvassociati.it/it/il-team">Steve&amp;Stefano</a> and <a href="http://it.linkedin.com/in/dlondero">Daniel</a> in front of a pizza,
-but never got to join during their
-monthly meetings, as I was already based in Rome at that time.</p>
-
-<p>There is no plan about that meeting, as the topic will be &ldquo;<em>Alessandro Nadalin in tour</em>&rdquo;:
-if you are a developer, a technology enthusiast or simply a student come
-and join us in Codroipo, as I will also talk about abroad work experiences as well
-as scout and recruit for some companies (yes, not only <strong>my</strong> company).</p>
-
-<p>Cheers!</p>
+<p>If you are going to be around San Francisco
+in the first days of Semptember, feel free to
+ping me!</p>
 ]]></content>
   </entry>
   
