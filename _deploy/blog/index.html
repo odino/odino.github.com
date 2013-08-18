@@ -137,8 +137,578 @@ conference about
 
 </article>
 
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/sending-hipchat-notifications-in-php/">Sending HipChat Notifications in PHP</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T14:20:00+04:00" pubdate data-updated="true">Friday, 19 July 2013 at 14:20</time>
+      
+       | <a href="/sending-hipchat-notifications-in-php/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/hipchat/'>HipChat</a>, <a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/notificator/'>Notificator</a>, <a class='category' href='/blog/categories/oss/'>OSS</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>This morning I added a couple handlers to
+<a href="https://github.com/namshi/notificator">Notificator</a>, one for
+RabbitMQ and another for <a href="https://hipchat.com">HipChat</a>: in
+this post I would like to show you how easy is to integrate
+HipChat within your systems.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/sending-hipchat-notifications-in-php/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/ab-testing-in-php-with-namshi-slash-ab/">AB Testing in PHP With Namshi/ab</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T14:27:00+04:00" pubdate data-updated="true">Saturday, 13 July 2013 at 14:27</time>
+      
+       | <a href="/ab-testing-in-php-with-namshi-slash-ab/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ab-testing/'>AB testing</a>, <a class='category' href='/blog/categories/foss/'>FOSS</a>, <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>AB testing is a powerful tecnique that
+lets you gather metrics about different
+versions of a feature: it basically
+consist into displaying a number of
+different variations of it to your
+users and tracking the results to see
+which variation performed better.</p>
+
+<p><img class="right" src="/images/ab-testing.jpg"></p>
+
+<p>An example? In an e-commerce system,
+you usually have an &ldquo;Add to cart&rdquo; button:
+have you ever though about the impact that
+single sentence has on your customers?
+What would sound better, between &ldquo;Add to cart&rdquo;
+and &ldquo;Buy now&rdquo;, for example? Copywriters
+away, you want <strong>data</strong> to tell you that!</p>
+
+<p>This is why AB testing is important:
+you serve different versions of something,
+and track the results to improve the
+experience users have while using your
+application: for example, Google benchmarked
+<a href="http://gigaom.com/2009/07/09/when-it-comes-to-links-color-matters/">40 different shades of blue</a>
+to find out how the rate of clickthrough
+would be altered.</p>
+
+<p>At <a href="http://en-ae.namshi.com">Namshi</a> we
+decided to ease AB testing by creating a
+very simple library that would let you generate
+and manage tests in a very easy and practical
+way: that&rsquo;s how <a href="https://github.com/namshi/ab">Namshi/AB</a>
+was born.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/ab-testing-in-php-with-namshi-slash-ab/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/">Notificator, Sending Notifications Through PHP in a Clean and Lightweight Way</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-11T01:20:00+04:00" pubdate data-updated="true">Thursday, 11 July 2013 at 01:20</time>
+      
+       | <a href="/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/foss/'>FOSS</a>, <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/rabbitmq/'>RabbitMQ</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>, <a class='category' href='/blog/categories/messaging/'>messaging</a>, <a class='category' href='/blog/categories/notifications/'>notifications</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>While implementing various pieces of our
+<a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
+we, at <a href="http://en-ae.namshi.com">Namshi</a>,
+realized that a central notification
+service would have been very good in order
+to abstract the way we notify our customers
+and everyone in the company (ie. skype messages
+when a task is due a certain date).</p>
+
+<p>We initially implemented all of this
+<a href="/configuring-a-symfony2-application-to-support-soa/">inside a Symfony2 bundle</a>,
+but soon realized that we could
+abstract and generalize our implementation
+in order to extract it into a library for the public
+domain, and that&rsquo;s how
+<a href="https://github.com/namshi/notificator">notificator</a>
+was born.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/using-emailvisions-campaigncommander-apis-from-php/">Using Emailvision&#8217;s CampaignCommander APIs From PHP</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-28T18:38:00+04:00" pubdate data-updated="true">Friday, 28 June 2013 at 18:38</time>
+      
+       | <a href="/using-emailvisions-campaigncommander-apis-from-php/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/email/'>email</a>, <a class='category' href='/blog/categories/open-source/'>open source</a>
+  
+</span>
+
+
+  <div class="entry-content"><p><img class="right" src="/images/emailvision-template.png"></p>
+
+<p>This weekend I finally had the chance to
+work a couple hours on the <code>namshi/emailvision</code>
+library, which lets you integrate CampaignCommander
+as (email) notification solution in your
+PHP projects.</p>
+
+<p>I already had a proof-of-concept of this library since weeks,
+and it was already pushed to Github, but since I had no
+valid API account to do some integration tests, I
+could not really &ldquo;publicize&rdquo; it.</p>
+
+<p>Right now I refactored the library and added a couple integration
+tests which are working flawlessy, so, in this post, I&rsquo;m
+going to show you how easy it is to send emails with
+Emailvision&rsquo;s solution directly from PHP.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/using-emailvisions-campaigncommander-apis-from-php/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/beautifying-json-data-from-the-shell/">Beautifying JSON Data From the Shell</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-22T15:36:00+04:00" pubdate data-updated="true">Saturday, 22 June 2013 at 15:36</time>
+      
+       | <a href="/beautifying-json-data-from-the-shell/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/json/'>JSON</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>Yesterday I bumped into a very
+handly utility to beautify JSON
+data directly from your command
+line.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/beautifying-json-data-from-the-shell/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/desktop-notifications-for-phpunit-tests-on-ubuntu/">Desktop Notifications for PHPUnit Tests on Ubuntu</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-21T03:48:00+04:00" pubdate data-updated="true">Friday, 21 June 2013 at 03:48</time>
+      
+       | <a href="/desktop-notifications-for-phpunit-tests-on-ubuntu/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/phpunit/'>PHPUnit</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+  
+</span>
+
+
+  <div class="entry-content"><p><img class="left" src="/images/phpunit-notification-ko.png"></p>
+
+<p>As everyone knows, automated tests are great
+since they let you test a system without the need
+of proactively checking anything: you launch your suite
+and you get a feedback; moreover, systems like Jenkins or Travis-CI allow you
+to even forget about checking the status of
+a build since they can do all of this work for you:
+the problem, instead, happens when you need
+to run the tests locally, as you always need to
+check the shell to know whether the tests passed or not.</p>
+
+<p>A solution would be to launch the tests and mind
+your own business, instead of having to check the CLI
+output, waiting for a notification that tells
+use about the tests&#8217; result.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/desktop-notifications-for-phpunit-tests-on-ubuntu/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/php-user-group-dubai-here-we-start-again/">PHP User Group Dubai, Here We Start Again!</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T13:38:00+04:00" pubdate data-updated="true">Tuesday, 18 June 2013 at 13:38</time>
+      
+       | <a href="/php-user-group-dubai-here-we-start-again/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dubai/'>Dubai</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/pug/'>PUG</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>After launching a couple
+PHP User Groups in Italy
+(<a href="http://roma.grusp.org">Rome</a> and <a href="http://friuli.grusp.org">Friuli</a>),
+I started to feel kind of lost here in
+Dubai, a place that gathers together lots
+of talents but doesn&rsquo;t have that much of
+knowledge-sharing culture.</p>
+
+<p>Given this and the pro-active involvement of
+some of my colleagues from <a href="http://en-ae.namshi.com">Namshi</a>,
+I really wanted to see some sort of community
+raise in this desert.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/php-user-group-dubai-here-we-start-again/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/">Integrating Twig in Your Legacy Code, Part 2: A Less Wild Approach</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T12:07:00+04:00" pubdate data-updated="true">Tuesday, 18 June 2013 at 12:07</time>
+      
+       | <a href="/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/twig/'>Twig</a>, <a class='category' href='/blog/categories/legacy/'>legacy</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>In my last post I wrote about
+<a href="/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
+with a really <strong>wild</strong>
+approach.</p>
+
+<p>Today I came up with a better
+solution that lets you take advantage
+of Twig full features without any hack
+(like the <code>partial</code> tag I was
+talking about in my previous post).</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h1 class="entry-title"><a href="/integrating-twig-in-your-legacy-php-code/">Integrating Twig in Your Legacy PHP Code</a></h1>
+    
+  </header>
+
+
+  
+    <p class="meta">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-15T23:15:00+04:00" pubdate data-updated="true">Saturday, 15 June 2013 at 23:15</time>
+      
+       | <a href="/integrating-twig-in-your-legacy-php-code/#disqus_thread">Comments</a>
+      
+    </p>
+  
+  
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/legacy/'>legacy</a>, <a class='category' href='/blog/categories/twig/'>twig</a>
+  
+</span>
+
+
+  <div class="entry-content"><p>It might happen that you are working
+on a legacy code that is years old,
+with its own templating mechanism<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>
+that doesn&rsquo;t really allow you to take
+advantage of the benefits that a structured
+and object-oriented engine like
+<a href="http://twig.sensiolabs.org/">Twig</a>.</p>
+
+<p>In this situations, when a complete replacement
+would cost too much to your organization,
+you can take advantage of a <em>wild</em> integration between
+this advanced template engine and your
+existing code.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/integrating-twig-in-your-legacy-php-code/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
 <nav id="pagenavi">
     
+    
+        <a href="/blog/page/2/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav>
