@@ -12,7 +12,7 @@ footer: true
 
 I'm currently living in
 Dubai where I am employed by [Rocket Internet](http://www.rocket-internet.de) for its venture [Namshi](http://namshi.com),
-as VP - Technology.
+as VP Technology.
 
 I like to play with the [Symfony framework](http://www.symfony.com), 
 [OrientDB](http://www.orientechnologies.com/),
@@ -72,3 +72,6 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I quit with cigarettes in late 2012
 * I'm totally informal
 * In my first 15 months at Namshi I covered 3 positions: Lead Develop, Head of Development and VP - Technology
+* I own an XboX, but I rarely play alone
+* I visited 13 countries so far (Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India),
+some of them very briefly, mostly during conferences

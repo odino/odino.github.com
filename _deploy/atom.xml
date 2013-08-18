@@ -3,7 +3,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-01T05:32:00+04:00</updated>
+  <updated>2013-08-18T23:58:19+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
+    <link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
+    <updated>2013-08-18T23:51:00+04:00</updated>
+    <id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
+    <content type="html"><![CDATA[<p>Today, even though I come from a weekend
+of barely sleeping, I decided, after an entire
+day unable to connect to the WiFi of the office,
+to try to fix this issue that seems to be affecting
+the Dell XPS harder than other laptops.</p>
+
+<!-- more -->
+
+
+<p>After googling for a while and realizing that
+even at home I got no luck with my wireless,
+I decided to go on with my own usual solution,
+which means <strong>downgrading the kernel or grub</strong>.</p>
+
+<p>You can get a list of the <em>installables</em> from
+any terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And since I&rsquo;m currently using <code>3.8.0-27-generic</code>
+I decided to give a slightly previous one a try;
+let&rsquo;s edit grub:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/kernel/postrm.d/zz-update-grub 3.8.0-19-generic /boot/vmlinuz-3.8.0-19-generic</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solved the issue, at least for me ;&ndash;)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
@@ -3511,147 +3549,6 @@ easy to fix, since the problem is that
 
 
 <p>&hellip;and you&rsquo;re done.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using Selenium and Symfony2 to help your frontend developers coding without risks]]></title>
-    <link href="http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
-    <updated>2013-03-10T11:39:00+04:00</updated>
-    <id>http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
-    <content type="html"><![CDATA[<p>Since testing is one of those practices
-that many consider <em>boring</em> (unless a major
-catastrophe happens), you should help people
-is easing their job while testing.</p>
-
-<p>Today I am going to show the approach that
-we just kickstarted, at Namshi, in order to
-help designers and developers testing
-frontend changes in a more automated, thus
-easier, way.</p>
-
-<!-- more -->
-
-
-<p>Thanks to the <a href="https://github.com/namshi/NamshiVoyeurBundle">NamshiVoyeurBundle</a>,
-it is really easy to start increasing
-the efficiency of your testing department,
-even if coders do not want to write
-automated tests.</p>
-
-<p>The bundle, that you can use <strong>inside a Symfony2
-application</strong>, is actually very small and can be
-extrapolated to be integrated in other frameworks
-(like ZF2 or Cake).</p>
-
-<p>The idea is very simple: you take some screenshots
-of a website, deploy a new version, take another set of
-screenshots (at the same URLs) and then compare
-them, generating an image diff.</p>
-
-<p>After you install the <code>NamshiVoyeurBundle</code> (via composer),
-it is really easy to start taking screenshots;
-you just have to configure a few services
-and some parameters:</p>
-
-<figure class='code'><figcaption><span>Configuring the bundle</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">namshi_voyeur</span><span class="p-Indicator">:</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">browsers</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">firefox</span>
-</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">safari</span>
-</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chrome</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">urls</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">homepage</span><span class="p-Indicator">:</span>     <span class="s">&quot;/&quot;</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">new-arrivals</span><span class="p-Indicator">:</span> <span class="s">&quot;new-products&quot;</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">women</span><span class="p-Indicator">:</span>        <span class="s">&quot;women-shoes&quot;</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">shots_dir</span><span class="p-Indicator">:</span> <span class="s">&quot;/Users/you/Downloads/screenshots&quot;</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span>       <span class="s">&quot;http://en-ae.namshi.com/&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">safari</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Behat\Mink\Driver\Selenium2Driver</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
-</span><span class='line'>          <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">start</span><span class="p-Indicator">]</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
-</span><span class='line'>          <span class="l-Scalar-Plain">browser</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">safari</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">firefox</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Behat\Mink\Driver\Selenium2Driver</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
-</span><span class='line'>          <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">start</span><span class="p-Indicator">]</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">chrome</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Behat\Mink\Driver\Selenium2Driver</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
-</span><span class='line'>          <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">start</span><span class="p-Indicator">]</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
-</span><span class='line'>          <span class="l-Scalar-Plain">browser</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">chrome</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This configuration basically tells Voyeur that
-you will be taking screenshots of three URLs:</p>
-
-<ul>
-<li><code>http://en-ae.namshi.com/</code></li>
-<li><code>http://en-ae.namshi.com/new-products</code></li>
-<li><code>http://en-ae.namshi.com/women-shoes</code></li>
-</ul>
-
-
-<p>with safari, firefox and google chrome.</p>
-
-<p>To run the Voyeur, use the <code>cli</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>php app/console namshi:voyeur
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Screenshots will be saved at <code>/Users/you/Downloads/screenshots</code>.</p>
-
-<p>At this point, after you deployed a new version of the code,
-run the Voyeur again, and you will be reay to generate the
-diffs between the screenshots:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>php app/console namshi:voyeur:diff /Users/you/Downloads/screenshots/firefox/2013/03/10/1200 /Users/you/Downloads/screenshots/firefox/2013/03/10/1205
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Diffs will be generated at <code>/Users/you/Downloads/screenshots/firefox/2013/03/10/1205/diff</code>.</p>
-
-<p>That&rsquo;s it: now you can start having a look at what changed and
-ask your developers to do the same, even on their local
-machine, before committing any changes.</p>
 ]]></content>
   </entry>
   

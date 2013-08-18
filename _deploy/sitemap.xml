@@ -647,12 +647,18 @@
         <lastmod>2013-08-01T05:30:44+04:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/
+        </loc>
+        <lastmod>2013-08-18T23:57:35+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://odino.org/404.html</loc>
         <lastmod>2013-06-15T03:22:01+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/archives/</loc>
-        <lastmod>2013-08-01T05:30:44+04:00</lastmod>
+        <lastmod>2013-08-18T23:57:35+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/robots.txt</loc>
@@ -660,7 +666,7 @@
     </url>
     <url>
         <loc>http://odino.org/</loc>
-        <lastmod>2013-08-01T05:30:44+04:00</lastmod>
+        <lastmod>2013-08-18T23:57:35+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/conferences/</loc>
@@ -676,10 +682,10 @@
     </url>
     <url>
         <loc>http://odino.org/blog/archives/</loc>
-        <lastmod>2013-08-01T05:30:44+04:00</lastmod>
+        <lastmod>2013-08-18T23:57:35+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/blog/</loc>
-        <lastmod>2013-08-01T05:30:44+04:00</lastmod>
+        <lastmod>2013-08-18T23:57:35+04:00</lastmod>
     </url>
 </urlset>
