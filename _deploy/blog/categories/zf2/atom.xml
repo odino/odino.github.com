@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ZF2 | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/zf2/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Contributing to the Zend Framework via GitHub]]></title>
     <link href="http://odino.org/contributing-to-the-zend-framework-via-github/"/>
-    <updated>2011-07-18T13:05:00+04:00</updated>
+    <updated>2011-07-18T13:05:00-07:00</updated>
     <id>http://odino.org/contributing-to-the-zend-framework-via-github</id>
     <content type="html"><![CDATA[<p>So, I managed to integrate <a href="https://github.com/zendframework/zf2/commit/fe60cf8deb9888adfc7757dcec536dd24c021653">some crap I daily write into the Zend Framework 2</a> git repository, and here&rsquo;s how to do that.</p>
 

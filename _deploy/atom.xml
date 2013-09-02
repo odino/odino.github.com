@@ -3,7 +3,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -13,9 +13,43 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
+    <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
+    <updated>2013-08-31T19:05:00-07:00</updated>
+    <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
+    <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
+<a href="http://cakefest.org">CakeFest</a> here in San Francisco,
+&ldquo;<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">Tips and Tricks for your SOA</a>&rdquo;.</p>
+
+<!-- more -->
+
+
+<p>It basically contains a few tips derived from our experience at
+<a href="http://en-ae.namshi.com">Namshi</a> while building our own service-oriented
+architecture, and I hope, since there&rsquo;s not <em>that</em> much material
+about SOA out there, that this can serve as a good feedback from who
+is actually embracing this architectural style.</p>
+
+<p>As always, the slides are on <a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">slideshare</a>,
+and I&rsquo;m embedding the presentation
+here for those who immediately want to have a look at it:</p>
+
+<div class="slideshare" id="__ss_25786089"><iframe src="http://www.slideshare.net/slideshow/embed_code/25786089 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+
+
+<p>Tomorrow, as per the conference&rsquo;s schedule, I will be giving my other talk,
+&ldquo;HTTP colon slash slash: end of the road?&rdquo;, a remake of what I
+presented at the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">IPC in Mainz last year</a>,
+with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
     <link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
-    <updated>2013-08-18T23:51:00+04:00</updated>
+    <updated>2013-08-18T23:51:00-07:00</updated>
     <id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
     <content type="html"><![CDATA[<p>Today, even though I come from a weekend
 of barely sleeping, I decided, after an entire
@@ -53,7 +87,7 @@ let&rsquo;s edit grub:</p>
   <entry>
     <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
     <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-    <updated>2013-08-01T05:24:00+04:00</updated>
+    <updated>2013-08-01T05:24:00-07:00</updated>
     <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
     <content type="html"><![CDATA[<p>At the end of August I will
 be travelling to reach SF and
@@ -87,7 +121,7 @@ ping me!</p>
   <entry>
     <title type="html"><![CDATA[Sending HipChat notifications in PHP]]></title>
     <link href="http://odino.org/sending-hipchat-notifications-in-php/"/>
-    <updated>2013-07-19T14:20:00+04:00</updated>
+    <updated>2013-07-19T14:20:00-07:00</updated>
     <id>http://odino.org/sending-hipchat-notifications-in-php</id>
     <content type="html"><![CDATA[<p>This morning I added a couple handlers to
 <a href="https://github.com/namshi/notificator">Notificator</a>, one for
@@ -199,7 +233,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[AB testing in PHP with namshi/ab]]></title>
     <link href="http://odino.org/ab-testing-in-php-with-namshi-slash-ab/"/>
-    <updated>2013-07-13T14:27:00+04:00</updated>
+    <updated>2013-07-13T14:27:00-07:00</updated>
     <id>http://odino.org/ab-testing-in-php-with-namshi-slash-ab</id>
     <content type="html"><![CDATA[<p>AB testing is a powerful tecnique that
 lets you gather metrics about different
@@ -631,7 +665,7 @@ a pull request</strong> if we screwed up with anything!</p>
   <entry>
     <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
     <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
-    <updated>2013-07-11T01:20:00+04:00</updated>
+    <updated>2013-07-11T01:20:00-07:00</updated>
     <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
     <content type="html"><![CDATA[<p>While implementing various pieces of our
 <a href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
@@ -1042,7 +1076,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Using Emailvision's CampaignCommander APIs from PHP]]></title>
     <link href="http://odino.org/using-emailvisions-campaigncommander-apis-from-php/"/>
-    <updated>2013-06-28T18:38:00+04:00</updated>
+    <updated>2013-06-28T18:38:00-07:00</updated>
     <id>http://odino.org/using-emailvisions-campaigncommander-apis-from-php</id>
     <content type="html"><![CDATA[<p><img class="right" src="http://odino.org/images/emailvision-template.png"></p>
 
@@ -1246,7 +1280,7 @@ running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
   <entry>
     <title type="html"><![CDATA[Beautifying JSON data from the shell]]></title>
     <link href="http://odino.org/beautifying-json-data-from-the-shell/"/>
-    <updated>2013-06-22T15:36:00+04:00</updated>
+    <updated>2013-06-22T15:36:00-07:00</updated>
     <id>http://odino.org/beautifying-json-data-from-the-shell</id>
     <content type="html"><![CDATA[<p>Yesterday I bumped into a very
 handly utility to beautify JSON
@@ -1350,7 +1384,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Desktop notifications for PHPUnit tests on Ubuntu]]></title>
     <link href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/"/>
-    <updated>2013-06-21T03:48:00+04:00</updated>
+    <updated>2013-06-21T03:48:00-07:00</updated>
     <id>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://odino.org/images/phpunit-notification-ko.png"></p>
 
@@ -1467,7 +1501,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[PHP User Group Dubai, here we start again!]]></title>
     <link href="http://odino.org/php-user-group-dubai-here-we-start-again/"/>
-    <updated>2013-06-18T13:38:00+04:00</updated>
+    <updated>2013-06-18T13:38:00-07:00</updated>
     <id>http://odino.org/php-user-group-dubai-here-we-start-again</id>
     <content type="html"><![CDATA[<p>After launching a couple
 PHP User Groups in Italy
@@ -1527,7 +1561,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Integrating Twig in your legacy code, Part 2: a less wild approach]]></title>
     <link href="http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
-    <updated>2013-06-18T12:07:00+04:00</updated>
+    <updated>2013-06-18T12:07:00-07:00</updated>
     <id>http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
     <content type="html"><![CDATA[<p>In my last post I wrote about
 <a href="http://odino.org/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
@@ -1689,7 +1723,7 @@ loader, and store <code>$templateOutput</code> in a unique template, called <cod
   <entry>
     <title type="html"><![CDATA[Integrating Twig in your legacy PHP code]]></title>
     <link href="http://odino.org/integrating-twig-in-your-legacy-php-code/"/>
-    <updated>2013-06-15T23:15:00+04:00</updated>
+    <updated>2013-06-15T23:15:00-07:00</updated>
     <id>http://odino.org/integrating-twig-in-your-legacy-php-code</id>
     <content type="html"><![CDATA[<p>It might happen that you are working
 on a legacy code that is years old,
@@ -2328,7 +2362,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
     <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
-    <updated>2013-06-06T13:00:00+04:00</updated>
+    <updated>2013-06-06T13:00:00-07:00</updated>
     <id>http://odino.org/configuring-a-symfony2-application-to-support-soa</id>
     <content type="html"><![CDATA[<p>When you think in terms of
 <a href="http://odino.org/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>
@@ -2635,7 +2669,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
     <link href="http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
-    <updated>2013-06-04T00:31:00+04:00</updated>
+    <updated>2013-06-04T00:31:00-07:00</updated>
     <id>http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
@@ -2825,7 +2859,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
     <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
-    <updated>2013-05-27T22:16:00+04:00</updated>
+    <updated>2013-05-27T22:16:00-07:00</updated>
     <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
@@ -3256,7 +3290,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Automated tests from a novice's perspective]]></title>
     <link href="http://odino.org/automated-tests-from-a-novice-perspective/"/>
-    <updated>2013-05-27T22:01:00+04:00</updated>
+    <updated>2013-05-27T22:01:00-07:00</updated>
     <id>http://odino.org/automated-tests-from-a-novice-perspective</id>
     <content type="html"><![CDATA[<p>Today I got one of those moments of pride
 when one of our developers, who is working
@@ -3272,7 +3306,7 @@ tests for the first weeks of his career:</p>
   <entry>
     <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
     <link href="http://odino.org/doctrine-80-percent-faster/"/>
-    <updated>2013-04-21T10:54:00+04:00</updated>
+    <updated>2013-04-21T10:54:00-07:00</updated>
     <id>http://odino.org/doctrine-80-percent-faster</id>
     <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
 caught my attention last week, and I want to
@@ -3299,7 +3333,7 @@ branch very soon!</p>
   <entry>
     <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
     <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
-    <updated>2013-03-29T18:08:00+04:00</updated>
+    <updated>2013-03-29T18:08:00-07:00</updated>
     <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
     <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
 people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
@@ -3342,7 +3376,7 @@ version compared to the ones I used in Rome:</p>
   <entry>
     <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
     <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
-    <updated>2013-03-29T14:14:00+04:00</updated>
+    <updated>2013-03-29T14:14:00-07:00</updated>
     <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
     <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
 back in Italy, since I was missing my friends in Rome
@@ -3381,7 +3415,7 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   <entry>
     <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
     <link href="http://odino.org/refactoring-your-architecture-go-for-soa/"/>
-    <updated>2013-03-23T17:35:00+04:00</updated>
+    <updated>2013-03-23T17:35:00-07:00</updated>
     <id>http://odino.org/refactoring-your-architecture-go-for-soa</id>
     <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>
@@ -3526,29 +3560,6 @@ understand that all the components are working alltogether? And&hellip;</p>
 <p>There&rsquo;s room for generic problems that everyone faced and that we will
 face as well, and I think it will be very interesting to share our
 approach and the vision we had in our own context.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Symfony2 console: permission denied during autocompletion]]></title>
-    <link href="http://odino.org/symfony2-console-permission-denied-during-autocompletion/"/>
-    <updated>2013-03-11T10:11:00+04:00</updated>
-    <id>http://odino.org/symfony2-console-permission-denied-during-autocompletion</id>
-    <content type="html"><![CDATA[<p>Yesterday I faced a pretty cryptic issue
-while using the Symfony2 console (<code>app/console</code>).</p>
-
-<!-- more -->
-
-
-<p>I guess the error is pretty common, and it&rsquo;s really
-easy to fix, since the problem is that
-<a href="https://github.com/hacfi/oh-my-zsh/commit/8c74d80fd6cdc7e1b48e7eb321a3e3a22674c3be">the binary is not executable</a>:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>chmod +x app/console</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;and you&rsquo;re done.</p>
 ]]></content>
   </entry>
   

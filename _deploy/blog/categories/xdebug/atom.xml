@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xdebug | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/xdebug/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Profiling with Xdebug and Kcachegrind]]></title>
     <link href="http://odino.org/profiling-with-xdebug-and-kcachegrind/"/>
-    <updated>2010-09-11T13:40:00+04:00</updated>
+    <updated>2010-09-11T13:40:00-07:00</updated>
     <id>http://odino.org/profiling-with-xdebug-and-kcachegrind</id>
     <content type="html"><![CDATA[<p>Here you can find the instructions for installing Xdebug and Kcachegrind to profile and debug PHP applications.</p>
 

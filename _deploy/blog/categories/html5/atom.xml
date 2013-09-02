@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTML5 | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The current vague state of PUT and DELETE in HTML5]]></title>
     <link href="http://odino.org/the-current-vague-state-of-put-and-delete-in-html5/"/>
-    <updated>2011-05-06T13:01:00+04:00</updated>
+    <updated>2011-05-06T13:01:00-07:00</updated>
     <id>http://odino.org/the-current-vague-state-of-put-and-delete-in-html5</id>
     <content type="html"><![CDATA[<p>If you followed my <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011">REST in peace</a> presentation, you probably noted that I was <a href="http://www.slideshare.net/odino/rest-in-peace-codemotion-2011/180">a bit angry against HTML5</a>.</p>
 

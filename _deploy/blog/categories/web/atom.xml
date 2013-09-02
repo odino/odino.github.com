@@ -4,7 +4,7 @@
   <title><![CDATA[Category: web | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/web/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
     <link href="http://odino.org/the-state-of-http-slash-2-dot-0/"/>
-    <updated>2012-10-15T23:45:00+04:00</updated>
+    <updated>2012-10-15T23:45:00-07:00</updated>
     <id>http://odino.org/the-state-of-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>With a few days of delay I&rsquo;m here reporting and commenting
 the last <strong>revolutions</strong> about the protocol of the web,
@@ -111,7 +111,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[The hope is that IE will drown in 2 years]]></title>
     <link href="http://odino.org/the-hope-is-that-ie-will-drown-in-2-years/"/>
-    <updated>2012-08-03T18:27:00+04:00</updated>
+    <updated>2012-08-03T18:27:00-07:00</updated>
     <id>http://odino.org/the-hope-is-that-ie-will-drown-in-2-years</id>
     <content type="html"><![CDATA[<p>More than a decade ago the first <a href="http://en.wikipedia.org/wiki/Browser_wars">browser war</a>
 made his victim: it was Netscape, which
@@ -161,7 +161,7 @@ sits on top of his past, glorious days.</p>
   <entry>
     <title type="html"><![CDATA[Search engines are making the web slower]]></title>
     <link href="http://odino.org/search-engines-are-making-the-web-slower/"/>
-    <updated>2012-04-07T10:00:00+04:00</updated>
+    <updated>2012-04-07T10:00:00-07:00</updated>
     <id>http://odino.org/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: doctrine | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/doctrine/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
     <link href="http://odino.org/doctrine-80-percent-faster/"/>
-    <updated>2013-04-21T10:54:00+04:00</updated>
+    <updated>2013-04-21T10:54:00-07:00</updated>
     <id>http://odino.org/doctrine-80-percent-faster</id>
     <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
 caught my attention last week, and I want to
@@ -43,7 +43,7 @@ branch very soon!</p>
   <entry>
     <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
     <link href="http://odino.org/making-the-orientdb-odm-5-times-faster/"/>
-    <updated>2013-01-25T17:39:00+04:00</updated>
+    <updated>2013-01-25T17:39:00-08:00</updated>
     <id>http://odino.org/making-the-orientdb-odm-5-times-faster</id>
     <content type="html"><![CDATA[<p>Today, after heavily testing performances
 on a project, I pushed some small but
@@ -128,7 +128,7 @@ which is a de-facto standard for graph generation.</p>
   <entry>
     <title type="html"><![CDATA[Please welcome the Doctrine2 OrientDB ODM]]></title>
     <link href="http://odino.org/please-welcome-the-doctrine-orientdb-odm/"/>
-    <updated>2012-12-28T23:12:00+04:00</updated>
+    <updated>2012-12-28T23:12:00-08:00</updated>
     <id>http://odino.org/please-welcome-the-doctrine-orientdb-odm</id>
     <content type="html"><![CDATA[<p>It took almost 2 years from the
 <a href="https://github.com/doctrine/orientdb-odm/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">first commit</a>,

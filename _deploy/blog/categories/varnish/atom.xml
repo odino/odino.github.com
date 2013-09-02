@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Varnish | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/varnish/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Installing and configuring Varnish on Ubuntu]]></title>
     <link href="http://odino.org/installing-and-configuring-varnish-on-ubuntu/"/>
-    <updated>2011-02-09T02:29:00+04:00</updated>
+    <updated>2011-02-09T02:29:00-08:00</updated>
     <id>http://odino.org/installing-and-configuring-varnish-on-ubuntu</id>
     <content type="html"><![CDATA[<p>On a brand new debian/*ubuntu distro, there are only a couple steps to do in order to make Varnish <del>act as a proxy</del> do its job in front of apache.</p>
 

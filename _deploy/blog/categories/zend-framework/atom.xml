@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Zend Framework | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/zend-framework/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Integrating Zend Framework 2 in Symfony 1.4]]></title>
     <link href="http://odino.org/integrating-zend-framework-2-in-symfony-1-4/"/>
-    <updated>2011-07-21T14:14:00+04:00</updated>
+    <updated>2011-07-21T14:14:00-07:00</updated>
     <id>http://odino.org/integrating-zend-framework-2-in-symfony-1-4</id>
     <content type="html"><![CDATA[<p>With PHP 5.3 the <a href="http://blog.webspecies.co.uk/2011-05-23/the-new-era-of-php-frameworks.html">new era of PHP frameworks</a> has begun, and things are really, for example, simpler to integrate, thanks to the <a href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR0</a>, which is the standard autoloader adopted by the community.</p>
 
@@ -69,7 +69,7 @@ class twitterActions extends sfActions
   <entry>
     <title type="html"><![CDATA[Deliver content as XML with Zend Framework]]></title>
     <link href="http://odino.org/deliver-content-as-xml-with-zend-framework/"/>
-    <updated>2010-09-11T12:00:00+04:00</updated>
+    <updated>2010-09-11T12:00:00-07:00</updated>
     <id>http://odino.org/deliver-content-as-xml-with-zend-framework</id>
     <content type="html"><![CDATA[<p>In the <a href="http://devzone.zend.com/article/884">DevZone of ZF</a> there&rsquo;s a good tutorial: my aim is to give you a silly example of how to deliver content as XML in ZF and/or Magento.</p>
 

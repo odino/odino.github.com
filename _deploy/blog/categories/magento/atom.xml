@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Magento | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/magento/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Pass a variable to a .phtml block]]></title>
     <link href="http://odino.org/pass-a-variable-to-a-phtml-block/"/>
-    <updated>2010-09-11T13:57:00+04:00</updated>
+    <updated>2010-09-11T13:57:00-07:00</updated>
     <id>http://odino.org/pass-a-variable-to-a-phtml-block</id>
     <content type="html"><![CDATA[<p>Here&rsquo;s a simple snippet to pass a PHP variable from a controller ( or whatever magento file ) to a block, using the <code>createBlock()</code> method.</p>
 

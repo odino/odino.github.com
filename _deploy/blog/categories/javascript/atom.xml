@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
     <link href="http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
-    <updated>2013-06-04T00:31:00+04:00</updated>
+    <updated>2013-06-04T00:31:00-07:00</updated>
     <id>http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
@@ -184,7 +184,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Optimizing loading times with images' lazy loading]]></title>
     <link href="http://odino.org/optimizing-loading-times-with-images-lazy-loading/"/>
-    <updated>2012-09-21T07:45:00+04:00</updated>
+    <updated>2012-09-21T07:45:00-07:00</updated>
     <id>http://odino.org/optimizing-loading-times-with-images-lazy-loading</id>
     <content type="html"><![CDATA[<p>Sometimes I like to forget that I&rsquo;m
 mainly involved in other things and
@@ -305,7 +305,7 @@ $(window).scroll(function() {
   <entry>
     <title type="html"><![CDATA[Human-readable user agents for JavaScript error reporting]]></title>
     <link href="http://odino.org/human-readable-user-agents-for-javascript-error-reporting/"/>
-    <updated>2012-08-22T09:40:00+04:00</updated>
+    <updated>2012-08-22T09:40:00-07:00</updated>
     <id>http://odino.org/human-readable-user-agents-for-javascript-error-reporting</id>
     <content type="html"><![CDATA[<p>Some time ago I published a few posts
 on logging, one on how to <a href="/logging-javascript-errors/">report JavaScript errors</a> and another one
@@ -507,7 +507,7 @@ echo sprintf(
   <entry>
     <title type="html"><![CDATA[Logging JavaScript errors]]></title>
     <link href="http://odino.org/logging-javascript-errors/"/>
-    <updated>2012-07-27T09:00:00+04:00</updated>
+    <updated>2012-07-27T09:00:00-07:00</updated>
     <id>http://odino.org/logging-javascript-errors</id>
     <content type="html"><![CDATA[<p>In one of my latest posts I talked about
 <a href="/using-monolog-for-php-error-reporting-on-new-relic/">using Monolog to remotely log stuff on New Relic</a>:
@@ -628,7 +628,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[iMacro: JavaScript loops with variables]]></title>
     <link href="http://odino.org/imacro-javascript-loops-with-variables/"/>
-    <updated>2010-12-01T02:03:00+04:00</updated>
+    <updated>2010-12-01T02:03:00-08:00</updated>
     <id>http://odino.org/imacro-javascript-loops-with-variables</id>
     <content type="html"><![CDATA[<p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
 

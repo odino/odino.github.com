@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/http/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-19T00:06:11+04:00</updated>
+  <updated>2013-08-31T19:18:45-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
     <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-    <updated>2013-08-01T05:24:00+04:00</updated>
+    <updated>2013-08-01T05:24:00-07:00</updated>
     <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
     <content type="html"><![CDATA[<p>At the end of August I will
 be travelling to reach SF and
@@ -50,7 +50,7 @@ ping me!</p>
   <entry>
     <title type="html"><![CDATA[Securing your HTTP API with JavaScript Object Signing and Encryption]]></title>
     <link href="http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
-    <updated>2013-06-04T00:31:00+04:00</updated>
+    <updated>2013-06-04T00:31:00-07:00</updated>
     <id>http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
@@ -218,7 +218,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
     <link href="http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
-    <updated>2012-10-16T15:11:00+04:00</updated>
+    <updated>2012-10-16T15:11:00-07:00</updated>
     <id>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>Yesterday, from Doha&rsquo;s international airport, I
 got the chance to blog about the latest changes
@@ -244,7 +244,7 @@ the basics</strong>.</p>
   <entry>
     <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
     <link href="http://odino.org/the-state-of-http-slash-2-dot-0/"/>
-    <updated>2012-10-15T23:45:00+04:00</updated>
+    <updated>2012-10-15T23:45:00-07:00</updated>
     <id>http://odino.org/the-state-of-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>With a few days of delay I&rsquo;m here reporting and commenting
 the last <strong>revolutions</strong> about the protocol of the web,
@@ -339,7 +339,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
     <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
-    <updated>2012-01-27T19:27:00+04:00</updated>
+    <updated>2012-01-27T19:27:00-08:00</updated>
     <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&rsquo;s gaining
 its <em>momentum</em> due to a good article which explained how you should build
