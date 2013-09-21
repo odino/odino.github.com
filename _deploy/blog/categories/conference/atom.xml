@@ -4,7 +4,7 @@
   <title><![CDATA[Category: conference | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-01T18:03:28-07:00</updated>
+  <updated>2013-09-21T16:21:30+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,177 +14,36 @@
 
   
   <entry>
-    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
-    <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-07:00</updated>
-    <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
-    <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
-I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
-in San Francisco.</p>
+    <title type="html"><![CDATA[See you in Paris at the 2013 edition of the PHP Forum]]></title>
+    <link href="http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/"/>
+    <updated>2013-09-21T16:04:00+04:00</updated>
+    <id>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum</id>
+    <content type="html"><![CDATA[<p>In late november I will be for a few days in Paris,
+attending and speaking at the 2013 edition of the
+<a href="http://afup.org/pages/forumphp2013/sessions.php">Forum PHP Paris</a>:
+funny enough, I&rsquo;ve only been to Paris for conferences so far,
+as my <em>first-timer</em> there was during the
+<a href="/symfony-live-2011-my-pov/">2011 edition of the Symfony Live</a>.</p>
 
 <!-- more -->
 
 
-<p>It was a slightly remixed version of the same talk I gave at the
-IPC in Germany last year, with a few addition and changes: I hope the
-attendees have enjoyed the conference as well as my 2 <strong>small</strong>
-contributions as much as I did.</p>
+<p><img class="right" src="/images/paris.jpg"></p>
 
-<p>As usual, the presentation is on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-end-of-the-road-cakefest-2013-in-san-francisco">slideshare</a>:
-here are the slides for the lazy ones :)</p>
+<p>Topic of my talk will be what we&rsquo;ve witnessed
+at <a href="http://afup.org/pages/forumphp2013/sessions.php#894">Namshi building our team and stack</a>:
+from recruiting talents to automated testing, from
+SOA&rsquo;s rules to deciding to use cutting-edge technologies
+like <a href="http://angularjs.org/">AngularJS</a>: don&rsquo;t miss the
+opportunity to
+<a href="http://afup.org/pages/forumphp2013/inscription.php">reserve your seat for the event</a>,
+since there will be amazing speakers, like
+Igor Wiedler talking about <a href="http://afup.org/pages/forumphp2013/sessions.php#967">Stack</a>,
+PHP&rsquo;s rack, and
+Dustin Whittle who will give his insights about
+<a href="http://afup.org/pages/forumphp2013/sessions.php#964">scaling PHP apps</a>.</p>
 
-<p><div class="slideshare" id="__ss_25801971"><iframe src="http://www.slideshare.net/slideshow/embed_code/25801971 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-
-<p>Cheers!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
-    <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-    <updated>2013-08-31T19:05:00-07:00</updated>
-    <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
-    <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
-<a href="http://cakefest.org">CakeFest</a> here in San Francisco,
-&ldquo;<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">Tips and Tricks for your SOA</a>&rdquo;.</p>
-
-<!-- more -->
-
-
-<p>It basically contains a few tips derived from our experience at
-<a href="http://en-ae.namshi.com">Namshi</a> while building our own service-oriented
-architecture, and I hope, since there&rsquo;s not <em>that</em> much material
-about SOA out there, that this can serve as a good feedback from who
-is actually embracing this architectural style.</p>
-
-<p>As always, the slides are on <a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">slideshare</a>,
-and I&rsquo;m embedding the presentation
-here for those who immediately want to have a look at it:</p>
-
-<p><div class="slideshare" id="__ss_25786089"><iframe src="http://www.slideshare.net/slideshow/embed_code/25786089 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-
-<p>Tomorrow, as per the conference&rsquo;s schedule, I will be giving my other talk,
-&ldquo;HTTP colon slash slash: end of the road?&rdquo;, a remake of what I
-presented at the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">IPC in Mainz last year</a>,
-with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
-
-<p>Cheers!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
-    <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-    <updated>2013-08-01T05:24:00-07:00</updated>
-    <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
-    <content type="html"><![CDATA[<p>At the end of August I will
-be travelling to reach SF and
-the <a href="http://cakefest.org/">CakeFest</a>, the annual
-conference about
-<a href="http://cakephp.org/">CakePHP</a>.</p>
-
-<!-- more -->
-
-
-<p>Funny thing is, I have two talks
-and none of them deals with Cake, <strong>at all</strong> :)</p>
-
-<p>I will be talking about the
-evolution of Web Protocols, in
-particular HTTP/2.0 and SPDY, in a
-remake of the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">talk I gave the IPC</a>,
-in Mainz, last year.</p>
-
-<p>My second talk will be a <em>new entry</em>, a
-collection of tips, advices and tricks
-in order to manage a SOA, learnt <strong>the hard
-way</strong>.</p>
-
-<p>If you are going to be around San Francisco
-in the first days of Semptember, feel free to
-ping me!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
-    <updated>2013-03-29T18:08:00-07:00</updated>
-    <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
-    <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
-people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
-in Turin my 1-year experience in Namshi, one of
-Rocket Internet&rsquo;s ventures in the Middle East.</p>
-
-<!-- more -->
-
-
-<p><img class="left" src="/images/phptostart2013.jpg"></p>
-
-<p>Luckily, this was a great opportunity to meet some good
-old friends and the talk went very well: of course,
-the reharsal at the <a href="http://roma.grusp.org">PHP User Group in Rome</a>
-earlier this week was a bless.</p>
-
-<p>It basically deals with the phases that I experienced
-with our team in Namshi, with some spicy details on
-recruiting (from looking for talents to conducting
-interviews), how to <strong>change processes to help people improving</strong>
-(and not change people to improve processes) and
-a big picture on what we were able to plan and achieve
-in this year together, from a technical point of view.</p>
-
-<p>At the end of the talk I invited everyone interested, and
-I will repeat myself here, to look for the open positions
-on <a href="http://en-ae.namshi.com/careers/">our careers site</a>,
-since we are currently hiring a Lead Developer and a
-PHP Developer (a junior or an intermediate, it&rsquo;s more
-about the approach rather than the hands-on experience).</p>
-
-<p>Here are the slides of the talk, in a slightly better (and more colored)
-version compared to the ones I used in Rome:</p>
-
-<iframe src="http://www.slideshare.net/odino/slideshelf" width="760px" height="570px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:none;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
-    <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
-    <updated>2013-03-29T14:14:00-07:00</updated>
-    <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
-back in Italy, since I was missing my friends in Rome
-since <strong>exactly</strong> a year and the last time my parents saw me it
-was 6 months ago.</p>
-
-<!-- more -->
-
-
-<p>Fun thing is, since I can&rsquo;t miss the opportunity
-of getting back in touch with a few people, I will
-be joining 4 tech events:</p>
-
-<ul>
-<li><a href="http://rome.codemotionworld.com/">Codemotion</a> &ndash; already happened, I was there on the 23rd &ndash; the conference open to
-all the programming languages, in Rome</li>
-<li><a href="http://roma.grusp.org/">PHP User group Rome</a>, a meetup that is held monthly, for one of
-the user groups that I helped launching here in Italy, again in Rome, where I gave
-a talk about assembling a mid-sized PHP team</li>
-<li><a href="http://www.phptostart.it/">PHP.TO.START</a> &ndash; happening <strong>right now </strong>&ndash; a yearly event for the
-north-western italian PHP community, where I&rsquo;ll be presenting the same talk I had at
-the PUG Rome</li>
-<li><a href="http://friuli.grusp.org/">PHP User Group Friuli</a>, another meetup organized by one of the
-italian PHP User Groups, where I&rsquo;ll be presenting an <em>unknown</em> topic (at least for now)</li>
-</ul>
-
-
-<p>An <strong>important thing</strong>: I am actively recruiting for our company,
-<a href="http://en-ae.namshi.com/careers/technology/">Namshi</a>, so if you
-are interested in one of the open positions that we have right now
-(in particular, Lead Developer and PHP Developer), feel free to approach
-me if you find me at the upcoming events (in Turin and Udine).</p>
+<p>See you in the core of europe!</p>
 ]]></content>
   </entry>
   
