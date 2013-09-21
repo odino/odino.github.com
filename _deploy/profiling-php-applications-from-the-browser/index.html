@@ -1,106 +1,100 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Profiling PHP applications from the browser - Alessandro Nadalin</title>
-  <meta name="author" content="Alessandro Nadalin">
-
-  
-  <meta name="description" content="In my previous post I briefly spoke about
+	<meta charset="utf-8">
+	<title>Profiling PHP applications from the browser - Alessandro Nadalin</title>
+    <meta name="author" content="Alessandro Nadalin">
+    
+	<meta name="description" content="In my previous post I briefly spoke about
 Webgrind,
 a web-based profiler for PHP:
 now I&rsquo;d like to spend some more time
 giving an overview on &hellip;">
-  
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
-  
-  <link rel="canonical" href="http://odino.org/profiling-php-applications-from-the-browser/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-7407627-3']);
-    _gaq.push(['_trackPageview']);
+    <script type="text/javascript" src="/javascripts/jquery-tapir.js"></script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+    <!-- remove or comment it to disable ajaxification -->   
+    <script src="/javascripts/ajaxify.js"></script>
+   
+    
+    
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-7407627-3']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 </head>
 
-<body    class="collapse-sidebar sidebar-footer" >
-  <header role="banner"><hgroup>
-  <img id="bio-picture" src="https://lh6.googleusercontent.com/-YgvT5_ULkUk/AAAAAAAAAAI/AAAAAAAAAWY/lIfaFw-9ZQo/s120-c/photo.jpg" />
-  <h1><a href="/">Alessandro Nadalin</a></h1>
-</hgroup>
 
-<ul id="topmenu">
-	<li>
-		<a href="/about" >
-			about
-		</a>
-	</li>
-	<li>
-		<a href="/conferences" >
-			conferences
-		</a>
-	</li>
-	<li>
-		<a href="http://twitter.com/_odino_" >
-			twitter
-		</a>
-	</li>
-	<li>
-		<a href="/archives" >
-			archives
-		</a>
-	</li>
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        Alessandro Nadalin
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
+  
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/_odino_" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
 </ul>
 
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/about">About</a></li>
+	<li id="ajax"><a href="/conferences">conferences</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+
+
+
 </header>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Profiling PHP Applications From the Browser</h1>
-    
-  </header>
 
-
-
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/performances/'>performances</a>, <a class='category' href='/blog/categories/php/'>php</a>
-  
-</span>
-
-
-<div class="entry-content"><p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
+        <article class="post">
+	<h2 class="title">Profiling PHP Applications From the Browser</h2>
+	<div class="entry-content"><p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
 <a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
 a web-based profiler for PHP:
 now I&rsquo;d like to spend some more time
@@ -379,82 +373,61 @@ Notes
 
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-25T22:38:00+04:00" pubdate data-updated="true">Friday, 25 January 2013 at 22:38</time>
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/profiling-php-applications-from-the-browser/" data-via="_odino_" data-counturl="http://odino.org/profiling-php-applications-from-the-browser/" >Tweet</a>
-  
-  
-  
+<div class="meta">
+	
+		<span class="comments"><a href="/profiling-php-applications-from-the-browser/#disqus_thread">Comments</a></span>
+	
 </div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/making-the-orientdb-odm-5-times-faster/" title="Previous Post: Making the OrientDB ODM 5 times faster">&laquo; Making the OrientDB ODM 5 times faster</a>
-      
-      
-        <a class="basic-alignment right" href="/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/" title="Next Post: PHP: 'The script tried to execute a method or access a property of an incomplete object'">PHP: 'The script tried to execute a method or access a property of an incomplete object' &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    
-  
-</aside>
-
+</section>
 
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Alessandro Nadalin -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
 
-</footer>
-  
+    Alessandro Nadalin
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'odino';
       
         
-        var disqus_developer = 1;
+        // var disqus_developer = 1;
         var disqus_identifier = 'http://odino.org/profiling-php-applications-from-the-browser/';
         var disqus_url = 'http://odino.org/profiling-php-applications-from-the-browser/';
-        var disqus_title = 'Profiling PHP applications from the browser';
         var disqus_script = 'embed.js';
       
     (function () {
@@ -468,24 +441,14 @@ Notes
 
 
 
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="/javascripts/aharris.js"></script>
-
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
 </body>
 </html>
