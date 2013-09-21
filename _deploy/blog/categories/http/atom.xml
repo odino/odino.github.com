@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/http/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-08-31T19:18:45-07:00</updated>
+  <updated>2013-09-01T18:03:28-07:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
+    <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
+    <updated>2013-09-01T17:48:00-07:00</updated>
+    <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
+    <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
+I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
+in San Francisco.</p>
+
+<!-- more -->
+
+
+<p>It was a slightly remixed version of the same talk I gave at the
+IPC in Germany last year, with a few addition and changes: I hope the
+attendees have enjoyed the conference as well as my 2 <strong>small</strong>
+contributions as much as I did.</p>
+
+<p>As usual, the presentation is on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-end-of-the-road-cakefest-2013-in-san-francisco">slideshare</a>:
+here are the slides for the lazy ones :)</p>
+
+<p><div class="slideshare" id="__ss_25801971"><iframe src="http://www.slideshare.net/slideshow/embed_code/25801971 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
@@ -330,83 +356,6 @@ Notes
 </span>
 	<ol>
 		<li id='fn:1'>No wonder why Roy Fielding, after having heavily influenced the HTTP protocol and the Apache ecosystem, came out with REST, an architectural style meant for long-living and scalable architectures <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>So, think about it, why do you need to re-write huge portions of code when better FOSS is out there? <a href='#fnref:2' rev='footnote'>↩</a></li>
-	</ol>
-</div>
-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
-    <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
-    <updated>2012-01-27T19:27:00-08:00</updated>
-    <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
-    <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&rsquo;s gaining
-its <em>momentum</em> due to a good article which explained how you should build
-your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
-
-<!-- more -->
-
-
-<p><img class="left" src="/images/http.png"></p>
-
-<h2>HTTP is slowly dying</h2>
-
-<p>This seems to be the conclusion that lot of people had after reading that article:
-SPDY is a newer, faster, more modern protocol and I have no problem in admitting
-that <em>a few</em> parts of the HTTP protocol need to be reviewed<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>: you
-can&rsquo;t simply advocate that HTTP fits <a href="http://lists.w3.org/Archives/Public/www-tag/2011Dec/0034.html">perfectly</a>
-in today&rsquo;s web, that&rsquo;s a <em>de-facto</em> issue.</p>
-
-<h2>SPDY in a nutshell</h2>
-
-<p><img class="right" src="/images/spdy.packet.png"></p>
-
-<p>SPDY is just a <strong>really good protocol implementation</strong>: it supports multiplexing,
-<strong>encourages</strong> content compression, allows servers to <strong>push notifications</strong> and
-lets you prioritize requests, just to mention the hottest features among
-<a href="http://www.chromium.org/spdy/spdy-whitepaper">others</a>.</p>
-
-<p>Amazon is currently shipping its Kindle with a browser that uses this protocol
-to communicate with EC2 instances, <a href="https://wiki.mozilla.org/Platform/Features/SPDY">Firefox 11 will support it</a>
-while &ndash; if using a google product &ndash; you may already be using SPDY<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:
-the road is long, but SPDY seems to be WWW&rsquo;s <em>next big thing</em>.</p>
-
-<h2>SPDY needs to love HTTP</h2>
-
-<p>Before going out there yelling at HTTP and telling everyone that SPDY will be
-the new, futuristic, what-we-were-missing web protocol I want you to consider a
-few things.</p>
-
-<p>It should not surprise you the fact that SPDY is <a href="http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft2#TOC-HTTP-Layering-over-SPDY">almost-completely</a>
-implementing <a href="http://www.ietf.org/rfc/rfc2616.txt">RFC2616</a>: <strong>the web relies on
-established semantics</strong>, clients and servers interact based on a series of
-well-known verbs, feedbacks and metadata associated to resources, that are the
-only immanent concept of the web.</p>
-
-<h2>Divide et impera: HTTP&rsquo;s soul is here to stay</h2>
-
-<p><blockquote><p>[We have] 10 years of implementation experience of RFC2616</p><footer><strong>Mark Nottingham <a href="http://www.w3.org/2001/tag/2012/01/06-minutes#item02">http://www.w3.org/2001/tag/2012/01/06-minutes#item02</a> HTTP futures and SPDY</strong></footer></blockquote></p>
-
-<p>You should really reconsider the HTTP protocol as 2 separate layers: its
-technical implementation and its interface.</p>
-
-<p><blockquote><p>The [HTTP] interface is designed to be efficient for large-grain [&hellip;] data transfer, optimizing for the common case of the Web.</p><footer><strong>Roy T. Fielding <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_5">http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_5</a> The uniform interface</strong></footer></blockquote></p>
-
-<p>The technical implementation may be a little updated<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup> but its
-interface was thought to be able to let machine and humans interact with
-resources in the most open, fault-tolerant, scalable, robust way we could have
-ever thought: <strong>without relying on HTTP, SPDY would not work</strong>, not in the ancient,
-not in the modern, not even in the future web.</p>
-
-<p>HTTP 2.0 is close, and <a href="http://www.w3.org/2001/tag/2012/01/06-minutes#item02">the W3C is not blind</a>.</p>
-
-<p><div class="footnotes">
-<span>
-Notes
-</span>
-	<ol>
-		<li id='fn:1'>To be kind <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>If you are currently reading this note with Chrome/Chromium, go here: chrome://net-internals/#events&amp;q=type:SPDY_SESSION%20is:active <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Again, to be kind <a href='#fnref:3' rev='footnote'>↩</a></li>
 	</ol>
 </div>
 </p>
