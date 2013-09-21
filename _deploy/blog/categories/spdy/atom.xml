@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SPDY | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/spdy/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-01T18:03:28-07:00</updated>
+  <updated>2013-09-21T16:24:19+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-07:00</updated>
+    <updated>2013-09-01T17:48:00+04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
     <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
 I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
@@ -42,7 +42,7 @@ here are the slides for the lazy ones :)</p>
   <entry>
     <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
     <link href="http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
-    <updated>2012-10-16T15:11:00-07:00</updated>
+    <updated>2012-10-16T15:11:00+04:00</updated>
     <id>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>Yesterday, from Doha&rsquo;s international airport, I
 got the chance to blog about the latest changes
@@ -68,7 +68,7 @@ the basics</strong>.</p>
   <entry>
     <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
     <link href="http://odino.org/the-state-of-http-slash-2-dot-0/"/>
-    <updated>2012-10-15T23:45:00-07:00</updated>
+    <updated>2012-10-15T23:45:00+04:00</updated>
     <id>http://odino.org/the-state-of-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>With a few days of delay I&rsquo;m here reporting and commenting
 the last <strong>revolutions</strong> about the protocol of the web,
@@ -163,7 +163,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
     <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
-    <updated>2012-01-27T19:27:00-08:00</updated>
+    <updated>2012-01-27T19:27:00+04:00</updated>
     <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>
     <content type="html"><![CDATA[<p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&rsquo;s gaining
 its <em>momentum</em> due to a good article which explained how you should build

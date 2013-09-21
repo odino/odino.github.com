@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Symfony2 | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/symfony2/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-01T18:03:28-07:00</updated>
+  <updated>2013-09-21T16:24:19+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
     <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
-    <updated>2013-07-11T01:20:00-07:00</updated>
+    <updated>2013-07-11T01:20:00+04:00</updated>
     <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
     <content type="html"><![CDATA[<p>While implementing various pieces of our
 <a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
@@ -208,7 +208,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x61;&#108;&#101;&#115;&#x73;&#x61;&#110;&#100;&#x72;&#111;&#46;&#x6e;&#x61;&#x64;&#x61;&#x6c;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#97;&#108;&#101;&#115;&#x73;&#97;&#110;&#100;&#x72;&#111;&#46;&#110;&#x61;&#x64;&#97;&#108;&#105;&#x6e;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x61;&#x6c;&#x65;&#115;&#x73;&#97;&#x6e;&#x64;&#x72;&#111;&#46;&#110;&#x61;&#x64;&#97;&#x6c;&#105;&#110;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#97;&#108;&#x65;&#115;&#x73;&#97;&#110;&#100;&#114;&#x6f;&#x2e;&#110;&#97;&#100;&#97;&#x6c;&#x69;&#110;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);
@@ -326,7 +326,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
     <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
-    <updated>2013-06-06T13:00:00-07:00</updated>
+    <updated>2013-06-06T13:00:00+04:00</updated>
     <id>http://odino.org/configuring-a-symfony2-application-to-support-soa</id>
     <content type="html"><![CDATA[<p>When you think in terms of
 <a href="/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>
@@ -597,7 +597,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
     <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
-    <updated>2013-05-27T22:16:00-07:00</updated>
+    <updated>2013-05-27T22:16:00+04:00</updated>
     <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
@@ -995,7 +995,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Symfony2 console: permission denied during autocompletion]]></title>
     <link href="http://odino.org/symfony2-console-permission-denied-during-autocompletion/"/>
-    <updated>2013-03-11T10:11:00-07:00</updated>
+    <updated>2013-03-11T10:11:00+04:00</updated>
     <id>http://odino.org/symfony2-console-permission-denied-during-autocompletion</id>
     <content type="html"><![CDATA[<p>Yesterday I faced a pretty cryptic issue
 while using the Symfony2 console (<code>app/console</code>).</p>
@@ -1018,7 +1018,7 @@ chmod +x app/console
   <entry>
     <title type="html"><![CDATA[Using Selenium and Symfony2 to help your frontend developers coding without risks]]></title>
     <link href="http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
-    <updated>2013-03-10T11:39:00-07:00</updated>
+    <updated>2013-03-10T11:39:00+04:00</updated>
     <id>http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
     <content type="html"><![CDATA[<p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major

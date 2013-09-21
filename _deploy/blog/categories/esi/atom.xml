@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ESI | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/esi/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-01T18:03:28-07:00</updated>
+  <updated>2013-09-21T16:24:19+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
     <link href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
-    <updated>2012-01-20T14:15:00-08:00</updated>
+    <updated>2012-01-20T14:15:00+04:00</updated>
     <id>http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
     <content type="html"><![CDATA[<p>I have an idea for an RFC that I would like to write, based on some thoughts I
 had in the last months.</p>
@@ -313,7 +313,7 @@ and leaner web.</p>
   <entry>
     <title type="html"><![CDATA[Some common questions about Edge Side Includes]]></title>
     <link href="http://odino.org/some-common-questions-about-edge-side-includes/"/>
-    <updated>2011-05-30T15:07:00-07:00</updated>
+    <updated>2011-05-30T15:07:00+04:00</updated>
     <id>http://odino.org/some-common-questions-about-edge-side-includes</id>
     <content type="html"><![CDATA[<p>After my <a href="http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011">REST in (a mobile) peace</a> talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so &ldquo;standard&rdquo;, here&rsquo;s a parade of little things to know about <a href="http://en.wikipedia.org/wiki/Edge_Side_Includes">ESI</a>.</p>
 
@@ -390,7 +390,7 @@ Content-Type: application/xhtml+xml;profile=esi
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
     <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
-    <updated>2011-05-06T15:42:00-07:00</updated>
+    <updated>2011-05-06T15:42:00+04:00</updated>
     <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There&rsquo;s a common goal that NoSQL and ESI share together: consistency.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHPUnit | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/phpunit/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-01T18:03:28-07:00</updated>
+  <updated>2013-09-21T16:24:19+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Desktop notifications for PHPUnit tests on Ubuntu]]></title>
     <link href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/"/>
-    <updated>2013-06-21T03:48:00-07:00</updated>
+    <updated>2013-06-21T03:48:00+04:00</updated>
     <id>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu</id>
     <content type="html"><![CDATA[<p><img class="left" src="/images/phpunit-notification-ko.png"></p>
 
@@ -115,7 +115,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Enter SfCcTesting: Symfony 1.X Client-Crawler Testing]]></title>
     <link href="http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/"/>
-    <updated>2012-01-26T11:51:00-08:00</updated>
+    <updated>2012-01-26T11:51:00+04:00</updated>
     <id>http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing</id>
     <content type="html"><![CDATA[<p>Earlier today I introduced why and how we initially integrated the <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/">Symfony2
 testing mechanism into symfony 1.X</a>
@@ -300,7 +300,7 @@ you can already rely on this small library via
   <entry>
     <title type="html"><![CDATA[Functional testing symfony 1.X with PHPUnit: the Symfony2 way]]></title>
     <link href="http://odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/"/>
-    <updated>2012-01-26T00:45:00-08:00</updated>
+    <updated>2012-01-26T00:45:00+04:00</updated>
     <id>http://odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way</id>
     <content type="html"><![CDATA[<p>In the process of starting a brand new project here at
 <a href="http://www.dnsee.com">DNSEE</a>, me and my colleague
@@ -655,7 +655,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Headers already sent... what's up PHPUnit?]]></title>
     <link href="http://odino.org/headers-already-sent-what-s-up-phpunit/"/>
-    <updated>2010-09-11T13:50:00-07:00</updated>
+    <updated>2010-09-11T13:50:00+04:00</updated>
     <id>http://odino.org/headers-already-sent-what-s-up-phpunit</id>
     <content type="html"><![CDATA[<p>Here we go with a simple workaround to resolve a bad error that you can encounter with PHPUnit: <code>headers already sent</code> and failure of the tests.</p>
 
@@ -724,7 +724,7 @@ phpunit --configuration phpunit.xml
   <entry>
     <title type="html"><![CDATA[Magento and PHPUnit]]></title>
     <link href="http://odino.org/magento-and-phpunit/"/>
-    <updated>2010-09-11T13:43:00-07:00</updated>
+    <updated>2010-09-11T13:43:00+04:00</updated>
     <id>http://odino.org/magento-and-phpunit</id>
     <content type="html"><![CDATA[<p>Although there is a good <a href="http://www.magentocommerce.com/wiki/development/phpunit_integration_with_magento">tutorial about PHPunit and Magento integration</a> and I&rsquo;d rather using Lime ( the symfony-integrated test engine ) here I&rsquo;ll show you how to set up PHPUnit tests in order to improve the QA of your Magento customizations.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: symfony. PHP | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/symfony-php/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-01T18:03:28-07:00</updated>
+  <updated>2013-09-21T16:24:19+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Basic HTTP authentication on a symfony backend]]></title>
     <link href="http://odino.org/basic-http-authentication-on-a-symfony-backend/"/>
-    <updated>2010-09-17T11:09:00-07:00</updated>
+    <updated>2010-09-17T11:09:00+04:00</updated>
     <id>http://odino.org/basic-http-authentication-on-a-symfony-backend</id>
     <content type="html"><![CDATA[<p>Since I&rsquo;m not a ninja from this point of view, any better solution is welcome.</p>
 
