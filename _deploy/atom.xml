@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-23T18:40:41+04:00</updated>
+  <updated>2013-11-10T09:20:39+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
+    <link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
+    <updated>2013-11-10T08:59:00+04:00</updated>
+    <id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://odino.org/images/java.png"></p>
+
+<p>A few weeks back I started noticing some performance
+issues on my <a href="http://www.jetbrains.com/phpstorm/">IDE</a> and decided to investigate a bit more
+on it: turns out that they recommended to 1) upgrade to
+the latest JDK (7) and stop using <a href="http://openjdk.java.net/">OpenJDK</a>, as it has
+some performance gotchas.</p>
+
+<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/
+</span><span class='line'>wget https://github.com/flexiondotorg/oab-java6/raw/0.3.0/oab-java.sh -O oab-java.sh
+</span><span class='line'>chmod +x oab-java.sh
+</span><span class='line'>sudo ./oab-java.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After running it you just need to re-install all the packages:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install oracle-java7-jdk oracle-java7-jre oracle-java7-plugin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and tell ubuntu that the JDK version and location has changed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo update-alternatives --config java</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A quick check with <code>java -version</code> and then enjoy it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
+    <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
+    <updated>2013-10-20T11:00:00+04:00</updated>
+    <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
+    <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
+be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,
+with a good lineup of talks:</p>
+
+<ul>
+<li><a href="http://confoo.ca/en/2014/session/orientdb-the-fastest-document-based-graphdb">OrientDB, the fastest NoSQL graph database</a></li>
+<li>building a <a href="http://confoo.ca/en/2014/session/soa-with-symfony2">SOA with Symfony2</a></li>
+<li><a href="http://confoo.ca/en/2014/session/angularjs-is-the-future-maybe">is AngularJS the future?</a></li>
+</ul>
+
+
+<p>For the first time ever, I have to admit it, I will be
+presenting <strong>3 topics that have very different backgrounds</strong>,
+and, as the days go by, I realize that working at <a href="http://en-ae.namshi.com">Namshi</a>
+has been terrific under this point of view: we have the ability of
+experimenting with different technologies and use the best out on the
+market, something that gets translated into the ability of having a
+360° overview of the market.</p>
+
+<p><img class="right" src="http://odino.org/images/montreal.jpg"></p>
+
+<p>For me it will be the first time in the cold lands of Canada, and
+I can&rsquo;t wait to make the most out of this trip: I always had a <strong>very</strong>
+good opinion about canadians in general, hope this trip will
+confirm my random thoughts.</p>
+
+<p>If you have the chance to join, don&rsquo;t miss this amazing event:
+<a href="http://confoo.ca/en/2014/sessions">the schedule</a> speaks for itself
+and I am thrilled to be part of such an amazing speakers&#8217; lineup
+&mdash; which I obviously ruin :&ndash;) !</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Space to the youngsters...]]></title>
@@ -3082,453 +3166,6 @@ Notes
         <li id='fn:1'>One of the disadvantages of this approach is that it relies on cookies, only available in the HTTP protocol. If you want to use another protocol for you application - a very rare and extreme use case - this wouldn&#8217;t work for you. <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I honestly never heard of this library before, so I can&#8217;t really say what it does and why it&#8217;s needed <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Since I&#8217;m not an expert in encryption and security, I would suggest to give it a look and come up with feedbacks <a href='#fnref:3' rev='footnote'>↩</a></li>
     </ol>
 </div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
-    <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
-    <updated>2013-05-27T22:16:00+04:00</updated>
-    <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
-    <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
-Symfony2 ecosystem, and going SOA with
-this framework was a very trivial decision
-for us at <a href="http://en-ae.namshi.com">Namshi</a>;
-all in all, besides personal preferences,
-there is a plethora of reasons to choose
-this framework among the others available
-in PHP, so I am going to list the most
-important factors that influenced our
-decision.</p>
-
-<p>Believe it or not, all of the following
-factors matter <strong>first for the business</strong>,
-then for the developers.</p>
-
-<!-- more -->
-
-
-<h2>Testing</h2>
-
-<p><img class="right" src="http://odino.org/images/behat.png"></p>
-
-<p>We are firm believers in automated test practices,
-and providing a layer that integrates very easily
-with testing tools (such as Behat or PHPUnit) is a
-must for us.</p>
-
-<p>Symfony2 is a testing-prone framework because:</p>
-
-<ul>
-<li>it is well decoupled, so <em>unit testing</em> becomes very easy
-since you can mock objects, isolate classes and inject stub
-dependencies very easily</li>
-<li>it provides a first layer for functional testing (with PHPUnit):
-being an HTTP-centric framework, it provides a <a href="http://symfony.com/doc/2.0/book/testing.html#your-first-functional-test">base class</a>
-that lets you simulate HTTP requests and examine the output; needless
-to say, these kind of tests are way faster than the ones that you
-would write with tools like Selenium, since they don&rsquo;t have the
-overhead of testing with an actual browser</li>
-<li>there is a <a href="http://extensions.behat.org/symfony2/">Behat extension</a>
-that lets you integrate the framework with this behavioral testing tool</li>
-</ul>
-
-
-<p>At the end, you can see how Symfony2 and the ecosystem around it
-provide the proper toolset to run <strong>unit</strong>, <strong>functional</strong> and
-<strong>behavioral</strong> tests.
-If you do care about testing, this is already a
-huge point: we can&rsquo;t afford our developers to <strong>waste</strong>
-a huge portion of their time doing manual testing, and
-we don&rsquo;t want to increase overhead to build a
-manual QA team; since we are a technology startup,
-we should take advantage of technology to automate
-expensive tasks that harm the business, like
-manual testing<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<h2>Debugging</h2>
-
-<p>I kind of had so much fun when, while still working
-with symfony 1.4, I saw people developing with
-frameworks like Yii or Zend Framework 1,
-beating their heads on their desks tying to
-understand which view to modify, var_dumping
-SQL queries to output them and so on:
-symfony 1.4 already had a very powerful
-debug toolbar that would present all of these
-informations in order to ease debugging.</p>
-
-<p>Symfony2 goes beyond what we had before,
-providing a way more powerful, extensible
-toolbar and an integrated profiler.</p>
-
-<p><img class="right" src="http://odino.org/images/symfony2-profiler.png"></p>
-
-<p>Database inspection will let you realize
-how many queries you are running and see the
-SQL of all of them, with a nice overview of the
-time they take, while the profiler itself
-includes informations about every step
-of the application: for example, with Joomla,
-can you tell this easily how long it took to
-render a particular view and how much memory
-was used to execute a controller&rsquo;s action?</p>
-
-<p>Now, imagine each of your developers
-(let&rsquo;s say you have a team of 6),
-spending 1 hour (very conservative estimate)
-out of 40 (a working week) trying to obtain
-informations that debugging tools natively give you:
-it&rsquo;s almost a day per week; multiply that day for 52
-weeks in a year and you will end up loosing
-one of your developers for two moths.</p>
-
-<p>We <strong>all</strong> honestly can&rsquo;t afford to let a guy
-leave the company for 2 months for free, so why
-would we keep using counterproductive tools?</p>
-
-<h2>Doctrine 2</h2>
-
-<p>It is no news that we, at Namshi,
-<a href="http://odino.org/refactoring-your-architecture-go-for-soa/">are working with a Service-Oriented Architecture</a>,
-and we are highly benefiting from the easy
-integration that Symfony2 provides for
-Doctrine.</p>
-
-<p>One of the rules of thumb of designing
-SOAs is that you can provide access to the
-same data source to different services:
-in simple terms, instead of talking via
-webservices or messaging queues, services
-can simply access the data stored <em>somewhere</em>
-by other ones.</p>
-
-<p><img class="left" src="http://odino.org/images/doctrine-cli.png"></p>
-
-<p>Well, Doctrine 2 is the cherry on top of the
-cake to access that <em>somewhere</em>: natively
-providing support for multiple DB connections
-and object-relational mappings, you can safely
-use this tool, within Symfony2, to handle read
-and writes to different databases without
-polluting the domain model of each of the services
-that take advantage of Doctrine; in addition to this,
-I should enumerate the huge list of good things that
-working with a data mapper like Doctrine 2 brings
-on the table.</p>
-
-<p>On another note, sharing the data model among different services
-helps you overcoming though situations
-where webservices or messaging queues are not
-enough: think about a service which, due to
-an update, needs to modify half a milion records
-that &ldquo;belong&rdquo; to another service; of course,
-istantly having 500k messages in a queue implies
-a long, very long time to process them, while
-a webservice might not be fully ok with sending
-a huge payload over the HTTP protocol &ndash; and,
-moreover, how do you start testing this feature,
-when your developers need to send a lot of MB
-through their browser? It is painful, believe me.</p>
-
-<p>At this point, the ability of directly accessing
-different DBs come out as a swiss-army knife, as
-you can directly execute the 500k updates, in
-batch, from the original service.</p>
-
-<h2>Deployments</h2>
-
-<p>Symfony2 has an <em>out of the box</em>
-<a href="http://capifony.org/">integration with Capistrano</a>,
-the most popular automated
-deployment tool in the market.</p>
-
-<p>This means that you should forget about
-wasting time, money and energy to develop
-your own in-house solution to automate
-deployments or, even worse, rely on
-manual procedure, which are prone to
-errors where it hurts the most, on the
-&ldquo;live server&rdquo;.</p>
-
-<h2>DIC</h2>
-
-<p>Let&rsquo;s say that you, for example, are
-using <a href="http://graylog2.org/">Graylog2</a>
-to handle logs in your application:
-while you are developing locally, you
-won&rsquo;t have a graylog2 server to connect to,
-since it might be that you want to keep
-your machine a bit cleaner and you might
-find more useful to read local logs
-from a file in the filesystem, or directly
-output them to the browser.</p>
-
-<p>In Symfony2, thanks to the <a href="http://symfony.com/doc/master/book/service_container.html">dependency-injection container</a>,
-you can define the logger as a service:</p>
-
-<figure class='code'><figcaption><span>config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>logger:
-</span><span class='line'>    class: <span class="s1">&#39;Monolog\Logger&#39;</span>
-</span><span class='line'>    arguments:
-</span><span class='line'>        name:           <span class="s2">&quot;applicationName-%kernel.environment%&quot;</span>
-</span><span class='line'>    calls:
-</span><span class='line'>        - <span class="o">[</span> pushHandler, <span class="o">[</span> @monolog_handler.graylog <span class="o">]</span> <span class="o">]</span>
-</span><span class='line'>monolog_handler.graylog:
-</span><span class='line'>    class: <span class="s1">&#39;Monolog\Handler\GelfHandler&#39;</span>
-</span><span class='line'>    arguments:
-</span><span class='line'>        publisher: @gelf.message_publisher
-</span><span class='line'>        level:     200
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and, for development environments, you
-can simply override the configuration in
-the <code>config_dev.yml</code> file:</p>
-
-<figure class='code'><figcaption><span>config_dev.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>monolog_handler.graylog:
-</span><span class='line'>    class: <span class="s1">&#39;Monolog\Handler\StreamHandler&#39;</span>
-</span><span class='line'>    arguments:
-</span><span class='line'>      stream: <span class="s2">&quot;php://stdout&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will allow you to output errors that
-would normally go to graylog2 directly to
-the developer&rsquo;s browser, easing debugging
-when you can afford to display errors in
-the browser &ndash; thing that is not possible
-who&rsquo;s viewing your application is a
-potential customer.</p>
-
-<p>Apart from all the technicalities involved
-in using a DIC, I would like to focus on
-one point: again, simplicity and speed to implement a
-solution to a problem (having different log
-handlers depending on the application&rsquo;s environment,
-in this case) are a winning factor for your
-development team, which is translated in <strong>more
-productivity for your company</strong>.</p>
-
-<h2>Bundles</h2>
-
-<p>When we kickstarted our first Symfony2-based
-service in our architecture, we decided to meld
-together 2 applications that support our CRM
-and ERP systems: being inside Symfony2, these
-layers are <strong>fully isolated</strong> in separate bundles,
-giving us the ability of phisically decoupling them
-in 2 installations in a matter of minutes.</p>
-
-<p>Bundles are probably one of the most powerful
-concepts of Symfony2, since they are
-micro-applications inside your main application:
-being able to totally separate logics from different
-domains helps you in keeping a clean separation
-of concerns and autonomously develop every single
-feature of your domain.</p>
-
-<h2>Declarative code</h2>
-
-<p>Consider the following snippet, written using the
-<a href="http://symfony.com/doc/master/components/finder.html">Symfony2 Finder component</a>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\Finder\Finder</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Zend_Service_Amazon_S3</span> <span class="k">as</span> <span class="nx">Amazon_S3</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$s3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Amazon_S3</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$secret</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$s3</span><span class="o">-&gt;</span><span class="na">registerStreamWrapper</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$finder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Finder</span><span class="p">();</span>
-</span><span class='line'><span class="nv">$finder</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;photos*&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">size</span><span class="p">(</span><span class="s1">&#39;&lt; 100K&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">date</span><span class="p">(</span><span class="s1">&#39;since 1 hour ago&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$finder</span><span class="o">-&gt;</span><span class="na">in</span><span class="p">(</span><span class="s1">&#39;s3://bucket-name&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">print</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">getFilename</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After your <strong>first</strong> look at this code, you already know
-what it is doing: now imagine that your team of developers
-need to, instead, try to understand how the Drupal
-framework works.</p>
-
-<p>Taken from <a href="https://github.com/drupal/drupal/blob/7.x/modules/comment/comment.admin.inc#L271">Drupal&rsquo;s source code</a>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="sd">/**</span>
-</span><span class='line'><span class="sd"> * Process comment_confirm_delete form submissions.</span>
-</span><span class='line'><span class="sd"> */</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">comment_confirm_delete_submit</span><span class="p">(</span><span class="nv">$form</span><span class="p">,</span> <span class="o">&amp;</span><span class="nv">$form_state</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nv">$comment</span> <span class="o">=</span> <span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;#comment&#39;</span><span class="p">];</span>
-</span><span class='line'>  <span class="c1">// Delete the comment and its replies.</span>
-</span><span class='line'>  <span class="nx">comment_delete</span><span class="p">(</span><span class="nv">$comment</span><span class="o">-&gt;</span><span class="na">cid</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">drupal_set_message</span><span class="p">(</span><span class="nx">t</span><span class="p">(</span><span class="s1">&#39;The comment and all its replies have been deleted.&#39;</span><span class="p">));</span>
-</span><span class='line'>  <span class="nx">watchdog</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;Deleted comment @cid and its replies.&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;@cid&#39;</span> <span class="o">=&gt;</span> <span class="nv">$comment</span><span class="o">-&gt;</span><span class="na">cid</span><span class="p">));</span>
-</span><span class='line'>  <span class="c1">// Clear the cache so an anonymous user sees that his comment was deleted.</span>
-</span><span class='line'>  <span class="nx">cache_clear_all</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">$form_state</span><span class="p">[</span><span class="s1">&#39;redirect&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;node/</span><span class="si">$comment-&gt;nid</span><span class="s2">&quot;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&rsquo;m far from saying that Drupal sucks, but some
-questions rise into my mind:</p>
-
-<ul>
-<li>why do I have a <code>$form</code> and a separate <code>$form_state</code>?</li>
-<li>what is <code>watchdog()</code> doing? Is it used for
-logging? Or to display flash messages?</li>
-<li>what is a <code>cid</code>? And what about the <code>nid</code>?</li>
-<li>why should I clear my entire application&rsquo;s
-cache to notify a user of a change?</li>
-</ul>
-
-
-<p>See, you don&rsquo;t want your developers to have to go
-through an entire application to understand what
-a piece of code does.</p>
-
-<h2>Best practices</h2>
-
-<p>Symfony2 is a framework made to take advantage
-of clean and clear tested patterns as well as
-tools to improve the final developer&rsquo;s
-productivity: imagine your team, working
-six months on this framework; how much would
-they learn? How many structural changes
-would they be able to do on your application without
-introducing regressions?</p>
-
-<p><img class="right" src="http://odino.org/images/best-practice.jpg"></p>
-
-<p>For startups, by the way, a huge plus comes from
-the fact that being highly decoupled, Symfony2 helps
-when you want to drastically replace a piece of software,
-or an adapter, with another one: for example,
-thanks to the dependency-injection container,
-you would be able to replace application services
-with others that have the same API, but a different
-implementation.</p>
-
-<p>It is clear enough that Symfony2 provides the
-flexibility you need to reach a very short
-<em>time to market</em> and increases your developers&#8217;
-awareness and efficiency by giving them the
-guidance and the tools they need to care about
-the domain of your services and not about how
-many bugs they would introduce by changing an
-untested piece of code.</p>
-
-<h2>All in all&hellip;is it Symfony2?</h2>
-
-<p>A very simple question that you should ask
-yourself at the end of this reading is:
-but, all in all, is this all thanks to
-Symfony2 or its surrounding environment?</p>
-
-<p>It is its surrounding environment, which
-was born thanks to the framework itself:
-when Symfony2 was released, no other framework
-had the same level of quality that the open source
-product from SensioLabs could offer;
-a natural effect of this was that the
-majority of well-known open source
-PHP developers got amused by this framework
-and embraced its way.</p>
-
-<p>Basically, Symfony2 is a framework chosen by
-the community, thus it can take advantage of
-all the efforts of the OS developers around it:
-from automated deployment tools to fully integrated
-ORMs, from testing frameworks to tutorials
-and best practices, through native, advanced
-debugging tools, Symfony2 is, as of today the most
-complete framework available in the PHP ecosystem
-when you take in consideration learning curve,
-integrations, stability and performances (don&rsquo;t forget
-that one of <a href="http://highscalability.com/blog/2012/4/2/youporn-targeting-200-million-views-a-day-and-beyond.html">top 100 website in the Alexa rank</a>
-is powered by Symfony2<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>).</p>
-
-<p>Can other frameworks do all of this?</p>
-
-<p>For the benefit of your <strong>business</strong>, this
-is the main question that you should ask
-yourself.</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>But - drumroll - since we are an e-commerce company, we always need to ensure that some critical parts of the system, like checkouts, are tested by a human reenacting our customers&#8217; behavior. So yes, for a few, business-critical things, we really *want* to do manual tests. <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Even though I am sorry for using *that* website as an example, it is a very useful use-case when you consider its technical stack. <a href='#fnref:2' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Automated tests from a novice's perspective]]></title>
-    <link href="http://odino.org/automated-tests-from-a-novice-perspective/"/>
-    <updated>2013-05-27T22:01:00+04:00</updated>
-    <id>http://odino.org/automated-tests-from-a-novice-perspective</id>
-    <content type="html"><![CDATA[<p>Today I got one of those moments of pride
-when one of our developers, who is working
-since &ndash; roughly &ndash; a year, decided to send an
-email to the team after working on automated
-tests for the first weeks of his career:</p>
-
-<blockquote><p>Automated testing is great idea </p><p>If you have a ticket which requires a lot of changes (20 files, for example) Automated tests are very helpful and save your time, it saves about 30% of your time; even if it&#8217;s still not perfect, its good<br/>For example look at this PR [link to a PR on Github], if i want to test all cases i need about half a day but it only took half an hour</p></blockquote>
 
 ]]></content>
   </entry>

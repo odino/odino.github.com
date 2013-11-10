@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SOA | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/soa/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-09-23T18:40:41+04:00</updated>
+  <updated>2013-11-10T09:20:39+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
+    <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
+    <updated>2013-10-20T11:00:00+04:00</updated>
+    <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
+    <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
+be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,
+with a good lineup of talks:</p>
+
+<ul>
+<li><a href="http://confoo.ca/en/2014/session/orientdb-the-fastest-document-based-graphdb">OrientDB, the fastest NoSQL graph database</a></li>
+<li>building a <a href="http://confoo.ca/en/2014/session/soa-with-symfony2">SOA with Symfony2</a></li>
+<li><a href="http://confoo.ca/en/2014/session/angularjs-is-the-future-maybe">is AngularJS the future?</a></li>
+</ul>
+
+
+<p>For the first time ever, I have to admit it, I will be
+presenting <strong>3 topics that have very different backgrounds</strong>,
+and, as the days go by, I realize that working at <a href="http://en-ae.namshi.com">Namshi</a>
+has been terrific under this point of view: we have the ability of
+experimenting with different technologies and use the best out on the
+market, something that gets translated into the ability of having a
+360° overview of the market.</p>
+
+<p><img class="right" src="/images/montreal.jpg"></p>
+
+<p>For me it will be the first time in the cold lands of Canada, and
+I can&rsquo;t wait to make the most out of this trip: I always had a <strong>very</strong>
+good opinion about canadians in general, hope this trip will
+confirm my random thoughts.</p>
+
+<p>If you have the chance to join, don&rsquo;t miss this amazing event:
+<a href="http://confoo.ca/en/2014/sessions">the schedule</a> speaks for itself
+and I am thrilled to be part of such an amazing speakers' lineup
+&mdash; which I obviously ruin :&ndash;) !</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
@@ -746,49 +784,6 @@ Notes
 	</ol>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
-    <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
-    <updated>2013-03-29T18:08:00+04:00</updated>
-    <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
-    <content type="html"><![CDATA[<p>Today I had the opportunity to share with the
-people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
-in Turin my 1-year experience in Namshi, one of
-Rocket Internet&rsquo;s ventures in the Middle East.</p>
-
-<!-- more -->
-
-
-<p><img class="left" src="/images/phptostart2013.jpg"></p>
-
-<p>Luckily, this was a great opportunity to meet some good
-old friends and the talk went very well: of course,
-the reharsal at the <a href="http://roma.grusp.org">PHP User Group in Rome</a>
-earlier this week was a bless.</p>
-
-<p>It basically deals with the phases that I experienced
-with our team in Namshi, with some spicy details on
-recruiting (from looking for talents to conducting
-interviews), how to <strong>change processes to help people improving</strong>
-(and not change people to improve processes) and
-a big picture on what we were able to plan and achieve
-in this year together, from a technical point of view.</p>
-
-<p>At the end of the talk I invited everyone interested, and
-I will repeat myself here, to look for the open positions
-on <a href="http://en-ae.namshi.com/careers/">our careers site</a>,
-since we are currently hiring a Lead Developer and a
-PHP Developer (a junior or an intermediate, it&rsquo;s more
-about the approach rather than the hands-on experience).</p>
-
-<p>Here are the slides of the talk, in a slightly better (and more colored)
-version compared to the ones I used in Rome:</p>
-
-<iframe src="http://www.slideshare.net/odino/slideshelf" width="760px" height="570px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:none;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-
 ]]></content>
   </entry>
   
