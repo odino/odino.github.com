@@ -3,7 +3,7 @@ layout: page
 title: "About"
 showtitle: About
 comments: false
-sidebar: false
+sidebar: true
 sharing: false
 footer: true
 ---

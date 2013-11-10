@@ -3,7 +3,6 @@ layout: page
 title: "Talks"
 showtitle: Conferences
 comments: false
-sidebar: false
 sharing: false
 footer: true
 ---
