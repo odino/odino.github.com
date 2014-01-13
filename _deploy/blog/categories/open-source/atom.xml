@@ -4,7 +4,7 @@
   <title><![CDATA[Category: open source | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/open-source/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-14T02:46:20+04:00</updated>
+  <updated>2014-01-14T02:50:39+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -84,7 +84,7 @@ of the template; the rest is very straightforward:</p>
 <p>);</p>
 
 <p>$emailvisionClient = new Client($config);
-$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x73;&#111;&#109;&#101;&#x6f;&#110;&#x65;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#115;&#x6f;&#109;&#x65;&#111;&#110;&#x65;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a>&rdquo;);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#x73;&#111;&#109;&#x65;&#x6f;&#110;&#101;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;">&#115;&#x6f;&#109;&#x65;&#x6f;&#110;&#x65;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a>&rdquo;);
 ```</p>
 
 <p>The nice thing here is that Emailvision lets you schedule
@@ -111,7 +111,7 @@ be a <code>DateTime</code> instance:</p>
 <p>);</p>
 
 <p>$emailvisionClient = new Client($config);
-$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#115;&#111;&#x6d;&#x65;&#x6f;&#110;&#x65;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x73;&#111;&#109;&#x65;&#x6f;&#110;&#101;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>&rdquo;);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#115;&#111;&#x6d;&#x65;&#x6f;&#x6e;&#x65;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#115;&#x6f;&#109;&#x65;&#111;&#110;&#101;&#64;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#x6d;</a>&rdquo;);
 ```</p>
 
 <p>This code will tell CampaignCommander to trigger
@@ -133,7 +133,7 @@ argument:</p>
 <p>``` php
 &lt;?php</p>
 
-<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x73;&#x6f;&#109;&#x65;&#x6f;&#x6e;&#x65;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x73;&#111;&#109;&#101;&#x6f;&#x6e;&#x65;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a>&rdquo;, array(</p>
+<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#115;&#x6f;&#109;&#101;&#111;&#x6e;&#x65;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#115;&#x6f;&#109;&#101;&#x6f;&#x6e;&#x65;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>&rdquo;, array(</p>
 
 <pre><code>'name' =&gt; 'Alex!',
 </code></pre>
@@ -175,7 +175,7 @@ running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
 
 <p>$encrypt    = &lsquo;email_template_security_tag&rsquo;;
 $random     = &lsquo;email_template_unique_id&rsquo;;
-$email  = &lsquo;<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#x79;&#x6f;&#x75;&#x72;&#46;&#x61;&#100;&#x64;&#x72;&#101;&#x73;&#115;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#111;&#x75;&#114;&#46;&#97;&#x64;&#100;&#114;&#101;&#x73;&#115;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a>&rsquo;;
+$email  = &lsquo;<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#121;&#111;&#x75;&#x72;&#x2e;&#97;&#100;&#x64;&#114;&#101;&#x73;&#x73;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#121;&#111;&#117;&#x72;&#x2e;&#x61;&#x64;&#x64;&#114;&#101;&#x73;&#x73;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a>&rsquo;;
 ```</p>
 
 <p>Enjoy!</p>

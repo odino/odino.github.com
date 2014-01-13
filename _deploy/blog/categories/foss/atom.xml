@@ -4,7 +4,7 @@
   <title><![CDATA[Category: FOSS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/foss/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-14T02:46:20+04:00</updated>
+  <updated>2014-01-14T02:50:39+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -557,7 +557,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#97;&#108;&#x65;&#x73;&#115;&#x61;&#110;&#100;&#114;&#x6f;&#x2e;&#x6e;&#x61;&#x64;&#x61;&#108;&#105;&#x6e;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#111;&#x6d;">&#x61;&#108;&#x65;&#x73;&#115;&#97;&#110;&#100;&#x72;&#111;&#46;&#110;&#x61;&#100;&#x61;&#108;&#x69;&#x6e;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#97;&#x6c;&#101;&#x73;&#115;&#97;&#110;&#100;&#114;&#x6f;&#46;&#x6e;&#x61;&#x64;&#97;&#x6c;&#x69;&#110;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;">&#x61;&#108;&#101;&#x73;&#x73;&#x61;&#110;&#100;&#x72;&#111;&#46;&#110;&#97;&#x64;&#x61;&#x6c;&#105;&#110;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);
