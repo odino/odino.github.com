@@ -4,10 +4,10 @@
 
 url: http://odino.org
 title: Alessandro Nadalin
-subtitle: Temptations of becoming RESTful, using graph databases and being agile
+subtitle: "Service Oriented Architectures, web APIs and development teams"
 author: Alessandro Nadalin
 simple_search: http://google.com/search
-description: "Blog of Alex, lead developer for Rocket Internet in Dubai: writing about PEAA, PHP and development teams."
+description: "Blog of Alex, Vice President - Technology at Namshi in Dubai: writing about Service Oriented Architectures, web APIs and development teams."
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -50,7 +50,7 @@ titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [custom/asides/about.html, asides/recent_posts.html]
+default_asides: []
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RabbitMQ | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/rabbitmq/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2013-11-11T02:02:53+04:00</updated>
+  <updated>2014-01-14T01:53:28+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -208,7 +208,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x61;&#x6c;&#101;&#x73;&#115;&#x61;&#x6e;&#100;&#x72;&#x6f;&#46;&#110;&#97;&#100;&#x61;&#108;&#x69;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#x61;&#108;&#x65;&#115;&#x73;&#x61;&#x6e;&#100;&#x72;&#111;&#46;&#110;&#x61;&#100;&#97;&#x6c;&#x69;&#110;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x61;&#x6c;&#x65;&#x73;&#x73;&#x61;&#x6e;&#x64;&#114;&#x6f;&#46;&#110;&#97;&#100;&#97;&#108;&#105;&#110;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#x61;&#x6c;&#x65;&#115;&#115;&#97;&#x6e;&#x64;&#x72;&#x6f;&#46;&#x6e;&#97;&#100;&#97;&#x6c;&#x69;&#110;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);

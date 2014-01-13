@@ -2,724 +2,712 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://odino.org/debug-a-sql-query-in-magento/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/deliver-content-as-xml-with-zend-framework/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/profiling-with-xdebug-and-kcachegrind/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/magento-and-phpunit/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/how-to-discover-if-a-site-has-been-built-with-joomla/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/typing-into-tinymce-with-selenium/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/headers-already-sent-what-s-up-phpunit/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/retrieve-top-rated-products-in-magento/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/pass-a-variable-to-a-phtml-block/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/border-radius-and-ie-8-and-previous-yes-we-can/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/setting-up-cron-jobs-in-magento/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/convert-a-password-the-magento-way/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/customizing-pagination-in-symfony/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/basic-http-authentication-on-a-symfony-backend/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/il-buio-nell-anima/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/deploying-a-symfony-application/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/mysql-mysqldump-command-not-found-on-centos/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/custom-pagination-on-different-models-with-symfony-and-doctrine/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/magento-s-request-doesn-t-collect-get-and-post/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/sfwidgetformchoice-with-spicy-empty-values/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/mockups-of-web-authentication-the-rest-rescue/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/browsers-rest-too-much-rest-lesser/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/amend-committing-in-svn/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-pomodoro-tecnique-on-your-linux-distro/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/versioning-other-behaviours-columns-with-doctrine-versionable/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/imacro-javascript-loops-with-variables/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/creating-your-own-services-for-the-symfony2-dic/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/symfony2-routes/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/redis-slow-with-php-think-again/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/tar-web-tar-wrote-only-x-of-y-bytes/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-crud-with-symfony2-and-doctrine-2/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/installing-and-configuring-varnish-on-ubuntu/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/rest-in-peace/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/don-t-rape-http-if-none-match-the-412-http-status-code/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/i-broke-the-rest/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/symfony-live-2011-my-pov/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-f-awesome-2011-php-benelux-conference/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-art-of-agile-development-my-review/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/re-doing-things-with-symfony2/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/ideas-of-march-rest-better/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/rest-better-http-cache/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/be-clever-with-your-etags/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/rest-better-common-pitfalls/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/singletons-of-the-web/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/nosql-day-from-enthusiasm-to-consciousness/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/rest-in-practice-my-review/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/long-live-xml-too-sorry-for-json-fanboyz/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/graph-databases-orientdb-to-the-rescue/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/graph-in-php-through-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/xml-vs-json-for-real/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-simple-menu-and-the-relational-model-collapses/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/it-s-client-s-fault/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-current-vague-state-of-put-and-delete-in-html5/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-data-mapper-for-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/symfony-2-http-cache/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/orientdb-the-graph-db-for-the-web/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-query-builder-for-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-current-status-of-my-work-with-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-orientdb-php-data-mapper-from-the-trenches/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/some-common-questions-about-edge-side-includes/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-problem-with-non-hypermedia-driven-webservices/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/yahoo-s-s4-stream-computing-platform/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/get-prepared-for-orientdb-s-query-builder/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/phpday-2011-wrapup/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/jazoon-2011-wrapup/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/rest-in-peace-again/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/resources-about-hateoas/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/contributing-to-the-zend-framework-via-github/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/integrating-zend-framework-2-in-symfony-1-4/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/hands-on-php-5-4-traits-and-other-good-stuff/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/unit-testing-your-symfony-forms/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/behaviour-driven-development-in-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/changing-the-layout-of-joomla-category-blog-view/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/http-saves-time-saves-money-saves-you/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-new-development-here-in-dnsee-bdd-and-much-more/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/graphdb-in-php-time-for-the-serious-stuff/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/application-level-caching-fight-the-right-battle/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/osidays-2011-wrapup/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/less-rest-more-hypermedia/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/getting-back-on-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/hypermedia-services-beyond-rest-architectures/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/managing-php-dependencies-with-composer/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/quality-isnt-always-better-than-quality/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/roy-fielding-on-soap-in-the-w3c-context/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-php-library-to-retrieve-whois-informations/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/retrieving-raw-whois-informations-in-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/using-the-symfony2-dependency-injection-container-as-a-standalone-component/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/install-composer-dependencies-with-the-symfony2-cli/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/how-to-argue-with-junior-and-stubborn-developers/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/book-review-data-intensive-text-processing-with-mapreduce/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/scaling-through-hinclude/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/moving-to-dubai/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/checking-a-domain-s-availability-with-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/search-engines-are-making-the-web-slower/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/y-u-no-access-whois-informations-in-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/back-in-track-with-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/going-beyond-http-at-ipc-in-october/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/speaking-at-ipc-2012/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/what-is-agile/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/bootstrap-of-a-travis-ci-test-machine/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/using-monolog-for-php-error-reporting-on-new-relic/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/logging-javascript-errors/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/three-times-and-refactor/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-hope-is-that-ie-will-drown-in-2-years/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/source-code-workflow-after-3-months-of-github/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/ping-sendto-no-buffer-space-available-with-du-dnses/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/human-readable-user-agents-for-javascript-error-reporting/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/bash-aliases-for-octopress/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/optimizing-loading-times-with-images-lazy-loading/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/so-yes-im-writing-a-book/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/ready-for-europe-ipc-and-pizzas/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/the-state-of-http-slash-2-dot-0/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/coding-bureaucracy/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/please-welcome-the-doctrine-orientdb-odm/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/making-the-orientdb-odm-5-times-faster/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/profiling-php-applications-from-the-browser/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/namshi-is-looking-for-a-new-lead-developer/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/symfony2-console-permission-denied-during-autocompletion/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/refactoring-your-architecture-go-for-soa/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/doctrine-80-percent-faster/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/automated-tests-from-a-novice-perspective/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/configuring-a-symfony2-application-to-support-soa/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/integrating-twig-in-your-legacy-php-code/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/php-user-group-dubai-here-we-start-again/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/beautifying-json-data-from-the-shell/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/using-emailvisions-campaigncommander-apis-from-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/ab-testing-in-php-with-namshi-slash-ab/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/sending-hipchat-notifications-in-php/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/hello-us-im-coming-to-san-francisco/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/cakefest-2013-wrap-up/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/space-to-the-youngsters-dot-dot-dot/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>
             http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/
         </loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/</loc>
-        <lastmod>2013-11-11T01:36:19+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
-        <loc>http://odino.org/404.html</loc>
-        <lastmod>2013-11-11T01:22:33+04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://odino.org/archives/</loc>
-        <lastmod>2013-11-11T01:22:33+04:00</lastmod>
+        <loc>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/</loc>
+        <lastmod>2014-01-14T01:50:11+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/robots.txt</loc>
-        <lastmod>2013-11-11T01:03:50+04:00</lastmod>
+        <lastmod>2014-01-14T01:48:25+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/</loc>
-        <lastmod>2013-11-11T01:22:33+04:00</lastmod>
+        <lastmod>2014-01-14T01:48:25+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/conferences/</loc>
-        <lastmod>2013-11-11T01:32:42+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:17+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/about/</loc>
-        <lastmod>2013-11-11T01:36:51+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:17+04:00</lastmod>
     </url>
     <url>
-        <loc>http://odino.org/search.html</loc>
-        <lastmod>2013-11-11T01:22:33+04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://odino.org/cv/</loc>
-        <lastmod>2013-11-11T01:22:33+04:00</lastmod>
+        <loc>http://odino.org/about/</loc>
+        <lastmod>2014-01-14T01:50:17+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/blog/archives/</loc>
-        <lastmod>2013-11-11T01:22:33+04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://odino.org/blog/</loc>
-        <lastmod>2013-11-11T01:57:47+04:00</lastmod>
+        <lastmod>2014-01-14T01:50:17+04:00</lastmod>
     </url>
 </urlset>

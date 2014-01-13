@@ -9,7 +9,8 @@
   <meta name="author" content="Alessandro Nadalin">
 
   
-  <meta name="description" content="Yes, you got it. ">
+  
+  <meta name="description" content="Checking a Domain&#8217;s Availability With PHP This post is part of the &#8221;WHOIS in PHP: consuming the Robowhois API&#8221; series; here is a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,10 +19,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://odino.org/blog/page/7/">
+  <link rel="canonical" href="http://odino.org/blog/page/7">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
@@ -29,8 +29,7 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
 
   
   <script type="text/javascript">
@@ -46,47 +45,116 @@
   </script>
 
 
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
 </head>
-
-<body   >
+<body   class="no-sidebar"  >
   <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Alessandro Nadalin</a>
+  </h1>
+  
+  <p class="article-date">
+      
+  </p>
 </hgroup>
-
 </header>
-  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
 </ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:odino.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav> -->
+</nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
   
-
-
-    <article class="post">
+  
+    <article>
+      
   <header>
-    
-      <h1 class="entry-title"><a href="/moving-to-dubai/">Moving to Dubai</a></h1>
-    
-    
-      <p class="meta">
+      <div class="front-title">
         
+          <h1 class="entry-title"><a href="/checking-a-domain-s-availability-with-php/">Checking a Domain&#8217;s Availability With PHP</a></h1>
+        
+        <ol class="aseries">
+    <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
+    <li>
+        <a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
+    </li>
+    <li>
+        <a href="/retrieving-raw-whois-informations-in-php/">Retrieving raw WHOIS informations in PHP</a>
+    </li>
+    <li>
+        <a href="/checking-a-domain-s-availability-with-php/">Checking a domain&#8217;s availability with PHP</a>
+    </li>
+  <li>
+    <a href="/y-u-no-access-whois-informations-in-php/">Y U NO access WHOIS informations in PHP?</a>
+  </li>
+</ol>
+
+
+<p>It&rsquo;s been a while I don&rsquo;t blog about the
+<a href="https://github.com/robowhois/robowhois-php">Robowhois PHP client</a> that I&rsquo;m developing
+together with <a href="http://davidfunaro.com">David</a> so, since we recently released
+the <code>0.8.0</code> version I want to share with you what you can do with it now.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-20T09:49:00+04:00" pubdate data-updated="true">Tuesday, 20 March 2012 at 09:49</time>
+            
+            | <a href="/checking-a-domain-s-availability-with-php/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/robowhois/'>Robowhois</a>, <a class='category' href='/blog/categories/whois/'>WHOIS</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/moving-to-dubai/">Moving to Dubai</a></h1>
+        
+        <p>Yes, you got it.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
 
 
 
@@ -99,35 +167,46 @@
 
 
 <time datetime="2012-03-05T10:00:00+04:00" pubdate data-updated="true">Monday, 05 March 2012 at 10:00</time>
+            
+            | <a href="/moving-to-dubai/#disqus_thread">Comments</a>
+            
+        </p>
         
-         | <a href="/moving-to-dubai/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+        <div class="entry-content">
 
-
-  <div class="entry-content"><p>Yes, you got it.</p>
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/personal/'>personal</a>
+  
+</span>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/moving-to-dubai/">Read on &rarr;</a>
-    </footer>
+    </div>
+  </header>
   
 
-</article>
-
-
-    <article class="post">
+    </article>
+  
+  
+    <article>
+      
   <header>
-    
-      <h1 class="entry-title"><a href="/scaling-through-hinclude/">Scaling Asynchronously Through HInclude</a></h1>
-    
-    
-      <p class="meta">
+      <div class="front-title">
         
+          <h1 class="entry-title"><a href="/scaling-through-hinclude/">Scaling Asynchronously Through HInclude</a></h1>
+        
+        <p>Since it&rsquo;s been a while that I spread the idea of
+having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
+someone pointed out that a good solution, technically
+different from the one I personally proposed, would
+be to use JavaScript to and asynchronous sub-requests.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
 
 
 
@@ -140,39 +219,45 @@
 
 
 <time datetime="2012-02-24T10:50:00+04:00" pubdate data-updated="true">Friday, 24 February 2012 at 10:50</time>
+            
+            | <a href="/scaling-through-hinclude/#disqus_thread">Comments</a>
+            
+        </p>
         
-         | <a href="/scaling-through-hinclude/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+        <div class="entry-content">
 
-
-  <div class="entry-content"><p>Since it&rsquo;s been a while that I spread the idea of
-having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
-someone pointed out that a good solution, technically
-different from the one I personally proposed, would
-be to use JavaScript to and asynchronous sub-requests.</p>
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/cache/'>cache</a>, <a class='category' href='/blog/categories/scaling/'>scaling</a>
+  
+</span>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/scaling-through-hinclude/">Read on &rarr;</a>
-    </footer>
+    </div>
+  </header>
   
 
-</article>
-
-
-    <article class="post">
+    </article>
+  
+  
+    <article>
+      
   <header>
-    
-      <h1 class="entry-title"><a href="/book-review-data-intensive-text-processing-with-mapreduce/">Book Review: Data-Intensive Text Processing With MapReduce</a></h1>
-    
-    
-      <p class="meta">
+      <div class="front-title">
         
+          <h1 class="entry-title"><a href="/book-review-data-intensive-text-processing-with-mapreduce/">Book Review: Data-Intensive Text Processing With MapReduce</a></h1>
+        
+        <p>As part of my studies not directly connected to my job,
+in the last month I&rsquo;ve finished this interesting book, which
+gives you a good overview about
+<a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
 
 
 
@@ -185,38 +270,46 @@ be to use JavaScript to and asynchronous sub-requests.</p>
 
 
 <time datetime="2012-02-23T12:57:00+04:00" pubdate data-updated="true">Thursday, 23 February 2012 at 12:57</time>
+            
+            | <a href="/book-review-data-intensive-text-processing-with-mapreduce/#disqus_thread">Comments</a>
+            
+        </p>
         
-         | <a href="/book-review-data-intensive-text-processing-with-mapreduce/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+        <div class="entry-content">
 
-
-  <div class="entry-content"><p>As part of my studies not directly connected to my job,
-in the last month I&rsquo;ve finished this interesting book, which
-gives you a good overview about
-<a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.</p>
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/mapreduce/'>MapReduce</a>, <a class='category' href='/blog/categories/book/'>book</a>
+  
+</span>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/book-review-data-intensive-text-processing-with-mapreduce/">Read on &rarr;</a>
-    </footer>
+    </div>
+  </header>
   
 
-</article>
-
-
-    <article class="post">
+    </article>
+  
+  
+    <article>
+      
   <header>
-    
-      <h1 class="entry-title"><a href="/how-to-argue-with-junior-and-stubborn-developers/">How to Argue With Junior and Stubborn Developers</a></h1>
-    
-    
-      <p class="meta">
+      <div class="front-title">
         
+          <h1 class="entry-title"><a href="/how-to-argue-with-junior-and-stubborn-developers/">How to Argue With Junior and Stubborn Developers</a></h1>
+        
+        <p>In these days I had a nice chat with
+<a href="http://www.linkedin.com/in/gogebakan">Önder Göğebakan</a> to exchange
+some views about <strong>team leading</strong>: one of the points I loved to face
+was how to deal with arrogant coders that <strong>don&rsquo;t want to consider
+the indications received from their technical lead</strong>.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
 
 
 
@@ -229,60 +322,35 @@ gives you a good overview about
 
 
 <time datetime="2012-02-23T12:00:00+04:00" pubdate data-updated="true">Thursday, 23 February 2012 at 12:00</time>
+            
+            | <a href="/how-to-argue-with-junior-and-stubborn-developers/#disqus_thread">Comments</a>
+            
+        </p>
         
-         | <a href="/how-to-argue-with-junior-and-stubborn-developers/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+        <div class="entry-content">
 
-
-  <div class="entry-content"><p>In these days I had a nice chat with
-<a href="http://www.linkedin.com/in/gogebakan">Önder Göğebakan</a> to exchange
-some views about <strong>team leading</strong>: one of the points I loved to face
-was how to deal with arrogant coders that <strong>don&rsquo;t want to consider
-the indications received from their technical lead</strong>.</p>
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/teams/'>teams</a>
+  
+</span>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/how-to-argue-with-junior-and-stubborn-developers/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-
-    <article class="post">
-  <header>
-    
-      <h1 class="entry-title"><a href="/install-composer-dependencies-with-the-symfony2-cli/">Create a Composer Command Line Installer With the Symfony2 CLI</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-21T10:51:00+04:00" pubdate data-updated="true">Tuesday, 21 February 2012 at 10:51</time>
-        
-         | <a href="/install-composer-dependencies-with-the-symfony2-cli/#disqus_thread">Comments</a>
-        
-      </p>
-    
+    </div>
   </header>
+  
 
-
-  <div class="entry-content"><ol class="aseries">
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/install-composer-dependencies-with-the-symfony2-cli/">Create a Composer Command Line Installer With the Symfony2 CLI</a></h1>
+        
+        <ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
         <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
@@ -301,46 +369,53 @@ the indications received from their technical lead</strong>.</p>
 which lets us build powerful interactive command line applications
 in pure PHP.</p>
 
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-21T10:51:00+04:00" pubdate data-updated="true">Tuesday, 21 February 2012 at 10:51</time>
+            
+            | <a href="/install-composer-dependencies-with-the-symfony2-cli/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/cli/'>CLI</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/install-composer-dependencies-with-the-symfony2-cli/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-
-    <article class="post">
-  <header>
-    
-      <h1 class="entry-title"><a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit Tests From a Browser With Symfony2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-20T13:41:00+04:00" pubdate data-updated="true">Monday, 20 February 2012 at 13:41</time>
-        
-         | <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/#disqus_thread">Comments</a>
-        
-      </p>
-    
+    </div>
   </header>
+  
 
-
-  <div class="entry-content"><ol class="aseries">
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit Tests From a Browser With Symfony2</a></h1>
+        
+        <ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
         <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
@@ -357,46 +432,53 @@ in pure PHP.</p>
 <p>Today we are going to launch interactive PHPUnit tests thanks to the
 Symfony2 <a href="https://github.com/symfony/Process">Process</a> component.</p>
 
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T13:41:00+04:00" pubdate data-updated="true">Monday, 20 February 2012 at 13:41</time>
+            
+            | <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-
-    <article class="post">
-  <header>
-    
-      <h1 class="entry-title"><a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 DIC as a Standalone Component</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-15T20:06:00+04:00" pubdate data-updated="true">Wednesday, 15 February 2012 at 20:06</time>
-        
-         | <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/#disqus_thread">Comments</a>
-        
-      </p>
-    
+    </div>
   </header>
+  
 
-
-  <div class="entry-content"><ol class="aseries">
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 DIC as a Standalone Component</a></h1>
+        
+        <ol class="aseries">
     <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
         <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
@@ -412,46 +494,53 @@ Symfony2 <a href="https://github.com/symfony/Process">Process</a> component.</p>
 
 <p>The <a href="https://github.com/symfony/symfony/tree/master/src/Symfony/Component">Symfony2 components</a> are powerful libraries that you can easily integrate in your own code: in this article we will se how to integrate the <a href="https://github.com/symfony/DependencyInjection#readme">dependency injection container</a> in a <em>framework-free</em> PHP small library.</p>
 
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-15T20:06:00+04:00" pubdate data-updated="true">Wednesday, 15 February 2012 at 20:06</time>
+            
+            | <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-
-    <article class="post">
-  <header>
-    
-      <h1 class="entry-title"><a href="/retrieving-raw-whois-informations-in-php/">Retrieving Raw WHOIS Informations in PHP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-14T00:58:00+04:00" pubdate data-updated="true">Tuesday, 14 February 2012 at 00:58</time>
-        
-         | <a href="/retrieving-raw-whois-informations-in-php/#disqus_thread">Comments</a>
-        
-      </p>
-    
+    </div>
   </header>
+  
 
-
-  <div class="entry-content"><ol class="aseries">
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/retrieving-raw-whois-informations-in-php/">Retrieving Raw WHOIS Informations in PHP</a></h1>
+        
+        <ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
         <a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
@@ -472,46 +561,53 @@ Symfony2 <a href="https://github.com/symfony/Process">Process</a> component.</p>
 the PHP library I was <a href="/a-php-library-to-retrieve-whois-informations/">talking earlier</a>
 to retrieve WHOIS informations with PHP.</p>
 
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-14T00:58:00+04:00" pubdate data-updated="true">Tuesday, 14 February 2012 at 00:58</time>
+            
+            | <a href="/retrieving-raw-whois-informations-in-php/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/robowhois/'>Robowhois</a>, <a class='category' href='/blog/categories/whois/'>WHOIS</a>
+  
+</span>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/retrieving-raw-whois-informations-in-php/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-
-    <article class="post">
-  <header>
-    
-      <h1 class="entry-title"><a href="/a-php-library-to-retrieve-whois-informations/">A PHP Library to Retrieve WHOIS Informations</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-03T03:40:00+04:00" pubdate data-updated="true">Friday, 03 February 2012 at 03:40</time>
-        
-         | <a href="/a-php-library-to-retrieve-whois-informations/#disqus_thread">Comments</a>
-        
-      </p>
-    
+    </div>
   </header>
+  
 
-
-  <div class="entry-content"><ol class="aseries">
+    </article>
+  
+  
+    <article>
+      
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/a-php-library-to-retrieve-whois-informations/">A PHP Library to Retrieve WHOIS Informations</a></h1>
+        
+        <ol class="aseries">
     <p>This post is part of the &#8221;<strong>WHOIS in PHP: consuming the Robowhois API</strong>&#8221; series; here is a list of all the articles contained this series:</p>
     <li>
         <a href="/a-php-library-to-retrieve-whois-informations/">A PHP library to retrieve WHOIS informations</a>
@@ -532,187 +628,63 @@ to retrieve WHOIS informations with PHP.</p>
 to <em>open source</em>: our next project is going to be an <strong>SDK for a
 WHOIS webservice</strong>.</p>
 
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-03T03:40:00+04:00" pubdate data-updated="true">Friday, 03 February 2012 at 03:40</time>
+            
+            | <a href="/a-php-library-to-retrieve-whois-informations/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/open-source/'>open source</a>
+  
+</span>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/a-php-library-to-retrieve-whois-informations/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-
-    <article class="post">
-  <header>
-    
-      <h1 class="entry-title"><a href="/http-benefits-from-spdy-as-spdy-benefits-from-http/">The Web Benefits From SPDY Just as SPDY Benefits From HTTP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-27T19:27:00+04:00" pubdate data-updated="true">Friday, 27 January 2012 at 19:27</time>
-        
-         | <a href="/http-benefits-from-spdy-as-spdy-benefits-from-http/#disqus_thread">Comments</a>
-        
-      </p>
-    
+    </div>
   </header>
+  
 
-
-  <div class="entry-content"><p>In these days <a href="http://www.chromium.org/spdy/spdy-protocol">SPDY</a> it&rsquo;s gaining
-its <em>momentum</em> due to a good article which explained how you should build
-your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-the-realtime-web/">technologic stack in the <em>realtime</em> web</a>.</p>
-
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/8/">&larr; Mais antigos</a>
+    
+    
+    <a class="next" href="/blog/page/6/">Mais recentes &rarr;</a>
+    
+  </div>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/http-benefits-from-spdy-as-spdy-benefits-from-http/">Read on &rarr;</a>
-    </footer>
-  
-
-</article>
-
-<nav id="pagination">
-    
-        <a href="/blog/page/6/" class="prev">Prev</a>
-    
-    
-        <a href="/blog/page/8/" class="next">Next</a>
-    
-    <div class="center"><a href="/archives">Blog Archives</a></div>
-</nav>
-  
-    <footer>
-      
-      
-        <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/blog/page/7/index.html" data-via="_odino_" data-counturl="http://odino.org/blog/page/7/index.html" >Tweet</a>
-  
-  
-  
-</div>
-
-      
-    </footer>
-  
-</article>
-
-</div>
-
 <aside class="sidebar">
   
-    <section>
-    <h1>
-        Alessandro Nadalin
-    </h1>
-    <ul>
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/about">About</a>
-        </li>
-        <li>
-            <a href="/conferences">Conferences</a>
-        </li>
-        <li>
-            <a href="/archives">Archives</a>
-        </li>
-        <li>
-            <a href="http://twitter.com/_odino_">Twitter</a>
-        </li>
-        <li>
-            <a href="/atom.xml">Feed</a>
-        </li>
-    </ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
     
-      <li class="post">
-        <a href="/drop-openjdk-and-upgrade-java-to-the-oracle-packages/">Drop OpenJDK and upgrade Java to the Oracle packages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/">Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/space-to-the-youngsters-dot-dot-dot/">Space to the youngsters...</a>
-      </li>
-    
-      <li class="post">
-        <a href="/cakefest-2013-wrap-up/">CakeFest 2013 wrap-up</a>
-      </li>
-    
-      <li class="post">
-        <a href="/see-you-in-paris-at-the-2013-edition-of-the-php-forum/">See you in Paris at the 2013 edition of the PHP Forum</a>
-      </li>
-    
-  </ul>
-</section>
-
   
 </aside>
-
-
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Alessandro Nadalin -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'odino';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
 </html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014</li>
+    </ul>
+</div>
