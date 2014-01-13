@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-14T03:02:28+04:00</updated>
+  <updated>2014-01-14T03:17:42+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -18,9 +18,7 @@
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
     <updated>2013-11-10T19:53:00+04:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
-    <content type="html"><![CDATA[<p><img class="right" src="http://odino.org/images/browsers.jpg"></p>
-
-<p>I am writing this post in the middle of revamping
+    <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
 with AngularJS, reverse proxies,
 SPDY and HTTP APIs, because I
@@ -29,6 +27,11 @@ that they are the de-facto cutting-edge solution for
 most of the antipatterns that we&rsquo;ve seen so far:
 monolithic applications, unscalable frontends,
 limited protocols.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="http://odino.org/images/browsers.jpg"></p>
 
 <p>So why would I rant about it? Well, this is not a real
 rant but it&rsquo;s more of a retrospective on the <em>gotchas</em>
@@ -39,9 +42,6 @@ very early stage and have their pitfalls when it comes
 to develop real-world, scalable architectures.</p>
 
 <p>The boring part&rsquo;s over, let&rsquo;s get into the real mess ;&ndash;)</p>
-
-<!-- more -->
-
 
 <h2>Reducing redirects?</h2>
 
@@ -366,20 +366,18 @@ Notes
     <link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
     <updated>2013-11-10T08:59:00+04:00</updated>
     <id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://odino.org/images/java.png"></p>
-
-<p>A few weeks back I started noticing some performance
+    <content type="html"><![CDATA[<p>A few weeks back I started noticing some performance
 issues on my <a href="http://www.jetbrains.com/phpstorm/">IDE</a> and decided to investigate a bit more
 on it: turns out that they recommended to 1) upgrade to
 the latest JDK (7) and stop using <a href="http://openjdk.java.net/">OpenJDK</a>, as it has
 some performance gotchas.</p>
 
-<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
-
 <!-- more -->
 
 
+<p><img class="left" src="http://odino.org/images/java.png"></p>
 
+<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -423,6 +421,9 @@ with a good lineup of talks:</p>
 </ul>
 
 
+<!-- more -->
+
+
 <p>For the first time ever, I have to admit it, I will be
 presenting <strong>3 topics that have very different backgrounds</strong>,
 and, as the days go by, I realize that working at <a href="http://en-ae.namshi.com">Namshi</a>
@@ -455,6 +456,9 @@ a team of (web) engineers, is when you lead
 them to one particular thing: do <strong>not make the
 same mistakes you made</strong> back at the time.</p>
 
+<!-- more -->
+
+
 <p><img class="center" src="http://odino.org/images/namshi-team.jpg"></p>
 
 <p>For our people it&rsquo;s pretty interesting, since
@@ -464,9 +468,6 @@ go <a href="http://odino.org/tips-and-tricks-for-you-service-oriented-architectu
 and the <strong>coolest thing</strong> is to see how juniors
 pick things up better, faster than you did back
 at the time.</p>
-
-<!-- more -->
-
 
 <p>Today I want to introduce you to <a href="http://mohdhallal.github.io/">Mohammad Hallal</a>,
 who joined us around 3 months ago, fresh from

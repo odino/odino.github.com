@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-14T03:02:28+04:00</updated>
+  <updated>2014-01-14T03:17:42+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -18,18 +18,18 @@
     <link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
     <updated>2013-11-10T08:59:00+04:00</updated>
     <id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
-    <content type="html"><![CDATA[<p><img class="left" src="/images/java.png"></p>
-
-<p>A few weeks back I started noticing some performance
+    <content type="html"><![CDATA[<p>A few weeks back I started noticing some performance
 issues on my <a href="http://www.jetbrains.com/phpstorm/">IDE</a> and decided to investigate a bit more
 on it: turns out that they recommended to 1) upgrade to
 the latest JDK (7) and stop using <a href="http://openjdk.java.net/">OpenJDK</a>, as it has
 some performance gotchas.</p>
 
-<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
-
 <!-- more -->
 
+
+<p><img class="left" src="/images/java.png"></p>
+
+<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
 
 <p><code>
 cd ~/
