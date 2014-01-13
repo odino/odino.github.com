@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Shell aliases for Octopress - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="A few days ago I moved to ZSH
+from bash, since my friend David was pushing me to try it:
+after a few days I really have to say
+that there is no &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/bash-aliases-for-octopress">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Shell aliases for Octopress</a>
+  </h1>
+  
+  <p class="article-date">
+      Friday, 24 August 2012, 11:02
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>A few days ago I moved to <a href="http://en.wikipedia.org/wiki/Z_shell">ZSH</a>
+from bash, since my friend David was pushing me to try it:
+after a few days I really have to say
+that there is no reason not to switch
+&ndash; mainly for the git integration and
+double-tab behaviour &ndash; and I also
+created a few <em>aliases</em> that work like
+a charm in Octopress.</p>
+
+<!-- more -->
+
+
+<p>The majority of them would also work in
+bash, but I remember I had to make
+<a href="https://github.com/imathis/octopress/issues/117">some changes</a>
+to make Octopress work with ZSH, so
+you may want to have a look at that discussion first.</p>
+
+<p>Bare in mind that all of this aliases need to be put in
+the <code>~/.zshrc</code> file.</p>
+
+<h2>octopreview</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">alias </span><span class="nv">octopreview</span><span class="o">=</span><span class="s1">&#39;rake preview&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Starts Octopress&#8217; preview mode:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹✭ ᐅ octopreview
+</span><span class='line'>
+</span><span class='line'>Starting to watch <span class="nb">source </span>with Jekyll and Compass. Starting Rack on port 4000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octopost</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octopost <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  rake new_post <span class="o">&amp;&amp;</span> octopreview;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This task let&rsquo;s you create a new post and
+automatically launches Octopress&#8217; preview mode:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹ ᐅ octopost
+</span><span class='line'>
+</span><span class='line'>Enter a title <span class="k">for </span>your post: bash aliases <span class="k">for </span>octopress
+</span><span class='line'>mkdir -p <span class="nb">source</span>/_posts
+</span><span class='line'>Creating new post: <span class="nb">source</span>/_posts/2012-08-24-bash-aliases-for-octopress.markdown
+</span><span class='line'>Starting to watch <span class="nb">source </span>with Jekyll and Compass. Starting Rack on port 4000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octostat</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octostat <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  rake list_posts;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Based on this <a href="http://tonytonyjan.github.com/2012/05/02/list-all-posts-rake-task-for-octopress/">rake task</a>
+that I <a href="https://github.com/odino/odino.github.com/blob/source/Rakefile#L388">slightly modified for ZSH</a>,
+this lets you find out which posts are published/unpublished
+in your blog:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹✭ ᐅ octostat
+</span><span class='line'>
+</span><span class='line'><span class="o">(</span>pub|unpub<span class="o">)</span>: unpub
+</span><span class='line'>2012-08-24-bash-aliases-for-octopress.markdown
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octosave</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octosave <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;$@&quot;</span> <span class="o">&amp;&amp;</span> git push origin <span class="nb">source</span>;
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Saves all your local changes committing
+and pushing everything on the remote <code>source</code>
+branch:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✘<span class="o">)</span>✹✭ ᐅ octosave <span class="s2">&quot;partial article&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="nb">source </span>572b571<span class="o">]</span> partial article
+</span><span class='line'> 62 files changed, 159 insertions<span class="o">(</span>+<span class="o">)</span>, 61 deletions<span class="o">(</span>-<span class="o">)</span>
+</span><span class='line'> create mode 100644 <span class="nb">source</span>/_posts/2012-08-24-bash-aliases-for-octopress.markdown
+</span><span class='line'>Counting objects: 255, <span class="k">done</span>.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% <span class="o">(</span>129/129<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Writing objects: 100% <span class="o">(</span>129/129<span class="o">)</span>, 12.45 KiB, <span class="k">done</span>.
+</span><span class='line'>Total 129 <span class="o">(</span>delta 64<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+</span><span class='line'>To git@github.com:odino/odino.github.com.git
+</span><span class='line'>   35d5d41..572b571  <span class="nb">source</span> -&gt; <span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>octodeploy</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>octodeploy <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;$@&quot;</span> <span class="o">&amp;&amp;</span> git push origin <span class="nb">source</span> <span class="o">&amp;&amp;</span> rake generate <span class="o">&amp;&amp;</span> rake deploy
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Same as <code>octosave</code>, but &ndash; additionally &ndash; it deploys
+all of your changes via <code>rake deploy</code>.</p>
+
+<p>This task is useful when you&rsquo;re locally done and
+want to publish your changes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/Sites/odino.github.com <span class="o">(</span><span class="nb">source</span> ✔<span class="o">)</span> ᐅ octodeploy <span class="s2">&quot;publishing changes&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="nb">source </span>43e08b3<span class="o">]</span> publishing changes
+</span><span class='line'> 1 files changed, 27 insertions<span class="o">(</span>+<span class="o">)</span>, 1 deletions<span class="o">(</span>-<span class="o">)</span>
+</span><span class='line'>Counting objects: 9, <span class="k">done</span>.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Writing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, 848 bytes, <span class="k">done</span>.
+</span><span class='line'>Total 5 <span class="o">(</span>delta 4<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+</span><span class='line'>To git@github.com:odino/odino.github.com.git
+</span><span class='line'>   572b571..43e08b3  <span class="nb">source</span> -&gt; <span class="nb">source</span>
+</span><span class='line'><span class="c">## Generating Site with Jekyll</span>
+</span><span class='line'>unchanged sass/screen.scss
+</span><span class='line'>/Users/odino/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;: iconv will be deprecated in the future, use String#encode instead.</span>
+</span><span class='line'><span class="s1">Configuration from /Users/odino/Sites/odino.github.com/_config.yml</span>
+</span><span class='line'><span class="s1">Building site: source -&gt; public</span>
+</span><span class='line'><span class="s1">AliasGenerator loading...</span>
+</span><span class='line'><span class="s1">Processing 120 post(s) for aliases...</span>
+</span><span class='line'><span class="s1">Processing 18 page(s) for aliases...</span>
+</span><span class='line'><span class="s1">Successfully generated site: source -&gt; public</span>
+</span><span class='line'><span class="s1">## Found posts in preview mode, regenerating files ...</span>
+</span><span class='line'><span class="s1">## Generating Site with Jekyll</span>
+</span><span class='line'><span class="s1">unchanged sass/screen.scss</span>
+</span><span class='line'><span class="s1">/Users/odino/.rvm/gems/ruby-1.9.3-p194/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;&#39;</span>: iconv will be deprecated in the future, use String#encode instead.
+</span><span class='line'>Configuration from /Users/odino/Sites/odino.github.com/_config.yml
+</span><span class='line'>Building site: <span class="nb">source</span> -&gt; public
+</span><span class='line'>AliasGenerator loading...
+</span><span class='line'>Processing 120 post<span class="o">(</span>s<span class="o">)</span> <span class="k">for </span>aliases...
+</span><span class='line'>Processing 18 page<span class="o">(</span>s<span class="o">)</span> <span class="k">for </span>aliases...
+</span><span class='line'>Successfully generated site: <span class="nb">source</span> -&gt; public
+</span><span class='line'><span class="c">## Deploying branch to Github Pages </span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## copying public to _deploy</span>
+</span><span class='line'>cp -r public/. _deploy
+</span><span class='line'><span class="nb">cd </span>_deploy
+</span><span class='line'>
+</span><span class='line'><span class="c">## Commiting: Site updated at 2012-08-24 07:22:23 UTC</span>
+</span><span class='line'><span class="o">[</span>master 3151733<span class="o">]</span> Site updated at 2012-08-24 07:22:23 UTC
+</span><span class='line'> 70 files changed, 70 insertions<span class="o">(</span>+<span class="o">)</span>, 70 deletions<span class="o">(</span>-<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">## Pushing generated _deploy website</span>
+</span><span class='line'>Counting objects: 284, <span class="k">done</span>.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% <span class="o">(</span>143/143<span class="o">)</span>, <span class="k">done</span>.
+</span><span class='line'>Writing objects: 100% <span class="o">(</span>143/143<span class="o">)</span>, 12.25 KiB, <span class="k">done</span>.
+</span><span class='line'>Total 143 <span class="o">(</span>delta 70<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+</span><span class='line'>To git@github.com:odino/odino.github.com.git
+</span><span class='line'>   78287e6..3151733  master -&gt; master
+</span><span class='line'>
+</span><span class='line'><span class="c">## Github Pages deploy complete</span>
+</span><span class='line'><span class="nb">cd</span> -
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-24T11:02:00+04:00" pubdate data-updated="true">Friday, 24 August 2012 at 11:02</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/zsh/'>ZSH</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/bash-aliases-for-octopress/" data-via="_odino_" data-counturl="http://odino.org/bash-aliases-for-octopress/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/human-readable-user-agents-for-javascript-error-reporting/" title="Post anterior: Human-readable user agents for JavaScript error reporting">&laquo; Human-readable user agents for JavaScript error reporting</a>
+      
+      
+        <a class="basic-alignment right" href="/optimizing-loading-times-with-images-lazy-loading/" title="Próximo post: Optimizing loading times with images' lazy loading">Optimizing loading times with images' lazy loading &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/bash-aliases-for-octopress/';
+        var disqus_url = 'http://odino.org/bash-aliases-for-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

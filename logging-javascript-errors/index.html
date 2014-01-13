@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Logging JavaScript errors - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="In one of my latest posts I talked about
+using Monolog to remotely log stuff on New Relic:
+getting a bit deeper on log management
+systems, here&rsquo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/logging-javascript-errors">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Logging JavaScript errors</a>
+  </h1>
+  
+  <p class="article-date">
+      Friday, 27 July 2012, 09:00
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>In one of my latest posts I talked about
+<a href="/using-monolog-for-php-error-reporting-on-new-relic/">using Monolog to remotely log stuff on New Relic</a>:
+getting a bit deeper on log management
+systems, here&rsquo;s how we managed to report
+JavaScript errors on our logs.</p>
+
+<!-- more -->
+
+
+<h2>A note on JavaScript errors</h2>
+
+<p>It may not sound obvious, but errors,
+in JavaScript, can be pretty nasty, since
+it&rsquo;s an &ndash; almost completely<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> &ndash; client-dependent
+technology that can react differently to
+your code based on the client&rsquo;s platform.</p>
+
+<p>Cross-browser testing may not always be
+performed <em>that</em> accurately, so you should
+definitely start tracking JS error that may
+happen of different clients.</p>
+
+<h2>The concept</h2>
+
+<p>This is <strong>totally not an idea of mine</strong>: it
+comes from a pretty smart <a href="http://devblog.pipelinedeals.com/pipelinedeals-dev-blog/2012/2/12/javascript-error-reporting-for-fun-and-profit-1.html">blog post which illustrates the main concept</a>:
+when a JS error is encountered, you trigger an HTTP request
+to a URL that collect the data transmitted
+within that request and logs it with
+server-side code.</p>
+
+<figure class='code'><figcaption><span>How to trigger JS error reporting</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">MaximumErrorCount</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">errorMsg</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">lineNumber</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nb">window</span><span class="p">.</span><span class="nx">errorCount</span> <span class="o">||</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">errorCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">errorCount</span> <span class="o">&lt;=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">MaximumErrorCount</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">jQuery</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/jsError/&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">errorMessage</span><span class="o">:</span>   <span class="nx">errorMsg</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">file</span><span class="o">:</span>           <span class="nx">file</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">url</span><span class="o">:</span>           <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">lineNumber</span><span class="o">:</span>     <span class="nx">lineNumber</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">ua</span><span class="o">:</span>             <span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, at the end, you only need to add some basic
+server-side code to handle the reported data:</p>
+
+<figure class='code'><figcaption><span>How to handle reported informations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">ErrorController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">MESSAGE_LOG_JAVASCRIPT</span> <span class="o">=</span> <span class="s1">&#39;A javascript error &quot;%s&quot; has been encountered at the URL %s on file %s:%s by an agent of type %s&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">logJavaScriptAction</span><span class="p">(</span><span class="nv">$postData</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$logMessage</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span>
+</span><span class='line'>          <span class="nx">self</span><span class="o">::</span><span class="na">MESSAGE_LOG_JAVASCRIPT</span><span class="p">,</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;errorMessage&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;lineNumber&#39;</span><span class="p">],</span>
+</span><span class='line'>          <span class="nv">$postData</span><span class="p">[</span><span class="s1">&#39;ua&#39;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLogger</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addError</span><span class="p">(</span><span class="nv">$logMessage</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You may want to write some additional
+code to only report errors that you should
+really fix: based on the user-agent, for
+example, you can ignore errors triggered
+on <code>MSIE 7.0</code>/<code>MSIE 6.0</code>.</p>
+
+<h2>All in all&hellip;</h2>
+
+<p>This has been a great solution for us,
+since we could easily keep track of JS
+code which was causing errors due to:</p>
+
+<ul>
+<li>lack of compatibility between developers&#8217;/users&#8217;
+platforms</li>
+<li>typos and small errors</li>
+<li>tricky situations in which our code depends on
+3rd party scripts that would break our functionality
+whenever they are not available/cause an error upon
+execution</li>
+</ul>
+
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>NodeJS <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T09:00:00+04:00" pubdate data-updated="true">Friday, 27 July 2012 at 09:00</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/log-management/'>log management</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/logging-javascript-errors/" data-via="_odino_" data-counturl="http://odino.org/logging-javascript-errors/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/using-monolog-for-php-error-reporting-on-new-relic/" title="Post anterior: Using Monolog for PHP error reporting on New Relic">&laquo; Using Monolog for PHP error reporting on New Relic</a>
+      
+      
+        <a class="basic-alignment right" href="/three-times-and-refactor/" title="Próximo post: How refactoring influenced the World Wide Web">How refactoring influenced the World Wide Web &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/logging-javascript-errors/';
+        var disqus_url = 'http://odino.org/logging-javascript-errors/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

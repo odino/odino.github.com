@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SOA | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/soa/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
+    <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
+    <updated>2013-10-20T11:00:00+04:00</updated>
+    <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
+    <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
+be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,
+with a good lineup of talks:</p>
+
+<ul>
+<li><a href="http://confoo.ca/en/2014/session/orientdb-the-fastest-document-based-graphdb">OrientDB, the fastest NoSQL graph database</a></li>
+<li>building a <a href="http://confoo.ca/en/2014/session/soa-with-symfony2">SOA with Symfony2</a></li>
+<li><a href="http://confoo.ca/en/2014/session/angularjs-is-the-future-maybe">is AngularJS the future?</a></li>
+</ul>
+
+
+<p>For the first time ever, I have to admit it, I will be
+presenting <strong>3 topics that have very different backgrounds</strong>,
+and, as the days go by, I realize that working at <a href="http://en-ae.namshi.com">Namshi</a>
+has been terrific under this point of view: we have the ability of
+experimenting with different technologies and use the best out on the
+market, something that gets translated into the ability of having a
+360° overview of the market.</p>
+
+<p><img class="right" src="/images/montreal.jpg"></p>
+
+<p>For me it will be the first time in the cold lands of Canada, and
+I can&rsquo;t wait to make the most out of this trip: I always had a <strong>very</strong>
+good opinion about canadians in general, hope this trip will
+confirm my random thoughts.</p>
+
+<p>If you have the chance to join, don&rsquo;t miss this amazing event:
+<a href="http://confoo.ca/en/2014/sessions">the schedule</a> speaks for itself
+and I am thrilled to be part of such an amazing speakers' lineup
+&mdash; which I obviously ruin :&ndash;) !</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
+    <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
+    <updated>2013-08-31T19:05:00+04:00</updated>
+    <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
+    <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
+<a href="http://cakefest.org">CakeFest</a> here in San Francisco,
+&ldquo;<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">Tips and Tricks for your SOA</a>&rdquo;.</p>
+
+<!-- more -->
+
+
+<p>It basically contains a few tips derived from our experience at
+<a href="http://en-ae.namshi.com">Namshi</a> while building our own service-oriented
+architecture, and I hope, since there&rsquo;s not <em>that</em> much material
+about SOA out there, that this can serve as a good feedback from who
+is actually embracing this architectural style.</p>
+
+<p>As always, the slides are on <a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">slideshare</a>,
+and I&rsquo;m embedding the presentation
+here for those who immediately want to have a look at it:</p>
+
+<p><div class="slideshare" id="__ss_25786089"><iframe src="http://www.slideshare.net/slideshow/embed_code/25786089 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>Tomorrow, as per the conference&rsquo;s schedule, I will be giving my other talk,
+&ldquo;HTTP colon slash slash: end of the road?&rdquo;, a remake of what I
+presented at the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">IPC in Mainz last year</a>,
+with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
+    <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
+    <updated>2013-08-01T05:24:00+04:00</updated>
+    <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
+    <content type="html"><![CDATA[<p>At the end of August I will
+be travelling to reach SF and
+the <a href="http://cakefest.org/">CakeFest</a>, the annual
+conference about
+<a href="http://cakephp.org/">CakePHP</a>.</p>
+
+<!-- more -->
+
+
+<p>Funny thing is, I have two talks
+and none of them deals with Cake, <strong>at all</strong> :)</p>
+
+<p>I will be talking about the
+evolution of Web Protocols, in
+particular HTTP/2.0 and SPDY, in a
+remake of the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">talk I gave the IPC</a>,
+in Mainz, last year.</p>
+
+<p>My second talk will be a <em>new entry</em>, a
+collection of tips, advices and tricks
+in order to manage a SOA, learnt <strong>the hard
+way</strong>.</p>
+
+<p>If you are going to be around San Francisco
+in the first days of Semptember, feel free to
+ping me!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
+    <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
+    <updated>2013-06-06T13:00:00+04:00</updated>
+    <id>http://odino.org/configuring-a-symfony2-application-to-support-soa</id>
+    <content type="html"><![CDATA[<p>When you think in terms of
+<a href="/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>
+one of the tricky things is to decide
+how to organize your development workflow
+in order to develop <strong>architecture</strong>,
+not a single application: for example, how would
+you configure deployments (when you need
+to deploy <strong>part</strong> of your architecture, not
+just a web application) or push cross-service
+features to your SCM?</p>
+
+<!-- more -->
+
+
+<p>This article gives an overview of the constraints
+and preferences that we wanted to implement
+in our SOA, which is mainly done with Symfony2,
+but most of it can be read in a
+framework/language-agnostic key.</p>
+
+<h2>Problems</h2>
+
+<p>We can at least identify 3 problems which pop
+up after you decide to layer your architecture
+and avoid <a href="http://www.slideshare.net/odino/the-rocket-internet-experience-phptostart-2013-in-turin/103">a monolithic approach</a>:</p>
+
+<ul>
+<li><p>given that every of your service will require
+some time (1~5 minutes) to be deployed, how do you
+ensure that you can release a new version of a service
+without the need of updating <strong>all</strong> the other
+services?
+If you have, for example, 9 machines and 3 services
+(A, B and C, 3 machines for each service),
+you cant really afford to <strong>deploy everywhere</strong>
+when you need to update just the service A, because
+you might need to shutdown service B and C during the
+deployment, while they dont really need to be updated.
+The solution here would be to update just a bunch of
+your servers</p></li>
+<li><p>how do you create <em>Pull Requests</em> and organize your
+repositories? This is not a trivial question: if you
+need a feature that involves changes in services A and B,
+and you have 2 repositories you will need to add some
+overhead on top of every single operation that you
+would usually do with a new feature</p></li>
+<li><p>is your software able to automatically support SOA?
+By this I mean, when you want to add a new service,
+how easy is to configure your architecture to be able
+to support the new layer? Of course, you would need
+something that lets you do this in a matter of a minute</p></li>
+</ul>
+
+
+<h2>Deployments</h2>
+
+<p>As I stated earlier, the solution is to be able
+to specify, upon deployments, which services need
+to be updated, and your best friend, here, could
+be something like <a href="https://github.com/capistrano/capistrano">Capistrano</a>.</p>
+
+<p>If you ever worked with capistrano, you know
+that deployments basically depend on the <code>deploy.rb</code> file,
+in which you can configure different <strong>stages</strong> of your
+architecture:</p>
+
+<p><code>ruby
+set :stages, %w(live staging)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
+</code></p>
+
+<p>In the example, weare declaring that our application
+can be deployed on 2 stages, <code>live</code> and <code>staging</code>; by doing a
+<code>cap live deploy</code> or <code>cap deploy</code> you are ready to either deploy to your live
+servers or staging ones, after configuring the staging
+files (<code>live.rb</code> and <code>staging.rb</code>):</p>
+
+<p>``` ruby An example live.rb
+role :web,        &ldquo;company.com&rdquo;
+role :app,        &ldquo;company.com&rdquo;, :primary => true
+role :db,         &ldquo;company.com&rdquo;, :primary => true</p>
+
+<p>set :app_environment, &ldquo;live&rdquo;
+set :deploy_to,   &ldquo;/var/www/htdocs/#{application}.#{app_environment}&rdquo;
+```</p>
+
+<p>This still doesn&rsquo;t solve the problem of
+<strong>just deploying a single service</strong>, but to
+overcome it, thanks to the capistrano <code>multistage</code>
+extension, it&rsquo;s a matter of configuring a few deployment
+files.</p>
+
+<p>For example, here&rsquo;s how you would write your deployment
+files once you have a couple services (<code>A</code> and <code>B</code>):</p>
+
+<p><code>ruby deploy.rb
+set :stages, %w(a-live a-staging b-live b-staging, live, staging)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
+</code></p>
+
+<p>``` ruby a-live.rb
+role :web,        &ldquo;a.company.com&rdquo;
+role :app,        &ldquo;a.company.com&rdquo;, :primary => true
+role :db,         &ldquo;a.company.com&rdquo;, :primary => true</p>
+
+<p>set :app_environment, &ldquo;live&rdquo;
+set :deploy_to,   &ldquo;/var/www/htdocs/#{application}.#{app_environment}&rdquo;
+```</p>
+
+<p>As you see, we are creating a few different stages:</p>
+
+<ul>
+<li><code>serviceName-environment</code> (ie. a-live), which includes servers for a
+specific environment of a service</li>
+<li><code>environment</code> (ie. live), which includes the entire architecture,
+useful in those cases when you really want to deploy
+the entire architecture<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup></li>
+</ul>
+
+
+<p>For Symfony2, to ease your job, you can use
+<a href="http://capifony.org/">capifony</a> which takes
+care of configure the remaining,
+specific, crucial parts of the deployment for the
+framework (such as clearing and warming up the cache,
+installing the dependencies via composer and so on).</p>
+
+<h2>Software lifecycle</h2>
+
+<p><img class="left" src="/images/cylinders.png"></p>
+
+<p>Ah, good old SCM problems!</p>
+
+<p>Let&rsquo;s say your are working on a traditional, monolithic application:
+you branch to implement a new feature, commit, push, open
+a pull request, the PR gets merged, deployed on staging, tested and
+then goes to live; very simple as well as efficient:
+<strong>zero overhead</strong>.</p>
+
+<p>You might think that in SOAs this is not different: you <code>cd</code> into a
+specific&rsquo;s service repository, branch to
+implement a new feature, commit, push, open
+a pull request, the PR gets merged in that repository, the service gets deployed
+on its staging servers, tested and then goes to live;
+very simple as well as efficient?</p>
+
+<p>No, at all.</p>
+
+<p>Thing is, often you will need to develop <strong>cross-service
+features</strong>, which require code to be updated in N different
+repositories: as a result, you will need to open N pull requests;
+Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>That&rsquo;s why I would advice to keep all of your services under
+one repositories, to avoid overheads:</p>
+
+<ul>
+<li>N projects in your IDE</li>
+<li>N SCM operations (<code>git checkout -b myBranch</code> as well as <code>git push origin myBranch</code>)</li>
+<li>N pull requests</li>
+<li>N code reviews</li>
+</ul>
+
+
+<p>Due to this, honestly, I don&rsquo;t really see the need of separating services
+into different repositories: when you deploy, you deploy a tag of the architecture
+itself (only on the servers which host the services to be updated with that tag),
+when you rollback, you rollback the entire architecture to a specific
+version.</p>
+
+<p><img class="left" src="/images/baby-birds.jpg"></p>
+
+<p>This seems to go against what I preached earlier, while talking
+about deployments, but the truth is that you want to be on the safe side
+once something goes wrong: you can optimize deployments so that you can
+just deploy some services, but in case of rollback, you need to take an
+immediate, &ldquo;total&rdquo; action to <strong>restore all of your services</strong>.</p>
+
+<p>Consider the situation from a very similar perspective coming
+from a very, very different context: cultivate an healthy colony of newborns
+in nature &ndash; as opposed to maintaining an healthy architecture on the internets.</p>
+
+<p>Exactly like the mom of newborn birds, when it comes to feed (update)
+them, you would give the weaker ones, in order to help them develop as healthy
+as their stronger brothers, the biggest meals; but when it comes
+to rescue (rollback) them from a predator, you would crave for having an
+option to move them all in one go, without the risk of moving them one by
+one, leaving the unluckiest ones defenseless against their own fate.</p>
+
+<h2>Configuring new services in Symfony2</h2>
+
+<p><img class="right" src="/images/cubic-architecture.jpg"></p>
+
+<p>This post has to come to an end dealing with Symfony2,
+since, in our experience,
+<a href="/why-we-choose-symfony2-over-any-other-php-framework/">we have decided to go SOA with this framework</a>:
+all in all, we found that due to the integration with capistrano
+and the concept of bundles, together with the ability to have
+per-bundle specific hostnames, this framework is pretty friendly
+towards the ideas and constraints that we want to implement in
+our SOA: what we&rsquo;ve seen is no rocket science, and even
+the approach that we are using with Symfony2 is nothing
+extraordinary, but it helps maintaining a very clean and
+efficient workflow while developing a SOA.</p>
+
+<p>As I said, for deploying you might want to use capifony,
+and when it comes to isolate services in just one repository
+we realized that a good solution would be to have <strong>one
+Symfony2 application</strong> and create <strong>a bundle for each service</strong>
+that we need.</p>
+
+<p>Thanks for the capabilities of Symfony2&rsquo;s routing
+mechanism, you can also bind a subdomain to a specific
+bundle; once you create the bundle, you can tell symfony
+that the routes of that specific bundle can be matched only
+if the subdomain of the application matches a particular
+string:</p>
+
+<p>``` bash app/config/routing.yml
+mycompany_service_a:</p>
+
+<pre><code>resource: "@AcmeServiceABundle/Resources/config/routing.yml"
+prefix:   /
+host:     service-a.mycompany.com
+</code></pre>
+
+<p>```</p>
+
+<p>``` bash src/Acme/ServiceABundle/Resources/config/routing.yml
+mycompany_service_a_index:</p>
+
+<pre><code>pattern:  /index/{whateverParameter}
+defaults: { _controller: AcmeServiceABundle:Default:index }
+</code></pre>
+
+<p>```</p>
+
+<p>In this case, the route <code>mycompany_service_a_index</code> will only
+be matched when the URL is using the hostname
+<code>service-a.mycompany.com</code>: for example, <code>http://mycompany.com/index/param</code>
+won&rsquo;t match it; this is pretty interesting since it gives you the
+flexibility to develop features in just once repository, on
+<strong>as many services as you want</strong>.</p>
+
+<p>We are still heavily experimenting, but out of a few approaches &ndash;
+for example <a href="http://symfony.com/doc/2.0/book/routing.html#prefixing-imported-routes">route prefixing</a> &ndash;
+we decided to go on with the ones I explained here for cleanness,
+clarity, efficiency and security of your development cycles
+and architecture: if your experience suggests something different
+or you want to share doubts, feel free to abuse of the comments
+section, since I am very open and interested to discuss this topic.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Cases such as disaster recovery or deployments to a brand new servers' set (for example, if you want to switch from AWS to another provider) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Rollbacking, per se, shouldn't be a pain in the ass, but you need to focus on it in order to reduce mistakes in an already-critical situation <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
+    <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
+    <updated>2013-05-27T22:16:00+04:00</updated>
+    <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
+    <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
+Symfony2 ecosystem, and going SOA with
+this framework was a very trivial decision
+for us at <a href="http://en-ae.namshi.com">Namshi</a>;
+all in all, besides personal preferences,
+there is a plethora of reasons to choose
+this framework among the others available
+in PHP, so I am going to list the most
+important factors that influenced our
+decision.</p>
+
+<p>Believe it or not, all of the following
+factors matter <strong>first for the business</strong>,
+then for the developers.</p>
+
+<!-- more -->
+
+
+<h2>Testing</h2>
+
+<p><img class="right" src="/images/behat.png"></p>
+
+<p>We are firm believers in automated test practices,
+and providing a layer that integrates very easily
+with testing tools (such as Behat or PHPUnit) is a
+must for us.</p>
+
+<p>Symfony2 is a testing-prone framework because:</p>
+
+<ul>
+<li>it is well decoupled, so <em>unit testing</em> becomes very easy
+since you can mock objects, isolate classes and inject stub
+dependencies very easily</li>
+<li>it provides a first layer for functional testing (with PHPUnit):
+being an HTTP-centric framework, it provides a <a href="http://symfony.com/doc/2.0/book/testing.html#your-first-functional-test">base class</a>
+that lets you simulate HTTP requests and examine the output; needless
+to say, these kind of tests are way faster than the ones that you
+would write with tools like Selenium, since they don&rsquo;t have the
+overhead of testing with an actual browser</li>
+<li>there is a <a href="http://extensions.behat.org/symfony2/">Behat extension</a>
+that lets you integrate the framework with this behavioral testing tool</li>
+</ul>
+
+
+<p>At the end, you can see how Symfony2 and the ecosystem around it
+provide the proper toolset to run <strong>unit</strong>, <strong>functional</strong> and
+<strong>behavioral</strong> tests.
+If you do care about testing, this is already a
+huge point: we can&rsquo;t afford our developers to <strong>waste</strong>
+a huge portion of their time doing manual testing, and
+we don&rsquo;t want to increase overhead to build a
+manual QA team; since we are a technology startup,
+we should take advantage of technology to automate
+expensive tasks that harm the business, like
+manual testing<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<h2>Debugging</h2>
+
+<p>I kind of had so much fun when, while still working
+with symfony 1.4, I saw people developing with
+frameworks like Yii or Zend Framework 1,
+beating their heads on their desks tying to
+understand which view to modify, var_dumping
+SQL queries to output them and so on:
+symfony 1.4 already had a very powerful
+debug toolbar that would present all of these
+informations in order to ease debugging.</p>
+
+<p>Symfony2 goes beyond what we had before,
+providing a way more powerful, extensible
+toolbar and an integrated profiler.</p>
+
+<p><img class="right" src="/images/symfony2-profiler.png"></p>
+
+<p>Database inspection will let you realize
+how many queries you are running and see the
+SQL of all of them, with a nice overview of the
+time they take, while the profiler itself
+includes informations about every step
+of the application: for example, with Joomla,
+can you tell this easily how long it took to
+render a particular view and how much memory
+was used to execute a controller&rsquo;s action?</p>
+
+<p>Now, imagine each of your developers
+(let&rsquo;s say you have a team of 6),
+spending 1 hour (very conservative estimate)
+out of 40 (a working week) trying to obtain
+informations that debugging tools natively give you:
+it&rsquo;s almost a day per week; multiply that day for 52
+weeks in a year and you will end up loosing
+one of your developers for two moths.</p>
+
+<p>We <strong>all</strong> honestly can&rsquo;t afford to let a guy
+leave the company for 2 months for free, so why
+would we keep using counterproductive tools?</p>
+
+<h2>Doctrine 2</h2>
+
+<p>It is no news that we, at Namshi,
+<a href="/refactoring-your-architecture-go-for-soa/">are working with a Service-Oriented Architecture</a>,
+and we are highly benefiting from the easy
+integration that Symfony2 provides for
+Doctrine.</p>
+
+<p>One of the rules of thumb of designing
+SOAs is that you can provide access to the
+same data source to different services:
+in simple terms, instead of talking via
+webservices or messaging queues, services
+can simply access the data stored <em>somewhere</em>
+by other ones.</p>
+
+<p><img class="left" src="/images/doctrine-cli.png"></p>
+
+<p>Well, Doctrine 2 is the cherry on top of the
+cake to access that <em>somewhere</em>: natively
+providing support for multiple DB connections
+and object-relational mappings, you can safely
+use this tool, within Symfony2, to handle read
+and writes to different databases without
+polluting the domain model of each of the services
+that take advantage of Doctrine; in addition to this,
+I should enumerate the huge list of good things that
+working with a data mapper like Doctrine 2 brings
+on the table.</p>
+
+<p>On another note, sharing the data model among different services
+helps you overcoming though situations
+where webservices or messaging queues are not
+enough: think about a service which, due to
+an update, needs to modify half a milion records
+that &ldquo;belong&rdquo; to another service; of course,
+istantly having 500k messages in a queue implies
+a long, very long time to process them, while
+a webservice might not be fully ok with sending
+a huge payload over the HTTP protocol &ndash; and,
+moreover, how do you start testing this feature,
+when your developers need to send a lot of MB
+through their browser? It is painful, believe me.</p>
+
+<p>At this point, the ability of directly accessing
+different DBs come out as a swiss-army knife, as
+you can directly execute the 500k updates, in
+batch, from the original service.</p>
+
+<h2>Deployments</h2>
+
+<p>Symfony2 has an <em>out of the box</em>
+<a href="http://capifony.org/">integration with Capistrano</a>,
+the most popular automated
+deployment tool in the market.</p>
+
+<p>This means that you should forget about
+wasting time, money and energy to develop
+your own in-house solution to automate
+deployments or, even worse, rely on
+manual procedure, which are prone to
+errors where it hurts the most, on the
+&ldquo;live server&rdquo;.</p>
+
+<h2>DIC</h2>
+
+<p>Let&rsquo;s say that you, for example, are
+using <a href="http://graylog2.org/">Graylog2</a>
+to handle logs in your application:
+while you are developing locally, you
+won&rsquo;t have a graylog2 server to connect to,
+since it might be that you want to keep
+your machine a bit cleaner and you might
+find more useful to read local logs
+from a file in the filesystem, or directly
+output them to the browser.</p>
+
+<p>In Symfony2, thanks to the <a href="http://symfony.com/doc/master/book/service_container.html">dependency-injection container</a>,
+you can define the logger as a service:</p>
+
+<p>``` bash config.yml
+logger:</p>
+
+<pre><code>class: 'Monolog\Logger'
+arguments:
+    name:           "applicationName-%kernel.environment%"
+calls:
+    - [ pushHandler, [ @monolog_handler.graylog ] ]  
+</code></pre>
+
+<p>monolog_handler.graylog:</p>
+
+<pre><code>class: 'Monolog\Handler\GelfHandler'
+arguments:
+    publisher: @gelf.message_publisher
+    level:     200
+</code></pre>
+
+<p>```</p>
+
+<p>and, for development environments, you
+can simply override the configuration in
+the <code>config_dev.yml</code> file:</p>
+
+<p>``` bash config_dev.yml
+monolog_handler.graylog:</p>
+
+<pre><code>class: 'Monolog\Handler\StreamHandler'
+arguments:
+  stream: "php://stdout"
+</code></pre>
+
+<p>```</p>
+
+<p>This will allow you to output errors that
+would normally go to graylog2 directly to
+the developer&rsquo;s browser, easing debugging
+when you can afford to display errors in
+the browser &ndash; thing that is not possible
+who&rsquo;s viewing your application is a
+potential customer.</p>
+
+<p>Apart from all the technicalities involved
+in using a DIC, I would like to focus on
+one point: again, simplicity and speed to implement a
+solution to a problem (having different log
+handlers depending on the application&rsquo;s environment,
+in this case) are a winning factor for your
+development team, which is translated in <strong>more
+productivity for your company</strong>.</p>
+
+<h2>Bundles</h2>
+
+<p>When we kickstarted our first Symfony2-based
+service in our architecture, we decided to meld
+together 2 applications that support our CRM
+and ERP systems: being inside Symfony2, these
+layers are <strong>fully isolated</strong> in separate bundles,
+giving us the ability of phisically decoupling them
+in 2 installations in a matter of minutes.</p>
+
+<p>Bundles are probably one of the most powerful
+concepts of Symfony2, since they are
+micro-applications inside your main application:
+being able to totally separate logics from different
+domains helps you in keeping a clean separation
+of concerns and autonomously develop every single
+feature of your domain.</p>
+
+<h2>Declarative code</h2>
+
+<p>Consider the following snippet, written using the
+<a href="http://symfony.com/doc/master/components/finder.html">Symfony2 Finder component</a>:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Symfony\Component\Finder\Finder;
+use Zend_Service_Amazon_S3 as Amazon_S3;</p>
+
+<p>$s3 = new Amazon_S3($key, $secret);
+$s3->registerStreamWrapper(&ldquo;s3&rdquo;);</p>
+
+<p>$finder = new Finder();
+$finder->name(&lsquo;photos*&rsquo;)&ndash;>size(&lsquo;&lt; 100K&rsquo;)&ndash;>date(&lsquo;since 1 hour ago&rsquo;);</p>
+
+<p>foreach ($finder->in(&lsquo;s3://bucket-name&rsquo;) as $file) {</p>
+
+<pre><code>print $file-&gt;getFilename();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>After your <strong>first</strong> look at this code, you already know
+what it is doing: now imagine that your team of developers
+need to, instead, try to understand how the Drupal
+framework works.</p>
+
+<p>Taken from <a href="https://github.com/drupal/drupal/blob/7.x/modules/comment/comment.admin.inc#L271">Drupal&rsquo;s source code</a>:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>/<em>*
+ * Process comment_confirm_delete form submissions.
+ </em>/
+function comment_confirm_delete_submit($form, &amp;$form_state) {
+  $comment = $form[&lsquo;#comment&rsquo;];
+  // Delete the comment and its replies.
+  comment_delete($comment->cid);
+  drupal_set_message(t(&lsquo;The comment and all its replies have been deleted.&rsquo;));
+  watchdog(&lsquo;content&rsquo;, &lsquo;Deleted comment @cid and its replies.&rsquo;, array(&lsquo;@cid&rsquo; => $comment->cid));
+  // Clear the cache so an anonymous user sees that his comment was deleted.
+  cache_clear_all();</p>
+
+<p>  $form_state[&lsquo;redirect&rsquo;] = &ldquo;node/$comment->nid&rdquo;;
+}
+```</p>
+
+<p>I&rsquo;m far from saying that Drupal sucks, but some
+questions rise into my mind:</p>
+
+<ul>
+<li>why do I have a <code>$form</code> and a separate <code>$form_state</code>?</li>
+<li>what is <code>watchdog()</code> doing? Is it used for
+logging? Or to display flash messages?</li>
+<li>what is a <code>cid</code>? And what about the <code>nid</code>?</li>
+<li>why should I clear my entire application&rsquo;s
+cache to notify a user of a change?</li>
+</ul>
+
+
+<p>See, you don&rsquo;t want your developers to have to go
+through an entire application to understand what
+a piece of code does.</p>
+
+<h2>Best practices</h2>
+
+<p>Symfony2 is a framework made to take advantage
+of clean and clear tested patterns as well as
+tools to improve the final developer&rsquo;s
+productivity: imagine your team, working
+six months on this framework; how much would
+they learn? How many structural changes
+would they be able to do on your application without
+introducing regressions?</p>
+
+<p><img class="right" src="/images/best-practice.jpg"></p>
+
+<p>For startups, by the way, a huge plus comes from
+the fact that being highly decoupled, Symfony2 helps
+when you want to drastically replace a piece of software,
+or an adapter, with another one: for example,
+thanks to the dependency-injection container,
+you would be able to replace application services
+with others that have the same API, but a different
+implementation.</p>
+
+<p>It is clear enough that Symfony2 provides the
+flexibility you need to reach a very short
+<em>time to market</em> and increases your developers'
+awareness and efficiency by giving them the
+guidance and the tools they need to care about
+the domain of your services and not about how
+many bugs they would introduce by changing an
+untested piece of code.</p>
+
+<h2>All in all&hellip;is it Symfony2?</h2>
+
+<p>A very simple question that you should ask
+yourself at the end of this reading is:
+but, all in all, is this all thanks to
+Symfony2 or its surrounding environment?</p>
+
+<p>It is its surrounding environment, which
+was born thanks to the framework itself:
+when Symfony2 was released, no other framework
+had the same level of quality that the open source
+product from SensioLabs could offer;
+a natural effect of this was that the
+majority of well-known open source
+PHP developers got amused by this framework
+and embraced its way.</p>
+
+<p>Basically, Symfony2 is a framework chosen by
+the community, thus it can take advantage of
+all the efforts of the OS developers around it:
+from automated deployment tools to fully integrated
+ORMs, from testing frameworks to tutorials
+and best practices, through native, advanced
+debugging tools, Symfony2 is, as of today the most
+complete framework available in the PHP ecosystem
+when you take in consideration learning curve,
+integrations, stability and performances (don&rsquo;t forget
+that one of <a href="http://highscalability.com/blog/2012/4/2/youporn-targeting-200-million-views-a-day-and-beyond.html">top 100 website in the Alexa rank</a>
+is powered by Symfony2<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>).</p>
+
+<p>Can other frameworks do all of this?</p>
+
+<p>For the benefit of your <strong>business</strong>, this
+is the main question that you should ask
+yourself.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>But - drumroll - since we are an e-commerce company, we always need to ensure that some critical parts of the system, like checkouts, are tested by a human reenacting our customers' behavior. So yes, for a few, business-critical things, we really *want* to do manual tests. <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Even though I am sorry for using *that* website as an example, it is a very useful use-case when you consider its technical stack. <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

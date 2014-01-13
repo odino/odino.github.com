@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Beautifying JSON data from the shell - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="Yesterday I bumped into a very
+handly utility to beautify JSON
+data directly from your command
+line. Let&rsquo;s say that, with a command, you
+are &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/beautifying-json-data-from-the-shell">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Beautifying JSON data from the shell</a>
+  </h1>
+  
+  <p class="article-date">
+      Saturday, 22 June 2013, 15:36
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>Yesterday I bumped into a very
+handly utility to beautify JSON
+data directly from your command
+line.</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s say that, with a command, you
+are retrieving some data in JSON
+format<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -X POST --user admin:admin <span class="se">\</span>
+</span><span class='line'>http://localhost:2480/command/temp/sql/select%20from%20person
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span><span class="s2">&quot;result&quot;</span>:<span class="o">[{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:2&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Luca&quot;</span><span class="o">}</span>, <span class="o">{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:3&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span><span class="o">}</span>, <span class="o">{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:4&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span><span class="o">}]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course, the result doesn&rsquo;t really look
+readable, but thanks to a python
+utility we can directly expand and beautify
+our JSON by piping:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -X POST --user admin:admin <span class="se">\</span>
+</span><span class='line'>http://localhost:2480/command/temp/sql/select%20from%20person <span class="se">\</span>
+</span><span class='line'>| python -mjson.tool
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;result&quot;</span>: <span class="o">[</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:2&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0,
+</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Luca&quot;</span>
+</span><span class='line'>        <span class="o">}</span>,
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:3&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0
+</span><span class='line'>        <span class="o">}</span>,
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:4&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">]</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all, folks!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>In my case, I am retrieving data from OrientDB, a NoSQL graph=document DB which handles data in JSON format over its HTTP interface <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-22T15:36:00+04:00" pubdate data-updated="true">Saturday, 22 June 2013 at 15:36</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/json/'>JSON</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/beautifying-json-data-from-the-shell/" data-via="_odino_" data-counturl="http://odino.org/beautifying-json-data-from-the-shell/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/desktop-notifications-for-phpunit-tests-on-ubuntu/" title="Post anterior: Desktop notifications for PHPUnit tests on Ubuntu">&laquo; Desktop notifications for PHPUnit tests on Ubuntu</a>
+      
+      
+        <a class="basic-alignment right" href="/using-emailvisions-campaigncommander-apis-from-php/" title="Próximo post: Using Emailvision's CampaignCommander APIs from PHP">Using Emailvision's CampaignCommander APIs from PHP &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/beautifying-json-data-from-the-shell/';
+        var disqus_url = 'http://odino.org/beautifying-json-data-from-the-shell/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

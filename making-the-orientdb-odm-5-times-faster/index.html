@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Making the OrientDB ODM 5 times faster - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="Today, after heavily testing performances
+on a project, I pushed some small but
+precious changes to the
+orientdb-odm. Prelude Premature optimization &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/making-the-orientdb-odm-5-times-faster">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Making the OrientDB ODM 5 times faster</a>
+  </h1>
+  
+  <p class="article-date">
+      Friday, 25 January 2013, 17:39
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>Today, after heavily testing performances
+on a project, I pushed some small but
+precious changes to the
+<a href="https://github.com/doctrine/orientdb-odm">orientdb-odm</a>.</p>
+
+<!-- more -->
+
+
+<h2>Prelude</h2>
+
+<blockquote><p>Premature optimization is the root of all evil</p><footer><strong>Donald Knuth</strong> <cite><a href='http://c2.com/cgi/wiki?PrematureOptimization'>C2 Wiki</a></cite></footer></blockquote>
+
+
+<p></p>
+
+<p>In these days I was testing performances of a
+service I am building with
+<a href="https://github.com/nuvolabase/orientdb">OrientDB</a>
+and the doctrine ODM that
+<a href="/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
+
+<p>Following one of the golden rules for software
+architects, we didn&rsquo;t paid attention to performances &ndash; at first &ndash;
+but rather went for a design which would allow us
+to inject behaviours and easily change portions of code
+(also thanks to the <a href="https://travis-ci.org/doctrine/orientdb-odm">test suite</a>),
+I knew that I would have noticed huge flaws at
+performance level when testing it with
+<strong>production data</strong>.</p>
+
+<p>A few days ago we committed fetchplans for repository
+classes, but it wasnt enough: rather then concentrating
+on which data we should fetch, I realized one major
+improvement could be applied on how we <strong>map</strong> data.</p>
+
+<h2>The golden rule</h2>
+
+<p><span class='pullquote-right' data-pullquote='abstraction comes with a cost:
+slow performances'>
+When you write a OXM (object-something mapper) you will
+shortly understand that a huge portion of your job
+consist into abstract your design, to ease
+integration of multiple components into your application:
+repositories, the object manager, POXO, the data mapper,
+proxy classes and so on.</p>
+
+<p>Of course, abstraction comes with a cost:
+slow performances, so one of the first things that you do is starting
+to <strong>cache everything</strong>.
+</span></p>
+
+<h2>How we did it</h2>
+
+<p>With a <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec">single commit</a>
+&ndash; there&rsquo;s always room for improvements &ndash; the ODM is now able
+to hydrate objects <strong>5 times faster</strong>: when you hydrate similar
+objects from OrientDB (for example, 2 records that share the same
+attributes&#8217; values, like <code>is_published</code> or <code>country</code>), there is
+no need to duplicate operations, so we added a <a href="https://github.com/doctrine/orientdb-odm/blob/df875c946e02a9c84eee22f0c86e0a3b06bd70ec/src/Doctrine/OrientDB/Util/Inflector/Cached.php">cached inflector</a>
+(with an in-memory / single request cache) and did some other
+improvements to the <code>Mapper</code>:</p>
+
+<ul>
+<li>cached the relations between <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L297">PHP classes and OrientDB classes</a> (if 2 records of the same OrientDB class are hydrated, there is only one single <em>search</em> operation to find the PHP class that should map them)</li>
+<li>cached the <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L223">casting of properties</a> (if 2 objects have the same value for the <code>is_published</code> attribute, casting is done once)</li>
+<li>cached <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L466">properties&#8217; annotations</a> (property-level annotations are inspected once per class)</li>
+</ul>
+
+
+<p>There is no rocket science in what we did, but benchmarks ensure that
+it&rsquo;s a <strong>huge performance improvement</strong>.</p>
+
+<h2>By the way, we used Webgrind</h2>
+
+<p><img class="right" src="/images/webgrind.png"></p>
+
+<p>Doing almost all of my work from a Mac, I kind of
+missed <a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
+for profiling, so I was looking for an
+alternative (no, installing
+<a href="https://github.com/facebook/xhprof">XHPROF</a> isn&rsquo;t an alternative at 2 in the morning)
+and I found Webgrind (which is cross-platform), a web profiler
+that requires zero setup:
+you basically just need to provide it access from the webserver
+and, by opening it with a browser, the application automatically
+launches and parses the cachegrind files generated by XDebug.</p>
+
+<p>Webgrind&rsquo;s code is a bit of a mess, but then, the
+result is still pretty good &ndash; you get a good overview
+of the expensiveness of your calls as well as a
+call graph compiled in <a href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>,
+which is a de-facto standard for graph generation.</p>
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-25T17:39:00+04:00" pubdate data-updated="true">Friday, 25 January 2013 at 17:39</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/doctrine/'>doctrine</a>, <a class='category' href='/blog/categories/orientdb-odm/'>orientdb-odm</a>, <a class='category' href='/blog/categories/php/'>php</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/making-the-orientdb-odm-5-times-faster/" data-via="_odino_" data-counturl="http://odino.org/making-the-orientdb-odm-5-times-faster/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/starting-to-play-with-the-doctrine-orientdb-odm/" title="Post anterior: Starting to play with the Doctrine OrientDB ODM">&laquo; Starting to play with the Doctrine OrientDB ODM</a>
+      
+      
+        <a class="basic-alignment right" href="/profiling-php-applications-from-the-browser/" title="Próximo post: Profiling PHP applications from the browser">Profiling PHP applications from the browser &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/making-the-orientdb-odm-5-times-faster/';
+        var disqus_url = 'http://odino.org/making-the-orientdb-odm-5-times-faster/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

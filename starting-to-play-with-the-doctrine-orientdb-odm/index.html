@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Starting to play with the Doctrine OrientDB ODM - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="Since I am actively playing around with it, I
+wanted to share some snippets to use the
+Doctrine OrientDB ODM
+in your PHP applications. Prelude In the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Starting to play with the Doctrine OrientDB ODM</a>
+  </h1>
+  
+  <p class="article-date">
+      Sunday, 20 January 2013, 23:00
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>Since I am actively playing around with it, I
+wanted to share some snippets to use the
+<a href="https://github.com/doctrine/orientdb-odm">Doctrine OrientDB ODM</a>
+in your PHP applications.</p>
+
+<!-- more -->
+
+
+<h2>Prelude</h2>
+
+<p>In the last few weeks I&rsquo;ve started working,
+for fun <strong>and</strong> profit, to a personal project,
+nothing really exciting as of now.</p>
+
+<p>The thing is, since I wanted to get back on some
+cool piece of software, I decided to go for
+OrientDB for the persistence and a
+mini-framework <em>a-la</em> Symfony2 as foundation for the
+PHP application &ndash; I actually considered NodeJS first,
+but I need a prototype in 2 months so&hellip;</p>
+
+<p>Point being, I&rsquo;d like to share with you my basic
+approach to the OrientDB ODM.</p>
+
+<h2>The container</h2>
+
+<p>Given I&rsquo;ve been inspired to Symfony2,
+instantiating the main ODM classes
+happens in the DIC:</p>
+
+<figure class='code'><figcaption><span>container.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">orientdb.binding.parameters</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\OrientDB\Binding\BindingParameters</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">127.0.0.1</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">2480</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">admin</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">admin</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">DBNAME</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">orientdb.binding</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\OrientDB\Binding\HttpBinding</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">orientdb.binding.parameters</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">odm</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\ODM\OrientDB\Manager</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">mapper</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">odm.mapper</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">binding</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">orientdb.binding</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">odm.mapper</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\ODM\OrientDB\Mapper</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">documentProxyDirectory</span><span class="p-Indicator">:</span> <span class="err">%</span><span class="l-Scalar-Plain">base-dir%/tmp/</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">annotationReader</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">odm.annotation-reader</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">setDocumentDirectories</span><span class="p-Indicator">,</span> <span class="p-Indicator">[</span> <span class="err">%</span><span class="nv">base-dir%/src/PROJECT/Entity/</span> <span class="p-Indicator">:</span> <span class="s">&quot;PROJECT</span><span class="err">\</span><span class="s">Entity&quot;</span> <span class="p-Indicator">]</span> <span class="p-Indicator">]</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">odm.annotation-reader</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\ODM\OrientDB\Mapper\Annotations\Reader</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">cacheReader</span><span class="p-Indicator">:</span> <span class="err">@</span><span class="l-Scalar-Plain">cache.array</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">cache.array</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Doctrine\Common\Cache\ArrayCache</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">base-dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/Users/odino/Sites/PROJECT</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, you need:</p>
+
+<ul>
+<li>the <code>Manager</code>, which requires a <code>Mapper</code> and a connection to
+OrientDB through a binding class implementing the
+<code>Doctrine\OrientDB\Binding\BindingInterface</code></li>
+<li>the <code>Mapper</code>, which requires a directory where it can write
+proxy classes (for lazy loading), and an annotation reader
+(this is not required, I&rsquo;ll explain it later), plus a source
+directory to locate entities</li>
+<li>the <code>HttpBinding</code>, used by the <code>Manager</code>, that does raw
+queries to the OrientDB server</li>
+<li>the <code>Annotations\Reader</code></li>
+<li>a cache implementing the interface <code>Doctrine\Common\Cache\Cache</code>:
+in dev environments it is needed since <code>ApcCache</code> is the default
+one, and you would need to flush APC every time you change an
+annotation in your entities (we will probably change it and put
+<code>ArrayCache</code> by default, so that you will need to tweak the live
+environment, not the dev one)</li>
+</ul>
+
+
+<h2>Autoloading</h2>
+
+<p>The autoloading is straightforward, thanks to the <code>PSR-0</code>; the
+only thing that you should keep in mind is that you will need
+to specify a separate autoloader for proxy classes, since they can
+be generated wherever you want (ideally, in a temporary folder,
+since they should be removed every time you deploy):</p>
+
+<figure class='code'><figcaption><span>autoload.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\ClassLoader\UniversalClassLoader</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UniversalClassLoader</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerNamespaces</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;Symfony&#39;</span>                       <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/symfony/symfony/src&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\Common&#39;</span>               <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/doctrine/common/lib&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\OrientDB&#39;</span>             <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/doctrine/orientdb-odm/src&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\ODM\OrientDB&#39;</span>         <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/doctrine/orientdb-odm/src&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;Doctrine\OrientDB\Proxy&#39;</span>       <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../tmp&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should set the autoloader for <code>Doctrine\OrientDB\Proxy</code>
+accordingly to the argument <code>documentProxyDirectory</code> of the
+<code>odm.mapper</code> service.</p>
+
+<h2>Entities</h2>
+
+<p>Following what we specified in the <code>container.yml</code>,
+entities should be located in
+<code>%base-dir%/src/PROJECT/Entity/</code> and follow the namespace
+<code>PROJECT\Entity</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">PROJECT\Entity</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Doctrine\ODM\OrientDB\Mapper\Annotations</span> <span class="k">as</span> <span class="nx">ODM</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd">* @ODM\Document(class=&quot;user&quot;)</span>
+</span><span class='line'><span class="sd">*/</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(name=&quot;@rid&quot;, type=&quot;string&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$rid</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(type=&quot;string&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$email</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(type=&quot;string&quot;, notnull=&quot;false&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$nick</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * @ODM\Property(type=&quot;linklist&quot;)</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$addresses</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Returns the nickname of the user, or his email if he has no nick set.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @return string</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getNick</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nick</span> <span class="o">?:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEmail</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setNick</span><span class="p">(</span><span class="nv">$nick</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">nick</span> <span class="o">=</span> <span class="nv">$nick</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getEmail</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setEmail</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAddresses</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addresses</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setAddresses</span><span class="p">(</span><span class="nv">$adresses</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addresses</span> <span class="o">=</span> <span class="nv">$addresses</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRid</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rid</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setRid</span><span class="p">(</span><span class="nv">$rid</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">rid</span> <span class="o">=</span> <span class="nv">$rid</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, mapping an entity is pretty easy:
+the first annotation is at class level, to define
+which OrientDB classes are mapped by the entity,
+then for every property that you want to be
+persisted / hydrated, you define another annotation and
+public getters / setters; if you want the property to be
+public, you dont need getters / setters.</p>
+
+<p>The property-level annotation has 3 parameters:</p>
+
+<ul>
+<li><strong>type</strong>: defines the type of the property in OrientDB
+( <code>boolean</code>, <code>link</code>, <code>linklist</code>, <code>string</code>, <code>integer</code>, etc )</li>
+<li><strong>name</strong>: the name of the attribute in the OrientDB class
+(you might have a PHP property called <code>$createdAt</code> and in OrientDB
+you call it <code>created_at</code>)</li>
+<li><strong>notnull</strong>: defines whether the property can be <code>null</code> or not<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup></li>
+</ul>
+
+
+<h2>What about controllers?</h2>
+
+<p>You can access the ODM from within
+controllers of your application by
+just using the container:</p>
+
+<figure class='code'><figcaption><span>PROJECT/Controller/User.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">PROJECT\Controller</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Project\Entity\User</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UserController</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">somethingAction</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="nv">$user</span>       <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">();</span>
+</span><span class='line'>      <span class="nv">$manager</span>    <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getService</span><span class="p">(</span><span class="s1">&#39;odm&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nv">$manager</span><span class="o">-&gt;...</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Repositories</h2>
+
+<p>At this point, after boostrapping the environment and creating your first entity,
+you might want to play with the repository in your controllers, to
+manipulate and retrieve collections:</p>
+
+<figure class='code'><figcaption><span>PROJECT/Controller/User.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span>      <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getService</span><span class="p">(</span><span class="s1">&#39;odm&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$userRepository</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="s1">&#39;PROJECT\Entity\User&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then, with the repository, you can start retrieving objects:</p>
+
+<figure class='code'><figcaption><span>Using the repository</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find all users</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find one user given its RID</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$rid</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find all users with the nick &quot;overlord&quot;</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findByNick</span><span class="p">(</span><span class="s2">&quot;overlord&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find the user with the nick &quot;TheOnlyOverlord&quot;</span>
+</span><span class='line'><span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneByNick</span><span class="p">(</span><span class="s2">&quot;TheOnlyOverlord&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// find jack&#39;s wife</span>
+</span><span class='line'><span class="nv">$jack</span>  <span class="o">=</span> <span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneByName</span><span class="p">(</span><span class="s2">&quot;Jack&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$wifey</span> <span class="o">=</span> <span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneBySpouse</span><span class="p">(</span><span class="nv">$jack</span><span class="p">);</span> <span class="c1">// spouse is an attribute of type &quot;link&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and it&rsquo;s not over, since you can, of course, add
+<strong>custom repository classes</strong>.</p>
+
+<p>Custom repositories must be located in the entity&rsquo;s folder
+and follow the naming convention <code>EntitytheymapRepository</code>:
+for our <code>User</code> entity, we would need to create a <code>UserRepository</code>
+class in <code>%base-dir%/src/PROJECT/Entity/</code>:</p>
+
+<figure class='code'><figcaption><span>PROJECT\Entity\UserRepository</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">PROJECT\Entity</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Doctrine\ODM\OrientDB\Repository</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UserRepository</span> <span class="k">extends</span> <span class="nx">Repository</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Retrieves a random user.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @return \PROJECT\Entity\User</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">findRandomUser</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nb">array_rand</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>so then you can call your new methods over repositories:</p>
+
+<figure class='code'><figcaption><span>Using custom repositories</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="s1">&#39;PROJECT\Entity\User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">findRandomUser</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Can I haz raw queries?</h2>
+
+<p>Entities and repositories are good, but what about
+adding some <code>SQL+</code><sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup> to the mix?</p>
+
+<p>That&rsquo;s very easy, thanks to the <strong>query builder</strong>
+that&rsquo;s packed with the ODM:</p>
+
+<figure class='code'><figcaption><span>Example queries</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Doctrine\OrientDB\Query\Query</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// instantiate a query object</span>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// simple SELECT</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;nick = ?&#39;</span><span class="p">,</span> <span class="nv">$nick</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// throwing some spice into the mix</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">orWhere</span><span class="p">(</span><span class="s1">&#39;attribute = ?&#39;</span><span class="p">,</span> <span class="nv">$attribute</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">orWhere</span><span class="p">(</span><span class="s1">&#39;(this IS NULL OR that IS NOT NULL)&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// SELECTing a single record</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$rid</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// SELECTing two records</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$rid1</span><span class="p">,</span> <span class="nv">$rid2</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you manipulate the <code>$query</code> object you are basically
+creating an SQL query with an object-oriented fluent interface;
+to eventually execute the query, just pass the object to
+the <code>Manager</code>:</p>
+
+<figure class='code'><figcaption><span>Executing a query</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender = ?&#39;</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$males</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Point being, how do you save data?</h2>
+
+<p>Since persistence is not already handled by the <code>Manager</code>,
+you will need to use raw queries for now:</p>
+
+<figure class='code'><figcaption><span>Saving data</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$user</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>  <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Jack&#39;</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">into</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fields</span><span class="p">(</span><span class="nb">array_keys</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">values</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>From the trenches</h2>
+
+<p>We&rsquo;ve been very active since a couple months,
+and we&rsquo;ve actually been able to roll out some major
+bugfixes and improvements (more than 10 in the last
+few weeks):</p>
+
+<ul>
+<li>repositories <a href="https://github.com/doctrine/orientdb-odm/issues/138">filtering by multiple criterias</a></li>
+<li><a href="https://github.com/doctrine/orientdb-odm/issues/139">custom repository</a> classes</li>
+<li>added ability to <a href="https://github.com/doctrine/orientdb-odm/issues/141">map timestamps</a> as DateTime objects</li>
+<li>unable to <a href="https://github.com/doctrine/orientdb-odm/issues/144">update attributes if they are a collection</a></li>
+<li>support for <a href="https://github.com/doctrine/orientdb-odm/commit/cbd9c3250d1fd6fc7ec1f39566b91d1f0e1531f2">INSERTing collections</a></li>
+<li>proxy classes dont <a href="https://github.com/doctrine/orientdb-odm/issues/147">import signatures</a></li>
+<li><code>findBy*</code> and <code>findOneBy*</code> <a href="https://github.com/doctrine/orientdb-odm/issues/149">&ldquo;magic&rdquo; methods</a></li>
+<li><a href="https://github.com/doctrine/orientdb-odm/issues/150">fetchplans in <code>find*</code></a> methods of repositories</li>
+<li>following <code>SQL+</code>, added <a href="https://github.com/doctrine/orientdb-odm/issues/99"><code>REBUILD INDEX</code> command</a></li>
+</ul>
+
+
+<p>I would not advise you to install one of the old tags,
+or even the last one, which brings the namespace
+changes for the incubation in the Doctrine
+organization, but to install it directly from master
+via composer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="s2">&quot;doctrine/orientdb-odm&quot;</span><span class="err">:</span> <span class="s2">&quot;dev-master&quot;</span><span class="err">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as we are constantly doing bugfixes and so on
+(I would day you would get an update &ndash; at least &ndash;
+every week).</p>
+
+<p>That is it, now <strong>start playing around!</strong></p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Be aware that if you are retrieving a property which is NULL in the DB and you don&#8217;t declare it as NULLable, an exception will be thrown (and there is an issue to improve the exception message https://github.com/doctrine/orientdb-odm/issues/152) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>OrientDB&#8217;s QL is called SQL+, as it looks like SQL but has some major improvements, as it&#8217;s very developer-friendly <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-20T23:00:00+04:00" pubdate data-updated="true">Sunday, 20 January 2013 at 23:00</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/doctrine/'>Doctrine</a>, <a class='category' href='/blog/categories/orientdb/'>OrientDB</a>, <a class='category' href='/blog/categories/orientdb-odm/'>orientdb-odm</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/" data-via="_odino_" data-counturl="http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/please-welcome-the-doctrine-orientdb-odm/" title="Post anterior: Please welcome the Doctrine2 OrientDB ODM">&laquo; Please welcome the Doctrine2 OrientDB ODM</a>
+      
+      
+        <a class="basic-alignment right" href="/making-the-orientdb-odm-5-times-faster/" title="Próximo post: Making the OrientDB ODM 5 times faster">Making the OrientDB ODM 5 times faster &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/';
+        var disqus_url = 'http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

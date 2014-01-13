@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>I broke the REST - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="I&rsquo;ve made a few mistakes with this plugin, called sfRestWebServicePlugin. Time to regret Cool thing, I&rsquo;ve been cited as its author in the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/i-broke-the-rest">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    I broke the REST</a>
+  </h1>
+  
+  <p class="article-date">
+      Sunday, 06 March 2011, 11:09
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>I&rsquo;ve made a few mistakes with this plugin, called <a href="http://www.symfony-project.org/plugins/sfRestWebServicePlugin">sfRestWebServicePlugin</a>.</p>
+
+<!-- more -->
+
+
+<h2>Time to regret</h2>
+
+<p>Cool thing, I&rsquo;ve been cited as its author in the Symfony Live conference in Paris and, before seeing some people ranting here, I just want to make clear one concept: its aim is not to be your way to write a RESTful webservice.</p>
+
+<p>Also, at the time I wrote it, I made a few mistakes in the implementations, which desn&rsquo;t make it really a software respecting the RESTful constraints.</p>
+
+<h2>I&rsquo;ve been young</h2>
+
+<p>What I hate about it?</p>
+
+<ul>
+<li>it does authorization, not authentication</li>
+<li>I use the word state instead of method, pretty nosense</li>
+<li>it isn&rsquo;t designed to facilitate your job with the hypermedia constraint (HATEOAS)</li>
+<li>it uses a general feedback when an error occurs</li>
+</ul>
+
+
+<p>These are just a few points.</p>
+
+<p>Since I don&rsquo;t want to evolve it, nor fix it, pretend to use it understanding this kind of limitations.</p>
+
+<h2>HATEOAS can&rsquo;t be generalized</h2>
+
+<p>Since the hypermedia constraint of REST is a domain-specific-workflow dependant concept, just forget about any magic plugin that tells it can generate a RESTful version of your service: it just can&rsquo;t be.</p>
+
+<p>Any kind of plugin can help you design a RESTful interface for your service, not build it from scratch to the end.</p>
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-06T11:09:00+04:00" pubdate data-updated="true">Sunday, 06 March 2011 at 11:09</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/rest/'>REST</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/i-broke-the-rest/" data-via="_odino_" data-counturl="http://odino.org/i-broke-the-rest/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/don-t-rape-http-if-none-match-the-412-http-status-code/" title="Post anterior: Don't rape HTTP: If-(None-)Match & the 412 HTTP status code">&laquo; Don't rape HTTP: If-(None-)Match & the 412 HTTP status code</a>
+      
+      
+        <a class="basic-alignment right" href="/symfony-live-2011-my-pov/" title="Próximo post: Symfony Live 2011, my POV">Symfony Live 2011, my POV &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/i-broke-the-rest/';
+        var disqus_url = 'http://odino.org/i-broke-the-rest/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Graph in PHP through OrientDB - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="As I said, Orient has an HTTP interface which you can use to manage and query any DB, document and navigate the graph: since it speaks HTTP&hellip; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/graph-in-php-through-orientdb">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Graph in PHP through OrientDB</a>
+  </h1>
+  
+  <p class="article-date">
+      Saturday, 16 April 2011, 14:11
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>As I <a href="http://www.odino.org/327/graph-databases-orientdb-to-the-rescue">said</a>, Orient has an HTTP interface which you can use to manage and query any DB, document and navigate the graph: since it speaks HTTP&hellip;</p>
+
+<!-- more -->
+
+
+<h2>OrientDB and PHP</h2>
+
+<p>So, as you can imagine, liking OrientDB and HTTP brought me and <a href="http://www.davidfunaro.com/">David</a> writing the <a href="https://github.com/odino/Orient/tree/beta-1">PHP binding for Orient DB</a>: it is a small library ( a couple classes, a couple interfaces ) able to let you manage your database through HTTP and an OO API.</p>
+
+<p>We&rsquo;re still working on it, but it&rsquo;s already usable.</p>
+
+<p>As I&rsquo;ll show you now, <strong>graph in php can be really funny and simple</strong>.</p>
+
+<h2>Friendship traversal in 5 minutes</h2>
+
+<p>You have this new super-cocky website which lets the user be friends, share stuff and so on. Just like FaceBook.</p>
+
+<p>So you download orient, start the server and go to <code>127.0.0.1:2480</code>, where you can administrate your Orient server via web, through <a href="http://code.google.com/p/orient/wiki/OrientDB_Studio">OrientStudio</a>.</p>
+
+<p>Orient&rsquo;s package comes with a demo DB, so you only need to log in as <code>admin/admin</code>.</p>
+
+<p><strong>Set-up instructions are doable also with PHP, but I think, to be faster and more clear, we should use OrientStudio instead</strong>.</p>
+
+<p><img class="right" src="/images/oeirnt-add-class.png"></p>
+
+<p>So, now, you only need to create a class, called <code>fellas</code>.</p>
+
+<p>A class is similar to a real-world class, like in OO design: so records of the same class share the type and class propertis ( when mandatory: as I said yesterday, classes can be schema-full, <em>-less, </em>-mixed ).</p>
+
+<p>As you create the class you should populate it with some records, from the <strong>command tab</strong>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">fellas</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Michelle Obama&#39;</span><span class="p">);</span> <span class="c1">-- our starting point</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">fellas</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Barack Obama&#39;</span><span class="p">);</span> <span class="c1">-- Michelle&#39;s husband ( =  friend )</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">fellas</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Angela Merkel&#39;</span><span class="p">);</span> <span class="c1">-- Barack&#39;s friend</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">fellas</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Nicolas Sarkozy&#39;</span><span class="p">);</span> <span class="c1">-- Angela&#39;s friend</span>
+</span><span class='line'><span class="k">insert</span> <span class="k">into</span> <span class="n">fellas</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;Silvio Berlusconi&#39;</span><span class="p">);</span> <span class="c1">-- friend of no one</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that you&rsquo;ll need to execute insert after insert, as multiple inserts are not supported.</p>
+
+<p>After you created your records you are able to see them: go to the <strong>query tab</strong> and execute</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="k">from</span> <span class="n">fellas</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="center" src="/images/orient-select-all.png"></p>
+
+<p>So you see your records with some attributes:</p>
+
+<ul>
+<li><code>@rid</code>, the resource identifier of your record: the part before the colon is the ID of the cluster ( a cluster is like a table, gruping all the records of the same class ), the second the ID of the record</li>
+<li><code>@version</code> is the &hellip;well you guessed it: it&rsquo;s auto-magically handled by Orient when you create/update your records</li>
+<li><code>@class</code></li>
+<li><code>name</code>, which is the property assigned with the INSERT command: remember it has been created on-the fly ( <em>schema-less</em> )</li>
+</ul>
+
+
+<p>Now we just want to connect our fellas:</p>
+
+<p><img class="center" src="/images/undirected.graph.no.cycles.png"></p>
+
+<p>As you can see, the graph is undirected, with no cycles<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>So we have to update our records:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">update</span> <span class="n">fellas</span> <span class="k">add</span> <span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Barack</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span> <span class="k">where</span> <span class="o">@</span><span class="n">rid</span> <span class="o">=</span> <span class="p">[</span><span class="n">Michelle</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span>
+</span><span class='line'><span class="k">update</span> <span class="n">fellas</span> <span class="k">add</span> <span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Michelle</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span> <span class="k">where</span> <span class="o">@</span><span class="n">rid</span> <span class="o">=</span> <span class="p">[</span><span class="n">Barack</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span>
+</span><span class='line'><span class="k">update</span> <span class="n">fellas</span> <span class="k">add</span> <span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Barack</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span> <span class="k">where</span> <span class="o">@</span><span class="n">rid</span> <span class="o">=</span> <span class="p">[</span><span class="n">Angela</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span>
+</span><span class='line'><span class="k">update</span> <span class="n">fellas</span> <span class="k">add</span> <span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Angela</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span> <span class="k">where</span> <span class="o">@</span><span class="n">rid</span> <span class="o">=</span> <span class="p">[</span><span class="n">Barack</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span>
+</span><span class='line'><span class="k">update</span> <span class="n">fellas</span> <span class="k">add</span> <span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nicolas</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span> <span class="k">where</span> <span class="o">@</span><span class="n">rid</span> <span class="o">=</span> <span class="p">[</span><span class="n">Angela</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span>
+</span><span class='line'><span class="k">update</span> <span class="n">fellas</span> <span class="k">add</span> <span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Angela</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span> <span class="k">where</span> <span class="o">@</span><span class="n">rid</span> <span class="o">=</span> <span class="p">[</span><span class="n">Nicolas</span> <span class="o">@</span><span class="n">rid</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There we go:</p>
+
+<p><img class="center" src="/images/orient-fellas-with-relationships.png"></p>
+
+<p>Now, to work with this grah with php, just clone the binding from GitHub; your directory structure should look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>myProject
+</span><span class='line'>  |
+</span><span class='line'>  Orient/
+</span><span class='line'>  |
+</span><span class='line'>  fellas.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>where <code>myProject</code> is your project route and <code>fellas.php</code> the script we want to execute to retrieve Michelle Obama&rsquo;s connections.</p>
+
+<p>First of all we should register an autoloading function in <code>fellas.php</code><sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">spl_autoload_register</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$className</span><span class="p">){</span>
+</span><span class='line'>    <span class="nv">$path</span> <span class="o">=</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;\\&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nv">$className</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$path</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="k">include</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then we need to istantiate the HTTP client for Orient and the binding:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$driver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Orient\Http\Client\Curl</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$orient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Orient\Foundation\Binding</span><span class="p">(</span><span class="nv">$driver</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;2480&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;demo&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>after that we can execute our query:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$orient</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;select from fellas where any() traverse(0,-1) ( @rid = [Michelle @rid] ) and @rid &lt;&gt; [Michelle @rid]&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and output the results:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$output</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">());</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$output</span><span class="o">-&gt;</span><span class="na">result</span> <span class="k">as</span> <span class="nv">$friend</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$friend</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="left" src="/images/orient-output.png"></p>
+
+<p>As you will see ( try running the script from the command line or from your localhost ) the output will return all Michelle Obama&rsquo;s connection, <strong>direct and indirect</strong>.</p>
+
+<p>If we modify the query we can return all the connections under a certain depth ( which is determined by the <code>traverse()</code> arguments ).</p>
+
+<p>So, in 5 minutes, you should be able to setup and <strong>work with a graph DB from PHP</strong>.</p>
+
+<h2>Under the hood</h2>
+
+<p>When you work with an instance of <a href="https://github.com/odino/Orient/tree/beta-1/Orient/Foundation/Binding.php">Binding</a> almost every public method returns an <a href="https://github.com/odino/Orient/tree/beta-1/Orient/Http/Response.php">HTTP Response</a>, so you basically only need to get the body of the response and <code>json_decode()</code> it ( OrientDB works only with the JSON format ).</p>
+
+<p>Once you decoded it, you can parse it as a Std object: if you&rsquo;re not ok working with this kinda stuff don&rsquo;t worry, because&hellip;</p>
+
+<h2>Object graph mapper and&hellip; Help!</h2>
+
+<p>Our library is quite finished: we still need to define better interfaces and polish a few things, but the main functionalities are there, ready to be used.</p>
+
+<p>As soon as we release the first stable version we will start working on a <strong>basic mapper</strong> ( <em>OGM</em> sounds cool ) for OrientDB: if you want to help us, don&rsquo;t hesitate, we will certainly need the help of someone from PHP&rsquo;s community.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>An real-world example of this kind of graph is a simple&#8230; tree <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>since I&#8217;m not an autoloading master, if you have better solutions I&#8217;ll be pleased to use&#8217;em <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-16T14:11:00+04:00" pubdate data-updated="true">Saturday, 16 April 2011 at 14:11</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/orientdb/'>OrientDB</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/graph-in-php-through-orientdb/" data-via="_odino_" data-counturl="http://odino.org/graph-in-php-through-orientdb/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/graph-databases-orientdb-to-the-rescue/" title="Post anterior: Graph databases: OrientDB to the rescue">&laquo; Graph databases: OrientDB to the rescue</a>
+      
+      
+        <a class="basic-alignment right" href="/xml-vs-json-for-real/" title="Próximo post: XML vs JSON for real">XML vs JSON for real &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/graph-in-php-through-orientdb/';
+        var disqus_url = 'http://odino.org/graph-in-php-through-orientdb/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

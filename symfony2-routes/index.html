@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Symfony2 routes - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="Let&rsquo;s look at two identhical routes, one described in symfony 1.4: 1
+2
+3
+4
+5
+post: pattern: /posts/:id params: { module: Blog, action: posts &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/symfony2-routes">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Symfony2 routes</a>
+  </h1>
+  
+  <p class="article-date">
+      Sunday, 09 January 2011, 13:57
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><!-- more -->
+
+
+<p>Let&rsquo;s look at two identhical routes, one described in symfony 1.4:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">post</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">pattern</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">/posts/:id</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">params</span><span class="p-Indicator">:</span>       <span class="p-Indicator">{</span> <span class="nv">module</span><span class="p-Indicator">:</span> <span class="nv">Blog</span><span class="p-Indicator">,</span> <span class="nv">action</span><span class="p-Indicator">:</span> <span class="nv">posts</span> <span class="p-Indicator">}</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">sf_method</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">GET</span><span class="p-Indicator">,</span> <span class="nv">PUT</span><span class="p-Indicator">,</span> <span class="nv">DELETE</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and the other one in Symfony2:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">post</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">pattern</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">/posts/:id</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">_controller</span><span class="p-Indicator">:</span> <span class="nv">BlogBundle</span><span class="p-Indicator">:</span><span class="nv">Post</span><span class="p-Indicator">:</span><span class="nv">posts</span> <span class="p-Indicator">}</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">requirements</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">_method</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">(GET|PUT|DELETE)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>as you see there are a few changes, so let&rsquo;s compare them line after line!</p>
+
+<h2>You ain&rsquo;t gonna need the @ anymore</h2>
+
+<p>The symfony 1.X routing system was mainly identifying the routes through the <code>@</code> prefix.</p>
+
+<p>That was also the way to write faster routes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">url_for(&#39;post&#39;, array(&#39;id&#39; =&gt; 1)) // slow</span>
+</span><span class='line'><span class="l-Scalar-Plain">url_for(&#39;@post?id=1&#39;) // fast</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With the new routing system you&rsquo;ll be only able to reference the plain route name:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// in a controller</span>
+</span><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">generateUrl</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Effectively working patterns</h2>
+
+<p>Once you describe your <strong>routing pattern</strong>, for example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">/post/:id</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Symfony will be able to incapsulate and isolate the request object, the controller and the needed parameters.</p>
+
+<p>No more <code>sfWebRequest</code>&rsquo;s hyper-referencing to get any routing parameter:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">executePost</span><span class="p">(</span><span class="nx">sfWebRequest</span> <span class="nv">$request</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nv">$id</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getGetParameter</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>they are directly injected to your action:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">postAction</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>From YAML to PHP</h2>
+
+<p>The localization of the proper action able to handle the matched route is not a params array anymore.</p>
+
+<p>Since Symfony2 introduced multiple controllers per bundle, you need to specify, in one parameter, the bundle, the controller and the action:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">_controller</span><span class="p-Indicator">:</span> <span class="nv">MyBundle</span><span class="p-Indicator">:</span><span class="nv">DefaultController</span><span class="p-Indicator">:</span><span class="nv">ActionName</span> <span class="p-Indicator">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Internals</h2>
+
+<p>As you&rsquo;ve seen, there is no <em>sHell</em>..ops, <strong>sf prefix</strong> for any internal convention.</p>
+
+<p>For example, when requiring a request method, you need to specify the <code>_method parameter</code>, not the <code>sf_method anymore</code>.</p>
+
+<h2>Multiple request methods</h2>
+
+<p>When dealing with some URLs ( ie. <code>/posts</code> ) you want to let the resource being asked with different verbs, such as GET to get the entire posts collection, POST for inserting a new one&hellip; etc etc&hellip;</p>
+
+<p>In symfony 1.X the methods were described as a YAML array:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">sf_method</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">X</span><span class="p-Indicator">,</span> <span class="nv">Y</span><span class="p-Indicator">,</span> <span class="nv">Z</span><span class="p-Indicator">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>while in Symfony2 you have a slightly different syntax:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">_method</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">(X|Y|Z)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which banally reminds us the native language statements/operators:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">if (x || y || z)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-09T13:57:00+04:00" pubdate data-updated="true">Sunday, 09 January 2011 at 13:57</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/symfony2-routes/" data-via="_odino_" data-counturl="http://odino.org/symfony2-routes/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/creating-your-own-services-for-the-symfony2-dic/" title="Post anterior: Creating your own services for the Symfony2 DIC">&laquo; Creating your own services for the Symfony2 DIC</a>
+      
+      
+        <a class="basic-alignment right" href="/redis-slow-with-php-think-again/" title="Próximo post: Redis slow with PHP? Think again!">Redis slow with PHP? Think again! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/symfony2-routes/';
+        var disqus_url = 'http://odino.org/symfony2-routes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

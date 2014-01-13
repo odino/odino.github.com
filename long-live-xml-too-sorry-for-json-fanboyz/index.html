@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Long live XML (too sorry for JSON fanboyz) - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="Time after time, the web sees the exploit of a technology, sometimes new, other times old, applied in a different context. This shouldn&rsquo;t be &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/long-live-xml-too-sorry-for-json-fanboyz">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Long live XML (too sorry for JSON fanboyz)</a>
+  </h1>
+  
+  <p class="article-date">
+      Saturday, 02 April 2011, 11:47
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>Time after time, the web sees the exploit of a technology, sometimes new, other times old, applied in a different context.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/sandviper-3.jpg"></p>
+
+<p>This shouldn&rsquo;t be problematic, although it&rsquo;s always a pain to explain to fanboys that technology has limitations, because a universal solution would be too general-purpose to resolve all the problems with the most simple and clean approach.</p>
+
+<p>JSON is definitely one of those, hyped, solutions.</p>
+
+<h2>New is trendy</h2>
+
+<p>You know the proverbial hammer to nail solutions?</p>
+
+<blockquote><p>Invented the hammer, everything becomes a nail</p></blockquote>
+
+
+<p>which means that <em>when the kid has something new, he tries to use it in every context</em>.</p>
+
+<p>I remember the first time I&rsquo;ve brought my &lsquo;92 ZZR home, because one of the first things my dad said to me was:</p>
+
+<blockquote><p>I bet when you&#8217;ll need to buy cigarettes you&#8217;ll go to the tobacconist with it.<br/>and he was totally right, although the tobacconist was 500mt far from home.</p></blockquote>
+
+
+<p>I was excited everytime I was turning it on, although I knew that using it for such a limited distance was bad because:</p>
+
+<ul>
+<li>I needed to wait some minutes before going, in order to warm up the bike: the result was that, by foot, it took less time to buy my <a href="http://www.flickr.com/photos/crumblindown/3559589709/">Dianas</a></li>
+<li>if I didn&rsquo;t wait, every sudden acceleration was a pain for the bike</li>
+</ul>
+
+
+<p>but I was so convinced, so happy, so dummy that I didn&rsquo;t care about it.</p>
+
+<p><img class="left" src="/images/6176_1170524713920_1552073836_445211_5558392_n.jpg"></p>
+
+<h2>Don&rsquo;t piss the audience off</h2>
+
+<p>At the <a href="http://www.odino.org/313/nosql-day-from-enthusiasm-to-consciousness">NoSQL day of the last week</a> I attended a session about ElasticSearch and MongoDB and blablabla: the topic is irrelevant, while the fact that the speaker asserted that <strong>XML should die in favour of JSON</strong> is important.</p>
+
+<p>Again, we tend to think that a technology ( JSON ) is the hammer for every nail.</p>
+
+<h2>Why XML sucks</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Ward_Cunningham">Ward Cunningham</a> has a cool section about it and I tend to agree on this: XML sucks in so many ways, we know it.</p>
+
+<p><img class="left" src="/images/cat-obvious.jpg"></p>
+
+<p>I basically don&rsquo;t like some things about XML:</p>
+
+<ul>
+<li>verbosity</li>
+<li>not human-readable</li>
+<li>slow(er) to parse ( than JSON, for example )</li>
+<li>not prone to <em>once and one only</em></li>
+</ul>
+
+
+<p>but, as I know nothing is perfect, I&rsquo;m ok with these drawbacks.</p>
+
+<h2>Enters the hero</h2>
+
+<p>JSON is a cool format for exchanging data: it&rsquo;s extremely fast to read and almost human-readable.</p>
+
+<p>Wikipedia has <a href="http://en.wikipedia.org/wiki/JSON">some words</a> about:</p>
+
+<blockquote><p>A lightweight text-based open standard designed for human-readable data interchange. It is derived from the JavaScript programming language for representing simple data structures and associative arrays, called objects.<br/>It wins over XML on a large amount of things, as [David Zuelke states](http://www.slideshare.net/Wombert/xml-versus-the-new-kids-on-the-block-phpbnl11-20110129/43).</p></blockquote>
+
+
+<h2>Fails the hero</h2>
+
+<p>But, as usual, one size can&rsquo;t fit all.</p>
+
+<p>Consider a JSON object: you have a product with 3 attributes ( name, sku, price ): since you know you are selling a product only in europe, your product&rsquo;s price is expressed in euros:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  "name":  "Banana",
+</span><span class='line'>  "sku":     1234,
+</span><span class='line'>  "price":   24
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Time goes by and you open an API for online stores around europe: doing this, you let them know about your catalog ( a useful information for price-comparison services, for example ).</p>
+
+<p>Other time goes by and the boss comes into your office telling your company is doing so good that is opening new branches in the united states: so your duty is to update the API in order to show prices both in euros and dollars:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>  "name":  "Banana",
+</span><span class='line'>  "sku":    1234,
+</span><span class='line'>  "price":  {
+</span><span class='line'>    "EUR":   24,
+</span><span class='line'>    "USD":  19
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&ldquo;Damn&rdquo;, you think, &ldquo;the current implementation breaks old clients&rdquo;: long story short, they expect an attribute but they get an array, and as soon as the consume your service&hellip; <strong>BOOOM</strong> :)</p>
+
+<p>With real attributes and other godness like namespaces XML is a solution for long-term stability:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>...
+</span><span class='line'><span class="nt">&lt;product&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;name&gt;</span>banana<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;sku&gt;</span>1234<span class="nt">&lt;/sku&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;price&gt;</span>24<span class="nt">&lt;/price&gt;</span>
+</span><span class='line'><span class="nt">&lt;/product&gt;</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>because it let&rsquo;s you evolve your implementation without breaking existing clients:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>...
+</span><span class='line'><span class="nt">&lt;product&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;name&gt;</span>banana<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;sku&gt;</span>1234<span class="nt">&lt;/sku&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;price</span> <span class="na">currency=</span><span class="s">&#39;EUR&#39;</span><span class="nt">&gt;</span>24<span class="nt">&lt;/price&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;price</span> <span class="na">currency=</span><span class="s">&#39;USD&#39;</span><span class="nt">&gt;</span>19<span class="nt">&lt;/price&gt;</span>
+</span><span class='line'><span class="nt">&lt;/product&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can&rsquo;t take control over the client side</p>
+
+<p>Think at the <a href="http://www.google.it/images?client=ubuntu&amp;channel=cs&amp;q=minitel&amp;um=1&amp;ie=UTF-8&amp;source=og&amp;sa=N&amp;hl=it&amp;tab=wi&amp;biw=1280&amp;bih=690">minitel</a>, or any physical device you use ( e.g. GPS systems ). Their implementation have evolved during the years, the months and ( for example for smartphones ) the weeks.</p>
+
+<p>Can you afford to oblige your clients ( = customers who paid your product/service ) to update their product/service? No.</p>
+
+<p>Can you break one of your clients devices/software because you wanted to evolve your software implementation? No.</p>
+
+<p>Would you use JSON to expose your services in such similar cases? No.</p>
+
+<p>There lies XML<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>ah, and a semantic web with JSON would obvioulsy be another pain too <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-02T11:47:00+04:00" pubdate data-updated="true">Saturday, 02 April 2011 at 11:47</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/xml/'>XML</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/long-live-xml-too-sorry-for-json-fanboyz/" data-via="_odino_" data-counturl="http://odino.org/long-live-xml-too-sorry-for-json-fanboyz/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/rest-in-practice-my-review/" title="Post anterior: REST in practice, my review">&laquo; REST in practice, my review</a>
+      
+      
+        <a class="basic-alignment right" href="/graph-databases-orientdb-to-the-rescue/" title="Próximo post: Graph databases: OrientDB to the rescue">Graph databases: OrientDB to the rescue &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/long-live-xml-too-sorry-for-json-fanboyz/';
+        var disqus_url = 'http://odino.org/long-live-xml-too-sorry-for-json-fanboyz/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

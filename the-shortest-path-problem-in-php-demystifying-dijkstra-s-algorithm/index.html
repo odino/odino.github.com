@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The shortest path problem in PHP: demystifying Dijkstra's algorithm - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="After a very long, but intensive, night, I&rsquo;m happy to announce that Orient, the PHP library used to work with OrientDB, has integrated an &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    The shortest path problem in PHP: demystifying Dijkstra's algorithm</a>
+  </h1>
+  
+  <p class="article-date">
+      Tuesday, 06 September 2011, 02:14
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>After a very long, but intensive, night, I&rsquo;m happy to announce that <a href="https://github.com/congow/Orient">Orient</a>, the PHP library used to work with <a href="http://www.orientechnologies.com/orient-db.htm">OrientDB</a>, has integrated an interesting feature, an implementation of <a href="http://en.wikipedia.org/wiki/Dijkstra's_algorithm">Dijkstra&rsquo;s algorithm</a>.</p>
+
+<!-- more -->
+
+
+<p>First of all, let me tell you that, as a pretty new implementation, I&rsquo;m pretty sure a couple bugs will be spotted in the next days; second, the design of the algorithm and the entities connected to it could probably be better, so I recommend you to just take a look at the final result, &lsquo;cause the internals will probably change a bit.</p>
+
+<h2>The problem</h2>
+
+<p>Given the following graph:</p>
+
+<p><img class="center" src="/images/graph-sp.png"></p>
+
+<p>how do you calculate the <strong>best way to reach Tokio from Rome</strong>?</p>
+
+<p>Ok, that&rsquo;s easy, you can count with your mind when you have such a small dataset:</p>
+
+<p><img class="center" src="/images/graph-sp.png"></p>
+
+<p>and as you probably already know, the simplest solution is to fly from Rome to Amsterdam To LA to Tokio: the distance is 13 (hours? 13k miles? No matter now).</p>
+
+<p>(You can also reach Amsterdam via Paris, but we don&rsquo;t care for the aim of this post)</p>
+
+<h2>The dataset grows&hellip; enter Orient</h2>
+
+<p>But as your dataset grows, you need to automate the process of <strong>finding shortest paths</strong>.</p>
+
+<p>Just install Orient:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git@github.com:congow/Orient.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and create your <code>path.php</code> script, which should use the <a href="https://gist.github.com/221634">PSR-0</a> autoloader:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$classLoader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SplClassLoader</span><span class="p">(</span><span class="s1">&#39;Congow\Orient&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s2">&quot;/Orient/src&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$classLoader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Congow\Orient\Graph</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Congow\Orient\Graph\Vertex</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Congow\Orient\Algorithm</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point you might think that the algorithm&rsquo;s implementation is pretty coupled with the rest of the library we&rsquo;re developing, and you would be terribly wrong.</p>
+
+<p>Take a look on how to create the graph</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$graph</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graph</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>how to create vertices</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$rome</span>      <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;Rome&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$paris</span>     <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$london</span>    <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$amsterdam</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;Amsterdam&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$ny</span>        <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;New York&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$la</span>        <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;Los Angeles&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$tokio</span>     <span class="o">=</span> <span class="k">new</span> <span class="nx">Vertex</span><span class="p">(</span><span class="s1">&#39;Tokio&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and how to connect vertices between themselves:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$rome</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$paris</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$rome</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$london</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$rome</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$amsterdam</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$paris</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$london</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$paris</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$amsterdam</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$london</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$ny</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$amsterdam</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$la</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$la</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$tokio</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$ny</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$tokio</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>final step, add the vertices to the graph:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$rome</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$paris</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$london</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$amsterdam</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$ny</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$la</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$graph</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$tokio</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, you have basically created some fixtures ( a fake graph, the one of the pictures above ), and we can finally calculate the shortest path from Rome to Tokio:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$algorithm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Algorithm\Dijkstra</span><span class="p">(</span><span class="nv">$graph</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$algorithm</span><span class="o">-&gt;</span><span class="na">setStartingVertex</span><span class="p">(</span><span class="nv">$rome</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$algorithm</span><span class="o">-&gt;</span><span class="na">setEndingVertex</span><span class="p">(</span><span class="nv">$tokio</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nv">$algorithm</span><span class="o">-&gt;</span><span class="na">getLiteralShortestPath</span><span class="p">()</span> <span class="o">.</span> <span class="s2">&quot;: distance &quot;</span> <span class="o">.</span> <span class="nv">$algorithm</span><span class="o">-&gt;</span><span class="na">getDistance</span><span class="p">();</span>
+</span><span class='line'><span class="c1">// the real method to get the SP is $algorithm-&gt;solve(), the ones used above are for printing a nice result </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which will output:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Rome - Amsterdam - Los Angeles - Tokio : distance 13
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have suggestions and questions, feel free to ask everything here; also, if you spot a bug, pull requests are welcome.</p>
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-06T02:14:00+04:00" pubdate data-updated="true">Tuesday, 06 September 2011 at 02:14</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/algorithms/'>algorithms</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/" data-via="_odino_" data-counturl="http://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/behaviour-driven-development-in-php/" title="Post anterior: Behaviour-driven development in PHP">&laquo; Behaviour-driven development in PHP</a>
+      
+      
+        <a class="basic-alignment right" href="/changing-the-layout-of-joomla-category-blog-view/" title="Próximo post: Changing the layout of Joomla! 'category blog' view">Changing the layout of Joomla! 'category blog' view &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/';
+        var disqus_url = 'http://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/web/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
+    <link href="http://odino.org/the-state-of-http-slash-2-dot-0/"/>
+    <updated>2012-10-15T23:45:00+04:00</updated>
+    <id>http://odino.org/the-state-of-http-slash-2-dot-0</id>
+    <content type="html"><![CDATA[<p>With a few days of delay I&rsquo;m here reporting and commenting
+the last <strong>revolutions</strong> about the protocol of the web,
+its upcoming groundbreaking new version and its state.</p>
+
+<!-- more -->
+
+
+<p>A few days back <a href="http://www.mnot.net/">Mark Nottingham</a> announced that the
+group is <a href="https://twitter.com/mnot/status/253175410383278081">officially working on the new draft of <code>HTTP/2.0</code></a>:
+even though rumors about the shape of this new version were
+going on since a couple years, this <strong>official</strong>
+news brings some fresh hope on the topic.</p>
+
+<p>As the HTTP protocol was always directly influenced
+by great minds (<a href="http://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a> and <a href="http://en.wikipedia.org/wiki/Roy_Fielding">Roy Fielding</a>, just
+to mention a couple names) when I first heard about
+Mark taking the responsability to publish <code>HTTP/2.0</code> I
+was pretty sure something great would have come out of
+his mind.</p>
+
+<p>I wasn&rsquo;t wrong.</p>
+
+<p>It&rsquo;s been 13 years since HTTP doesnt see a major change
+in its specification (recent changes are the addition of
+the <code>PATCH</code> method, for example, but we&rsquo;re talking about
+<strong>minor</strong> stuff) and SPDY &ndash; a new protocol created by Google &ndash;
+came out in the recent history of the web with a disruptive
+force.</p>
+
+<p>HTTP needed something.</p>
+
+<h2>SPDY</h2>
+
+<p>But before having a look at what <code>HTTP/2.0</code> will look like,
+let&rsquo;s mention the good things that SPDY brings on the table:</p>
+
+<ul>
+<li>prioritization: it allows to send different requests and
+tell the server to prioritize some of them</li>
+<li>multiplexing: allows parallel requests and asynchronous
+responses, unlike <em>pipelining</em> which is bound to multiple
+requests/responses at the same time</li>
+<li>server push: servers can now push resources to the client
+without them having to ask for</li>
+<li>better performances: extended compression is one of the
+key FTW of SPDY</li>
+</ul>
+
+
+<p>But there is one things that SPDY doesn&rsquo;t change at all:
+the <strong>interface</strong> between the machines.</p>
+
+<p>As recognized worldwide, the HTTP protocol was an almost
+perfect example of M2M interface which allows servers
+and clients to follow DAPs (<em>domain-application protocols</em>)
+according to a loosely coupled interface &ndash; the protocol itself,
+with its verbs, semantics and workflows<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>So SPDY, recognizing the perfection of the contract that HTTP
+puts among clients and servers, isn&rsquo;t a real new protocol, it&rsquo;s
+a <strong>better implementation of the same interface</strong>.</p>
+
+<h2>HTTP/2.0 is an evolution of an evolution</h2>
+
+<p>No wonder, then, in reading the words of Nottingham, as, after
+all, he &ldquo;just&rdquo; announced that <a href="http://lists.w3.org/Archives/Public/ietf-http-wg/2012OctDec/0004.html"><code>HTTP/2.0</code> will be <strong>based on SPDY</strong></a>:
+a great news that is basically telling you the &ldquo;don&rsquo;t reinvent the wheel&rdquo;
+principle is even applied at the foundation of the web<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>The layers will definitely be different, but, again, I think
+that having a newer version of our beloved protocol, based on a
+specification which already improves it and adds tons of new and
+interesting features, is going to be <strong>a game-changer for web
+applications</strong>.</p>
+
+<p>Will we see <code>HTTP/2.0</code> being deployed with multiplexing, server push,
+prioritization and extended compression next year?</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>No wonder why Roy Fielding, after having heavily influenced the HTTP protocol and the Apache ecosystem, came out with REST, an architectural style meant for long-living and scalable architectures <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>So, think about it, why do you need to re-write huge portions of code when better FOSS is out there? <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The hope is that IE will drown in 2 years]]></title>
+    <link href="http://odino.org/the-hope-is-that-ie-will-drown-in-2-years/"/>
+    <updated>2012-08-03T18:27:00+04:00</updated>
+    <id>http://odino.org/the-hope-is-that-ie-will-drown-in-2-years</id>
+    <content type="html"><![CDATA[<p>More than a decade ago the first <a href="http://en.wikipedia.org/wiki/Browser_wars">browser war</a>
+made his victim: it was Netscape, which
+couldn&rsquo;t compete with Microsoft and its
+IE: after long time, it&rsquo;s time for this
+decadent winner to retreat.</p>
+
+<!-- more -->
+
+
+<p>Today I was spending a few minutes on
+<a href="http://caniuse.com/">IcanUse</a>, a brilliant service which
+gives you informations on features implemented
+by modern web browsers: not surprisingly,
+IE is a total disappointment.</p>
+
+<p>So I decided to take a look at what the <strong>current</strong> browsers
+are implementing, retrieving some nice
+charts to compare them against each other:</p>
+
+<p><img class="center <a" src="href="https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:31,83,94,75,65|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20JS-related%20feature">https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:31,83,94,75,65|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20JS-related%20feature</a>"></p>
+
+<p><img class="center <a" src="href="https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:59,88,97,94,97|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20SVG-related%20feature">https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:59,88,97,94,97|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20SVG-related%20feature</a>"></p>
+
+<p><img class="center <a" src="href="https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:63,82,89,88,73|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20CSS-related%20feature">https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:63,82,89,88,73|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20CSS-related%20feature</a>"></p>
+
+<p><img class="center <a" src="href="https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:40,71,94,80,80|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20HTML5-related%20feature">https://chart.googleapis.com/chart?cht=bvs&amp;chco=4D89F9,C6D9FD&amp;chd=t:40,71,94,80,80|100,100,100,100,100&amp;chxl=0:|IE|Firefox|Chrome|Safari|Opera&amp;chs=750x400&amp;chxt=x,y&amp;chbh=120&amp;chtt=Implementation%20of%20HTML5-related%20feature</a>"></p>
+
+<p>It&rsquo;s not a surprise that IE9 is the worst browser out there,
+but this made me think about how long it will be
+a competitor in the market.</p>
+
+<p>IE is slowly dying, <a href="http://upload.wikimedia.org/wikipedia/commons/8/86/Usage_share_of_web_browsers_%28Source_StatCounter%29.svg">we all know</a>:
+just as netscape, it&rsquo;s not able to face competitors
+pushing hard to deliver the best
+web-browsing experience.</p>
+
+<p>It will take a few months, maybe years, to see
+IE leaving the market kicked out by the yougsters,
+nontheless it will be a great day for the
+internet: the day that who fights for the
+innovation will definitely overwhelm who
+sits on top of his past, glorious days.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Search engines are making the web slower]]></title>
+    <link href="http://odino.org/search-engines-are-making-the-web-slower/"/>
+    <updated>2012-04-07T10:00:00+04:00</updated>
+    <id>http://odino.org/search-engines-are-making-the-web-slower</id>
+    <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
+a tecnique which made the web able to scale the way
+it is now: <strong>search engines are making it slower</strong> and
+less scalable, as they don&rsquo;t want us to do so.</p>
+
+<!-- more -->
+
+
+<p>The problem is that JavaScript &ndash; the <em>creepy</em> JavaScript &ndash;
+is now recognized as a first-level programming language<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+although SE are around since more than a decade: thus,
+crawlers and spiders, although able to interpretate basic
+JS code, cannot do more complex stuff, like managing
+<a href="http://handlebarsjs.com/">Handlerbars</a> or <a href="http://mnot.github.com/hinclude/">HInclude</a>.</p>
+
+<p>Or, at least, we don&rsquo;t know if they can.</p>
+
+<p>There would be a workaround to this kind of issue, by just
+<strong>serving different content for JS-aware clients</strong>, so that a
+spider could see the whole resource without the need of
+executing JS code: a workaround that would cost in terms of
+development time, but still an acceptable workaround.</p>
+
+<p>The problem, here, is that tis tecnique, known as <a href="http://en.wikipedia.org/wiki/Cloaking">cloacking</a>
+is part of the <a href="http://en.wikipedia.org/wiki/Search_engine_optimization#White_hat_versus_black_hat">black hat SEO</a> list, so you basically can&rsquo;t take
+advantage of it as malicious web developers would use
+cloacking to serve keyword-stuffed contents to bots and
+&ldquo;normal&rdquo; webpages to humans, and this is something you
+really want to avoid, since SERPs' relevance is an
+important part of a user&rsquo;s eb experience.</p>
+
+<p>But, at least, we don&rsquo;t know how search engines would react
+to the workaround I just explained.</p>
+
+<h2>What do we need?</h2>
+
+<p>We should have clarifications from SE vendors, to know whether
+they are able or not to let us take advantage of great JS-based
+technologies able to make our applications scale better, or &ndash; better &ndash;
+have fully JS-aware spiders and crawlers, able to elaborate
+resources like real-world browsers.</p>
+
+<p>It&rsquo;s not about me, it&rsquo;s not about you, it&rsquo;s about the web: a faster,
+and <strong>definitely better</strong>, web.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Mainly because of the NodeJS hype <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

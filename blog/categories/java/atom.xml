@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
+    <link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
+    <updated>2013-11-10T08:59:00+04:00</updated>
+    <id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/java.png"></p>
+
+<p>A few weeks back I started noticing some performance
+issues on my <a href="http://www.jetbrains.com/phpstorm/">IDE</a> and decided to investigate a bit more
+on it: turns out that they recommended to 1) upgrade to
+the latest JDK (7) and stop using <a href="http://openjdk.java.net/">OpenJDK</a>, as it has
+some performance gotchas.</p>
+
+<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
+
+<!-- more -->
+
+
+<p><code>
+cd ~/
+wget https://github.com/flexiondotorg/oab-java6/raw/0.3.0/oab-java.sh -O oab-java.sh
+chmod +x oab-java.sh
+sudo ./oab-java.sh
+</code></p>
+
+<p>After running it you just need to re-install all the packages:</p>
+
+<p><code>
+sudo apt-get install oracle-java7-jdk oracle-java7-jre oracle-java7-plugin
+</code></p>
+
+<p>and tell ubuntu that the JDK version and location has changed:</p>
+
+<p><code>
+sudo update-alternatives --config java
+</code></p>
+
+<p>A quick check with <code>java -version</code> and then enjoy it!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: OrientDB in Action | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/orientdb-in-action/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[So yes, I'm writing a book]]></title>
+    <link href="http://odino.org/so-yes-im-writing-a-book/"/>
+    <updated>2012-09-21T08:00:00+04:00</updated>
+    <id>http://odino.org/so-yes-im-writing-a-book</id>
+    <content type="html"><![CDATA[<p>As announced on twitter a few days back, it seems
+that the time has come for me to step up and start
+dealing with printed paper.</p>
+
+<!-- more -->
+
+
+<p>It&rsquo;s not something I&rsquo;ve never talked about,
+and especially in the last 9 months I wanted
+to start something towards this direction &ndash;
+my draft of
+<a href="https://leanpub.com/rest-webservices-php">REST webservices in PHP</a>
+is still there ideed.</p>
+
+<p><img class="right" src="/images/garulli-nadalin.jpeg"></p>
+
+<p>At the same time, even though self-publishing
+is easier and provides good motivation at first,
+<strong>is not very attractive on the long run</strong>,
+for both the author and the reader: yes, you
+get to reach a wide audience, yes, they can
+learn in a really cheap way<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+but writing a <strong>real</strong> book is way different.
+It&rsquo;s a statement, a printed statement: it is
+<strong>just different</strong>.</p>
+
+<p>The chance has come quite quickly, as I will be
+<strong>co-author</strong> of a book by
+<a href="http://www.manning.com/">Manning Publications Co.</a>,
+which is a very important editor when it comes to
+the language with the J.</p>
+
+<p>Isn&rsquo;t it strange? I am a seasoned lead developer
+on the LAMP stack but I will write a book dealing with a tool
+that has something to do with Java: there a reason,
+of course, behind this.</p>
+
+<p>And probably you have already guessed it.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>Our challenge is to evangelize this new frontier for
+data storage: I&rsquo;m sure it will be a long but succesfull
+way.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Usually cheap: some books on LeanPub were even sold for 50 USD <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I could write a separate chapter on Luca. Let&rsquo;s just say that meeting him gave me the confidence that even without a college degree you can be a game-changer in your field. <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

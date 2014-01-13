@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Notificator, sending notifications through PHP in a clean and lightweight way - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="While implementing various pieces of our
+Service-Oriented Architecture
+we, at Namshi,
+realized that a central notification
+service would have been &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Notificator, sending notifications through PHP in a clean and lightweight way</a>
+  </h1>
+  
+  <p class="article-date">
+      Thursday, 11 July 2013, 01:20
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>While implementing various pieces of our
+<a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
+we, at <a href="http://en-ae.namshi.com">Namshi</a>,
+realized that a central notification
+service would have been very good in order
+to abstract the way we notify our customers
+and everyone in the company (ie. skype messages
+when a task is due a certain date).</p>
+
+<p>We initially implemented all of this
+<a href="/configuring-a-symfony2-application-to-support-soa/">inside a Symfony2 bundle</a>,
+but soon realized that we could
+abstract and generalize our implementation
+in order to extract it into a library for the public
+domain, and that&rsquo;s how
+<a href="https://github.com/namshi/notificator">notificator</a>
+was born.</p>
+
+<!-- more -->
+
+
+<h2>Aim of the library: a monolog-like implementation for notifications</h2>
+
+<p>The aim of this library is to provide a very
+clean abstraction for a task, handling notifications,
+that can be spread across multiple channels (for example
+emails, skype messages, desktop notifications, &hellip;):
+by following this target, we soon realized that by merging
+together 2 simple things, <a href="https://github.com/Seldaek/monolog">Monolog</a>
+and the concept of <a href="http://en.wikipedia.org/wiki/Observer_pattern">event dispatching</a>,
+we could have easily reached our goal.</p>
+
+<p>Honestly, it&rsquo;s true that you can achieve the same goal with
+Monolog, but the problem, there, is that it&rsquo;s a library
+specifically built for logging, thus, when your domain
+deals with simple notifications, your code would really
+be inexpressive.</p>
+
+<p>Even though <strong>Notificator is way simpler</strong>, we took a lot
+of inspiration from Monolog: for example, the concept of
+handlers is a total steal ;&ndash;)</p>
+
+<h2>Installation</h2>
+
+<p>The library is available via composer,
+as you can see from its
+<a href="https://packagist.org/packages/namshi/notificator">packagist page</a>.</p>
+
+<p>Using semantic versioning, I recommend you
+to pick a minor release (<code>1.0</code>, for example)
+and stick to it in your <code>composer.json</code>:
+what we try to do is that, if there is a BC break
+in the API, we increase the minor version (<code>1.0.X</code> to <code>1.1.X</code>, for example).</p>
+
+<p>At the end, you <strong>should</strong> require it like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"namshi/notificator": "1.0.*"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Hello world! example</h2>
+
+<p>Just to give a very rough and simple example on how this
+library works, let&rsquo;s see how you can trigger a notification
+via <strong>both</strong> email (with PHP&rsquo;s <code>mail</code> function<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>)
+and the <code>notify-send</code> utility available on ubuntu (I&rsquo;ve already spoke
+about it in <a href="/desktop-notifications-for-phpunit-tests-on-ubuntu/">a previous post</a>).</p>
+
+<p>First of all, we would need to create a <em>plain-old-php-class</em>
+representing the notification, which implements 2 interfaces:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Notification</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\NotificationInterface</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">interface</span> <span class="nx">NotifySendNotificationInterface</span> <span class="k">extends</span> <span class="nx">NotificationInterface</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">interface</span> <span class="nx">EmailNotificationInterface</span> <span class="k">extends</span> <span class="nx">NotificationInterface</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAddress</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSubject</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBody</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">DoubleNotification</span> <span class="k">extends</span> <span class="nx">Notification</span> <span class="k">implements</span> <span class="nx">NotifySendNotificationInterface</span><span class="p">,</span> <span class="nx">EmailNotificationInterface</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$address</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$body</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$subject</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$address</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$parameters</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">address</span>  <span class="o">=</span> <span class="nv">$address</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">body</span>     <span class="o">=</span> <span class="nv">$body</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">subject</span>  <span class="o">=</span> <span class="nv">$subject</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAddress</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">address</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSubject</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">subject</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBody</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point we need 2 notification handlers, which
+will separately handle the notification:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Notification\Handler\HandlerInterface</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\NotificationInterface</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">NotifySendNotificationHandler</span> <span class="k">implements</span> <span class="nx">HandlerInterface</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">shouldHandle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$notification</span> <span class="nx">instanceOf</span> <span class="nx">NotifySendNotificationInterface</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nb">shell_exec</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;notify-send &quot;%s&quot;&#39;</span><span class="p">,</span> <span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">EmailNotificationHandler</span> <span class="k">implements</span> <span class="nx">HandlerInterface</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">shouldHandle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nv">$notification</span> <span class="nx">instanceOf</span> <span class="nx">EmailNotificationInterface</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nb">mail</span><span class="p">(</span><span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getAddress</span><span class="p">(),</span> <span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getSubject</span><span class="p">(),</span> <span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&rsquo;re basically there: with a bunch of code we can now trigger
+a notification both via email and <code>notify-send</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// create the manager and assign handlers to it</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Manager</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">addHandler</span><span class="p">(</span><span class="k">new</span> <span class="nx">NotifySendNotificationHandler</span><span class="p">());</span>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">addHandler</span><span class="p">(</span><span class="k">new</span> <span class="nx">EmailNotificationHandler</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DoubleNotification</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalin@gmail.com&#39;</span><span class="p">,</span> <span class="s1">&#39;Test email&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello!&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//  trigger the notification</span>
+</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$notification</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="right" src="/images/notification-email.png"></p>
+
+<p>At this point, if you run this example<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, you should
+see a notification popping up on your desktop and, in a few seconds,
+you will also receive an email to the address you&rsquo;ve given, with the subject
+&ldquo;Test email&rdquo; and &ldquo;Hello!&rdquo; in the body.</p>
+
+<p>By the way, if you want to see some examples on
+how the library works, <a href="https://github.com/namshi/notificator/tree/master/examples">check them out on github</a>.</p>
+
+<h2>Sending notifications via RabbitMQ</h2>
+
+<p>It is no news that we heavily rely on
+<a href="http://odino.org/refactoring-your-architecture-go-for-soa/">RabbitMQ in our SOA</a>,
+so it&rsquo;s pretty obvious that, to implement the notification service,
+we send messages containing the notifications, that will
+be intercepted by our notification service, which relies on
+Notificator.</p>
+
+<p>To do so, we take advantage of the great job done by
+<a href="https://twitter.com/old_sound">Alvaro Videla</a>
+on RabbitMQ for PHP and Symfony2, through the
+<a href="https://github.com/videlalvaro/php-amqplib">PHP AMQP library</a>
+and the <a href="https://github.com/videlalvaro/RabbitMqBundle">RabbitMQ bundle</a>.</p>
+
+<p>If you are familiar with them, you know that in order to consume messages,
+you have to declare your consumer as a callback of the actual, generic
+rabbitmq consumer, through the <code>config.yml</code> file:</p>
+
+<figure class='code'><figcaption><span>app/config/config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">old_sound_rabbit_mq</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">consumers</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">notification</span><span class="p-Indicator">:</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">connection</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">default</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">exchange_options</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span><span class="nv">name</span><span class="p-Indicator">:</span> <span class="s">&#39;notifications&#39;</span><span class="p-Indicator">,</span> <span class="nv">type</span><span class="p-Indicator">:</span> <span class="nv">direct</span><span class="p-Indicator">}</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">queue_options</span><span class="p-Indicator">:</span>    <span class="p-Indicator">{</span><span class="nv">name</span><span class="p-Indicator">:</span> <span class="s">&#39;notifications&#39;</span><span class="p-Indicator">}</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">callback</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">namshi.notification.consumer</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="err">    </span><span class="l-Scalar-Plain">namshi.notification.consumer</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Namshi\Notificator\Messaging\RabbitMQ\Symfony2\Consumer</span>
+</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="err">@</span><span class="nv">namshi.notification.manager</span><span class="p-Indicator">]</span>
+</span><span class='line'><span class="err">    </span><span class="l-Scalar-Plain">namshi.notification.manager</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Namshi\Notificator\Manager</span>
+</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="err">    </span>      <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">addhandler</span><span class="p-Indicator">,</span> <span class="p-Indicator">[</span><span class="err">@</span><span class="nv">namshi.notification.handler.notify_send</span><span class="p-Indicator">]</span> <span class="p-Indicator">]</span>
+</span><span class='line'><span class="err">    </span><span class="l-Scalar-Plain">namshi.notification.handler.notify_send</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Namshi\Notificator\Notification\Handler\NotifySend</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We already provide a <a href="https://github.com/namshi/notificator/blob/master/src/Namshi/Notificator/Messaging/RabbitMQ/Symfony2/Consumer.php">very basic consumer callback</a>
+to be used with the RabbitMQ bundle.</p>
+
+<p>The main idea behind this is that the publisher serializes the notification
+and sends it through RabbitMQ, while the consumer unserializes and
+triggers it through the <code>Manager</code>. The publisher code would be very, very simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$publisher</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;old_sound_rabbit_mq.notifications_producer&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySampleNotification</span><span class="p">(</span><span class="s2">&quot;man, this comes from RabbitMQ and Symfony2!&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$publisher</span><span class="o">-&gt;</span><span class="na">publish</span><span class="p">(</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">$notification</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and to start consuming messages you would only need to
+start the consumer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">php app/console rabbitmq:consumer -w notification</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>FOSS</h2>
+
+<p>I&rsquo;ve tried to write a pretty extensive
+<a href="https://github.com/namshi/notificator/">README</a> that you can use as a reference, on Github
+(check the <a href="https://github.com/namshi/notificator/tree/master/tests">tests</a>, as well, to get an idea of the internals):
+if you spot any typo or mistake, don&rsquo;t hesitate to
+reach out and point it out.</p>
+
+<p>This library is part of the efforts,
+from <a href="https://github.com/namshi">Namshi</a>,
+to be able to give back to the
+OSS community as much as possible: you
+are therefore strongly encouraged to open a PR
+or express your opinion if you find that something
+should be fixed or could be improved (there&rsquo;s a lot
+of room for improvement, starting by implementing
+many more <a href="https://github.com/namshi/notificator/tree/master/src/Namshi/Notificator/Notification/Handler">handlers</a>).</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Only used for its simplicity here, please do not use it in production, use stuff like SwiftMailer instead! <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I mostly took the example code from the README of the library on github, so forgive me if there are synthax errors or some typo. You can anyhow have a look at the examples (in the examples/ folder) to check some working code <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-11T01:20:00+04:00" pubdate data-updated="true">Thursday, 11 July 2013 at 01:20</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/foss/'>FOSS</a>, <a class='category' href='/blog/categories/github/'>Github</a>, <a class='category' href='/blog/categories/open-source/'>Open Source</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/rabbitmq/'>RabbitMQ</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>, <a class='category' href='/blog/categories/messaging/'>messaging</a>, <a class='category' href='/blog/categories/notifications/'>notifications</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/" data-via="_odino_" data-counturl="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/using-emailvisions-campaigncommander-apis-from-php/" title="Post anterior: Using Emailvision's CampaignCommander APIs from PHP">&laquo; Using Emailvision's CampaignCommander APIs from PHP</a>
+      
+      
+        <a class="basic-alignment right" href="/ab-testing-in-php-with-namshi-slash-ab/" title="Próximo post: AB testing in PHP with namshi/ab">AB testing in PHP with namshi/ab &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/';
+        var disqus_url = 'http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

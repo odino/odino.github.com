@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Desktop notifications for PHPUnit tests on Ubuntu - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="As everyone knows, automated tests are great
+since they let you test a system without the need
+of proactively checking anything: you launch your &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Desktop notifications for PHPUnit tests on Ubuntu</a>
+  </h1>
+  
+  <p class="article-date">
+      Friday, 21 June 2013, 03:48
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p><img class="left" src="/images/phpunit-notification-ko.png"></p>
+
+<p>As everyone knows, automated tests are great
+since they let you test a system without the need
+of proactively checking anything: you launch your suite
+and you get a feedback; moreover, systems like Jenkins or Travis-CI allow you
+to even forget about checking the status of
+a build since they can do all of this work for you:
+the problem, instead, happens when you need
+to run the tests locally, as you always need to
+check the shell to know whether the tests passed or not.</p>
+
+<p>A solution would be to launch the tests and mind
+your own business, instead of having to check the CLI
+output, waiting for a notification that tells
+use about the tests&#8217; result.</p>
+
+<!-- more -->
+
+
+<h2>Notifications to the rescue</h2>
+
+<p>A very simple program, written for Linux, can help
+you with this task: it&rsquo;s <code>notify-send</code>.</p>
+
+<p>Given that you have PHPUnit installed via composer
+(so the binary is accessible at <code>./vendor/bin/phpunit</code>)
+you can simply use a small shell function that can
+sends notifications about the tests&#8217; results, that I
+put on <a href="https://github.com/odino/phpunit-notifications">Github</a>.</p>
+
+<h2>Installation</h2>
+
+<p>Clone the repository and add the shell function to your
+shell profile<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd wherever
+</span><span class='line'>
+</span><span class='line'>git clone git@github.com:odino/phpunit-notifications.git
+</span><span class='line'>
+</span><span class='line'>chmod +x phpunit-notifications/phpunit-notifications.sh
+</span><span class='line'>
+</span><span class='line'>echo 'source wherever/phpunit-notifications/phpunit-notifications.sh' &gt;&gt; ~/.zshrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Usage</h2>
+
+<p>At this point you can open a new shell and run your tests with
+the <code>phpunit</code> commmand:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/projects/my-project
+</span><span class='line'>
+</span><span class='line'>phpunit
+</span><span class='line'>
+</span><span class='line'>// or
+</span><span class='line'>
+</span><span class='line'>phpunit -c config
+</span><span class='line'>
+</span><span class='line'>// or
+</span><span class='line'>
+</span><span class='line'>phpunit tests/My/Example/ClassTest.php</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="left" src="/images/phpunit-notification-ok.png"></p>
+
+<p>and see that as soon as the tests are over you will
+see one of those usual notifications on the top right
+of your screen, hopefully telling you that the automated
+tests suite is greener than ever.</p>
+
+<p>The <code>notify-send</code> utility is probably not available on
+Macs, but I guess you can just replace it with <code>growlnotify</code>.</p>
+
+<p>If you are interested into digging deeper into the topic,
+I would suggest you to read a very nice article from
+Giulio Di Donato which explains how to <a href="http://welcometothebundle.com/automate-test-and-code-inspection-in-php-with-guard-and-symfony2/">run PHPUnit tests for Symfony2 as soon as any file in your filesystem changes, and get the same type of notifications</a>:
+even though I personally think this approach is a little
+bit too extreme<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>, it is anyhow interesting as
+it pushes automation and time-management to their best limits.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Or, for example, to empty the tables of the right database after each test (there are different databases for each website) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I am personally using ZSH: https://github.com/robbyrussell/oh-my-zsh <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>If you modify 5 files and your test suite is 30secs long, woul will already have to wait 2 and a half minutes <a href='#fnref:3' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-21T03:48:00+04:00" pubdate data-updated="true">Friday, 21 June 2013 at 03:48</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/phpunit/'>PHPUnit</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/" data-via="_odino_" data-counturl="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/php-user-group-dubai-here-we-start-again/" title="Post anterior: PHP User Group Dubai, here we start again!">&laquo; PHP User Group Dubai, here we start again!</a>
+      
+      
+        <a class="basic-alignment right" href="/beautifying-json-data-from-the-shell/" title="Próximo post: Beautifying JSON data from the shell">Beautifying JSON data from the shell &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/';
+        var disqus_url = 'http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

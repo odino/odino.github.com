@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: design patterns | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/design-patterns/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Use the Strategy to avoid the Switch-Case antipattern]]></title>
+    <link href="http://odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern/"/>
+    <updated>2012-05-14T00:28:00+04:00</updated>
+    <id>http://odino.org/use-the-strategy-to-avoid-the-switch-case-antipattern</id>
+    <content type="html"><![CDATA[<p>In PHP we have tons of bad constructs/functions that don&rsquo;t actually
+help newcomers on writing good code: the <code>SWITCH/CASE</code> statement is one
+of those that I hate the most, although very few developers rely on
+it.</p>
+
+<!-- more -->
+
+
+<p>The statement is pretty straightfoward</p>
+
+<p>``` php Simple SWITCH/CASE statement
+&lt;?php</p>
+
+<p>class Logger
+{</p>
+
+<pre><code>public function logMessage($message = "CRITICAL::The system encountered a problem")
+{
+    $parts = explode('::', $message);
+    $level = $parts[0];
+
+    switch ($level) {
+        case 'notice':
+            ...
+            break;
+        case 'critical':
+            ...
+            break;
+        case 'catastrophe':
+            ...
+            break;
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<p>and is intended to make multiple IFs more readable.</p>
+
+<p>It may seem useful, but at first you should recognize that <strong>multiple
+IFs are already a bad smell</strong>, so, from the beginning there is something
+with a code trying to make them look nicer.</p>
+
+<p>The <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy pattern</a>,
+one of my favourites, is a simple but powerful way to avoid writing
+procedural code that relies on IFs.</p>
+
+<p>The main concept is that you should contextualize the application&rsquo;s
+workflow at runtime, deciding which steps (methods) to run based on
+data which is external to the method itself.</p>
+
+<p>``` php silly implementation of Strategy
+&lt;?php</p>
+
+<p>class Logger
+{</p>
+
+<pre><code>public function logMessage($message = "CRITICAL::The system encountered a problem")
+{
+    $parts  = explode('::', $message);
+    $level  = $parts[0];
+    $method = sprintf('log%sMessage', ucfirst($level));
+    $output = $this-&gt;$method($parts[1]);
+}
+</code></pre>
+
+<p>```</p>
+
+<p>In this way we are able to isolate and keep clean the implementations
+of the methods, thus the logic behind the application.</p>
+
+<p>This means that we only need to implement submethods:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>public function logNoticeMessage($message);</p>
+
+<p>public function logCriticalMessage($message);</p>
+
+<p>public function logCatastropheMessage($message);
+```</p>
+
+<p>If this doesn&rsquo;t seem important to you, consider this scenario:
+you are shipping a library with the <code>SWITCH/CASE</code> in the first example;
+what would happen if another developer using that library would only
+like to edit the logic when a <code>catastrophe</code> message is received?</p>
+
+<p>Yes, he would need to override the entire <code>logMessage</code> method,
+<strong>loosing the possibility to benefit of future software updates</strong>
+for that specific method.</p>
+]]></content>
+  </entry>
+  
+</feed>

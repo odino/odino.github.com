@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: UAE | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/uae/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ping: sendto: No buffer space available with DU DNSes]]></title>
+    <link href="http://odino.org/ping-sendto-no-buffer-space-available-with-du-dnses/"/>
+    <updated>2012-08-10T13:03:00+04:00</updated>
+    <id>http://odino.org/ping-sendto-no-buffer-space-available-with-du-dnses</id>
+    <content type="html"><![CDATA[<p>Today I faced I pretty weird issue, having
+no internet connection since last night.</p>
+
+<!-- more -->
+
+
+<p>Chrome is telling me that the DNS lookup
+fails, and since I know, here in UAE,
+problems with <a href="http://www.du.ae/en/default?gclid=COC_7Jvd3LECFUp76wodgB0Apg">DU</a> DNSes are pretty frequent,
+I thought I just needed to use different DNS
+servers.</p>
+
+<p>Unfortunately, openDNS wasnt solving my
+issues, and when I tried with the infamous
+Google Public DNS ( <code>8.8.8.8</code> and <code>8.8.4.4</code> )
+without any good feedback, I thought it could be
+something out of my jurisdiction :)</p>
+
+<p>Pissed off, I tried to ping the DNS
+servers manually:</p>
+
+<p><code>bash
+ping 8.8.8.8          
+PING 8.8.8.8 (8.8.8.8): 56 data bytes
+ping: sendto: No buffer space available
+ping: sendto: No buffer space available
+</code></p>
+
+<p>So now things are interesting: the <code>No buffer space available</code>
+tells me that there is something seriously
+weird going on today &ndash; never seen before.</p>
+
+<p>With a quick search I&rsquo;m able to fix the problem:
+seems that I need to shutdown the interface
+itself.</p>
+
+<p>First, I needed to retrieve the interface used:</p>
+
+<p>``` bash
+sudo route -n get 8.8.8.8</p>
+
+<p>   route to: 8.8.8.8
+destination: 8.8.8.8</p>
+
+<pre><code>gateway: 10.168.10.221
+</code></pre>
+
+<p>  interface: tun0</p>
+
+<pre><code>  flags: &lt;UP,GATEWAY,HOST,DONE,WASCLONED,IFSCOPE,IFREF&gt;
+</code></pre>
+
+<p> recvpipe  sendpipe  ssthresh  rtt,msec    rttvar  hopcount      mtu     expire</p>
+
+<pre><code>   0         0         0         0         0         0      1500         0 
+</code></pre>
+
+<p>```</p>
+
+<p>then it&rsquo;s a simple matter of:</p>
+
+<p><code>bash
+sudo ifconfig tun0 down
+sudo ifconfig tun0 up
+</code></p>
+
+<p>DNS working as expected and the connection is back.</p>
+]]></content>
+  </entry>
+  
+</feed>

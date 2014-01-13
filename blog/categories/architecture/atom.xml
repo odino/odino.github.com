@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: architecture | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/architecture/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-01-14T02:50:39+04:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
+    <link href="http://odino.org/refactoring-your-architecture-go-for-soa/"/>
+    <updated>2013-03-23T17:35:00+04:00</updated>
+    <id>http://odino.org/refactoring-your-architecture-go-for-soa</id>
+    <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
+supported by <a href="http://www.rocket-internet.de">a mothership</a>
+that helps most of his affiliates with know-how
+and basic tools.</p>
+
+<p>But to aim expansion, one needs to go beyond those
+shared layers and start customizing his
+products and services, and in terms of software development
+nothing can help you more than
+<a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">service-oriented architectures</a>,
+or <em>SOA</em>.</p>
+
+<!-- more -->
+
+
+<p>So, what&rsquo;s the goal of this post? Basically
+providing our view on how we are going to
+shift from our current architecture, which
+is already a composite, to a more powerful
+layer of services.</p>
+
+<h2>Identifying the service</h2>
+
+<p>One of the first steps in order to dig
+into the implementation is to actually identity
+a first bunch of functionalities that should be
+incorporated as standalone services.</p>
+
+<p>Usually, opportunities for new services pop up
+when it&rsquo;s time to <strong>introduce a new functionality</strong>
+or the cost of fixing / implementation of a
+change request are too high: for example, if you
+want to add the ability to send SMSes from your website,
+a good service would be one which just deals with
+the receiving an input event, assembling a message
+and contacting the <em>real</em> SMS provider via webservice
+in order to dispatch the message; another good example is
+<strong>identity</strong>: if you are struggling with different userbases
+that need to be in sync, a good solution would be to
+centralize identities and provide a service which does,
+at least, authentication.</p>
+
+<h2>Data</h2>
+
+<p>Another tipical question is how to manage and organize
+data when you have a de-centralized architecture.</p>
+
+<p>In SOA terms, usually data is shared among the
+services but this doesnt mean that each service can&rsquo;t
+have its own data-layer: it is often seen a very old
+fashioned RDBMS shared across all the services and
+some of them using a less traditional solution, like
+a NoSQL DB; this is mainly done to achieve better
+performances and different data-retrieval patterns</p>
+
+<p>Think about legacy applications that have a model which can be
+extensively customized by the end user, that usually
+implement the <a href="http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model">EAV pattern</a>,
+getting stuck into <strong>performance bottlenecks</strong>, while
+a document-db like MongoDB or CouchDB would
+perfectly solve the issue.</p>
+
+<p>If you are running, for example, an e-commerce system,
+you may want to have transactions and identities in a
+solid and robust system like MSSQL, while your
+frontend can actually run with MongoDB: once the user
+purchases a product, via webservice you store it into
+MSSQL.</p>
+
+<h2>Services need</h2>
+
+<p>One typical aspect, in SOA terms, is seeking answers
+to our questions (read getting <em>responses</em> for our <em>requests</em>),
+a problem which we can overcame with a simple solution:
+when a service <strong>needs</strong> another one, we talk about APIs.</p>
+
+<p>For example, your frontend might offer authentication, while
+the Identity manager is a service providing identities to
+multiple layers of your architecture: when the frontend needs
+to authenticate a user, it will directly rely on the
+Identity service, asking him to authenticate the user with the
+credentials he or she submitted to the frontend.</p>
+
+<p>APIs can be traditionally categorized into <a href="http://nordsc.com/ext/classification_of_http_based_apis.html">a few types</a>:</p>
+
+<ul>
+<li>mess: &ldquo;messy&rdquo; API don&rsquo;t follow structured rules (it cab be <em>plain-old XML over HTTP</em>
+or a replication of DB writes and reads in JSON format); they can
+be <strong>very useful</strong> when you need to kickstart a new, small and simple
+API</li>
+<li>HTTP API: services that semantically expose their domain model
+in terms of resources, embracing the HTTP specification</li>
+<li><a href="/hypermedia-services-beyond-rest-architectures/">REST</a>: hypermedia services</li>
+<li>SOAP: services using strict interfaces between clients and servers,
+following the SOAP spec</li>
+</ul>
+
+
+<p>No matter what, you will always find yourself dealing with APIs
+if you decided to go for SOA: it is the simplest way to
+provide <strong>data-exchange mechanisms to layers that don&rsquo;t fully
+know each other&rsquo;s domain</strong>.</p>
+
+<h2>Services listen</h2>
+
+<p>Another <strong>very common</strong> scenario, is when services &ldquo;listen&rdquo;,
+waiting for notifications sent across by other components of
+the architecture: you are probably already thinking about
+messaging queues and message notifications, and you are right.</p>
+
+<p>A event-driven process can be achieved when we have tools
+such as <a href="http://www.rabbitmq.com/">RabbitMQ</a> helping in gathering
+and dispatching notifications to various parts of the architecture:
+with Rabbit, a service can dispatch a message to a queue
+and another one (or <strong>ones</strong>), through a daemon, consumes the message.</p>
+
+<p>Thinking about what I mentioned earlier, an SMS-dispatching mechanism
+could fit in this context really well: think about SMSes that are sent
+once the user completes certain actions on your frontend (by gaining credits,
+placing an order on your e-commerce or so on); once the user
+completes an action, a notification will be sent out and
+whoever needs to listen to that message will catch
+and process it.</p>
+
+<h2>So far so good</h2>
+
+<p>In our fast and new journey towards integrating services into
+our architecture, we are finding ourselves pretty well: it is
+no news that we are using RabbitMQ and <a href="http://symfony.com">Symfony2</a>
+for our new, isolated services, and that we already identified
+a few services that can run on their own, decoupled context.</p>
+
+<p>Thinking in SOA terms, by the way, brings out a new set of problems, like
+thinking in terms of architecture, and not of application: you
+don&rsquo;t deploy a new version of your application, you <strong>update a part
+of the architecture</strong>; your system is decoupled, from the code to the
+processes you use to handle them. And what about the complications in the
+development environments? And which monitoring tool should I use to
+understand that all the components are working alltogether? And&hellip;</p>
+
+<p>There&rsquo;s room for generic problems that everyone faced and that we will
+face as well, and I think it will be very interesting to share our
+approach and the vision we had in our own context.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Application-level caching: fight the right battle ]]></title>
+    <link href="http://odino.org/application-level-caching-fight-the-right-battle/"/>
+    <updated>2011-11-22T15:01:00+04:00</updated>
+    <id>http://odino.org/application-level-caching-fight-the-right-battle</id>
+    <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
+
+<blockquote><p>Why do you hate application-level caches?</p></blockquote>
+
+<p>First of all, I don&rsquo;t.</p>
+
+<p>And here&rsquo;s explained why I don&rsquo;t hate AL caches and why I do really hate how developers integrate caching in their applications.</p>
+
+<!-- more -->
+
+
+<h2>What should we cache</h2>
+
+<p>There are a few aspects of our architecture/application that usually need caching-capabilities to improve performances, and I will analyze each one of them in order to understand whether they fit well in an application cache or not.</p>
+
+<p>To summarize them, here&rsquo;s a brief list:</p>
+
+<ul>
+<li>finding file on the filesystem</li>
+<li>metadata</li>
+<li>routing</li>
+<li>configuration</li>
+<li>non-native data providers</li>
+<li>output fragments</li>
+</ul>
+
+
+<h2>Finding files</h2>
+
+<p>An AL cache is really good for finding files on the filesystem: autoloaders are pretty smart ( for example, in PHP, we have the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> standard ) so they basically know a set of conventions and calculate the path to a required file: well, the process of calculating that path is really unnecessary when going live on production, because the core of our application is rarely meant to be moved/changed.</p>
+
+<p>``` php autoloading.php
+&lt;?php</p>
+
+<p>array(
+  &lsquo;Symfony\Component\Finder\Finder&rsquo; => <strong>DIR</strong> .&lsquo;/src/Symfony/Component/Finder/Finder.php&rsquo;,
+  &hellip;
+  &hellip;
+);
+```</p>
+
+<p>Flushing the autoloading cache at every deploy is the solution for those rare scenarios.</p>
+
+<h2>Reading metadata</h2>
+
+<p>When you need to specify metadata on objects, a good solution is recurring to annotations:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Dog
+{
+  /<em>*
+   *  @validation(int)
+   </em>/
+  protected $age;
+}
+```</p>
+
+<p>but reading that data can be expensive, since you always need to parse and introspect an entity.</p>
+
+<p>Doctrine2, the infamous PHP ORM, uses <a href="https://github.com/doctrine/common/tree/master/lib/Doctrine/Common/Cache">caching</a> exactly to solve the issue of always reading metadata from objects.</p>
+
+<h2>Routing</h2>
+
+<p>We usually compile YML/XML files for routing ( &lsquo;cause they are way easier to read/write ), which means that at every request we parse the URI, parse the routing file and find a match between them.</p>
+
+<p>Reading the routing can be annoying, so we can easily compile down a PHP file with routing rules from the original routing file.</p>
+
+<h2>Can I haz natives?</h2>
+
+<p>As you might understand, a good solution is to cache when we need to face formats which are different from our language: so, for example, from configuration files we can compile &ndash; in PHP &ndash; arrays, or stuff like that.</p>
+
+<p>Symfony2, for example, add the ability of <a href="http://www.slideshare.net/fabpot/dependency-injection-in-php-5354/100">compiling down the whole dependency injection container</a> from different formats to plain PHP.</p>
+
+<h2>Bad smells, here they come</h2>
+
+<p>So you may wonder why I hate application caches, and <strong>here it comes the tornado</strong>.</p>
+
+<p>We are basically used to think that <strong>caching the output</strong> is just good, and we have those CMSes like Joomla! or Drupal doing that.</p>
+
+<p>Think about how many things you are loosing re-implementing an output caching layer inside your application: your application needs to do the storage of cached files, it needs to calculate dates and evaluate if an HTML fragment have expired or not, it needs to be hit for 2 identical requests and then, the most disturbing thing, you need to add a layer on top of your application.</p>
+
+<p>Adding new layers is bad, because as you add them, you potentially introduce bugs, coupling and limitations to your software: <strong>the more code you write, the more bugs happen</strong>.</p>
+
+<p>Output caching should be done with the HTTP cache, which works at the protocol level: you don&rsquo;t have to add any layer to your application ( you only need a good framework ), and whether to cache or not a resource is demanded to the client&rsquo;s browser or to the reverse proxy.</p>
+
+<p>In the HTTP cache, you can serve the same response to 1 milion clients just with a stupid reverse proxy; you can serve the same response after identical requests, to a single client, without even making the subsequent requests traverse the internet.</p>
+
+<p>Custom output caches are not capable of doing 1% of what the HTTP cache has proven to be able to do.</p>
+
+<p>Application-level output caches are an antipattern, get over it.</p>
+]]></content>
+  </entry>
+  
+</feed>
