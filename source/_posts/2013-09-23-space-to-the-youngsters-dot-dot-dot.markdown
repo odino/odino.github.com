@@ -11,6 +11,8 @@ a team of (web) engineers, is when you lead
 them to one particular thing: do **not make the
 same mistakes you made** back at the time.
 
+<!-- more -->
+
 {% img center /images/namshi-team.jpg %}
 
 For our people it's pretty interesting, since
@@ -20,8 +22,6 @@ go [SOA](/tips-and-tricks-for-you-service-oriented-architecture/),
 and the **coolest thing** is to see how juniors
 pick things up better, faster than you did back
 at the time.
-
-<!-- more -->
 
 Today I want to introduce you to [Mohammad Hallal](http://mohdhallal.github.io/),
 who joined us around 3 months ago, fresh from 

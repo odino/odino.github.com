@@ -14,6 +14,8 @@ with a good lineup of talks:
 * building a [SOA with Symfony2](http://confoo.ca/en/2014/session/soa-with-symfony2)
 * [is AngularJS the future?](http://confoo.ca/en/2014/session/angularjs-is-the-future-maybe)
 
+<!-- more -->
+
 For the first time ever, I have to admit it, I will be
 presenting **3 topics that have very different backgrounds**,
 and, as the days go by, I realize that working at [Namshi](http://en-ae.namshi.com)

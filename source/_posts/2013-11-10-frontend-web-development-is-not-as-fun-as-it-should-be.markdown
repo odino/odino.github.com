@@ -7,8 +7,6 @@ categories: [JavaScript, AngularJS, CORS, NGINX, Internet Explorer, xDomain, Var
 published: true
 ---
 
-{% img right /images/browsers.jpg %}
-
 I am writing this post in the middle of revamping
 [Namshi's architecture](http://en-ae.namshi.com)
 with AngularJS, reverse proxies,
@@ -19,6 +17,10 @@ most of the antipatterns that we've seen so far:
 monolithic applications, unscalable frontends,
 limited protocols.
 
+<!-- more -->
+
+{% img right /images/browsers.jpg %}
+
 So why would I rant about it? Well, this is not a real
 rant but it's more of a retrospective on the *gotchas*
 that we faced over the past months: I do **really**
@@ -28,8 +30,6 @@ very early stage and have their pitfalls when it comes
 to develop real-world, scalable architectures.
 
 The boring part's over, let's get into the real mess ;-)
-
-<!-- more -->
 
 ## Reducing redirects?
 
