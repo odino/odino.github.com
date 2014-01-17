@@ -4,7 +4,7 @@
   <title><![CDATA[Category: job | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/job/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T16:24:28+04:00</updated>
+  <updated>2014-01-17T16:50:31+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
+    <link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
+    <updated>2014-01-17T16:28:00+04:00</updated>
+    <id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
+    <content type="html"><![CDATA[<p>In order to expand our team we are now looking for a
+frontend JavaScript developer that loves Angular and wants to
+drown under loads of <code>ng-*</code>, FPS optimizations and
+building the frontends for our
+<a href="/tips-and-tricks-for-you-service-oriented-architecture/">Service Oriented Architecture</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/namshi.png"></p>
+
+<p>If you are also interested in helping on the whole stack, here&rsquo;s a
+summary of the rest of the technologies we&rsquo;re using down here at
+<a href="http://namshi.com">Namshi</a>:</p>
+
+<ul>
+<li><a href="http://symfony.com/">Symfony2</a></li>
+<li><a href="http://nodejs.org/">NodeJS</a></li>
+<li><a href="http://redis.io/">Redis</a></li>
+<li><a href="http://www.saltstack.com/">SaltStack</a></li>
+<li><a href="http://angularjs.org/">AngularJS</a></li>
+</ul>
+
+
+<p>I must admit that is has been pretty exciting to get our
+hands dirty with all of these (and the less attractive ones
+as well :-P).</p>
+
+<p>Dubai is a pretty nice place and we are <strong>very</strong> open
+to relocations: if I&rsquo;m writing this blog post it&rsquo;s because
+I would like to reach everyone on the internet who wants
+to give it a shot, and not only our connections here in
+Dubai.</p>
+
+<p>Namshi is a <a href="http://www.youtube.com/watch?v=NThxiu1HGgM">fun workplace</a>
+and you&rsquo;re gonna be working with an
+<a href="http://tech.namshi.com/portfolio/">highly skilled team</a>
+with the goal of delivering the best customer experience in
+the Middle East, through a website that should ideally
+render in ~100ms, powered by lotsa APIs.</p>
+
+<p>So yeah, what are you waiting for? <code>ng-apply</code> now!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Namshi is looking for a new Lead Developer!]]></title>
