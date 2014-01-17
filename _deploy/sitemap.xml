@@ -691,12 +691,18 @@
         <lastmod>2014-01-17T16:14:58+04:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/
+        </loc>
+        <lastmod>2014-01-17T16:50:08+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://odino.org/404.html</loc>
         <lastmod>2014-01-14T02:49:29+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/archives/</loc>
-        <lastmod>2014-01-17T16:14:58+04:00</lastmod>
+        <lastmod>2014-01-17T16:50:08+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/robots.txt</loc>
@@ -704,7 +710,7 @@
     </url>
     <url>
         <loc>http://odino.org/</loc>
-        <lastmod>2014-01-17T16:14:58+04:00</lastmod>
+        <lastmod>2014-01-17T16:50:08+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/conferences/</loc>
@@ -728,10 +734,10 @@
     </url>
     <url>
         <loc>http://odino.org/blog/archives/</loc>
-        <lastmod>2014-01-17T16:14:58+04:00</lastmod>
+        <lastmod>2014-01-17T16:50:08+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/blog/</loc>
-        <lastmod>2014-01-17T16:14:58+04:00</lastmod>
+        <lastmod>2014-01-17T16:50:08+04:00</lastmod>
     </url>
 </urlset>
