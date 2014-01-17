@@ -4,7 +4,7 @@
   <title><![CDATA[Category: BDD | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/bdd/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-14T03:02:28+04:00</updated>
+  <updated>2014-01-17T16:16:29+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -23,6 +23,9 @@ a team of (web) engineers, is when you lead
 them to one particular thing: do <strong>not make the
 same mistakes you made</strong> back at the time.</p>
 
+<!-- more -->
+
+
 <p><img class="center" src="/images/namshi-team.jpg"></p>
 
 <p>For our people it&rsquo;s pretty interesting, since
@@ -32,9 +35,6 @@ go <a href="/tips-and-tricks-for-you-service-oriented-architecture/">SOA</a>,
 and the <strong>coolest thing</strong> is to see how juniors
 pick things up better, faster than you did back
 at the time.</p>
-
-<!-- more -->
-
 
 <p>Today I want to introduce you to <a href="http://mohdhallal.github.io/">Mohammad Hallal</a>,
 who joined us around 3 months ago, fresh from

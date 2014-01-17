@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xDomain | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/xdomain/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-14T03:02:28+04:00</updated>
+  <updated>2014-01-17T16:16:29+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -18,9 +18,7 @@
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
     <updated>2013-11-10T19:53:00+04:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
-    <content type="html"><![CDATA[<p><img class="right" src="/images/browsers.jpg"></p>
-
-<p>I am writing this post in the middle of revamping
+    <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
 with AngularJS, reverse proxies,
 SPDY and HTTP APIs, because I
@@ -29,6 +27,11 @@ that they are the de-facto cutting-edge solution for
 most of the antipatterns that we&rsquo;ve seen so far:
 monolithic applications, unscalable frontends,
 limited protocols.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/browsers.jpg"></p>
 
 <p>So why would I rant about it? Well, this is not a real
 rant but it&rsquo;s more of a retrospective on the <em>gotchas</em>
@@ -39,9 +42,6 @@ very early stage and have their pitfalls when it comes
 to develop real-world, scalable architectures.</p>
 
 <p>The boring part&rsquo;s over, let&rsquo;s get into the real mess ;&ndash;)</p>
-
-<!-- more -->
-
 
 <h2>Reducing redirects?</h2>
 
