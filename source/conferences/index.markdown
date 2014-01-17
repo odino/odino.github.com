@@ -14,6 +14,7 @@ Here's a summary of the most important ones:
 
 {% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
+* [A Rocket Internet experience](http://www.slideshare.net/odino/a-rocket-internet-experience-forumphp-paris-2013), given at the ForumPHP 2013 in Paris (FRA), dealing with how we formed the development team and structured our Service-Oriented Architecture in Namshi
 * [Tips and tricks for your Service Oriented Architecture](http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco), presented at the CakeFest 2013 in San Francisco (US), in which I explained the way we approached SOA at Namshi
 * [HTTP colon slash slash: end of the road](http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road), presented at
 the International PHP Conference 2012 in Mainz (GER), dealing with the history of the `HTTP` protocol, a look at `SPDY` and `HTTP/2.0`
