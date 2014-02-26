@@ -75,8 +75,7 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I'm totally informal
 * In my first 15 months at Namshi I covered 3 positions: Lead Developer, Head of Development and VP Technology
 * I own an XboX, but I rarely play alone
-* I visited 13 countries so far (Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India),
-some of them very briefly, mostly during conferences
+* I visited 14 countries so far (Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada), some of them very briefly, mostly during conferences
 * I don't drink alcohol
 * one of my favorites TV shows is [River Monsters](http://en.wikipedia.org/wiki/River_Monsters)
-* once moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks), [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers) and [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls)
+* once moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks), [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers), [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls), Blake Griffin (L.A. Clippers), Kevin Durant (Oklahoma City Thunder), Damien Lillard (Portland Trail Blazers), Kobe Bryant (L.A. Lakers #24), Kobe Bryant (L.A. Lakers - Hardwood Classic Rookie Edition #8)
