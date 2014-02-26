@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Shell aliases for Octopress]]></title>
     <link href="http://odino.org/bash-aliases-for-octopress/"/>
-    <updated>2012-08-24T11:02:00+04:00</updated>
+    <updated>2012-08-24T11:02:00-04:00</updated>
     <id>http://odino.org/bash-aliases-for-octopress</id>
     <content type="html"><![CDATA[<p>A few days ago I moved to <a href="http://en.wikipedia.org/wiki/Z_shell">ZSH</a>
 from bash, since my friend David was pushing me to try it:

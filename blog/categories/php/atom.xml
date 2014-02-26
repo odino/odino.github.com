@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
     <link href="http://odino.org/doctrine-80-percent-faster/"/>
-    <updated>2013-04-21T10:54:00+04:00</updated>
+    <updated>2013-04-21T10:54:00-04:00</updated>
     <id>http://odino.org/doctrine-80-percent-faster</id>
     <content type="html"><![CDATA[<p>A post in the <em>doctrine-dev</em> mailing list
 caught my attention last week, and I want to
@@ -43,7 +43,7 @@ branch very soon!</p>
   <entry>
     <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
     <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
-    <updated>2013-03-29T14:14:00+04:00</updated>
+    <updated>2013-03-29T14:14:00-04:00</updated>
     <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
     <content type="html"><![CDATA[<p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
 back in Italy, since I was missing my friends in Rome
@@ -82,7 +82,7 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   <entry>
     <title type="html"><![CDATA[PHP: 'The script tried to execute a method or access a property of an incomplete object']]></title>
     <link href="http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
-    <updated>2013-01-31T13:28:00+04:00</updated>
+    <updated>2013-01-31T13:28:00-05:00</updated>
     <id>http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
     <content type="html"><![CDATA[<p>Have you ever got this error in PHP? I bet no, never.</p>
 
@@ -117,7 +117,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Profiling PHP applications from the browser]]></title>
     <link href="http://odino.org/profiling-php-applications-from-the-browser/"/>
-    <updated>2013-01-25T22:38:00+04:00</updated>
+    <updated>2013-01-25T22:38:00-05:00</updated>
     <id>http://odino.org/profiling-php-applications-from-the-browser</id>
     <content type="html"><![CDATA[<p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
 <a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
@@ -361,7 +361,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
     <link href="http://odino.org/making-the-orientdb-odm-5-times-faster/"/>
-    <updated>2013-01-25T17:39:00+04:00</updated>
+    <updated>2013-01-25T17:39:00-05:00</updated>
     <id>http://odino.org/making-the-orientdb-odm-5-times-faster</id>
     <content type="html"><![CDATA[<p>Today, after heavily testing performances
 on a project, I pushed some small but

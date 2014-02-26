@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RabbitMQ | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/rabbitmq/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
     <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
-    <updated>2013-07-11T01:20:00+04:00</updated>
+    <updated>2013-07-11T01:20:00-04:00</updated>
     <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
     <content type="html"><![CDATA[<p>While implementing various pieces of our
 <a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
@@ -208,7 +208,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x61;&#x6c;&#x65;&#x73;&#x73;&#97;&#110;&#100;&#x72;&#x6f;&#46;&#x6e;&#x61;&#100;&#x61;&#108;&#105;&#x6e;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#108;&#x65;&#x73;&#x73;&#97;&#110;&#100;&#114;&#111;&#46;&#x6e;&#97;&#100;&#97;&#x6c;&#105;&#110;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#97;&#x6c;&#101;&#115;&#x73;&#97;&#110;&#x64;&#x72;&#x6f;&#x2e;&#x6e;&#x61;&#100;&#97;&#x6c;&#x69;&#x6e;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#111;&#109;">&#97;&#x6c;&#x65;&#115;&#x73;&#x61;&#110;&#100;&#x72;&#x6f;&#46;&#x6e;&#97;&#x64;&#97;&#x6c;&#x69;&#110;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);
@@ -326,7 +326,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Refactoring your architecture understanding SOA]]></title>
     <link href="http://odino.org/refactoring-your-architecture-go-for-soa/"/>
-    <updated>2013-03-23T17:35:00+04:00</updated>
+    <updated>2013-03-23T17:35:00-04:00</updated>
     <id>http://odino.org/refactoring-your-architecture-go-for-soa</id>
     <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>

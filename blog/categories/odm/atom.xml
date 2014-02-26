@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ODM | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/odm/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[OrientDB ODM beta 5: repositories, compatibility with 1.2.0 and more stability]]></title>
     <link href="http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability/"/>
-    <updated>2012-11-23T09:10:00+04:00</updated>
+    <updated>2012-11-23T09:10:00-05:00</updated>
     <id>http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability</id>
     <content type="html"><![CDATA[<p>It has almost been a baby&rsquo;s delivery, but we eventually made it:
 the PHP <a href="http://css.dzone.com/articles/era-object-document-mapping">ODM</a> for <a href="http://code.google.com/p/orient/">OrientDB</a> has finally reached its <strong>5th beta</strong>.</p>

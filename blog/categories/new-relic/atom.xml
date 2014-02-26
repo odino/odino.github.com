@@ -4,7 +4,7 @@
   <title><![CDATA[Category: New Relic | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/new-relic/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Using Monolog for PHP error reporting on New Relic]]></title>
     <link href="http://odino.org/using-monolog-for-php-error-reporting-on-new-relic/"/>
-    <updated>2012-07-27T08:00:00+04:00</updated>
+    <updated>2012-07-27T08:00:00-04:00</updated>
     <id>http://odino.org/using-monolog-for-php-error-reporting-on-new-relic</id>
     <content type="html"><![CDATA[<p>I <strong>do</strong> really like <a href="http://newrelic.com/">New Relic</a>, a real-time
 error reporting solution available for many

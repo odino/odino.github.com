@@ -10,7 +10,7 @@
 
   
   
-  <meta name="description" content="Using the Symfony2 DIC as a Standalone Component This post is part of the &#8221;Symfony2 components in your own userland&#8221; series; here is a &hellip;">
+  <meta name="description" content="Launching PHPUnit Tests From a Browser With Symfony2 This post is part of the &#8221;Symfony2 components in your own userland&#8221; series; here is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,7 +60,7 @@
 </header>
   <nav role="navigation"><ul class="main-navigation">
   <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
-  <li><a href="/about"><i class="icon-user icon-large"></i> About me</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
   <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
   <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
   <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
@@ -71,6 +71,67 @@
       <div>
 <article role="article">
   
+
+
+    <article class="post">
+  <header>
+      <div class="front-title">
+        
+          <h1 class="entry-title"><a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit Tests From a Browser With Symfony2</a></h1>
+        
+        <ol class="aseries">
+    <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
+    <li>
+        <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+    </li>
+    <li>
+        <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+    </li>
+    <li>
+        <a href="/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+    </li>
+</ol>
+
+
+<p>Today we are going to launch interactive PHPUnit tests thanks to the
+Symfony2 <a href="https://github.com/symfony/Process">Process</a> component.</p>
+
+
+      </div>
+    <div class="front-meta">
+        
+        <p class="meta">
+            
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T13:41:00-05:00" pubdate data-updated="true">Monday, 20 February 2012 at 13:41</time>
+            
+            | <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/#disqus_thread">Comments</a>
+            
+        </p>
+        
+        <div class="entry-content">
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+</div>
+    </div>
+  </header>
+  
+</article>
 
 
     <article class="post">
@@ -112,7 +173,7 @@
   
 
 
-<time datetime="2012-02-15T20:06:00+04:00" pubdate data-updated="true">Wednesday, 15 February 2012 at 20:06</time>
+<time datetime="2012-02-15T20:06:00-05:00" pubdate data-updated="true">Wednesday, 15 February 2012 at 20:06</time>
             
             | <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/#disqus_thread">Comments</a>
             
@@ -177,7 +238,7 @@ to retrieve WHOIS informations with PHP.</p>
   
 
 
-<time datetime="2012-02-14T00:58:00+04:00" pubdate data-updated="true">Tuesday, 14 February 2012 at 00:58</time>
+<time datetime="2012-02-14T00:58:00-05:00" pubdate data-updated="true">Tuesday, 14 February 2012 at 00:58</time>
             
             | <a href="/retrieving-raw-whois-informations-in-php/#disqus_thread">Comments</a>
             
@@ -242,7 +303,7 @@ WHOIS webservice</strong>.</p>
   
 
 
-<time datetime="2012-02-03T03:40:00+04:00" pubdate data-updated="true">Friday, 03 February 2012 at 03:40</time>
+<time datetime="2012-02-03T03:40:00-05:00" pubdate data-updated="true">Friday, 03 February 2012 at 03:40</time>
             
             | <a href="/a-php-library-to-retrieve-whois-informations/#disqus_thread">Comments</a>
             
@@ -290,7 +351,7 @@ your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-t
   
 
 
-<time datetime="2012-01-27T19:27:00+04:00" pubdate data-updated="true">Friday, 27 January 2012 at 19:27</time>
+<time datetime="2012-01-27T19:27:00-05:00" pubdate data-updated="true">Friday, 27 January 2012 at 19:27</time>
             
             | <a href="/http-benefits-from-spdy-as-spdy-benefits-from-http/#disqus_thread">Comments</a>
             
@@ -334,7 +395,7 @@ your <a href="http://www.igvita.com/2012/01/18/building-a-modern-web-stack-for-t
   
 
 
-<time datetime="2012-01-27T15:20:00+04:00" pubdate data-updated="true">Friday, 27 January 2012 at 15:20</time>
+<time datetime="2012-01-27T15:20:00-05:00" pubdate data-updated="true">Friday, 27 January 2012 at 15:20</time>
             
             | <a href="/roy-fielding-on-soap-in-the-w3c-context/#disqus_thread">Comments</a>
             
@@ -383,7 +444,7 @@ I just isolated it and made a small repo on Github.</p>
   
 
 
-<time datetime="2012-01-26T11:51:00+04:00" pubdate data-updated="true">Thursday, 26 January 2012 at 11:51</time>
+<time datetime="2012-01-26T11:51:00-05:00" pubdate data-updated="true">Thursday, 26 January 2012 at 11:51</time>
             
             | <a href="/enter-sfcctesting-symfony-1-dot-x-client-crawler-testing/#disqus_thread">Comments</a>
             
@@ -436,7 +497,7 @@ this project, which will be developed with symfony
   
 
 
-<time datetime="2012-01-26T00:45:00+04:00" pubdate data-updated="true">Thursday, 26 January 2012 at 00:45</time>
+<time datetime="2012-01-26T00:45:00-05:00" pubdate data-updated="true">Thursday, 26 January 2012 at 00:45</time>
             
             | <a href="/functional-testing-symfony-1-dot-4-with-phpunit-the-symfony2-way/#disqus_thread">Comments</a>
             
@@ -484,7 +545,7 @@ algorithm&rsquo;s tale.</p>
   
 
 
-<time datetime="2012-01-25T13:43:00+04:00" pubdate data-updated="true">Wednesday, 25 January 2012 at 13:43</time>
+<time datetime="2012-01-25T13:43:00-05:00" pubdate data-updated="true">Wednesday, 25 January 2012 at 13:43</time>
             
             | <a href="/quality-isnt-always-better-than-quality/#disqus_thread">Comments</a>
             
@@ -528,7 +589,7 @@ algorithm&rsquo;s tale.</p>
   
 
 
-<time datetime="2012-01-25T11:44:00+04:00" pubdate data-updated="true">Wednesday, 25 January 2012 at 11:44</time>
+<time datetime="2012-01-25T11:44:00-05:00" pubdate data-updated="true">Wednesday, 25 January 2012 at 11:44</time>
             
             | <a href="/managing-php-dependencies-with-composer/#disqus_thread">Comments</a>
             
@@ -539,54 +600,6 @@ algorithm&rsquo;s tale.</p>
 <span class="categories"><i class="icon-tags"></i>
   
     <a class='category' href='/blog/categories/php/'>PHP</a>
-  
-</span>
-
-</div>
-    </div>
-  </header>
-  
-</article>
-
-
-    <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/hypermedia-services-beyond-rest-architectures/">Media Types and Hypermedia Services: Beyond REST Architectures</a></h1>
-        
-        <p>RESTafarians should support the abandon of the
-original term &ndash; REpresentational State Transfer &ndash;  in favour of
-some fresh new words.</p>
-
-
-      </div>
-    <div class="front-meta">
-        
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-24T03:22:00+04:00" pubdate data-updated="true">Tuesday, 24 January 2012 at 03:22</time>
-            
-            | <a href="/hypermedia-services-beyond-rest-architectures/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/hateoas/'>HATEOAS</a>, <a class='category' href='/blog/categories/rest/'>REST</a>, <a class='category' href='/blog/categories/hypermedia/'>hypermedia</a>, <a class='category' href='/blog/categories/webservice/'>webservice</a>
   
 </span>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Border radius and IE 8 and previous yes we can]]></title>
     <link href="http://odino.org/border-radius-and-ie-8-and-previous-yes-we-can/"/>
-    <updated>2010-09-11T14:51:00+04:00</updated>
+    <updated>2010-09-11T14:51:00-04:00</updated>
     <id>http://odino.org/border-radius-and-ie-8-and-previous-yes-we-can</id>
     <content type="html"><![CDATA[<p>CSS3 is the way to render a web2.0 layout without pain in the ass.</p>
 

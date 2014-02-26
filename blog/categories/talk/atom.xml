@@ -4,7 +4,7 @@
   <title><![CDATA[Category: talk | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/talk/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,9 +14,28 @@
 
   
   <entry>
+    <title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
+    <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
+    <updated>2014-02-26T15:25:00-05:00</updated>
+    <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
+    <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
+of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
+document-based graphdb</a>&rdquo;.</p>
+
+<!-- more -->
+
+
+<p>For the ones interested in the slides, I am also publishing them,
+as usual, here:</p>
+
+<p><div class="slideshare" id="__ss_31683783"><iframe src="http://www.slideshare.net/slideshow/embed_code/31683783 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00+04:00</updated>
+    <updated>2013-09-01T17:48:00-04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
     <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
 I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
@@ -42,7 +61,7 @@ here are the slides for the lazy ones :)</p>
   <entry>
     <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
     <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-    <updated>2013-08-31T19:05:00+04:00</updated>
+    <updated>2013-08-31T19:05:00-04:00</updated>
     <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
     <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
 <a href="http://cakefest.org">CakeFest</a> here in San Francisco,

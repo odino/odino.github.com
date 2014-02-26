@@ -4,7 +4,7 @@
   <title><![CDATA[Category: REST | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/rest/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:19:57+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
     <link href="http://odino.org/hypermedia-services-beyond-rest-architectures/"/>
-    <updated>2012-01-24T03:22:00+04:00</updated>
+    <updated>2012-01-24T03:22:00-05:00</updated>
     <id>http://odino.org/hypermedia-services-beyond-rest-architectures</id>
     <content type="html"><![CDATA[<p>RESTafarians should support the abandon of the
 original term &ndash; REpresentational State Transfer &ndash;  in favour of
@@ -276,7 +276,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Less REST, more hypermedia]]></title>
     <link href="http://odino.org/less-rest-more-hypermedia/"/>
-    <updated>2011-12-19T23:40:00+04:00</updated>
+    <updated>2011-12-19T23:40:00-05:00</updated>
     <id>http://odino.org/less-rest-more-hypermedia</id>
     <content type="html"><![CDATA[<p>From an entry into the <a href="http://tech.groups.yahoo.com/group/rest-discuss/message/18085">REST-discuss mailing list</a>:</p>
 
@@ -291,7 +291,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Resources about HATEOAS]]></title>
     <link href="http://odino.org/resources-about-hateoas/"/>
-    <updated>2011-07-16T13:50:00+04:00</updated>
+    <updated>2011-07-16T13:50:00-04:00</updated>
     <id>http://odino.org/resources-about-hateoas</id>
     <content type="html"><![CDATA[<p>Since <a href="http://matteo.vaccari.name/">Matteo</a>, an italian XP coach and university teacher, <a href="http://twitter.com/#!/xpmatteo/status/81392376928665600">asked me where he could find some free resources about HATEOAS</a> for his students, I thought the thing deserves a post.</p>
 
@@ -337,7 +337,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[REST in peace, again]]></title>
     <link href="http://odino.org/rest-in-peace-again/"/>
-    <updated>2011-07-12T23:17:00+04:00</updated>
+    <updated>2011-07-12T23:17:00-04:00</updated>
     <id>http://odino.org/rest-in-peace-again</id>
     <content type="html"><![CDATA[<p>Yesterday I was in Turin for the PHP.TO.START in Turin, a good event organized by the <a href="http://blog.indigenidigitali.com/">Indigeni Digitali</a> network and <a href="http://www.skuola.net/">skuola.net</a>.</p>
 
@@ -353,7 +353,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[It's client's fault]]></title>
     <link href="http://odino.org/it-s-client-s-fault/"/>
-    <updated>2011-04-21T12:50:00+04:00</updated>
+    <updated>2011-04-21T12:50:00-04:00</updated>
     <id>http://odino.org/it-s-client-s-fault</id>
     <content type="html"><![CDATA[<!-- more -->
 
