@@ -4,7 +4,7 @@
   <title><![CDATA[Category: NoSQL | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/nosql/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:15:27+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,9 +14,28 @@
 
   
   <entry>
+    <title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
+    <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
+    <updated>2014-02-26T15:25:00-05:00</updated>
+    <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
+    <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
+of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
+document-based graphdb</a>&rdquo;.</p>
+
+<!-- more -->
+
+
+<p>For the ones interested in the slides, I am also publishing them,
+as usual, here:</p>
+
+<p><div class="slideshare" id="__ss_31683783"><iframe src="http://www.slideshare.net/slideshow/embed_code/31683783 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Please welcome the Doctrine2 OrientDB ODM]]></title>
     <link href="http://odino.org/please-welcome-the-doctrine-orientdb-odm/"/>
-    <updated>2012-12-28T23:12:00+04:00</updated>
+    <updated>2012-12-28T23:12:00-05:00</updated>
     <id>http://odino.org/please-welcome-the-doctrine-orientdb-odm</id>
     <content type="html"><![CDATA[<p>It took almost 2 years from the
 <a href="https://github.com/doctrine/orientdb-odm/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">first commit</a>,
@@ -65,7 +84,7 @@ as it contains the references to the new repository.</p>
   <entry>
     <title type="html"><![CDATA[Video introduction about NoSQL graph databases and OrientDB]]></title>
     <link href="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
-    <updated>2012-12-08T15:56:00+04:00</updated>
+    <updated>2012-12-08T15:56:00-05:00</updated>
     <id>http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
     <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
@@ -88,7 +107,7 @@ finally made it to Vimeo: enjoy some tarzan english!</p>
   <entry>
     <title type="html"><![CDATA[Back in track with OrientDB]]></title>
     <link href="http://odino.org/back-in-track-with-orientdb/"/>
-    <updated>2012-04-20T15:26:00+04:00</updated>
+    <updated>2012-04-20T15:26:00-04:00</updated>
     <id>http://odino.org/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It&rsquo;s been a while since I don&rsquo;t release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
@@ -226,7 +245,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
     <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
-    <updated>2011-05-06T15:42:00+04:00</updated>
+    <updated>2011-05-06T15:42:00-04:00</updated>
     <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>
     <content type="html"><![CDATA[<p>There&rsquo;s a common goal that NoSQL and ESI share together: consistency.</p>
 
@@ -283,101 +302,6 @@ Notes
 <p>In order to &ldquo;<em>real-time scale</em>&rdquo; you can use a technology born a decade ago or another one which is on everyone&rsquo;s lips since a couple years.</p>
 
 <p>The choice is yours: tools are always tools, but the architecture&rsquo;s design is something we, only we, can manage.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A simple menu and the relational model collapses]]></title>
-    <link href="http://odino.org/a-simple-menu-and-the-relational-model-collapses/"/>
-    <updated>2011-04-17T16:07:00+04:00</updated>
-    <id>http://odino.org/a-simple-menu-and-the-relational-model-collapses</id>
-    <content type="html"><![CDATA[<p>Relational sucks, some say.</p>
-
-<p>That&rsquo;s not fair, because we used it for 30 years and we still need it: but there are some particular cases, out there, that relational, and traditional, databases can&rsquo;t handle well.</p>
-
-<!-- more -->
-
-
-<h2>The simple case of the menu</h2>
-
-<p>You are building a CMS for your customer, and you just got to the point you need to develop <em>that</em> feature, the <strong>menu management system</strong>.</p>
-
-<p>A menu is really simple, because it&rsquo;s an entity connected ( N to N ) with other entities ( menu items ).</p>
-
-<p>So the class diagram is really simple:</p>
-
-<p><img class="center" src="/images/Menuclassdiagram.png"></p>
-
-<p>But there&rsquo;s a problem: not all of the menu items are equal; you can link an external URI or a news ( an entity of your model ).</p>
-
-<p>There you basically have 2 choices: to de-normalize your data or to do <strong>column aggregation</strong>.</p>
-
-<h2>Column aggregation</h2>
-
-<p>You can simply create a single table, link, with a type column ( the type is usually used in order to <a href="http://www.doctrine-project.org/documentation/manual/1_2/en/inheritance:column-aggregation">work with an ORM</a> ):</p>
-
-<p><img class="center" src="/images/Columnaggregation.png"></p>
-
-<p>but the situation gets ridicolous, although your ORM may work fine with this pattern: as soon as your domain grows and you need to link more entities, you get</p>
-
-<p><code>bash
-(n-1) * r
-</code></p>
-
-<p><code>NULL</code>s in your table, given <code>n</code> as our entities and <code>r</code> the amount of rows.</p>
-
-<p>Another problem is that the relations can be NULLable, and sometimes you can&rsquo;t afford it.</p>
-
-<p>I like to call tables created with the column aggregation <strong>full-o'null</strong>, because they suck really much: despite this, they can save your life if you need to develop small system, with a modest domain; plus, they usually help you avoid UNIONs.</p>
-
-<h2>De-normalization</h2>
-
-<p>Subtitle: how to use a RDBMS as a non relational system.</p>
-
-<p>Sub-subtitle: <strong>being an ass with RDBMS</strong>.</p>
-
-<p>Normalization is one of the things we try to achieve with relational systems, so dropping it it&rsquo;s evil: we tend to consider de-normalization good as far as we recognize our data don&rsquo;t fit well in a RDBMS ( thus the problem it&rsquo;s not with MySQL or Oracle, it&rsquo;s our fault ).</p>
-
-<p>But sometimes we like being asses, and we go for disrupting our relational DB.</p>
-
-<p><img class="center" src="/images/Denormalization.png"></p>
-
-<p>With this approach, you break the referential integrity, although you have much cleaner tables. I personally don&rsquo;t like it, but sometimes it&rsquo;s the fastest and most clever way to go.</p>
-
-<h2>A menu, with its complications</h2>
-
-<p>So, as you see, a menu ( something that should be really simple ) can undermine our data structure: and since we are used to relational data we think relational DBMS can handle very well this kind of problems.</p>
-
-<p>That&rsquo;s, obviously, wrong, because relational databases have their limitations: they can&rsquo;t, for example, deal with <strong>semantic inheritance</strong>.</p>
-
-<h2>The semantic inheritance dilemma</h2>
-
-<p>A menu has N links, and each link differs from the others.</p>
-
-<p>So a link basically has a relation with semantics ( &ldquo;I <strong>link</strong> in a menu&rdquo; ) and its inheritance ( links inherit from a base Link class ) but the relational systems aren&rsquo;t able to provide a way to express a relation, which has a single semantics, with entities from different sources ( = tables, roughly speaking ).</p>
-
-<p>When you work with systems like <a href="http://www.orientechnologies.com/">OrientDB</a>, everything is done for you; being a NoSQL graph db:</p>
-
-<ul>
-<li>the system doesn&rsquo;t care, by itself, about referential integrity ( so you feel relieved :&ndash;) )</li>
-<li>the system stores a direct link to express the relation</li>
-<li>the system has a native API to easily retrieve linked objects</li>
-</ul>
-
-
-<p>For example, in OrientDB you can:</p>
-
-<p><code>bash
-select links from menu where @rid = [rid of the menu] // [29:0, 28:0, 28:1]
-</code></p>
-
-<p>as you see that returns you records from different classes ( <strong>29</strong>:0, <strong>28</strong>:0, &hellip; ), that you can retrieve with:</p>
-
-<p><code>bash
-select from [28:0, 28:1, 29:0, ...]
-</code></p>
-
-<p>Yes, awesome.</p>
 ]]></content>
   </entry>
   

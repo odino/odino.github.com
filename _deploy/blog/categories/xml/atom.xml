@@ -4,7 +4,7 @@
   <title><![CDATA[Category: XML | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/xml/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:15:27+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Long live XML (too sorry for JSON fanboyz)]]></title>
     <link href="http://odino.org/long-live-xml-too-sorry-for-json-fanboyz/"/>
-    <updated>2011-04-02T11:47:00+04:00</updated>
+    <updated>2011-04-02T11:47:00-04:00</updated>
     <id>http://odino.org/long-live-xml-too-sorry-for-json-fanboyz</id>
     <content type="html"><![CDATA[<p>Time after time, the web sees the exploit of a technology, sometimes new, other times old, applied in a different context.</p>
 

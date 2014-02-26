@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SVN | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/svn/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:15:27+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Amend committing in SVN]]></title>
     <link href="http://odino.org/amend-committing-in-svn/"/>
-    <updated>2010-10-30T11:06:00+04:00</updated>
+    <updated>2010-10-30T11:06:00-04:00</updated>
     <id>http://odino.org/amend-committing-in-svn</id>
     <content type="html"><![CDATA[<p>Amending, in Git, is one of my favourite features: it basically lets you modify your local history ( unpushed ) to correct mistakes. Or, more often, to <strong>add the missing file</strong>.</p>
 

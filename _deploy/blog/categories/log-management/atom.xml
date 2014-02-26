@@ -4,7 +4,7 @@
   <title><![CDATA[Category: log management | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/log-management/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:15:27+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Human-readable user agents for JavaScript error reporting]]></title>
     <link href="http://odino.org/human-readable-user-agents-for-javascript-error-reporting/"/>
-    <updated>2012-08-22T09:40:00+04:00</updated>
+    <updated>2012-08-22T09:40:00-04:00</updated>
     <id>http://odino.org/human-readable-user-agents-for-javascript-error-reporting</id>
     <content type="html"><![CDATA[<p>Some time ago I published a few posts
 on logging, one on how to <a href="/logging-javascript-errors/">report JavaScript errors</a> and another one
@@ -218,7 +218,7 @@ echo sprintf(
   <entry>
     <title type="html"><![CDATA[Logging JavaScript errors]]></title>
     <link href="http://odino.org/logging-javascript-errors/"/>
-    <updated>2012-07-27T09:00:00+04:00</updated>
+    <updated>2012-07-27T09:00:00-04:00</updated>
     <id>http://odino.org/logging-javascript-errors</id>
     <content type="html"><![CDATA[<p>In one of my latest posts I talked about
 <a href="/using-monolog-for-php-error-reporting-on-new-relic/">using Monolog to remotely log stuff on New Relic</a>:
@@ -339,7 +339,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Using Monolog for PHP error reporting on New Relic]]></title>
     <link href="http://odino.org/using-monolog-for-php-error-reporting-on-new-relic/"/>
-    <updated>2012-07-27T08:00:00+04:00</updated>
+    <updated>2012-07-27T08:00:00-04:00</updated>
     <id>http://odino.org/using-monolog-for-php-error-reporting-on-new-relic</id>
     <content type="html"><![CDATA[<p>I <strong>do</strong> really like <a href="http://newrelic.com/">New Relic</a>, a real-time
 error reporting solution available for many

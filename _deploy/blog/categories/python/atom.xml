@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-01-17T20:15:27+04:00</updated>
+  <updated>2014-02-26T15:39:40-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Beautifying JSON data from the shell]]></title>
     <link href="http://odino.org/beautifying-json-data-from-the-shell/"/>
-    <updated>2013-06-22T15:36:00+04:00</updated>
+    <updated>2013-06-22T15:36:00-04:00</updated>
     <id>http://odino.org/beautifying-json-data-from-the-shell</id>
     <content type="html"><![CDATA[<p>Yesterday I bumped into a very
 handly utility to beautify JSON
