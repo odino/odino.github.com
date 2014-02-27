@@ -4,7 +4,7 @@
   <title><![CDATA[Category: talk | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/talk/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T12:04:04-05:00</updated>
+  <updated>2014-02-27T16:19:24-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -28,84 +28,6 @@ quite well.</p>
 <p>Enjoy!</p>
 
 <p><div class="slideshare" id="__ss_31723051"><iframe src="http://www.slideshare.net/slideshow/embed_code/31723051 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
-    <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-    <updated>2014-02-26T15:25:00-05:00</updated>
-    <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
-    <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
-of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
-document-based graphdb</a>&rdquo;.</p>
-
-<!-- more -->
-
-
-<p>For the ones interested in the slides, I am also publishing them,
-as usual, here:</p>
-
-<p><div class="slideshare" id="__ss_31683783"><iframe src="http://www.slideshare.net/slideshow/embed_code/31683783 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
-    <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-04:00</updated>
-    <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
-    <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
-I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
-in San Francisco.</p>
-
-<!-- more -->
-
-
-<p>It was a slightly remixed version of the same talk I gave at the
-IPC in Germany last year, with a few addition and changes: I hope the
-attendees have enjoyed the conference as well as my 2 <strong>small</strong>
-contributions as much as I did.</p>
-
-<p>As usual, the presentation is on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-end-of-the-road-cakefest-2013-in-san-francisco">slideshare</a>:
-here are the slides for the lazy ones :)</p>
-
-<p><div class="slideshare" id="__ss_25801971"><iframe src="http://www.slideshare.net/slideshow/embed_code/25801971 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-
-<p>Cheers!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
-    <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-    <updated>2013-08-31T19:05:00-04:00</updated>
-    <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
-    <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
-<a href="http://cakefest.org">CakeFest</a> here in San Francisco,
-&ldquo;<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">Tips and Tricks for your SOA</a>&rdquo;.</p>
-
-<!-- more -->
-
-
-<p>It basically contains a few tips derived from our experience at
-<a href="http://en-ae.namshi.com">Namshi</a> while building our own service-oriented
-architecture, and I hope, since there&rsquo;s not <em>that</em> much material
-about SOA out there, that this can serve as a good feedback from who
-is actually embracing this architectural style.</p>
-
-<p>As always, the slides are on <a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">slideshare</a>,
-and I&rsquo;m embedding the presentation
-here for those who immediately want to have a look at it:</p>
-
-<p><div class="slideshare" id="__ss_25786089"><iframe src="http://www.slideshare.net/slideshow/embed_code/25786089 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-
-<p>Tomorrow, as per the conference&rsquo;s schedule, I will be giving my other talk,
-&ldquo;HTTP colon slash slash: end of the road?&rdquo;, a remake of what I
-presented at the <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">IPC in Mainz last year</a>,
-with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
-
-<p>Cheers!</p>
 ]]></content>
   </entry>
   

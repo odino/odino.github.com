@@ -31,6 +31,35 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
 
+
+<script type="text/javascript">
+(function(){
+  var dom,doc,where,iframe = document.createElement('iframe');
+  iframe.src = "javascript:false";
+  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+  where = document.getElementsByTagName('script')[0];
+  where.parentNode.insertBefore(iframe, where);
+
+  try {
+    doc = iframe.contentWindow.document;
+  } catch(e) {
+    dom = document.domain;
+    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+    doc = iframe.contentWindow.document;
+  }
+  doc.open()._l = function() {
+    var js = this.createElement("script");
+    if(dom) this.domain = dom;
+    js.id = "boomr-if-as";
+    js.src = '//c.go-mpulse.net/boomerang/' +
+    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
+    BOOMR_lstart=new Date().getTime();
+    this.body.appendChild(js);
+  };
+  doc.write('<body onload="document._l();">');
+  doc.close();
+  })();
+</script>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -84,61 +113,6 @@
 
 <footer>
   <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/confoo/'>ConFoo</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/talk/'>talk</a></span>
-</footer>
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/">If you love AngularJS, you should definitely join us...we're hiring!</a></h1>
-<time datetime="2014-01-17T16:28:00-05:00" pubdate><span class='month'>Jan</span> <span class='day'>17</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/dubai/'>Dubai</a>, <a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/job/'>job</a></span>
-</footer>
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/how-to-make-your-javascript-apps-seo-friendly/">How to make your JavaScript apps SEO-friendly</a></h1>
-<time datetime="2014-01-17T14:15:00-05:00" pubdate><span class='month'>Jan</span> <span class='day'>17</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/prerender/'>Prerender</a>, <a class='category' href='/blog/categories/seo/'>SEO</a></span>
-</footer>
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/frontend-web-development-is-not-as-fun-as-it-should-be/">Frontend web development is not as fun as it could be</a></h1>
-<time datetime="2013-11-10T19:53:00-05:00" pubdate><span class='month'>Nov</span> <span class='day'>10</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/android/'>Android</a>, <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/cors/'>CORS</a>, <a class='category' href='/blog/categories/http/'>HTTP</a>, <a class='category' href='/blog/categories/internet-explorer/'>Internet Explorer</a>, <a class='category' href='/blog/categories/jws/'>JWS</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/nginx/'>NGINX</a>, <a class='category' href='/blog/categories/varnish/'>Varnish</a>, <a class='category' href='/blog/categories/xdomain/'>xDomain</a></span>
-</footer>
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/">Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014</a></h1>
-<time datetime="2013-10-20T11:00:00-04:00" pubdate><span class='month'>Oct</span> <span class='day'>20</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/soa/'>SOA</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/confoo/'>confoo</a></span>
 </footer>
 
 </article>
