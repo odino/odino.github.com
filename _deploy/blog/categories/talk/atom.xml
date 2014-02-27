@@ -4,7 +4,7 @@
   <title><![CDATA[Category: talk | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/talk/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-26T21:18:45-05:00</updated>
+  <updated>2014-02-27T12:04:04-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
+    <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
+    <updated>2014-02-27T11:54:00-05:00</updated>
+    <id>http://odino.org/angularjs-is-the-future-maybe</id>
+    <content type="html"><![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
+an overview of why Angular could fit your <em>future</em> requirements
+quite well.</p>
+
+<!-- more -->
+
+
+<p>Enjoy!</p>
+
+<p><div class="slideshare" id="__ss_31723051"><iframe src="http://www.slideshare.net/slideshow/embed_code/31723051 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
