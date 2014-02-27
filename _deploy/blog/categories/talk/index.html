@@ -31,6 +31,35 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
 
+
+<script type="text/javascript">
+(function(){
+  var dom,doc,where,iframe = document.createElement('iframe');
+  iframe.src = "javascript:false";
+  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+  where = document.getElementsByTagName('script')[0];
+  where.parentNode.insertBefore(iframe, where);
+
+  try {
+    doc = iframe.contentWindow.document;
+  } catch(e) {
+    dom = document.domain;
+    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+    doc = iframe.contentWindow.document;
+  }
+  doc.open()._l = function() {
+    var js = this.createElement("script");
+    if(dom) this.domain = dom;
+    js.id = "boomr-if-as";
+    js.src = '//c.go-mpulse.net/boomerang/' +
+    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
+    BOOMR_lstart=new Date().getTime();
+    this.body.appendChild(js);
+  };
+  doc.write('<body onload="document._l();">');
+  doc.close();
+  })();
+</script>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -84,48 +113,6 @@
 
 <footer>
   <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/angularjs/'>AngularJS</a>, <a class='category' href='/blog/categories/confoo/'>ConFoo</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/talk/'>talk</a></span>
-</footer>
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/orientdb-the-fastest-document-based-graph-database/">OrientDB, the fastest document-based graph database</a></h1>
-<time datetime="2014-02-26T15:25:00-05:00" pubdate><span class='month'>Feb</span> <span class='day'>26</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/nosql/'>NoSQL</a>, <a class='category' href='/blog/categories/orientdb/'>OrientDB</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/confoo/'>confoo</a>, <a class='category' href='/blog/categories/talk/'>talk</a></span>
-</footer>
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/">HTTP/1.1, SPDY and HTTP/2.0, again</a></h1>
-<time datetime="2013-09-01T17:48:00-04:00" pubdate><span class='month'>Sep</span> <span class='day'>01</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/cakefest/'>CakeFest</a>, <a class='category' href='/blog/categories/http/'>HTTP</a>, <a class='category' href='/blog/categories/spdy/'>SPDY</a>, <a class='category' href='/blog/categories/cache/'>cache</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/talk/'>talk</a></span>
-</footer>
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/tips-and-tricks-for-you-service-oriented-architecture/">Tips and Tricks for you Service-Oriented Architecture</a></h1>
-<time datetime="2013-08-31T19:05:00-04:00" pubdate><span class='month'>Aug</span> <span class='day'>31</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories"><i class="icon-tags"></i> <a class='category' href='/blog/categories/cakefest/'>CakeFest</a>, <a class='category' href='/blog/categories/soa/'>SOA</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/talk/'>talk</a></span>
 </footer>
 
 </article>
