@@ -4,7 +4,7 @@
   <title><![CDATA[Alessandro Nadalin]]></title>
   <link href="http://odino.org/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-26T21:18:45-05:00</updated>
+  <updated>2014-02-27T12:04:04-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
+    <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
+    <updated>2014-02-27T11:54:00-05:00</updated>
+    <id>http://odino.org/angularjs-is-the-future-maybe</id>
+    <content type="html"><![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
+an overview of why Angular could fit your <em>future</em> requirements
+quite well.</p>
+
+<!-- more -->
+
+
+<p>Enjoy!</p>
+
+<div class="slideshare" id="__ss_31723051"><iframe src="http://www.slideshare.net/slideshow/embed_code/31723051 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[7 takeways from the first day of ConFoo]]></title>
@@ -2450,110 +2469,6 @@ running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
 
 
 <p>Enjoy!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Beautifying JSON data from the shell]]></title>
-    <link href="http://odino.org/beautifying-json-data-from-the-shell/"/>
-    <updated>2013-06-22T15:36:00-04:00</updated>
-    <id>http://odino.org/beautifying-json-data-from-the-shell</id>
-    <content type="html"><![CDATA[<p>Yesterday I bumped into a very
-handly utility to beautify JSON
-data directly from your command
-line.</p>
-
-<!-- more -->
-
-
-<p>Let&rsquo;s say that, with a command, you
-are retrieving some data in JSON
-format<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -X POST --user admin:admin <span class="se">\</span>
-</span><span class='line'>http://localhost:2480/command/temp/sql/select%20from%20person
-</span><span class='line'>
-</span><span class='line'><span class="o">{</span><span class="s2">&quot;result&quot;</span>:<span class="o">[{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:2&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Luca&quot;</span><span class="o">}</span>, <span class="o">{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:3&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span><span class="o">}</span>, <span class="o">{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:4&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span><span class="o">}]}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Of course, the result doesn&rsquo;t really look
-readable, but thanks to a python
-utility we can directly expand and beautify
-our JSON by piping:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -X POST --user admin:admin <span class="se">\</span>
-</span><span class='line'>http://localhost:2480/command/temp/sql/select%20from%20person <span class="se">\</span>
-</span><span class='line'>| python -mjson.tool
-</span><span class='line'>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>    <span class="s2">&quot;result&quot;</span>: <span class="o">[</span>
-</span><span class='line'>        <span class="o">{</span>
-</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:2&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0,
-</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Luca&quot;</span>
-</span><span class='line'>        <span class="o">}</span>,
-</span><span class='line'>        <span class="o">{</span>
-</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:3&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0
-</span><span class='line'>        <span class="o">}</span>,
-</span><span class='line'>        <span class="o">{</span>
-</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:4&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
-</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">]</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s all, folks!</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>In my case, I am retrieving data from OrientDB, a NoSQL graph=document DB which handles data in JSON format over its HTTP interface <a href='#fnref:1' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
 ]]></content>
   </entry>
   
