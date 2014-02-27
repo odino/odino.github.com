@@ -4,7 +4,7 @@
   <title><![CDATA[Category: web | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/web/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-26T15:43:49-05:00</updated>
+  <updated>2014-02-26T21:18:45-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[7 takeways from the first day of ConFoo]]></title>
+    <link href="http://odino.org/7-takeways-from-the-first-day-of-confoo/"/>
+    <updated>2014-02-26T20:34:00-05:00</updated>
+    <id>http://odino.org/7-takeways-from-the-first-day-of-confoo</id>
+    <content type="html"><![CDATA[<p>Today it was the first day of ConFoo here in Montreal and,
+as usual, a conference is always good to wrap your head around
+solutions, different standpoints and discussions with other
+nerds :)</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/odino-confoo.jpg"></p>
+
+<h2>Websockets to the rescue</h2>
+
+<p>I&rsquo;ve come to learn about <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a>
+quite a while ago but I honestly never found a practical application for our
+architecture: nonetheless, in one of the talks it was <a href="http://blog.arungupta.me/2014/02/rest-vs-websocket-comparison-benchmarks/">compared to REST</a>
+in a context where multiple API calls are made, and the idea of re-using the same
+TCP connection is pretty handy at that point.</p>
+
+<p>For sure, things like <a href="http://stackoverflow.com/questions/12103628/spdy-as-replacement-for-websockets">SPDY</a>
+are probably already enough from that point of view, but that&rsquo;s not a valid excuse
+for not digging deeper into the WS specification.</p>
+
+<h2>Patterns of batch processing</h2>
+
+<p>During the same talk, <a href="https://twitter.com/arungupta">Arun Gupta</a> spoke about
+<a href="https://blogs.oracle.com/arungupta/entry/batch_applications_in_java_ee">JSR 352</a>,
+a specification for batch processing introduced in Java EE7.</p>
+
+<p>It was really interesting as the specification is quite &ldquo;obvious&rdquo; but anyhow
+efficient, as it structures batch jobs following a few rules:</p>
+
+<ul>
+<li>every job must process a specific number of items to process</li>
+<li>it is divided in steps</li>
+<li>each step is then again divided into 3 different sub-steps
+
+<ul>
+<li>reading the content of the item (<code>ItemReader</code>)</li>
+<li>processing it, executing transformation and any kind of magic over that content (<code>ItemProcessor</code>)</li>
+<li>writing the processed content <em>somewhere</em> (<code>ItemWriter</code>)</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Dividing batches into jobs of a limited number of items is a golden rule (and I would say
+your number should be as close to 1 as possible), while the structure that the JSR proposes
+is very clean.</p>
+
+<h2>Xamarin</h2>
+
+<p>This tool might be what you were looking for if you&rsquo;re into mobile development:
+its aim is to write code once (in C#) that gets <strong>converted to native code</strong> for both
+IOS and Android.</p>
+
+<p>If you had to write an app twice, because you needed to go native, you might really
+wanna <a href="https://xamarin.com/">have a look at it</a> as, from what I heard, it might
+really simplify your life.</p>
+
+<h2>AppDynamics</h2>
+
+<p>My bad for not being aware of <a href="http://www.appdynamics.com/">AppDynamics</a>, but we&rsquo;re pretty
+happy with one of their competitors (<a href="http://newrelic.com/">NewRelic</a>) :)</p>
+
+<p>AD is an <strong>application performance management</strong> platform that, just like NR, provides agents for
+various platforms in order to collect metrics and reports from the stuff that runs on your
+production servers: definitely worth a look, at least to understand the differences between
+these guys and NewRelic.</p>
+
+<h2>Detach DOM elements while transforming them</h2>
+
+<p>Switching to something more browser-oriented, I found out about a very simple but
+effective tecnique to optimize browser rendering performances when working with DOM
+elements: instead of applying a bunch of transformations on a visible element you can
+simply hide it, apply them and then show the element again, so that the browser
+won&rsquo;t have to repaint and reflow at every transformation but only when you eventually
+make the element visible again.</p>
+
+<p>Another way to implement the same tecnique is to clone the element (so that we are actually
+just working with a <strong>virtual DOM node</strong>), apply the transformations to that element and then
+replacing the existing one by calling <code>parent.innerHtml(virtualElement)</code>.</p>
+
+<p>Pretty simple but much valuable!</p>
+
+<h2>Optimize DOM animations</h2>
+
+<p>Another way to optimize browser performance upon rendering is to execute animations
+on elements with an absolute or fixed position.</p>
+
+<p>Why? Again, because then the browser doesn&rsquo;t have to reflow the whole DOM.</p>
+
+<h2>Lodash</h2>
+
+<p>A very <a href="http://lodash.com/">handy JS library</a> that seems to be <a href="http://lodash.com/benchmarks">way faster</a>
+than underscore. It is now considered a <a href="http://stackoverflow.com/questions/13789618/differences-between-lodash-and-underscore">superset of underscore</a>
+and you might want to look into using it from now on, in place of its predecessor.</p>
+
+<h2>All in all&hellip;</h2>
+
+<p>It was a fairly good day and my <a href="/orientdb-the-fastest-document-based-graph-database/">presentation about OrientDB</a>
+went pretty well, can&rsquo;t wait for tomorrow!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
