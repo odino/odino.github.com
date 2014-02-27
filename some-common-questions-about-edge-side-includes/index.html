@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Some common questions about Edge Side Includes - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="After my REST in (a mobile) peace talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/some-common-questions-about-edge-side-includes">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+
+<script type="text/javascript">
+(function(){
+  var dom,doc,where,iframe = document.createElement('iframe');
+  iframe.src = "javascript:false";
+  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+  where = document.getElementsByTagName('script')[0];
+  where.parentNode.insertBefore(iframe, where);
+
+  try {
+    doc = iframe.contentWindow.document;
+  } catch(e) {
+    dom = document.domain;
+    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+    doc = iframe.contentWindow.document;
+  }
+  doc.open()._l = function() {
+    var js = this.createElement("script");
+    if(dom) this.domain = dom;
+    js.id = "boomr-if-as";
+    js.src = '//c.go-mpulse.net/boomerang/' +
+    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
+    BOOMR_lstart=new Date().getTime();
+    this.body.appendChild(js);
+  };
+  doc.write('<body onload="document._l();">');
+  doc.close();
+  })();
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Some common questions about Edge Side Includes</a>
+  </h1>
+  
+  <p class="article-date">
+      Monday, 30 May 2011, 15:07
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>After my <a href="http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011">REST in (a mobile) peace</a> talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so &ldquo;standard&rdquo;, here&rsquo;s a parade of little things to know about <a href="http://en.wikipedia.org/wiki/Edge_Side_Includes">ESI</a>.</p>
+
+<!-- more -->
+
+
+<h2>Is it a single-construct language?</h2>
+
+<p>No: although the most used tag is the include one:</p>
+
+<figure class='code'><figcaption><span>Typical ESI tag</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;esi:include</span> <span class="na">src=</span><span class="s">&quot;http://www.example.net&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>the ESI specification has a <a href="http://www.w3.org/TR/esi-lang">plethora of commands</a>, while the Oracle website has a specific section on more <a href="http://download.oracle.com/docs/cd/B15897_01/caching.1012/b14046/esi.htm">detailed insights</a>.</p>
+
+<h2>If I install Varnish and use ESI, do I need to do something specific?</h2>
+
+<p>No: after you set up Varnish in order to do <a href="http://www.varnish-cache.org/trac/wiki/ESIfeatures">ESI processing</a>, everything will magically happen :)</p>
+
+<h2>Do I need, in my architecture, an ESI processor?</h2>
+
+<p>Yes, otherwise the ESI tags won&rsquo;t be replaced.</p>
+
+<p>Luckily, Varnish and Squid do it for free since years: the RAD framework for PHP Symfony2 implements a <a href="http://www.odino.org/343/symfony2-http-cache-the-good-parts-of-both-of-em">custom-made reverse proxy</a> and something is moving also in the <a href="https://github.com/ramsingla/rack-rsi">Ruby ecosystem</a>.</p>
+
+<h2>Does it work with modern browsers?</h2>
+
+<p>No: since ESI never got hype browser vendors never thought about implementing the specification.</p>
+
+<p>The topic is also subject of <a href="/339/esi-upside-down-will-the-client-be-happier">various arguments</a>.</p>
+
+<h2>Does ESI invalidate my output format?</h2>
+
+<p>No: since ESI processors ( like Varnish ) work on the server side, before sending the response to the clients esi tags get replaced with the actual content.</p>
+
+<h2>Does it work with HTML?</h2>
+
+<p>Well, the specification works regardless the format of your response: it can be application/xml, json, html, a custom media type&hellip;</p>
+
+<h2>How do I avoid my middleware to look for ESI tags in every response?</h2>
+
+<p>Parsing responses, in order to look for ESI tags, is expensive, we all know.</p>
+
+<p>In order to let your ESI processor ignore responses not containing ESI tags you can specify a declination of your content type:</p>
+
+<figure class='code'><figcaption><span>HTTP response with profile parameter in the media type</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Content-Type: application/xhtml+xml;profile<span class="o">=</span>esi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and make your processor checking this <code>profile</code> attribute.</p>
+
+<p>Unfortunately, it seems that only the <code>application/xhtml+xml</code> <a href="http://www.ietf.org/rfc/rfc3236.txt">supports the <code>profile</code> attribute</a>, but you can &ldquo;hack&rdquo; the media type of your needs and make it support it, since you are working on the server side, without sending non-standardized media type descriptions over the internet.</p>
+
+<h2>How does my application know if it can send ESI tags or not?</h2>
+
+<p>There are 2 common scenarios:</p>
+
+<ul>
+<li>when a middleware supports the ESI specification, and your application can send a response with ESI tags</li>
+<li>when you have no ESI processors in your architecture, and your application should assemble a single whole response</li>
+</ul>
+
+
+<p>In order to take this decision a custom HTTP header is used: <code>Surrogate-Capability</code>, which has been introduced in the <a href="http://www.w3.org/TR/edge-arch">edge side architectures</a> specification.</p>
+
+<h2>Is ESI a new technology?</h2>
+
+<p>10 years old, baby :)</p>
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-30T15:07:00-04:00" pubdate data-updated="true">Monday, 30 May 2011 at 15:07</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/esi/'>ESI</a>, <a class='category' href='/blog/categories/cache/'>cache</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/some-common-questions-about-edge-side-includes/" data-via="_odino_" data-counturl="http://odino.org/some-common-questions-about-edge-side-includes/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/the-orientdb-php-data-mapper-from-the-trenches/" title="Post anterior: The OrientDB PHP data mapper, from the trenches ">&laquo; The OrientDB PHP data mapper, from the trenches </a>
+      
+      
+        <a class="basic-alignment right" href="/the-problem-with-non-hypermedia-driven-webservices/" title="Próximo post: The problem with non hypermedia-driven webservices">The problem with non hypermedia-driven webservices &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/some-common-questions-about-edge-side-includes/';
+        var disqus_url = 'http://odino.org/some-common-questions-about-edge-side-includes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

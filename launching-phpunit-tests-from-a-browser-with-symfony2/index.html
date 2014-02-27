@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Launching PHPUnit tests from a browser with Symfony2 - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="This post is part of the &#8221;Symfony2 components in your own userland&#8221; series; here is a list of all the articles contained this series: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+
+<script type="text/javascript">
+(function(){
+  var dom,doc,where,iframe = document.createElement('iframe');
+  iframe.src = "javascript:false";
+  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+  where = document.getElementsByTagName('script')[0];
+  where.parentNode.insertBefore(iframe, where);
+
+  try {
+    doc = iframe.contentWindow.document;
+  } catch(e) {
+    dom = document.domain;
+    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+    doc = iframe.contentWindow.document;
+  }
+  doc.open()._l = function() {
+    var js = this.createElement("script");
+    if(dom) this.domain = dom;
+    js.id = "boomr-if-as";
+    js.src = '//c.go-mpulse.net/boomerang/' +
+    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
+    BOOMR_lstart=new Date().getTime();
+    this.body.appendChild(js);
+  };
+  doc.write('<body onload="document._l();">');
+  doc.close();
+  })();
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Launching PHPUnit tests from a browser with Symfony2</a>
+  </h1>
+  
+  <p class="article-date">
+      Monday, 20 February 2012, 13:41
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><ol class="aseries">
+    <p>This post is part of the &#8221;<strong>Symfony2 components in your own userland</strong>&#8221; series; here is a list of all the articles contained this series:</p>
+    <li>
+        <a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Using the Symfony2 Dependency Injection Container as a standalone component</a>
+    </li>
+    <li>
+        <a href="/launching-phpunit-tests-from-a-browser-with-symfony2/">Launching PHPUnit tests from a browser with Symfony2</a>
+    </li>
+    <li>
+        <a href="/install-composer-dependencies-with-the-symfony2-cli/">Using the Console component to write an interactive installer for Composer</a>
+    </li>
+</ol>
+
+
+<p>Today we are going to launch interactive PHPUnit tests thanks to the
+Symfony2 <a href="https://github.com/symfony/Process">Process</a> component.</p>
+
+<!-- more -->
+
+
+<h2>Premise</h2>
+
+<p>This article will show you how to build a script to run your unit tests
+from a browser and render the output to the webpage: since the aim
+of this series of articles is to show you how easily you can integrate
+Symfony2 code into your own projects, I will use nasty scripts to
+accomplish our requirements.</p>
+
+<h2>The approach</h2>
+
+<p>Our approach will be very basic and dummy: we are goint to execute a shell
+command from PHP, write each output buffers into a file and poll the file
+from the frontend to progressively read its content.</p>
+
+<h2>Into the mix</h2>
+
+<p>To do so, let&rsquo;s create a JS-loving <code>index.php</code> file:</p>
+
+<figure class='code'><figcaption><span>The entry point of out application</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>PHPUnit web tests<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">id=</span><span class="s">&quot;run&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      Run tests
+</span><span class='line'>    <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;output&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js&quot;</span> <span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">getOutput</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span><span class='line'>            <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;output.php&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#output&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">content</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>              <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">stop</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">getOutput</span><span class="p">();</span>
+</span><span class='line'>              <span class="p">}</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>        <span class="p">};</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#run&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span><span class='line'>            <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;process.php&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>          <span class="nx">getOutput</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, as you click on the <code>Run tests</code> link you will fire an event that:</p>
+
+<ul>
+<li>makes a <code>GET</code> call to <code>process.php</code></li>
+<li>makes a recursive <code>GET</code> request to <code>output.php</code>, until the output object
+does not contain the <code>stop</code> attribute</li>
+</ul>
+
+
+<p>The output script is really easy:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$fileName</span> <span class="o">=</span> <span class="nb">sys_get_temp_dir</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/test.output.txt&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$fileName</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$f</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nb">sys_get_temp_dir</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/test.output.txt&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$f</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$f</span> <span class="o">=</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nb">sys_get_temp_dir</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/test.output.txt.f&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$f</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span><span class='line'>  <span class="nb">unlink</span><span class="p">(</span><span class="nv">$f</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, each time we call this script, it reads the content of the <code>test.output.txt</code>
+file in the temporary directory of your system: if it doesn&rsquo;t find it, it reads the
+<code>test.output.txt.f</code> file<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<h2>Enter Process</h2>
+
+<p>In our final step, let&rsquo;s install the Process component:</p>
+
+<figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;require&quot;</span>: <span class="o">{</span>
+</span><span class='line'>        <span class="s2">&quot;php&quot;</span>: <span class="s2">&quot;&gt;=5.3.2&quot;</span>,
+</span><span class='line'>        <span class="s2">&quot;symfony/process&quot;</span>: <span class="s2">&quot;2.0.10&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>composer.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget http://getcomposer.org/composer.phar
+</span><span class='line'>
+</span><span class='line'>php composer.phar install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then we can create our <code>process.php</code> script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/vendor/.composer/autoload.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$file</span> <span class="o">=</span> <span class="nb">sys_get_temp_dir</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/test.output.txt&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$handle</span>   <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$process</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">(</span><span class="s1">&#39;phpunit -c /home/foor/bar/phpunit.xml /home/foo/bar&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">)</span> <span class="k">use</span><span class="p">(</span><span class="nv">$handle</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nb">fwrite</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nb">nl2br</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">));</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">fclose</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">rename</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nv">$file</span> <span class="o">.</span> <span class="s2">&quot;.f&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see we are launching the test suite and, at each buffer, thanks to a
+lambda, we write a new chunk to the file: at the end of the process the
+<code>txt</code> file gets renamed, so the <code>output.php</code> script knows that it needs to
+notify the frontend that he&rsquo;s not required to poll it anymore, adding
+the <code>stop</code> attribute to the JSON object it outputs:</p>
+
+<figure class='code'><figcaption><span>fragment of output.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="nv">$f</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="center" src="/images/phpunit-process.png"></p>
+
+<h2>Benefits from the Process component</h2>
+
+<blockquote><p>I can do that crap with shell_exec() too!</p></blockquote>
+
+
+<p>There are some advantages of using Process instead of writing your own command
+executor: first of all, if you don&rsquo;t want to take care of the subtle <strong>differences
+between the different platforms</strong> everything is done for you;
+then <strong>error handling becomes very easy</strong> since you are able to catch all the buffers:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;err&#39;</span> <span class="o">===</span> <span class="nv">$type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="s1">&#39;Something nasty happened&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">syslog</span><span class="p">(</span><span class="nx">LOG_ERR</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$buffer</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Flaw here: no error handling when the .f file is not found <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T13:41:00-05:00" pubdate data-updated="true">Monday, 20 February 2012 at 13:41</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/" data-via="_odino_" data-counturl="http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/" title="Post anterior: Using the Symfony2 DIC as a standalone component">&laquo; Using the Symfony2 DIC as a standalone component</a>
+      
+      
+        <a class="basic-alignment right" href="/install-composer-dependencies-with-the-symfony2-cli/" title="Próximo post: Create a Composer command line installer with the Symfony2 CLI">Create a Composer command line installer with the Symfony2 CLI &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/';
+        var disqus_url = 'http://odino.org/launching-phpunit-tests-from-a-browser-with-symfony2/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

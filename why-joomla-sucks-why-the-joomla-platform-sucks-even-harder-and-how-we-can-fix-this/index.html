@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Why Joomla sucks, why the Joomla platform sucks even harder and how We can fix this - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="I started using Joomla! in 2007 and then I massively focused my old company technology know-how on it when version 1.5 came out. In 2009 I abandoned &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+
+<script type="text/javascript">
+(function(){
+  var dom,doc,where,iframe = document.createElement('iframe');
+  iframe.src = "javascript:false";
+  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+  where = document.getElementsByTagName('script')[0];
+  where.parentNode.insertBefore(iframe, where);
+
+  try {
+    doc = iframe.contentWindow.document;
+  } catch(e) {
+    dom = document.domain;
+    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+    doc = iframe.contentWindow.document;
+  }
+  doc.open()._l = function() {
+    var js = this.createElement("script");
+    if(dom) this.domain = dom;
+    js.id = "boomr-if-as";
+    js.src = '//c.go-mpulse.net/boomerang/' +
+    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
+    BOOMR_lstart=new Date().getTime();
+    this.body.appendChild(js);
+  };
+  doc.write('<body onload="document._l();">');
+  doc.close();
+  })();
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Why Joomla sucks, why the Joomla platform sucks even harder and how We can fix this</a>
+  </h1>
+  
+  <p class="article-date">
+      Monday, 18 July 2011, 12:00
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>I started using Joomla! in 2007 and then I massively focused my old company technology know-how on it when version 1.5 came out.</p>
+
+<p>In 2009 I abandoned it because I had so much pain in the *** trying to fit this product to customers&#8217; needs and, other big reason, because I lost enthusiasm on developing on such this kind of platform.</p>
+
+<!-- more -->
+
+
+<p>Seriously, no fun at all after a few months I worked with it.</p>
+
+<p>Seriously, I wrote a few extensions I&rsquo;m not proud of. <strong>At all</strong>.</p>
+
+<p>So, as you might understand, I need to reveal a big disclaimer before digging into this post: it&rsquo;s been a while I don&rsquo;t use Joomla! in production and I didn&rsquo;t even used the 1.6 version, which had some cool features the 1.5 series lacked of.</p>
+
+<p>But I always followed the project, as an external watcher, in order to understand where it was going, its aims, its gotchas and so on.</p>
+
+<p>I love the idea behind this CMS, but I hate how it is implemented and the way the entire project is handled.</p>
+
+<p>That&rsquo;s why, in the title of my post, I put a couple <em>sucks</em>: since I don&rsquo;t want to bitch around offending a good product with a great community, I&rsquo;ll analyze the motivations that led me to think Joomla! sucks hard and I could not use it for my projects, those I made with my former company ( and it was my company ) and those we are manufacturing in <a href="http://www.dnsee.com/">DNSEE</a>.</p>
+
+<h2>All the way with Django</h2>
+
+<p>I was fascinated by a talk entitled &ldquo;<a href="http://www.scribd.com/doc/37113340/Why-Django-Sucks-and-How-we-Can-Fix-it">Why Django sucks, and how We can fix it</a>&rdquo;, because it had a purpose: highlighting the bad and the evil of the framework providing some proposals to fix them.</p>
+
+<p>So I will take inspiration from that talk so you will read about:</p>
+
+<ul>
+<li>things that suck in Joomla!</li>
+<li>why they suck</li>
+<li>how to fix them</li>
+</ul>
+
+
+<h2>Joomla!</h2>
+
+<p>As you might know, Joomla! is a fork of a procedural crap called <a href="http://www.mamboserver.com/">Mambo</a>, an <em>en-vogue</em> CMS during the old fashion age of <strong>PHP 4</strong>, when men were living in caves and, if you were a woman, your job was picking up berries from the woods near to your own cave, while your man was out, hunting mammoths.</p>
+
+<p>At that time, PHP solutions were not properly engineered and a lot of concepts, like <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">SoC</a>, <a href="http://en.wikipedia.org/wiki/Inversion_of_control">IoC</a>, <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">OOP</a> [<em>insert every kind of goodness we have nowaday here</em>] were missing.</p>
+
+<p>So we had <strong>Joomla! 1.0</strong>, a political fork of Mambo ( and the DevTeam had the right reasons to fork it ) which was, basically, Mambo with a different name.</p>
+
+<p>In 2008 we had <strong>Joomla! 1.5</strong>, an almost-completely rewritten version of the CMS, with a new framework, still supporting some legacy stuff but better engineered, althought still crappy.</p>
+
+<h2>Joomla! 1.5 and 1.6: what a mess!</h2>
+
+<p>If we consider Joomla! 1.5/6 we agree on the fact that it&rsquo;s not properly engineered or, better, not as engineered as its community claims it is.</p>
+
+<p>First of all you notice that there is no decent abstraction layer for the DB: only 2 PDOs are supported, <a href="http://joomlacode.org/svn/joomla/development/releases/1.5/libraries/joomla/database/database/">Mysql and Mysqli</a>, so you can basically just install Joomla! with MySQL.</p>
+
+<p>Looking at the tests of the framework, you can see that in the version 1.5 the <a href="http://joomlacode.org/svn/joomla/development/releases/1.5/tests/unit/suite/">code coverage of the framework was very weak</a>, while in 1.6 they <a href="http://joomlacode.org/svn/joomla/development/trunk/tests/unit/">improved it</a>: the ugly thing is that ots of &ldquo;unit&rdquo; test are not that <em>unit</em>](<a href="http://joomlacode.org/svn/joomla/development/trunk/tests/unit/suite/libraries/joomla/form/JFormDataHelper.php">http://joomlacode.org/svn/joomla/development/trunk/tests/unit/suite/libraries/joomla/form/JFormDataHelper.php</a>).</p>
+
+<p>You can also find other masterpieces of the software right around: for example <a href="http://joomlacode.org/svn/joomla/development/trunk/components/com_content/helpers/query.php">helpers which handle models&#8217; responsabilities</a>. Not even MVC.</p>
+
+<p>Again, <strong>not even MVC</strong>.</p>
+
+<p>And then, again, no decent abstraction on the core components of a framework/cms, like HTTP requests ( <a href="http://joomlacode.org/svn/joomla/development/trunk/components/com_content/controller.php">$_SERVER is so 2003</a> ).</p>
+
+<h2>The golden age which started from the 1.6 series</h2>
+
+<p>Now we have Joomla! 1.6 and will have a newer version of Joomla! every six months ( like Ubuntu ): the DevTeam decided to separate the framework from the actual CMS, so they invented the Joomla! platform, because, you know, it&rsquo;s nice to have a clear separation between the foundation of your product and the product itself.</p>
+
+<p>But the question is not &ldquo;<strong>Why</strong> did they do this?&rdquo;, because I fully agree with that decision: the real question is <strong>How?</strong>.</p>
+
+<p>And here comes the hard part.</p>
+
+<h2>The Joomla! Platform</h2>
+
+<p>If you look at the <a href="https://github.com/joomla/joomla-platform">Joomla! Platform</a> on GitHub you will see a few things that I still can&rsquo;t believe they could be included in a &ldquo;framework&rdquo;.</p>
+
+<p>No namespaces, no standardization of the <a href="https://github.com/joomla/joomla-platform/blob/master/libraries/loader.php">autoloading</a> through the <a href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR0</a>&hellip;</p>
+
+<p>And other stuff that I want to spend a few lines on:</p>
+
+<ul>
+<li><a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/factory.php">Factory</a> is really a good design pattern, but you should couple it with DI and, if needed a DI container</li>
+<li>Do we really need such this kind of code in every file? <code>defined('JPATH_PLATFORM') or die;</code></li>
+<li><a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/access/access.php">static methods are everywhere</a> and, oh my, there are even methods that <a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/database/table.php#L924">spend a few lines in order to inspect if they live in a static context or not</a></li>
+<li>lack of abstraction is well expressed when <a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/database/table.php#L963">a Table object ( DB-related ) throws a generic exception</a>: how the hell a coder can extend this code implementing fault-tolerance?</li>
+<li><a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/document/document.php#L196">methods embarrassing themselves</a></li>
+<li>dependency injection <a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/session/session.php#L446">heavily ignored</a></li>
+<li><a href="https://github.com/joomla/joomla-platform/blob/master/libraries/joomla/form/form.php">useless pieces of code</a> already written &ndash; better &ndash; by Zend Framework and Symfony</li>
+</ul>
+
+
+<p>Besides all of this, why do we need <strong>just another framework</strong>?</p>
+
+<p>It is obvious that if we consider the evolution from Mambo to Joomla! 1.6 the road has been cool and long, mostly succesfull ( for <strong>Joomla!, the brand</strong> ) but the product had to face a tremendous slow down of the development process, internal quality and so on.</p>
+
+<p>Internal quality is the biggest problem I&rsquo;m considering now, because it&rsquo;s the quality of a software which makes the software itself evolve faster/slower, without/with pain in the ass.</p>
+
+<p>The quality of Joomla! CMS and the platform is not that good and the biggest problem is that we should not expect something well-engineered from people stucked on the old PHP world.</p>
+
+<p>And stucked to some idiotic ideas like <a href="http://people.joomla.org/groups/viewdiscussion/634-a-framework-i-mean-a-real-framework.html?groupid=630">re-inventing the software is really cool, because other&rsquo;s sw is crap</a>.</p>
+
+<p>If you take a look at the points I highlight in my post on people.joomla.org you&rsquo;ll notice that:</p>
+
+<ul>
+<li>people think Joomla! is the coolest software on the planet, and the Joomla! community can make great things</li>
+<li>after I point out some problems, people recognizes that there is something evil in this way of managing a software</li>
+<li>after that, the excuse is to bring feelings into the battlefield:</li>
+</ul>
+
+
+<blockquote><p>I could go through the rest of what you&#8217;ve mentioned, but I don&#8217;t think that it is helpfull.<br/>Mainly because I&#8217;m most likely wrong, but will defend all this to the blood because I&#8217;m emotionally attached to it. ;-)</p></blockquote>
+
+
+<p>Seriously, guys?</p>
+
+<h2>Steal&hellip; I mean, reuse, or fork if you need to!</h2>
+
+<p>So after saying really ugly things on this wonderful CMS and its community, it&rsquo;s time to throw a solution, the solution I recommend, into this post: <strong>stealing code</strong>.</p>
+
+<p>Take a look at <a href="http://www.symfony.com/">Symfony</a>: it all started before 2007 ( so before Joomla! 1.5 ), when Fabien Potencier decided to fork the Mojavi<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> framework1 and expand it integrating a few other libraries, like some parts of the Zend Framework, Prado and so on.</p>
+
+<p>Since Fabien isn&rsquo;t stupid, he took the best from a few projects to deliver one of the first real RAD frameworks for PHP, and after doing that, he took inspiration from Spring to re-engineer &ldquo;his&rdquo; framework and deliver Symfony2 ( which is in RC4 now ): also Symfony2 likes to steal code; for example, the logging aspect is handled with <a href="https://github.com/Seldaek/monolog">Monolog</a>.</p>
+
+<p>Not only code, that&rsquo;s obvious: Symfony2 has also stolen a 10 years old specification, the <a href="http://www.w3.org/TR/esi-lang">ESI</a> language one, in order to spare development time and teach people that HTTP cache is almost <strong>total</strong>.</p>
+
+<p>But as you probably know, I&rsquo;m not really talking about stealing actual things, but rather about taking inspiration about good ideas and re-using great products to speed up our development process and deliver better software.</p>
+
+<p><strong>Look, try, re-use</strong>: that should be the motto for the Joomla! core team.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>David Zuelke started developing Agavi from the same - more or less - point <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-18T12:00:00-04:00" pubdate data-updated="true">Monday, 18 July 2011 at 12:00</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/php/'>PHP</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this/" data-via="_odino_" data-counturl="http://odino.org/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/resources-about-hateoas/" title="Post anterior: Resources about HATEOAS">&laquo; Resources about HATEOAS</a>
+      
+      
+        <a class="basic-alignment right" href="/contributing-to-the-zend-framework-via-github/" title="Próximo post: Contributing to the Zend Framework via GitHub">Contributing to the Zend Framework via GitHub &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this/';
+        var disqus_url = 'http://odino.org/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Twig | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/twig/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating Twig in your legacy code, Part 2: a less wild approach]]></title>
+    <link href="http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
+    <updated>2013-06-18T12:07:00-04:00</updated>
+    <id>http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
+    <content type="html"><![CDATA[<p>In my last post I wrote about
+<a href="/integrating-twig-in-your-legacy-php-code/">integrating Twig into your legacy code</a>
+with a really <strong>wild</strong>
+approach.</p>
+
+<p>Today I came up with a better
+solution that lets you take advantage
+of Twig full features without any hack
+(like the <code>partial</code> tag I was
+talking about in my previous post).</p>
+
+<!-- more -->
+
+
+<p>Instead of parsing the generated output
+as a string with Twig, we can store it
+into a template, which lets us use
+features like <code>use</code>, <code>extends</code>, <code>include</code>,
+thing that is almost impossible &ndash; in a clean way &ndash;
+if we use the Twig string loader:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{
+  public function render($templateName, array $parameters = array())
+  {</p>
+
+<pre><code>  // ....
+  // do stuff to render your template
+  // we have the HTML output in the $templateOutput variable
+  // ...
+
+    $twig = new Twig_Environment(new Twig_Loader_String(), array(
+      'autoescape' =&gt; false,
+  ));
+
+    return $twig-&gt;render($templateOutput, $parameters);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Instead of using the <code>Twig_String_Loader</code> we would use an array
+loader, and store <code>$templateOutput</code> in a unique template, called <code>__MAIN__</code>.</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>class Framework_Base_Controller
+{
+  public function render($templateName, array $parameters = array())
+  {</p>
+
+<pre><code>  // ....
+  // do stuff to render your template
+  // we have the HTML output in the $templateOutput variable
+  // ...
+
+  $finder     = new Symfony\Component\Finder\Finder();
+  $templates  = array();
+
+  foreach ($finder-&gt;in('/path/to/twig/templates') as $file) {
+      if (!$file-&gt;isDir()) {
+          $templates[$file-&gt;getRelativePathName()] = $file-&gt;getContents();
+      }
+  }
+
+  $loader = new Twig_Loader_Array($templates);
+  $loader-&gt;setTemplate('__MAIN__', $templateOutput);
+
+  $twig = new Twig_Environment($loader, array(
+      'autoescape' =&gt; false,
+  ));
+
+  try {
+      return $this-&gt;twig-&gt;render($templateName, Alice_Component_Registry::getAll());
+  } catch (Twig_Error_Loader $e) {
+      return $this-&gt;twig-&gt;render("__MAIN__", Alice_Component_Registry::getAll());
+  }
+</code></pre>
+
+<p>  }
+}
+```
+And that&rsquo;s it!</p>
+
+<p>Now you can write your own <code>$templateName</code>:</p>
+
+<p>``` bash /path/to/twig/templates/$templateName
+{ % extends &lsquo;<strong>MAIN</strong>&rsquo; % }</p>
+
+<p>{ % use &lsquo;whatever&rsquo; % }</p>
+
+<p>{ % block somewhat % }</p>
+
+<pre><code>some content
+</code></pre>
+
+<p>{ % endblock % }
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

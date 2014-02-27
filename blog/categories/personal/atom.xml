@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: personal | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/personal/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Moving to Dubai]]></title>
+    <link href="http://odino.org/moving-to-dubai/"/>
+    <updated>2012-03-05T10:00:00-05:00</updated>
+    <id>http://odino.org/moving-to-dubai</id>
+    <content type="html"><![CDATA[<p>Yes, you got it.</p>
+
+<!-- more -->
+
+
+<p>Last thursday I resigned from my lead developer position at <a href="http://dnsee.com">DNSEE</a>
+to be able to join <a href="http://www.rocket-internet.de/">Rocket Internet</a> for their exciting projects
+in the middle east area.</p>
+
+<p>After more than 2 years in DNSEE, I really owe everyone a hug, and I gotta
+say I&rsquo;m pretty excited for my relocation, which is gonna lead me to Dubai on the 30 or 31
+of this month.</p>
+
+<p>I will be in charge of one of the teams in Dubai, reporting to <a href="http://de.linkedin.com/in/halilkoklu">Halil</a>, as a team leader.</p>
+
+<p>I have no words, really: after a brief visit to my parents (it has been a very sad weekend, believe me),
+I&rsquo;m just <strong>so excited</strong> to start this new challenge.</p>
+
+<p>Wish me luck guys, wish me luck.</p>
+]]></content>
+  </entry>
+  
+</feed>

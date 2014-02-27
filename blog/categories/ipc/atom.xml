@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: IPC | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/ipc/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
+    <link href="http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
+    <updated>2012-10-16T15:11:00-04:00</updated>
+    <id>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
+    <content type="html"><![CDATA[<p>Yesterday, from Doha&rsquo;s international airport, I
+got the chance to blog about the latest changes
+surrounding the upcoming major version of the
+protocol of the web, <code>HTTP/2.0</code>.</p>
+
+<p>Today I gave, at the International PHPConference in
+Mainz, an overview about HTTP (<code>0.9</code>, <code>1.0</code>, <code>1.1</code>), SPDY
+and <code>HTTP/2.0</code> itself.</p>
+
+<!-- more -->
+
+
+<p>There&rsquo;s not that much to say, as the presentation is already
+on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-the-end-of-the-road">Slideshare</a> and I&rsquo;m embedding it here, other than a thing
+the guys here in Germany already heard a lot: <strong>go back to
+the basics</strong>.</p>
+
+<p><div class="slideshare" id="__ss_14749994"><iframe src="http://www.slideshare.net/slideshow/embed_code/14749994 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ready for europe, IPC and pizzas]]></title>
+    <link href="http://odino.org/ready-for-europe-ipc-and-pizzas/"/>
+    <updated>2012-10-14T21:21:00-04:00</updated>
+    <id>http://odino.org/ready-for-europe-ipc-and-pizzas</id>
+    <content type="html"><![CDATA[<p>In 24 hourse I&rsquo;ll be on a plane which is gonna bring
+me in Frankfurt, to then join the <a href="http://phpconference.com/">International PHP Conference</a>
+in Mainz.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/ipc-slide.png"></p>
+
+<p>I&rsquo;m pretty excited since this will be my first visit
+to the old continent since I moved to Dubai &ndash; almost 7 months ago &ndash;
+and I&rsquo;m glad I&rsquo;ll do that for IPC, with a brief <em>pit-stop</em> in Italy &ndash;
+unfortunately not in Rome.</p>
+
+<p>At IPC I will talk about REST, with an &ndash; I hope &ndash;
+interesting introduction about this architectural style, anti-patterns
+and a few tips on how to implement REST&rsquo;s constraints in our
+architectures.</p>
+
+<p>I will also have another chance to talk, and I&rsquo;m <strong>seriously</strong>
+excited about it, since, for the first time, I get the chance to
+talk about the foundation of our lives in the modern era (<em>homo internectus</em>),
+the <strong>HTTP protocol</strong>: I will talk a little bit about why we needed it,
+with some historical notion about the web&rsquo;s foundation, what SPDY
+brings on the table and the recent <strong>revolutions</strong> around <code>HTTP/2.0</code>.</p>
+
+<p>On the 17th evening I will catch a flight for Venice (via Wien) and then
+I&rsquo;ll spend some time with the rest of the family, good thing if you also
+consider that for the first time in 4 years they&rsquo;re gonna see me for my birthday.</p>
+
+<p><img class="left" src="/images/ale_idiot.jpeg"></p>
+
+<p>But Italy doesn&rsquo;t mean that I&rsquo;m going to relax <strong>at all</strong>, as I will
+finally meet all the guys from the <a href="http://friuli.grusp.org/">PHP User Group Friuli</a>,
+the 2nd PHP user group in Italy (considering numbers and history), that
+I personally founded along with <a href="http://www.mvassociati.it/it/il-team">Steve&amp;Stefano</a> and <a href="http://it.linkedin.com/in/dlondero">Daniel</a> in front of a pizza,
+but never got to join during their
+monthly meetings, as I was already based in Rome at that time.</p>
+
+<p>There is no plan about that meeting, as the topic will be &ldquo;<em>Alessandro Nadalin in tour</em>&rdquo;:
+if you are a developer, a technology enthusiast or simply a student come
+and join us in Codroipo, as I will also talk about abroad work experiences as well
+as scout and recruit for some companies (yes, not only <strong>my</strong> company).</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

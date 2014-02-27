@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CMS | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/cms/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Retrieve top rated products in Magento]]></title>
+    <link href="http://odino.org/retrieve-top-rated-products-in-magento/"/>
+    <updated>2010-09-11T13:52:00-04:00</updated>
+    <id>http://odino.org/retrieve-top-rated-products-in-magento</id>
+    <content type="html"><![CDATA[<p>Here you learn how to display top rated products using an helper function and a snippet of a <code>.phtml</code> block.</p>
+
+<!-- more -->
+
+
+<p>This is the function you need to put in your helper ( mine is named &lsquo;heart&rsquo;, you&rsquo;ll see that later ):</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>public function getTopRatedProducts($limit) {</p>
+
+<pre><code>    $limit = (int) $limit; 
+
+    // retrieve all the products
+    $products = Mage::getModel('catalog/product')-&gt;getCollection(); 
+
+    $rated = array(); 
+
+    foreach($products as $product) { 
+
+        $_product = Mage::getModel('catalog/product')
+                    -&gt;load($product-&gt;getid()); 
+
+        $storeId    = Mage::app()-&gt;getStore()-&gt;getId(); 
+
+        // retrieve reviews data related to the current products
+        // of the iteration
+        $summaryData = Mage::getModel('review/review_summary') 
+        -&gt;setStoreId($storeId) 
+        -&gt;load($_product-&gt;getId()); 
+
+        // put a subarray containing name, url and rating of the
+        // product in our array containing the products
+        $rated[] = array(
+                     'rating' =&gt; $summaryData['rating_summary'], 
+                     'name' =&gt; $_product-&gt;getName(), 
+                     'url' =&gt; $_product-&gt;getUrlPath()
+                    ); 
+    } 
+
+    // tell that the product's array must be ordered by rating DESC
+    arsort($rated); 
+
+    // return the array with the amount of products defined by $limit
+    return array_slice($rated, 0, $limit); 
+}
+</code></pre>
+
+<p>```</p>
+
+<p>So now that you are able to retrieve the products you need to put them in your Magento pages:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>//create the array of top rated products calling our function
+$products = Mage::helper(&lsquo;heart&rsquo;)&ndash;>getTopRatedProducts(5);</p>
+
+<pre><code>foreach($products as $product){
+
+    echo "
+        &lt;li&gt;
+            &lt;a href='{$product['url']}' /&gt;
+                {$product['name']}
+            &lt;/a&gt;
+        &lt;/li&gt;
+    ";
+}
+</code></pre>
+
+<p>```</p>
+
+<p>That&rsquo;s it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to discover if a site has been built with Joomla!]]></title>
+    <link href="http://odino.org/how-to-discover-if-a-site-has-been-built-with-joomla/"/>
+    <updated>2010-09-11T13:44:00-04:00</updated>
+    <id>http://odino.org/how-to-discover-if-a-site-has-been-built-with-joomla</id>
+    <content type="html"><![CDATA[<p>Today I&rsquo;ve updated my customers' requests' list with a particular one from an hair stylist products' reseller.</p>
+
+<!-- more -->
+
+
+<p>The mail body:</p>
+
+<p><blockquote><p>home page restyling</p></blockquote></p>
+
+<p>and nothing else matters.</p>
+
+<p>I&rsquo;m not kiddind: not an &ldquo;Hello guys&rdquo; nor a thank for the patience we paied to read the mail ( the 19 letters that compose the whole mail! ).</p>
+
+<p>So, no probs!</p>
+
+<p>I asked, in the reply, if they need a complete restyling of the site and <em>&hellip;{other boring stuff}&hellip;</em>   &hellip;but the big question was: how was their site built?</p>
+
+<p>Current site&rsquo;s layout sucks at all so, I&rsquo;ve thought, it has been built with frontpage or simple HTML+CSS old way ( like this blog&rsquo;s layout, but more ridicolous ).</p>
+
+<p>No: after a while I&rsquo;ve decided to know if they were using a CMS and it came out they use Joomla!.</p>
+
+<p>How did I found it out? Let&rsquo;s take a look to the ways you can recognize a Joomla!-based site.</p>
+
+<h2>URLs</h2>
+
+<p>Dynamic URLs, in Joomla!, are something like:</p>
+
+<ul>
+<li><code>index.php?option=com_content...</code></li>
+<li><code>index.php?option=com_virtuemart...</code></li>
+</ul>
+
+
+<p>but this site used static URLs.</p>
+
+<p>Next!</p>
+
+<h2>Generator metatag</h2>
+
+<p>The generator metatag defines Joomla! 1.5 as the software that builds the site; unfortunately, it missed here.</p>
+
+<p>Next!</p>
+
+<h2>HTML source</h2>
+
+<p>In HTML source of the webpages of the site you can find lots of signs of the usage of Joomla!:</p>
+
+<ul>
+<li>template&rsquo;s path (<code>/templates/rhuk_milkyway/css/template.css</code>)</li>
+<li>extensions</li>
+</ul>
+
+
+<p>and many others.</p>
+
+<p>Ridicolous, this site used a source encryption tool!</p>
+
+<p>Next!</p>
+
+<h2>Standard URLs</h2>
+
+<p>I&rsquo;ve tried to type a standard URL like <code>index.php?option=com_user</code> but I got a forbidden error: what a stupid webmaster built this site, trying to hide that he used Joomla!</p>
+
+<p>Next!</p>
+
+<h2>/administrator</h2>
+
+<p>The backend of the site was protected by a php script.</p>
+
+<p>This appeared to me like a confirmation of the usage of Joomla! because the webmaster could have used any URL he wanted to reach the backend of the site; although I cannot directly get to the backend of the CMS, the fact that the <code>/administrator</code> path was the backend of the site made me realize that it was a Joomla!-based site, but I needed a new confirmation.</p>
+
+<p>Next!</p>
+
+<h2>Template blocks</h2>
+
+<p>So I&rsquo;ve reached:</p>
+
+<ul>
+<li><del>index.php?tp=0</del></li>
+<li>index.php?tp=1</li>
+</ul>
+
+
+<p>and it suddenly appeared the typical Joomla!&rsquo;s template blocks view.</p>
+
+<p><em>Next one, sheriff!</em></p>
+]]></content>
+  </entry>
+  
+</feed>

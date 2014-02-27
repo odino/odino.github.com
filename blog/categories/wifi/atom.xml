@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wifi | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/wifi/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
+    <link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
+    <updated>2013-08-18T23:51:00-04:00</updated>
+    <id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
+    <content type="html"><![CDATA[<p>Today, even though I come from a weekend
+of barely sleeping, I decided, after an entire
+day unable to connect to the WiFi of the office,
+to try to fix this issue that seems to be affecting
+the Dell XPS harder than other laptops.</p>
+
+<!-- more -->
+
+
+<p>After googling for a while and realizing that
+even at home I got no luck with my wireless,
+I decided to go on with my own usual solution,
+which means <strong>downgrading the kernel or grub</strong>.</p>
+
+<p>You can get a list of the <em>installables</em> from
+any terminal:</p>
+
+<p><code>
+ dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+</code></p>
+
+<p>And since I&rsquo;m currently using <code>3.8.0-27-generic</code>
+I decided to give a slightly previous one a try;
+let&rsquo;s edit grub:</p>
+
+<p><code>
+sudo /etc/kernel/postrm.d/zz-update-grub 3.8.0-19-generic /boot/vmlinuz-3.8.0-19-generic
+</code></p>
+
+<p>This solved the issue, at least for me ;&ndash;)</p>
+]]></content>
+  </entry>
+  
+</feed>

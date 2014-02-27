@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Integrating Zend Framework 2 in Symfony 1.4 - Alessandro Nadalin</title>
+  <meta name="author" content="Alessandro Nadalin">
+
+  
+  
+  <meta name="description" content="With PHP 5.3 the new era of PHP frameworks has begun, and things are really, for example, simpler to integrate, thanks to the PSR0, which is the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://odino.org/integrating-zend-framework-2-in-symfony-1-4">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
+
+
+<script type="text/javascript">
+(function(){
+  var dom,doc,where,iframe = document.createElement('iframe');
+  iframe.src = "javascript:false";
+  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+  where = document.getElementsByTagName('script')[0];
+  where.parentNode.insertBefore(iframe, where);
+
+  try {
+    doc = iframe.contentWindow.document;
+  } catch(e) {
+    dom = document.domain;
+    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+    doc = iframe.contentWindow.document;
+  }
+  doc.open()._l = function() {
+    var js = this.createElement("script");
+    if(dom) this.domain = dom;
+    js.id = "boomr-if-as";
+    js.src = '//c.go-mpulse.net/boomerang/' +
+    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
+    BOOMR_lstart=new Date().getTime();
+    this.body.appendChild(js);
+  };
+  doc.write('<body onload="document._l();">');
+  doc.close();
+  })();
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7407627-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
+</head>
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1 class="hentry" role="title"><a href="">
+    Integrating Zend Framework 2 in Symfony 1.4</a>
+  </h1>
+  
+  <p class="article-date">
+      Thursday, 21 July 2011, 14:14
+  </p>
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+<div class="entry-content"><p>With PHP 5.3 the <a href="http://blog.webspecies.co.uk/2011-05-23/the-new-era-of-php-frameworks.html">new era of PHP frameworks</a> has begun, and things are really, for example, simpler to integrate, thanks to the <a href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR0</a>, which is the standard autoloader adopted by the community.</p>
+
+<!-- more -->
+
+
+<p>The PSR0 is, obviously, not supported by the symfony 1.4 framework, which was released far before PHP 5.3 was ready, but it&rsquo;s not <em>that</em> difficult to integrate PSR0-compliant projects in Sf1.4.</p>
+
+<p>If you want, for example, to use the <a href="https://github.com/zendframework/zf2">Zend Framework 2</a> in symfony you just need a few quick steps: first of all, copy the standard <a href="https://gist.github.com/221634">SplClassLoader</a> in your symfony project ( lib/autoload? ), then require it in your <code>projectConfiguration.class.php</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">require_once</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/../lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require_once</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/../lib/autoload/SplClassLoader.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">sfCoreAutoload</span><span class="o">::</span><span class="na">register</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then, put the Zend Framework wherever you want ( <code>lib/vendor/ZF2</code>? ) and re-edit the <code>projectConfiguration</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="nx">sfCoreAutoload</span><span class="o">::</span><span class="na">register</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$classLoader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SplClassLoader</span><span class="p">(</span><span class="s1">&#39;ZF2&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/zend/framework/2&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$classLoader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and you&rsquo;re done!</p>
+
+<p>You can start using the Zend Framework 2 using namespaces inside your existing symfony code, without breaking anything:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">ZF2\Service\Twitter</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">twitterActions</span> <span class="k">extends</span> <span class="nx">sfActions</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">executeTwitterLogin</span><span class="p">(</span><span class="nx">sfWebRequest</span> <span class="nv">$request</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$service</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Twitter</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+  <footer>
+    <p class="meta">
+<!--       
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-21T14:14:00-04:00" pubdate data-updated="true">Thursday, 21 July 2011 at 14:14</time>
+ -->      
+
+<span class="categories"><i class="icon-tags"></i>
+  
+    <a class='category' href='/blog/categories/zend-framework/'>Zend Framework</a>, <a class='category' href='/blog/categories/symfony/'>symfony</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/integrating-zend-framework-2-in-symfony-1-4/" data-via="_odino_" data-counturl="http://odino.org/integrating-zend-framework-2-in-symfony-1-4/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/contributing-to-the-zend-framework-via-github/" title="Post anterior: Contributing to the Zend Framework via GitHub">&laquo; Contributing to the Zend Framework via GitHub</a>
+      
+      
+        <a class="basic-alignment right" href="/hands-on-php-5-4-traits-and-other-good-stuff/" title="Próximo post: Hands on PHP 5.4: traits and other good stuff">Hands on PHP 5.4: traits and other good stuff &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
+      var disqus_shortname = 'odino';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://odino.org/integrating-zend-framework-2-in-symfony-1-4/';
+        var disqus_url = 'http://odino.org/integrating-zend-framework-2-in-symfony-1-4/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script></div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+</html>
+<div id="footer">
+    <ul class="credit">
+        <li>&copy; 2014 - Alex Nadalin</li>
+    </ul>
+</div>

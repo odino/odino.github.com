@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: python | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Beautifying JSON data from the shell]]></title>
+    <link href="http://odino.org/beautifying-json-data-from-the-shell/"/>
+    <updated>2013-06-22T15:36:00-04:00</updated>
+    <id>http://odino.org/beautifying-json-data-from-the-shell</id>
+    <content type="html"><![CDATA[<p>Yesterday I bumped into a very
+handly utility to beautify JSON
+data directly from your command
+line.</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s say that, with a command, you
+are retrieving some data in JSON
+format<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
+
+<p>``` bash
+curl -X POST &mdash;user admin:admin \
+<a href="http://localhost:2480/command/temp/sql/select%20from%20person">http://localhost:2480/command/temp/sql/select%20from%20person</a></p>
+
+<p>{&ldquo;result&rdquo;:[{&ldquo;@type&rdquo;:&ldquo;d&rdquo;,&ldquo;@rid&rdquo;:&ldquo;#9:2&rdquo;,&ldquo;@version&rdquo;:0,&ldquo;@class&rdquo;:&ldquo;person&rdquo;,&ldquo;name&rdquo;:&ldquo;Luca&rdquo;}, {&ldquo;@type&rdquo;:&ldquo;d&rdquo;,&ldquo;@rid&rdquo;:&ldquo;#9:3&rdquo;,&ldquo;@version&rdquo;:0,&ldquo;@class&rdquo;:&ldquo;person&rdquo;}, {&ldquo;@type&rdquo;:&ldquo;d&rdquo;,&ldquo;@rid&rdquo;:&ldquo;#9:4&rdquo;,&ldquo;@version&rdquo;:0,&ldquo;@class&rdquo;:&ldquo;person&rdquo;}]}
+```</p>
+
+<p>Of course, the result doesn&rsquo;t really look
+readable, but thanks to a python
+utility we can directly expand and beautify
+our JSON by piping:</p>
+
+<p>```
+curl -X POST &mdash;user admin:admin \
+<a href="http://localhost:2480/command/temp/sql/select%20from%20person">http://localhost:2480/command/temp/sql/select%20from%20person</a> \
+| python -mjson.tool</p>
+
+<p>{</p>
+
+<pre><code>"result": [
+    {
+        "@class": "person",
+        "@rid": "#9:2",
+        "@type": "d",
+        "@version": 0,
+        "name": "Luca"
+    },
+    {
+        "@class": "person",
+        "@rid": "#9:3",
+        "@type": "d",
+        "@version": 0
+    },
+    {
+        "@class": "person",
+        "@rid": "#9:4",
+        "@type": "d",
+        "@version": 0
+    }
+]
+</code></pre>
+
+<p>}
+```</p>
+
+<p>That&rsquo;s all, folks!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>In my case, I am retrieving data from OrientDB, a NoSQL graph=document DB which handles data in JSON format over its HTTP interface <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

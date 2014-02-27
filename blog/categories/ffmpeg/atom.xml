@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ffmpeg | Alessandro Nadalin]]></title>
+  <link href="http://odino.org/blog/categories/ffmpeg/atom.xml" rel="self"/>
+  <link href="http://odino.org/"/>
+  <updated>2014-02-27T16:20:07-05:00</updated>
+  <id>http://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[FFMPEG: get a thumbnail from a video with PHP]]></title>
+    <link href="http://odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php/"/>
+    <updated>2010-09-11T10:28:00-04:00</updated>
+    <id>http://odino.org/ffmpeg-get-a-thumbnail-from-a-video-with-php</id>
+    <content type="html"><![CDATA[<p>Here&rsquo;s a simple tutorial in order to <strong>extract a thumbnail from a video</strong> using FFMPEG and PHP.</p>
+
+<!-- more -->
+
+
+<p>First of all let&rsquo;s install FFMPEG ( you probably already got it if you know what kind of kick-ass video manipulator it is ):</p>
+
+<p><code>bash
+sudo apt-get install ffmpeg
+</code></p>
+
+<p>Then let&rsquo;s set up our script: the main problem is the use of the <code>shell_exec()</code> function, in order to run a shell command inside PHP.</p>
+
+<p>If you don&rsquo;t know anything about <code>cmd()</code>, <code>shell_exec()</code> or shell escaping please don&rsquo;t use this tecnique and go ahed to <a href="http://php.net">php.net</a> to read some documentation about it.</p>
+
+<p>At least, you also need to have <code>shell_exec()</code> enabled in your server, so shared hosting won&rsquo;t fit your requirements.</p>
+
+<p>Here&rsquo;s the way:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$video = &lsquo;path/to/video.flv&rsquo;;
+$thumbnail = &lsquo;path/to/thumbnail.jpg&rsquo;;</p>
+
+<p>// shell command [highly simplified, please don&rsquo;t run it plain on your script!]
+shell_exec(&ldquo;ffmpeg -i $video -deinterlace -an -ss 1 -t 00:00:01 -r 1 -y -vcodec mjpeg -f mjpeg $thumbnail 2>&amp;1&rdquo;);
+```</p>
+
+<p>so you&rsquo;ll be able to see your thumbnail of the video at the location you specified.</p>
+]]></content>
+  </entry>
+  
+</feed>
