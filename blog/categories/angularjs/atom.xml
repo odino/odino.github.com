@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: AngularJS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
+    <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
     <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
     <updated>2014-02-27T11:54:00-05:00</updated>
     <id>http://odino.org/angularjs-is-the-future-maybe</id>
@@ -32,7 +31,7 @@ quite well.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
+    <title type="html"><![CDATA[If You Love AngularJS, You Should Definitely Join us...we're Hiring!]]></title>
     <link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
     <updated>2014-01-17T16:28:00-05:00</updated>
     <id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
@@ -82,7 +81,7 @@ render in ~100ms, powered by lotsa APIs.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How to make your JavaScript apps SEO-friendly]]></title>
+    <title type="html"><![CDATA[How to Make Your JavaScript Apps SEO-friendly]]></title>
     <link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
     <updated>2014-01-17T14:15:00-05:00</updated>
     <id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
@@ -214,7 +213,7 @@ is <a href="https://prerender.io/pricing">very affordable</a> as well.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Frontend web development is not as fun as it could be]]></title>
+    <title type="html"><![CDATA[Frontend Web Development Is Not as Fun as It Could Be]]></title>
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
     <updated>2013-11-10T19:53:00-05:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
@@ -541,7 +540,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
+    <title type="html"><![CDATA[Speaking About AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
     <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
     <updated>2013-10-20T11:00:00-04:00</updated>
     <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>

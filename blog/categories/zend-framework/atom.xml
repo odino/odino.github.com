@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: Zend Framework | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/zend-framework/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -67,7 +66,7 @@ class twitterActions extends sfActions
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Deliver content as XML with Zend Framework]]></title>
+    <title type="html"><![CDATA[Deliver Content as XML With Zend Framework]]></title>
     <link href="http://odino.org/deliver-content-as-xml-with-zend-framework/"/>
     <updated>2010-09-11T12:00:00-04:00</updated>
     <id>http://odino.org/deliver-content-as-xml-with-zend-framework</id>

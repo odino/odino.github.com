@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: ConFoo | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/confoo/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[6 takeways from the second day of ConFoo]]></title>
+    <title type="html"><![CDATA[6 Takeways From the Second Day of ConFoo]]></title>
     <link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
     <updated>2014-02-27T18:27:00-05:00</updated>
     <id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
@@ -102,7 +101,7 @@ forward to my third day &ndash; with my last talk, about SOAs &ndash; in this co
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
+    <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
     <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
     <updated>2014-02-27T11:54:00-05:00</updated>
     <id>http://odino.org/angularjs-is-the-future-maybe</id>

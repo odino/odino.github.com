@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: ESI | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/esi/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
+    <title type="html"><![CDATA[Edge Side Includes, How to Spare Terabytes Every Day]]></title>
     <link href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
     <updated>2012-01-20T14:15:00-05:00</updated>
     <id>http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
@@ -311,7 +310,7 @@ and leaner web.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Some common questions about Edge Side Includes]]></title>
+    <title type="html"><![CDATA[Some Common Questions About Edge Side Includes]]></title>
     <link href="http://odino.org/some-common-questions-about-edge-side-includes/"/>
     <updated>2011-05-30T15:07:00-04:00</updated>
     <id>http://odino.org/some-common-questions-about-edge-side-includes</id>
@@ -388,7 +387,7 @@ Content-Type: application/xhtml+xml;profile=esi
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
+    <title type="html"><![CDATA[Real-time Scaling: When NoSQL Almost Wins, HTTP Almost Wins, and the Customer Smiles]]></title>
     <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
     <updated>2011-05-06T15:42:00-04:00</updated>
     <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>

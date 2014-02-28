@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: REST | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/rest/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Media types and hypermedia services: beyond REST architectures]]></title>
+    <title type="html"><![CDATA[Media Types and Hypermedia Services: Beyond REST Architectures]]></title>
     <link href="http://odino.org/hypermedia-services-beyond-rest-architectures/"/>
     <updated>2012-01-24T03:22:00-05:00</updated>
     <id>http://odino.org/hypermedia-services-beyond-rest-architectures</id>
@@ -274,7 +273,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Less REST, more hypermedia]]></title>
+    <title type="html"><![CDATA[Less REST, More Hypermedia]]></title>
     <link href="http://odino.org/less-rest-more-hypermedia/"/>
     <updated>2011-12-19T23:40:00-05:00</updated>
     <id>http://odino.org/less-rest-more-hypermedia</id>
@@ -289,7 +288,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Resources about HATEOAS]]></title>
+    <title type="html"><![CDATA[Resources About HATEOAS]]></title>
     <link href="http://odino.org/resources-about-hateoas/"/>
     <updated>2011-07-16T13:50:00-04:00</updated>
     <id>http://odino.org/resources-about-hateoas</id>
@@ -335,7 +334,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[REST in peace, again]]></title>
+    <title type="html"><![CDATA[REST in Peace, Again]]></title>
     <link href="http://odino.org/rest-in-peace-again/"/>
     <updated>2011-07-12T23:17:00-04:00</updated>
     <id>http://odino.org/rest-in-peace-again</id>
@@ -351,7 +350,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[It's client's fault]]></title>
+    <title type="html"><![CDATA[It's Client's Fault]]></title>
     <link href="http://odino.org/it-s-client-s-fault/"/>
     <updated>2011-04-21T12:50:00-04:00</updated>
     <id>http://odino.org/it-s-client-s-fault</id>

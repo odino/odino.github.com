@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: CLI | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/cli/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Create a Composer command line installer with the Symfony2 CLI]]></title>
+    <title type="html"><![CDATA[Create a Composer Command Line Installer With the Symfony2 CLI]]></title>
     <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
     <updated>2012-02-21T10:51:00-05:00</updated>
     <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>

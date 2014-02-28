@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: legacy | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Legacy | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/legacy/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Integrating Twig in your legacy code, Part 2: a less wild approach]]></title>
+    <title type="html"><![CDATA[Integrating Twig in Your Legacy Code, Part 2: A Less Wild Approach]]></title>
     <link href="http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach/"/>
     <updated>2013-06-18T12:07:00-04:00</updated>
     <id>http://odino.org/integrating-twig-in-your-legacy-code-part-2-a-less-wild-approach</id>
@@ -125,7 +124,7 @@ And that&rsquo;s it!</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Integrating Twig in your legacy PHP code]]></title>
+    <title type="html"><![CDATA[Integrating Twig in Your Legacy PHP Code]]></title>
     <link href="http://odino.org/integrating-twig-in-your-legacy-php-code/"/>
     <updated>2013-06-15T23:15:00-04:00</updated>
     <id>http://odino.org/integrating-twig-in-your-legacy-php-code</id>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: WHOIS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/whois/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Y U NO access WHOIS informations in PHP?]]></title>
+    <title type="html"><![CDATA[Y U NO Access WHOIS Informations in PHP?]]></title>
     <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
     <updated>2012-04-16T00:38:00-04:00</updated>
     <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
@@ -163,7 +162,7 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Checking a domain's availability with PHP]]></title>
+    <title type="html"><![CDATA[Checking a Domain's Availability With PHP]]></title>
     <link href="http://odino.org/checking-a-domain-s-availability-with-php/"/>
     <updated>2012-03-20T09:49:00-04:00</updated>
     <id>http://odino.org/checking-a-domain-s-availability-with-php</id>
@@ -297,7 +296,7 @@ are provided under the <code>sample</code> directory.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Retrieving raw WHOIS informations in PHP]]></title>
+    <title type="html"><![CDATA[Retrieving Raw WHOIS Informations in PHP]]></title>
     <link href="http://odino.org/retrieving-raw-whois-informations-in-php/"/>
     <updated>2012-02-14T00:58:00-05:00</updated>
     <id>http://odino.org/retrieving-raw-whois-informations-in-php</id>

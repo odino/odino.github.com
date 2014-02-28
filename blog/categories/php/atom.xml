@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: php | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Php | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Doctrine 80% faster?]]></title>
+    <title type="html"><![CDATA[Doctrine 80% Faster?]]></title>
     <link href="http://odino.org/doctrine-80-percent-faster/"/>
     <updated>2013-04-21T10:54:00-04:00</updated>
     <id>http://odino.org/doctrine-80-percent-faster</id>
@@ -41,7 +40,7 @@ branch very soon!</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[A brief visit to the cold lands of Italy]]></title>
+    <title type="html"><![CDATA[A Brief Visit to the Cold Lands of Italy]]></title>
     <link href="http://odino.org/a-brief-visit-to-the-cold-lands-of-italy/"/>
     <updated>2013-03-29T14:14:00-04:00</updated>
     <id>http://odino.org/a-brief-visit-to-the-cold-lands-of-italy</id>
@@ -80,7 +79,7 @@ me if you find me at the upcoming events (in Turin and Udine).</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PHP: 'The script tried to execute a method or access a property of an incomplete object']]></title>
+    <title type="html"><![CDATA[PHP: 'the Script Tried to Execute a Method or Access a Property of an Incomplete Object']]></title>
     <link href="http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/"/>
     <updated>2013-01-31T13:28:00-05:00</updated>
     <id>http://odino.org/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object</id>
@@ -115,7 +114,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Profiling PHP applications from the browser]]></title>
+    <title type="html"><![CDATA[Profiling PHP Applications From the Browser]]></title>
     <link href="http://odino.org/profiling-php-applications-from-the-browser/"/>
     <updated>2013-01-25T22:38:00-05:00</updated>
     <id>http://odino.org/profiling-php-applications-from-the-browser</id>
@@ -359,7 +358,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Making the OrientDB ODM 5 times faster]]></title>
+    <title type="html"><![CDATA[Making the OrientDB ODM 5 Times Faster]]></title>
     <link href="http://odino.org/making-the-orientdb-odm-5-times-faster/"/>
     <updated>2013-01-25T17:39:00-05:00</updated>
     <id>http://odino.org/making-the-orientdb-odm-5-times-faster</id>

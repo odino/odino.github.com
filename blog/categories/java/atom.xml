@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: Java | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
+    <title type="html"><![CDATA[Drop OpenJDK and Upgrade Java to the Oracle Packages]]></title>
     <link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
     <updated>2013-11-10T08:59:00-05:00</updated>
     <id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>

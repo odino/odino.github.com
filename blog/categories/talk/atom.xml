@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: talk | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Talk | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/talk/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
+    <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
     <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
     <updated>2014-02-27T11:54:00-05:00</updated>
     <id>http://odino.org/angularjs-is-the-future-maybe</id>
@@ -32,7 +31,7 @@ quite well.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
+    <title type="html"><![CDATA[OrientDB, the Fastest Document-based Graph Database]]></title>
     <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
     <updated>2014-02-26T15:25:00-05:00</updated>
     <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
@@ -51,7 +50,7 @@ as usual, here:</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
+    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, Again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
     <updated>2013-09-01T17:48:00-04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
@@ -77,7 +76,7 @@ here are the slides for the lazy ones :)</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
+    <title type="html"><![CDATA[Tips and Tricks for You Service-Oriented Architecture]]></title>
     <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
     <updated>2013-08-31T19:05:00-04:00</updated>
     <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>

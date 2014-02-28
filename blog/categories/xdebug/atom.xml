@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: xdebug | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Xdebug | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/xdebug/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Profiling with Xdebug and Kcachegrind]]></title>
+    <title type="html"><![CDATA[Profiling With Xdebug and Kcachegrind]]></title>
     <link href="http://odino.org/profiling-with-xdebug-and-kcachegrind/"/>
     <updated>2010-09-11T13:40:00-04:00</updated>
     <id>http://odino.org/profiling-with-xdebug-and-kcachegrind</id>

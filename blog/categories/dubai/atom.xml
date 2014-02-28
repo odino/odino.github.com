@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: Dubai | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/dubai/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[7 reasons why working for Namshi is great]]></title>
+    <title type="html"><![CDATA[7 Reasons Why Working for Namshi Is Great]]></title>
     <link href="http://odino.org/7-reasons-why-working-at-namshi-is-great/"/>
     <updated>2014-01-17T17:44:00-05:00</updated>
     <id>http://odino.org/7-reasons-why-working-at-namshi-is-great</id>
@@ -198,7 +197,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
+    <title type="html"><![CDATA[If You Love AngularJS, You Should Definitely Join us...we're Hiring!]]></title>
     <link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
     <updated>2014-01-17T16:28:00-05:00</updated>
     <id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
@@ -248,7 +247,7 @@ render in ~100ms, powered by lotsa APIs.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PHP User Group Dubai, here we start again!]]></title>
+    <title type="html"><![CDATA[PHP User Group Dubai, Here We Start Again!]]></title>
     <link href="http://odino.org/php-user-group-dubai-here-we-start-again/"/>
     <updated>2013-06-18T13:38:00-04:00</updated>
     <id>http://odino.org/php-user-group-dubai-here-we-start-again</id>

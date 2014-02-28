@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: graphdb | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Graphdb | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/graphdb/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[GraphDB in PHP: time for the serious stuff]]></title>
+    <title type="html"><![CDATA[GraphDB in PHP: Time for the Serious Stuff]]></title>
     <link href="http://odino.org/graphdb-in-php-time-for-the-serious-stuff/"/>
     <updated>2011-10-25T12:09:00-04:00</updated>
     <id>http://odino.org/graphdb-in-php-time-for-the-serious-stuff</id>

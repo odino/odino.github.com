@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: SPDY | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/spdy/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
+    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, Again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
     <updated>2013-09-01T17:48:00-04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
@@ -40,7 +39,7 @@ here are the slides for the lazy ones :)</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mixing the history of HTTP, SPDY and HTTP/2.0]]></title>
+    <title type="html"><![CDATA[Mixing the History of HTTP, SPDY and HTTP/2.0]]></title>
     <link href="http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0/"/>
     <updated>2012-10-16T15:11:00-04:00</updated>
     <id>http://odino.org/mixing-the-history-of-http-spdy-and-http-slash-2-dot-0</id>
@@ -66,7 +65,7 @@ the basics</strong>.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[The state of HTTP/2.0]]></title>
+    <title type="html"><![CDATA[The State of HTTP/2.0]]></title>
     <link href="http://odino.org/the-state-of-http-slash-2-dot-0/"/>
     <updated>2012-10-15T23:45:00-04:00</updated>
     <id>http://odino.org/the-state-of-http-slash-2-dot-0</id>
@@ -161,7 +160,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[The web benefits from SPDY just as SPDY benefits from HTTP]]></title>
+    <title type="html"><![CDATA[The Web Benefits From SPDY Just as SPDY Benefits From HTTP]]></title>
     <link href="http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http/"/>
     <updated>2012-01-27T19:27:00-05:00</updated>
     <id>http://odino.org/http-benefits-from-spdy-as-spdy-benefits-from-http</id>

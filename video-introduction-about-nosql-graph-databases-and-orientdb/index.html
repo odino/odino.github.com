@@ -1,106 +1,37 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Video introduction about NoSQL graph databases and OrientDB - Alessandro Nadalin</title>
-  <meta name="author" content="Alessandro Nadalin">
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="Blog of Alex, Vice President - Technology at Namshi in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		<title>Video introduction about NoSQL graph databases and OrientDB — Alessandro Nadalin</title>
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="/stylesheets/prettify-hemisu.css" type="text/css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Cambo' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
 
-  
-  
-  <meta name="description" content="During October of the last year, me and my ex-colleague David
-took some time off to partecipate to the polish PHP Conference
-with a talk about graph &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
-
-<script type="text/javascript">
-(function(){
-  var dom,doc,where,iframe = document.createElement('iframe');
-  iframe.src = "javascript:false";
-  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
-  where = document.getElementsByTagName('script')[0];
-  where.parentNode.insertBefore(iframe, where);
-
-  try {
-    doc = iframe.contentWindow.document;
-  } catch(e) {
-    dom = document.domain;
-    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
-    doc = iframe.contentWindow.document;
-  }
-  doc.open()._l = function() {
-    var js = this.createElement("script");
-    if(dom) this.domain = dom;
-    js.id = "boomr-if-as";
-    js.src = '//c.go-mpulse.net/boomerang/' +
-    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
-    BOOMR_lstart=new Date().getTime();
-    this.body.appendChild(js);
-  };
-  doc.write('<body onload="document._l();">');
-  doc.close();
-  })();
-</script>
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-7407627-3']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
-</head>
-<body   class="no-sidebar"  >
-  <header role="banner"><hgroup>
-  <h1 class="hentry" role="title"><a href="">
-    Video introduction about NoSQL graph databases and OrientDB</a>
-  </h1>
-  
-  <p class="article-date">
-      Saturday, 08 December 2012, 15:56
-  </p>
-</hgroup>
-</header>
-  <nav role="navigation"><ul class="main-navigation">
-  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
-  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
-  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
-  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
-  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
-</ul>
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
+    <header>
+        <h1><a href="/video-introduction-about-nosql-graph-databases-and-orientdb/">Video introduction about NoSQL graph databases and OrientDB</a></h1>
+        <time>08 December 2012</time>
+    </header>
 <div class="entry-content"><p>During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
 with a talk about graph databases, OrientDB and how to integrate it
@@ -118,84 +49,28 @@ finally made it to Vimeo: enjoy some tarzan english!</p>
 <p> <p><a href="http://vimeo.com/53451968">Alessandro Nadalin, David Funaro: Graph databases and PHP: time for serious stuff</a> from <a href="http://vimeo.com/user10854134">PLUG</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
 </div>
 
-  <footer>
-    <p class="meta">
-<!--       
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Alessandro Nadalin</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-08T15:56:00-05:00" pubdate data-updated="true">Saturday, 08 December 2012 at 15:56</time>
- -->      
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/nosql/'>NoSQL</a>, <a class='category' href='/blog/categories/orientdb/'>OrientDB</a>, <a class='category' href='/blog/categories/conference/'>conference</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/" data-via="_odino_" data-counturl="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/coding-bureaucracy/" title="Post anterior: Coding bureaucracy">&laquo; Coding bureaucracy</a>
-      
-      
-        <a class="basic-alignment right" href="/please-welcome-the-doctrine-orientdb-odm/" title="Próximo post: Please welcome the Doctrine2 OrientDB ODM">Please welcome the Doctrine2 OrientDB ODM &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><script type="text/javascript">
-      var disqus_shortname = 'odino';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/';
-        var disqus_url = 'http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script></div>
-  </section>
-
-</div>
-
-
-    </div>
-  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'podabedorg';
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- END _/layouts/post.html -->
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2014 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+	</body>
 </html>
-<div id="footer">
-    <ul class="credit">
-        <li>&copy; 2014 - Alex Nadalin</li>
-    </ul>
-</div>
+<!-- END _layouts/default.html -->

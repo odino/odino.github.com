@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: ubuntu | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Ubuntu | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
+    <title type="html"><![CDATA[WiFi Not Connecting or Being Wonky on a Dell XPS in Ubuntu 13.04]]></title>
     <link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
     <updated>2013-08-18T23:51:00-04:00</updated>
     <id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
@@ -52,7 +51,7 @@ sudo /etc/kernel/postrm.d/zz-update-grub 3.8.0-19-generic /boot/vmlinuz-3.8.0-19
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Desktop notifications for PHPUnit tests on Ubuntu]]></title>
+    <title type="html"><![CDATA[Desktop Notifications for PHPUnit Tests on Ubuntu]]></title>
     <link href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/"/>
     <updated>2013-06-21T03:48:00-04:00</updated>
     <id>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu</id>

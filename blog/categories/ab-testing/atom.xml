@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: AB testing | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: AB Testing | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/ab-testing/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-28T14:35:22-05:00</updated>
+  <updated>2014-02-28T15:42:21-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[AB testing in PHP with namshi/ab]]></title>
+    <title type="html"><![CDATA[AB Testing in PHP With Namshi/ab]]></title>
     <link href="http://odino.org/ab-testing-in-php-with-namshi-slash-ab/"/>
     <updated>2013-07-13T14:27:00-04:00</updated>
     <id>http://odino.org/ab-testing-in-php-with-namshi-slash-ab</id>
