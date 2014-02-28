@@ -2,9 +2,17 @@
 @import "compass";
 @include global-reset;
 @include reset-html5;
+$color-background: #eee !default;
+$color-main: #258fb8 !default;
+$color-gray01: #666 !default;
+$color-gray02: #999 !default;
+$color-gray03: #ccc !default;
+$color-gray04: #ddd !default;
+$color-gray05: #fff !default;
 
 @import "base";
 @import "partials";
+@import "parts";
 
 
 .wrap {
@@ -21,4 +29,41 @@ sup, sub {
 
 .footnotes {
   font-size: 80%;
+}
+
+img, video{
+  @extend .basic-alignment;
+  margin: 10px 0;
+  max-width: 100%;
+  height: auto;
+  -moz-border-radius:0.3em;
+  -webkit-border-radius:0.3em;
+  -o-border-radius:0.3em;
+  -ms-border-radius:0.3em;
+  -khtml-border-radius:0.3em;
+  border-radius:0.3em;
+  -moz-box-shadow:rgba(0,0,0,0.75) 0 1px 4px;
+  -webkit-box-shadow:rgba(0,0,0,0.75) 0 1px 4px;
+  -o-box-shadow:rgba(0,0,0,0.75) 0 1px 4px;
+  box-shadow:rgba(0,0,0,0.75) 0 1px 4px;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  -ms-box-sizing:border-box;
+  box-sizing:border-box;
+  border:#fff 0.3em solid;
+}
+
+
+.left {
+  float: left;
+  margin-right: 30px;
+}
+
+.right {
+  float: right;
+  margin-left: 30px;
+}
+
+.cat-month {
+  color: #cc0033;
 }
