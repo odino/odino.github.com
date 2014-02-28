@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ConFoo | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/confoo/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T16:20:07-05:00</updated>
+  <updated>2014-02-27T19:00:03-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[6 takeways from the second day of ConFoo]]></title>
+    <link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
+    <updated>2014-02-27T18:27:00-05:00</updated>
+    <id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
+    <content type="html"><![CDATA[<p>Today it was an interesting day here at ConFoo, and I&rsquo;ve
+seen some good content dealing with web performances.</p>
+
+<!-- more -->
+
+
+<h2>Don&rsquo;t pollute domain models with specifications</h2>
+
+<p><img class="right" src="/images/odino-confoo-2.jpg"></p>
+
+<p>During a very good talk I was waiting for since the conference started,
+<a href="http://twitter.com/mathiasverraes">Mathias Verrase</a> has been talking
+about DDD and domain models and has shown to the audience how you
+should not pollute them with specifications.</p>
+
+<p>The proposed approach introduces a bit more verbosity with the advantage
+of having cleaner models that reflect your domain.</p>
+
+<p>So, instead of having models knowing the business specification:</p>
+
+<p><code>
+$customer-&gt;isPremium();
+</code></p>
+
+<p>you might want to refactor the code in a way that makes the
+information as part of a business rule (hence, the <em>specification</em>),
+that will accept a subject in order to verify that it actually
+satisfies the rule / specification:</p>
+
+<p><code>
+$premiumSpecification-&gt;isSatisfiedBy($customer);
+</code></p>
+
+<h2>Optimizing images</h2>
+
+<p><a href="">Imageoptim</a> is a very handy tool to losslessly compress images
+and save bandwidth while serving them.</p>
+
+<h2>gzip_static</h2>
+
+<p>Instead of gzipping each and every assets <em>on-the-fly</em> you can tell <code>nginx</code>
+to look for a previously gzipped version of the same file.</p>
+
+<p>Compile <code>nginx</code> with this option enabled:</p>
+
+<p><code>
+./configure --with-http_gzip_static_module
+</code></p>
+
+<p>and then turn it on:</p>
+
+<p><code>
+gzip_static on;
+</code></p>
+
+<h2>Turn off tcp_slow_start_after_idle</h2>
+
+<p><a href="http://www.lognormal.com/blog/2012/09/27/linux-tcpip-tuning/">Turning off window resizing</a>
+(or&hellip; downsizing) after a slow start will help clients who take a while
+to send back packets over the same, slow, TCP connection, as it doesn&rsquo;t resize
+the TCP window contrary to what the system would do by default.</p>
+
+<h2>Pagespeed at nginx level</h2>
+
+<p>I already knew about <a href="https://github.com/pagespeed/ngx_pagespeed">ngx_pagespeed</a>
+but totally forgot to use it :)</p>
+
+<h2>More RUM monitoring tools</h2>
+
+<p>I&rsquo;ve come across <a href="https://mpulse.soasta.com">mpulse</a> which is another RUM platform.</p>
+
+<p>Even though their UI is a bit old school, they&rsquo;re (of course) real-time and provide
+valuable insides, like pageload times and DOM rendering performances.</p>
+
+<p>Sign up on their site, it&rsquo;s free up to 1M visits a month!</p>
+
+<h2>All in all</h2>
+
+<p>Good day for optimizations and delivering a faster experience to your users, looking
+forward to my third day &ndash; with my last talk, about SOAs &ndash; in this cold land!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
