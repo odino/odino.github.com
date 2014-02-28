@@ -299,7 +299,7 @@ figure.code {
   font-weight: normal;
   margin-bottom: 0;
   @include top-borders(5px);
-  font-family: "Helvetica Neue", Arial, "Lucida Grande", "Lucida Sans Unicode", Lucida, sans-serif;
+  font-family: 'Cambo';
   background: #aaaaaa image-url("code_bg.png") top repeat-x;
   border: 1px solid #565656;
   border-top-color: #cbcbcb;

@@ -1,10 +1,24 @@
+@import 'main';
 @import "compass";
 @include global-reset;
 @include reset-html5;
 
-@import "custom/colors";
-@import "custom/fonts";
-@import "custom/layout";
 @import "base";
 @import "partials";
-@import "custom/styles";
+
+
+.wrap {
+  width: 70%;
+  line-height: 30px;
+}
+
+
+sup, sub {
+  padding: 0 0.2em;
+  display: inline;
+  font-size: 80%
+}
+
+.footnotes {
+  font-size: 80%;
+}

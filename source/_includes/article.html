@@ -1,26 +1,26 @@
 {% if index %}
-  <header>
-      <div class="front-title">
-        {% if index %}
-          <h1 class="entry-title"><a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></h1>
-        {% else %}
-          <h1 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
-        {% endif %}
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="{{ root_url }}{{ page.url }}">{{ page.title }}</a></h1>
+        <time>{{ page.date | date: "%d %B %Y" }}</time>
+    </header>
+    <div class="content">
         {{ content | excerpt }}
-      </div>
-    <div class="front-meta">
-        {% unless page.meta == false %}
-        <p class="meta">
-            {% include post/date.html %}{{ time }}
-            {% if site.disqus_short_name and page.comments != false and site.disqus_show_comment_count == true %}
-            | <a href="{% if index %}{{ root_url }}{{ post.url }}{% endif %}#disqus_thread">Comments</a>
-            {% endif %}
-        </p>
-        {% endunless %}
-        <div class="entry-content">{% include post/categories.html %}</div>
+        {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
+        {% if excerpted == 'true' %} <a href="{{ root_url }}{{ post.url }}">{{ site.excerpt_link }}</a> {% endif %}
     </div>
-  </header>
-  {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
+    <footer>
+        {% include post/categories.html %}
+        {% if page.source.url %}via <a href="{{ page.source.url }}">{{ page.source.title }}</a>{% endif %}
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+{% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
 {% else %}
+    <header>
+        <h1><a href="{{ root_url }}{{ page.url }}">{{ page.title }}</a></h1>
+        <time>{{ page.date | date: "%d %B %Y" }}</time>
+    </header>
 <div class="entry-content">{{ content }}</div>
 {% endif %}

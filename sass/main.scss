@@ -1,0 +1,368 @@
+@import "variables";
+
+// Prefixes
+@mixin prefixer ($property, $value,
+				 $webkit: true,
+				 $moz: true,
+				 $ms: true,
+				 $o: true,
+				 $spec: true)
+					{
+					@if $webkit { -webkit-#{$property}: $value; }
+					@if $moz    {    -moz-#{$property}: $value; }
+					@if $ms     {     -ms-#{$property}: $value; }
+					@if $o      {      -o-#{$property}: $value; }
+					@if $spec   {         #{$property}: $value; }
+					}
+
+// Responsive
+@mixin respond-to($device)
+	{
+	@if $device == phones
+		{
+		@media only screen and (min-width: 0px) and (max-width: 400px)
+			{
+			@content;
+			}
+		}
+	@else if $device == tablets
+		{
+		@media only screen and (min-width: 400px) and (max-width: 1200px)
+			{
+			@content;
+			}
+		}
+	@else if $device == desktops
+		{
+		@media only screen and (min-width: 1200px)
+			{
+			@content;
+			}
+		}
+	}
+
+// CSS
+*::selection
+	{
+	background: $black;
+	color: $white;
+	}
+
+*::-moz-selection
+	{
+	background: $black;
+	color: $white;
+	}
+
+*::-webkit-selection
+	{
+	background: $black;
+	color: $white;
+	}
+
+body
+	{
+	margin: 0;
+	padding: 0;
+	font-family: $body-font;
+	font-size: $body-font-size;
+	color: $black;
+	@media only screen and (max-width: 1000px)
+		{
+		font-size: 0.9em;
+		}
+	}
+
+em
+	{
+	font-style: normal;
+	font-family: $body-font-italic;
+	}
+
+h1
+	{
+	margin-top: $heading-top-spacing;
+	font-size: $heading-font-size;
+	font-weight: $heading-font-weight;
+	font-style: $heading-font-style;
+	text-align: $page-title-align;
+	}
+
+h2
+	{
+	margin-top: $subheading-top-spacing;
+	font-size: $subheading-font-size;
+	font-weight: $subheading-font-weight;
+	font-style: $subheading-font-style;
+	}
+
+.wrap
+	{
+	margin: 0 auto;
+	width: $content-width;
+	@media only screen and (min-width: 0px) and (max-width: 1200px)
+		{
+		width: 90%;
+		}
+	// Blog footer
+	& > footer
+		{
+		margin-top: 2em;
+		padding: 2em 0;
+		border-top: 1px solid $black;
+		text-align: center;
+		font-size: 0.8em;
+		}
+	}
+
+// The main blog header
+header
+	{
+	margin-bottom: $space-between-posts/2*1;
+	padding: $header-spacing 0;
+	border-bottom: 1px solid $black;
+	text-align: center;
+	.title
+		{
+		font-family: $blog-title-font;
+		font-size: $blog-title-font-size;
+		text-transform: $blog-title-text-transform;
+		}
+	.navi
+		{
+		font-family: $navi-font;
+		font-size: $navi-font-size;
+		ul
+			{
+			margin: $navi-top-spacing 0 0 0;
+			padding: 0;
+			list-style: none;
+			li
+				{
+				display: inline-block;
+				vertical-align: baseline;
+				zoom: 1;
+				*display: inline;
+				*vertical-align: auto;
+				margin: 0;
+				padding: 0 ($navi-link-spacing/2 * 1);
+				a
+					{
+					color: $black;
+					text-decoration: none;
+					border-bottom: 1px dotted;
+					&:hover,
+					&:active
+						{
+						border-bottom: 1px solid;
+						}
+					}// a
+				}// li
+			}// ul
+		}// .navi
+	}// header
+
+a
+	{
+	color: $black;
+	text-decoration: none;
+	border-bottom: 1px dotted;
+	&:hover,
+	&:active
+		{
+		border-bottom: 1px solid;
+		}
+	}// a
+
+blockquote
+	{
+	font-family: $blockquote-font-family;
+	font-size: $blockquote-font-size;
+	}
+
+article
+	{
+	margin-bottom: $space-between-posts*1;
+	padding: 0;
+	font-size: $post-font-size;
+	line-height: $post-font-line-height;
+	text-align: $post-align;
+
+.content
+	{
+	padding-bottom: $post-content-bottom-space;
+	}
+
+footer
+	{
+	padding: $tags-spacing 0;
+	border-bottom: 1px solid $black;
+	border-top: 1px solid $black;
+	}
+
+h1, h2, h3
+	{
+	text-align: $subheadings-align;
+	a
+		{
+		color: $black;
+		text-decoration: none;
+		border-bottom: 1px dotted;
+		&:hover,
+		&:active
+			{
+			border-bottom: 1px solid;
+			}
+		}// a
+	}
+
+header
+	{
+	margin: 0 0 $post-content-top-space 0;
+	padding: 0;
+	border: 0px;
+	text-align: center;
+	h1
+		{
+		font-family: $post-title-font;
+		font-size: $post-title-font-size;
+		font-weight: $post-title-font-weight;
+		font-style: $post-title-font-style;
+		line-height: $post-title-line-height;
+		text-align: $post-title-align;
+		}
+	time
+		{
+		font-size: $date-font-size;
+		font-style: $date-font-style;
+		}
+	}
+
+hr
+	{
+	margin: $hr-spacing !important;
+	height: 1px;
+	border: none;
+	color: $black;
+	background-color: $black;
+	}
+
+p
+	{
+	.caption
+		{
+		font-family: $caption-font-family;
+		font-size: $caption-font-size;
+		}
+	img
+		{
+		max-width: 100%;
+		padding: 4px;
+		}
+	.word1,
+	.word2,
+	.word3
+		{
+		font-size: $post-first-words-font-size;
+		font-variant: $post-first-words-font-variant;
+		}
+	}
+	}
+
+// Code blocks
+pre
+	{
+	position: relative;
+	border: 1px solid $black;
+	line-height: $code-block-line-height;
+	background-color: $code-background-color;
+	overflow: hidden;
+	.clip-btn
+		{
+		position: absolute;
+		top: 0px;
+		right: 1em;
+		font-size: 0.8em;
+		text-decoration: underline;
+		@media only screen and (max-width: 1000)
+			{
+			display: none;
+			}
+		}
+	}
+
+code
+	{
+	margin: $code-margin 0;
+	padding: $code-padding;
+	font-family: $code-font-family;
+	font-size: $code-font-size;
+	}
+
+// Inline code
+p > code
+	{
+	border: 1px solid $black;
+	background-color: $code-background-color;
+	white-space: nowrap;
+	}
+
+.pagination
+	{
+	position: relative;
+	margin: 1em 0;
+	a
+	{
+	font-family: $paginator-font-family;
+	font-size: $paginator-font-size;
+	color: $black;
+	text-decoration: none;
+	border-bottom: 1px dotted;
+	&:hover,
+	&:active
+		{
+		border-bottom: 1px solid;
+		}
+	}// a
+
+.newer
+	{
+	position: absolute;
+	top: 0;
+	right: 0;
+	}
+
+.older
+	{
+	position: absolute;
+	top: 0;
+	left: 0;
+	}
+
+span
+	{
+	display: block;
+	width: 100%;
+	text-align: center;
+	}
+	}
+
+// Archive and tags listings
+.cat-year
+	{
+	padding-top: $year-spacing-bottom;
+	font-family: $year-font-family;
+	font-size: $year-font-size;
+	}
+
+.cat-month
+	{
+	margin: $month-indent 0 $month-spacing-bottom $month-indent;
+	font-family: $month-font-family;
+	font-size: $month-font-size;
+	}
+
+.title-listing
+	{
+	margin-left: $month-indent;
+	}
