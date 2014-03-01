@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: messaging | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Messaging | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/messaging/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
+    <title type="html"><![CDATA[Notificator, Sending Notifications Through PHP in a Clean and Lightweight Way]]></title>
     <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
     <updated>2013-07-11T01:20:00-04:00</updated>
     <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
@@ -208,7 +207,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#97;&#x6c;&#x65;&#115;&#115;&#97;&#110;&#x64;&#x72;&#111;&#x2e;&#110;&#97;&#100;&#97;&#108;&#105;&#110;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;">&#x61;&#x6c;&#101;&#115;&#115;&#x61;&#110;&#x64;&#x72;&#111;&#46;&#x6e;&#97;&#x64;&#x61;&#x6c;&#x69;&#110;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#97;&#108;&#101;&#x73;&#x73;&#x61;&#110;&#x64;&#x72;&#x6f;&#x2e;&#x6e;&#97;&#100;&#97;&#108;&#105;&#x6e;&#x40;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#97;&#108;&#x65;&#115;&#x73;&#97;&#110;&#100;&#x72;&#111;&#46;&#110;&#x61;&#x64;&#x61;&#x6c;&#105;&#110;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);

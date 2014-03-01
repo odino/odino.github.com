@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: teams | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Teams | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/teams/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
+    <title type="html"><![CDATA[My Experience With Our Development Team in Dubai: In Between Business, SOA and Sun]]></title>
     <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
     <updated>2013-03-29T18:08:00-04:00</updated>
     <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>
@@ -57,7 +56,7 @@ version compared to the ones I used in Rome:</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Coding bureaucracy]]></title>
+    <title type="html"><![CDATA[Coding Bureaucracy]]></title>
     <link href="http://odino.org/coding-bureaucracy/"/>
     <updated>2012-12-05T12:23:00-05:00</updated>
     <id>http://odino.org/coding-bureaucracy</id>
@@ -74,7 +73,7 @@ technical issue.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Source code workflow after 3 months of Github]]></title>
+    <title type="html"><![CDATA[Source Code Workflow After 3 Months of Github]]></title>
     <link href="http://odino.org/source-code-workflow-after-3-months-of-github/"/>
     <updated>2012-08-05T23:16:00-04:00</updated>
     <id>http://odino.org/source-code-workflow-after-3-months-of-github</id>
@@ -272,7 +271,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Wanna be hired? Go get yourself a blog and a github profile]]></title>
+    <title type="html"><![CDATA[Wanna Be Hired? Go Get Yourself a Blog and a Github Profile]]></title>
     <link href="http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile/"/>
     <updated>2012-03-27T11:32:00-04:00</updated>
     <id>http://odino.org/wanna-be-hired-go-get-yourself-a-blog-and-a-github-profile</id>
@@ -396,7 +395,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How to argue with junior and stubborn developers]]></title>
+    <title type="html"><![CDATA[How to Argue With Junior and Stubborn Developers]]></title>
     <link href="http://odino.org/how-to-argue-with-junior-and-stubborn-developers/"/>
     <updated>2012-02-23T12:00:00-05:00</updated>
     <id>http://odino.org/how-to-argue-with-junior-and-stubborn-developers</id>

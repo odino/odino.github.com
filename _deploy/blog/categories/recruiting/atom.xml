@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: recruiting | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Recruiting | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/recruiting/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[My experience with our development team in Dubai: in between business, SOA and sun]]></title>
+    <title type="html"><![CDATA[My Experience With Our Development Team in Dubai: In Between Business, SOA and Sun]]></title>
     <link href="http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/"/>
     <updated>2013-03-29T18:08:00-04:00</updated>
     <id>http://odino.org/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun</id>

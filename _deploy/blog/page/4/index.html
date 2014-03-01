@@ -1,260 +1,201 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Alessandro Nadalin</title>
-  <meta name="author" content="Alessandro Nadalin">
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="Blog of Alex, Vice President - Technology at Namshi in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		<title>Alessandro Nadalin</title>
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="/stylesheets/prettify-hemisu.css" type="text/css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Cambo' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/page.html -->
+<article>
+<header>
 
-  
-  
-  <meta name="description" content="Doctrine 80% Faster? A post in the doctrine-dev mailing list
-caught my attention last week, and I want to
-share its insights with you. Sunday, 21 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://odino.org/blog/page/4">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
-
-<script type="text/javascript">
-(function(){
-  var dom,doc,where,iframe = document.createElement('iframe');
-  iframe.src = "javascript:false";
-  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
-  where = document.getElementsByTagName('script')[0];
-  where.parentNode.insertBefore(iframe, where);
-
-  try {
-    doc = iframe.contentWindow.document;
-  } catch(e) {
-    dom = document.domain;
-    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
-    doc = iframe.contentWindow.document;
-  }
-  doc.open()._l = function() {
-    var js = this.createElement("script");
-    if(dom) this.domain = dom;
-    js.id = "boomr-if-as";
-    js.src = '//c.go-mpulse.net/boomerang/' +
-    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
-    BOOMR_lstart=new Date().getTime();
-    this.body.appendChild(js);
-  };
-  doc.write('<body onload="document._l();">');
-  doc.close();
-  })();
-</script>
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-7407627-3']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
-</head>
-<body   class="no-sidebar"  >
-  <header role="banner"><hgroup>
-  <h1 class="hentry" role="title"><a href="">
-    Alessandro Nadalin</a>
-  </h1>
-  
-  <p class="article-date">
-      
-  </p>
-</hgroup>
 </header>
-  <nav role="navigation"><ul class="main-navigation">
-  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
-  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
-  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
-  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
-  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
-</ul>
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article role="article">
-  
+
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
+        <p>Today I got one of those moments of pride
+when one of our developers, who is working
+since &ndash; roughly &ndash; a year, decided to send an
+email to the team after working on automated
+tests for the first weeks of his career:</p>
+
+<blockquote><p>Automated testing is great idea </p><p>If you have a ticket which requires a lot of changes (20 files, for example) Automated tests are very helpful and save your time, it saves about 30% of your time; even if it&#8217;s still not perfect, its good<br/>For example look at this PR [link to a PR on Github], if i want to test all cases i need about half a day but it only took half an hour</p></blockquote>
+
+
         
-          <h1 class="entry-title"><a href="/doctrine-80-percent-faster/">Doctrine 80% Faster?</a></h1>
         
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+</article>
+
+
+    <article class="post">
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>A post in the <em>doctrine-dev</em> mailing list
 caught my attention last week, and I want to
 share its insights with you.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T10:54:00-04:00" pubdate data-updated="true">Sunday, 21 April 2013 at 10:54</time>
-            
-            | <a href="/doctrine-80-percent-faster/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/doctrine/'>doctrine</a>, <a class='category' href='/blog/categories/php/'>php</a>
-  
-</span>
-
-</div>
+         <a href="/doctrine-80-percent-faster/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/doctrine/'>doctrine</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/">My Experience With Our Development Team in Dubai: In Between Business, SOA and Sun</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Today I had the opportunity to share with the
 people at the <a href="http://www.phptostart.it/">PHP.TO.START</a>
 in Turin my 1-year experience in Namshi, one of
 Rocket Internet&rsquo;s ventures in the Middle East.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-29T18:08:00-04:00" pubdate data-updated="true">Friday, 29 March 2013 at 18:08</time>
-            
-            | <a href="/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/rocket-internet/'>Rocket Internet</a>, <a class='category' href='/blog/categories/soa/'>SOA</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/recruiting/'>recruiting</a>, <a class='category' href='/blog/categories/teams/'>teams</a>
-  
-</span>
-
-</div>
+         <a href="/my-experience-with-our-development-team-in-dubai-in-between-business-soa-and-sun/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/rocket-internet/'>Rocket Internet</a>, <a class='category' href='/blog/categories/soa/'>SOA</a>, <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/recruiting/'>recruiting</a>, <a class='category' href='/blog/categories/teams/'>teams</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/a-brief-visit-to-the-cold-lands-of-italy/">A Brief Visit to the Cold Lands of Italy</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>I&rsquo;m enjoying a relatively long &ndash; at least for me &ndash; 2 weeks &ldquo;vacation&rdquo;
 back in Italy, since I was missing my friends in Rome
 since <strong>exactly</strong> a year and the last time my parents saw me it
 was 6 months ago.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-29T14:14:00-04:00" pubdate data-updated="true">Friday, 29 March 2013 at 14:14</time>
-            
-            | <a href="/a-brief-visit-to-the-cold-lands-of-italy/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/travel/'>travel</a>
-  
-</span>
-
-</div>
+         <a href="/a-brief-visit-to-the-cold-lands-of-italy/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/conference/'>conference</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/travel/'>travel</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/refactoring-your-architecture-go-for-soa/">Refactoring Your Architecture Understanding SOA</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>
 that helps most of his affiliates with know-how
@@ -268,96 +209,74 @@ nothing can help you more than
 or <em>SOA</em>.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-23T17:35:00-04:00" pubdate data-updated="true">Saturday, 23 March 2013 at 17:35</time>
-            
-            | <a href="/refactoring-your-architecture-go-for-soa/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/messaging/'>Messaging</a>, <a class='category' href='/blog/categories/rabbitmq/'>RabbitMQ</a>, <a class='category' href='/blog/categories/soa/'>SOA</a>, <a class='category' href='/blog/categories/architecture/'>architecture</a>
-  
-</span>
-
-</div>
+         <a href="/refactoring-your-architecture-go-for-soa/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/messaging/'>Messaging</a>, <a class='category' href='/blog/categories/rabbitmq/'>RabbitMQ</a>, <a class='category' href='/blog/categories/soa/'>SOA</a>, <a class='category' href='/blog/categories/architecture/'>architecture</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/symfony2-console-permission-denied-during-autocompletion/">Symfony2 Console: Permission Denied During Autocompletion</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Yesterday I faced a pretty cryptic issue
 while using the Symfony2 console (<code>app/console</code>).</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-11T10:11:00-04:00" pubdate data-updated="true">Monday, 11 March 2013 at 10:11</time>
-            
-            | <a href="/symfony2-console-permission-denied-during-autocompletion/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
-  
-</span>
-
-</div>
+         <a href="/symfony2-console-permission-denied-during-autocompletion/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/using-behat-to-help-your-frontend-developers-coding-without-risks/">Using Selenium and Symfony2 to Help Your Frontend Developers Coding Without Risks</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major
 catastrophe happens), you should help people
@@ -370,49 +289,38 @@ frontend changes in a more automated, thus
 easier, way.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-10T11:39:00-04:00" pubdate data-updated="true">Sunday, 10 March 2013 at 11:39</time>
-            
-            | <a href="/using-behat-to-help-your-frontend-developers-coding-without-risks/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/behat/'>Behat</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>, <a class='category' href='/blog/categories/selenium/'>selenium</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/webdriver/'>webdriver</a>
-  
-</span>
-
-</div>
+         <a href="/using-behat-to-help-your-frontend-developers-coding-without-risks/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/behat/'>Behat</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>, <a class='category' href='/blog/categories/selenium/'>selenium</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/webdriver/'>webdriver</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/namshi-is-looking-for-a-new-lead-developer/">Namshi Is Looking for a New Lead Developer!</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>As some of you know, I am currently employed by
 <a href="http://en-ae.namshi.com/">Namshi</a>, a
 <a href="http://www.rocket-internet.de/">Rocket Internet</a>
@@ -424,95 +332,73 @@ development, we are looking for a new Lead Developer
 who can strive, with the team, towards excellence.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-21T19:28:00-05:00" pubdate data-updated="true">Thursday, 21 February 2013 at 19:28</time>
-            
-            | <a href="/namshi-is-looking-for-a-new-lead-developer/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/rocket-internet/'>Rocket Internet</a>, <a class='category' href='/blog/categories/job/'>job</a>, <a class='category' href='/blog/categories/lead-developer/'>lead developer</a>
-  
-</span>
-
-</div>
+         <a href="/namshi-is-looking-for-a-new-lead-developer/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/namshi/'>Namshi</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/rocket-internet/'>Rocket Internet</a>, <a class='category' href='/blog/categories/job/'>job</a>, <a class='category' href='/blog/categories/lead-developer/'>lead developer</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/">PHP: &#8216;the Script Tried to Execute a Method or Access a Property of an Incomplete Object&#8217;</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Have you ever got this error in PHP? I bet no, never.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-31T13:28:00-05:00" pubdate data-updated="true">Thursday, 31 January 2013 at 13:28</time>
-            
-            | <a href="/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/php/'>php</a>
-  
-</span>
-
-</div>
+         <a href="/php-the-script-tried-to-execute-a-method-or-access-a-property-of-an-incomplete-object/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/php/'>php</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/profiling-php-applications-from-the-browser/">Profiling PHP Applications From the Browser</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/4/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
 <a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
 a web-based profiler for PHP:
@@ -522,89 +408,27 @@ and use it, as well as <strong>what to look for
 when profiling an application</strong>.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-25T22:38:00-05:00" pubdate data-updated="true">Friday, 25 January 2013 at 22:38</time>
-            
-            | <a href="/profiling-php-applications-from-the-browser/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/performances/'>performances</a>, <a class='category' href='/blog/categories/php/'>php</a>
-  
-</span>
-
-</div>
+         <a href="/profiling-php-applications-from-the-browser/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/performances/'>performances</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+        
+    </footer>
 </article>
+<!-- END _includes/article.html -->
 
-
-    <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/making-the-orientdb-odm-5-times-faster/">Making the OrientDB ODM 5 Times Faster</a></h1>
-        
-        <p>Today, after heavily testing performances
-on a project, I pushed some small but
-precious changes to the
-<a href="https://github.com/doctrine/orientdb-odm">orientdb-odm</a>.</p>
-
-
-      </div>
-    <div class="front-meta">
-        
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-25T17:39:00-05:00" pubdate data-updated="true">Friday, 25 January 2013 at 17:39</time>
-            
-            | <a href="/making-the-orientdb-odm-5-times-faster/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/doctrine/'>doctrine</a>, <a class='category' href='/blog/categories/orientdb-odm/'>orientdb-odm</a>, <a class='category' href='/blog/categories/php/'>php</a>
-  
-</span>
-
-</div>
-    </div>
-  </header>
-  
 </article>
 
 <nav id="pagination">
@@ -616,30 +440,16 @@ precious changes to the
     
     <div class="center"><a href="/archives">Blog Archives</a></div>
 </nav>
-  
-    <footer>
-      
-      
-        <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/blog/page/4/index.html" data-via="_odino_" data-counturl="http://odino.org/blog/page/4/index.html" >Tweet</a>
-  
-  
-  
-</div>
-
-      
-    </footer>
-  
 </article>
-
-</div>
-
-    </div>
-  </div>
+<!-- END _layouts/page.html -->
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2014 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+	</body>
 </html>
-<div id="footer">
-    <ul class="credit">
-        <li>&copy; 2014 - Alex Nadalin</li>
-    </ul>
-</div>
+<!-- END _layouts/default.html -->

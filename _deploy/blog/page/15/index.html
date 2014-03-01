@@ -1,158 +1,118 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Alessandro Nadalin</title>
-  <meta name="author" content="Alessandro Nadalin">
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="Blog of Alex, Vice President - Technology at Namshi in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		<title>Alessandro Nadalin</title>
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="/stylesheets/prettify-hemisu.css" type="text/css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Cambo' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/page.html -->
+<article>
+<header>
 
-  
-  
-  <meta name="description" content="Tar: web.tar: Wrote Only X of Y Bytes So you are trying to compress a directory or whatever file on your disk, probably from SSH, and experience no &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://odino.org/blog/page/15">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="../../stylesheets/font-awesome.min.css">
-
-<script type="text/javascript">
-(function(){
-  var dom,doc,where,iframe = document.createElement('iframe');
-  iframe.src = "javascript:false";
-  (iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
-  where = document.getElementsByTagName('script')[0];
-  where.parentNode.insertBefore(iframe, where);
-
-  try {
-    doc = iframe.contentWindow.document;
-  } catch(e) {
-    dom = document.domain;
-    iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
-    doc = iframe.contentWindow.document;
-  }
-  doc.open()._l = function() {
-    var js = this.createElement("script");
-    if(dom) this.domain = dom;
-    js.id = "boomr-if-as";
-    js.src = '//c.go-mpulse.net/boomerang/' +
-    'XUJ46-RM4L4-CEUJZ-E4J4Z-Y2ENS';
-    BOOMR_lstart=new Date().getTime();
-    this.body.appendChild(js);
-  };
-  doc.write('<body onload="document._l();">');
-  doc.close();
-  })();
-</script>
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-7407627-3']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-  <link rel="stylesheet" href="../../../stylesheets/font-awesome.min.css">
-</head>
-<body   class="no-sidebar"  >
-  <header role="banner"><hgroup>
-  <h1 class="hentry" role="title"><a href="">
-    Alessandro Nadalin</a>
-  </h1>
-  
-  <p class="article-date">
-      
-  </p>
-</hgroup>
 </header>
-  <nav role="navigation"><ul class="main-navigation">
-  <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
-  <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
-  <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
-  <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
-  <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
-</ul>
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article role="article">
-  
+
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
+        <p>A few weeks ago I&rsquo;ve made an experiment with Symfony2 and Doctrine 2,
+creating a simple, dummy and no-purpose blog CRUD, the <a href="https://github.com/odino/BlogBundle">BlogBundle</a>.</p>
+
+
         
-          <h1 class="entry-title"><a href="/tar-web-tar-wrote-only-x-of-y-bytes/">Tar: web.tar: Wrote Only X of Y Bytes</a></h1>
-        
-        <p>So you are trying to compress a directory or whatever file on your disk, probably from SSH, and experience no useful errors?</p>
-
-
-      </div>
-    <div class="front-meta">
-        
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-02T12:16:00-05:00" pubdate data-updated="true">Wednesday, 02 February 2011 at 12:16</time>
-            
-            | <a href="/tar-web-tar-wrote-only-x-of-y-bytes/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/linux/'>Linux</a>
-  
-</span>
-
-</div>
+         <a href="/a-crud-with-symfony2-and-doctrine-2/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/doctrine/'>Doctrine</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
+        <p>So you are trying to compress a directory or whatever file on your disk, probably from SSH, and experience no useful errors?</p>
+
+
         
-          <h1 class="entry-title"><a href="/redis-slow-with-php-think-again/">Redis Slow With PHP? Think Again!</a></h1>
+         <a href="/tar-web-tar-wrote-only-x-of-y-bytes/">Read on &rarr;</a> 
+    </div>
+    <footer>
         
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+</article>
+
+
+    <article class="post">
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>So <a href="http://www.odino.org/275/approaching-a-cmf-architecture-with-symfony">you have a problem</a> and think that a NoSQL solution should work for you.</p>
 
 <p>Good.</p>
@@ -162,400 +122,270 @@
 <p>Damn.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-25T13:56:00-05:00" pubdate data-updated="true">Tuesday, 25 January 2011 at 13:56</time>
-            
-            | <a href="/redis-slow-with-php-think-again/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/redis/'>Redis</a>
-  
-</span>
-
-</div>
+         <a href="/redis-slow-with-php-think-again/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/redis/'>Redis</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         
-          <h1 class="entry-title"><a href="/symfony2-routes/">Symfony2 Routes</a></h1>
         
-        
-      </div>
-    <div class="front-meta">
-        
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-09T13:57:00-05:00" pubdate data-updated="true">Sunday, 09 January 2011 at 13:57</time>
-            
-            | <a href="/symfony2-routes/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
-  
-</span>
-
-</div>
+         <a href="/symfony2-routes/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/creating-your-own-services-for-the-symfony2-dic/">Creating Your Own Services for the Symfony2 DIC</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>I want you to know how to write a service and let the container handle it for you.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-08T19:50:00-05:00" pubdate data-updated="true">Saturday, 08 January 2011 at 19:50</time>
-            
-            | <a href="/creating-your-own-services-for-the-symfony2-dic/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/peaa/'>PEAA</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
-  
-</span>
-
-</div>
+         <a href="/creating-your-own-services-for-the-symfony2-dic/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/peaa/'>PEAA</a>, <a class='category' href='/blog/categories/symfony2/'>Symfony2</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/imacro-javascript-loops-with-variables/">iMacro: JavaScript Loops With Variables</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p><a href="https://addons.mozilla.org/en-US/firefox/addon/3863/">iMacro</a> is a cool firefox plugin able to record and play macros on the browser.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-01T02:03:00-05:00" pubdate data-updated="true">Wednesday, 01 December 2010 at 02:03</time>
-            
-            | <a href="/imacro-javascript-loops-with-variables/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/javascript/'>JavaScript</a>
-  
-</span>
-
-</div>
+         <a href="/imacro-javascript-loops-with-variables/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/javascript/'>JavaScript</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/versioning-other-behaviours-columns-with-doctrine-versionable/">Versioning Other Behaviours&#8217; Columns With Doctrine Versionable</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Using doctrine inside symfony is a relief: behaviours, particularly, can save your days.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-23T13:54:00-05:00" pubdate data-updated="true">Tuesday, 23 November 2010 at 13:54</time>
-            
-            | <a href="/versioning-other-behaviours-columns-with-doctrine-versionable/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/doctrine/'>Doctrine</a>
-  
-</span>
-
-</div>
+         <a href="/versioning-other-behaviours-columns-with-doctrine-versionable/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/doctrine/'>Doctrine</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/the-pomodoro-tecnique-on-your-linux-distro/">The Pomodoro Tecnique on Your Linux Distro</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Shortening the post &ndash; it&rsquo;s late and I&rsquo;m tired &ndash; I&rsquo;ve played with <a href="http://gambas.sourceforge.net/en/main.html">Gambas2</a> and its wonderful IDE in order to get in touch with Desktop development, one of those things I&rsquo;ve always missed as a programmer.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-01T13:33:00-04:00" pubdate data-updated="true">Monday, 01 November 2010 at 13:33</time>
-            
-            | <a href="/the-pomodoro-tecnique-on-your-linux-distro/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/linux/'>Linux</a>
-  
-</span>
-
-</div>
+         <a href="/the-pomodoro-tecnique-on-your-linux-distro/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/amend-committing-in-svn/">Amend Committing in SVN</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Amending, in Git, is one of my favourite features: it basically lets you modify your local history ( unpushed ) to correct mistakes. Or, more often, to <strong>add the missing file</strong>.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-30T11:06:00-04:00" pubdate data-updated="true">Saturday, 30 October 2010 at 11:06</time>
-            
-            | <a href="/amend-committing-in-svn/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/svn/'>SVN</a>
-  
-</span>
-
-</div>
+         <a href="/amend-committing-in-svn/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/svn/'>SVN</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
 </article>
 
 
     <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/browsers-rest-too-much-rest-lesser/">Browsers Rest Too Much REST Lesser</a></h1>
-        
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/blog/page/15/index.html"></a></h1>
+        <time></time>
+    </header>
+    <div class="content">
         <p>Today I asked, looking for valid replies, some guys of the <a href="http://roma.grusp.org/">Rome PUG</a>, about cool ways to authenticate a client over a REST architecture.</p>
 
 
-      </div>
-    <div class="front-meta">
         
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-29T15:50:00-04:00" pubdate data-updated="true">Friday, 29 October 2010 at 15:50</time>
-            
-            | <a href="/browsers-rest-too-much-rest-lesser/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-<span class="categories"><i class="icon-tags"></i>
-  
-    <a class='category' href='/blog/categories/rest/'>REST</a>
-  
-</span>
-
-</div>
+         <a href="/browsers-rest-too-much-rest-lesser/">Read on &rarr;</a> 
     </div>
-  </header>
-  
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/blog/categories/rest/'>REST</a>
+
+
+        
+    </footer>
 </article>
+<!-- END _includes/article.html -->
 
-
-    <article class="post">
-  <header>
-      <div class="front-title">
-        
-          <h1 class="entry-title"><a href="/mockups-of-web-authentication-the-rest-rescue/">Mockups of Web Authentication: The REST Rescue</a></h1>
-        
-        <p>As I stated yesterday about how <a href="http://www.odino.org/237/browsers-rest-too-much-rest-lesser">browsers should authenticate the client</a> in order to let server remain stateless ( no session, no cookies, no tokens ) I wanted to show off a more tangible image of the &ldquo;<em>authentication sidebar</em>&rdquo; I mentioned in the post.</p>
-
-
-      </div>
-    <div class="front-meta">
-        
-        <p class="meta">
-            
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-29T15:15:00-04:00" pubdate data-updated="true">Friday, 29 October 2010 at 15:15</time>
-            
-            | <a href="/mockups-of-web-authentication-the-rest-rescue/#disqus_thread">Comments</a>
-            
-        </p>
-        
-        <div class="entry-content">
-
-</div>
-    </div>
-  </header>
-  
 </article>
 
 <nav id="pagination">
@@ -567,30 +397,16 @@
     
     <div class="center"><a href="/archives">Blog Archives</a></div>
 </nav>
-  
-    <footer>
-      
-      
-        <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://odino.org/blog/page/15/index.html" data-via="_odino_" data-counturl="http://odino.org/blog/page/15/index.html" >Tweet</a>
-  
-  
-  
-</div>
-
-      
-    </footer>
-  
 </article>
-
-</div>
-
-    </div>
-  </div>
+<!-- END _layouts/page.html -->
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2014 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+	</body>
 </html>
-<div id="footer">
-    <ul class="credit">
-        <li>&copy; 2014 - Alex Nadalin</li>
-    </ul>
-</div>
+<!-- END _layouts/default.html -->

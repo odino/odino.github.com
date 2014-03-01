@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: UAE | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/uae/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[ping: sendto: No buffer space available with DU DNSes]]></title>
+    <title type="html"><![CDATA[Ping: Sendto: No Buffer Space Available With DU DNSes]]></title>
     <link href="http://odino.org/ping-sendto-no-buffer-space-available-with-du-dnses/"/>
     <updated>2012-08-10T13:03:00-04:00</updated>
     <id>http://odino.org/ping-sendto-no-buffer-space-available-with-du-dnses</id>

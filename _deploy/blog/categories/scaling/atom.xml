@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Category: scaling | Alessandro Nadalin]]></title>
+  <title><![CDATA[Category: Scaling | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/scaling/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Search engines are making the web slower]]></title>
+    <title type="html"><![CDATA[Search Engines Are Making the Web Slower]]></title>
     <link href="http://odino.org/search-engines-are-making-the-web-slower/"/>
     <updated>2012-04-07T10:00:00-04:00</updated>
     <id>http://odino.org/search-engines-are-making-the-web-slower</id>
@@ -76,7 +75,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Scaling asynchronously through HInclude]]></title>
+    <title type="html"><![CDATA[Scaling Asynchronously Through HInclude]]></title>
     <link href="http://odino.org/scaling-through-hinclude/"/>
     <updated>2012-02-24T10:50:00-05:00</updated>
     <id>http://odino.org/scaling-through-hinclude</id>
@@ -311,7 +310,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Edge Side Includes, how to spare terabytes every day]]></title>
+    <title type="html"><![CDATA[Edge Side Includes, How to Spare Terabytes Every Day]]></title>
     <link href="http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day/"/>
     <updated>2012-01-20T14:15:00-05:00</updated>
     <id>http://odino.org/edge-side-includes-how-to-spare-terabytes-every-day</id>
@@ -608,7 +607,7 @@ and leaner web.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles]]></title>
+    <title type="html"><![CDATA[Real-time Scaling: When NoSQL Almost Wins, HTTP Almost Wins, and the Customer Smiles]]></title>
     <link href="http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles/"/>
     <updated>2011-05-06T15:42:00-04:00</updated>
     <id>http://odino.org/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles</id>

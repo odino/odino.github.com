@@ -8,7 +8,7 @@
     <div class="content">
         {{ content | excerpt }}
         {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
-        {% if excerpted == 'true' %} <a href="{{ root_url }}{{ post.url }}">{{ site.excerpt_link }}</a> {% endif %}
+        {% if excerpted == 'true' %} <a href="{{ root_url }}{{ page.url }}">{{ site.excerpt_link }}</a> {% endif %}
     </div>
     <footer>
         {% include post/categories.html %}

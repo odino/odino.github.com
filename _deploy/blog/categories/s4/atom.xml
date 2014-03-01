@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: S4 | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/s4/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Yahoo's S4 stream computing platform]]></title>
+    <title type="html"><![CDATA[Yahoo's S4 Stream Computing Platform]]></title>
     <link href="http://odino.org/yahoo-s-s4-stream-computing-platform/"/>
     <updated>2011-06-02T12:29:00-04:00</updated>
     <id>http://odino.org/yahoo-s-s4-stream-computing-platform</id>

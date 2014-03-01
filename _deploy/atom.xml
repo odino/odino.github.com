@@ -1,24 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
+	<title><![CDATA[Alessandro Nadalin]]></title>
+	<link href="http://odino.org/atom.xml" rel="self"/>
+	<link href="http://odino.org/"/>
+	<updated>2014-02-28T16:13:11-05:00</updated>
+	<id>http://odino.org/</id>
+	<author>
+		<name><![CDATA[Alessandro Nadalin]]></name>
+		
+	</author>
+	<generator uri="http://octopress.org/">Octopress</generator>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Service Oriented Architectures with Symfony2]]></title>
+		
+		<link href="http://odino.org/service-oriented-architectures-with-symfony2/"/>
+		<updated>2014-02-28T14:31:00-05:00</updated>
+		<id>http://odino.org/service-oriented-architectures-with-symfony2</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Last talk for me in the cold lands of Canada: today it was Symfony2&rsquo;s
+turn and how to integrate it with your SOA.</p>
 
-  <title><![CDATA[Alessandro Nadalin]]></title>
-  <link href="http://odino.org/atom.xml" rel="self"/>
-  <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
-  <id>http://odino.org/</id>
-  <author>
-    <name><![CDATA[Alessandro Nadalin]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!-- more -->
 
-  
-  <entry>
-    <title type="html"><![CDATA[6 takeways from the second day of ConFoo]]></title>
-    <link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
-    <updated>2014-02-27T18:27:00-05:00</updated>
-    <id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
-    <content type="html"><![CDATA[<p>Today it was an interesting day here at ConFoo, and I&rsquo;ve
+
+<p>As usual, for those who missed it, here are the slides:</p>
+
+<div class="slideshare" id="__ss_31775384"><iframe src="http://www.slideshare.net/slideshow/embed_code/31775384 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[6 takeways from the second day of ConFoo]]></title>
+		
+		<link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
+		<updated>2014-02-27T18:27:00-05:00</updated>
+		<id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today it was an interesting day here at ConFoo, and I&rsquo;ve
 seen some good content dealing with web performances.</p>
 
 <!-- more -->
@@ -98,15 +131,24 @@ valuable insides, like pageload times and DOM rendering performances.</p>
 
 <p>Good day for optimizations and delivering a faster experience to your users, looking
 forward to my third day &ndash; with my last talk, about SOAs &ndash; in this cold land!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
-    <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
-    <updated>2014-02-27T11:54:00-05:00</updated>
-    <id>http://odino.org/angularjs-is-the-future-maybe</id>
-    <content type="html"><![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
+		
+		<link href="http://odino.org/angularjs-is-the-future-maybe/"/>
+		<updated>2014-02-27T11:54:00-05:00</updated>
+		<id>http://odino.org/angularjs-is-the-future-maybe</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
 an overview of why Angular could fit your <em>future</em> requirements
 quite well.</p>
 
@@ -117,15 +159,24 @@ quite well.</p>
 
 <div class="slideshare" id="__ss_31723051"><iframe src="http://www.slideshare.net/slideshow/embed_code/31723051 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[7 takeways from the first day of ConFoo]]></title>
-    <link href="http://odino.org/7-takeways-from-the-first-day-of-confoo/"/>
-    <updated>2014-02-26T20:34:00-05:00</updated>
-    <id>http://odino.org/7-takeways-from-the-first-day-of-confoo</id>
-    <content type="html"><![CDATA[<p>Today it was the first day of ConFoo here in Montreal and,
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[7 takeways from the first day of ConFoo]]></title>
+		
+		<link href="http://odino.org/7-takeways-from-the-first-day-of-confoo/"/>
+		<updated>2014-02-26T20:34:00-05:00</updated>
+		<id>http://odino.org/7-takeways-from-the-first-day-of-confoo</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today it was the first day of ConFoo here in Montreal and,
 as usual, a conference is always good to wrap your head around
 solutions, different standpoints and discussions with other
 nerds :)</p>
@@ -226,15 +277,24 @@ and you might want to look into using it from now on, in place of its predecesso
 
 <p>It was a fairly good day and my <a href="http://odino.org/orientdb-the-fastest-document-based-graph-database/">presentation about OrientDB</a>
 went pretty well, can&rsquo;t wait for tomorrow!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
-    <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-    <updated>2014-02-26T15:25:00-05:00</updated>
-    <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
-    <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
+		
+		<link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
+		<updated>2014-02-26T15:25:00-05:00</updated>
+		<id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
 of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
 document-based graphdb</a>&rdquo;.</p>
 
@@ -246,15 +306,24 @@ as usual, here:</p>
 
 <div class="slideshare" id="__ss_31683783"><iframe src="http://www.slideshare.net/slideshow/embed_code/31683783 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[7 reasons why working for Namshi is great]]></title>
-    <link href="http://odino.org/7-reasons-why-working-at-namshi-is-great/"/>
-    <updated>2014-01-17T17:44:00-05:00</updated>
-    <id>http://odino.org/7-reasons-why-working-at-namshi-is-great</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been working for <a href="http://namshi.com">Namshi</a> for almost 2
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[7 reasons why working for Namshi is great]]></title>
+		
+		<link href="http://odino.org/7-reasons-why-working-at-namshi-is-great/"/>
+		<updated>2014-01-17T17:44:00-05:00</updated>
+		<id>http://odino.org/7-reasons-why-working-at-namshi-is-great</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>I&rsquo;ve been working for <a href="http://namshi.com">Namshi</a> for almost 2
 years now and I thought it would be interesting to share some
 of the reasons why I consider this an ideal place, at the moment.</p>
 
@@ -431,15 +500,24 @@ Notes
     </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
-    <link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
-    <updated>2014-01-17T16:28:00-05:00</updated>
-    <id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
-    <content type="html"><![CDATA[<p>In order to expand our team we are now looking for a
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
+		
+		<link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
+		<updated>2014-01-17T16:28:00-05:00</updated>
+		<id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>In order to expand our team we are now looking for a
 frontend JavaScript developer that loves Angular and wants to
 drown under loads of <code>ng-*</code>, FPS optimizations and
 building the frontends for our
@@ -481,15 +559,24 @@ the Middle East, through a website that should ideally
 render in ~100ms, powered by lotsa APIs.</p>
 
 <p>So yeah, what are you waiting for? <code>ng-apply</code> now!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to make your JavaScript apps SEO-friendly]]></title>
-    <link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
-    <updated>2014-01-17T14:15:00-05:00</updated>
-    <id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
-    <content type="html"><![CDATA[<p>One of the challenges in moving your application logic
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[How to make your JavaScript apps SEO-friendly]]></title>
+		
+		<link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
+		<updated>2014-01-17T14:15:00-05:00</updated>
+		<id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>One of the challenges in moving your application logic
 from the backend (Rails, Django or whatsoever) to the
 new frontier of JS web frameworks like AngularJS and
 EmberJS is how you can make them SEO-friendly, as these
@@ -630,15 +717,24 @@ run and requires very less configuration / manual work.</p>
 <p>All in all, the good thing is that, in 2014, we can finally say that
 making SEO-friendly JavaScript apps is not a hassle anymore!
 </span></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Frontend web development is not as fun as it could be]]></title>
-    <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-    <updated>2013-11-10T19:53:00-05:00</updated>
-    <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
-    <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Frontend web development is not as fun as it could be]]></title>
+		
+		<link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
+		<updated>2013-11-10T19:53:00-05:00</updated>
+		<id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
 with AngularJS, reverse proxies,
 SPDY and HTTP APIs, because I
@@ -978,15 +1074,24 @@ Notes
     </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
-    <link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
-    <updated>2013-11-10T08:59:00-05:00</updated>
-    <id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
-    <content type="html"><![CDATA[<p>A few weeks back I started noticing some performance
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
+		
+		<link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
+		<updated>2013-11-10T08:59:00-05:00</updated>
+		<id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>A few weeks back I started noticing some performance
 issues on my <a href="http://www.jetbrains.com/phpstorm/">IDE</a> and decided to investigate a bit more
 on it: turns out that they recommended to 1) upgrade to
 the latest JDK (7) and stop using <a href="http://openjdk.java.net/">OpenJDK</a>, as it has
@@ -1022,15 +1127,24 @@ some performance gotchas.</p>
 
 
 <p>A quick check with <code>java -version</code> and then enjoy it!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
-    <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
-    <updated>2013-10-20T11:00:00-04:00</updated>
-    <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
-    <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
+		
+		<link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
+		<updated>2013-10-20T11:00:00-04:00</updated>
+		<id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>I am very happy to announce that next February I will
 be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,
 with a good lineup of talks:</p>
 
@@ -1063,15 +1177,24 @@ confirm my random thoughts.</p>
 <a href="http://confoo.ca/en/2014/sessions">the schedule</a> speaks for itself
 and I am thrilled to be part of such an amazing speakers&#8217; lineup
 &mdash; which I obviously ruin :&ndash;) !</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Space to the youngsters...]]></title>
-    <link href="http://odino.org/space-to-the-youngsters-dot-dot-dot/"/>
-    <updated>2013-09-23T18:26:00-04:00</updated>
-    <id>http://odino.org/space-to-the-youngsters-dot-dot-dot</id>
-    <content type="html"><![CDATA[<p>One of the best feeling ever, while heading
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Space to the youngsters...]]></title>
+		
+		<link href="http://odino.org/space-to-the-youngsters-dot-dot-dot/"/>
+		<updated>2013-09-23T18:26:00-04:00</updated>
+		<id>http://odino.org/space-to-the-youngsters-dot-dot-dot</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>One of the best feeling ever, while heading
 a team of (web) engineers, is when you lead
 them to one particular thing: do <strong>not make the
 same mistakes you made</strong> back at the time.</p>
@@ -1101,15 +1224,24 @@ with a technical blog.</p>
 
 <p>Kudos to Hallal, and don&rsquo;t miss his first post,
 an introduction about <a href="http://mohdhallal.github.io/blog/2013/09/22/behat-mink-and-parallel-runner-a-recipe-for-automated-web-testing/">BDD, Behat and automated testing</a>!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CakeFest 2013 wrap-up]]></title>
-    <link href="http://odino.org/cakefest-2013-wrap-up/"/>
-    <updated>2013-09-21T16:58:00-04:00</updated>
-    <id>http://odino.org/cakefest-2013-wrap-up</id>
-    <content type="html"><![CDATA[<p>I am taking some time off to describe my last trip between
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[CakeFest 2013 wrap-up]]></title>
+		
+		<link href="http://odino.org/cakefest-2013-wrap-up/"/>
+		<updated>2013-09-21T16:58:00-04:00</updated>
+		<id>http://odino.org/cakefest-2013-wrap-up</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>I am taking some time off to describe my last trip between
 Burlingame and San Francisco for the CakeFest 2013.</p>
 
 <!-- more -->
@@ -1231,15 +1363,24 @@ the CakeFest is an event I would definitely like to join
 again in the future.</p>
 
 <p>Who knows where the <a href="http://bakery.cakephp.org/articles/predominant/2013/03/20/cakefest_2013_-_vote_for_the_location">crazy band is heading next year!</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[See you in Paris at the 2013 edition of the PHP Forum]]></title>
-    <link href="http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/"/>
-    <updated>2013-09-21T16:04:00-04:00</updated>
-    <id>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum</id>
-    <content type="html"><![CDATA[<p>In late november I will be for a few days in Paris,
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[See you in Paris at the 2013 edition of the PHP Forum]]></title>
+		
+		<link href="http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/"/>
+		<updated>2013-09-21T16:04:00-04:00</updated>
+		<id>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>In late november I will be for a few days in Paris,
 attending and speaking at the 2013 edition of the
 <a href="http://afup.org/pages/forumphp2013/sessions.php">Forum PHP Paris</a>:
 funny enough, I&rsquo;ve only been to Paris for conferences so far,
@@ -1265,15 +1406,24 @@ Dustin Whittle who will give his insights about
 <a href="http://afup.org/pages/forumphp2013/sessions.php#964">scaling PHP apps</a>.</p>
 
 <p>See you in the core of europe!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
-    <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-04:00</updated>
-    <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
-    <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
+		
+		<link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
+		<updated>2013-09-01T17:48:00-04:00</updated>
+		<id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today, tired like hell due to an almost sleepless night,
 I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
 in San Francisco.</p>
 
@@ -1292,15 +1442,24 @@ here are the slides for the lazy ones :)</p>
 
 
 <p>Cheers!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
-    <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-    <updated>2013-08-31T19:05:00-04:00</updated>
-    <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
-    <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
+		
+		<link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
+		<updated>2013-08-31T19:05:00-04:00</updated>
+		<id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
 <a href="http://cakefest.org">CakeFest</a> here in San Francisco,
 &ldquo;<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">Tips and Tricks for your SOA</a>&rdquo;.</p>
 
@@ -1326,15 +1485,24 @@ presented at the <a href="http://www.slideshare.net/odino/http-colon-slash-slash
 with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
 
 <p>Cheers!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
-    <link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
-    <updated>2013-08-18T23:51:00-04:00</updated>
-    <id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
-    <content type="html"><![CDATA[<p>Today, even though I come from a weekend
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
+		
+		<link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
+		<updated>2013-08-18T23:51:00-04:00</updated>
+		<id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today, even though I come from a weekend
 of barely sleeping, I decided, after an entire
 day unable to connect to the WiFi of the office,
 to try to fix this issue that seems to be affecting
@@ -1364,15 +1532,24 @@ let&rsquo;s edit grub:</p>
 
 
 <p>This solved the issue, at least for me ;&ndash;)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
-    <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-    <updated>2013-08-01T05:24:00-04:00</updated>
-    <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
-    <content type="html"><![CDATA[<p>At the end of August I will
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
+		
+		<link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
+		<updated>2013-08-01T05:24:00-04:00</updated>
+		<id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>At the end of August I will
 be travelling to reach SF and
 the <a href="http://cakefest.org/">CakeFest</a>, the annual
 conference about
@@ -1398,15 +1575,24 @@ way</strong>.</p>
 <p>If you are going to be around San Francisco
 in the first days of Semptember, feel free to
 ping me!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sending HipChat notifications in PHP]]></title>
-    <link href="http://odino.org/sending-hipchat-notifications-in-php/"/>
-    <updated>2013-07-19T14:20:00-04:00</updated>
-    <id>http://odino.org/sending-hipchat-notifications-in-php</id>
-    <content type="html"><![CDATA[<p>This morning I added a couple handlers to
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Sending HipChat notifications in PHP]]></title>
+		
+		<link href="http://odino.org/sending-hipchat-notifications-in-php/"/>
+		<updated>2013-07-19T14:20:00-04:00</updated>
+		<id>http://odino.org/sending-hipchat-notifications-in-php</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>This morning I added a couple handlers to
 <a href="https://github.com/namshi/notificator">Notificator</a>, one for
 RabbitMQ and another for <a href="https://hipchat.com">HipChat</a>: in
 this post I would like to show you how easy is to integrate
@@ -1510,15 +1696,24 @@ Notes
     </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AB testing in PHP with namshi/ab]]></title>
-    <link href="http://odino.org/ab-testing-in-php-with-namshi-slash-ab/"/>
-    <updated>2013-07-13T14:27:00-04:00</updated>
-    <id>http://odino.org/ab-testing-in-php-with-namshi-slash-ab</id>
-    <content type="html"><![CDATA[<p>AB testing is a powerful tecnique that
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[AB testing in PHP with namshi/ab]]></title>
+		
+		<link href="http://odino.org/ab-testing-in-php-with-namshi-slash-ab/"/>
+		<updated>2013-07-13T14:27:00-04:00</updated>
+		<id>http://odino.org/ab-testing-in-php-with-namshi-slash-ab</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>AB testing is a powerful tecnique that
 lets you gather metrics about different
 versions of a feature: it basically
 consist into displaying a number of
@@ -1942,418 +2137,8 @@ the library correctly <a href="https://github.com/namshi/AB/blob/master/tests/Na
 would like to see something different, have a suggestion
 or whatsoever: even better than that, <strong>feel free to open
 a pull request</strong> if we screwed up with anything!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
-    <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
-    <updated>2013-07-11T01:20:00-04:00</updated>
-    <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
-    <content type="html"><![CDATA[<p>While implementing various pieces of our
-<a href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
-we, at <a href="http://en-ae.namshi.com">Namshi</a>,
-realized that a central notification
-service would have been very good in order
-to abstract the way we notify our customers
-and everyone in the company (ie. skype messages
-when a task is due a certain date).</p>
-
-<p>We initially implemented all of this
-<a href="http://odino.org/configuring-a-symfony2-application-to-support-soa/">inside a Symfony2 bundle</a>,
-but soon realized that we could
-abstract and generalize our implementation
-in order to extract it into a library for the public
-domain, and that&rsquo;s how
-<a href="https://github.com/namshi/notificator">notificator</a>
-was born.</p>
-
-<!-- more -->
-
-
-<h2>Aim of the library: a monolog-like implementation for notifications</h2>
-
-<p>The aim of this library is to provide a very
-clean abstraction for a task, handling notifications,
-that can be spread across multiple channels (for example
-emails, skype messages, desktop notifications, &hellip;):
-by following this target, we soon realized that by merging
-together 2 simple things, <a href="https://github.com/Seldaek/monolog">Monolog</a>
-and the concept of <a href="http://en.wikipedia.org/wiki/Observer_pattern">event dispatching</a>,
-we could have easily reached our goal.</p>
-
-<p>Honestly, it&rsquo;s true that you can achieve the same goal with
-Monolog, but the problem, there, is that it&rsquo;s a library
-specifically built for logging, thus, when your domain
-deals with simple notifications, your code would really
-be inexpressive.</p>
-
-<p>Even though <strong>Notificator is way simpler</strong>, we took a lot
-of inspiration from Monolog: for example, the concept of
-handlers is a total steal ;&ndash;)</p>
-
-<h2>Installation</h2>
-
-<p>The library is available via composer,
-as you can see from its
-<a href="https://packagist.org/packages/namshi/notificator">packagist page</a>.</p>
-
-<p>Using semantic versioning, I recommend you
-to pick a minor release (<code>1.0</code>, for example)
-and stick to it in your <code>composer.json</code>:
-what we try to do is that, if there is a BC break
-in the API, we increase the minor version (<code>1.0.X</code> to <code>1.1.X</code>, for example).</p>
-
-<p>At the end, you <strong>should</strong> require it like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"namshi/notificator": "1.0.*"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Hello world! example</h2>
-
-<p>Just to give a very rough and simple example on how this
-library works, let&rsquo;s see how you can trigger a notification
-via <strong>both</strong> email (with PHP&rsquo;s <code>mail</code> function<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>)
-and the <code>notify-send</code> utility available on ubuntu (I&rsquo;ve already spoke
-about it in <a href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/">a previous post</a>).</p>
-
-<p>First of all, we would need to create a <em>plain-old-php-class</em>
-representing the notification, which implements 2 interfaces:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Notification</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\NotificationInterface</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">interface</span> <span class="nx">NotifySendNotificationInterface</span> <span class="k">extends</span> <span class="nx">NotificationInterface</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">interface</span> <span class="nx">EmailNotificationInterface</span> <span class="k">extends</span> <span class="nx">NotificationInterface</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAddress</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSubject</span><span class="p">();</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBody</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">DoubleNotification</span> <span class="k">extends</span> <span class="nx">Notification</span> <span class="k">implements</span> <span class="nx">NotifySendNotificationInterface</span><span class="p">,</span> <span class="nx">EmailNotificationInterface</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">protected</span> <span class="nv">$address</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">protected</span> <span class="nv">$body</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">protected</span> <span class="nv">$subject</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$address</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$parameters</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">address</span>  <span class="o">=</span> <span class="nv">$address</span><span class="p">;</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">body</span>     <span class="o">=</span> <span class="nv">$body</span><span class="p">;</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">subject</span>  <span class="o">=</span> <span class="nv">$subject</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAddress</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">address</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSubject</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">subject</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBody</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMessage</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>At this point we need 2 notification handlers, which
-will separately handle the notification:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Notification\Handler\HandlerInterface</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\NotificationInterface</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">NotifySendNotificationHandler</span> <span class="k">implements</span> <span class="nx">HandlerInterface</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">shouldHandle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nv">$notification</span> <span class="nx">instanceOf</span> <span class="nx">NotifySendNotificationInterface</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nb">shell_exec</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;notify-send &quot;%s&quot;&#39;</span><span class="p">,</span> <span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()));</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">EmailNotificationHandler</span> <span class="k">implements</span> <span class="nx">HandlerInterface</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">shouldHandle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="nv">$notification</span> <span class="nx">instanceOf</span> <span class="nx">EmailNotificationInterface</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">NotificationInterface</span> <span class="nv">$notification</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="nb">mail</span><span class="p">(</span><span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getAddress</span><span class="p">(),</span> <span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getSubject</span><span class="p">(),</span> <span class="nv">$notification</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">());</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We&rsquo;re basically there: with a bunch of code we can now trigger
-a notification both via email and <code>notify-send</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// create the manager and assign handlers to it</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Manager</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$manager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">();</span>
-</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">addHandler</span><span class="p">(</span><span class="k">new</span> <span class="nx">NotifySendNotificationHandler</span><span class="p">());</span>
-</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">addHandler</span><span class="p">(</span><span class="k">new</span> <span class="nx">EmailNotificationHandler</span><span class="p">());</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DoubleNotification</span><span class="p">(</span><span class="s1">&#39;alessandro.nadalin@gmail.com&#39;</span><span class="p">,</span> <span class="s1">&#39;Test email&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello!&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//  trigger the notification</span>
-</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$notification</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img class="right" src="http://odino.org/images/notification-email.png"></p>
-
-<p>At this point, if you run this example<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, you should
-see a notification popping up on your desktop and, in a few seconds,
-you will also receive an email to the address you&rsquo;ve given, with the subject
-&ldquo;Test email&rdquo; and &ldquo;Hello!&rdquo; in the body.</p>
-
-<p>By the way, if you want to see some examples on
-how the library works, <a href="https://github.com/namshi/notificator/tree/master/examples">check them out on github</a>.</p>
-
-<h2>Sending notifications via RabbitMQ</h2>
-
-<p>It is no news that we heavily rely on
-<a href="http://odino.org/refactoring-your-architecture-go-for-soa/">RabbitMQ in our SOA</a>,
-so it&rsquo;s pretty obvious that, to implement the notification service,
-we send messages containing the notifications, that will
-be intercepted by our notification service, which relies on
-Notificator.</p>
-
-<p>To do so, we take advantage of the great job done by
-<a href="https://twitter.com/old_sound">Alvaro Videla</a>
-on RabbitMQ for PHP and Symfony2, through the
-<a href="https://github.com/videlalvaro/php-amqplib">PHP AMQP library</a>
-and the <a href="https://github.com/videlalvaro/RabbitMqBundle">RabbitMQ bundle</a>.</p>
-
-<p>If you are familiar with them, you know that in order to consume messages,
-you have to declare your consumer as a callback of the actual, generic
-rabbitmq consumer, through the <code>config.yml</code> file:</p>
-
-<figure class='code'><figcaption><span>app/config/config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">old_sound_rabbit_mq</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">consumers</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">notification</span><span class="p-Indicator">:</span>
-</span><span class='line'>            <span class="l-Scalar-Plain">connection</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">default</span>
-</span><span class='line'>            <span class="l-Scalar-Plain">exchange_options</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span><span class="nv">name</span><span class="p-Indicator">:</span> <span class="s">&#39;notifications&#39;</span><span class="p-Indicator">,</span> <span class="nv">type</span><span class="p-Indicator">:</span> <span class="nv">direct</span><span class="p-Indicator">}</span>
-</span><span class='line'>            <span class="l-Scalar-Plain">queue_options</span><span class="p-Indicator">:</span>    <span class="p-Indicator">{</span><span class="nv">name</span><span class="p-Indicator">:</span> <span class="s">&#39;notifications&#39;</span><span class="p-Indicator">}</span>
-</span><span class='line'>            <span class="l-Scalar-Plain">callback</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">namshi.notification.consumer</span>
-</span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="err">    </span><span class="l-Scalar-Plain">namshi.notification.consumer</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Namshi\Notificator\Messaging\RabbitMQ\Symfony2\Consumer</span>
-</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="err">@</span><span class="nv">namshi.notification.manager</span><span class="p-Indicator">]</span>
-</span><span class='line'><span class="err">    </span><span class="l-Scalar-Plain">namshi.notification.manager</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Namshi\Notificator\Manager</span>
-</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="err">    </span>      <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">addhandler</span><span class="p-Indicator">,</span> <span class="p-Indicator">[</span><span class="err">@</span><span class="nv">namshi.notification.handler.notify_send</span><span class="p-Indicator">]</span> <span class="p-Indicator">]</span>
-</span><span class='line'><span class="err">    </span><span class="l-Scalar-Plain">namshi.notification.handler.notify_send</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="err">    </span>    <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Namshi\Notificator\Notification\Handler\NotifySend</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We already provide a <a href="https://github.com/namshi/notificator/blob/master/src/Namshi/Notificator/Messaging/RabbitMQ/Symfony2/Consumer.php">very basic consumer callback</a>
-to be used with the RabbitMQ bundle.</p>
-
-<p>The main idea behind this is that the publisher serializes the notification
-and sends it through RabbitMQ, while the consumer unserializes and
-triggers it through the <code>Manager</code>. The publisher code would be very, very simple:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$publisher</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;old_sound_rabbit_mq.notifications_producer&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySampleNotification</span><span class="p">(</span><span class="s2">&quot;man, this comes from RabbitMQ and Symfony2!&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$publisher</span><span class="o">-&gt;</span><span class="na">publish</span><span class="p">(</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">$notification</span><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and to start consuming messages you would only need to
-start the consumer:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">php app/console rabbitmq:consumer -w notification</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>FOSS</h2>
-
-<p>I&rsquo;ve tried to write a pretty extensive
-<a href="https://github.com/namshi/notificator/">README</a> that you can use as a reference, on Github
-(check the <a href="https://github.com/namshi/notificator/tree/master/tests">tests</a>, as well, to get an idea of the internals):
-if you spot any typo or mistake, don&rsquo;t hesitate to
-reach out and point it out.</p>
-
-<p>This library is part of the efforts,
-from <a href="https://github.com/namshi">Namshi</a>,
-to be able to give back to the
-OSS community as much as possible: you
-are therefore strongly encouraged to open a PR
-or express your opinion if you find that something
-should be fixed or could be improved (there&rsquo;s a lot
-of room for improvement, starting by implementing
-many more <a href="https://github.com/namshi/notificator/tree/master/src/Namshi/Notificator/Notification/Handler">handlers</a>).</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>Only used for its simplicity here, please do not use it in production, use stuff like SwiftMailer instead! <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I mostly took the example code from the README of the library on github, so forgive me if there are synthax errors or some typo. You can anyhow have a look at the examples (in the examples/ folder) to check some working code <a href='#fnref:2' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
-]]></content>
-  </entry>
-  
+]]>
+		</content>
+	</entry>
+	
 </feed>

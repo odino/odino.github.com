@@ -16,7 +16,7 @@ $color-gray05: #fff !default;
 
 
 .wrap {
-  width: 70%;
+  width: 50%;
   line-height: 30px;
 }
 
@@ -66,4 +66,37 @@ img, video{
 
 .cat-month {
   color: #cc0033;
+}
+
+h1, header h1 a, h2 {
+  font-family: 'Alegreya SC', serif;
+  letter-spacing: 3px;
+  word-spacing: 10px;
+}
+
+time {
+  color: #777777;
+}
+
+article > footer {
+  padding-bottom: 0;
+  border: 0;
+  border-top: 1px dashed #4d4d4d;
+}
+
+header h1 a {
+  font-size: 45px;
+  border-bottom: 0;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+article {
+  border-bottom:  0;
+}
+
+p a {
+  border-bottom: 1px dashed black;
 }

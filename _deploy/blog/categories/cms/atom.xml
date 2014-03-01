@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: CMS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/cms/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Retrieve top rated products in Magento]]></title>
+    <title type="html"><![CDATA[Retrieve Top Rated Products in Magento]]></title>
     <link href="http://odino.org/retrieve-top-rated-products-in-magento/"/>
     <updated>2010-09-11T13:52:00-04:00</updated>
     <id>http://odino.org/retrieve-top-rated-products-in-magento</id>
@@ -96,7 +95,7 @@ $products = Mage::helper(&lsquo;heart&rsquo;)&ndash;>getTopRatedProducts(5);</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How to discover if a site has been built with Joomla!]]></title>
+    <title type="html"><![CDATA[How to Discover if a Site Has Been Built With Joomla!]]></title>
     <link href="http://odino.org/how-to-discover-if-a-site-has-been-built-with-joomla/"/>
     <updated>2010-09-11T13:44:00-04:00</updated>
     <id>http://odino.org/how-to-discover-if-a-site-has-been-built-with-joomla</id>

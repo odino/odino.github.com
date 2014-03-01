@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title><![CDATA[Category: Symfony2 | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/symfony2/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-02-27T19:02:51-05:00</updated>
+  <updated>2014-02-28T16:13:11-05:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -14,7 +13,24 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
+    <title type="html"><![CDATA[Service Oriented Architectures With Symfony2]]></title>
+    <link href="http://odino.org/service-oriented-architectures-with-symfony2/"/>
+    <updated>2014-02-28T14:31:00-05:00</updated>
+    <id>http://odino.org/service-oriented-architectures-with-symfony2</id>
+    <content type="html"><![CDATA[<p>Last talk for me in the cold lands of Canada: today it was Symfony2&rsquo;s
+turn and how to integrate it with your SOA.</p>
+
+<!-- more -->
+
+
+<p>As usual, for those who missed it, here are the slides:</p>
+
+<p><div class="slideshare" id="__ss_31775384"><iframe src="http://www.slideshare.net/slideshow/embed_code/31775384 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Speaking About AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
     <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
     <updated>2013-10-20T11:00:00-04:00</updated>
     <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
@@ -55,7 +71,7 @@ and I am thrilled to be part of such an amazing speakers' lineup
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Notificator, sending notifications through PHP in a clean and lightweight way]]></title>
+    <title type="html"><![CDATA[Notificator, Sending Notifications Through PHP in a Clean and Lightweight Way]]></title>
     <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
     <updated>2013-07-11T01:20:00-04:00</updated>
     <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
@@ -249,7 +265,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#97;&#108;&#101;&#115;&#x73;&#97;&#x6e;&#x64;&#x72;&#111;&#x2e;&#x6e;&#x61;&#x64;&#97;&#108;&#x69;&#110;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#97;&#x6c;&#101;&#x73;&#x73;&#97;&#x6e;&#x64;&#114;&#x6f;&#46;&#x6e;&#x61;&#x64;&#97;&#108;&#105;&#x6e;&#64;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#97;&#x6c;&#101;&#x73;&#x73;&#x61;&#110;&#x64;&#x72;&#x6f;&#46;&#110;&#x61;&#x64;&#x61;&#108;&#x69;&#110;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#97;&#108;&#101;&#x73;&#115;&#97;&#110;&#x64;&#x72;&#x6f;&#46;&#110;&#97;&#100;&#97;&#x6c;&#x69;&#x6e;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);
@@ -365,7 +381,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Configuring a Symfony2 application to support SOA]]></title>
+    <title type="html"><![CDATA[Configuring a Symfony2 Application to Support SOA]]></title>
     <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
     <updated>2013-06-06T13:00:00-04:00</updated>
     <id>http://odino.org/configuring-a-symfony2-application-to-support-soa</id>
@@ -636,7 +652,7 @@ Notes
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Why our business choose Symfony2 over any other PHP framework]]></title>
+    <title type="html"><![CDATA[Why Our Business Choose Symfony2 Over Any Other PHP Framework]]></title>
     <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
     <updated>2013-05-27T22:16:00-04:00</updated>
     <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
@@ -1030,29 +1046,6 @@ Notes
 	</ol>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Symfony2 console: permission denied during autocompletion]]></title>
-    <link href="http://odino.org/symfony2-console-permission-denied-during-autocompletion/"/>
-    <updated>2013-03-11T10:11:00-04:00</updated>
-    <id>http://odino.org/symfony2-console-permission-denied-during-autocompletion</id>
-    <content type="html"><![CDATA[<p>Yesterday I faced a pretty cryptic issue
-while using the Symfony2 console (<code>app/console</code>).</p>
-
-<!-- more -->
-
-
-<p>I guess the error is pretty common, and it&rsquo;s really
-easy to fix, since the problem is that
-<a href="https://github.com/hacfi/oh-my-zsh/commit/8c74d80fd6cdc7e1b48e7eb321a3e3a22674c3be">the binary is not executable</a>:</p>
-
-<p><code>
-chmod +x app/console
-</code></p>
-
-<p>&hellip;and you&rsquo;re done.</p>
 ]]></content>
   </entry>
   
