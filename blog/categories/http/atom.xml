@@ -3,7 +3,7 @@
   <title><![CDATA[Category: HTTP | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/http/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Increase Mobile Performances by Implementing Transparent Redirects]]></title>
     <link href="http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects/"/>
-    <updated>2014-03-03T17:58:00-05:00</updated>
+    <updated>2014-03-03T17:58:00+04:00</updated>
     <id>http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects</id>
     <content type="html"><![CDATA[<p>Most of you are aware that one of the biggest problems while
 developing mobile apps / websites, is the reduced bandwidth / connectivity
@@ -108,7 +108,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Frontend Web Development Is Not as Fun as It Could Be]]></title>
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-    <updated>2013-11-10T19:53:00-05:00</updated>
+    <updated>2013-11-10T19:53:00+04:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
     <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
@@ -435,7 +435,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, Again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-04:00</updated>
+    <updated>2013-09-01T17:48:00+04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
     <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
 I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
@@ -461,7 +461,7 @@ here are the slides for the lazy ones :)</p>
   <entry>
     <title type="html"><![CDATA[Hello US, I'm Coming to San Francisco]]></title>
     <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-    <updated>2013-08-01T05:24:00-04:00</updated>
+    <updated>2013-08-01T05:24:00+04:00</updated>
     <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
     <content type="html"><![CDATA[<p>At the end of August I will
 be travelling to reach SF and
@@ -495,7 +495,7 @@ ping me!</p>
   <entry>
     <title type="html"><![CDATA[Securing Your HTTP API With JavaScript Object Signing and Encryption]]></title>
     <link href="http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
-    <updated>2013-06-04T00:31:00-04:00</updated>
+    <updated>2013-06-04T00:31:00+04:00</updated>
     <id>http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,

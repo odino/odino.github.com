@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Architecture | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Refactoring Your Architecture Understanding SOA]]></title>
     <link href="http://odino.org/refactoring-your-architecture-go-for-soa/"/>
-    <updated>2013-03-23T17:35:00-04:00</updated>
+    <updated>2013-03-23T17:35:00+04:00</updated>
     <id>http://odino.org/refactoring-your-architecture-go-for-soa</id>
     <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>
@@ -166,7 +166,7 @@ approach and the vision we had in our own context.</p>
   <entry>
     <title type="html"><![CDATA[Application-level Caching: Fight the Right Battle]]></title>
     <link href="http://odino.org/application-level-caching-fight-the-right-battle/"/>
-    <updated>2011-11-22T15:01:00-05:00</updated>
+    <updated>2011-11-22T15:01:00+04:00</updated>
     <id>http://odino.org/application-level-caching-fight-the-right-battle</id>
     <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
 

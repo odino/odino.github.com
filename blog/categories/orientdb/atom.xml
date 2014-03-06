@@ -3,7 +3,7 @@
   <title><![CDATA[Category: OrientDB | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/orientdb/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[OrientDB, the Fastest Document-based Graph Database]]></title>
     <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-    <updated>2014-02-26T15:25:00-05:00</updated>
+    <updated>2014-02-26T15:25:00+04:00</updated>
     <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
     <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
 of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
@@ -34,7 +34,7 @@ as usual, here:</p>
   <entry>
     <title type="html"><![CDATA[Starting to Play With the Doctrine OrientDB ODM]]></title>
     <link href="http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm/"/>
-    <updated>2013-01-20T23:00:00-05:00</updated>
+    <updated>2013-01-20T23:00:00+04:00</updated>
     <id>http://odino.org/starting-to-play-with-the-doctrine-orientdb-odm</id>
     <content type="html"><![CDATA[<p>Since I am actively playing around with it, I
 wanted to share some snippets to use the
@@ -506,7 +506,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Please Welcome the Doctrine2 OrientDB ODM]]></title>
     <link href="http://odino.org/please-welcome-the-doctrine-orientdb-odm/"/>
-    <updated>2012-12-28T23:12:00-05:00</updated>
+    <updated>2012-12-28T23:12:00+04:00</updated>
     <id>http://odino.org/please-welcome-the-doctrine-orientdb-odm</id>
     <content type="html"><![CDATA[<p>It took almost 2 years from the
 <a href="https://github.com/doctrine/orientdb-odm/commit/65929ec57a2e2cb1f4af034d722e17b5339b9d48">first commit</a>,
@@ -555,7 +555,7 @@ as it contains the references to the new repository.</p>
   <entry>
     <title type="html"><![CDATA[Video Introduction About NoSQL Graph Databases and OrientDB]]></title>
     <link href="http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb/"/>
-    <updated>2012-12-08T15:56:00-05:00</updated>
+    <updated>2012-12-08T15:56:00+04:00</updated>
     <id>http://odino.org/video-introduction-about-nosql-graph-databases-and-orientdb</id>
     <content type="html"><![CDATA[<p>During October of the last year, me and my ex-colleague David
 took some time off to partecipate to the <a href="http://phpcon.pl/2011/pl/">polish PHP Conference</a>
@@ -578,7 +578,7 @@ finally made it to Vimeo: enjoy some tarzan english!</p>
   <entry>
     <title type="html"><![CDATA[OrientDB ODM Beta 5: Repositories, Compatibility With 1.2.0 and More Stability]]></title>
     <link href="http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability/"/>
-    <updated>2012-11-23T09:10:00-05:00</updated>
+    <updated>2012-11-23T09:10:00+04:00</updated>
     <id>http://odino.org/orientdb-odm-beta-5-repositories-compatibility-with-1-dot-2-0-and-more-stability</id>
     <content type="html"><![CDATA[<p>It has almost been a baby&rsquo;s delivery, but we eventually made it:
 the PHP <a href="http://css.dzone.com/articles/era-object-document-mapping">ODM</a> for <a href="http://code.google.com/p/orient/">OrientDB</a> has finally reached its <strong>5th beta</strong>.</p>

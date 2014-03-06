@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Testing | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[AB Testing in PHP With Namshi/ab]]></title>
     <link href="http://odino.org/ab-testing-in-php-with-namshi-slash-ab/"/>
-    <updated>2013-07-13T14:27:00-04:00</updated>
+    <updated>2013-07-13T14:27:00+04:00</updated>
     <id>http://odino.org/ab-testing-in-php-with-namshi-slash-ab</id>
     <content type="html"><![CDATA[<p>AB testing is a powerful tecnique that
 lets you gather metrics about different
@@ -364,7 +364,7 @@ a pull request</strong> if we screwed up with anything!</p>
   <entry>
     <title type="html"><![CDATA[Desktop Notifications for PHPUnit Tests on Ubuntu]]></title>
     <link href="http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/"/>
-    <updated>2013-06-21T03:48:00-04:00</updated>
+    <updated>2013-06-21T03:48:00+04:00</updated>
     <id>http://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu</id>
     <content type="html"><![CDATA[<p><img class="left" src="/images/phpunit-notification-ko.png"></p>
 
@@ -463,7 +463,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Why Our Business Choose Symfony2 Over Any Other PHP Framework]]></title>
     <link href="http://odino.org/why-we-choose-symfony2-over-any-other-php-framework/"/>
-    <updated>2013-05-27T22:16:00-04:00</updated>
+    <updated>2013-05-27T22:16:00+04:00</updated>
     <id>http://odino.org/why-we-choose-symfony2-over-any-other-php-framework</id>
     <content type="html"><![CDATA[<p>Everyone knows that I am a big fan of the
 Symfony2 ecosystem, and going SOA with
@@ -861,7 +861,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Automated Tests From a Novice's Perspective]]></title>
     <link href="http://odino.org/automated-tests-from-a-novice-perspective/"/>
-    <updated>2013-05-27T22:01:00-04:00</updated>
+    <updated>2013-05-27T22:01:00+04:00</updated>
     <id>http://odino.org/automated-tests-from-a-novice-perspective</id>
     <content type="html"><![CDATA[<p>Today I got one of those moments of pride
 when one of our developers, who is working
@@ -876,7 +876,7 @@ tests for the first weeks of his career:</p>
   <entry>
     <title type="html"><![CDATA[Using Selenium and Symfony2 to Help Your Frontend Developers Coding Without Risks]]></title>
     <link href="http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
-    <updated>2013-03-10T11:39:00-04:00</updated>
+    <updated>2013-03-10T11:39:00+04:00</updated>
     <id>http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
     <content type="html"><![CDATA[<p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major

@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Web | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/web/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Increase Mobile Performances by Implementing Transparent Redirects]]></title>
     <link href="http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects/"/>
-    <updated>2014-03-03T17:58:00-05:00</updated>
+    <updated>2014-03-03T17:58:00+04:00</updated>
     <id>http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects</id>
     <content type="html"><![CDATA[<p>Most of you are aware that one of the biggest problems while
 developing mobile apps / websites, is the reduced bandwidth / connectivity
@@ -108,7 +108,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[6 Takeways From the Second Day of ConFoo]]></title>
     <link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
-    <updated>2014-02-27T18:27:00-05:00</updated>
+    <updated>2014-02-27T18:27:00+04:00</updated>
     <id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
     <content type="html"><![CDATA[<p>Today it was an interesting day here at ConFoo, and I&rsquo;ve
 seen some good content dealing with web performances.</p>
@@ -145,7 +145,7 @@ $premiumSpecification-&gt;isSatisfiedBy($customer);
 
 <h2>Optimizing images</h2>
 
-<p><a href="">Imageoptim</a> is a very handy tool to losslessly compress images
+<p><a href="http://imageoptim.com/">Imageoptim</a> is a very handy tool to losslessly compress images
 and save bandwidth while serving them.</p>
 
 <h2>gzip_static</h2>
@@ -196,7 +196,7 @@ forward to my third day &ndash; with my last talk, about SOAs &ndash; in this co
   <entry>
     <title type="html"><![CDATA[7 Takeways From the First Day of ConFoo]]></title>
     <link href="http://odino.org/7-takeways-from-the-first-day-of-confoo/"/>
-    <updated>2014-02-26T20:34:00-05:00</updated>
+    <updated>2014-02-26T20:34:00+04:00</updated>
     <id>http://odino.org/7-takeways-from-the-first-day-of-confoo</id>
     <content type="html"><![CDATA[<p>Today it was the first day of ConFoo here in Montreal and,
 as usual, a conference is always good to wrap your head around
@@ -305,7 +305,7 @@ went pretty well, can&rsquo;t wait for tomorrow!</p>
   <entry>
     <title type="html"><![CDATA[The State of HTTP/2.0]]></title>
     <link href="http://odino.org/the-state-of-http-slash-2-dot-0/"/>
-    <updated>2012-10-15T23:45:00-04:00</updated>
+    <updated>2012-10-15T23:45:00+04:00</updated>
     <id>http://odino.org/the-state-of-http-slash-2-dot-0</id>
     <content type="html"><![CDATA[<p>With a few days of delay I&rsquo;m here reporting and commenting
 the last <strong>revolutions</strong> about the protocol of the web,
@@ -400,7 +400,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[The Hope Is That IE Will Drown in 2 Years]]></title>
     <link href="http://odino.org/the-hope-is-that-ie-will-drown-in-2-years/"/>
-    <updated>2012-08-03T18:27:00-04:00</updated>
+    <updated>2012-08-03T18:27:00+04:00</updated>
     <id>http://odino.org/the-hope-is-that-ie-will-drown-in-2-years</id>
     <content type="html"><![CDATA[<p>More than a decade ago the first <a href="http://en.wikipedia.org/wiki/Browser_wars">browser war</a>
 made his victim: it was Netscape, which

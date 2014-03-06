@@ -3,7 +3,7 @@
   <title><![CDATA[Category: RabbitMQ | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/rabbitmq/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Service Oriented Architectures With Symfony2]]></title>
     <link href="http://odino.org/service-oriented-architectures-with-symfony2/"/>
-    <updated>2014-02-28T14:31:00-05:00</updated>
+    <updated>2014-02-28T14:31:00+04:00</updated>
     <id>http://odino.org/service-oriented-architectures-with-symfony2</id>
     <content type="html"><![CDATA[<p>Last talk for me in the cold lands of Canada: today it was Symfony2&rsquo;s
 turn and how to integrate it with your SOA.</p>
@@ -32,7 +32,7 @@ turn and how to integrate it with your SOA.</p>
   <entry>
     <title type="html"><![CDATA[Notificator, Sending Notifications Through PHP in a Clean and Lightweight Way]]></title>
     <link href="http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way/"/>
-    <updated>2013-07-11T01:20:00-04:00</updated>
+    <updated>2013-07-11T01:20:00+04:00</updated>
     <id>http://odino.org/notificator-sending-notifications-through-php-in-clean-and-lightweight-way</id>
     <content type="html"><![CDATA[<p>While implementing various pieces of our
 <a href="/why-we-choose-symfony2-over-any-other-php-framework/">Service-Oriented Architecture</a>
@@ -224,7 +224,7 @@ use Namshi\Notificator\Manager;</p>
 $manager->addHandler(new NotifySendNotificationHandler());
 $manager->addHandler(new EmailNotificationHandler());</p>
 
-<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x61;&#108;&#101;&#x73;&#x73;&#97;&#110;&#x64;&#114;&#111;&#46;&#110;&#97;&#x64;&#97;&#x6c;&#x69;&#110;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x61;&#108;&#x65;&#115;&#x73;&#97;&#x6e;&#100;&#114;&#x6f;&#x2e;&#110;&#x61;&#x64;&#x61;&#x6c;&#x69;&#x6e;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
+<p>$notification = new DoubleNotification(&lsquo;<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x61;&#x6c;&#101;&#x73;&#115;&#x61;&#110;&#x64;&#114;&#111;&#46;&#x6e;&#97;&#100;&#97;&#108;&#x69;&#x6e;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x61;&#x6c;&#x65;&#115;&#x73;&#97;&#x6e;&#x64;&#x72;&#x6f;&#x2e;&#110;&#x61;&#x64;&#x61;&#108;&#x69;&#110;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;</a>&rsquo;, &lsquo;Test email&rsquo;, &lsquo;Hello!&rsquo;);</p>
 
 <p>//  trigger the notification
 $manager->trigger($notification);
@@ -342,7 +342,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Refactoring Your Architecture Understanding SOA]]></title>
     <link href="http://odino.org/refactoring-your-architecture-go-for-soa/"/>
-    <updated>2013-03-23T17:35:00-04:00</updated>
+    <updated>2013-03-23T17:35:00+04:00</updated>
     <id>http://odino.org/refactoring-your-architecture-go-for-soa</id>
     <content type="html"><![CDATA[<p>It is no news that I work for <a href="http://en-ae.namshi.com">a company</a>
 supported by <a href="http://www.rocket-internet.de">a mothership</a>

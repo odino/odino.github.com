@@ -3,7 +3,7 @@
   <title><![CDATA[Category: SOA | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/soa/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-03-06T11:03:50+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Service Oriented Architectures With Symfony2]]></title>
     <link href="http://odino.org/service-oriented-architectures-with-symfony2/"/>
-    <updated>2014-02-28T14:31:00-05:00</updated>
+    <updated>2014-02-28T14:31:00+04:00</updated>
     <id>http://odino.org/service-oriented-architectures-with-symfony2</id>
     <content type="html"><![CDATA[<p>Last talk for me in the cold lands of Canada: today it was Symfony2&rsquo;s
 turn and how to integrate it with your SOA.</p>
@@ -32,7 +32,7 @@ turn and how to integrate it with your SOA.</p>
   <entry>
     <title type="html"><![CDATA[Speaking About AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
     <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
-    <updated>2013-10-20T11:00:00-04:00</updated>
+    <updated>2013-10-20T11:00:00+04:00</updated>
     <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
     <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
 be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,
@@ -73,7 +73,7 @@ and I am thrilled to be part of such an amazing speakers' lineup
   <entry>
     <title type="html"><![CDATA[Tips and Tricks for You Service-Oriented Architecture]]></title>
     <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-    <updated>2013-08-31T19:05:00-04:00</updated>
+    <updated>2013-08-31T19:05:00+04:00</updated>
     <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
     <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
 <a href="http://cakefest.org">CakeFest</a> here in San Francisco,
@@ -106,7 +106,7 @@ with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
   <entry>
     <title type="html"><![CDATA[Hello US, I'm Coming to San Francisco]]></title>
     <link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-    <updated>2013-08-01T05:24:00-04:00</updated>
+    <updated>2013-08-01T05:24:00+04:00</updated>
     <id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
     <content type="html"><![CDATA[<p>At the end of August I will
 be travelling to reach SF and
@@ -140,7 +140,7 @@ ping me!</p>
   <entry>
     <title type="html"><![CDATA[Configuring a Symfony2 Application to Support SOA]]></title>
     <link href="http://odino.org/configuring-a-symfony2-application-to-support-soa/"/>
-    <updated>2013-06-06T13:00:00-04:00</updated>
+    <updated>2013-06-06T13:00:00+04:00</updated>
     <id>http://odino.org/configuring-a-symfony2-application-to-support-soa</id>
     <content type="html"><![CDATA[<p>When you think in terms of
 <a href="/refactoring-your-architecture-go-for-soa/">Service Oriented Architecture</a>

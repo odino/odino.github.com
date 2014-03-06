@@ -3,7 +3,7 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-03-04T06:33:24-05:00</updated>
+	<updated>2014-03-06T11:03:50+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
@@ -16,7 +16,7 @@
 			<title type="html"><![CDATA[Increase mobile performances by implementing transparent redirects]]></title>
 		
 		<link href="http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects/"/>
-		<updated>2014-03-03T17:58:00-05:00</updated>
+		<updated>2014-03-03T17:58:00+04:00</updated>
 		<id>http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects</id>
 		<content type="html">
 			<![CDATA[
@@ -128,7 +128,7 @@ Notes
 			<title type="html"><![CDATA[Service Oriented Architectures with Symfony2]]></title>
 		
 		<link href="http://odino.org/service-oriented-architectures-with-symfony2/"/>
-		<updated>2014-02-28T14:31:00-05:00</updated>
+		<updated>2014-02-28T14:31:00+04:00</updated>
 		<id>http://odino.org/service-oriented-architectures-with-symfony2</id>
 		<content type="html">
 			<![CDATA[
@@ -155,7 +155,7 @@ turn and how to integrate it with your SOA.</p>
 			<title type="html"><![CDATA[6 takeways from the second day of ConFoo]]></title>
 		
 		<link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
-		<updated>2014-02-27T18:27:00-05:00</updated>
+		<updated>2014-02-27T18:27:00+04:00</updated>
 		<id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
 		<content type="html">
 			<![CDATA[
@@ -198,7 +198,7 @@ satisfies the rule / specification:</p>
 
 <h2>Optimizing images</h2>
 
-<p><a href="">Imageoptim</a> is a very handy tool to losslessly compress images
+<p><a href="http://imageoptim.com/">Imageoptim</a> is a very handy tool to losslessly compress images
 and save bandwidth while serving them.</p>
 
 <h2>gzip_static</h2>
@@ -252,7 +252,7 @@ forward to my third day &ndash; with my last talk, about SOAs &ndash; in this co
 			<title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
 		
 		<link href="http://odino.org/angularjs-is-the-future-maybe/"/>
-		<updated>2014-02-27T11:54:00-05:00</updated>
+		<updated>2014-02-27T11:54:00+04:00</updated>
 		<id>http://odino.org/angularjs-is-the-future-maybe</id>
 		<content type="html">
 			<![CDATA[
@@ -280,7 +280,7 @@ quite well.</p>
 			<title type="html"><![CDATA[7 takeways from the first day of ConFoo]]></title>
 		
 		<link href="http://odino.org/7-takeways-from-the-first-day-of-confoo/"/>
-		<updated>2014-02-26T20:34:00-05:00</updated>
+		<updated>2014-02-26T20:34:00+04:00</updated>
 		<id>http://odino.org/7-takeways-from-the-first-day-of-confoo</id>
 		<content type="html">
 			<![CDATA[
@@ -398,7 +398,7 @@ went pretty well, can&rsquo;t wait for tomorrow!</p>
 			<title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
 		
 		<link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-		<updated>2014-02-26T15:25:00-05:00</updated>
+		<updated>2014-02-26T15:25:00+04:00</updated>
 		<id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
 		<content type="html">
 			<![CDATA[
@@ -427,7 +427,7 @@ as usual, here:</p>
 			<title type="html"><![CDATA[7 reasons why working for Namshi is great]]></title>
 		
 		<link href="http://odino.org/7-reasons-why-working-at-namshi-is-great/"/>
-		<updated>2014-01-17T17:44:00-05:00</updated>
+		<updated>2014-01-17T17:44:00+04:00</updated>
 		<id>http://odino.org/7-reasons-why-working-at-namshi-is-great</id>
 		<content type="html">
 			<![CDATA[
@@ -621,7 +621,7 @@ Notes
 			<title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
 		
 		<link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
-		<updated>2014-01-17T16:28:00-05:00</updated>
+		<updated>2014-01-17T16:28:00+04:00</updated>
 		<id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
 		<content type="html">
 			<![CDATA[
@@ -680,7 +680,7 @@ render in ~100ms, powered by lotsa APIs.</p>
 			<title type="html"><![CDATA[How to make your JavaScript apps SEO-friendly]]></title>
 		
 		<link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
-		<updated>2014-01-17T14:15:00-05:00</updated>
+		<updated>2014-01-17T14:15:00+04:00</updated>
 		<id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
 		<content type="html">
 			<![CDATA[
@@ -838,7 +838,7 @@ making SEO-friendly JavaScript apps is not a hassle anymore!
 			<title type="html"><![CDATA[Frontend web development is not as fun as it could be]]></title>
 		
 		<link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-		<updated>2013-11-10T19:53:00-05:00</updated>
+		<updated>2013-11-10T19:53:00+04:00</updated>
 		<id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
 		<content type="html">
 			<![CDATA[
@@ -1195,7 +1195,7 @@ Notes
 			<title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
 		
 		<link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
-		<updated>2013-11-10T08:59:00-05:00</updated>
+		<updated>2013-11-10T08:59:00+04:00</updated>
 		<id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
 		<content type="html">
 			<![CDATA[
@@ -1248,7 +1248,7 @@ some performance gotchas.</p>
 			<title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
 		
 		<link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
-		<updated>2013-10-20T11:00:00-04:00</updated>
+		<updated>2013-10-20T11:00:00+04:00</updated>
 		<id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
 		<content type="html">
 			<![CDATA[
@@ -1298,7 +1298,7 @@ and I am thrilled to be part of such an amazing speakers&#8217; lineup
 			<title type="html"><![CDATA[Space to the youngsters...]]></title>
 		
 		<link href="http://odino.org/space-to-the-youngsters-dot-dot-dot/"/>
-		<updated>2013-09-23T18:26:00-04:00</updated>
+		<updated>2013-09-23T18:26:00+04:00</updated>
 		<id>http://odino.org/space-to-the-youngsters-dot-dot-dot</id>
 		<content type="html">
 			<![CDATA[
@@ -1345,7 +1345,7 @@ an introduction about <a href="http://mohdhallal.github.io/blog/2013/09/22/behat
 			<title type="html"><![CDATA[CakeFest 2013 wrap-up]]></title>
 		
 		<link href="http://odino.org/cakefest-2013-wrap-up/"/>
-		<updated>2013-09-21T16:58:00-04:00</updated>
+		<updated>2013-09-21T16:58:00+04:00</updated>
 		<id>http://odino.org/cakefest-2013-wrap-up</id>
 		<content type="html">
 			<![CDATA[
@@ -1484,7 +1484,7 @@ again in the future.</p>
 			<title type="html"><![CDATA[See you in Paris at the 2013 edition of the PHP Forum]]></title>
 		
 		<link href="http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/"/>
-		<updated>2013-09-21T16:04:00-04:00</updated>
+		<updated>2013-09-21T16:04:00+04:00</updated>
 		<id>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum</id>
 		<content type="html">
 			<![CDATA[
@@ -1527,7 +1527,7 @@ Dustin Whittle who will give his insights about
 			<title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
 		
 		<link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-		<updated>2013-09-01T17:48:00-04:00</updated>
+		<updated>2013-09-01T17:48:00+04:00</updated>
 		<id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
 		<content type="html">
 			<![CDATA[
@@ -1563,7 +1563,7 @@ here are the slides for the lazy ones :)</p>
 			<title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
 		
 		<link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-		<updated>2013-08-31T19:05:00-04:00</updated>
+		<updated>2013-08-31T19:05:00+04:00</updated>
 		<id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
 		<content type="html">
 			<![CDATA[
@@ -1606,7 +1606,7 @@ with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
 			<title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
 		
 		<link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
-		<updated>2013-08-18T23:51:00-04:00</updated>
+		<updated>2013-08-18T23:51:00+04:00</updated>
 		<id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
 		<content type="html">
 			<![CDATA[
@@ -1653,7 +1653,7 @@ let&rsquo;s edit grub:</p>
 			<title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
 		
 		<link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-		<updated>2013-08-01T05:24:00-04:00</updated>
+		<updated>2013-08-01T05:24:00+04:00</updated>
 		<id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
 		<content type="html">
 			<![CDATA[
@@ -1696,7 +1696,7 @@ ping me!</p>
 			<title type="html"><![CDATA[Sending HipChat notifications in PHP]]></title>
 		
 		<link href="http://odino.org/sending-hipchat-notifications-in-php/"/>
-		<updated>2013-07-19T14:20:00-04:00</updated>
+		<updated>2013-07-19T14:20:00+04:00</updated>
 		<id>http://odino.org/sending-hipchat-notifications-in-php</id>
 		<content type="html">
 			<![CDATA[
