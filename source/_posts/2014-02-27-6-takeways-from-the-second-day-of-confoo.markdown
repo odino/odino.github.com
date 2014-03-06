@@ -41,7 +41,7 @@ $premiumSpecification->isSatisfiedBy($customer);
 
 ## Optimizing images
 
-[Imageoptim]() is a very handy tool to losslessly compress images
+[Imageoptim](http://imageoptim.com/) is a very handy tool to losslessly compress images
 and save bandwidth while serving them.
 
 ## gzip_static
