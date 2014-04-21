@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Architecture | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-06T11:03:50+04:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Use a Custom HTTP Status Code for Your Apps' Healthchecks]]></title>
+    <link href="http://odino.org/use-a-custom-http-status-code-for-your-apps-healthchecks/"/>
+    <updated>2014-04-21T10:20:00+04:00</updated>
+    <id>http://odino.org/use-a-custom-http-status-code-for-your-apps-healthchecks</id>
+    <content type="html"><![CDATA[<p>To have systems up &amp; running is something, but to
+have them healthy it&rsquo;s another story.</p>
+
+<!-- more -->
+
+
+<p>If you are looking to implement healthchecks in your
+architecture beware of being a
+bit too simplistic: you might configure, for example,
+on of your frontend machines to check the status of the
+backend ones every few seconds, so that
+<a href="http://wiki.nginx.org/HttpHealthcheckModule">nginx</a> or
+<a href="http://haproxy.1wt.eu/download/1.3/doc/haproxy-en.txt">haproxy</a>
+can remove the backend if they find it unreliable / unhealthy.</p>
+
+<p>Problem is, there might be tricky situations in which the
+backend responds with a <code>200 Ok</code> even though it&rsquo;s not
+working<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>There are a lot of ways to avoid this, but the simplest one,
+that takes you 2 minutes and works quite well, is to use a
+custom HTTP status code for your healthcheck page &ndash; we use
+<code>211 Healthy</code>.</p>
+
+<p>For example, in node, we would do:</p>
+
+<p><code>javascript Serving response with a custom HTTP status code in NodeJS
+res.writeHead(211);
+res.write('OK');
+res.end();
+</code></p>
+
+<p>and then we would need to tell our backend that the only status
+code that has to be considered healthy is <code>211</code>.</p>
+
+<p>No more, no less.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>For example, the backend's nginx can just respond with nginx's default welcome page, if your host is misconfigured <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Refactoring Your Architecture Understanding SOA]]></title>
