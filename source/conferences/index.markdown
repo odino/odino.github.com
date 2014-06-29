@@ -15,6 +15,7 @@ Here's a summary of the most important ones:
 {% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
 
+* [Don't screw it up:  how to build durable web APIs](http://www.slideshare.net/odino/dont-screw-it-up-how-to-build-durable-web-apis-phpday-2014-in-verona-ita), at the 2014 italian PHPDay, where I explained tips, tricks and pitfalls of developing durable, sustainable and long-term HTTP APIs
 * [AngularJS is the future. Maybe.](http://www.slideshare.net/odino/angular-js-is-the-future-maybe-confoo-2014-in-montreal-ca), given at the 2014 edition of the ConFoo in Montreal (CA), in which I highlighted killer features, pros and cons of using AngularJS for your web apps
 * [A Rocket Internet experience](http://www.slideshare.net/odino/a-rocket-internet-experience-forumphp-paris-2013), given at the ForumPHP 2013 in Paris (FRA), dealing with how we formed the development team and structured our Service-Oriented Architecture in Namshi
 * [Tips and tricks for your Service Oriented Architecture](http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco), presented at the CakeFest 2013 in San Francisco (US), in which I explained the way we approached SOA at Namshi

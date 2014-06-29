@@ -3,7 +3,7 @@
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
     <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
-    <updated>2014-02-27T11:54:00-05:00</updated>
+    <updated>2014-02-27T11:54:00+04:00</updated>
     <id>http://odino.org/angularjs-is-the-future-maybe</id>
     <content type="html"><![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
 an overview of why Angular could fit your <em>future</em> requirements
@@ -33,7 +33,7 @@ quite well.</p>
   <entry>
     <title type="html"><![CDATA[How to Make Your JavaScript Apps SEO-friendly]]></title>
     <link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
-    <updated>2014-01-17T14:15:00-05:00</updated>
+    <updated>2014-01-17T14:15:00+04:00</updated>
     <id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
     <content type="html"><![CDATA[<p>One of the challenges in moving your application logic
 from the backend (Rails, Django or whatsoever) to the
@@ -165,7 +165,7 @@ is <a href="https://prerender.io/pricing">very affordable</a> as well.</p>
   <entry>
     <title type="html"><![CDATA[Frontend Web Development Is Not as Fun as It Could Be]]></title>
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-    <updated>2013-11-10T19:53:00-05:00</updated>
+    <updated>2013-11-10T19:53:00+04:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
     <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
@@ -492,7 +492,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Securing Your HTTP API With JavaScript Object Signing and Encryption]]></title>
     <link href="http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
-    <updated>2013-06-04T00:31:00-04:00</updated>
+    <updated>2013-06-04T00:31:00+04:00</updated>
     <id>http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
     <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
 deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
@@ -660,7 +660,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Optimizing Loading Times With Images' Lazy Loading]]></title>
     <link href="http://odino.org/optimizing-loading-times-with-images-lazy-loading/"/>
-    <updated>2012-09-21T07:45:00-04:00</updated>
+    <updated>2012-09-21T07:45:00+04:00</updated>
     <id>http://odino.org/optimizing-loading-times-with-images-lazy-loading</id>
     <content type="html"><![CDATA[<p>Sometimes I like to forget that I&rsquo;m
 mainly involved in other things and

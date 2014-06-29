@@ -3,7 +3,7 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-03-04T06:33:24-05:00</updated>
+	<updated>2014-04-21T10:52:06+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
@@ -13,10 +13,76 @@
 	
 	<entry>
 		
+			<title type="html"><![CDATA[Use a custom HTTP status code for your apps' healthchecks]]></title>
+		
+		<link href="http://odino.org/use-a-custom-http-status-code-for-your-apps-healthchecks/"/>
+		<updated>2014-04-21T10:20:00+04:00</updated>
+		<id>http://odino.org/use-a-custom-http-status-code-for-your-apps-healthchecks</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>To have systems up &amp; running is something, but to
+have them healthy it&rsquo;s another story.</p>
+
+<!-- more -->
+
+
+<p>If you are looking to implement healthchecks in your
+architecture beware of being a
+bit too simplistic: you might configure, for example,
+on of your frontend machines to check the status of the
+backend ones every few seconds, so that
+<a href="http://wiki.nginx.org/HttpHealthcheckModule">nginx</a> or
+<a href="http://haproxy.1wt.eu/download/1.3/doc/haproxy-en.txt">haproxy</a>
+can remove the backend if they find it unreliable / unhealthy.</p>
+
+<p>Problem is, there might be tricky situations in which the
+backend responds with a <code>200 Ok</code> even though it&rsquo;s not
+working<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>There are a lot of ways to avoid this, but the simplest one,
+that takes you 2 minutes and works quite well, is to use a
+custom HTTP status code for your healthcheck page &ndash; we use
+<code>211 Healthy</code>.</p>
+
+<p>For example, in node, we would do:</p>
+
+<figure class='code'><figcaption><span>Serving response with a custom HTTP status code in NodeJS </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">211</span><span class="p">);</span>
+</span><span class='line'><span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;OK&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and then we would need to tell our backend that the only status
+code that has to be considered healthy is <code>211</code>.</p>
+
+<p>No more, no less.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>For example, the backend&#8217;s nginx can just respond with nginx&#8217;s default welcome page, if your host is misconfigured <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+]]>
+		</content>
+	</entry>
+	
+	<entry>
+		
 			<title type="html"><![CDATA[Increase mobile performances by implementing transparent redirects]]></title>
 		
 		<link href="http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects/"/>
-		<updated>2014-03-03T17:58:00-05:00</updated>
+		<updated>2014-03-03T17:58:00+04:00</updated>
 		<id>http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects</id>
 		<content type="html">
 			<![CDATA[
@@ -128,7 +194,7 @@ Notes
 			<title type="html"><![CDATA[Service Oriented Architectures with Symfony2]]></title>
 		
 		<link href="http://odino.org/service-oriented-architectures-with-symfony2/"/>
-		<updated>2014-02-28T14:31:00-05:00</updated>
+		<updated>2014-02-28T14:31:00+04:00</updated>
 		<id>http://odino.org/service-oriented-architectures-with-symfony2</id>
 		<content type="html">
 			<![CDATA[
@@ -155,7 +221,7 @@ turn and how to integrate it with your SOA.</p>
 			<title type="html"><![CDATA[6 takeways from the second day of ConFoo]]></title>
 		
 		<link href="http://odino.org/6-takeways-from-the-second-day-of-confoo/"/>
-		<updated>2014-02-27T18:27:00-05:00</updated>
+		<updated>2014-02-27T18:27:00+04:00</updated>
 		<id>http://odino.org/6-takeways-from-the-second-day-of-confoo</id>
 		<content type="html">
 			<![CDATA[
@@ -198,7 +264,7 @@ satisfies the rule / specification:</p>
 
 <h2>Optimizing images</h2>
 
-<p><a href="">Imageoptim</a> is a very handy tool to losslessly compress images
+<p><a href="http://imageoptim.com/">Imageoptim</a> is a very handy tool to losslessly compress images
 and save bandwidth while serving them.</p>
 
 <h2>gzip_static</h2>
@@ -252,7 +318,7 @@ forward to my third day &ndash; with my last talk, about SOAs &ndash; in this co
 			<title type="html"><![CDATA[AngularJS is the future. Maybe.]]></title>
 		
 		<link href="http://odino.org/angularjs-is-the-future-maybe/"/>
-		<updated>2014-02-27T11:54:00-05:00</updated>
+		<updated>2014-02-27T11:54:00+04:00</updated>
 		<id>http://odino.org/angularjs-is-the-future-maybe</id>
 		<content type="html">
 			<![CDATA[
@@ -280,7 +346,7 @@ quite well.</p>
 			<title type="html"><![CDATA[7 takeways from the first day of ConFoo]]></title>
 		
 		<link href="http://odino.org/7-takeways-from-the-first-day-of-confoo/"/>
-		<updated>2014-02-26T20:34:00-05:00</updated>
+		<updated>2014-02-26T20:34:00+04:00</updated>
 		<id>http://odino.org/7-takeways-from-the-first-day-of-confoo</id>
 		<content type="html">
 			<![CDATA[
@@ -398,7 +464,7 @@ went pretty well, can&rsquo;t wait for tomorrow!</p>
 			<title type="html"><![CDATA[OrientDB, the fastest document-based graph database]]></title>
 		
 		<link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-		<updated>2014-02-26T15:25:00-05:00</updated>
+		<updated>2014-02-26T15:25:00+04:00</updated>
 		<id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
 		<content type="html">
 			<![CDATA[
@@ -427,7 +493,7 @@ as usual, here:</p>
 			<title type="html"><![CDATA[7 reasons why working for Namshi is great]]></title>
 		
 		<link href="http://odino.org/7-reasons-why-working-at-namshi-is-great/"/>
-		<updated>2014-01-17T17:44:00-05:00</updated>
+		<updated>2014-01-17T17:44:00+04:00</updated>
 		<id>http://odino.org/7-reasons-why-working-at-namshi-is-great</id>
 		<content type="html">
 			<![CDATA[
@@ -621,7 +687,7 @@ Notes
 			<title type="html"><![CDATA[If you love AngularJS, you should definitely join us...we're hiring!]]></title>
 		
 		<link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
-		<updated>2014-01-17T16:28:00-05:00</updated>
+		<updated>2014-01-17T16:28:00+04:00</updated>
 		<id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
 		<content type="html">
 			<![CDATA[
@@ -680,7 +746,7 @@ render in ~100ms, powered by lotsa APIs.</p>
 			<title type="html"><![CDATA[How to make your JavaScript apps SEO-friendly]]></title>
 		
 		<link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
-		<updated>2014-01-17T14:15:00-05:00</updated>
+		<updated>2014-01-17T14:15:00+04:00</updated>
 		<id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
 		<content type="html">
 			<![CDATA[
@@ -838,7 +904,7 @@ making SEO-friendly JavaScript apps is not a hassle anymore!
 			<title type="html"><![CDATA[Frontend web development is not as fun as it could be]]></title>
 		
 		<link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-		<updated>2013-11-10T19:53:00-05:00</updated>
+		<updated>2013-11-10T19:53:00+04:00</updated>
 		<id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
 		<content type="html">
 			<![CDATA[
@@ -1195,7 +1261,7 @@ Notes
 			<title type="html"><![CDATA[Drop OpenJDK and upgrade Java to the Oracle packages]]></title>
 		
 		<link href="http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
-		<updated>2013-11-10T08:59:00-05:00</updated>
+		<updated>2013-11-10T08:59:00+04:00</updated>
 		<id>http://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
 		<content type="html">
 			<![CDATA[
@@ -1248,7 +1314,7 @@ some performance gotchas.</p>
 			<title type="html"><![CDATA[Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
 		
 		<link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
-		<updated>2013-10-20T11:00:00-04:00</updated>
+		<updated>2013-10-20T11:00:00+04:00</updated>
 		<id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
 		<content type="html">
 			<![CDATA[
@@ -1298,7 +1364,7 @@ and I am thrilled to be part of such an amazing speakers&#8217; lineup
 			<title type="html"><![CDATA[Space to the youngsters...]]></title>
 		
 		<link href="http://odino.org/space-to-the-youngsters-dot-dot-dot/"/>
-		<updated>2013-09-23T18:26:00-04:00</updated>
+		<updated>2013-09-23T18:26:00+04:00</updated>
 		<id>http://odino.org/space-to-the-youngsters-dot-dot-dot</id>
 		<content type="html">
 			<![CDATA[
@@ -1345,7 +1411,7 @@ an introduction about <a href="http://mohdhallal.github.io/blog/2013/09/22/behat
 			<title type="html"><![CDATA[CakeFest 2013 wrap-up]]></title>
 		
 		<link href="http://odino.org/cakefest-2013-wrap-up/"/>
-		<updated>2013-09-21T16:58:00-04:00</updated>
+		<updated>2013-09-21T16:58:00+04:00</updated>
 		<id>http://odino.org/cakefest-2013-wrap-up</id>
 		<content type="html">
 			<![CDATA[
@@ -1484,7 +1550,7 @@ again in the future.</p>
 			<title type="html"><![CDATA[See you in Paris at the 2013 edition of the PHP Forum]]></title>
 		
 		<link href="http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/"/>
-		<updated>2013-09-21T16:04:00-04:00</updated>
+		<updated>2013-09-21T16:04:00+04:00</updated>
 		<id>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum</id>
 		<content type="html">
 			<![CDATA[
@@ -1527,7 +1593,7 @@ Dustin Whittle who will give his insights about
 			<title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
 		
 		<link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-		<updated>2013-09-01T17:48:00-04:00</updated>
+		<updated>2013-09-01T17:48:00+04:00</updated>
 		<id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
 		<content type="html">
 			<![CDATA[
@@ -1563,7 +1629,7 @@ here are the slides for the lazy ones :)</p>
 			<title type="html"><![CDATA[Tips and Tricks for you Service-Oriented Architecture]]></title>
 		
 		<link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-		<updated>2013-08-31T19:05:00-04:00</updated>
+		<updated>2013-08-31T19:05:00+04:00</updated>
 		<id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
 		<content type="html">
 			<![CDATA[
@@ -1606,7 +1672,7 @@ with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
 			<title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
 		
 		<link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
-		<updated>2013-08-18T23:51:00-04:00</updated>
+		<updated>2013-08-18T23:51:00+04:00</updated>
 		<id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
 		<content type="html">
 			<![CDATA[
@@ -1653,7 +1719,7 @@ let&rsquo;s edit grub:</p>
 			<title type="html"><![CDATA[Hello US, I'm coming to San Francisco]]></title>
 		
 		<link href="http://odino.org/hello-us-im-coming-to-san-francisco/"/>
-		<updated>2013-08-01T05:24:00-04:00</updated>
+		<updated>2013-08-01T05:24:00+04:00</updated>
 		<id>http://odino.org/hello-us-im-coming-to-san-francisco</id>
 		<content type="html">
 			<![CDATA[
@@ -1687,127 +1753,6 @@ way</strong>.</p>
 <p>If you are going to be around San Francisco
 in the first days of Semptember, feel free to
 ping me!</p>
-]]>
-		</content>
-	</entry>
-	
-	<entry>
-		
-			<title type="html"><![CDATA[Sending HipChat notifications in PHP]]></title>
-		
-		<link href="http://odino.org/sending-hipchat-notifications-in-php/"/>
-		<updated>2013-07-19T14:20:00-04:00</updated>
-		<id>http://odino.org/sending-hipchat-notifications-in-php</id>
-		<content type="html">
-			<![CDATA[
-				
-					<p></p>
-				
-			]]>
-			<![CDATA[<p>This morning I added a couple handlers to
-<a href="https://github.com/namshi/notificator">Notificator</a>, one for
-RabbitMQ and another for <a href="https://hipchat.com">HipChat</a>: in
-this post I would like to show you how easy is to integrate
-HipChat within your systems.</p>
-
-<!-- more -->
-
-
-<p>The handler takes advantage of the
-<a href="https://github.com/hipchat/hipchat-php">PHP SDK</a> that the HipChat
-team built, which is very, very good and
-<a href="https://packagist.org/packages/hipchat/hipchat-php">available through packagist</a>.</p>
-
-<p>First thing you will need to do, is to create an instance of a
-notification manager and adding the handler to it, with
-an HipChat client and the API token you can generate from the HipChat
-admin interface:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Manager</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Notification\Handler\HipChat</span> <span class="k">as</span> <span class="nx">HipChatHandler</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">HipChat\HipChat</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">Namshi\Notificator\Notification\HipChat\HipChatNotification</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$hipChatClient</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">HipChat</span><span class="p">(</span><span class="s1">&#39;YOUR_API_TOKEN_HERE&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$hipChatHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HipChatHandler</span><span class="p">(</span><span class="o">%</span><span class="nx">hipChatClient</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$manager</span>      <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">();</span>
-</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">addHandler</span><span class="p">(</span><span class="nv">$hipChatHandler</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then you only need to define a notification with a few, HipChat-specific,
-properties and trigger it:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HipChatNotification</span><span class="p">(</span>
-</span><span class='line'>  <span class="s1">&#39;YOLO!&#39;</span><span class="p">,</span> <span class="c1">// message</span>
-</span><span class='line'>  <span class="s1">&#39;Alex&#39;</span><span class="p">,</span>  <span class="c1">// sender</span>
-</span><span class='line'>  <span class="s1">&#39;room1&#39;</span><span class="p">,</span> <span class="c1">// name of the room you want this message to appear</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>      <span class="s1">&#39;hipchat_notify&#39;</span>            <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="c1">// optional: should send notifications to everyone?</span>
-</span><span class='line'>      <span class="s1">&#39;hipchat_color&#39;</span>             <span class="o">=&gt;</span> <span class="nx">HipChat</span><span class="o">::</span><span class="na">COLOR_GREEN</span><span class="p">,</span> <span class="c1">// optional: background color of the notification</span>
-</span><span class='line'>      <span class="s1">&#39;hipchat_message_format&#39;</span>    <span class="o">=&gt;</span> <span class="nx">HipChat</span><span class="o">::</span><span class="na">FORMAT_TEXT</span><span class="p">,</span> <span class="c1">// optional: text or html</span>
-</span><span class='line'>  <span class="p">)</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$notification</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The result is pretty self-explanatory:</p>
-
-<p><img class="center" src="http://odino.org/images/hipchat-php.png"></p>
-
-<p>Kind of the <a href="https://github.com/namshi/notificator/blob/master/examples/hipchat.php">same code</a>
-is also available, as an example,
-on the <a href="https://github.com/namshi/notificator">notificator repository</a>,
-under the <a href="https://github.com/namshi/notificator/tree/master/examples">examples</a> folder.</p>
-
-<p>The greatness of Notificator are its handlers, so if you feel
-we should add another, useful handler, just shout out!
-Even better, you can contribute to the project by sending
-a <a href="https://github.com/namshi/notificator/pulls?direction=desc&amp;page=1&amp;sort=created&amp;state=closed">pull request</a>
-like <a href="https://twitter.com/cirpo">Alessandro</a>,
-<a href="https://twitter.com/pborreli">Pascal</a> and
-<a href="https://twitter.com/cordoval">Luis</a> already did!</p>
-
-<div class="footnotes">
-<span>
-Notes
-</span>
-    <ol>
-        <li id='fn:1'>The sad truth is that capistrano has an hipchat gem/extension, but you cant really plug it the way you want (at least this happens to non-rubiers) <a href='#fnref:1' rev='footnote'>↩</a></li>
-    </ol>
-</div>
-
 ]]>
 		</content>
 	</entry>

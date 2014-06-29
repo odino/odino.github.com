@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Open Source | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/open-source/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Using Emailvision's CampaignCommander APIs From PHP]]></title>
     <link href="http://odino.org/using-emailvisions-campaigncommander-apis-from-php/"/>
-    <updated>2013-06-28T18:38:00-04:00</updated>
+    <updated>2013-06-28T18:38:00+04:00</updated>
     <id>http://odino.org/using-emailvisions-campaigncommander-apis-from-php</id>
     <content type="html"><![CDATA[<p><img class="right" src="/images/emailvision-template.png"></p>
 
@@ -83,7 +83,7 @@ of the template; the rest is very straightforward:</p>
 <p>);</p>
 
 <p>$emailvisionClient = new Client($config);
-$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#58;&#x73;&#111;&#109;&#x65;&#111;&#x6e;&#101;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#115;&#111;&#109;&#101;&#x6f;&#x6e;&#x65;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>&rdquo;);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#115;&#111;&#x6d;&#x65;&#x6f;&#x6e;&#x65;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x73;&#x6f;&#x6d;&#x65;&#111;&#x6e;&#x65;&#64;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#109;</a>&rdquo;);
 ```</p>
 
 <p>The nice thing here is that Emailvision lets you schedule
@@ -110,7 +110,7 @@ be a <code>DateTime</code> instance:</p>
 <p>);</p>
 
 <p>$emailvisionClient = new Client($config);
-$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#115;&#x6f;&#109;&#101;&#111;&#x6e;&#x65;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#115;&#111;&#109;&#101;&#x6f;&#x6e;&#101;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>&rdquo;);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x73;&#x6f;&#x6d;&#101;&#x6f;&#110;&#101;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#x73;&#x6f;&#x6d;&#101;&#x6f;&#x6e;&#101;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#109;</a>&rdquo;);
 ```</p>
 
 <p>This code will tell CampaignCommander to trigger
@@ -132,7 +132,7 @@ argument:</p>
 <p>``` php
 &lt;?php</p>
 
-<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#115;&#111;&#x6d;&#101;&#x6f;&#110;&#x65;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#x6f;&#109;">&#x73;&#111;&#109;&#x65;&#x6f;&#x6e;&#x65;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;</a>&rdquo;, array(</p>
+<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x73;&#111;&#x6d;&#101;&#x6f;&#110;&#x65;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#46;&#99;&#x6f;&#x6d;">&#x73;&#x6f;&#x6d;&#x65;&#111;&#x6e;&#x65;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a>&rdquo;, array(</p>
 
 <pre><code>'name' =&gt; 'Alex!',
 </code></pre>
@@ -174,7 +174,7 @@ running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
 
 <p>$encrypt    = &lsquo;email_template_security_tag&rsquo;;
 $random     = &lsquo;email_template_unique_id&rsquo;;
-$email  = &lsquo;<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#121;&#111;&#x75;&#x72;&#x2e;&#97;&#x64;&#100;&#114;&#101;&#115;&#x73;&#x40;&#x67;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#x6f;&#117;&#114;&#46;&#x61;&#x64;&#100;&#114;&#x65;&#x73;&#x73;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>&rsquo;;
+$email  = &lsquo;<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#x79;&#111;&#x75;&#x72;&#46;&#97;&#x64;&#x64;&#x72;&#101;&#x73;&#115;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x79;&#111;&#117;&#x72;&#x2e;&#97;&#x64;&#x64;&#x72;&#101;&#115;&#115;&#64;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;</a>&rsquo;;
 ```</p>
 
 <p>Enjoy!</p>
@@ -184,7 +184,7 @@ $email  = &lsquo;<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#121;&#111;&#
   <entry>
     <title type="html"><![CDATA[Back in Track With OrientDB]]></title>
     <link href="http://odino.org/back-in-track-with-orientdb/"/>
-    <updated>2012-04-20T15:26:00-04:00</updated>
+    <updated>2012-04-20T15:26:00+04:00</updated>
     <id>http://odino.org/back-in-track-with-orientdb</id>
     <content type="html"><![CDATA[<p>It&rsquo;s been a while since I don&rsquo;t release any update about
 Orient, the PHP data mapper for OrientDB: we recently got
@@ -322,7 +322,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Y U NO Access WHOIS Informations in PHP?]]></title>
     <link href="http://odino.org/y-u-no-access-whois-informations-in-php/"/>
-    <updated>2012-04-16T00:38:00-04:00</updated>
+    <updated>2012-04-16T00:38:00+04:00</updated>
     <id>http://odino.org/y-u-no-access-whois-informations-in-php</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
@@ -471,7 +471,7 @@ decide to keep the only <code>Robowhois\Exception</code> class.</p>
   <entry>
     <title type="html"><![CDATA[A PHP Library to Retrieve WHOIS Informations]]></title>
     <link href="http://odino.org/a-php-library-to-retrieve-whois-informations/"/>
-    <updated>2012-02-03T03:40:00-05:00</updated>
+    <updated>2012-02-03T03:40:00+04:00</updated>
     <id>http://odino.org/a-php-library-to-retrieve-whois-informations</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>WHOIS in PHP: consuming the Robowhois API</strong>" series; here is a list of all the articles contained this series:</p>
@@ -564,7 +564,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[The Current Status of My Work With OrientDB]]></title>
     <link href="http://odino.org/the-current-status-of-my-work-with-orientdb/"/>
-    <updated>2011-05-24T14:09:00-04:00</updated>
+    <updated>2011-05-24T14:09:00+04:00</updated>
     <id>http://odino.org/the-current-status-of-my-work-with-orientdb</id>
     <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
 

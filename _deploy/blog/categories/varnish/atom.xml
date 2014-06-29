@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Varnish | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/varnish/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Frontend Web Development Is Not as Fun as It Could Be]]></title>
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-    <updated>2013-11-10T19:53:00-05:00</updated>
+    <updated>2013-11-10T19:53:00+04:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
     <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
@@ -342,7 +342,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Installing and Configuring Varnish on Ubuntu]]></title>
     <link href="http://odino.org/installing-and-configuring-varnish-on-ubuntu/"/>
-    <updated>2011-02-09T02:29:00-05:00</updated>
+    <updated>2011-02-09T02:29:00+04:00</updated>
     <id>http://odino.org/installing-and-configuring-varnish-on-ubuntu</id>
     <content type="html"><![CDATA[<p>On a brand new debian/*ubuntu distro, there are only a couple steps to do in order to make Varnish <del>act as a proxy</del> do its job in front of apache.</p>
 

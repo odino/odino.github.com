@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Cache | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/cache/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, Again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-04:00</updated>
+    <updated>2013-09-01T17:48:00+04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
     <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
 I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
@@ -41,7 +41,7 @@ here are the slides for the lazy ones :)</p>
   <entry>
     <title type="html"><![CDATA[Scaling Asynchronously Through HInclude]]></title>
     <link href="http://odino.org/scaling-through-hinclude/"/>
-    <updated>2012-02-24T10:50:00-05:00</updated>
+    <updated>2012-02-24T10:50:00+04:00</updated>
     <id>http://odino.org/scaling-through-hinclude</id>
     <content type="html"><![CDATA[<p>Since it&rsquo;s been a while that I spread the idea of
 having <a href="/edge-side-includes-how-to-spare-terabytes-every-day/">ESI on the client side</a>,
@@ -276,7 +276,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Application-level Caching: Fight the Right Battle]]></title>
     <link href="http://odino.org/application-level-caching-fight-the-right-battle/"/>
-    <updated>2011-11-22T15:01:00-05:00</updated>
+    <updated>2011-11-22T15:01:00+04:00</updated>
     <id>http://odino.org/application-level-caching-fight-the-right-battle</id>
     <content type="html"><![CDATA[<p>I always receive a funny question, that I want to answer right here, right now, with the usual reply I give to people asking it to me:</p>
 
@@ -376,7 +376,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Some Common Questions About Edge Side Includes]]></title>
     <link href="http://odino.org/some-common-questions-about-edge-side-includes/"/>
-    <updated>2011-05-30T15:07:00-04:00</updated>
+    <updated>2011-05-30T15:07:00+04:00</updated>
     <id>http://odino.org/some-common-questions-about-edge-side-includes</id>
     <content type="html"><![CDATA[<p>After my <a href="http://www.slideshare.net/odino/rest-in-a-mobile-peace-whymca-05212011">REST in (a mobile) peace</a> talk at the WHYMCA in Milan, 2 weeks ago, I was surrounded by a few developers trying better understand how does Edge Side Includes behave: after I realized that some concepts are not so &ldquo;standard&rdquo;, here&rsquo;s a parade of little things to know about <a href="http://en.wikipedia.org/wiki/Edge_Side_Includes">ESI</a>.</p>
 
@@ -453,7 +453,7 @@ Content-Type: application/xhtml+xml;profile=esi
   <entry>
     <title type="html"><![CDATA[REST Better: HTTP Cache]]></title>
     <link href="http://odino.org/rest-better-http-cache/"/>
-    <updated>2011-03-17T14:12:00-04:00</updated>
+    <updated>2011-03-17T14:12:00+04:00</updated>
     <id>http://odino.org/rest-better-http-cache</id>
     <content type="html"><![CDATA[<p>HTTP has a widely-ignored <a href="http://tools.ietf.org/html/rfc2616#section-13">cache specification</a> which helps us implementing fast, scaleable and fault-tolerant services.</p>
 

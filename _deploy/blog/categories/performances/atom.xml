@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Performances | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/performances/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Increase Mobile Performances by Implementing Transparent Redirects]]></title>
     <link href="http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects/"/>
-    <updated>2014-03-03T17:58:00-05:00</updated>
+    <updated>2014-03-03T17:58:00+04:00</updated>
     <id>http://odino.org/increase-mobile-performances-by-implementing-transparent-redirects</id>
     <content type="html"><![CDATA[<p>Most of you are aware that one of the biggest problems while
 developing mobile apps / websites, is the reduced bandwidth / connectivity
@@ -108,7 +108,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Profiling PHP Applications From the Browser]]></title>
     <link href="http://odino.org/profiling-php-applications-from-the-browser/"/>
-    <updated>2013-01-25T22:38:00-05:00</updated>
+    <updated>2013-01-25T22:38:00+04:00</updated>
     <id>http://odino.org/profiling-php-applications-from-the-browser</id>
     <content type="html"><![CDATA[<p>In my <a href="/making-the-orientdb-odm-5-times-faster/">previous post</a> I briefly spoke about
 <a href="https://github.com/jokkedk/webgrind">Webgrind</a>,
@@ -352,7 +352,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Optimizing Loading Times With Images' Lazy Loading]]></title>
     <link href="http://odino.org/optimizing-loading-times-with-images-lazy-loading/"/>
-    <updated>2012-09-21T07:45:00-04:00</updated>
+    <updated>2012-09-21T07:45:00+04:00</updated>
     <id>http://odino.org/optimizing-loading-times-with-images-lazy-loading</id>
     <content type="html"><![CDATA[<p>Sometimes I like to forget that I&rsquo;m
 mainly involved in other things and
@@ -473,7 +473,7 @@ $(window).scroll(function() {
   <entry>
     <title type="html"><![CDATA[Search Engines Are Making the Web Slower]]></title>
     <link href="http://odino.org/search-engines-are-making-the-web-slower/"/>
-    <updated>2012-04-07T10:00:00-04:00</updated>
+    <updated>2012-04-07T10:00:00+04:00</updated>
     <id>http://odino.org/search-engines-are-making-the-web-slower</id>
     <content type="html"><![CDATA[<p>Like it or not, pushing the work to the clients is
 a tecnique which made the web able to scale the way

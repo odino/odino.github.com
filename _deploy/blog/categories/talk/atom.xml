@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Talk | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/talk/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
     <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
-    <updated>2014-02-27T11:54:00-05:00</updated>
+    <updated>2014-02-27T11:54:00+04:00</updated>
     <id>http://odino.org/angularjs-is-the-future-maybe</id>
     <content type="html"><![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
 an overview of why Angular could fit your <em>future</em> requirements
@@ -33,7 +33,7 @@ quite well.</p>
   <entry>
     <title type="html"><![CDATA[OrientDB, the Fastest Document-based Graph Database]]></title>
     <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-    <updated>2014-02-26T15:25:00-05:00</updated>
+    <updated>2014-02-26T15:25:00+04:00</updated>
     <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
     <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
 of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
@@ -52,7 +52,7 @@ as usual, here:</p>
   <entry>
     <title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, Again]]></title>
     <link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-    <updated>2013-09-01T17:48:00-04:00</updated>
+    <updated>2013-09-01T17:48:00+04:00</updated>
     <id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
     <content type="html"><![CDATA[<p>Today, tired like hell due to an almost sleepless night,
 I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
@@ -78,7 +78,7 @@ here are the slides for the lazy ones :)</p>
   <entry>
     <title type="html"><![CDATA[Tips and Tricks for You Service-Oriented Architecture]]></title>
     <link href="http://odino.org/tips-and-tricks-for-you-service-oriented-architecture/"/>
-    <updated>2013-08-31T19:05:00-04:00</updated>
+    <updated>2013-08-31T19:05:00+04:00</updated>
     <id>http://odino.org/tips-and-tricks-for-you-service-oriented-architecture</id>
     <content type="html"><![CDATA[<p>Today I gave the first of my 2 presentations scheduled for the
 <a href="http://cakefest.org">CakeFest</a> here in San Francisco,

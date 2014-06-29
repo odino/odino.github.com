@@ -3,7 +3,7 @@
   <title><![CDATA[Category: AngularJS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
     <link href="http://odino.org/angularjs-is-the-future-maybe/"/>
-    <updated>2014-02-27T11:54:00-05:00</updated>
+    <updated>2014-02-27T11:54:00+04:00</updated>
     <id>http://odino.org/angularjs-is-the-future-maybe</id>
     <content type="html"><![CDATA[<p>Today I gave my 2nd talk here at the ConFoo in Montreal,
 an overview of why Angular could fit your <em>future</em> requirements
@@ -33,7 +33,7 @@ quite well.</p>
   <entry>
     <title type="html"><![CDATA[If You Love AngularJS, You Should Definitely Join us...we're Hiring!]]></title>
     <link href="http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring/"/>
-    <updated>2014-01-17T16:28:00-05:00</updated>
+    <updated>2014-01-17T16:28:00+04:00</updated>
     <id>http://odino.org/if-you-love-angularjs-you-should-definitely-join-us-dot-dot-dot-were-hiring</id>
     <content type="html"><![CDATA[<p>In order to expand our team we are now looking for a
 frontend JavaScript developer that loves Angular and wants to
@@ -83,7 +83,7 @@ render in ~100ms, powered by lotsa APIs.</p>
   <entry>
     <title type="html"><![CDATA[How to Make Your JavaScript Apps SEO-friendly]]></title>
     <link href="http://odino.org/how-to-make-your-javascript-apps-seo-friendly/"/>
-    <updated>2014-01-17T14:15:00-05:00</updated>
+    <updated>2014-01-17T14:15:00+04:00</updated>
     <id>http://odino.org/how-to-make-your-javascript-apps-seo-friendly</id>
     <content type="html"><![CDATA[<p>One of the challenges in moving your application logic
 from the backend (Rails, Django or whatsoever) to the
@@ -215,7 +215,7 @@ is <a href="https://prerender.io/pricing">very affordable</a> as well.</p>
   <entry>
     <title type="html"><![CDATA[Frontend Web Development Is Not as Fun as It Could Be]]></title>
     <link href="http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be/"/>
-    <updated>2013-11-10T19:53:00-05:00</updated>
+    <updated>2013-11-10T19:53:00+04:00</updated>
     <id>http://odino.org/frontend-web-development-is-not-as-fun-as-it-should-be</id>
     <content type="html"><![CDATA[<p>I am writing this post in the middle of revamping
 <a href="http://en-ae.namshi.com">Namshi&rsquo;s architecture</a>
@@ -542,7 +542,7 @@ Notes
   <entry>
     <title type="html"><![CDATA[Speaking About AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
     <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
-    <updated>2013-10-20T11:00:00-04:00</updated>
+    <updated>2013-10-20T11:00:00+04:00</updated>
     <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
     <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
 be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,

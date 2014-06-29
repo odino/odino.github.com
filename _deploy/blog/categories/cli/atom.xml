@@ -3,7 +3,7 @@
   <title><![CDATA[Category: CLI | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/cli/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Create a Composer Command Line Installer With the Symfony2 CLI]]></title>
     <link href="http://odino.org/install-composer-dependencies-with-the-symfony2-cli/"/>
-    <updated>2012-02-21T10:51:00-05:00</updated>
+    <updated>2012-02-21T10:51:00+04:00</updated>
     <id>http://odino.org/install-composer-dependencies-with-the-symfony2-cli</id>
     <content type="html"><![CDATA[<p><ol class="aseries">
 	<p>This post is part of the "<strong>Symfony2 components in your own userland</strong>" series; here is a list of all the articles contained this series:</p>

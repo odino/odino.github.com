@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Behat | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/behat/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-03-04T06:33:24-05:00</updated>
+  <updated>2014-04-21T10:52:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -15,7 +15,7 @@
   <entry>
     <title type="html"><![CDATA[Space to the Youngsters...]]></title>
     <link href="http://odino.org/space-to-the-youngsters-dot-dot-dot/"/>
-    <updated>2013-09-23T18:26:00-04:00</updated>
+    <updated>2013-09-23T18:26:00+04:00</updated>
     <id>http://odino.org/space-to-the-youngsters-dot-dot-dot</id>
     <content type="html"><![CDATA[<p>One of the best feeling ever, while heading
 a team of (web) engineers, is when you lead
@@ -53,7 +53,7 @@ an introduction about <a href="http://mohdhallal.github.io/blog/2013/09/22/behat
   <entry>
     <title type="html"><![CDATA[Using Selenium and Symfony2 to Help Your Frontend Developers Coding Without Risks]]></title>
     <link href="http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"/>
-    <updated>2013-03-10T11:39:00-04:00</updated>
+    <updated>2013-03-10T11:39:00+04:00</updated>
     <id>http://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks</id>
     <content type="html"><![CDATA[<p>Since testing is one of those practices
 that many consider <em>boring</em> (unless a major
