@@ -3,7 +3,7 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-06-30T00:07:06+04:00</updated>
+	<updated>2014-06-30T00:12:04+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
@@ -38,7 +38,7 @@ that runs within a browser.</p>
 WebStorm / Eclipse / Netbeans when you can satisfy all
 of your basic needs with a simple <code>&lt;div contenteditable /&gt;</code>?</p>
 
-<p>Well, because a browser editor would still nedd to be able
+<p>Well, because a browser editor would still need to be able
 to talk with your filesystem, and that&rsquo;s something a completely
 &ldquo;frontend&rdquo; JS app wouldn&rsquo;t be able to do
 (<a href="https://hacks.mozilla.org/2014/06/webide-lands-in-nightly/">but might be able to do soon</a>).</p>
@@ -55,26 +55,25 @@ and we&rsquo;re done:</p>
 <p>Simply install nikki with an <code>npm install -g nikki</code>, <code>cd</code>
 into a project&rsquo;s directory and launch the editor with the <code>nikki</code>
 command: the editor will launch a new browser window to let
-you have file with your project.</p>
+you have fun with your project.</p>
 
 <p>A <code>nikki --help</code> might get the confusion away, but if you
-really want to give the project a closer look simply give
-a look at the <a href="https://github.com/odino/nikki">README on github</a>.</p>
+really want to give the project a closer look simply check
+the <a href="https://github.com/odino/nikki">README on github</a>.</p>
 
 <p>Of course, of course, of course, I need to clarify a few points:
 first of all, nikki is not a &ldquo;real&rdquo; IDE, it&rsquo;s  more a text editor
 (the marketer in me!), and it didn&rsquo;t really come out in a single weekend
-(even though  the basics were setup last WE).</p>
-
-<p>Last but not least, I&rsquo;m not a javascripter (<a href="http://osrc.dfm.io/odino/">I guess</a>), so most of the credit goes
+(even though  the basics were setup last WE); last but not least,
+I&rsquo;m not a javascripter (<a href="http://osrc.dfm.io/odino/">I guess</a>), so most of the credit goes
 to <a href="http://socket.io/">socket.io</a>, the <a href="http://ace.c9.io/#nav=about">ACE editor</a>
 and <a href="it.linkedin.com/in/davidfunaro">David</a>, who made me write my
 very first lines of JS back in 2011 (I know, so late!)</p>
 
 <h2>Considerations</h2>
 
-<p>I&rsquo;ve started writing this things 2 weeks ago and I&rsquo;m very happy
-with where I&rsquo;ve got so far, in fact, I am writing
+<p>I&rsquo;ve started writing this thing 2 weeks ago and I&rsquo;m very happy
+with where I&rsquo;ve got so far; in fact, I am writing
 this post from &ldquo;my&rdquo; nikki, here&rsquo;s the proof:</p>
 
 <p><img class="center" src="http://odino.org/images/nikki-proof.png"></p>
@@ -82,8 +81,8 @@ this post from &ldquo;my&rdquo; nikki, here&rsquo;s the proof:</p>
 <p>I plan on fixing a few more bugs I have in my todo list
 (because they&rsquo;re &ldquo;bugging&rdquo; me) and would be extremely happy
 to fix anything you find while playing with nikki: I must admit
-that, by using the latest version of Chrome on Linux, I could
-have broke a few things on other browsers, so I&rsquo;d be very
+that, by using the latest version of Chrome on Linux, I might
+have broken a few things on other browsers, so I&rsquo;d be very
 happy to fix anything that comes up (ofc don&rsquo;t mention IE).</p>
 
 <h2>One more thing</h2>
