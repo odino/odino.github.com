@@ -3,7 +3,7 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-06-30T00:12:04+04:00</updated>
+	<updated>2014-06-30T00:28:43+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
@@ -92,6 +92,13 @@ happy to fix anything that comes up (ofc don&rsquo;t mention IE).</p>
 <blockquote><p>Hey, couldn&rsquo;t you simply use TextMate or LightTable?</p>
 
 <p>Yes, but then, where&rsquo;s the fun?</p></blockquote>
+
+<p>Remember, this is a pet project and I firstly did it for
+fun, learning and to practice a bit over my spare time:
+it is nothing groundbreaking or rocket-science, and I
+don&rsquo;t see this going anywhere but my laptop (in terms of
+userbase). If you wish to use (or at least try) nikki
+I would be very happy though :)</p>
 ]]>
 		</content>
 	</entry>
