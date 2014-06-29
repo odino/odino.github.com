@@ -73,3 +73,10 @@ As per the README:
 > Hey, couldn't you simply use TextMate or LightTable?
 
 > Yes, but then, where's the fun?
+
+Remember, this is a pet project and I firstly did it for
+fun, learning and to practice a bit over my spare time:
+it is nothing groundbreaking or rocket-science, and I
+don't see this going anywhere but my laptop (in terms of
+userbase). If you wish to use (or at least try) nikki
+I would be very happy though :)
