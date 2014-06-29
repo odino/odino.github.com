@@ -3,7 +3,7 @@
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-04-21T10:52:06+04:00</updated>
+  <updated>2014-06-30T00:07:06+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Last Weekend I Wrote an IDE. In JavaScript.]]></title>
+    <link href="http://odino.org/last-weekend-i-wrote-an-ide-in-javascript/"/>
+    <updated>2014-06-29T23:32:00+04:00</updated>
+    <id>http://odino.org/last-weekend-i-wrote-an-ide-in-javascript</id>
+    <content type="html"><![CDATA[<p>In the past days I&rsquo;ve been spending some hours on a project
+I had in mind since a while, and finally got to roll out
+something I am already using on a daily basis: a fast IDE
+that runs within a browser.</p>
+
+<!-- more -->
+
+
+<h2>Nikki</h2>
+
+<p>The idea is very simple: why booting a Java monster like
+WebStorm / Eclipse / Netbeans when you can satisfy all
+of your basic needs with a simple <code>&lt;div contenteditable /&gt;</code>?</p>
+
+<p>Well, because a browser editor would still nedd to be able
+to talk with your filesystem, and that&rsquo;s something a completely
+&ldquo;frontend&rdquo; JS app wouldn&rsquo;t be able to do
+(<a href="https://hacks.mozilla.org/2014/06/webide-lands-in-nightly/">but might be able to do soon</a>).</p>
+
+<p>So, take JavaScript, put it on the frontend (browser), put
+it on the backend (NodeJS), get them to talk (socket.io) and
+use a pretty good web editor (ACE), add <code>ctrl + f</code> and <code>ctrl + s</code>
+and we&rsquo;re done:</p>
+
+<p><img class="center <a" src="href="https://raw.githubusercontent.com/odino/nikki/master/bin/images/nikki-ss.png?token=328420__eyJzY29wZSI6IlJhd0Jsb2I6b2Rpbm8vbmlra2kvbWFzdGVyL2Jpbi9pbWFnZXMvbmlra2kuZ2lmIiwiZXhwaXJlcyI6MTQwMzk4MDA4N30%3D--df43445fcfba173ae878bc6447c1169b61bc59cf">https://raw.githubusercontent.com/odino/nikki/master/bin/images/nikki-ss.png?token=328420__eyJzY29wZSI6IlJhd0Jsb2I6b2Rpbm8vbmlra2kvbWFzdGVyL2Jpbi9pbWFnZXMvbmlra2kuZ2lmIiwiZXhwaXJlcyI6MTQwMzk4MDA4N30%3D--df43445fcfba173ae878bc6447c1169b61bc59cf</a>"></p>
+
+<h2>How to get started</h2>
+
+<p>Simply install nikki with an <code>npm install -g nikki</code>, <code>cd</code>
+into a project&rsquo;s directory and launch the editor with the <code>nikki</code>
+command: the editor will launch a new browser window to let
+you have file with your project.</p>
+
+<p>A <code>nikki --help</code> might get the confusion away, but if you
+really want to give the project a closer look simply give
+a look at the <a href="https://github.com/odino/nikki">README on github</a>.</p>
+
+<p>Of course, of course, of course, I need to clarify a few points:
+first of all, nikki is not a &ldquo;real&rdquo; IDE, it&rsquo;s  more a text editor
+(the marketer in me!), and it didn&rsquo;t really come out in a single weekend
+(even though  the basics were setup last WE).</p>
+
+<p>Last but not least, I&rsquo;m not a javascripter (<a href="http://osrc.dfm.io/odino/">I guess</a>), so most of the credit goes
+to <a href="http://socket.io/">socket.io</a>, the <a href="http://ace.c9.io/#nav=about">ACE editor</a>
+and <a href="it.linkedin.com/in/davidfunaro">David</a>, who made me write my
+very first lines of JS back in 2011 (I know, so late!)</p>
+
+<h2>Considerations</h2>
+
+<p>I&rsquo;ve started writing this things 2 weeks ago and I&rsquo;m very happy
+with where I&rsquo;ve got so far, in fact, I am writing
+this post from &ldquo;my&rdquo; nikki, here&rsquo;s the proof:</p>
+
+<p><img class="center" src="/images/nikki-proof.png"></p>
+
+<p>I plan on fixing a few more bugs I have in my todo list
+(because they&rsquo;re &ldquo;bugging&rdquo; me) and would be extremely happy
+to fix anything you find while playing with nikki: I must admit
+that, by using the latest version of Chrome on Linux, I could
+have broke a few things on other browsers, so I&rsquo;d be very
+happy to fix anything that comes up (ofc don&rsquo;t mention IE).</p>
+
+<h2>One more thing</h2>
+
+<p>As per the README:</p>
+
+<blockquote><p>Hey, couldn&rsquo;t you simply use TextMate or LightTable?</p>
+
+<p>Yes, but then, where&rsquo;s the fun?</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS Is the Future. Maybe.]]></title>
@@ -654,127 +731,6 @@ Notes
 	</ol>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Optimizing Loading Times With Images' Lazy Loading]]></title>
-    <link href="http://odino.org/optimizing-loading-times-with-images-lazy-loading/"/>
-    <updated>2012-09-21T07:45:00+04:00</updated>
-    <id>http://odino.org/optimizing-loading-times-with-images-lazy-loading</id>
-    <content type="html"><![CDATA[<p>Sometimes I like to forget that I&rsquo;m
-mainly involved in other things and
-get my hands dirty with low-level
-stuff: last week I wanted to improve
-some existing lazy loading code we use
-with JavaScript.</p>
-
-<!-- more -->
-
-
-<p>Let&rsquo;s suppose that we have a page
-showing almost 100 images, 500kb
-per image, 5MB of a webpage.</p>
-
-<p>It&rsquo;s clearly unpractical to load
-all the images at once, since you
-would force the use to download
-stuff that he would only see scrolling
-down with the mouse, so the solution
-would be to store all the images' path
-in an HTML attribute and trigger the load
-just for visible images in the current window.</p>
-
-<p>You&rsquo;d have an HTML like this:</p>
-
-<p>``` html
-<html>
-  <head></p>
-
-<pre><code>...
-</code></pre>
-
-<p>  </head>
-  <body></p>
-
-<pre><code>...
-
-...
-
-&lt;div class="imgContainer" &gt;
-    &lt;img class="lazy-loading" id="http://example.com/img1.jpg" /&gt;
-&lt;/div&gt;
-&lt;div class="imgContainer" &gt;
-    &lt;img class="lazy-loading" id="http://example.com/img2.jpg" /&gt;
-&lt;/div&gt;
-&lt;div class="imgContainer" &gt;
-    &lt;img class="lazy-loading" id="http://example.com/img3.jpg" /&gt;
-&lt;/div&gt;
-&lt;div class="imgContainer" &gt;
-    &lt;img class="lazy-loading" id="http://example.com/img4.jpg" /&gt;
-&lt;/div&gt;
-&lt;div class="imgContainer" &gt;
-    &lt;img class="lazy-loading" id="http://example.com/img5.jpg" /&gt;
-&lt;/div&gt;
-&lt;div class="imgContainer" &gt;
-    &lt;img class="lazy-loading" id="http://example.com/img6.jpg" /&gt;
-&lt;/div&gt;
-...
-...
-...
-</code></pre>
-
-<p>  </body>
-</html>
-```</p>
-
-<p>and the lazy laoding function looks like:</p>
-
-<p>``` javascript
-var lazyLoading = function(){</p>
-
-<pre><code>$('img.lazy-loading').each(function(){            
-    var distanceToTop = $(this).offset().top;
-    var scroll        = $(window).scrollTop();
-    var windowHeight  = $(window).height();
-    var isVisible     = distanceToTop - scroll &lt; windowHeight;
-
-    if (isVisible) {
-        $(this).attr('src', $(this).attr('id'));
-    }
-});
-</code></pre>
-
-<p>}
-```</p>
-
-<p>As you see, we only trigger lazy loading for <strong>visible</strong>
-items, which are appearing in the current window:
-given the <code>windowHeight</code>, we calculate visibility
-based on the difference between the item and
-the mouse scroll, so that we can see whether the
-product is comprehended in the current window
-or not.</p>
-
-<p>To trigger lazy loading you need to listen for
-mouse scroll events <strong>and</strong> <code>domready</code> ( if some
-images would be visible without scrolling ):</p>
-
-<p>``` javascript
-$(document).ready(function() {</p>
-
-<pre><code>lazyLoading();
-
-$(window).scroll(function() {
-    lazyLoading();
-});
-</code></pre>
-
-<p>});
-```</p>
-
-<p>We, at <a href="http://www.namshi.com/">Namshi</a>, use the same approach for
-<a href="http://www.namshi.com/women-shoes/">catalog listing pages</a>.</p>
 ]]></content>
   </entry>
   
