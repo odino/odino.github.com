@@ -3,13 +3,60 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-06-30T23:16:11+04:00</updated>
+	<updated>2014-07-02T23:25:49+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
 		
 	</author>
 	<generator uri="http://octopress.org/">Octopress</generator>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Nikki v0.16.5: first issues ahead]]></title>
+		
+		<link href="http://odino.org/nikki-v0-dot-16-dot-5-first-issues-ahead/"/>
+		<updated>2014-07-02T22:47:00+04:00</updated>
+		<id>http://odino.org/nikki-v0-dot-16-dot-5-first-issues-ahead</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Today I migrated all the possible issues I knew
+from <a href="https://github.com/odino/nikki">nikki</a>&rsquo;s
+README to <a href="https://github.com/odino/nikki/issues">github&rsquo;s issues</a>, and started
+addressing the first few of them.</p>
+
+<!-- more -->
+
+
+<blockquote><p>If you are new to nikki, you might want to read
+<a href="http://odino.org/last-weekend-i-wrote-an-ide-in-javascript/">this introductory post</a> I wrote a while ago.</p></blockquote>
+
+<p>Among the things I&rsquo;ve been hacking on today:</p>
+
+<ul>
+<li>if you tried to open a non-existing directory the server
+would crash, now it&rsquo;s simply telling you you&rsquo;re trying to do
+something nasty</li>
+<li>I added <a href="https://github.com/odino/nikki/blob/master/client/images/favicon.png">this awesome favicon</a> :)</li>
+<li>I ported the keyboard shortcuts to the Mac:
+whatever you were able to do with <code>ctrl</code> now is also available
+with <code>⌘</code></li>
+<li>when you boot nikki, now, you will be able to see it running
+under the name <code>nikki</code> in the process&#8217; list (try a <code>ps -ef | grep nikki</code>)</li>
+<li>you can customize the <a href="https://github.com/odino/nikki/blob/master/.nikki.yml#L9-L25">mappings for syntax highlighting</a> by adding
+them in your <code>.nikki.yml</code></li>
+</ul>
+
+
+<p>Contextually, I released <code>v0.16.5</code>, so simply run an
+<code>npm update -g nikki</code> and enjoy this bunch of new things!</p>
+]]>
+		</content>
+	</entry>
 	
 	<entry>
 		
@@ -1755,53 +1802,6 @@ presented at the <a href="http://www.slideshare.net/odino/http-colon-slash-slash
 with some more contents and &ndash; hopefully &ndash; fancier slides :-P</p>
 
 <p>Cheers!</p>
-]]>
-		</content>
-	</entry>
-	
-	<entry>
-		
-			<title type="html"><![CDATA[WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04]]></title>
-		
-		<link href="http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
-		<updated>2013-08-18T23:51:00+04:00</updated>
-		<id>http://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
-		<content type="html">
-			<![CDATA[
-				
-					<p></p>
-				
-			]]>
-			<![CDATA[<p>Today, even though I come from a weekend
-of barely sleeping, I decided, after an entire
-day unable to connect to the WiFi of the office,
-to try to fix this issue that seems to be affecting
-the Dell XPS harder than other laptops.</p>
-
-<!-- more -->
-
-
-<p>After googling for a while and realizing that
-even at home I got no luck with my wireless,
-I decided to go on with my own usual solution,
-which means <strong>downgrading the kernel or grub</strong>.</p>
-
-<p>You can get a list of the <em>installables</em> from
-any terminal:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And since I&rsquo;m currently using <code>3.8.0-27-generic</code>
-I decided to give a slightly previous one a try;
-let&rsquo;s edit grub:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/kernel/postrm.d/zz-update-grub 3.8.0-19-generic /boot/vmlinuz-3.8.0-19-generic</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This solved the issue, at least for me ;&ndash;)</p>
 ]]>
 		</content>
 	</entry>

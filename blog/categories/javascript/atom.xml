@@ -3,7 +3,7 @@
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-06-30T23:16:11+04:00</updated>
+  <updated>2014-07-02T23:25:49+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nikki v0.16.5: First Issues Ahead]]></title>
+    <link href="http://odino.org/nikki-v0-dot-16-dot-5-first-issues-ahead/"/>
+    <updated>2014-07-02T22:47:00+04:00</updated>
+    <id>http://odino.org/nikki-v0-dot-16-dot-5-first-issues-ahead</id>
+    <content type="html"><![CDATA[<p>Today I migrated all the possible issues I knew
+from <a href="https://github.com/odino/nikki">nikki</a>&rsquo;s
+README to <a href="https://github.com/odino/nikki/issues">github&rsquo;s issues</a>, and started
+addressing the first few of them.</p>
+
+<!-- more -->
+
+
+<blockquote><p>If you are new to nikki, you might want to read
+<a href="/last-weekend-i-wrote-an-ide-in-javascript/">this introductory post</a> I wrote a while ago.</p></blockquote>
+
+<p>Among the things I&rsquo;ve been hacking on today:</p>
+
+<ul>
+<li>if you tried to open a non-existing directory the server
+would crash, now it&rsquo;s simply telling you you&rsquo;re trying to do
+something nasty</li>
+<li>I added <a href="https://github.com/odino/nikki/blob/master/client/images/favicon.png">this awesome favicon</a> :)</li>
+<li>I ported the keyboard shortcuts to the Mac:
+whatever you were able to do with <code>ctrl</code> now is also available
+with <code>⌘</code></li>
+<li>when you boot nikki, now, you will be able to see it running
+under the name <code>nikki</code> in the process' list (try a <code>ps -ef | grep nikki</code>)</li>
+<li>you can customize the <a href="https://github.com/odino/nikki/blob/master/.nikki.yml#L9-L25">mappings for syntax highlighting</a> by adding
+them in your <code>.nikki.yml</code></li>
+</ul>
+
+
+<p>Contextually, I released <code>v0.16.5</code>, so simply run an
+<code>npm update -g nikki</code> and enjoy this bunch of new things!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Last Weekend I Wrote an IDE. In JavaScript.]]></title>
@@ -566,174 +604,6 @@ Notes
 </span>
 	<ol>
 		<li id='fn:1'>Which might be fair, as even Chrome has some funny behaviors <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Not so many DOM elements! <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Chrome's Devtools "Profiles" are probably the best resource you can use to backtrace stuff <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>Which makes sense when you have platforms like Tumblr <a href='#fnref:4' rev='footnote'>↩</a></li><li id='fn:5'>BTW IE11 is out, so there's even more hope <a href='#fnref:5' rev='footnote'>↩</a></li>
-	</ol>
-</div>
-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Securing Your HTTP API With JavaScript Object Signing and Encryption]]></title>
-    <link href="http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption/"/>
-    <updated>2013-06-04T00:31:00+04:00</updated>
-    <id>http://odino.org/securing-your-http-api-with-javascript-object-signing-and-encryption</id>
-    <content type="html"><![CDATA[<p>One thing that is always difficult, enough to
-deserve <a href="http://www.amazon.com/Ajax-Security-Billy-Hoffman/dp/0321491939">its own book</a>,
-is to <strong>secure HTTP API</strong> that interact with client-side
-applications: today, after a discussion about how to face
-the problem in our company, we bumped into the
-<a href="http://datatracker.ietf.org/doc/draft-ietf-jose-json-web-signature/?include_text=1">JOSE</a>
-&ndash; JavaScript Object Signing and Encryption &ndash;
-specification.</p>
-
-<!-- more -->
-
-
-<p>Basically, the specification defines 4 entities:</p>
-
-<ul>
-<li>JWS, <a href="http://tools.ietf.org/html/draft-jones-json-web-signature-04">JSON Web Signature</a>,
-a signed representation of data</li>
-<li>JWT, <a href="http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html">JSON Web Token</a>,
-a representation of data
-(it differs from JWS as JWT is not signed)</li>
-<li>JWE, <a href="http://self-issued.info/docs/draft-ietf-jose-json-web-encryption.html">JSON Web Encryption</a>,
-an encrypted JSON representation of data</li>
-<li>JWA, <a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-00">JSON Web Algorithms</a>,
-a list of safe algorithms to be used with JWS and JWE</li>
-</ul>
-
-
-<p>For the sake of basic knowledge, we will only have a look
-at JWS and JWT / JWE now: the specifications about these
-entities are quite extensive and not very straightforward,
-so for further details you should <strong>really</strong> give them
-a look.</p>
-
-<p><img class="right" src="/images/jws.png"></p>
-
-<h2>JWT</h2>
-
-<p>Basically, the token (JWT) is the simplest structure
-that you will deal with while implementing JOSE in our
-architecture; it is a string representation of some data
-base64 encoded (other types of encoding might be applied, but
-this is not madatory): the JWT differs from raw base64-encoded
-data since it also includes informations about the encoding
-itself, in the token&rsquo;s header; by concatenating the base64-encoded
-version of the token header and payload (the actual data) you
-obtain what the specification calls <strong>signature input</strong>, which will
-then be used to create the signature (JWS).</p>
-
-<h2>JWS and JWE</h2>
-
-<p>After the JWT comes the JWS, which is a signed representation
-of the JWT; it differs from the token just because of the
-signature; on an higher step of the ladder comes the JWE instead,
-which lets you encrypt the data in order to achieve an higher security
-level: the <a href="http://self-issued.info/docs/draft-ietf-jose-json-web-encryption.html#JWEExamples">examples in the ietf draft</a>
-show you how to create JWEs with a pair of private /
-public keys.</p>
-
-<h2>Use case: how to authenticate stateless AJAX calls?</h2>
-
-<p><img class="left" src="/images/jsw-auth.png"></p>
-
-<p>One of the needs that you might have is to,
-from JavaScript, make authenticated HTTP calls to
-one of your webservices: since you don&rsquo;t want to
-expose the WS credentials on the JS service (the
-credentials would be readable by any client) a good
-solution might be to generate a JWS with a private
-OpenSSL key in your webservice, store it into a cookie
-accessible to the JS service, which would execute
-those calls including that cookie<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, which you can then
-verify while authenticating the call.</p>
-
-<p>This workflow is pretty easy to understand, but the actual
-implementation is more than tricky, since the
-specification is quite abundant &ndash; especially about
-encryption algorithms.</p>
-
-<p>In PHP we can use at least 3 libraries: one of them,
-<a href="https://github.com/ritou/php-Akita_JOSE">Akita_JOSE</a>,
-is pretty old (since the last commit was more than
-7 months ago) but is very understandable and quite
-easy to use; another one, <a href="https://packagist.org/packages/gree/jose">gree/jose</a>,
-has itw own package on packagist and can be easily
-installed via composer: from a fast look at the
-<a href="https://github.com/gree/jose">source code on GitHub</a> it looks good,
-even though it needs the <a href="http://phpseclib.sourceforge.net/">phpsec</a>
-library to be able to work<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
-
-<p>The third option, which is the one that <a href="https://github.com/namshi/jose">I built in the last couple of hours</a>,
-is <a href="https://packagist.org/packages/namshi/jose">namshi/jose</a>,
-which is very, very easy to use<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>: it currently only
-supports the <a href="https://github.com/namshi/jose/blob/master/src/Namshi/JOSE/Signer/RS256.php">RSA algorithm</a>
-with <code>sha256</code> hashing, but I guess that implementing other
-algorithms is less than trivial.</p>
-
-<p>For example, let&rsquo;s see how you would generate the JWS
-to be stored in a cookie:</p>
-
-<p>``` php Generating a JWS after authentication and storing it into a cookie
-&lt;?php</p>
-
-<p>use Namshi\JOSE\JWS;</p>
-
-<p>if ($username == &lsquo;correctUsername&rsquo; &amp;&amp; $pass = &lsquo;ok&rsquo;) {</p>
-
-<pre><code>$user = Db::loadUserByUsername($username);
-
-$jws  = new JWS('RS256');
-$jws-&gt;setPayload(array(
-    'uid' =&gt; $user-&gt;getid(),
-));
-
-$privateKey = openssl_pkey_get_private("file://path/to/private.key");
-$jws-&gt;sign($privateKey);
-setcookie('identity', $jws-&gt;getTokenString());
-</code></pre>
-
-<p>}
-```</p>
-
-<p>and then the apps that want to execute authenticated
-calls on behalf of the user by using this cookie just need
-to include it in these calls; the server will just need
-to verify that the JWS in the cookie is valid:</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>use Namshi\JOSE\JWS;</p>
-
-<p>$jws        = JWS::load($_COOKIE[&lsquo;identity&rsquo;]);
-$public_key = openssl_pkey_get_public(&ldquo;/path/to/public.key&rdquo;);</p>
-
-<p>if ($jws->verify($public_key)) {</p>
-
-<pre><code>$paylod = $jws-&gt;getPayload();
-
-echo sprintf("Hey, my JS app just did an action authenticated as user #%s", $payload['id']);
-</code></pre>
-
-<p>}
-```</p>
-
-<p>That&rsquo;s it: far from being a stable library, this is more a
-proof of concept that we, an Namshi, would like to see developing
-in the next weeks / months.</p>
-
-<p>As always, comments, rants or &ndash; even better &ndash; pull requests are
-<strong>more than welcome</strong>!</p>
-
-<p><div class="footnotes">
-<span>
-Notes
-</span>
-	<ol>
-		<li id='fn:1'>One of the disadvantages of this approach is that it relies on cookies, only available in the HTTP protocol. If you want to use another protocol for you application - a very rare and extreme use case - this wouldn't work for you. <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I honestly never heard of this library before, so I can't really say what it does and why it's needed <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Since I'm not an expert in encryption and security, I would suggest to give it a look and come up with feedbacks <a href='#fnref:3' rev='footnote'>↩</a></li>
 	</ol>
 </div>
 </p>
