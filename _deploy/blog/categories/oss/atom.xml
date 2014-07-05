@@ -3,7 +3,7 @@
   <title><![CDATA[Category: OSS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/oss/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-02T23:25:49+04:00</updated>
+  <updated>2014-07-05T23:30:58+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,138 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The 5 Golden Rules When Writing Open Source Software]]></title>
+    <link href="http://odino.org/the-5-golden-rules-when-writing-open-source-software/"/>
+    <updated>2014-07-05T21:29:00+04:00</updated>
+    <id>http://odino.org/the-5-golden-rules-when-writing-open-source-software</id>
+    <content type="html"><![CDATA[<p>There you are, you just opened your laptop
+and got the inspiration to write a bunch of
+code and release it open-source: sounds quite
+simple and easy, but you should always keep
+in mind a few rules that are going to boost
+your &ldquo;creature&rdquo; before releasing it to the
+public.</p>
+
+<!-- more -->
+
+
+<h2>Documentation</h2>
+
+<blockquote><p>If it&rsquo;s not documented, it doesn&rsquo;t exist</p></blockquote>
+
+<p>That&rsquo;s probably the biggest truth of OSS: if you don&rsquo;t
+provide a good <a href="https://github.com/visionmedia/express">README</a>
+or some <a href="http://pypy.readthedocs.org/en/improve-docs/index.html">more complete docs</a>
+it&rsquo;s gonna be hard for people to be able to understand
+the value of your software, or to even give it a try and
+get straight to the point.</p>
+
+<p><a href="https://readthedocs.org/">ReadTheDocs</a> is an awesome project
+that lets you create beautiful documentation for your projects
+for free but, if you want to keep things simple, github&rsquo;s
+<a href="https://pages.github.com/">pages</a> or <a href="https://help.github.com/articles/about-github-wikis">wiki</a>
+might be what you were looking for.</p>
+
+<h2>Packaging</h2>
+
+<p><img class="left" src="/images/npm-logo.png" title="" ></p>
+
+<p>Do never forget about shipping it in a way that makes it easy,
+for others, to install your software in a matter of seconds:
+a great example, in this sense, is <a href="https://www.npmjs.org/">NPM</a>
+for NodeJS, which lets you install modules with a simple <code>npm install moduleName</code>.</p>
+
+<p>This is possible with basically any platform out there: PHP has
+<a href="https://getcomposer.org/">Composer</a>, Ruby has <a href="https://rubygems.org/">Gems</a>
+and Python uses, if I&rsquo;m not wrong, <a href="https://pypi.python.org/pypi/pip">pip</a>
+(there are many other examples, like CocoaPods and so on, but the ones
+i mentioned seem to be most mature and stable nowadays<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>).</p>
+
+<h2>Visibility</h2>
+
+<p><img class="right" src="/images/github-logo.png" title="" ></p>
+
+<p>I don&rsquo;t know about you, but I always have a strange feeling
+when I open a link to a project and it&rsquo;s hosted somewhere like,
+let&rsquo;s say, <a href="https://code.google.com/">GoogleCode</a>: I wouldn&rsquo;t
+say that your choices are limited, but whenever you&rsquo;re
+gonna pick a hosting solution for your library it&rsquo;s though to look
+anywhere but <a href="https://github.com/">Github</a>, as they have:</p>
+
+<ul>
+<li>great user experience</li>
+<li>good platform for engagement (pull requests, comments)</li>
+<li><a href="https://github.com/github">love for the OSS world</a></li>
+<li>awesome <a href="https://github.com/blog">vision and communication</a></li>
+<li><a href="https://www.flickr.com/photos/ginatrapani/5016915048/">tricks</a> to make your experience fabolous</li>
+</ul>
+
+
+<p>If you want to look for widespread alternatives, though, you might
+find Atlassian&rsquo;s <a href="https://bitbucket.org/">BitBucket</a> the most
+serious competitor of GitHub.</p>
+
+<h2>Coding standards</h2>
+
+<p>Follow the coding standards that are <em>en vogue</em> in your community:
+for example, in PHP you got the <a href="http://www.php-fig.org/">PSR</a>s,
+which are guidelines for writing your code, created by the
+PHP community itself (or &ndash; at least &ndash; its most prominent members).</p>
+
+<p>Writing code with your own standard will just make it
+harder for the ones interested in your project: you want them
+to be able to focus on what you&rsquo;re offering and to discuss it,
+not to spend too much time reading commas and brackets in weird
+positions.</p>
+
+<h2>Tests</h2>
+
+<p><img class="left" src="/images/travis-logo.png" title="" ></p>
+
+<p>Automated tests are probably a must if you plan to have
+people relying on your software, especially if what it does
+is not contained in very few lines of code (and in any case,
+even there tests are so much helpful).</p>
+
+<p>Tests will also help you evaluating contributions from the
+community: other devs will get interested in your software,
+find a glitch, fix it, add a test and send you a pull
+request. At that point you only have to check the code,
+because the tests are gonna take care of the build on their own.</p>
+
+<p>Nowadays you don&rsquo;t even have to boot your own machine to run
+the tests: hook your library with <a href="https://travis-ci.org/">travis-ci</a>
+and you&rsquo;re done!</p>
+
+<h2>Recap</h2>
+
+<p>Before announcing your latest project to the world, I would:</p>
+
+<ul>
+<li>put it on github or bitbucket</li>
+<li>write a decent <code>README.md</code></li>
+<li>create the package on the most suitable package manager</li>
+<li>review the code to check everything makes sense</li>
+<li>add tests and let them run on Travis</li>
+</ul>
+
+
+<p>I&rsquo;m sure I might have missed something&hellip;   &hellip;so you tell me,
+what are <strong>your</strong> golden rules?</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Besides, probably, apt :) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Last Weekend I Wrote an IDE. In JavaScript.]]></title>
@@ -60,7 +192,7 @@ first of all, nikki is not a &ldquo;real&rdquo; IDE, it&rsquo;s  more a text edi
 (even though  the basics were setup last WE); last but not least,
 I&rsquo;m not a javascripter (<a href="http://osrc.dfm.io/odino/">I guess</a>), so most of the credit goes
 to <a href="http://socket.io/">socket.io</a>, the <a href="http://ace.c9.io/#nav=about">ACE editor</a>
-and <a href="it.linkedin.com/in/davidfunaro">David</a>, who made me write my
+and <a href="https://it.linkedin.com/in/davidfunaro">David</a>, who made me write my
 very first lines of JS back in 2011 (I know, so late!)</p>
 
 <h2>Considerations</h2>

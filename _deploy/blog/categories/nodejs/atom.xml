@@ -3,7 +3,7 @@
   <title><![CDATA[Category: NodeJS | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-02T23:25:49+04:00</updated>
+  <updated>2014-07-05T23:30:58+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -98,7 +98,7 @@ first of all, nikki is not a &ldquo;real&rdquo; IDE, it&rsquo;s  more a text edi
 (even though  the basics were setup last WE); last but not least,
 I&rsquo;m not a javascripter (<a href="http://osrc.dfm.io/odino/">I guess</a>), so most of the credit goes
 to <a href="http://socket.io/">socket.io</a>, the <a href="http://ace.c9.io/#nav=about">ACE editor</a>
-and <a href="it.linkedin.com/in/davidfunaro">David</a>, who made me write my
+and <a href="https://it.linkedin.com/in/davidfunaro">David</a>, who made me write my
 very first lines of JS back in 2011 (I know, so late!)</p>
 
 <h2>Considerations</h2>
