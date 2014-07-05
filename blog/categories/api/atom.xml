@@ -3,7 +3,7 @@
   <title><![CDATA[Category: API | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-05T23:30:58+04:00</updated>
+  <updated>2014-07-05T23:40:47+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Planning to Write Long-term APIs? @cirpo and Me Shared Our Experience]]></title>
+    <link href="http://odino.org/planning-to-write-long-term-apis-at-cirpo-and-me-shared-our-experience/"/>
+    <updated>2014-07-05T23:34:00+04:00</updated>
+    <id>http://odino.org/planning-to-write-long-term-apis-at-cirpo-and-me-shared-our-experience</id>
+    <content type="html"><![CDATA[<p>A few weeks ago <a href="https://twitter.com/cirpo">@cirpo</a> and me
+flew back to Italy to partecipate to the 2014 edition of the
+<a href="http://2014.phpday.it/">PHPDay</a> in Verona, sharing our
+experience building APIs.</p>
+
+<!-- more -->
+
+
+<p>It was really a great time, especially since I missed the
+event in the past couple of years, so it was a blast to see
+those good'old tech-friends again.</p>
+
+<p>Our presentation, titled &ldquo;<a href="http://www.slideshare.net/odino/dont-screw-it-up-how-to-build-durable-web-apis-phpday-2014-in-verona-ita">Don&rsquo;t screw it up: how to build durable
+web APIs</a>&rdquo;, went <a href="https://joind.in/talk/view/11310">pretty well</a>: have a look below and let me know
+if you have any feedback!</p>
+
+<p><div class="slideshare" id="__ss_34940481"><iframe src="http://www.slideshare.net/slideshow/embed_code/34940481 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Securing Your HTTP API With JavaScript Object Signing and Encryption]]></title>

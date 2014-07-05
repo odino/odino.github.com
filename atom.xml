@@ -3,13 +3,48 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-07-05T23:30:58+04:00</updated>
+	<updated>2014-07-05T23:40:47+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
 		
 	</author>
 	<generator uri="http://octopress.org/">Octopress</generator>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Planning to write long-term APIs? @cirpo and me shared our experience]]></title>
+		
+		<link href="http://odino.org/planning-to-write-long-term-apis-at-cirpo-and-me-shared-our-experience/"/>
+		<updated>2014-07-05T23:34:00+04:00</updated>
+		<id>http://odino.org/planning-to-write-long-term-apis-at-cirpo-and-me-shared-our-experience</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>A few weeks ago <a href="https://twitter.com/cirpo">@cirpo</a> and me
+flew back to Italy to partecipate to the 2014 edition of the
+<a href="http://2014.phpday.it/">PHPDay</a> in Verona, sharing our
+experience building APIs.</p>
+
+<!-- more -->
+
+
+<p>It was really a great time, especially since I missed the
+event in the past couple of years, so it was a blast to see
+those good&#8217;old tech-friends again.</p>
+
+<p>Our presentation, titled &ldquo;<a href="http://www.slideshare.net/odino/dont-screw-it-up-how-to-build-durable-web-apis-phpday-2014-in-verona-ita">Don&rsquo;t screw it up: how to build durable
+web APIs</a>&rdquo;, went <a href="https://joind.in/talk/view/11310">pretty well</a>: have a look below and let me know
+if you have any feedback!</p>
+
+<div class="slideshare" id="__ss_34940481"><iframe src="http://www.slideshare.net/slideshow/embed_code/34940481 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+
+]]>
+		</content>
+	</entry>
 	
 	<entry>
 		
@@ -1864,42 +1899,6 @@ Dustin Whittle who will give his insights about
 <a href="http://afup.org/pages/forumphp2013/sessions.php#964">scaling PHP apps</a>.</p>
 
 <p>See you in the core of europe!</p>
-]]>
-		</content>
-	</entry>
-	
-	<entry>
-		
-			<title type="html"><![CDATA[HTTP/1.1, SPDY and HTTP/2.0, again]]></title>
-		
-		<link href="http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again/"/>
-		<updated>2013-09-01T17:48:00+04:00</updated>
-		<id>http://odino.org/http-slash-1-dot-1-spdy-and-http-slash-2-dot-0-again</id>
-		<content type="html">
-			<![CDATA[
-				
-					<p></p>
-				
-			]]>
-			<![CDATA[<p>Today, tired like hell due to an almost sleepless night,
-I gave my second (and last) talk at the <a href="http://cakefest.org">CakeFest</a>
-in San Francisco.</p>
-
-<!-- more -->
-
-
-<p>It was a slightly remixed version of the same talk I gave at the
-IPC in Germany last year, with a few addition and changes: I hope the
-attendees have enjoyed the conference as well as my 2 <strong>small</strong>
-contributions as much as I did.</p>
-
-<p>As usual, the presentation is on <a href="http://www.slideshare.net/odino/http-colon-slash-slash-end-of-the-road-cakefest-2013-in-san-francisco">slideshare</a>:
-here are the slides for the lazy ones :)</p>
-
-<div class="slideshare" id="__ss_25801971"><iframe src="http://www.slideshare.net/slideshow/embed_code/25801971 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
-
-
-<p>Cheers!</p>
 ]]>
 		</content>
 	</entry>
