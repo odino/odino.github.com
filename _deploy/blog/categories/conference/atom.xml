@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Conference | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-05T23:30:58+04:00</updated>
+  <updated>2014-07-05T23:40:47+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Planning to Write Long-term APIs? @cirpo and Me Shared Our Experience]]></title>
+    <link href="http://odino.org/planning-to-write-long-term-apis-at-cirpo-and-me-shared-our-experience/"/>
+    <updated>2014-07-05T23:34:00+04:00</updated>
+    <id>http://odino.org/planning-to-write-long-term-apis-at-cirpo-and-me-shared-our-experience</id>
+    <content type="html"><![CDATA[<p>A few weeks ago <a href="https://twitter.com/cirpo">@cirpo</a> and me
+flew back to Italy to partecipate to the 2014 edition of the
+<a href="http://2014.phpday.it/">PHPDay</a> in Verona, sharing our
+experience building APIs.</p>
+
+<!-- more -->
+
+
+<p>It was really a great time, especially since I missed the
+event in the past couple of years, so it was a blast to see
+those good'old tech-friends again.</p>
+
+<p>Our presentation, titled &ldquo;<a href="http://www.slideshare.net/odino/dont-screw-it-up-how-to-build-durable-web-apis-phpday-2014-in-verona-ita">Don&rsquo;t screw it up: how to build durable
+web APIs</a>&rdquo;, went <a href="https://joind.in/talk/view/11310">pretty well</a>: have a look below and let me know
+if you have any feedback!</p>
+
+<p><div class="slideshare" id="__ss_34940481"><iframe src="http://www.slideshare.net/slideshow/embed_code/34940481 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[6 Takeways From the Second Day of ConFoo]]></title>
@@ -243,47 +268,6 @@ document-based graphdb</a>&rdquo;.</p>
 as usual, here:</p>
 
 <p><div class="slideshare" id="__ss_31683783"><iframe src="http://www.slideshare.net/slideshow/embed_code/31683783 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Speaking About AngularJS, SOA and OrientDB in Montreal at the Confoo 2014]]></title>
-    <link href="http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014/"/>
-    <updated>2013-10-20T11:00:00+04:00</updated>
-    <id>http://odino.org/speaking-about-angularjs-soa-and-orientdb-in-montreal-at-the-confoo-2014</id>
-    <content type="html"><![CDATA[<p>I am very happy to announce that next February I will
-be attending the <a href="http://confoo.ca/">Confoo 2014</a> and <a href="http://confoo.ca/en/speaker/alessandro-nadalin">speaking as well</a>,
-with a good lineup of talks:</p>
-
-<ul>
-<li><a href="http://confoo.ca/en/2014/session/orientdb-the-fastest-document-based-graphdb">OrientDB, the fastest NoSQL graph database</a></li>
-<li>building a <a href="http://confoo.ca/en/2014/session/soa-with-symfony2">SOA with Symfony2</a></li>
-<li><a href="http://confoo.ca/en/2014/session/angularjs-is-the-future-maybe">is AngularJS the future?</a></li>
-</ul>
-
-
-<!-- more -->
-
-
-<p>For the first time ever, I have to admit it, I will be
-presenting <strong>3 topics that have very different backgrounds</strong>,
-and, as the days go by, I realize that working at <a href="http://en-ae.namshi.com">Namshi</a>
-has been terrific under this point of view: we have the ability of
-experimenting with different technologies and use the best out on the
-market, something that gets translated into the ability of having a
-360° overview of the market.</p>
-
-<p><img class="right" src="/images/montreal.jpg"></p>
-
-<p>For me it will be the first time in the cold lands of Canada, and
-I can&rsquo;t wait to make the most out of this trip: I always had a <strong>very</strong>
-good opinion about canadians in general, hope this trip will
-confirm my random thoughts.</p>
-
-<p>If you have the chance to join, don&rsquo;t miss this amazing event:
-<a href="http://confoo.ca/en/2014/sessions">the schedule</a> speaks for itself
-and I am thrilled to be part of such an amazing speakers' lineup
-&mdash; which I obviously ruin :&ndash;) !</p>
 ]]></content>
   </entry>
   
