@@ -48,7 +48,7 @@ first of all, nikki is not a "real" IDE, it's  more a text editor
 (even though  the basics were setup last WE); last but not least,
 I'm not a javascripter ([I guess](http://osrc.dfm.io/odino/)), so most of the credit goes
 to [socket.io](http://socket.io/), the [ACE editor](http://ace.c9.io/#nav=about)
-and [David](it.linkedin.com/in/davidfunaro), who made me write my
+and [David](https://it.linkedin.com/in/davidfunaro), who made me write my
 very first lines of JS back in 2011 (I know, so late!)
 
 ## Considerations

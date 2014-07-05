@@ -1,0 +1,100 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="Blog of Alex, Vice President - Technology at Namshi in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		<title>Nikki v0.16.5: first issues ahead — Alessandro Nadalin</title>
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+        <link href='http://fonts.googleapis.com/css?family=Inika' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Alegreya+SC:900' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/blog/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/nikki-v0-dot-16-dot-5-first-issues-ahead/">Nikki v0.16.5: first issues ahead</a></h1>
+        <time>02 July 2014</time>
+    </header>
+<div class="entry-content"><p>Today I migrated all the possible issues I knew
+from <a href="https://github.com/odino/nikki">nikki</a>&rsquo;s
+README to <a href="https://github.com/odino/nikki/issues">github&rsquo;s issues</a>, and started
+addressing the first few of them.</p>
+
+<!-- more -->
+
+
+<blockquote><p>If you are new to nikki, you might want to read
+<a href="/last-weekend-i-wrote-an-ide-in-javascript/">this introductory post</a> I wrote a while ago.</p></blockquote>
+
+<p>Among the things I&rsquo;ve been hacking on today:</p>
+
+<ul>
+<li>if you tried to open a non-existing directory the server
+would crash, now it&rsquo;s simply telling you you&rsquo;re trying to do
+something nasty</li>
+<li>I added <a href="https://github.com/odino/nikki/blob/master/client/images/favicon.png">this awesome favicon</a> :)</li>
+<li>I ported the keyboard shortcuts to the Mac:
+whatever you were able to do with <code>ctrl</code> now is also available
+with <code>⌘</code></li>
+<li>when you boot nikki, now, you will be able to see it running
+under the name <code>nikki</code> in the process&#8217; list (try a <code>ps -ef | grep nikki</code>)</li>
+<li>you can customize the <a href="https://github.com/odino/nikki/blob/master/.nikki.yml#L9-L25">mappings for syntax highlighting</a> by adding
+them in your <code>.nikki.yml</code></li>
+</ul>
+
+
+<p>Contextually, I released <code>v0.16.5</code>, so simply run an
+<code>npm update -g nikki</code> and enjoy this bunch of new things!</p>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'podabedorg';
+    (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- END _/layouts/post.html -->
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2014 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+    </script>
+	</body>
+</html>
+<!-- END _layouts/default.html -->
