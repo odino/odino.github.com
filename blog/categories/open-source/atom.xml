@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Open Source | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/open-source/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-07T17:26:59+04:00</updated>
+  <updated>2014-07-07T17:52:07+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nikki 0.19.1: Awesomeness Won't Stop]]></title>
+    <link href="http://odino.org/nikki-0-dot-19-dot-1-awesomeness-wont-stop/"/>
+    <updated>2014-07-07T17:30:00+04:00</updated>
+    <id>http://odino.org/nikki-0-dot-19-dot-1-awesomeness-wont-stop</id>
+    <content type="html"><![CDATA[<p>Given it&rsquo;s Ramadan and we have some spare time at the
+end of the day, I&rsquo;m getting the chance to be
+<a href="https://github.com/odino/nikki/commits/master">quite active</a>
+with the development of <a href="https://github.com/odino/nikki">Nikki</a>.</p>
+
+<!-- more -->
+
+
+<blockquote><p>If you are new to nikki, you might want to read
+<a href="/last-weekend-i-wrote-an-ide-in-javascript/">this introductory post</a> I wrote a while ago.</p></blockquote>
+
+<p>I figured out the best way to document these changes, besides
+writing a blog post, would be to document them with
+<a href="https://github.com/odino/nikki/issues?direction=desc&amp;page=1&amp;sort=updated&amp;state=closed">Github issues</a>
+and by beefing up the <a href="https://github.com/odino/nikki/">README</a> &mdash; so
+you should definitely have a look there.</p>
+
+<h2>What&rsquo;s new?</h2>
+
+<p><img class="center" src="/images/nikki-0.19.1.png"></p>
+
+<p>The biggest change is that you are now gonna be running nikki
+as a <a href="https://github.com/odino/nikki/commit/efecd05ab8a02406d63011e465850f2931ecef07">detached process</a>:
+once you start nikki you will see it running on port <code>9123</code> (by default)
+and you will be able to stop it with a simple <code>nikki --stop</code>; to
+check whether nikki is running simply run a <code>nikki --status</code>.</p>
+
+<p>This change was made possible using node&rsquo;s spawning capabilities
+and <a href="https://github.com/substack/dnode">dnode</a>, which lets you
+implement <a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>
+in NodeJS: once yu start nikki the main process spawns itself,
+the spawned one listens on <code>9124</code> for signals and the main process
+ends; when we issue <code>nikki --stop</code> we will just be sending a
+<code>shutdown</code> signal to the spawned nikki
+process through an RPC call.</p>
+
+<p>Other changes?</p>
+
+<ul>
+<li>added the <code>ctrl + shift + l</code> shortcut to <a href="https://github.com/odino/nikki/commit/40899aaeecb70c02c1c1a00e566335d190508c2f">close editor tabs</a></li>
+<li>once you re-open nikki, tabs that were open at the time you closed <a href="https://github.com/odino/nikki/commit/daa95c0efd3022b744016830e2f7995cea138a52">will be open again</a></li>
+<li>using <a href="https://github.com/odino/nikki/commit/7e2f2baec4eb2aec7ba2980de2a82d8ab2b1bff5">jQuery 2.X</a></li>
+<li>&ldquo;<a href="https://github.com/odino/nikki/commit/1a3fd2605ed6f325409fd8d489bd624a72d8a7af">open in github</a>&rdquo; you can now configure nikki so that
+once you use the <code>ctrl + g</code> shortcut in a file it will open it, in github, in a new broser tab</li>
+<li>added <a href="https://github.com/odino/nikki/commit/46e5c1881b6ca331b64cc470086f7af7936af69e">filesystem icons from fontawesome</a></li>
+<li>when you search for files, now, the <a href="https://github.com/odino/nikki/commit/649106f5d491165b3e1c982cbb76e9967cb81c0d">file path will be shown next to the filename</a> (so if you have 3 <code>index.js</code> in your codebase&hellip;   &hellip;no worries anymore!)</li>
+<li><a href="https://github.com/odino/nikki/commit/7db31f927b3027dfa1408e2af84b6806a6b91d12">debug mode</a>, so that you can troubleshoot problems in an easier way</li>
+</ul>
+
+
+<h2>What&rsquo;s fixed?</h2>
+
+<ul>
+<li>navigation used to show <a href="https://github.com/odino/nikki/commit/d829129992e5e42eed54f7f13492254f3b3df08d">incorrect</a> <a href="https://github.com/odino/nikki/commit/b463eab67816c8fa1c02d30af019e2a9628be458">paths</a></li>
+<li>inconsistencies with the <a href="https://github.com/odino/nikki/commit/4450b27ea477f119b3d7a32a27a37606687ccae0">file search</a></li>
+<li><a href="https://github.com/odino/nikki/commit/041397e71198599cc6c4a2ec06a706aff0c72623">shortcuts conflicts</a> with the ACE editor</li>
+</ul>
+
+
+<h2>How to get all these changes?</h2>
+
+<p>As simple as running an <code>npm install -g nikki</code> if this is the first time
+you hear about it: for the ones who already have it installed on their
+systems simply run a <code>npm update -g nikki</code>.</p>
+
+<p>Then open a terminal, type <code>nikki</code> and let the show begin!</p>
+
+<h2>What&rsquo;s next?</h2>
+
+<p>I will be implementing filesystem operations in these days (delete / create
+files and folders) and probably refactor some of the key frontend components, like
+the keyboard shortcuts.</p>
+
+<p>Keep an eye on the <a href="https://github.com/odino/nikki">github project</a> and let me know your feedback!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Emailvision's CampaignCommander APIs From PHP]]></title>
@@ -83,7 +165,7 @@ of the template; the rest is very straightforward:</p>
 <p>);</p>
 
 <p>$emailvisionClient = new Client($config);
-$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#x73;&#x6f;&#109;&#x65;&#111;&#110;&#x65;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#x73;&#x6f;&#x6d;&#x65;&#x6f;&#x6e;&#101;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a>&rdquo;);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#115;&#111;&#x6d;&#101;&#111;&#110;&#x65;&#64;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x73;&#x6f;&#109;&#x65;&#x6f;&#x6e;&#x65;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;</a>&rdquo;);
 ```</p>
 
 <p>The nice thing here is that Emailvision lets you schedule
@@ -110,7 +192,7 @@ be a <code>DateTime</code> instance:</p>
 <p>);</p>
 
 <p>$emailvisionClient = new Client($config);
-$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#115;&#x6f;&#109;&#x65;&#x6f;&#x6e;&#101;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#115;&#x6f;&#x6d;&#x65;&#x6f;&#110;&#101;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>&rdquo;);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#115;&#x6f;&#109;&#x65;&#111;&#x6e;&#x65;&#x40;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;">&#115;&#111;&#109;&#x65;&#111;&#110;&#101;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;</a>&rdquo;);
 ```</p>
 
 <p>This code will tell CampaignCommander to trigger
@@ -132,7 +214,7 @@ argument:</p>
 <p>``` php
 &lt;?php</p>
 
-<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x73;&#x6f;&#109;&#101;&#111;&#x6e;&#x65;&#64;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#115;&#111;&#109;&#x65;&#111;&#x6e;&#101;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a>&rdquo;, array(</p>
+<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x73;&#x6f;&#x6d;&#101;&#111;&#110;&#101;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#109;">&#115;&#111;&#x6d;&#101;&#111;&#110;&#x65;&#64;&#103;&#109;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a>&rdquo;, array(</p>
 
 <pre><code>'name' =&gt; 'Alex!',
 </code></pre>
@@ -174,7 +256,7 @@ running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
 
 <p>$encrypt    = &lsquo;email_template_security_tag&rsquo;;
 $random     = &lsquo;email_template_unique_id&rsquo;;
-$email  = &lsquo;<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#121;&#111;&#x75;&#114;&#x2e;&#97;&#100;&#100;&#114;&#101;&#x73;&#x73;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#x79;&#x6f;&#117;&#114;&#x2e;&#97;&#x64;&#100;&#114;&#x65;&#115;&#x73;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#109;</a>&rsquo;;
+$email  = &lsquo;<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#121;&#x6f;&#117;&#x72;&#46;&#97;&#x64;&#100;&#114;&#101;&#x73;&#115;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;">&#x79;&#x6f;&#x75;&#x72;&#x2e;&#x61;&#x64;&#x64;&#114;&#101;&#x73;&#115;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a>&rsquo;;
 ```</p>
 
 <p>Enjoy!</p>
@@ -558,79 +640,6 @@ Notes
 	</ol>
 </div>
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Current Status of My Work With OrientDB]]></title>
-    <link href="http://odino.org/the-current-status-of-my-work-with-orientdb/"/>
-    <updated>2011-05-24T14:09:00+04:00</updated>
-    <id>http://odino.org/the-current-status-of-my-work-with-orientdb</id>
-    <content type="html"><![CDATA[<p>Since I just merged everything on the master, on <a href="https://github.com/odino/Orient">GitHub</a>, I made a few decisions about the OrientDB PHP library ( named Orient ) lifecycle.</p>
-
-<!-- more -->
-
-
-<p>Great <a href="news:">news:</a> <strong>we are compatible with the RC1 version of OrientDB</strong> ( the README on GitHub is not updated, sorry ).</p>
-
-<p>Since the RC2 snapshot has been released, I&rsquo;ll look if something is broken.</p>
-
-<h2>What&rsquo;s new?</h2>
-
-<p>As <a href="http://www.odino.org/348/the-query-builder-for-orientdb">I said</a>, the huge work for the query builder has been done: you can find it in the <code>beta-2</code> tag.</p>
-
-<p>Now we&rsquo;re only waiting integration tests and the resolution of <a href="http://code.google.com/p/orient/issues/detail?id=374&amp;q=quotes">a bug in OrientDB&rsquo;s SQL parser</a>.</p>
-
-<h2>The old stuff?</h2>
-
-<p>I fixed some links from my first post talking about <a href="http://www.odino.org/328/graph-in-php-through-orientdb">OrientDB and PHP</a>, through the binding of the library.</p>
-
-<p>If you want to use it, just use the <code>beta-1</code> tag.</p>
-
-<h2>What&rsquo;s coming?</h2>
-
-<p>We plan to have 4 beta releases in the next &frac34; months:</p>
-
-<ul>
-<li><code>beta-3</code>, which marks the end of the whole query builder, meaning that all the new SQL commands are integrated in the QB and integration tests are done</li>
-<li><code>beta-4</code>, where we will be able to retrieve hydrated records from a query executed with the QB: it obviously includes annotations on your domain POPOs</li>
-<li><code>beta-5</code>, in which you&rsquo;ll be able to manage repository classes</li>
-<li><code>beta-6</code>, when you will be able to persist records through the document manager</li>
-</ul>
-
-
-<h2>Wanna help?</h2>
-
-<p>Help would be really appreciated: not only in writing bunches of code, but also in helping with the design of the whole library; for example, I just asked in OrientDB ML questions about <a href="https://groups.google.com/d/topic/orient-database/0hPWojYPJ9Q/discussion">protocols interoperability in PHP</a>.</p>
-
-<p>Feedbacks on this kind of stuff are really welcome.</p>
-
-<h2>What&rsquo;s ok with this library?</h2>
-
-<p>The aim is to build a general purpose library to manage OrientDB from PHP: having loosely coupled components means that you&rsquo;ll be able to use the query builder to build SQL statements, or the binding to query OrientDB with raw strings through the HTTP protocol.</p>
-
-<p>Keyword: decoupling; that&rsquo;s why we&rsquo;re already thinking about <strong>interoperability</strong>.</p>
-
-<p>Anton Terekhov is building the binding for the <a href="https://github.com/AntonTerekhov/OrientDB-PHP">binary protocol</a>, so we don&rsquo;t want, for example, to force people to use the HTTP one, and that&rsquo;s why the design of the whole library is made preventing coupling between components.</p>
-
-<h2>Ah, I was forgetting about&hellip;</h2>
-
-<p>You can download the library and, with phpunit, run the tests ( the integration one, for the binding, are disabled by default, since they require a working instance of OrientDB ) with:</p>
-
-<p><code>
-phpunit --configuration=Test/PHPUnit/phpunit.xml
-</code></p>
-
-<p>from the root of the library.</p>
-
-<p>I&rsquo;ve setup also the PHP_CodeSniffer code analysis, just run:</p>
-
-<p><code>
-chmod +x report.sh
-./report.sh
-</code></p>
-
-<p>and look into <code>log/report/index.html</code> with a browser.</p>
 ]]></content>
   </entry>
   

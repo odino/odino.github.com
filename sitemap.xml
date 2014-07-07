@@ -757,12 +757,16 @@
         <lastmod>2014-07-07T17:26:02+04:00</lastmod>
     </url>
     <url>
+        <loc>http://odino.org/nikki-0-dot-19-dot-1-awesomeness-wont-stop/</loc>
+        <lastmod>2014-07-07T17:51:27+04:00</lastmod>
+    </url>
+    <url>
         <loc>http://odino.org/404.html</loc>
         <lastmod>2014-07-05T23:29:07+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/archives/</loc>
-        <lastmod>2014-07-07T17:26:02+04:00</lastmod>
+        <lastmod>2014-07-07T17:51:27+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/robots.txt</loc>
@@ -770,7 +774,7 @@
     </url>
     <url>
         <loc>http://odino.org/</loc>
-        <lastmod>2014-07-07T17:26:02+04:00</lastmod>
+        <lastmod>2014-07-07T17:51:27+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/conferences/</loc>
@@ -794,10 +798,10 @@
     </url>
     <url>
         <loc>http://odino.org/blog/archives/</loc>
-        <lastmod>2014-07-07T17:26:02+04:00</lastmod>
+        <lastmod>2014-07-07T17:51:27+04:00</lastmod>
     </url>
     <url>
         <loc>http://odino.org/blog/</loc>
-        <lastmod>2014-07-07T17:26:02+04:00</lastmod>
+        <lastmod>2014-07-07T17:51:27+04:00</lastmod>
     </url>
 </urlset>

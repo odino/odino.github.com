@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Nikki | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/nikki/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-07T17:26:59+04:00</updated>
+  <updated>2014-07-07T17:52:07+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nikki 0.19.1: Awesomeness Won't Stop]]></title>
+    <link href="http://odino.org/nikki-0-dot-19-dot-1-awesomeness-wont-stop/"/>
+    <updated>2014-07-07T17:30:00+04:00</updated>
+    <id>http://odino.org/nikki-0-dot-19-dot-1-awesomeness-wont-stop</id>
+    <content type="html"><![CDATA[<p>Given it&rsquo;s Ramadan and we have some spare time at the
+end of the day, I&rsquo;m getting the chance to be
+<a href="https://github.com/odino/nikki/commits/master">quite active</a>
+with the development of <a href="https://github.com/odino/nikki">Nikki</a>.</p>
+
+<!-- more -->
+
+
+<blockquote><p>If you are new to nikki, you might want to read
+<a href="/last-weekend-i-wrote-an-ide-in-javascript/">this introductory post</a> I wrote a while ago.</p></blockquote>
+
+<p>I figured out the best way to document these changes, besides
+writing a blog post, would be to document them with
+<a href="https://github.com/odino/nikki/issues?direction=desc&amp;page=1&amp;sort=updated&amp;state=closed">Github issues</a>
+and by beefing up the <a href="https://github.com/odino/nikki/">README</a> &mdash; so
+you should definitely have a look there.</p>
+
+<h2>What&rsquo;s new?</h2>
+
+<p><img class="center" src="/images/nikki-0.19.1.png"></p>
+
+<p>The biggest change is that you are now gonna be running nikki
+as a <a href="https://github.com/odino/nikki/commit/efecd05ab8a02406d63011e465850f2931ecef07">detached process</a>:
+once you start nikki you will see it running on port <code>9123</code> (by default)
+and you will be able to stop it with a simple <code>nikki --stop</code>; to
+check whether nikki is running simply run a <code>nikki --status</code>.</p>
+
+<p>This change was made possible using node&rsquo;s spawning capabilities
+and <a href="https://github.com/substack/dnode">dnode</a>, which lets you
+implement <a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>
+in NodeJS: once yu start nikki the main process spawns itself,
+the spawned one listens on <code>9124</code> for signals and the main process
+ends; when we issue <code>nikki --stop</code> we will just be sending a
+<code>shutdown</code> signal to the spawned nikki
+process through an RPC call.</p>
+
+<p>Other changes?</p>
+
+<ul>
+<li>added the <code>ctrl + shift + l</code> shortcut to <a href="https://github.com/odino/nikki/commit/40899aaeecb70c02c1c1a00e566335d190508c2f">close editor tabs</a></li>
+<li>once you re-open nikki, tabs that were open at the time you closed <a href="https://github.com/odino/nikki/commit/daa95c0efd3022b744016830e2f7995cea138a52">will be open again</a></li>
+<li>using <a href="https://github.com/odino/nikki/commit/7e2f2baec4eb2aec7ba2980de2a82d8ab2b1bff5">jQuery 2.X</a></li>
+<li>&ldquo;<a href="https://github.com/odino/nikki/commit/1a3fd2605ed6f325409fd8d489bd624a72d8a7af">open in github</a>&rdquo; you can now configure nikki so that
+once you use the <code>ctrl + g</code> shortcut in a file it will open it, in github, in a new broser tab</li>
+<li>added <a href="https://github.com/odino/nikki/commit/46e5c1881b6ca331b64cc470086f7af7936af69e">filesystem icons from fontawesome</a></li>
+<li>when you search for files, now, the <a href="https://github.com/odino/nikki/commit/649106f5d491165b3e1c982cbb76e9967cb81c0d">file path will be shown next to the filename</a> (so if you have 3 <code>index.js</code> in your codebase&hellip;   &hellip;no worries anymore!)</li>
+<li><a href="https://github.com/odino/nikki/commit/7db31f927b3027dfa1408e2af84b6806a6b91d12">debug mode</a>, so that you can troubleshoot problems in an easier way</li>
+</ul>
+
+
+<h2>What&rsquo;s fixed?</h2>
+
+<ul>
+<li>navigation used to show <a href="https://github.com/odino/nikki/commit/d829129992e5e42eed54f7f13492254f3b3df08d">incorrect</a> <a href="https://github.com/odino/nikki/commit/b463eab67816c8fa1c02d30af019e2a9628be458">paths</a></li>
+<li>inconsistencies with the <a href="https://github.com/odino/nikki/commit/4450b27ea477f119b3d7a32a27a37606687ccae0">file search</a></li>
+<li><a href="https://github.com/odino/nikki/commit/041397e71198599cc6c4a2ec06a706aff0c72623">shortcuts conflicts</a> with the ACE editor</li>
+</ul>
+
+
+<h2>How to get all these changes?</h2>
+
+<p>As simple as running an <code>npm install -g nikki</code> if this is the first time
+you hear about it: for the ones who already have it installed on their
+systems simply run a <code>npm update -g nikki</code>.</p>
+
+<p>Then open a terminal, type <code>nikki</code> and let the show begin!</p>
+
+<h2>What&rsquo;s next?</h2>
+
+<p>I will be implementing filesystem operations in these days (delete / create
+files and folders) and probably refactor some of the key frontend components, like
+the keyboard shortcuts.</p>
+
+<p>Keep an eye on the <a href="https://github.com/odino/nikki">github project</a> and let me know your feedback!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nikki v0.16.5: First Issues Ahead]]></title>
