@@ -3,13 +3,42 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="http://odino.org/atom.xml" rel="self"/>
 	<link href="http://odino.org/"/>
-	<updated>2014-07-05T23:40:47+04:00</updated>
+	<updated>2014-07-06T00:10:32+04:00</updated>
 	<id>http://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
 		
 	</author>
 	<generator uri="http://octopress.org/">Octopress</generator>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Tips and tricks for your Service Oriented Architecture - Video]]></title>
+		
+		<link href="http://odino.org/tips-and-tricks-for-your-service-oriented-architecture-video/"/>
+		<updated>2014-07-06T00:05:00+04:00</updated>
+		<id>http://odino.org/tips-and-tricks-for-your-service-oriented-architecture-video</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>The folks from the <a href="http://cakefest.org/">CakeFest</a> got to upload the video of my
+<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">first talk</a>
+at the 2013 edition of their conference online.</p>
+
+<!-- more -->
+
+
+<p>It was my first trip to the States and got the chance to discuss
+with the guys pitfalls and advantages of going SOA:</p>
+
+<iframe width="100%" height="600px" src="http://odino.org//www.youtube.com/embed/PdClg5bMcow" frameborder="0" allowfullscreen></iframe>
+
+]]>
+		</content>
+	</entry>
 	
 	<entry>
 		
@@ -1856,49 +1885,6 @@ the CakeFest is an event I would definitely like to join
 again in the future.</p>
 
 <p>Who knows where the <a href="http://bakery.cakephp.org/articles/predominant/2013/03/20/cakefest_2013_-_vote_for_the_location">crazy band is heading next year!</a></p>
-]]>
-		</content>
-	</entry>
-	
-	<entry>
-		
-			<title type="html"><![CDATA[See you in Paris at the 2013 edition of the PHP Forum]]></title>
-		
-		<link href="http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum/"/>
-		<updated>2013-09-21T16:04:00+04:00</updated>
-		<id>http://odino.org/see-you-in-paris-at-the-2013-edition-of-the-php-forum</id>
-		<content type="html">
-			<![CDATA[
-				
-					<p></p>
-				
-			]]>
-			<![CDATA[<p>In late november I will be for a few days in Paris,
-attending and speaking at the 2013 edition of the
-<a href="http://afup.org/pages/forumphp2013/sessions.php">Forum PHP Paris</a>:
-funny enough, I&rsquo;ve only been to Paris for conferences so far,
-as my <em>first-timer</em> there was during the
-<a href="http://odino.org/symfony-live-2011-my-pov/">2011 edition of the Symfony Live</a>.</p>
-
-<!-- more -->
-
-
-<p><img class="right" src="http://odino.org/images/paris.jpg"></p>
-
-<p>Topic of my talk will be what we&rsquo;ve witnessed
-at <a href="http://afup.org/pages/forumphp2013/sessions.php#894">Namshi building our team and stack</a>:
-from recruiting talents to automated testing, from
-SOA&rsquo;s rules to deciding to use cutting-edge technologies
-like <a href="http://angularjs.org/">AngularJS</a>: don&rsquo;t miss the
-opportunity to
-<a href="http://afup.org/pages/forumphp2013/inscription.php">reserve your seat for the event</a>,
-since there will be amazing speakers, like
-Igor Wiedler talking about <a href="http://afup.org/pages/forumphp2013/sessions.php#967">Stack</a>,
-PHP&rsquo;s rack, and
-Dustin Whittle who will give his insights about
-<a href="http://afup.org/pages/forumphp2013/sessions.php#964">scaling PHP apps</a>.</p>
-
-<p>See you in the core of europe!</p>
 ]]>
 		</content>
 	</entry>

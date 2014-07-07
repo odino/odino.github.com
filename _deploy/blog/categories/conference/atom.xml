@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Conference | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/conference/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-05T23:40:47+04:00</updated>
+  <updated>2014-07-06T00:10:32+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tips and Tricks for Your Service Oriented Architecture - Video]]></title>
+    <link href="http://odino.org/tips-and-tricks-for-your-service-oriented-architecture-video/"/>
+    <updated>2014-07-06T00:05:00+04:00</updated>
+    <id>http://odino.org/tips-and-tricks-for-your-service-oriented-architecture-video</id>
+    <content type="html"><![CDATA[<p>The folks from the <a href="http://cakefest.org/">CakeFest</a> got to upload the video of my
+<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">first talk</a>
+at the 2013 edition of their conference online.</p>
+
+<!-- more -->
+
+
+<p>It was my first trip to the States and got the chance to discuss
+with the guys pitfalls and advantages of going SOA:</p>
+
+<iframe width="100%" height="600px" src="http://odino.org//www.youtube.com/embed/PdClg5bMcow" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Planning to Write Long-term APIs? @cirpo and Me Shared Our Experience]]></title>
@@ -249,25 +269,6 @@ and you might want to look into using it from now on, in place of its predecesso
 
 <p>It was a fairly good day and my <a href="/orientdb-the-fastest-document-based-graph-database/">presentation about OrientDB</a>
 went pretty well, can&rsquo;t wait for tomorrow!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OrientDB, the Fastest Document-based Graph Database]]></title>
-    <link href="http://odino.org/orientdb-the-fastest-document-based-graph-database/"/>
-    <updated>2014-02-26T15:25:00+04:00</updated>
-    <id>http://odino.org/orientdb-the-fastest-document-based-graph-database</id>
-    <content type="html"><![CDATA[<p>Today I gave the first of my talks here at the 2014 edition
-of the confoo in Montreal, &ldquo;<a href="http://www.slideshare.net/odino/orientdb-the-fastest-documentbased-graph-database-confoo-2014-in-montreal-ca">OrientDB, the fastest
-document-based graphdb</a>&rdquo;.</p>
-
-<!-- more -->
-
-
-<p>For the ones interested in the slides, I am also publishing them,
-as usual, here:</p>
-
-<p><div class="slideshare" id="__ss_31683783"><iframe src="http://www.slideshare.net/slideshow/embed_code/31683783 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
 ]]></content>
   </entry>
   

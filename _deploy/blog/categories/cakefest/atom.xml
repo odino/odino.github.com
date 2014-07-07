@@ -3,7 +3,7 @@
   <title><![CDATA[Category: CakeFest | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/cakefest/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-05T23:40:47+04:00</updated>
+  <updated>2014-07-06T00:10:32+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tips and Tricks for Your Service Oriented Architecture - Video]]></title>
+    <link href="http://odino.org/tips-and-tricks-for-your-service-oriented-architecture-video/"/>
+    <updated>2014-07-06T00:05:00+04:00</updated>
+    <id>http://odino.org/tips-and-tricks-for-your-service-oriented-architecture-video</id>
+    <content type="html"><![CDATA[<p>The folks from the <a href="http://cakefest.org/">CakeFest</a> got to upload the video of my
+<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco">first talk</a>
+at the 2013 edition of their conference online.</p>
+
+<!-- more -->
+
+
+<p>It was my first trip to the States and got the chance to discuss
+with the guys pitfalls and advantages of going SOA:</p>
+
+<iframe width="100%" height="600px" src="http://odino.org//www.youtube.com/embed/PdClg5bMcow" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CakeFest 2013 Wrap-up]]></title>
