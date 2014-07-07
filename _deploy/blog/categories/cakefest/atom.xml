@@ -3,7 +3,7 @@
   <title><![CDATA[Category: CakeFest | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/cakefest/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-06T00:10:32+04:00</updated>
+  <updated>2014-07-07T17:26:59+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[History of HTTP, SPDY and HTTP/2.0 - Video]]></title>
+    <link href="http://odino.org/history-of-http-spdy-and-http-slash-2-dot-0-video/"/>
+    <updated>2014-07-07T17:22:00+04:00</updated>
+    <id>http://odino.org/history-of-http-spdy-and-http-slash-2-dot-0-video</id>
+    <content type="html"><![CDATA[<p>&hellip;and the folks from the <a href="http://cakefest.org/">CakeFest</a> ended up
+uploading my <a href="http://www.slideshare.net/odino/http-colon-slash-slash-end-of-the-road-cakefest-2013-in-san-francisco">2nd talk at the conference</a>
+as well.</p>
+
+<!-- more -->
+
+
+<p>It was surely more difficult than my first talk (I was half sick that day)
+but I hope you will be able to enjoy this as well:</p>
+
+<iframe width="100%" height="600px" src="http://odino.org//www.youtube.com/embed/PdClg5bMcow" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tips and Tricks for Your Service Oriented Architecture - Video]]></title>
