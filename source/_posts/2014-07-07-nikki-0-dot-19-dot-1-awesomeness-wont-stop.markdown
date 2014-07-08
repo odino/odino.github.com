@@ -35,7 +35,7 @@ check whether nikki is running simply run a `nikki --status`.
 This change was made possible using node's spawning capabilities
 and [dnode](https://github.com/substack/dnode), which lets you
 implement [RPC](http://en.wikipedia.org/wiki/Remote_procedure_call)
-in NodeJS: once yu start nikki the main process spawns itself,
+in NodeJS: once you start nikki the main process spawns itself,
 the spawned one listens on `9124` for signals and the main process
 ends; when we issue `nikki --stop` we will just be sending a
 `shutdown` signal to the spawned nikki
