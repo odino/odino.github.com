@@ -3,7 +3,7 @@
   <title><![CDATA[Category: JavaScript | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-07T17:52:07+04:00</updated>
+  <updated>2014-07-08T22:06:26+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -47,7 +47,7 @@ check whether nikki is running simply run a <code>nikki --status</code>.</p>
 <p>This change was made possible using node&rsquo;s spawning capabilities
 and <a href="https://github.com/substack/dnode">dnode</a>, which lets you
 implement <a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>
-in NodeJS: once yu start nikki the main process spawns itself,
+in NodeJS: once you start nikki the main process spawns itself,
 the spawned one listens on <code>9124</code> for signals and the main process
 ends; when we issue <code>nikki --stop</code> we will just be sending a
 <code>shutdown</code> signal to the spawned nikki
