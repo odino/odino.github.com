@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Nikki | Alessandro Nadalin]]></title>
   <link href="http://odino.org/blog/categories/nikki/atom.xml" rel="self"/>
   <link href="http://odino.org/"/>
-  <updated>2014-07-08T22:06:26+04:00</updated>
+  <updated>2014-07-11T18:08:56+04:00</updated>
   <id>http://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nikki 0.25.1: Let's Play With the Filesystem!]]></title>
+    <link href="http://odino.org/nikki-0-dot-25-dot-1-lets-play-with-the-filesystem/"/>
+    <updated>2014-07-11T17:40:00+04:00</updated>
+    <id>http://odino.org/nikki-0-dot-25-dot-1-lets-play-with-the-filesystem</id>
+    <content type="html"><![CDATA[<p>In the last 24 hours I rolled out some changes
+I actually personally needed to get way more
+productive than ever on nikki, and leave my old-school
+IDE turned off.</p>
+
+<!-- more -->
+
+
+<blockquote><p>If you are new to nikki, you might want to read
+<a href="/last-weekend-i-wrote-an-ide-in-javascript/">this introductory post</a> I wrote a while ago.</p></blockquote>
+
+<h2>What&rsquo;s new?</h2>
+
+<p>Probably the most needed feature, at least by me,
+is to be able to look for a text in files, and
+it has been <a href="https://github.com/odino/nikki/commit/6e6540147d6c0d165ab0aad3d4ed7bd267eb9f5f">rudimentally implemented</a>
+while  I will focus, in the next days, on how to
+make this much more user-friendly: in any case,
+by activating the search bar through <code>ctrl + shift + g</code>
+you are going to search in <code>grep</code> mode, which means
+that instead of looking by file name we are gonna
+grep the content of those files.</p>
+
+<p><img class="center" src="/images/nikki-0.25.1.png"></p>
+
+<p>As you see in the screenshot above, Nikki then
+returns you a list of files and highlights the matches:
+what I  want to work on, then, is to be able to
+click on those matches and open that file
+at that specific line.</p>
+
+<p>How about other changes?</p>
+
+<ul>
+<li>we are <a href="https://github.com/odino/nikki/commit/704927c369ef156d3d03d90af68853657328c5f4">watching the FS now</a>, so if you touch a file
+from your terminal you&rsquo;ll magically see it appear in nikki!</li>
+<li>when searching for files with <code>ctrl + shift +f</code> you are now gonna be able to also <a href="https://github.com/odino/nikki/commit/bae2c1b51617551bf814869e815a2eea1246a8cb">look for directories</a></li>
+<li>generally improved the search: now <code>proj gu .js</code> will match <code>/path/to/projects/test/gulpfile.js</code></li>
+<li>nikki will now show the current focus (filesystem / search / editor) right <a href="https://github.com/odino/nikki/commit/fb1d05f2eac3370348d41158a2e55c337d28a874">above the editor</a></li>
+<li>added the <a href="https://github.com/odino/nikki/commit/17a4dd7a7c53a7fa5a6c360818857e35eb246143">awesome nikki logo</a></li>
+<li>you can configure the <a href="https://github.com/odino/nikki/commit/5f2b680750bccac228e471fdb7b81762df8bde0c">keyboard shortcuts</a></li>
+<li>you can now <a href="https://github.com/odino/nikki/commit/79f37e158417a9ea6b6dfa7a50f06b25a046cf4f">delete files and directories</a>: simply hover on a file and press <code>delete</code></li>
+</ul>
+
+
+<h2>What&rsquo;s fixed?</h2>
+
+<ul>
+<li>when you move between tabs, now nikki will <a href="https://github.com/odino/nikki/commit/d294446cc089207db143324a192827bcb636b65c">remember the position of the cursor</a> on each tab</li>
+<li>issues while <a href="https://github.com/odino/nikki/commit/a38be0e0c14cab6036d52a585c165bcd34baf4dd">focusing on the filesystem</a></li>
+<li>nikki <a href="https://github.com/odino/nikki/commit/36a820025db61a30e55735e733888d25fa2fe2c1">would epically crash</a> if you have an open tab that points to a file, you delete it, and then refresh nikki, as it couldn&rsquo;t  find the file</li>
+<li>fixed <a href="https://github.com/odino/nikki/commit/1bce21bb0b60d7bbca1a3993d0b652cfff27178f">a crash</a> when re-opening a tab after closing all tabs</li>
+<li>small, informative <a href="https://github.com/odino/nikki/commit/81c197f655cf4d06402ab5c930fc0bdb08e0bbd0">fixes</a></li>
+</ul>
+
+
+<h2>How do I get all this awesomeness?</h2>
+
+<p>As simple as running an <code>npm install -g nikki</code> if this is the first time
+you hear about it: for the ones who already have it installed on their
+systems simply run a <code>npm update -g nikki</code>.</p>
+
+<p>Then open a terminal, type <code>nikki</code> and let the show begin!</p>
+
+<h2>What&rsquo;s  next?</h2>
+
+<p>I&rsquo;m giving 100% priority to bugs before implementing new features:
+given I&rsquo;m using nikki on a daily basis I usually find <a href="https://github.com/odino/nikki/issues?direction=desc&amp;labels=bug&amp;page=1&amp;sort=updated&amp;state=open">gotchas</a>
+and fix them straight away.</p>
+
+<p>If there are not gonna be too many fixes to do I will focus
+on making the editor &ldquo;smarter&rdquo;, by improving the search in files
+and adding find / find &amp; replace functionalities (the ACE editor
+has built-in support for them, so shouldn&rsquo;t be that much of
+a problem).</p>
+
+<p>Keep an eye on the <a href="https://github.com/odino/nikki">github project</a> and let me know your feedback!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nikki 0.19.1: Awesomeness Won't Stop]]></title>
