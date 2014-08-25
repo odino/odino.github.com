@@ -1,3 +1,4 @@
+_deploy/*
 .bundle
 .DS_Store
 .sass-cache

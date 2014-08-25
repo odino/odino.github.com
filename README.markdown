@@ -1,3 +1,13 @@
+# How to run this?
+
+This blog should be run through docker:
+
+```
+docker run -t -i -p 4000:4000 odino/odino.github.com
+```
+
+Have fun! Original readme below...
+
 ## What is Octopress?
 
 Octopress is [Jekyll](https://github.com/mojombo/jekyll) blogging at its finest.
