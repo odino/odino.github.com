@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Edge Side Includes, how to spare terabytes every day"
-date: 2012-01-20 14:15
+date: 2012-01-20 14:16
 comments: true
 categories: [ESI, HTTP, scaling]
 ---
