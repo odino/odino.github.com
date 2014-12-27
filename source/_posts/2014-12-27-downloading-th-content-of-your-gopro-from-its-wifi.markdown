@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Downloading th content of your GoPro from its WiFi"
+title: "Downloading the content of your GoPro from its WiFi"
 date: 2014-12-27 20:55
 comments: true
 categories: [hardware]
