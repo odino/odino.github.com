@@ -16,8 +16,14 @@ $color-gray05: #fff !default;
 
 
 .wrap {
-  width: 50%;
-  line-height: 30px;
+  width: 55%;
+  line-height: 35px;
+  font-size: 1.2em;
+  color: #3A4145;
+}
+
+h2 {
+  color: #000;
 }
 
 
@@ -100,3 +106,4 @@ article {
 ul li a, p a {
   border-bottom: 1px dashed black;
 }
+
