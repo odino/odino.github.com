@@ -5,4 +5,7 @@
 	<li>
 		<a href="/the-strange-case-of-orientdb-and-graph-databases/">The strange case of OrientDB and graph databases</a>
 	</li>
+	<li>
+		<a href="/an-overview-of-orientdbs-capabilities/">An overview of OrienDB's capabilities</a>
+	</li>
 </ol>
