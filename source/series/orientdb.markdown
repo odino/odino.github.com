@@ -8,4 +8,7 @@
 	<li>
 		<a href="/an-overview-of-orientdbs-capabilities/">An overview of OrienDB's capabilities</a>
 	</li>
+	<li>
+		<a href="/going-beyond-rdbms/">Going beyond RDBMS</a>
+	</li>
 </ol>
