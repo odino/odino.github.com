@@ -21,18 +21,18 @@ architecture.
 
 Monolithic architectures are the ones
 running on a single application layer
-that tends to bundle all the functionalities
-needed by the architecture together.
+that tends to bundle together all the functionalities
+needed by the architecture.
 
 At the architectural level, this is the
-simplest form of the ones we're gonna
-see in this post simply because it doesn't involve
-as many actors as the other options I will
-mention.
+simplest form of architecture simply
+because it doesn't involve
+as many actors as other architectural
+styles.
 
 If we, for example, want to build a web
 architecture with a monolithic approach,
-we would start developing the frontend and
+we would start developing the frontend of it and
 make it access data directly rather than
 giving it an abstraction layer such as an API.
 
@@ -41,11 +41,11 @@ approach as, for small/mid sized architectures,
 it runs pretty well and keeps complexity quite
 low: the **problems tend to come when the
 architecture needs to scale up feature-wise**;
-modules are extensively dependent on other
-modules, the code becomes hard to refactor as
+modules are extensively dependent to each other,
+the code becomes hard to refactor as
 it involves touching the whole monolith (think,
 for example, of doing an extensive refactoring on
-the `HttpRequest` class, which would kind of impact
+the `HttpRequest` class, which would impact
 every single request to every single functionality
 of the architecture).
 
@@ -71,20 +71,13 @@ on their own.
 
 I find semi-monoliths **quite harmful** as they are,
 in my opinion, **a wrong step in the right direction**:
-you believe decoupling works well but end up doing
-just a bit of it but ending up with the same problems
+you believe decoupling works well but do
+just a bit of it, ending up with the same problems
 you'd have with monoliths, just on a bigger stage.
 
-Architects usually go for semi monoliths because:
-
-* they need to diversify layers of their architecture (for example, using different platforms)
-* their software needs to scale much more that it could
-do as a monolith
-
-I think both reasons are quite problematic, because in
-very complex architectures it's usually much easier
+In complex architectures it's usually much easier
 to keep each piece simple but small, whereas semi-monoliths
-end up solving the surface of a problem (ie. performance
+end up solving just the surface of a problem (ie. performance
 bottlenecks) but then leave you with the complexity
 of each mini-monolith.
 
@@ -142,7 +135,7 @@ start to realize that one piece of the architecture
 shouldn't bring down the rest of it if a deployment
 goes wrong and so on. In other terms, **you'll feel it**.
 
-SOAs usually give you a good flexibility but come
+SOAs usually give you a good flexibility but, as said, come
 at a cost: even though each piece has its own life,
 evolves independently, doesn't impact the others
 very much and it's simples, **the architecture itself
@@ -151,23 +144,23 @@ becomes more complex**.
 One thing to clarify about SOAs is that, nowadays,
 the term has lost its appeal due to the fact that
 it [might mean too many things](http://martinfowler.com/bliki/ServiceOrientedAmbiguity.html):
-SOAs is a very general term and it's hard to pinpoint
-what they actually represent, though, in recent years,
+SOA is a very general term and it's hard to pinpoint
+what it actually represents, though, in recent years,
 it seems that we all agreed that a very good way to
-do SOAs is through microservices.
+do SOA is through microservices.
 
 ## Microservices
 
 {% img right /images/ants-microservices.png %}
 
 And here we are with [microservices](http://martinfowler.com/articles/microservices.html).
-What do microservice-base architectures actually are?
+What do microservice-based architectures actually are?
 
 I could say a lot of things but, to simplify, I will
 pick my own definition:
 
 > microservice-based architectures are the ones
-> that mimic SOAs with [unix-inspired](http://en.wikipedia.org/wiki/Unix_philosophy) services,
+> that mimic SOAs with very small, [unix-inspired](http://en.wikipedia.org/wiki/Unix_philosophy) services,
 > which do one thing and do it well
 
 What does that actually mean? Shrink those services,
@@ -176,7 +169,8 @@ create a hell lot of them; the only difference I see
 between traditional SOAs and microservices is that
 the latter clearly states that the size of a
 service should be minimal, else it needs to be split
-in multiple services.
+in multiple services. In other words, **microservices
+are an implementation of SOA**.
 
 As we've seen with traditional SOAs, microservices bring
 a lot of complexity at the architectural level as there
