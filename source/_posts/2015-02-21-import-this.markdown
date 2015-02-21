@@ -9,7 +9,7 @@ published: true
 
 Since I recently bumped again into this,
 I thought it might be worth sharing with
-everyone what happend when you `import this`
+everyone what happens when you `import this`
 in Python's REPL.
 
 <!-- more -->
