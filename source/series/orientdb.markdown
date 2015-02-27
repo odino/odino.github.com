@@ -11,4 +11,7 @@
 	<li>
 		<a href="/going-beyond-rdbms/">Going beyond RDBMS</a>
 	</li>
+	<li>
+		<a href="/orientdb-just-like-any-other-nosql-database/">Just like any other NoSQL database?</a>
+	</li>
 </ol>
