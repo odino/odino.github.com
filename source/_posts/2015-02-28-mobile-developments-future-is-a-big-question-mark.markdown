@@ -114,7 +114,7 @@ easiest thing to do is to **give JavaScript a (real) shot**.
 KTHXBYE.
 
 {% footnotes %}
-  {% fn I know that it sounds a bit counter-intuitive since I earlier said that "we don't need another JavaScript", but there I was referring to what JS used to look like 3/5 years back (= a mess). We've come a long way, thoughthere's still a lot we can do :)  %}
+  {% fn I know that it sounds a bit counter-intuitive since I earlier said that "we don't need another JavaScript", but there I was referring to what JS used to look like 3/5 years back (= a mess). We've come a long way, though there's still a lot we can do :)  %}
 {% endfootnotes %}
 
 
