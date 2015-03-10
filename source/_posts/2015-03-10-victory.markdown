@@ -3,7 +3,7 @@ layout: post
 title: "Victory"
 date: 2015-03-10 13:45
 comments: true
-categories: [ntflix, personal]
+categories: [netflix, personal]
 ---
 
 The [long battle](/netflix-you-have-a-problem/) is over :)
