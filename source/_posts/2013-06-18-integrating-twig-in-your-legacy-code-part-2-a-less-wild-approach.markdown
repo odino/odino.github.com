@@ -80,9 +80,9 @@ class Framework_Base_Controller
       ));
 
       try {
-          return $this->twig->render($templateName, Alice_Component_Registry::getAll());
+          return $this->twig->render($templateName, array(...));
       } catch (Twig_Error_Loader $e) {
-          return $this->twig->render("__MAIN__", Alice_Component_Registry::getAll());
+          return $this->twig->render("__MAIN__", array(...));
       }
   }
 }
