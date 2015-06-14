@@ -1,0 +1,9 @@
+---
+layout: post
+title: "Married!"
+date: 2015-06-15 03:00
+comments: true
+categories: personal
+---
+
+{% img center /images/wedding.jpg %}
