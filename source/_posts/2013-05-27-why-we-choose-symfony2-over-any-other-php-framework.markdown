@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why our business choose Symfony2 over any other PHP framework"
+title: "Why our business chose Symfony2 over any other PHP framework"
 date: 2013-05-27 22:16
 comments: true
 published: true
