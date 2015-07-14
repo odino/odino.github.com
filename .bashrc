@@ -1,7 +1,7 @@
 alias octopreview='rake preview'
 
 octopost () {
-  rake new_post && octopreview;
+  rake new_post && chown 1000:1000 source/_posts/* && octopreview;
 }
 
 octostat () {
