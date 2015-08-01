@@ -158,4 +158,4 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I don't drink alcohol
 * one of my favorites TV shows is [River Monsters](http://en.wikipedia.org/wiki/River_Monsters), it brings back great memories of days spent fishing with my father
 * once I moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks), [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers), [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls), Blake Griffin (L.A. Clippers), Kevin Durant (Oklahoma City Thunder), Damien Lillard (Portland Trail Blazers), Kobe Bryant (L.A. Lakers #24), Kobe Bryant (L.A. Lakers - Hardwood Classic Rookie Edition #8)
-* I got [married](/married) in June 2015
+* I got [married](/married) to [Sarah](https://www.facebook.com/sarah.mujeeb) in June 2015
