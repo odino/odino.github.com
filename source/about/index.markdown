@@ -153,7 +153,7 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I quit with cigarettes in late 2012
 * I'm totally informal
 * In my first 15 months at Namshi I covered 3 positions: Lead Developer, Head of Development and VP Technology
-* I own an XboX, but I rarely play alone
+* I own an XboX, but I rarely play alone (though my wife kicks my ass at [Forza 2](https://en.wikipedia.org/wiki/Forza_Motorsport_2))
 * I visited 19 countries so far (Maldives, Kenya, Spain, Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada, Nederlands, Turkey), some of them very briefly, mostly during conferences
 * I don't drink alcohol
 * one of my favorites TV shows is [River Monsters](http://en.wikipedia.org/wiki/River_Monsters), it brings back great memories of days spent fishing with my father
