@@ -12,7 +12,7 @@ them either running apps in production or easily
 replicating development environments, so I won't
 spend much time on that.
 
-This is post is about how docker changed the way
+This post is about how docker changed the way
 I think of my personal laptop which is, yes, used
 to deploy containers to production and develop
 apps through [docker-compose](https://docs.docker.com/compose/),
