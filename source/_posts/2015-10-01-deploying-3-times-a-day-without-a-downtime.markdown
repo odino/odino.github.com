@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Deploying 3 times a day without a downtime"
-date: 2015-10-01 17:15
+date: 2015-10-03 17:15
 comments: true
 categories: [presentation, slides, docker, conference]
 ---
