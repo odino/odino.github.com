@@ -15,34 +15,15 @@ to enterprise patterns, methodologies, communities and (everyone's)
 personal development: with 7 years of experience on my back, I've
 heavily focused my attention to [agile practices](http://agilemanifesto.org/),
 [patterns of enterprise application architecture](http://www.martinfowler.com/books/eaa.html)
-and leading mid/big-sized development teams.
+and leading mid/big-sized development teams and managing complexity in distributed systems.
 
-I am a forward-thinker by nature and I still love to get my hands
-dirty with code, or testing new platforms.
+I am a forward-thinker by nature and I still love to get my hands dirty with code, or testing new platforms: I am quite active on [github](https://github.com/odino) and, from time to time,
+blog over here.
 
-I'm currently in Dubai, where I work as VP Technology for [Namshi](http://namshi.com),
-a [Rocket Internet](http://www.rocket-internet.de) venture, trying to teach the team and push them
-towards enterprise applications development and new practices while
-developing distributed, stateless systems within our Service-Oriented
-Architecture: I am very proud of the achievements we reached in the
-past 3 years together, since we refactored our platform to become a
-SOA using the best of the market (ie. NodeJS, Docker, AngularJS,
-Symfony2, SaltStack, Redis, RabbitMQ) and the cloud (AWS & CloudAMQP
-among others), helping our team members understand new tools and
-practices they have never seen before (like BDD, microservices or
-12-factor apps) and still being able to deploy multiple times a
-day.
+I'm currently in Dubai, where I work as VP Technology for [Namshi](http://namshi.com), a [Rocket Internet](http://www.rocket-internet.de) venture, leading our engineering team in developing our distributed, stateless microservice-based architecture: I am very proud of what we achieved in the past 3 years together, since we refactored our platform to become a SOA using the best of the market (ie. NodeJS, Docker, AngularJS, Symfony2, Redis, RabbitMQ) and the cloud (AWS & Google's Kubernetes among others).
+I spend most of my time trying to innovate our stack with tools like Docker or React, taming the implicit complexity of a large scale distributed system and helping our team members adopt new tools, practices and patterns they have never used before, like 12-factor apps, containers or ChatOps.
 
-I'm a big supporter of **Service-Oriented Architectures**, the **REST**
-architectural style, asynchronous messaging systems and I'm
-used to work with some practices of extreme  programming
-(and agile development, in general), like TDD and
-pair-programming.
-
-Still able to find time to hack, lately I have also developed expertise
-in [NodeJS and JavaScript in general](https://www.npmjs.com/~odino)
-after a career spent on PHP-based architectures and software
-design at large.
+I'm a big supporter of **microservices**, the **REST** architectural style, asynchronous messaging systems and I'm used to work with some practices of extreme programming (and agile development, in general), like TDD and pair-programming.
 
 I have been involved in projects for governments, mainstream companies
 such as Samsung or Nissan and pioneered the technology scene of
