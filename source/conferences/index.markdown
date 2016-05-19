@@ -16,6 +16,9 @@ Here's a summary of the most important ones:
 
 {% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
+* [Dockerize it!](http://www.slideshare.net/odino/dockerize-it-codemotion-2016-in-rome),
+at the [2016 Codemotion in Rome (ITA)](http://rome2016.codemotionworld.com/conference/), which is a look
+at linux containers and how they can make our infrastructures more efficient and easier to manage
 * [Deploying 3 times a day without any downtime](http://www.slideshare.net/odino/deploying-3-times-a-day-without-a-downtime-rocket-tech-summit-in-berlin),
 at the [2015 Rocket Tech Summit](http://www.techsummit2015.com/), dealing with the way we're trying to keep development
 fast, reliable and fun at Namshi
