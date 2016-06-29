@@ -4,6 +4,13 @@
 @import "footnote";
 
 .wrap {
-  width: 70%;
+  width: 80%;
   line-height: 30px;
+}
+
+@media (max-width: 600px) {
+  .wrap {
+    width: 80%;
+    line-height: 30px;
+  }
 }
