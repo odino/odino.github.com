@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Bundling static files within your Golang app"
-date: 2016-06-29 18:46
+date: 2016-06-30 20:23
 comments: true
 categories: [golang, programming]
 ---
@@ -55,7 +55,7 @@ be "included" in your final binary.
 
 Now, you could argue that writing code like this isn't ideal,
 and that is true -- that is why you'll find [go-bindata](https://github.com/jteeuwen/go-bindata)
-useful, as it generates all of the code automatically: 
+useful, as it generates all of the code automatically:
 
 ```
 go get jteeuwen/go-bindata
