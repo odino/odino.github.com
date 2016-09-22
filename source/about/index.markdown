@@ -38,6 +38,22 @@ work at, both from a technical and interpersonal perspective;
 some of the feedback that I received includes:
 
 
+> I had the pleasure of working with Alessandro since the early stages of Namshi,
+> before it became the most successful fashion e-commerce in the Middle-East.
+> There is no doubt that Alessandro played a key role in the success of Namshi.
+> Thanks to his forward thinking and leadership, we were able to quickly create
+> and modify an ecommerce platform that fulfills the business needs, with a very
+>  small tech team (compared to the market). Other than being a great product
+> oriented professional, he can rapidly choose the right tools for the job,
+> even if it is a new product or technology, mentor the team and also feed a
+> developer’s willing-to-learn/willing-to-try desires.
+> It is very difficult nowadays find someone that has great skills from the
+> business, technical and leadership point of view, but Alessandro has all of
+> them. His motto, “keep things simple”, is something that I will definitely
+> keep in mind every time I have to tackle a tech challenge.
+>
+> **Alessandro Cinelli, Head of Backend Engineering @ Namshi (2016)**
+>
 > I have been privileged to have good managers but Alex stands above.
 > He is one of the most complete leaders I have seen. His attributes
 > are countless from unique ways of motivating the team to being a
@@ -135,7 +151,7 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I'm totally informal
 * In my first 15 months at Namshi I covered 3 positions: Lead Developer, Head of Development and VP Technology
 * I own an XboX, but I rarely play alone (though my wife kicks my ass at [Forza 2](https://en.wikipedia.org/wiki/Forza_Motorsport_2))
-* I visited 19 countries so far (Maldives, Kenya, Spain, Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada, Nederlands, Turkey), some of them very briefly, mostly during conferences
+* I visited 20 countries so far (Maldives, Kenya, Spain, Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada, Nederlands, Turkey, Vietnam), some of them very briefly, mostly during conferences
 * I don't drink alcohol
 * one of my favorites TV shows is [River Monsters](http://en.wikipedia.org/wiki/River_Monsters), it brings back great memories of days spent fishing with my father
 * once I moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks), [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers), [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls), Blake Griffin (L.A. Clippers), Kevin Durant (Oklahoma City Thunder), Damien Lillard (Portland Trail Blazers), Kobe Bryant (L.A. Lakers #24), Kobe Bryant (L.A. Lakers - Hardwood Classic Rookie Edition #8), Carmelo Anthony (New York Knicks), Rajon Rondo (Boston Celtics)
