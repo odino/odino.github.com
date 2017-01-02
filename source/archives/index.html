@@ -4,6 +4,27 @@ title: Blog Archive
 footer: false
 ---
 
+<div class="upcoming">
+  <h2 id="upcoming-articles">
+    Upcoming articles
+  </h2>
+  <p>
+    Consider this a list of ideas more than something set in stone -- I'm going to
+    note down here articles I will (hopefully) have the time to work on:
+  </p>
+  <ul>
+    <li>
+      patterns of stability: timeouts
+    </li>
+    <li>
+      patterns of stability: circuit-breakers
+    </li>
+  </ul>
+  <p>
+    See <a href="/the-2017-blogging-pledge/">this</a> for more info.
+  </p>
+</div>
+
 <div id="blog-archives">
 {% for post in site.posts reverse %}
 {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}

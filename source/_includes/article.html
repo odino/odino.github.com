@@ -21,6 +21,13 @@
     <header>
         <h1><a href="{{ root_url }}{{ page.url }}">{{ page.title }}</a></h1>
         <time>{{ page.date | date: "%d %B %Y" }}</time>
+        <!-- {% capture currentDate %}{{ site.time | date: '%Y' }}{% endcapture %}
+        {% capture publishedDate %}{{ page.date | date: '%Y' }}{% endcapture %}
+        {% capture diff %}{{currentDate | minus: publishedDate}}{% endcapture %}
+        {% if diff != '0' and diff != '1' %}
+          <br />
+          <time>(note: this post was written {{diff}} years ago and might be outdated)</time>
+        {% endif %} -->
     </header>
 <div class="entry-content">{{ content }}</div>
 {% endif %}
