@@ -1,14 +1,13 @@
 ---
 layout: post
 title: "Better performance: the case for timeouts"
-date: 2017-01-15 08:16
+date: 2017-01-19 18:57
 comments: true
-categories: [performance, nodejs, memory]
-published: false
+categories: [performance, nodejs, memory, timeout, SOA, microservices]
 ---
 
 Most of the larger-scale services that we design
-nowadays depend, more or less, on HTTP APIs:
+nowadays depend, more or less, on external APIs:
 you've heard it multiple times, as soon as your codebase
 starts to look like a monolith it's time to start
 splitting it into [smaller services](https://en.wikipedia.org/wiki/Microservices)
@@ -17,10 +16,11 @@ coupled with the monolith.
 
 Even if you don't really employ microservices, chances
 are that you already depend on external services, such
-as [elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch) or a payment gateway, and need to integrate
-with them via - usually - HTTP APIs.
+as [elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch),
+[redis](https://redis.io/) or a payment gateway, and need to integrate
+with them via some kind of APIs.
 
-What happens when those services are unavailable? Well,
+What happens when those services are slow or unavailable? Well,
 you can't process search queries, or payments, but your
 app would still be working "fine" -- right?
 
@@ -75,7 +75,7 @@ A few things to note:
 
 * the servers run on port `3000` (main app) and `3001` ("backend" server): so once the client will make a request to `localhost:3000` a new HTTP request will be sent to `localhost:3001`
 * the backend service will wait 100ms (this is to simulate real-world use cases) before returning a response
-* I'm using the [unirest](https://github.com/Mashape/unirest-nodejs) HTTP client: I like it a lot and, even though we could have simply used the built-in `http` module I'm confident this will gives us a better feeling in terms of real-world applications
+* I'm using the [unirest](https://github.com/Mashape/unirest-nodejs) HTTP client: I like it a lot and, even though we could have simply used the built-in `http` module, I'm confident this will gives us a better feeling in terms of real-world applications
 * unirest is nice enough to tell us if there was an error on our request, so we can just check `response.error` and handle the drama from there
 * I'm going to be using [docker](https://www.docker.com/) to run these tests, and the code is [available on github](https://github.com/odino/the-case-for-timeouts)
 
@@ -269,18 +269,20 @@ users will be presented an error page -- still better,
 though, than serving them after 10s, as most of them
 would have abandoned our service anyway.
 
-We've now seen that, ideally, **timeouts help you preserve
-near-ideal rps** (requests per second), but what about
+{% pullquote %}
+We've now seen that, ideally, **{"timeouts help you preserve
+near-ideal rps"}** (requests per second), but what about
 resource consumption? Will they be better at
 making sure that our servers won't require
 extra resources if one of their dependencies becomes
 less responsive?
+{% endpullquote %}
 
 Let's dig into it.
 
 ## The RAM factor
 
-In order to figure out how much RAM our `server1.js`
+In order to figure out how much memory our `server1.js`
 is consuming, we need to measure, at intervals, the amount
 of memory the server is using; in production, we would
 use tools such as [NewRelic](https://newrelic.com/) or [KeyMetrics](https://keymetrics.io/)
@@ -363,9 +365,9 @@ node /src/server1.js | number-aggregator-stats
 Meas: 1429 Min: 3 Max: 411 Avg: 205 Cur: 172
 ```
 
-Whoa, at a first look it seems like timeouts aren't helping
+Whoa, at a first look it seems like **timeouts aren't helping
 after all: our memory usage hits a high with timeouts enabled
-and is, on average, 5% higher as well. Is there any reasonable
+and is, on average, 5% higher as well**. Is there any reasonable
 explanation to that?
 
 There is, of course, as we just need to go back to siege and
@@ -390,6 +392,8 @@ To do so, we need some kind of tool that makes it easy
 to generate rps-based load, and siege is not very
 suitable for that: it's time to call our friend [vegeta](https://github.com/tsenart/vegeta),
 a modern load testing tool written in [golang](https://golang.org/).
+
+## Enter vegeta
 
 Vegeta is very simple to use, just start "attacking"
 a server and let it report the results:
@@ -465,28 +469,25 @@ Meas: 1886 Min: 3 Max: 299 Avg: 149 Cur: 392
 
 This looks more like it: timeouts have
 helped us keeping the **memory usage, on average,
-30% lower**.
+30% lower**{% fn_ref 2 %}.
 
 All of this thanks to a simple `.timeout(3000)`:
 what a win!
 
 ## Avoiding the domino effect
 
-It's interesting to talk about such basic notions
-like timeouts as, after all, you're probably already
-using them or had someone tell you that "*you should*",
-especially when dealing with things over the network.
+Quoting myself:
+
+{% blockquote %}
+What happens when those services are slow or unavailable? Well,
+you can't process search queries, or payments, but your
+app would still be working "fine" -- right?
+{% endblockquote %}
+
+Fun fact: **a missing timeout can
+cripple your entire infrastructure!**
 
 {% img left /images/domino.jpg %}
-
-The fun fact, though, is that software engineers
-rarely think of timeouts as a risky business and
-instead focus on the fact that "*without a timeout
-the webpage will be hanging forever*" or "*the user
-will eventually see an nginx gateway timeout page,
-which sucks, so let's add our own error handling*":
-it's way worse than that, as **a missing timeout can
-cripple your entire infrastructure!**
 
 In our basic example we saw how a service that
 starts to fail at a 10% rate can significantly
@@ -505,35 +506,55 @@ though it comes after several seconds rather than
 milliseconds), so the service won't be removed from
 the load balancer.
 
+{% pullquote %}
 You've just created **a trap
 for your frontends**: they will start requiring
 more memory, serve less requests and... ...a recipe for disaster.
 
-This is what a **domino effect** looks like: a system
+{"This is what a domino effect looks like: a system
 slows down (or incurs in downtime) and other pieces
-in the architecture are affected by it,
+in the architecture are affected"} by it,
 highlighting a design that didn't consider failure
 an option and is neither robust nor resilient enough.
 
 The key thing to keep in mind is: **embrace failures**,
 let them come and make sure you can fight them with
 ease.
+{% endpullquote %}
 
 ## A note on timeouts
 
-Waiting is very dangerous
+If you thought waiting is dangerous, let's add to the
+fire:
 
-## I've broken every single benchmarking rule
+* we're not talking HTTP only -- everytime we rely on an external system we should [use timeouts](https://github.com/mysqljs/mysql#connection-options)
+* a server could have an open port and drop every packet you send -- this will result in a TCP connection timeout. Try this in your terminal: `time curl example.com:81`. Good luck!
+* a server could reply instantly, but be very slow at sending each packet (as in, seconds between packets). You would then need to protect yourself against a **read timeout**
 
-* node 7.1.0 memory leak on keepalive
-* node-simple-visual-aggregator
-* tcp connection timeout is too slow
-* to note:
-  * timeouts dont only apply to HTTP
-  * benchmarks on the same server arent 100% accurate
-  * benchmark should be on virgin machnes
-  * meas memory should be transparent, not on script
+...and many more edge cases to list. I know, distributed systems are nasty.
+
+Luckily, high-level APIs (like the one [exposed by unirest](https://github.com/Mashape/unirest-nodejs#requesttimeoutnumber))
+are generally helpful since they take care of all of the hiccups that
+might happen on the way.
+
+## Closing remarks: I've broken every single benchmarking rule
+
+If you have any "aggressive" feedback about my *rusty* benchmarking skills...
+...well, I would agree with you, as I purposely took some shortcuts
+for the sake of simplifying my job and the ability, for you, to
+easily reproduce these benchmarks.
+
+Things you should do if you're serious about benchmarks:
+
+* do not run the code you're benchmarking and the tool you use to benchmark on the same machine. Here I ran everything on my XPS which is powerful enough to let me run these tests, though running siege / vegeta on the same machine the servers run definitely has an impact on the results (I say `ulimit` and you figure out the rest). My advice is to try to get some hardware on AWS and benchmark from there -- more isolation, less doubts
+* do not measure memory by logging it out with a `console.log`, instead use a tool such as NewRelic which, I think, is less invasive
+* measure more data: benchmarking for 3 minutes is ok for the sake of this post, but if we want to look at real-world data, to give a better estimate of how helpful timeouts are, you should leave the benchmarks running for way longer
+* keep Gmail closed while you run `siege ...`, the tenants living in `/proc/cpuinfo` will be grateful
+
+And...I'm done for the day: I hope you enjoyed this post and, if otherwise, feel
+free to rant in the comment box below!
 
 {% footnotes %}
   {% fn For system-to-system integrations it could even be 10 to 20 seconds, depending on how slow the backend you have to connect to is (sigh: don't ask me) %}
+  {% fn But don't be naive and think that the 30% of memory saved will be the same in your production infrastructure. It really depends on your setup -- it could be lower (most likely) or even higher. Benchmark yourself and see what you're missing on! %}
 {% endfootnotes %}
