@@ -5,6 +5,7 @@ date: 2015-02-28 18:48
 comments: true
 categories: [mobile, android, ios, development, JavaScript, ReactJS]
 published: true
+description: How will the mobile development ecosystem look in 5 years? The current landscape isn't very exciting, and I feel there might be revolutions ahead
 ---
 
 In the past 5 years, mobile devices have taken
@@ -54,7 +55,7 @@ sense on how both platforms work?
 
 We need things to be better: just like the web,
 mobile is now a scary land of vendors-dictated
-"standards". **We don't need another JavaScript.** 
+"standards". **We don't need another JavaScript.**
 
 ## The need for standards
 
@@ -116,14 +117,3 @@ KTHXBYE.
 {% footnotes %}
   {% fn I know that it sounds a bit counter-intuitive since I earlier said that "we don't need another JavaScript", but there I was referring to what JS used to look like 3/5 years back (= a mess). We've come a long way, though there's still a lot we can do :)  %}
 {% endfootnotes %}
-
-
-
-
-
-
-
-
-
-
-

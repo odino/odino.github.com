@@ -4,6 +4,7 @@ title: "Better performance: the case for timeouts"
 date: 2017-01-19 18:57
 comments: true
 categories: [performance, nodejs, memory, timeout, SOA, microservices]
+description: "Use timeouts to build more robust and less expensive distributed systems: less memory, less downtime, more fun!"
 ---
 
 Most of the larger-scale services that we design
@@ -556,5 +557,5 @@ free to rant in the comment box below!
 
 {% footnotes %}
   {% fn For system-to-system integrations it could even be 10 to 20 seconds, depending on how slow the backend you have to connect to is (sigh: don't ask me) %}
-  {% fn But don't be naive and think that the 30% of memory saved will be the same in your production infrastructure. It really depends on your setup -- it could be lower (most likely) or even higher. Benchmark yourself and see what you're missing on! %}
+  {% fn But don't be naive and think that the 30% of memory saved will be the same in your production infrastructure. It really depends on your setup -- it could be lower (most likely) or even higher. Benchmark for yourself and see what you're missing out on! %}
 {% endfootnotes %}

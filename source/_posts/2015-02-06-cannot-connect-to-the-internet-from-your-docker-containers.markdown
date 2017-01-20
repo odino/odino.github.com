@@ -5,6 +5,7 @@ date: 2015-02-06 00:54
 comments: true
 categories: [docker, containers, network]
 published: true
+description: Ever experienced problem connecting to the internet from a docker container? Let's fix it!
 ---
 
 Stuck trying to figure out what's up with
@@ -78,4 +79,3 @@ around and found out that there might be [some](https://github.com/docker/docker
 issues that might cause the problem, so I'd
 really hope yours is just as silly as the one
 I've faced.
-

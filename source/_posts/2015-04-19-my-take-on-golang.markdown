@@ -4,6 +4,7 @@ title: "My (nice) experience with Golang"
 date: 2015-04-19 22:30
 comments: true
 categories: [golang, programming]
+description: "Go is an incredibly exciting language: what made me fall in love with it?"
 ---
 
 {% img right /images/gopher.png %}

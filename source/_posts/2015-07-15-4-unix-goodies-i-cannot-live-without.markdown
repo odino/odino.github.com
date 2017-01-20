@@ -4,6 +4,7 @@ title: "4 unix goodies I cannot live without"
 date: 2015-07-15 14:15
 comments: true
 categories: [unix, linux]
+description: How would I live without 'watch' or 'screen'?
 ---
 
 In the past few years I managed to discover

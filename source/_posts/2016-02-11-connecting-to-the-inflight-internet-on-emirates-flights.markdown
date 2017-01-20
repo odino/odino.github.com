@@ -4,6 +4,7 @@ title: "Connecting to the inflight internet on Emirates' flights"
 date: 2016-02-11 09:00
 comments: true
 categories: [wifi]
+description: Having troubles connecting to the internet on an emirates flight? 172.19.248.1 is the answer
 ---
 
 It would really be hard for you to find this article useful because

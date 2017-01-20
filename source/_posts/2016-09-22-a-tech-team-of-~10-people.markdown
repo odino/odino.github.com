@@ -4,6 +4,7 @@ title: "A tech team of ~10 people"
 date: 2016-09-22 15:18
 comments: true
 categories: [team, namshi, conference, slides, talk]
+description: How do you scale an e-commerce business with a tech team of ~10 people? A short presentation on how we do it at Namshi.
 ---
 
 I am currently in Berlin, attending the [2016 Rocket Tech Summit](http://www.techsummit2016.com/): what a good

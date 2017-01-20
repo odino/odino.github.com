@@ -4,6 +4,7 @@ title: "Using gists like git repositories"
 date: 2015-07-14 17:27
 comments: true
 categories: [gist, github, git]
+description: "A hidden feature of gists is the ability to act as a git repository: here's how to take advantage of it"
 ---
 
 In the past couple of years I've been using [gist](https://gist.github.com/)

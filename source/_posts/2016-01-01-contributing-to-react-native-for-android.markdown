@@ -4,6 +4,7 @@ title: "Contributing to React Native for Android"
 date: 2016-01-01 11:19
 comments: true
 categories: [react native, mobile, oss, github, react, android]
+description: Let's see how we can run RN locally and patch it, so that we can give back to the community!
 ---
 
 {% img right /images/reactjs.png %}

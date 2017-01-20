@@ -4,6 +4,7 @@ title: "Bundling static files within your Golang app"
 date: 2016-06-30 20:23
 comments: true
 categories: [golang, programming]
+description: Ever needed to bundle static files, like translations, in your app? go-bindata is the right tool for you
 ---
 
 {% img right /images/gopher.png %}

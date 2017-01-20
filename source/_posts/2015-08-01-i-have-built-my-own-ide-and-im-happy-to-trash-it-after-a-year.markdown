@@ -4,6 +4,7 @@ title: "I have built my own IDE and I'm happy to trash it after a year"
 date: 2015-08-01 11:42
 comments: true
 categories: [nikki, open source, javascript, atom, github, nodejs]
+description: The story of how Open Source projects are born and die, without regrets
 ---
 
 {% img right /images/nikki-logo.svg 180 %}

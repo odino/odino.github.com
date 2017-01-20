@@ -5,6 +5,7 @@ date: 2015-02-20 19:48
 comments: true
 categories: [web architectures, soa, microservices, architecture]
 published: true
+description: In the last few years web architectures have been evolving pretty fast, and the result is that now we have a few approaches to pick between when building your next software architecture
 ---
 
 In the last few years web architectures have
@@ -239,5 +240,3 @@ Have fun with your next architecture folks!
   {% fn I'm not sure if this definition is purely mine or if I read it somewhere -- pardon my lack of memory! %}
   {% fn This last point, evolving, is taking care by the architectural style itself. Small, indipendent services are easy to evolve by definition, as they are not complex %}
 {% endfootnotes %}
-
-

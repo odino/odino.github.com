@@ -4,6 +4,7 @@ title: "Generating badges / shields with NodeJS"
 date: 2015-05-16 19:05
 comments: true
 categories: [NodeJS, shields.io, SVG]
+description: How can you generate badges (like the 'build status' ones) through Node? Let's find out!
 ---
 
 In the last post, I wrote a simple example
@@ -70,7 +71,7 @@ var path = require('path')
 
 app.get('/badge/:left/:right/:color', function (req, res) {
   var badge = swig.renderFile(path.join(__dirname, 'badge.svg'), req.params);
-  
+
   res.writeHead(200, {"Content-Type": "image/svg+xml"})
   res.write(badge);
   res.end();
@@ -149,6 +150,3 @@ Since I wanted to have a working example that people could
 run, rather than simply copypasting code from this post around,
 I created a simple github repo for [nodejs-badges](https://github.com/odino/nodejs-badges)
 so that you can play around with more ease.
-
-
-

@@ -16,7 +16,7 @@ in Python's REPL.
 
 ```
 ~  ᐅ python                           
-Python 2.7.4 (default, Sep 26 2013, 03:20:26) 
+Python 2.7.4 (default, Sep 26 2013, 03:20:26)
 [GCC 4.7.3] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import this

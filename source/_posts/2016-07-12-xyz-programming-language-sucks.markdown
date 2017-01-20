@@ -4,6 +4,7 @@ title: "XYZ programming language sucks"
 date: 2016-07-12 15:05
 comments: true
 categories: [golang, programming]
+description: Ah, those language wars we never, ever miss.
 ---
 
 I would have tweeted this, but it's a bit longer than

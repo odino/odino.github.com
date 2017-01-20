@@ -4,6 +4,7 @@ title: "The 2017 blogging pledge"
 date: 2017-01-02 16:54
 comments: true
 categories: [blog]
+description: More quality, same quantity. At least that's my hope!
 ---
 
 Last year I wrote [12 posts](/archives), which makes it

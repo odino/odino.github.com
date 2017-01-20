@@ -5,6 +5,7 @@ date: 2015-02-20 16:54
 comments: true
 categories: [orientdb, series, orientdb 101, database]
 published: true
+description: Not everything can be expressed in relational terms, and that is why NoSQL is here
 ---
 
 {% render_partial series/orientdb.markdown %}

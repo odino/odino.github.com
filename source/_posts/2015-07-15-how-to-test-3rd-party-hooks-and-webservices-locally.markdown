@@ -4,6 +4,7 @@ title: "How to test 3rd party hooks and webservices locally"
 date: 2015-07-15 20:35
 comments: true
 categories: [ngrok, tools, webservice, testing, hooks]
+description: Ever needed to expose an app that runs locally to the internet? ngrok to the rescue!
 ---
 
 In the past few months I have spent a bit of my spare time

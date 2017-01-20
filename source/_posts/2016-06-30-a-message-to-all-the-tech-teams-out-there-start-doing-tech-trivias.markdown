@@ -4,6 +4,7 @@ title: "A message to all the tech teams out there: start doing Tech Trivias"
 date: 2016-07-01 00:01
 comments: true
 categories: [teams, fun]
+description: "Keep it fun and technical: organize game sessions with your team."
 ---
 
 {% img right /images/trivia2.png %}

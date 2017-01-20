@@ -4,6 +4,7 @@ title: "Why did Google create the Go language?"
 date: 2016-08-22 05:19
 comments: true
 categories: [golang, google, quora]
+description: An interesting quote from Rob Pike, one of the creators of golang.
 ---
 
 A few days ago a very interesting digest popped up in my

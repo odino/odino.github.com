@@ -4,6 +4,7 @@ title: "2 Web APIs I'm particularly excited about"
 date: 2016-10-25 01:02
 comments: true
 categories: [web, api, chrome, web payments, push notifications]
+description: Web Push Notifications and Payment Requests are exciting, as they open up new frontiers in web development.
 ---
 
 In the past few months we have seen Google and Apple push in 2

@@ -4,6 +4,7 @@ title: "How Docker changed me"
 date: 2015-08-07 17:11
 comments: true
 categories: [docker, linux]
+description: I decided to move as much as possible to containers, even for everyday tasks like browsing the internet
 ---
 
 A lot of people blog about their experiences with

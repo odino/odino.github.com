@@ -5,6 +5,7 @@ date: 2015-02-27 15:55
 comments: true
 categories: [web, tech]
 published: true
+description: Here are the technologies I'm going to keep an eye on this year
 ---
 
 It's been a very short while since we landed
@@ -27,8 +28,8 @@ It feels like I'm developing for the web. But I'm writing a real native app, and
 
 At the UI level, there is no difference; these are all native UIViews beautifully sliding around like normal.
 
-This is solid engineering. And it completely reinforces the fact that React.js is the right way to build apps. 
-I can write a native app using the same techniques as I would write web app. 
+This is solid engineering. And it completely reinforces the fact that React.js is the right way to build apps.
+I can write a native app using the same techniques as I would write web app.
 
 Let's start treating the DOM as an implementation detail, just like UIViews.
 {% endblockquote %}
@@ -61,7 +62,7 @@ decent beta and stable releases:
 * [swarm](https://blog.docker.com/2015/02/scaling-docker-with-swarm/), a tool for clustering / scaling containers
 * [compose](https://blog.docker.com/2015/02/announcing-docker-compose/), a way to orchestrate those clusters
 * [machine](https://blog.docker.com/2015/02/announcing-docker-machine-beta/), the easiest way to get started with your first container
- 
+
 As someone stated durint the european docker event:
 
 > Docker was on no one's agenda in 2014, it's on everyone's agenda in 2015
@@ -179,6 +180,3 @@ are taking.
   {% fn How crazy, right? %}
   {% fn Which I hate in JS as well :) %}
 {% endfootnotes %}
-
-
-

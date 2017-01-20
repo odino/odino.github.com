@@ -4,6 +4,7 @@ title: "Enable remote debugging on chrome for React Native's webviews"
 date: 2016-01-02 09:00
 comments: true
 categories: [react native, android, chrome, webview]
+description: This is how you can enable remote debugging and have chrome help you fix bugs on RN's webviews
 ---
 
 {% img right /images/android.jpg %}

@@ -5,6 +5,7 @@ date: 2015-02-20 16:24
 comments: true
 categories: [nodejs, JavaScript, open source, oss]
 published: true
+description: A handy utility to make sure you can refresh configurations in background
 ---
 
 Today I wrote a simple (silly, I'd say) library
@@ -103,9 +104,3 @@ freshenUp(checkIfInternetIsDown, 1000);
 That's basically it: I added a couple tests just in case,
 though I still think there are better ways to do
 [cache invalidation](http://martinfowler.com/bliki/TwoHardThings.html).
-
-
-
-
-
-

@@ -4,6 +4,7 @@ title: "Netflix, you have a problem"
 date: 2015-02-14 20:43
 comments: true
 categories: [personal, rant, netflix]
+description: This is the story of how Netflix is really trying to be funny...no, super-funny!
 ---
 
 This is the story of how Netflix is really

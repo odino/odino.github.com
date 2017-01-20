@@ -4,6 +4,7 @@ title: "Minimal docker : run your NodeJS app in <25mb of an image"
 date: 2015-07-31 09:27
 comments: true
 categories: [docker, nodejs, javascript, linux, busybox, alpine]
+description: Let's create container no heavier than a few megabytes -- and docker pull will never be the same
 ---
 
 {% img right /images/docker.png %}

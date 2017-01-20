@@ -4,6 +4,7 @@ title: "Things I ask during interviews"
 date: 2015-03-02 18:47
 comments: true
 categories: [people, hiring, open source]
+description: A brief list of things I generally ask during to kickoff the conversation during an interview
 ---
 
 Today I was wasting my time on a trip [back home](https://www.google.com/maps/dir/The+Dubai+Mall+-+Financial+Center+Road,+Near+Souk+Al+Bahar+Bridge,+DownTown+Dubai+-+%D8%A5%D9%85%D8%A7%D8%B1%D8%A9+%D8%AF%D8%A8%D9%8A%D9%91+-+United+Arab+Emirates%E2%80%AD/Dubai+Marina+-+Dubai+-+United+Arab+Emirates/@25.14228,55.1815421,13z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3e5f68282fe3dbb1:0xc9a673f9ef407801!2m2!1d55.278896!2d25.197628!1m5!1m1!1s0x3e5f6b5402c126e3:0xb9511e6655c46d7c!2m2!1d55.144075!2d25.08135)

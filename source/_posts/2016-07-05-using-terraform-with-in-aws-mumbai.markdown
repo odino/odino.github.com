@@ -4,6 +4,7 @@ title: "Using Terraform in AWS Mumbai"
 date: 2016-07-05 16:04
 comments: true
 categories: [terraform, devops, AWS]
+description: "Terraform's AWS regions are hardcoded: we need to re-build it from scratch from a PR that adds support for Mumbai."
 ---
 
 Terraform is a fantastic tool to manage your infrastructure

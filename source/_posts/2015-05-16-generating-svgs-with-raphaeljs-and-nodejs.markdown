@@ -4,6 +4,7 @@ title: "Generating SVGs with RaphaelJS and NodeJS"
 date: 2015-05-16 02:52
 comments: true
 categories: [NodeJS, Javascript]
+description: One of these mornings, in need of generating images with 'copyable' text with Node, I had the chance to play around with RaphaelJS
 ---
 
 One of these mornings, in need of generating
@@ -72,10 +73,10 @@ http.createServer(function(req, res){
         global.window = win
         global.document = win.document
         global.navigator = win.navigator
-        
+
         var raphael = require('raphael')
         raphael.setWindow(win)
-        
+
         // start drawing some stuff with raphael,
         // which will write to the virtual "window"
         var paper = raphael(10, 30, "100%", "100%");
@@ -87,7 +88,7 @@ http.createServer(function(req, res){
         svg = win.document.documentElement.innerHTML
         svg = svg.replace('<head></head><body>', '')
         svg = svg.replace('</body>', '')
-        
+
         // let's serve the plain SVG, so that
         // it can be embedded in HTML pages with
         // <object type="image/svg+xml" data="http://localhost:3000/">
@@ -148,7 +149,7 @@ dom.initialize = function(){
     global.window = win
     global.document = win.document
     global.navigator = win.navigator
-    
+
     dom.emit('ready')
   })
 }

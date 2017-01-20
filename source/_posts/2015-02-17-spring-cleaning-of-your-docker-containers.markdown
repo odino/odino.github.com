@@ -5,6 +5,7 @@ date: 2015-02-17 01:43
 comments: true
 categories: [docker, bash voodoo]
 published: true
+description: Low on disk space thanks to docker? Let's cleanup those containers!
 ---
 
 [Docker](https://www.docker.com/) is an amazing tool, but sometimes you
@@ -148,6 +149,3 @@ so I'm sure the guys are going to come up with a simple, official
 solution that will make us forget about all of these bash voodoo very shortly.
 
 Happy containers to everyone!
-
-
-

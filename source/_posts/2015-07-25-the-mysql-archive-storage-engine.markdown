@@ -4,6 +4,7 @@ title: "The MySQL ARCHIVE storage engine"
 date: 2015-07-25 18:24
 comments: true
 categories: [mysql]
+description: If you want an append-only solution for MySQL, the ARCHIVE engine might be for you
 ---
 
 Ever wondered how you can treat MySQL as an append-only storage?
