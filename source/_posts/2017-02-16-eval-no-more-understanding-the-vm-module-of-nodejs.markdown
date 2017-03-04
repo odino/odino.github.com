@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Eval no more: a journey through NodeJS' VM module and Expression Language"
-date: 2017-03-02 22:21
+title: "Eval no more: a journey through NodeJS' VM module, VM2 and Expression Language"
+date: 2017-03-04 05:55
 comments: true
 categories: [nodejs, javascript, vm, eval]
 description: "A safer alternative to implement expression parsers in NodeJS: introducing the VM module."
@@ -455,37 +455,141 @@ r: 1.778ms
 
 Still expensive, but very minimal in the context of a request / response cycle{% fn_ref 6 %}.
 
-## What about the browser?
+## Surprise surprise: VM is not that safe
+
+{% img right /images/facepalm.jpg %}
+
+You came all the way down here thinking `vm` solved all of your problems, just
+like I did: when it comes to security, though, I always want to double and triple
+check to make sure I'm really considering the safest solution and, after some
+digging around, I had one of those facepalm moments.
+
+Without further ado, let me break it down to you: **vm might not be safe enough
+for you**.
+
+Consider this trick:
+
+``` js
+vm.runInNewContext("this.constructor.constructor('return process')().exit()")
+console.log("The app goes on...")
+```
+
+Unfortunately, this is a valid exploit that will likely never get fixed -- the
+VM module is to be considered [a sandbox, not a jail](https://github.com/nodejs/node-v0.x-archive/issues/2486#issuecomment-3420936),
+meaning that it can't really screw around with the current context but it can
+very well access NodeJS' standard APIs, providing a straightforward attack vector
+similar to what you'd end up with by using `eval`.
+
+One way to make sure that VM can't use this funny trick to access globals is by
+making sure the context is only made of primitives:
+
+``` js
+let ctx = Object.create(null)
+ctx.a = 1
+vm.runInNewContext("this.constructor.constructor('return process')().exit()", ctx)
+```
+
+What we're doing here is to create a "special" context that does not have a
+prototype (`Object.create(null)`), thus removing the ability to access unsafe areas of node's JS API:
+
+``` js
+vm.runInNewContext("this.constructor.constructor('return process')().exit()", ctx)
+
+// same as
+
+vm.runInNewContext("this.__proto__.constructor.constructor('return process')().exit()", ctx)
+```
+
+The above code will throw the `ReferenceError: process is not defined`, but will
+still be vulnerable if we throw non-primitives into the context:
+
+``` js
+let ctx = Object.create(null)
+ctx.a = function(){}
+vm.runInNewContext("this.a.constructor.constructor('return process')().exit()", ctx)
+```
+
+Unless you can afford to only use primitives in our context, we're back to square
+one, left with no way to safely execute untrusted JS code.
+
+And, by the way, this isn't likely to change soon as it's been [there for ages](http://grokbase.com/t/gg/nodejs/1273tqtcsk/sandboxing-using-vm-module-wrapping-require-process-binding).
+Worse of all, most people still assume `vm` is safe (see [here](https://github.com/hacksparrow/safe-eval#what-is-this)
+and [here](https://www.quora.com/What-are-the-use-cases-for-the-Node-js-vm-core-module)),
+which means there might be tons of applications out there that are vulnerable to
+this kind of attack.
+
+## Introducing VM2
+
+As I briefly explained in the previous paragraph, I was doing some digging
+around to see if `vm`'s sandbox could still be exploited when I found myself
+on [this gist](https://gist.github.com/domenic/d15dfd8f06ae5d1109b0) which
+eventually led me to the [VM2 library on github](https://github.com/patriksimek/vm2).
+
+Curious on what would this module add on top of `vm`'s default behavior,
+[I asked](https://github.com/patriksimek/vm2/issues/59)
+only to find that it actually secures the sandbox through some custom security checks (mainly using [proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)):
+
+``` bash
+/tmp ᐅ node
+
+> const {VM} = require('vm2');
+undefined
+
+> new VM().run('this.constructor.constructor("return process")().exit()');
+ReferenceError: process is not defined
+    at eval (eval at <anonymous> (vm.js:1:18), <anonymous>:2:8)
+    at vm.js:1:47
+    at ContextifyScript.Script.runInContext (vm.js:32:29)
+    at VM.run (/tmp/node_modules/vm2/lib/main.js:145:72)
+    at repl:1:10
+    at ContextifyScript.Script.runInThisContext (vm.js:23:33)
+    at REPLServer.defaultEval (repl.js:336:29)
+    at bound (domain.js:280:14)
+    at REPLServer.runBound [as eval] (domain.js:293:12)
+    at REPLServer.onLine (repl.js:533:10)
+```
+
+Sweet -- we can simply then install [VM2](https://www.npmjs.com/package/vm2)
+and start switching all `vm.runInNewContext(...)` to VM2's API:
+
+``` js
+let vm = new VM({timeout: 10, sandbox: {a: function(){ return 123 }}})
+
+vm.run('a()') // 123
+```
+
+## Time for a quick recap
+
+It's been quite a long read if you've made it this far -- to reward you let me
+leave you with some key takeaways:
+
+* there are business cases for evaluating external code, on-the-fly
+* avoid using `eval` for that, it's not safe
+* node's `vm` module provides a safer implementation, but it can still be exploited by an attacker
+* [VM2](https://github.com/patriksimek/vm2) appears to provide a safer, solid sandbox that can't be escaped
+* always specify timeouts when executing untrusted code, else a `while true` might halt the entire application
+
+All in all, there have been a few [security concerns](https://github.com/patriksimek/vm2/issues/32) in VM2 as well,
+and similar libraries [had the same problems](https://github.com/asvd/jailed/issues/33)
+-- my gut feeling is that [a new attack vector
+might be there, waiting to be discovered](https://github.com/patriksimek/vm2/issues/32#issuecomment-226581203).
+
+Another alternative would be to go with a full-blown EL such as [Jexl](https://github.com/TechnologyAdvice/Jexl) or [exprjs](https://github.com/jleibund/exprjs) (haven't tested them so I'm all ears).
+
+## Last thing (I promise): What about the browser?
 
 There is no consensus on how we could achieve something similar on the client, as
 the VM API is specific to Node{% fn_ref 8 %}; one very
 interesting approach, though, is to use [web workers](http://blog.namangoel.com/replacing-eval-with-a-web-worker)
 as they provide a semi-isolated context that cannot interfere with the original
-window; alternatively, you could also use a JS expression language such as [Jexl](https://github.com/TechnologyAdvice/Jexl).
+window; alternatively, you could also use a JS expression language such as the
+aforementioned [Jexl](https://github.com/TechnologyAdvice/Jexl).
 
-Even though these solutions are, in my opinion, very smart hacks (especially the one
-that employs web workers), I'd wait for something like `vm` to be available on the
-browser, so that you don't  have to re-invent the wheel and potentially come up with
-a buggy, unsafe, custom-made alternative.
-
-Last but not least, I'd like to mention that some believe [eval isn't such a threat](http://stackoverflow.com/a/198031/934439)
+Lastly, I'd like to mention that some believe [eval isn't such a threat](http://stackoverflow.com/a/198031/934439)
 on the browser, as most clients can anyhow do the same kind of harm through the
 DevTools' console. Even though, in principle, that's true, there are some [other
 things to consider](http://stackoverflow.com/questions/197769/when-is-javascripts-eval-not-evil#comment19416896_198031)
 that might still make `eval` a risky element of your codebase.
-
-## Conclusion
-
-It's been quite a long read if you've made it this far -- to reward you let me
-recap the major points we've looked at today:
-
-* there are business cases for evaluating external code, on-the-fly
-* avoid using `eval` for that
-* use node's `vm` module
-  * always specify timeouts, else your code might halt the entire application (it's as simple as `vm.runInNewContext(code, context, {timeout: 10})`)
-  * never use `vm.runInThisContext(...)`, it's similar to `eval`
-  * try using new contexts whenever it's possible through `vm.runInNewContext(...)`
-  * if using new contexts is too slow for you, then you can re-use contexts with `vm.runInContext(code, context)` -- but be aware that previous runs might influence subsequent ones by modifying the shared context
 
 As always, feel free to leave your feedback in the
 comments!
