@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Eval no more: a journey through NodeJS' VM module, VM2 and Expression Language"
-date: 2017-03-04 05:55
+date: 2017-03-04 21:28
 comments: true
 categories: [nodejs, javascript, vm, eval]
-description: "A safer alternative to implement expression parsers in NodeJS: introducing the VM module."
+description: "A safer alternative to implement expression parsers in NodeJS: let's look at eval, VM and VM2."
 ---
 
 How many times have you heard of [how evil eval is](https://www.google.ae/search?q=eval&oq=eval&aqs=chrome..69i57j69i60l3j0l2.673j0j7&sourceid=chrome&ie=UTF-8#q=eval+is+evil)? What if I told you that there is a safe alternative in the modern, server-side
@@ -75,7 +75,7 @@ $car->getMaker() == 'BMW'
 Long story short, EL is a very **lightweight programming
 language** that provides convenient shortcuts so that **any non-technical person can
 write code**: initially thought of as a nicer replacement for writing regular code into HTML
-templates, it's been widely used in the Java ecosystem and the [Symfony2 Framework](http://symfony.com/doc/current/components/expression_language.html)
+templates, it's been widely used in the Java ecosystem and the [Symfony2 framework](http://symfony.com/doc/current/components/expression_language.html)
 popularized it in the PHP world.
 
 Why am I telling you this? Well, because it's damn convenient, as {"you can let
@@ -122,7 +122,7 @@ The advantage of using an expression language is that you don't  need to build
 a full fledged CMS to customize various parts of your applications -- import a
 file (or a spreadsheet) and you're done.
 
-Doing this in JavaScript is even easier, as expressions are fundamentally valid
+Doing this in JavaScript is even easier, as expressions are, fundamentally, valid
 JS code that can be executed without the need of a [custom parser](http://symfony.com/doc/current/components/expression_language/extending.html).
 Let's take a look at some expressions from the [Symfony2 website](http://symfony.com/doc/current/components/expression_language.html):
 
@@ -137,8 +137,8 @@ life + universe + everything
 ```
 
 These are all **valid examples of JS code**: some operators
-work a little bit differently (for example, in JS, `in` will mainly  work with
-objects vs lists) but, if you're not too creative, you can basically make
+work a little bit differently (for example `in` will mainly  work with
+objects, not arrays) but, if you're not too creative, you can basically make
 sure your expressions are valid JS that can be executed without a custom
 parser{% fn_ref 2 %}.
 
@@ -214,7 +214,7 @@ it is a very risky and, in my opinion, a poor choice for implementing an express
 evaluator.
 {% endpullquote %}
 
-## VM to the rescue
+## Enter VM
 
 Now, imagine you could run some JS code in a new "node process" that has no access
 to the standard node library -- no `process`, no `console`, just basic plain JS: that's
@@ -455,6 +455,8 @@ r: 1.778ms
 
 Still expensive, but very minimal in the context of a request / response cycle{% fn_ref 6 %}.
 
+So, are we good to go using `vm`?
+
 ## Surprise surprise: VM is not that safe
 
 {% img right /images/facepalm.jpg %}
@@ -462,10 +464,8 @@ Still expensive, but very minimal in the context of a request / response cycle{%
 You came all the way down here thinking `vm` solved all of your problems, just
 like I did: when it comes to security, though, I always want to double and triple
 check to make sure I'm really considering the safest solution and, after some
-digging around, I had one of those facepalm moments.
-
-Without further ado, let me break it down to you: **vm might not be safe enough
-for you**.
+digging around, I had one of those facepalm moments, as **vm might not be safe
+enough**.
 
 Consider this trick:
 
@@ -490,7 +490,8 @@ vm.runInNewContext("this.constructor.constructor('return process')().exit()", ct
 ```
 
 What we're doing here is to create a "special" context that does not have a
-prototype (`Object.create(null)`), thus removing the ability to access unsafe areas of node's JS API:
+prototype (`Object.create(null)`), thus removing the ability to access "unsafe"
+areas of the JS API:
 
 ``` js
 vm.runInNewContext("this.constructor.constructor('return process')().exit()", ctx)
@@ -501,7 +502,7 @@ vm.runInNewContext("this.__proto__.constructor.constructor('return process')().e
 ```
 
 The above code will throw the `ReferenceError: process is not defined`, but will
-still be vulnerable if we throw non-primitives into the context:
+still be vulnerable if we add non-primitives in the context:
 
 ``` js
 let ctx = Object.create(null)
@@ -518,7 +519,7 @@ and [here](https://www.quora.com/What-are-the-use-cases-for-the-Node-js-vm-core-
 which means there might be tons of applications out there that are vulnerable to
 this kind of attack.
 
-## Introducing VM2
+## Enter VM2
 
 As I briefly explained in the previous paragraph, I was doing some digging
 around to see if `vm`'s sandbox could still be exploited when I found myself
@@ -558,6 +559,14 @@ let vm = new VM({timeout: 10, sandbox: {a: function(){ return 123 }}})
 vm.run('a()') // 123
 ```
 
+At this point you could probably settle on VM2 and call it a day, but you'd still
+need to ask yourself "*what if VM2 contains a vulnerability?*".
+
+All in all, there have been a few [security concerns](https://github.com/patriksimek/vm2/issues/32) with this module as well,
+and similar libraries [had the same problems](https://github.com/asvd/jailed/issues/33)
+-- to be honest, my gut feeling is that [a new attack vector
+might be out there, waiting to be discovered](https://github.com/patriksimek/vm2/issues/32#issuecomment-226581203).
+
 ## Time for a quick recap
 
 It's been quite a long read if you've made it this far -- to reward you let me
@@ -566,33 +575,26 @@ leave you with some key takeaways:
 * there are business cases for evaluating external code, on-the-fly
 * avoid using `eval` for that, it's not safe
 * node's `vm` module provides a safer implementation, but it can still be exploited by an attacker
-* [VM2](https://github.com/patriksimek/vm2) appears to provide a safer, solid sandbox that can't be escaped
-* always specify timeouts when executing untrusted code, else a `while true` might halt the entire application
+* [VM2](https://github.com/patriksimek/vm2) appears to provide a more solid sandbox that can't be escaped, but a security issue might lurk [somewhere in the codebase](https://github.com/patriksimek/vm2/issues/32)...
 
-All in all, there have been a few [security concerns](https://github.com/patriksimek/vm2/issues/32) in VM2 as well,
-and similar libraries [had the same problems](https://github.com/asvd/jailed/issues/33)
--- my gut feeling is that [a new attack vector
-might be there, waiting to be discovered](https://github.com/patriksimek/vm2/issues/32#issuecomment-226581203).
-
-Another alternative would be to go with a full-blown EL such as [Jexl](https://github.com/TechnologyAdvice/Jexl) or [exprjs](https://github.com/jleibund/exprjs) (haven't tested them so I'm all ears).
+All in all I think the only safe way to run untrusted code is to "physically"
+separate your application from that code by, for example, running it in a VM, a docker
+container or a [lambda function](http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html) on AWS{% fn_ref 9 %}.
+Given the scarcity of 100%-safe solutions, I would settle for VM2 for the time being.
 
 ## Last thing (I promise): What about the browser?
 
-There is no consensus on how we could achieve something similar on the client, as
-the VM API is specific to Node{% fn_ref 8 %}; one very
-interesting approach, though, is to use [web workers](http://blog.namangoel.com/replacing-eval-with-a-web-worker)
-as they provide a semi-isolated context that cannot interfere with the original
-window; alternatively, you could also use a JS expression language such as the
-aforementioned [Jexl](https://github.com/TechnologyAdvice/Jexl).
-
-Lastly, I'd like to mention that some believe [eval isn't such a threat](http://stackoverflow.com/a/198031/934439)
+Some believe [eval isn't such a threat](http://stackoverflow.com/a/198031/934439)
 on the browser, as most clients can anyhow do the same kind of harm through the
 DevTools' console. Even though, in principle, that's true, there are some [other
 things to consider](http://stackoverflow.com/questions/197769/when-is-javascripts-eval-not-evil#comment19416896_198031)
 that might still make `eval` a risky element of your codebase.
 
-As always, feel free to leave your feedback in the
-comments!
+One very interesting approach is to use [web workers](http://blog.namangoel.com/replacing-eval-with-a-web-worker)
+as they provide a semi-isolated context that cannot interfere with the original
+window.
+
+Oh boy, did I make this long...As always, feel free to leave your feedback in the comments!
 
 {% footnotes %}
   {% fn Here I am running under the assumption everyone understand why you shouldn't expose eval to the public through forms etc, and you only use it on "protected" backends %}
@@ -603,4 +605,5 @@ comments!
   {% fn Code was running on Node v7.4.0 %}
   {% fn Unless you are, of course, optimizing for each and every ms. In general, I tend to forget about these optimizations as the bottleneck is usually somewhere in the network, or a DB query, so optimizing for that won't really move the needle %}
   {% fn I assume that's because it's based on a V8 feature, contexts, that is not really standardized / spread across all engines %}
+  {% fn Using lambda for this would actually make it for a cool proof of concept %}
 {% endfootnotes %}
