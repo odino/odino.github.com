@@ -465,7 +465,7 @@ and with timeouts:
 ```
 node /src/server1.js | number-aggregator-stats
 
-Meas: 1886 Min: 3 Max: 299 Avg: 149 Cur: 392
+Meas: 1886 Min: 3 Max: 299 Avg: 149 Cur: 292
 ```
 
 This looks more like it: timeouts have
