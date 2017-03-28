@@ -66,7 +66,7 @@ Mar 17 17:53:35 app Unable to place order #123, responding to client with error 
 Mar 17 17:53:35 app Sent code 500 to client for order #123
 ```
 
-So, out of 6 messages we only care about 1 or 2 of them, the actual error
+So, out of 8 messages we only care about 1 or 2 of them, the actual error
 (`connection timed out`) and maybe the incoming request message (first one above):
 most of those messages will not really add anything but clutter, and you're left
 looking at logs that you eventually have to **filter out**.
@@ -84,7 +84,7 @@ Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on
 
 This should help keeping logs as informative as possible, but it exposes you to
 a nasty problem, as you're only logging in case an error occurs. Supposing that
-your app is an HTTP server, I'd strongly recommend to the request (very high-level,
+your app is an HTTP server, I'd strongly recommend to log the request (very high-level,
 no need for a lot of details) so that you know that the app is being hit:
 
 ```
@@ -133,17 +133,70 @@ parameter.
 
 ## What went wrong?
 
-* exp/desiderata
+It's generally helpful to understand what exactly went wrong, or what kind of
+parameter we were expecting: most of the times it's a matter of being able
+to include the specific parameter that caused the error in the logs, as there's
+nothing worse than logging a generic `invalid parameters` error, leaving the
+next guy on-call trying to figure out what exactly triggered the error.
+
+Something as easy as:
+
+``` js
+app.post('/users', (req, res) {
+  let user = req.params
+
+  db.findUser(user).catch(err => {
+    console.log('Error creating new user', {err, params})
+  })
+})
+```
+
+could help you understand the root cause of the failure.
+
+Bear in mind that you have to be very careful when embedding external parameters into your logs,
+as you might end up **logging sensitive information such as DB credentials or credit
+card numbers**: check the documentation of your specific logger to see if it supports
+[redacting](https://github.com/pinojs/pino/blob/4c6170274abcd09721e9d37f668e01ec5083852a/docs/howtos.md#how-do-i-redact-sensitive-information) information, else you'll have to manually redact those parameters.
 
 ## How do I fix this?
 
-* what to do
+Another very important aspects of great logs is the ability to include
+remediation steps in the logs themselves, so that once a failure happens we're
+immediately able to troubleshoot.
+
+As easy as it sounds, it's not always feasible to include remediation steps:
+for example, when a clients sends the wrong parameter to a service, it's very
+easy to identify the root cause, but not so trivial to figure out what needs
+to be done to remediate the error.
+
+Was there a deployment that changed the
+parameter name from `userId` to `user_id`? Is the client broken due to an update
+on its side? Is it on "our" side or "their" side? No single, clear action can be
+taken without digging a bit further, and at that point it's better to avoid
+including vague, unhelpful remediation steps such as "*contact the customer as they seem
+to be screwing up*", as it might lead you towards the wrong direction.
+
+An example of remediation steps for when a [circuit breaker](https://martinfowler.com/bliki/CircuitBreaker.html)
+kicks in:
+
+```
+GET api.example.com -- Circuit breaker prevented connection, if you believe this
+is an error you can manually open the circuit with the following command from our
+intranet:
+
+  curl -X POST -d "state=open" https://frontend.example.com/_breakers/api.namshi.com
+```
+
+Most of the time, the breaker will close the circuit for a valid reason; whenever
+that's not the case you have a solution right in front of you.
+
+It's worth noting that remediation steps, like any form of documentation,
+might get outdated quite fast: my advice is to not get too excited in order to avoid
+spamming your codebase with instructions that will change every 3 months.
 
 ## Provide useful info
 
 * context
-
-## Don't log everything
 
 ## Collect crashes
 
