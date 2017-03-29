@@ -1,11 +1,10 @@
 ---
 layout: post
 title: "When debugging doesn't suck: beautiful errors"
-date: 2017-03-16 14:57
+date: 2017-03-29 22:59
 comments: true
 categories: [debugging, errors, exception, logging]
 description: "Debugging and analyzing logs can be a painful activity, especially if we don't raise the right kind of exceptions."
-published: false
 ---
 
 {% img right /images/stacktrace-java.png %}
@@ -26,7 +25,7 @@ beautiful errors**.
 
 We have great infrastructures in place to log information and monitor our systems
 where, in theory, everything is taken care of; then the day comes when disaster, in the form
-of a nasty bug, strikes and we're left, clueless, trying to understand what's
+of a nasty bug, strikes and we're left trying to understand what's
 going on with our software.
 
 How many times, after fixing a bug, you find yourself saying
@@ -43,7 +42,7 @@ not the single app, so there's virtually no reason to make the app aware of a
 specific logging transport.
 
 Most logging libraries support `std***` out of the box, so that you can, at a higher
-level, collect those logs in a single place, without having to change 100 apps when
+level, collect those logs in a single place, without having to change a hundred apps when
 you decide to switch to a new log collector (ie. SumoLogic, ELK, Graylog).
 
 Make the app unaware of who's receiving the logs, it's the best way to centralize
@@ -156,7 +155,7 @@ could help you understand the root cause of the failure.
 Bear in mind that you have to be very careful when embedding external parameters into your logs,
 as you might end up **logging sensitive information such as DB credentials or credit
 card numbers**: check the documentation of your specific logger to see if it supports
-[redacting](https://github.com/pinojs/pino/blob/4c6170274abcd09721e9d37f668e01ec5083852a/docs/howtos.md#how-do-i-redact-sensitive-information) information, else you'll have to manually redact those parameters.
+[redacting](https://github.com/pinojs/pino/blob/4c6170274abcd09721e9d37f668e01ec5083852a/docs/howtos.md#how-do-i-redact-sensitive-information) information, else you'll have to manually "hide" those values.
 
 ## How do I fix this?
 
@@ -164,7 +163,7 @@ Another very important aspects of great logs is the ability to include
 remediation steps in the logs themselves, so that once a failure happens we're
 immediately able to troubleshoot.
 
-As easy as it sounds, it's not always feasible to include remediation steps:
+As easy as it sounds, it's not always feasible to include them:
 for example, when a clients sends the wrong parameter to a service, it's very
 easy to identify the root cause, but not so trivial to figure out what needs
 to be done to remediate the error.
@@ -196,9 +195,39 @@ spamming your codebase with instructions that will change every 3 months.
 
 ## Provide useful info
 
-* context
+Most of the loggers available today let you specify some kind of context to
+surround your log message with: when a timeout connecting to MySQL occurs, for
+example, it would be nice to understand how your connections pool looked at the
+time, as well as other information like the timeout itself.
+
+``` js
+pool.getConnection({timeout})
+  .then(...)
+  .catch(err => {
+    logger.error(err, {
+      timeout,
+      pool: pool.getState(),
+    })
+  })  
+```
+
+As usual, no rocket science.
 
 ## Collect crashes
+
+{% img left /images/newrelic.jpg %}
+
+Last but not least, something that might sound silly to many of you: **collect
+crash reports**.
+
+In some languages that's not as trivial as it sounds (for example, [PHP's
+fatal errors aren't catchable](http://stackoverflow.com/questions/12928487/php-try-catch-and-fatal-error)),
+so you might need to look into other, lower-level solutions that are able
+to intercept and log crashes when userland code can do nothing about it.
+
+[NewRelic](https://newrelic.com/) seem to be the front-runner here, even though its
+host-based pricing model is quite quirky under certain circumstances
+(think containers or t2 instances on AWS).
 
 ## Conclusion
 
@@ -209,8 +238,14 @@ times.
 If you're curious about the infrastructure we use to handle monitoring and logging
 at Namshi let me just give you a brief overview:
 
-* most of our apps are running in containers and log to `stdout`
-*
+* our legacy systems log to [Graylog](https://www.graylog.org/) through specialized transports (ie. [winston-graylog2](https://github.com/namshi/winston-graylog2))
+* the rest of our apps are running in containers and log to `stdout`
+* there's a container, on each host, that collects all docker logs and ships them to [sematext's logsene](https://sematext.com/logsene/)
+* on staging, we give devs a bit more freedom and let them have a look at the [kubernetes' dashboard](https://github.com/kubernetes/dashboard#kubernetes-dashboard)
+* [NewRelic](https://newrelic.com/) monitors crashes and performance
+* [Sensu](https://sensuapp.org/) runs checks that ensure things are running smoothly (ie. `ping google.com` from the machines, check we have at least X products on the website, etc)
 
 If you'd like to read more about logging, I'd recommend [this article](http://www.masterzen.fr/2013/01/13/the-10-commandments-of-logging/)
-that helped me shape this post.
+that really helped me shape this post.
+
+Cheers!
