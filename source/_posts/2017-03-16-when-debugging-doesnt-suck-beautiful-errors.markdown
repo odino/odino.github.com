@@ -221,11 +221,11 @@ Last but not least, something that might sound silly to many of you: **collect
 crash reports**.
 
 In some languages that's not as trivial as it sounds (for example, [PHP's
-fatal errors aren't catchable](http://stackoverflow.com/questions/12928487/php-try-catch-and-fatal-error)),
+fatal errors weren't catchable](http://stackoverflow.com/questions/12928487/php-try-catch-and-fatal-error) until [PHP 7](http://php.net/manual/en/language.errors.php7.php)),
 so you might need to look into other, lower-level solutions that are able
 to intercept and log crashes when userland code can do nothing about it.
 
-[NewRelic](https://newrelic.com/) seem to be the front-runner here, even though its
+[NewRelic](https://newrelic.com/) seems to be the front-runner here, even though its
 host-based pricing model is quite quirky under certain circumstances
 (think containers or t2 instances on AWS).
 
