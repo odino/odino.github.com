@@ -7,13 +7,13 @@ categories: [talk, conference, JavaScript]
 description: "Slides of my presentation at the 2017 italian JsDay:  servers can be pretty darn fast too!"
 ---
 
-This morning I have a talk at the JsDay in Verona, describing how we went "back
+This morning I gave a [talk](https://joind.in/event/jsday-2017/spa-isomorphic-and-back-to-the-server--our-journey-with-javascript) at the [JsDay](https://2017.jsday.it/) in Verona, describing how we went "back
 to the basics" with our latest revamp of our mobile website.
 
 <!-- more -->
 
 My presentation was mostly focused on performance and seeing how
-easy it is to combine fast servers ("10ms or less") with frontend optimization
+easy it is to combine fast servers ("10ms or less") with frontend optimizations
 for extremely speedy web applications.
 
 Here are the slides of the talk:
