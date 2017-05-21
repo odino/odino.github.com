@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Local development with rkt containers"
-date: 2017-05-11 17:42
+date: 2017-05-15 23:21
 comments: true
 categories: [linux, containers, docker, rkt, development]
 description: "Time to explore rkt, a fast-growing alternative to Docker."
