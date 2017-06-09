@@ -1,6 +1,6 @@
 // Fonts
-$ptserif: 'Noto Serif', serif;
-$ptsans: 'Noto Serif', serif;
+$ptserif: 'Lato', serif;
+$ptsans: 'Lato', serif;
 $ptmono: 'PT Mono', monospace;
 
 // Colors
@@ -10,7 +10,7 @@ $black: black;
 // Typography
 $body-font: $ptserif;
 $body-font-italic: $ptserif;
-$body-font-size: 1em;
+$body-font-size: 18px;
 
 $blog-title-font: $ptsans;
 $blog-title-font-size: 1.6em;
@@ -76,7 +76,7 @@ $year-spacing-bottom: 1.5em;
 $month-font-family: $ptsans;
 $month-font-size: 1em;
 $month-spacing-bottom: 0.5em;
-$month-indent: 2em;
+$month-indent: 1em;
 
 // Layout
 
@@ -84,7 +84,7 @@ $month-indent: 2em;
 $content-width: 100%;
 
 // Space above and below the header section
-$header-spacing: 1em;
+$header-spacing: 1sem;
 
 // Space between header links
 $navi-link-spacing: 0.8em;

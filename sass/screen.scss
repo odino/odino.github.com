@@ -20,8 +20,7 @@ code {
 
 .wrap {
   width: 50%;
-  line-height: 35px;
-  font-size: 1.15em;
+  line-height: 1.7em;
   color: #3A4145;
 }
 
@@ -85,9 +84,7 @@ img, video{
 }
 
 h1, header h1 a, h2 {
-  font-family: 'Alegreya SC', serif;
-  letter-spacing: 3px;
-  word-spacing: 10px;
+  font-family: 'Lato', serif;
 }
 
 time {
@@ -100,13 +97,18 @@ article > footer {
   border-top: 1px dashed #4d4d4d;
 }
 
-header h1 a {
-  font-size: 45px;
+header h1 a,h1 {
+  font-size: 1.7em;
+  line-height: 1em;
   border-bottom: 0;
+  font-weight: bold;
+  margin-top: 2em;
 }
 
 h2 {
   font-size: 30px;
+  font-weight: bold;
+  margin-top: 2em;
 }
 
 article {
