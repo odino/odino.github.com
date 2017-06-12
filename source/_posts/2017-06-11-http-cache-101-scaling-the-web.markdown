@@ -19,6 +19,8 @@ provides some basic but extremely interesting features for offline experiences
 -- thus, I want to shed some light on one of the most ingenious sections of the
 HTTP protocol.
 
+<!-- more -->
+
 ## What is the HTTP cache?
 
 First of all, let's start by diving the HTTP protocol into 2 entities:
@@ -57,14 +59,14 @@ origin server? The request needs to cross the network (slow, and TCP is a "heavy
 protocol), hit the origin server (which could do better without the additional load)
 and come back to the client. *No bueno*: if we can avoid all of that we, first of
 all, take a huge burden off our servers and, second, make the web faster, as clients
-don't need to hit your server to get the information they need.
+don't need to travel through the network to get the information they need.
 
 A side effect of HTTP caching is the fact that it makes the web inconsistent: a
 resource might have changed and, by serving a cached, stale version of it we don't
-feed the clients the latest version of it: this is, generally, an acceptable
+feed the clients the latest version: this is, generally, an acceptable
 compromise we, as developers, make in order to scale better. In addition, these
 inconsistencies can be avoided by tweaking the *cacheability* of our responses, and
-we will look at how to do that in the next paragraph.
+we will look at how to do that in the next paragraphs.
 
 In defining mechanisms to implement this kind of performance optimizations, the
 W3C working group split caching into 2 main variants: **expiration**, which is simpler
@@ -76,54 +78,277 @@ basis.
 
 ## Expiration
 
-This is the sort of caching you're used to see every day, used to specify TTLs (
-*time to live*) for static assets like JS, CSS & the likes: we know those assets
-are cacheable for a long time, so we specify an expiration date on those resources,
-through the `Expires` HTTP header:
+This is the sort of caching you're used to see every day, which allows you to specify TTLs
+(*time to live*) for static assets like JS, CSS & the likes: we know those assets
+are cacheable for a long time, so we specify an expiration date on those resources.
+
+As I mentioned, expiration is generally used for static assets, but can be used
+for any kind of resource (ie. `GET /news/1`), so don't just think caching is for
+content that never changes (such as a minified JS file).
+
+How can we implement expiration though? Through 2 very simple HTTP headers.
+
+## Expires
+
+The `Expires` HTTP header allows  us to specify a future date that defines until
+when a resource should be cacheable:
 
 {% img center nobo /images/expires.png %}
 
-If the server needs to fetch the same resources later on, it will first figure out
-if it has expired and, if not, use the local copy stored in the cache:
+If the client needs to fetch the same resources later on, it will first figure out
+if it has expired and, if not, use the local copy stored in the cache, without
+hitting the origin server. An example implementation might look like:
 
-https://www.subbu.org/blog/2005/01/http-caching
-https://tools.ietf.org/html/rfc7234
-https://tools.ietf.org/html/rfc2616
-https://www.chromestatus.com/features#reva
-https://www.mnot.net/blog/2014/06/01/chrome_and_stale-while-revalidate
-https://webdemo.balsamiq.com/
-http://odino.org/rest-better-http-cache/
+``` js
+cache = {}
 
-Expires
-Cache-Control
+server.on('request', (req, res) => {
+  if (cache[req.url] && cache[req.url].headers.expires > now) {
+    return res.send(cache[req.url])
+  }
 
-## Fault tolerance
+  upstreamResponse = server.forward(req)
 
-stale-if-error
+  if (upstreamResponse.headers.expires) {
+    cache[req.url] = upstreamResponse;
+  }
 
-## Scaling with compromises
+  res.send(upstreamResponse)
+})
+```
 
-stale-while-revalidate
+This is a very simplistic implementation, but should give you an idea of the
+process an *HTTP intermediary* (a browser, a proxy, etc) goes through when
+implementing basic HTTP cache through the `Expires` header.
 
-## A note on offline apps
+### Cache-Control
+
+If we want to get a bit fancier, we can use the `Cache-Control` header, which allows
+us more control over how a response should be cached; for example, here's an HTTP
+response using `Cache-Control`:
+
+``` bash
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: ...
+Cache-Control: public, max-age=3600, s-maxage=60, stale-if-error=600, no-transform
+
+// ...JS content here...
+```
+
+Wow, that's a lot of stuff to process! Let's break it down:
+
+* `Cache-Control` allows you to embed multiple caching directives into one header
+* directives are comma separated
+* in most cases, directives are parsed as key-value pairs (ie. `key=val`) -- some of them, though, require no value (ie. `no-transform`)
+* they control different aspects of the cacheability of a resource
+
+{% pullquote %}
+So what directives can we use in here?
+
+* `public`, which means that the resource can be cached by *any* cache (read on)
+* `private`, which means that the resource can only be cached if the cache is not shared. **A browser is a private cache**, while **a proxy is a shared cache**, as it channels requests and responses from and to multiple clients. For example, the resource at `GET /customers/me` could possibly be cached by private caches (my own browser), but not by shared caches, as they would end up showing my user profile information to
+other users
+* `max-age`, the TTL, in seconds, of the resource. `max-age=60` means it is cacheable for 1 minute
+* `s-maxage`, which is exactly like `max-age` but applies to shared caches only (hence the `s-` prefix)
+* `must-revalidate`, which indicates that once the resource is stale, the cache should not serve it without first re-validating it with the server
+* `proxy-revalidate`, same as `must-revalidate` but for shared caches
+* `no-cache`, basically meaning this response should not be cached at all
+* `no-store`, which means you should not cache the resource, as well as you should remove it from the cache if it was there from a previous session
+* `no-transform` says the intermediary should not toy around with the response payload at all (I've never seen intermediaries doing so, so I'm assuming this is how most softwares like browsers or gateway caches behave by default)
+
+{"Most people think that the Cache-Control is a response header, whereas it can be
+included in HTTP requests as well"} -- and the directives you can use are slightly
+different:
+
+* `max-age`: the client will discard responses with an `Age` header older than the value of this directive
+* `max-stale`: here the client advertises that if the server is willing to serve a stale response (to avoid hitting the DB, for example) it can do so as long as the response is not older than the value of the directive (ie. `max-stale=60`). This is a very clever mechanism to allow servers to do less work!
+* `mix-fresh`: the opposite of `max-stale`. The client will accept cached responses only if they're fresher than this value
+* `no-cache`: don't even try... :)
+* `no-transform`: same meaning that it would have in an HTTP response
+* `only-if-cached`: the client will only accept cached responses
+{% endpullquote %}
+
+### Stale-* directives
+
+An ingenious trick, the `stale-while-revalidate` and `stale-if-error` cache-control
+directives are worth a mention on their own, as what they let you achieve is [pretty
+interesting](https://tools.ietf.org/html/rfc5861):
+
+* `stale-if-error` tells the cache that it can serve a cached response if, by any chance, it encounters an error when fetching a fresh response from the origin server. In other words, this means that an HTTP cache can be smart enough to serve cached content when you server starts returning 500 errors -- talk about fault tolerance!
+
+{% img center nobo /images/stale-if-error.png %}
+
+* `stale-while-revalidate` lets you serve cached content while refreshing the cache instead. This is fairly interesting as, if 100 clients are accessing your cache at *T0*, you can serve them a cached resource at *T1* (even if it's  stale), while revalidating the cache in background. If a client then requests the same resource at *T2*, he will receive the version that's been revalidated from the origin server
+
+{% img center nobo /images/stale-while-revalidate.png %}
+
+Funny enough, [Chrome has been considering implementing this directive](https://www.mnot.net/blog/2014/06/01/chrome_and_stale-while-revalidate) for quite
+some time, and last I heard it was still just [under consideration](https://www.chromestatus.com/features/5050913014153216),
+though it looks like [it might never going to make it to Chrome Stable](https://bugs.chromium.org/p/chromium/issues/detail?id=348877#c68).
+
+**Enough with expiration**: it's now time to move on to validation, a more expensive
+but granular way to implement HTTP caching.
 
 ## Validation
 
-Etag
-Last-Modified
+Expiration provides a very interesting way to keep clients off the server, at the
+cost of serving stale content more often than we'd might like: in cases when that's
+not an acceptable compromise you can use **validation**, as it ensures clients will
+always be able to receive the latest, most fresh version of a resource.
 
-## Note: obsolete headers you'll still see around
+At its core, validation works in a very simple manner: when you request a resource,
+the server assigns a "tag" to it (let's say `v1`) and the next time you request the
+same resource you include the tag in your request; the server, at this point, can
+quickly check if the resource has changed: if so, it returns the new version, else
+it tells you to use the cached version you should have with you.
+
+In HTTP words this is how it basically works:
+
+``` bash
+# First request
+GET /news/1 HTTP/1.1
+
+# Response
+HTTP/1.1 200 OK
+Etag: 1234
+
+The content of the resource
+
+# Second request
+GET /news/1 HTTP/1.1
+If-None-Match: 1234
+
+# Response if the content has changed
+HTTP/1.1 200 OK
+Etag: 9876
+
+The NEW content of the resource
+
+# Response if the content is the same
+HTTP/1.1 304 Not Modified
+```
+
+As you see, returning a `304 Not Modified` is cheaper as it doesn't contain as many
+information as the "real" resource: less packets traveling through the network, thus
+a faster response.
+
+At the same time, calculating an `Etag` (the HTTP header used to tag resources) is
+generally cheaper than rendering your resource again -- let's look at some pseudo-code
+to understand what we're talking about:
+
+``` js
+// GET /news/:id
+server.on('request', (req, res) => {
+  news = db.fetchNews(req.params.id)
+
+  if (req.headers.etag === news.version) {
+    return res.send(304)
+  }
+
+  res.render('news_template.html', {news})
+})
+```
+
+We have saved the server some extra work by not rendering the news template all
+over again: this might feel like a small saving, but put it in the context of
+thousands of requests every day and you see where we're going.
+
+Looking back at our second request:
+
+``` bash
+GET /news/1 HTTP/1.1
+If-None-Match: 1234
+```
+
+you might be wondering what's that `If-None-Match`, so let me break the whole
+process down for you:
+
+* client requests a resource
+* server returns it and tags it with the `Etag` header
+* client requests the same resource again, and tells the server to return it only if the resource's etag doesnt match the one we're sending (that's why the header is called `If-None-Match`)
+
+A request that contains the `If-None-Match` header is called a "conditional request":
+it's expected to fetch a resource only if the condition it is sending
+won't be satisfied (the condition is that the client's etag matches the server's).
+
+Conditional requests and validation can be implemented with etags as well as dates:
+if you're more comfortable using timestamps (think of an `updated_at` column in the DB)
+you can replace `Etag` with `Last-Modified` and `If-None-Match` with `If-Modified-Since`:
+
+``` bash
+# First request
+GET /news/1 HTTP/1.1
+
+# Response
+HTTP/1.1 200 OK
+Last-Modified: Wed, 21 Oct 2020 06:00:00 GMT
+
+The content of the resource
+
+# Second request
+GET /news/1 HTTP/1.1
+If-Modified-Since: Wed, 21 Oct 2020 06:00:00 GMT
+
+# Response if the content was updated after that date
+HTTP/1.1 200 OK
+Last-Modified: Wed, 30 Oct 2020 06:00:00 GMT
+
+The NEW content of the resource
+
+# Response if the content is the same
+HTTP/1.1 304 Not Modified
+```
+
+Again, the spec is very simple and doesn't get too fancy, yet it's powerful enough
+to let you save so much time and data by returning `304` rather than "full" responses --
+that's why I like the HTTP caching spec: it's so clever and simple!
+
+## Who can cache my responses?
+
+types of caches
+* browsers
+* proxy
+* reverse proxy
+* origin server
+
+## Pragma: an obsolete header you'll still see around
 
 Pragma
 
+## Warning: when things don't go as planned...
+
+## A note on offline apps
+
+AMP chat with google
+
 ## Conclusion
+
+Caching in HTTP has been here for almost 2 decades, it's a battle-tested
+part of the protocol and allows you to efficiently trade freshness with scale
+(emphasis on *efficiently*): there's no reason to implement our own application-level
+caches when the protocol we use to exchange messages allows you to do the same,
+for free, by just jamming a bunch of headers in your responses.
+
+HTTP caching is truly the hidden gem of the protocol, and I wish more people would
+be aware of the inner workings of the spec -- to me it is a great example of
+achieving great results without compromising on complexity, and this is the kind
+of design we should aim towards when building software.
+
+In short: *the HTTP cache is great. Be like the HTTP cache*.
 
 ## Further readings
 
-* /categories/cache/
-* mnot
-* rtomayko
-* https://www.subbu.org/blog/2005/01/http-caching
+If you enjoyed this article I would suggest you to read further stuff on the HTTP
+cache:
+
+* the complete [HTTP caching spec](https://tools.ietf.org/html/rfc7234)
+* I have a [few articles](/categories/cache/) on this very same blog
+* [Mark Nottingham's blog](https://www.mnot.net/blog/) (Mark is known for his contribution to the HTTP protocol, web caching and for being the "chairman" of HTTP/2)
+* [Ryan Tomayko](https://tomayko.com/blog/2008/rack-cache-announce) is a very smart guy who spoke about HTTP caching in the past. He turns whatever he touches into gold, so follow him ;-)
+* [Subbu Allamaraju](https://www.subbu.org/) is a well-known member of the REST community and [has written about HTTP caching](https://www.subbu.org/blog/2005/01/http-caching) in the past
+
+See you next time!
 
 {% footnotes %}
   {% fn Worth to note that RFC2616 has been superseded by a few updates (RFCs 7230, 7231, 7232, 7233, 7234, 7235, which update part of the original spec) %}
