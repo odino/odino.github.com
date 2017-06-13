@@ -318,9 +318,32 @@ Pragma
 
 ## Warning: when things don't go as planned...
 
-## A note on offline apps
+## A note on Service Workers
 
-AMP chat with google
+{% pullquote %}
+Here comes the fun part: if you're a web developer chances are you've heard you
+should implement service workers in order to efficiently serve cached content, and
+**that's quite misleading**.
+
+Service workers give you a great deal of control on the network stack, allowing you
+to intercept HTTP requests being made, hijack them and, as many advise, cache them
+on-the-fly -- but I'd honestly avoid doing so as you can achieve the exact same thing
+with the HTTP cache and way less code.
+
+Let me rephrase it: {"if all you need is caching static assets or do expiration-based
+caching, do not use service workers as the HTTP cache gets the same job done"}. If you need some special functionality
+that is not included in the caching spec, then use a worker, but I'd be very surprised
+to hear you needed to: the contexts where you would be able to take advantage of the
+SW's capabilities are quite advanced, and I could argue HTTP caching would anyhow
+get you ~85% there even in those cases.
+{% endpullquote %}
+
+Service workers are great because they let us implement functionalities we traditionally
+never had on the web (think of push notifications) but, for stuff that's been there, I
+would advise to stick to the basics: I remember talking to a PM at Google while, at Namshi,
+we were considering implementing a bunch of features to turn our mobile website into a PWA,
+and specifically asking what advantage they'd see in using SW's caching over HTTP caching
+for static assets. His answer? "*Yeah, you can stick to the HTTP cache in these cases*". Danke.
 
 ## Conclusion
 
