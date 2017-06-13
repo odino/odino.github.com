@@ -29,10 +29,10 @@ First of all, let's start by diving the HTTP protocol into 2 entities:
 * the implementation (for example, Google Chrome is an HTTP client, Nginx implements an HTTP server and so on)
 
 So, for example, with HTTP/2 we have seen a revamped *implementation*, one that
-brings SSL by default, that turned plaintext messages (the way messages were exchanged
+brings TSL by default, that turned plaintext messages (the way messages were exchanged
 in HTTP/1) into binary, along with the introduction of [multiplexing](https://en.wikipedia.org/wiki/Multiplexing)
 (in short: one connection can channel multiple requests and responses) and the
-likes -- HTTP/2 was a massive upgrade to the protocol and is making the web a much
+likes -- HTTP/2 was a massive upgrade to HTTP and is making the web a much
 safer, faster place. At the same time, **the spec itself didn't change as much**, as
 the semantics of the protocol have been widely unaffected by HTTP/2.
 
@@ -57,7 +57,7 @@ As you might have guessed, {"the HTTP cache is there so that we hit servers as l
 as possible"}: if we can re-use an existing response, why sending a request to the
 origin server? The request needs to cross the network (slow, and TCP is a "heavy"
 protocol), hit the origin server (which could do better without the additional load)
-and come back to the client. *No bueno*: if we can avoid all of that we, first of
+and come back to the client. *No bueno:* if we can avoid all of that we, first of
 all, take a huge burden off our servers and, second, make the web faster, as clients
 don't need to travel through the network to get the information they need.
 
@@ -88,7 +88,7 @@ content that never changes (such as a minified JS file).
 
 How can we implement expiration though? Through 2 very simple HTTP headers.
 
-## Expires
+### Expires
 
 The `Expires` HTTP header allows  us to specify a future date that defines until
 when a resource should be cacheable:
@@ -136,7 +136,7 @@ Cache-Control: public, max-age=3600, s-maxage=60, stale-if-error=600, no-transfo
 // ...JS content here...
 ```
 
-Wow, that's a lot of stuff to process! Let's break it down:
+Wow, that's a lot of stuff to process, so let's break it down:
 
 * `Cache-Control` allows you to embed multiple caching directives into one header
 * directives are comma separated
@@ -187,6 +187,34 @@ Funny enough, [Chrome has been considering implementing this directive](https://
 some time, and last I heard it was still just [under consideration](https://www.chromestatus.com/features/5050913014153216),
 though it looks like [it might never going to make it to Chrome Stable](https://bugs.chromium.org/p/chromium/issues/detail?id=348877#c68).
 
+### Pragma: an obsolete header you'll still see around
+
+`Cache-Control` was introduced in HTTP/1.1, meaning there had to be some way to
+control caches in the olden HTTP/1.0 days -- that would be
+the [Pragma header](https://tools.ietf.org/html/rfc7234#section-5.4).
+
+`Pragma` doesn't let you do much, as you can just tell caches not to cache through
+`Pragma: no-cache` -- nothing too complicated here.
+
+What's interesting, though, is that a few HTTP clients will still consider responses
+cacheable if they don't see a `no-cache` in the `Pragma`, and so the best practice
+to avoid caching has been to send both `Cache-Control` and `Pragma`:
+
+```
+HTTP/1.1 200 Ok
+Cache-Control: no-cache
+Pragma: no-cache
+```
+
+At the same time, a peculiar use of Pragma is by telling HTTP/1.0 caches not to
+cache (via `Pragma`) while allowing HTTP/1.1 caches to do so (via `Cache-Control`):
+
+```
+HTTP/1.1 200 Ok
+Cache-Control: max-age=3600
+Pragma: no-cache
+```
+
 **Enough with expiration**: it's now time to move on to validation, a more expensive
 but granular way to implement HTTP caching.
 
@@ -196,6 +224,8 @@ Expiration provides a very interesting way to keep clients off the server, at th
 cost of serving stale content more often than we'd might like: in cases when that's
 not an acceptable compromise you can use **validation**, as it ensures clients will
 always be able to receive the latest, most fresh version of a resource.
+
+{% img right nobo /images/if-none.png %}
 
 At its core, validation works in a very simple manner: when you request a resource,
 the server assigns a "tag" to it (let's say `v1`) and the next time you request the
@@ -273,7 +303,7 @@ it's expected to fetch a resource only if the condition it is sending
 won't be satisfied (the condition is that the client's etag matches the server's).
 
 Conditional requests and validation can be implemented with etags as well as dates:
-if you're more comfortable using timestamps (think of an `updated_at` column in the DB)
+if you're more comfortable using the latter (think of an `updated_at` column in the DB)
 you can replace `Etag` with `Last-Modified` and `If-None-Match` with `If-Modified-Since`:
 
 ``` bash
@@ -292,7 +322,7 @@ If-Modified-Since: Wed, 21 Oct 2020 06:00:00 GMT
 
 # Response if the content was updated after that date
 HTTP/1.1 200 OK
-Last-Modified: Wed, 30 Oct 2020 06:00:00 GMT
+Last-Modified: Wed, 30 Oct 2020 06:05:00 GMT
 
 The NEW content of the resource
 
@@ -306,24 +336,57 @@ that's why I like the HTTP caching spec: it's so clever and simple!
 
 ## Who can cache my responses?
 
-types of caches
-* browsers
-* proxy
-* reverse proxy
-* origin server
+HTTP is a layered protocol, meaning there can be countless intermediaries between
+the client and the server -- a picture is worth
+a thousand words:
 
-## Pragma: an obsolete header you'll still see around
+{% img center nobo /images/types-caches.png %}
 
-Pragma
+So, who are all these guys that can cache resources all along the way?
+
+* nothing to explain in terms of **browsers**, as we're all familiar with them.
+Worth to note that, when you use `curl` from your command-line, that's your browser
+* **proxies**, instead, are generally installed between the client and the internet,
+and they provide a shield between the two. Proxies are shared caches as, for example,
+you could install them at your company so that multiple browsers use the same proxy
+-- that way, if I request a cacheable resource and one of my co-workers requests the
+same, he will be served the cached response I generated, by the proxy
+* **ISPs / the internet**: well, that's the backbone of your internet connection, and
+they could implement caching on their own
+* proxies installed on the server-side are called **reverse proxies** instead,
+as their job is to shield multiple servers from requests. Reverse proxies are also
+called "HTTP accelerators", as their main job is to avoid requests from hitting
+the origin servers. [Varnish](https://varnish-cache.org/) is one of the most popular reverse proxies out there
+* last but not least you've got your **origin servers**, where your applications
+run. They can implement HTTP caching on their own, even though it's generally
+preferred to have a dedicated reverse proxy to offload origins
 
 ## Warning: when things don't go as planned...
+
+An interesting header is `Warning`, as it's used to signal that *something went wrong*
+when fetching the response from the upstream, something that's hard to infer from the HTTP status code
+alone: for example, when the cache knows that the response being served is stale, it
+could include a `Warning: 110 - "Response is Stale"` to inform the client that the response
+he's receiving isn't fresh at all -- that, for example, could happen when `stale-while-revalidate`
+or `stale-if-error` kick in:
+
+```
+# The HTTP status code says everything's good,
+# but the warning header tells the client the
+# response being served is not fresh
+HTTP/1.1 200 Ok
+Warning: 110 - "Response is Stale"
+```
 
 ## A note on Service Workers
 
 {% pullquote %}
 Here comes the fun part: if you're a web developer chances are you've heard you
 should implement service workers in order to efficiently serve cached content, and
-**that's quite misleading**.
+**that's quite misleading** -- to be clear, you can have offline apps working
+without service workers, as when you tap on a link and that renders a response with,
+say, `Cache-Control: max-age=3600`, you can still open that page for another hour,
+without an internet connection.
 
 Service workers give you a great deal of control on the network stack, allowing you
 to intercept HTTP requests being made, hijack them and, as many advise, cache them
@@ -335,15 +398,45 @@ caching, do not use service workers as the HTTP cache gets the same job done"}. 
 that is not included in the caching spec, then use a worker, but I'd be very surprised
 to hear you needed to: the contexts where you would be able to take advantage of the
 SW's capabilities are quite advanced, and I could argue HTTP caching would anyhow
-get you ~85% there even in those cases.
+get you ~95% there even in those cases.
 {% endpullquote %}
 
+{% img right nobo /images/99-devs.png %}
+
 Service workers are great because they let us implement functionalities we traditionally
-never had on the web (think of push notifications) but, for stuff that's been there, I
-would advise to stick to the basics: I remember talking to a PM at Google while, at Namshi,
-we were considering implementing a bunch of features to turn our mobile website into a PWA,
-and specifically asking what advantage they'd see in using SW's caching over HTTP caching
-for static assets. His answer? "*Yeah, you can stick to the HTTP cache in these cases*". Danke.
+never had on the web (think of [push notifications](https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/), [add to homescreen](https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/), [background sync](https://developers.google.com/web/updates/2015/12/background-sync)
+and the likes) but, for stuff that's been there, I
+would advise to stick to the basics.
+
+Let's have a look at an example code from a service worker that implements its own
+caching -- as you see not most straightforward code you'll bump
+into:
+
+``` js
+this.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(resp) {
+      return resp || fetch(event.request).then(function(response) {
+        caches.open('v1').then(function(cache) {
+          cache.put(event.request, response.clone());
+        });
+        return response;
+      });
+    }).catch(function() {
+      return caches.match('/sw-test/gallery/myLittleVader.jpg');
+    })
+  );
+});
+```
+
+As Jake Archibald, developer advocate at Google,
+puts it:
+
+{% blockquote Jake Archibald https://jakearchibald.com/2016/caching-best-practices/ Caching best practices %}
+You can hack around poor caching in your service worker, but you're way better off fixing the root of the problem. Getting your [HTTP] caching right makes things easier in service worker land, but also benefits browsers that don't support service worker (Safari, IE/Edge), and lets you get the most out of your CDN.
+{% endblockquote %}
+
+Ditto.
 
 ## Conclusion
 
