@@ -4,8 +4,7 @@ title: "HTTP cache 101: scaling the web"
 date: 2017-06-14 00:18
 comments: true
 categories: [http, caching, web, performance]
-description: "A modern view at the HTTP cache: scaling has never been easier."
-published: false
+description: "A modern look at the HTTP cache: scaling on the web has never been easier."
 ---
 
 {% img right nobo /images/internetz.png %}
