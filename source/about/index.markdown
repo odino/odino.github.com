@@ -14,8 +14,8 @@ I am a seasoned technical leader who pays a lot of attention
 to enterprise patterns, methodologies, communities and (everyone's)
 personal development: with 8 years of experience on my back, I've
 heavily focused my attention to [agile practices](http://agilemanifesto.org/),
-[patterns of enterprise application architecture](http://www.martinfowler.com/books/eaa.html)
-and leading mid/big-sized development teams and managing complexity in distributed systems.
+[patterns of enterprise application architecture](http://www.martinfowler.com/books/eaa.html),
+leading mid-sized development teams and managing complexity in distributed systems.
 
 I am a forward-thinker by nature and I still love to get my hands dirty with code, or testing new platforms: I am quite active on [github](https://github.com/odino) and, from time to time,
 blog over here.

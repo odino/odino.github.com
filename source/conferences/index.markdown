@@ -16,6 +16,8 @@ Here's a summary of the most important ones:
 
 {% img right ../images/jazoon.jpg "During Jazoon 2011 in Zurich" 'Ciao' %}
 
+* [SPA, isomorphic and back to the server](https://www.slideshare.net/odino/spa-isomorphic-and-back-to-the-server-our-journey-with-javascript-jsday-2017-in-verona-italy),
+at the [2017 JsDay in Verona (ITA)](https://2017.jsday.it/), where I explained how we approached building our mobile website, going back to **server-side rendering**, towards the end of 2016
 * [Dockerize it!](http://www.slideshare.net/odino/dockerize-it-codemotion-2016-in-rome),
 at the [2016 Codemotion in Rome (ITA)](http://rome2016.codemotionworld.com/conference/), which is a look
 at linux containers and how they can make our infrastructures more efficient and easier to manage
