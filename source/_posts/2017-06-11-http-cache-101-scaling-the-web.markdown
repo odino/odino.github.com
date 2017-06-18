@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTTP cache 101: scaling the web"
-date: 2017-06-14 00:18
+date: 2017-06-18 22:05
 comments: true
 categories: [http, caching, web, performance]
 description: "A modern look at the HTTP cache: scaling on the web has never been easier."
