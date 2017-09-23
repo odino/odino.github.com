@@ -22,7 +22,7 @@ HTTP protocol.
 
 ## What is the HTTP cache?
 
-First of all, let's start by diving the HTTP protocol into 2 entities:
+First of all, let's start by dividing HTTP into 2 entities:
 
 * the [spec](https://www.w3.org/Protocols/rfc2616/rfc2616.txt){% fn_ref 1 %}, which highlights how messages can be exchanged between clients and servers
 * the implementation (for example, Google Chrome is an HTTP client, Nginx implements an HTTP server and so on)
