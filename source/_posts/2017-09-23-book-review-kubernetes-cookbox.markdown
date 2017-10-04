@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Book review: Kubernetes cookbox"
+title: "Book review: Kubernetes cookbook"
 date: 2017-09-23 22:06
 comments: true
 categories: [kubernetes, book, review]
