@@ -5,6 +5,7 @@ date: 2017-12-08 19:20
 comments: true
 categories: [linux, unix, bash, shell]
 description: "2nd edition of my personal unix faves: tools I couldn't live without."
+published: true
 ---
 
 A couple years ago I wrote a post presenting a few [unix commands that save me on
