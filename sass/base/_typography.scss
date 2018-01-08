@@ -1,6 +1,6 @@
 $blockquote: $type-border !default;
-$sans: 'Lato', serif ;
-$serif: 'Lato', serif;
+$sans: 'CharterITCPro-Regular', serif;
+$serif: 'CharterITCPro-Regular'  , serif;
 $mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
 $heading-font-family: 'Inika' serif;
 $header-title-font-family: $heading-font-family !default;
@@ -37,7 +37,7 @@ h1 {
 }
 
 @media only screen and (min-width: 992px) {
-  body { font-size: 1.15em; }
+  body { font-size: 1.4em; }
   h1 { font-size: 2.6em; line-height: 1.2em; }
 }
 
@@ -63,7 +63,9 @@ h5, section h4, section section h3 {
 h6, section h5, section section h4, section section section h3 {
   font-size: .8em;
 }
-p, blockquote, ul, ol { margin-bottom: 1.5em; }
+p, blockquote, ul, ol {
+  margin-bottom: 1.5em;
+}
 
 ul { list-style-type: disc;
   ul { list-style-type: circle; margin-bottom: 0px;
