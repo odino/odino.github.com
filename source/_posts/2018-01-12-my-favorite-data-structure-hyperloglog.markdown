@@ -21,9 +21,9 @@ as Google and Reddit.
 
 ## So, what's your phone number?
 
-My friend Tommy and I planned to go to a conference and, while heading to the
+My friend Tommy and I planned to go to a conference and, while heading to
 its location, decide to wager on who will talk to the most strangers.
-So once we reach the place we start conversating around and keep a counter of
+So once we reach the place we start conversing around and keep a counter of
 how many people we talk to.
 
 {% img center /images/networking-event.png %}
