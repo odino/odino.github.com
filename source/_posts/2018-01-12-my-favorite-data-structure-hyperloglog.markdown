@@ -3,7 +3,7 @@ layout: post
 title: "My favorite algorithm (and data structure): HyperLogLog"
 date: 2018-01-13 21:09
 comments: true
-categories: [probabilistic data structures, HLL, BigQuery, algorithms, series]
+categories: [probabilistic data structures, data structures, HLL, BigQuery, algorithms, series]
 description: "One of the most amazing algorithms that were ever invented -- how to efficiently count unique things"
 ---
 

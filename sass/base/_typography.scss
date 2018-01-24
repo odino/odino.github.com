@@ -6,6 +6,41 @@ $heading-font-family: 'Inika' serif;
 $header-title-font-family: $heading-font-family !default;
 $header-subtitle-font-family: $heading-font-family !default;
 
+.anchorjs-link {
+  transition: all .25s linear;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+}
+
+hr.divider-cazzuto {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  overflow: visible; /* For IE */
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+
+hr.divider-cazzuto:after {
+    content: "~";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+.recent {
+  border-radius: 7px;
+  padding: 1em;
+  border: 3px dashed white;
+  color: black;
+}
+
 // Fonts
 .heading {
   font-family: $heading-font-family;

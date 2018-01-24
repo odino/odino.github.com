@@ -4,6 +4,35 @@ single: true
 ---
 <!-- BEGIN _layouts/post.html -->
 {% include article.html %}
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    {% for post in site.posts limit:7 %}
+      <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> ({{ post.date  | date: "%d %B %Y"}})</li>
+    {% endfor %}
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+
+})();
+</script>
 <!-- <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'odino';
