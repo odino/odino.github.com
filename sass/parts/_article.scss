@@ -231,3 +231,36 @@ hr.divider-cazzuto:after {
   border: 3px dashed white;
   color: black;
 }
+
+.bloom > table {
+	margin: 2em;
+
+	th, td {
+		border: 3px solid black;
+		padding: 1em;
+		font-size: 1.3em;
+	}
+
+	td {
+		text-align: center;
+	}
+
+	tr:nth-child(n+1){
+	  background-color: #f5f4ec;
+	  color: #000;
+	}
+
+	tr:nth-child(n+3){
+	  background-color: #EFEFFC;
+	  color: #000;
+	}
+
+	tr:nth-child(n+5){
+	  background-color: #F0FFFD;
+	  color: #000;
+	}
+
+	th {
+	  background-color: white;
+	}
+}
