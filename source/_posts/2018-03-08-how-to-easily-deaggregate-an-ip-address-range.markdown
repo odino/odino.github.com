@@ -14,7 +14,7 @@ IP ranges.
 
 <!-- more -->
 
-Sure that I wouldn't do such thing by hand I google around and found [ipcalc](http://jodies.de/ipcalc),
+Sure that I wouldn't do such thing by hand, I googled around and found [ipcalc](http://jodies.de/ipcalc),
 which can be installed on most Linux systems:
 
 ```
