@@ -9,7 +9,7 @@ module Slideshare
 
 		def render(context)
 			unless @slides.nil?
-				'<div class="slideshare" id="__ss_' + @slides[0] + '"><iframe src="http://www.slideshare.net/slideshow/embed_code/' + @slides[0] +  ' " width="' + @slides[1]+ '" height="' + @slides[2] + '" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>'
+				'<div class="slideshare" id="__ss_' + @slides[0] + '"><iframe src="https://www.slideshare.net/slideshow/embed_code/' + @slides[0] +  ' " width="' + @slides[1]+ '" height="' + @slides[2] + '" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>'
 			end
 		end
 	end
