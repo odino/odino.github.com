@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The simplest template engine for NodeJS"
-date: 2018-03-08 14:35
+date: 2018-03-23 17:59
 comments: true
 categories: [NodeJS, JavaScript, lodash, template engines]
 description: "Let's take advantage of one of lodash's best-kept secrets and use the simplest template engine for Node."
@@ -70,7 +70,7 @@ Sure, we don't call `res.render`, but the difference is very minimal
 
 **Done. No more. That's it.**
 
-## Lesson learned
+## Lessons learned
 
 **I can be a pretty good liar**: I didn't build a template engine, I simply took advantage
 of lodash' own minimalist `.template` method.
