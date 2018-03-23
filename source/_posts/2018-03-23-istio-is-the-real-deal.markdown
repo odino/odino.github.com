@@ -4,6 +4,7 @@ title: "Istio is the real deal"
 date: 2018-03-23 14:06
 comments: true
 categories: [kubernetes, cloud native, istio, microservices]
+description: "Please meet Istio, a service-mesh that turbo-charges communication between your microservices."
 ---
 
 I don't generally spend time blogging (or bragging) about technologies I don't

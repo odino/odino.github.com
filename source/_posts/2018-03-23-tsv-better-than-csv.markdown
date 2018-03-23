@@ -4,6 +4,7 @@ title: "TSV, better than CSV"
 date: 2018-03-23 14:29
 comments: true
 categories: [tsv. csv, format]
+description: "Wondering whether you should use CSV or TSV files? Don't bother, TSV is the answer."
 ---
 
 Lately I've been getting a few questions on why one should use `.tsv` files
