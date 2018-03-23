@@ -4,26 +4,29 @@ title: "The simplest template engine for NodeJS"
 date: 2018-03-08 14:35
 comments: true
 categories: [NodeJS, JavaScript, lodash, template engines]
-published: false
 description: "Let's take advantage of one of lodash's best-kept secrets and use the simplest template engine for Node."
 ---
 
-This is the story of how I decided to dump [nunjucks](https://mozilla.github.io/nunjucks/) and build the best
-templating engine in the world in just...   ...one line of code.
+This is the story of how I decided to dump [nunjucks](https://mozilla.github.io/nunjucks/) and use the best
+templating engine hack in the world.
+
+...with one line of code.
 
 <!-- more -->
 
 ## Background
 
 Node does not seem to have a [clear-cut winner](https://github.com/tj/consolidate.js/#supported-template-engines) when it comes to template engines --
-For the longest time, I banked on nunjucks but, lately, I feel that while developing microservices
-nunjucks is "*too much*" -- so I began to look for minimalist alternatives.
+for the longest time, I banked on nunjucks but I've been wondering if there's
+something *simpler* to take care of templating in small apps.
+I'm not really bashing nunjucks here, I'm simply wondering if anything else can
+get the job done without too much fuss.
 
 ## Mounting the hack
 
-Armed with an [express](https://expressjs.com/) app that consists of a couple
+Armed with an [express](https://expressjs.com/), a couple
 routes, 2 database queries and more documentation in the README than LoCs, I
-started writing this abomination:
+started writing the following:
 
 ``` js
 app.get("/my-view", async (req, res) => {
@@ -48,7 +51,7 @@ compiled({ 'user': 'tommy' });
 ```
 
 Just what I needed -- the syntax is not the jinja one but it mirrors
-template strings, so I can't complain much about it.
+template strings, so I can't complain too much.
 
 Let's put everything together:
 
@@ -65,13 +68,23 @@ function render(view, ctx = {}) {
 Sure, we don't call `res.render`, but the difference is very minimal
 (`.render(tpl, ctx)` vs `.send(render(tpl, ctx))`).
 
+**Done. No more. That's it.**
+
 ## Lesson learned
 
-Well, this "experience" thaught me a few things -- first and foremost, **I can be
-a pretty good liar**: .
+**I can be a pretty good liar**: I didn't build a template engine, I simply took advantage
+of lodash' own minimalist `.template` method.
 
-Quite a few lessons I learned with this master hack:
+At the same time, though, I love
+the fact that I'm using a library I anyhow require 99% of the times I'm working in node
+and I don't need extra dependencies. It definitely can't do everything nunjucks
+does, but, when all you need is rendering a couple templates from your application,
+this approach works well enough.
 
-* I can be a good liar:
-*
-* minimal  elegant
+And to those who are going to tell me what `fs.readFileSync` is bad I say: *well, it depends*.
+
+Do you need to render hundreds of templates per second? Then sure, `readFileSync`
+isn't the most optimized way of doing things. But in a low-traffic, internal app,
+this just fits the bill.
+
+Adios!
