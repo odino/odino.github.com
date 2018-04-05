@@ -1,11 +1,10 @@
 ---
 layout: post
-title: "This is how a (dumb) hashtable works"
-date: 2018-04-02 17:27
+title: "This is how a (dumb) hash table works"
+date: 2018-04-04 05:27
 comments: true
 categories: [data structures, computer science, JavaScript]
-description: "Let's have a look at how hashtables work and why they're so fast by building one and understanding their inner mechanisms."
-published: false
+description: "Let's have a look at how hash tables work and why they're so fast by building one and understanding their inner mechanisms."
 ---
 
 {% img right /images/hashtable.png %}
@@ -15,7 +14,7 @@ How beautiful is `{}`?
 It lets you store values by key, and retrieve them in a very cost-efficient manner
 (`O(1)`, more on this later).
 
-In this post I want to implement a very basic hashtable, and have a look at its inner
+In this post I want to implement a very basic hash table, and have a look at its inner
 workings to explain one of the most ingenious ideas in computer science.
 
 <!-- more -->
@@ -24,7 +23,7 @@ workings to explain one of the most ingenious ideas in computer science.
 
 Imagine you're building a new programming language: you start by having pretty
 simple types (strings, integers, floats, ...) and then proceed to implement very basic
-data structures -- first you come up with the array (`[]`), then comes the hashtable
+data structures -- first you come up with the array (`[]`), then comes the hash table
 (otherwise known as dictionary, associative array, hashmap, map and...the list goes on).
 
 Ever wondered how they work? How they're so damn fast?
@@ -39,7 +38,7 @@ Wikipedia has a good refresher on [computational complexity](https://en.wikipedi
 but I'll add a brief explanation for the lazy ones.
 
 Complexity measures how many steps are required by our function -- the fewer steps,
-the fastest the execution (also known as "running time").
+the faster the execution (also known as "running time").
 
 Let's a look at the following snippet:
 
@@ -50,7 +49,7 @@ function fn(n, m) {
 ```
 
 The computational complexity (from now simply "complexity") of `fn` is `O(1)`,
-meaning that it's constant (you can read this as "*the cost is one*"): no matter
+meaning that it's constant (you can read `O(1)` as "*the cost is one*"): no matter
 what arguments you pass, the platform that runs this code only has to do one
 operation (multiply `n` into `m`). Again, since it's one operation, the cost is
 referred as `O(1)`.
@@ -160,12 +159,12 @@ Now that you've just got a brief introduction (or refresher) on complexity, it's
 very easy to understand that a function with complexity `O(1)` is going to perform
 much better than one with `O(n)`.
 
-Hashtables have a `O(1)` complexity: in layman's terms, they're **superfast**.
+Hashtables have a `O(1)` complexity{% fn_ref 1 %}: in layman's terms, they're **superfast**.
 Let's move on.
 
-## Let's build a (dumb) hashtable
+## Let's build a (dumb) hash table
 
-Our hashtable has 2 simple methods -- `set(x, y)` and `get(x)`. Let's start writing
+Our hash table has 2 simple methods -- `set(x, y)` and `get(x)`. Let's start writing
 some code:
 
 ``` js
@@ -255,7 +254,7 @@ Our `DumbMap is amazing`! It works right out of the box, but how will it perform
 pairs?
 
 Let's try a simple benchmark -- we will first try to find a non-existing element
-in an hashtable with very few elements, and then try the same in one with a large quantity
+in an hash table with very few elements, and then try the same in one with a large quantity
 of elements:
 
 ``` js
@@ -292,13 +291,13 @@ terrible.
 ## Make it fast(er)
 
 We need to find a way to avoid looping through our list: time to put *hash*
-back into the *hashtable*.
+back into the *hash table*.
 
-Ever wondered why this data structure is called **hash**table? That's because
+Ever wondered why this data structure is called **hash** table? That's because
 a hashing function is used on the keys that you set and get: we will use this
 function to turn our key into an integer `i`, and store our value at index `i`
 of our internal list. Since accessing an element, by its index, from a list has
-a constant cost (`O(1)`), then the hashtable will also have a cost of `O(1)`.
+a constant cost (`O(1)`), then the hash table will also have a cost of `O(1)`.
 
 Let's try this out:
 
@@ -333,7 +332,7 @@ W - O - W. This is what I'm talking about!
 We don't have to loop through all elements in the list and retrieving elements
 from `DumbMap` is fast as hell!
 
-Let me put this as straightforward as possible: **hashing is what makes hashtables
+Let me put this as straightforward as possible: **hashing is what makes hash tables
 extremely efficient**. No magic. Nothing more. Nada. Just a simple, clever, ingenious
 idea.
 
@@ -344,7 +343,7 @@ runs in a few seconds, our function will be quite slow regardless of its complex
 
 At the same time, **it's very important to make sure that our hashing function doesn't
 produce a lot of collisions**, as they would be detrimental to the complexity of our
-hashtable.
+hash table.
 
 Confused? Let's take a closer look at collisions.
 
@@ -376,7 +375,7 @@ function hash(key) {
 }
 ```
 
-This function uses an array of ten elements to store values, meaning that elements
+This function uses an array of 10 elements to store values, meaning that elements
 are likely to be replaced -- a nasty bug in our `DumbMap`:
 
 ``` js
@@ -392,7 +391,7 @@ console.log(m.get('element1000')) // 999987
 ```
 
 In order to resolve the issue, we can simply store multiple key-value pairs at the
-same index -- let's amend our hashtable:
+same index -- let's amend our hash table:
 
 ``` js
 class DumbMap {
@@ -434,7 +433,7 @@ As you might notice, here we fall back to our original implementation: store a l
 of key-value pairs and loop through each of them, which is going to be quite slow
 when there are a lot of collisions for a particular index of the list.
 
-Let's benchmark this using our own `hash()` function that generates indexes from 0 to 10:
+Let's benchmark this using our own `hash()` function that generates indexes from 1 to 10:
 
 ``` bash
 with lots of records in the map: 11.919ms
@@ -446,7 +445,7 @@ and by using the hash function from `string-hash`, which generates random indexe
 with lots of records in the map: 0.014ms
 ```
 
-WHOA, there's the cost of picking the right hashing function -- fast enough that
+Whoa! There's the cost of picking the right hashing function -- fast enough that
 it doesn't slow our execution down on its own, and good enough that it doesn't produce a lot
 of collisions.
 
@@ -456,7 +455,7 @@ Remember my words?
 
 > Hashtables have a `O(1)` complexity
 
-Well, I lied: the complexity of an hashtable depends on the hashing function you
+Well, I lied: the complexity of an hash table depends on the hashing function you
 pick. The more collisions you generate, the more the complexity tends toward `O(n)`.
 
 A hashing function such as:
@@ -467,13 +466,13 @@ function hash(key) {
 }
 ```
 
-would mean that our hashtable has a complexity of `O(n)`.
+would mean that our hash table has a complexity of `O(n)`.
 
 This is why, in general, computational complexity has 3 measures: best, average
 and worst-case scenarios. Hashtables have a `O(1)` complexity in best and average case scenarios, but fall
 to `O(n)` in their worst-case scenario.
 
-Remember: **a good hashing function is the key to an efficient hashtable** -- nothing more, nothing less.
+Remember: **a good hashing function is the key to an efficient hash table** -- nothing more, nothing less.
 
 ## More on collisions...
 
@@ -488,26 +487,26 @@ Another popular technique is [open addressing](https://en.wikipedia.org/wiki/Ope
 * if `x + 1` is taken, try `x + 2` and so on...
 * when retrieving an element, hash the key and see if the element at that position (`x`) matches our key
 * if not, try to access the element at position `x + 1`
-* rinse and repeat until you get to the end of the list, or when you find an empty index -- that means our element is not in the hashtable
+* rinse and repeat until you get to the end of the list, or when you find an empty index -- that means our element is not in the hash table
 
 Smart, simple, elegant and [usually very efficient](http://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16-28.html)!
 
 ## FAQs (or TL;DR)
 
-**Does a hashtable hash the values we're storing?**
+#### Does a hash table hash the values we're storing?
 
-No, keys are hashed so that they can be turned into an integer, and both keys
-and values are stored at position `hash(key)` in a list.
+No, keys are hashed so that they can be turned into an integer `i`, and both keys
+and values are stored at position `i` in a list.
 
-**Do the hashing functions used by hashtables generate collisions?**
+#### Do the hashing functions used by hash tables generate collisions?
 
-Absolutely -- so hashtables are implemented with [defense strategies](https://en.wikipedia.org/wiki/Hash_table#Collision_resolution)
+Absolutely -- so hash tables are implemented with [defense strategies](https://en.wikipedia.org/wiki/Hash_table#Collision_resolution)
 to avoid nasty bugs.
 
-**Do hashtables use a list or a linked list internally?**
+#### Do hash tables use a list or a linked list internally?
 
-It depends, [both can work](https://stackoverflow.com/questions/13595767/why-do-hashtables-use-a-linked-list-over-an-array-for-the-bucket).
-In our examples, we use the JavaScript array (`[]`) that can be [resized dynamically](https://www.quora.com/Do-arrays-in-JavaScript-grow-dynamically):
+It depends, [both can work](https://stackoverflow.com/questions/13595767/why-do-hash tables-use-a-linked-list-over-an-array-for-the-bucket).
+In our examples, we use the JavaScript array (`[]`) that can be [dynamically resized](https://www.quora.com/Do-arrays-in-JavaScript-grow-dynamically):
 
 ``` js
 > a = []
@@ -518,7 +517,7 @@ In our examples, we use the JavaScript array (`[]`) that can be [resized dynamic
 [ <3 empty items>, 1 ]
 ```
 
-**Why did you pick JavaScript for the examples? JS arrays ARE hashtables!**
+#### Why did you pick JavaScript for the examples? JS arrays ARE hash tables!
 
 For example:
 
@@ -539,7 +538,7 @@ JavaScript is "universal" and probably the easiest language to understand when l
 at some sample code. I agree JS might not be the best language, but I hope these
 examples are clear enough.
 
-**Is your example a really good implementation of an hashtable? Is it really THAT simple?**
+#### Is your example a really good implementation of an hash table? Is it really THAT simple?
 
 No, not at all.
 
@@ -559,10 +558,14 @@ whether you create a [dictionary in Python](https://stackoverflow.com/questions/
 in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- they all share the same concepts and beautifully work to let us
 store and retrieve element by an identifier, at a (most likely) constant cost.
 
-Before I leave, let me already say "*sorry*" for the typos and mistakes in this
-article -- it's late in the night, I wrote this quickly...   ...but I didn't
-want to leave hashtables, the unsung heroes of computer science, behind anymore!
-
 Hope you enjoyed this article, and feel free to share your feedback with me.
 
+*A
+special thanks goes to [Joe](https://github.com/joejean) who helped me by reviewing
+this article.*
+
 Adios!
+
+{% footnotes %}
+  {% fn I know, I know, I'm kinda lying here. Read until the end of the post ;-) %}
+{% endfootnotes %}
