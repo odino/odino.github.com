@@ -159,7 +159,7 @@ Now that you've just got a brief introduction (or refresher) on complexity, it's
 very easy to understand that a function with complexity `O(1)` is going to perform
 much better than one with `O(n)`.
 
-Hashtables have a `O(1)` complexity{% fn_ref 1 %}: in layman's terms, they're **superfast**.
+Hash tables have a `O(1)` complexity{% fn_ref 1 %}: in layman's terms, they're **superfast**.
 Let's move on.
 
 ## Let's build a (dumb) hash table
@@ -453,7 +453,7 @@ of collisions.
 
 Remember my words?
 
-> Hashtables have a `O(1)` complexity
+> Hash tables have a `O(1)` complexity
 
 Well, I lied: the complexity of an hash table depends on the hashing function you
 pick. The more collisions you generate, the more the complexity tends toward `O(n)`.
@@ -469,7 +469,7 @@ function hash(key) {
 would mean that our hash table has a complexity of `O(n)`.
 
 This is why, in general, computational complexity has 3 measures: best, average
-and worst-case scenarios. Hashtables have a `O(1)` complexity in best and average case scenarios, but fall
+and worst-case scenarios. Hash tables have a `O(1)` complexity in best and average case scenarios, but fall
 to `O(n)` in their worst-case scenario.
 
 Remember: **a good hashing function is the key to an efficient hash table** -- nothing more, nothing less.
@@ -553,7 +553,7 @@ context. There's a lot more to learn, so I would also suggest you to also have a
 
 ## In the end...
 
-Hashtables are a very clever idea we use on a regular basis: no matter
+Hash tables are a very clever idea we use on a regular basis: no matter
 whether you create a [dictionary in Python](https://stackoverflow.com/questions/114830/is-a-python-dictionary-an-example-of-a-hash-table), an [associative array in PHP](https://stackoverflow.com/a/3134315/934439) or a [Map
 in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- they all share the same concepts and beautifully work to let us
 store and retrieve element by an identifier, at a (most likely) constant cost.

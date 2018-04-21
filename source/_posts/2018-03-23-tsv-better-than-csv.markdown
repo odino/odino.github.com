@@ -8,7 +8,7 @@ description: "Wondering whether you should use CSV or TSV files? Don't bother, T
 ---
 
 Lately I've been getting a few questions on why one should use `.tsv` files
-since CSVs are "stardard" and virtually everyone knows how they work -- so I wanted
+since CSVs are "standard" and virtually everyone knows how they work -- so I wanted
 to clarify this once and for all.
 
 <!-- more -->
