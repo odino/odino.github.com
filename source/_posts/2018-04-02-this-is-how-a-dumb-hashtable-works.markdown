@@ -61,7 +61,7 @@ Let's look at this example:
 function fn(n, m) {
   let s = 0
 
-  for (i = 0; 0 < 3; i++) {
+  for (i = 0; i < 3; i++) {
     s += n * m
   }
 
@@ -82,7 +82,7 @@ Now this example is a little bit different:
 function fn(n, m) {
   let s = []
 
-  for (i = 0; 0 < n; i++) {
+  for (i = 0; i < n; i++) {
     s.push(m)
   }
 
@@ -100,7 +100,7 @@ Other examples?
 function fn(n, m) {
   let s = []
 
-  for (i = 0; 0 < 2 * n; i++) {
+  for (i = 0; i < 2 * n; i++) {
     s.push(m)
   }
 
@@ -118,8 +118,8 @@ One more?
 function fn(n, m) {
   let s = []
 
-  for (i = 0; 0 < n; i++) {
-    for (i = 0; 0 < n; i++) {
+  for (i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
       s.push(m)
     }
   }
@@ -140,11 +140,11 @@ One last example?
 function fn(n, m) {
   let s = []
 
-  for (i = 0; 0 < n; i++) {
+  for (i = 0; i < n; i++) {
     s.push(n)
   }
 
-  for (i = 0; 0 < m; i++) {
+  for (i = 0; i < m; i++) {
     s.push(m)
   }
 

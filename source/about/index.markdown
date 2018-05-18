@@ -121,7 +121,7 @@ a godforsaken region of Italy
 a small town suitable for families
 * believe it or not, I had my first PC when I was 16/17
 * I moved to Rome by myself when I was 21
-* I've been a (some say) talended basketball player ( small forward )
+* I've been a (some say) talended basketball player (small / point forward)
 * I once played the bass at a concert
 * back in University times, I started studying Philosophy, then I realized one day
 I would have needed a real job
@@ -136,7 +136,7 @@ I would have needed a real job
 * Gimme some drums or a guitar, I still should be able to play something
 * with [Jacopo](http://www.agiledevelopment.it/), I've been part of the
 [Frog crew](http://a1.sphotos.ak.fbcdn.net/hphotos-ak-snc6/179422_1744393780288_1552073836_1746666_5292395_n.jpg) during Santa Marinella's 2010/2011 Este24 winter championship
-* I've changed **6 houses in the last 3 years**
+* I've changed **6 houses in 3 years** (2011 - 2013)
 * I'm fascinated by [indian food](http://a8.sphotos.ak.fbcdn.net/hphotos-ak-snc7/390052_2597546188565_1552073836_2665338_114963098_n.jpg) and almost
 [everything](http://a3.sphotos.ak.fbcdn.net/hphotos-ak-snc7/319666_2596714327769_1552073836_2664926_1543548191_n.jpg)
 of that [beautiful country](http://www.flickr.com/photos/alessandrolombardi/6438543299/in/set-72157628237175419),
@@ -150,10 +150,12 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I quit with cigarettes in late 2012
 * I'm totally informal
 * In my first 15 months at Namshi I covered 3 positions: Lead Developer, Head of Development and VP Technology
-* I own an XboX, but I rarely play alone (though my wife kicks my ass at [Forza 2](https://en.wikipedia.org/wiki/Forza_Motorsport_2))
-* I visited 20 countries so far (Maldives, Kenya, Spain, Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada, Nederlands, Turkey, Vietnam), some of them very briefly, mostly during conferences
+* ~~I own an XboX, but I rarely play alone (though my wife kicks my ass at [Forza 2](https://en.wikipedia.org/wiki/Forza_Motorsport_2))~~
+* I visited 21 countries so far (Maldives, Kenya, Spain, Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada, Nederlands, Turkey, Vietnam, Finland), some of them very briefly, mostly during conferences
 * I don't drink alcohol
 * one of my favorites TV shows is [River Monsters](http://en.wikipedia.org/wiki/River_Monsters), it brings back great memories of days spent fishing with my father
 * once I moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks), [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers), [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls), Blake Griffin (L.A. Clippers), Kevin Durant (Oklahoma City Thunder), Damien Lillard (Portland Trail Blazers), Kobe Bryant (L.A. Lakers #24), Kobe Bryant (L.A. Lakers - Hardwood Classic Rookie Edition #8), Carmelo Anthony (New York Knicks), Rajon Rondo (Boston Celtics)
 * I got [married](/married) to [Sarah](https://www.facebook.com/sarah.mujeeb) in June 2015
 * I think [Game of Thrones](https://en.wikipedia.org/wiki/Game_of_Thrones) is too predictable
+* I own a PS4 -- a generous gift from my better half. Though I suck at whatever game I try to play
+* I enjoy my solo-time more than I would care to admit
