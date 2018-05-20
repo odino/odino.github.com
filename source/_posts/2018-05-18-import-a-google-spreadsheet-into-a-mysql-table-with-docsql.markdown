@@ -15,12 +15,12 @@ Golang qualifies as one of the weirdest of my creations.
 
 <!-- more -->
 
-At Namshi, we've been using spreadsheet as a mean of configuration for quite some
+At Namshi, we've been using spreadsheets as a mean of configuration for quite some
 time -- you tell the stakeholder "hey, here's a google doc, if you need to change
 one of the translations just edit the doc and wait 5 mins" and the bets are down.
 
 Sometimes we actually need to import this data into MySQL (could be a *una-tantum*
-import as well as well as a scheduled job) and we traditionally did this manually,
+import as well as a scheduled job) and we traditionally did this manually,
 by pulling down a `.tsv` export from Google docs, amending it and running something
 such as `LOAD DATA LOCAL INFILE`.
 
