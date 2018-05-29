@@ -69,7 +69,7 @@ spinning up a SQL Server instance on Azure. Turns out a simple `docker run -e 'A
 does the trick!
 * knowing I was developing a CLI tool in Golang, I thought I would *need* to resort
 to [cobra](https://github.com/spf13/cobra) -- wanting to try to simplify things
-up I instead opted for [go-flags](github.com/jessevdk/go-flags), which has way less
+up I instead opted for [go-flags](https://github.com/jessevdk/go-flags), which has way less
 features but is also less opinionated and faster to setup (cobra is probably overkill
 for a CLI app with only one command)
 
