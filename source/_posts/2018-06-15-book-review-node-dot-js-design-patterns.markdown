@@ -16,7 +16,9 @@ turned out to be pretty disappointing.
 [Node.js design patterns](https://www.amazon.com/Node-js-Design-Patterns-Mario-Casciaro/dp/1783287314)
 gives you a few interesting pointers, like a complete overview of streams or implementing
 a service locator / container in Node -- but to me it feels like that most of the
-topics covered in the book are either too basic or general.
+topics covered in the book are either too basic or general (on a side note: most
+of the code / explanations are still relevant **because** they're generic, and
+that's a plus).
 
 I think it might be that the book is intended for a different audience, so I won't
 make too many assumptions or criticize the book too much. In addition, there's
