@@ -4,6 +4,7 @@ title: "Book review: Node.js Design Patterns (1st edition)"
 date: 2018-06-15 09:56
 comments: true
 categories: [NodeJS, JavaScript, design patterns, book, review]
+description: "I book I didn't like, too basic and generic. Maybe I should have bough that 2nd edition to begin with!"
 ---
 
 This is a book that was recommended to me by one of my former colleagues, but
