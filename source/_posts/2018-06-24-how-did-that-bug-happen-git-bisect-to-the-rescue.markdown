@@ -9,7 +9,7 @@ description: "A brief guide to git bisect, a handy utility that helps you which 
 
 {% img right /images/git.png %}
 
-`git bisect` is a very handy command that let's you [isolate which commit introduced a bug](https://git-scm.com/docs/git-bisect):
+`git bisect` is a very handy command that lets you [isolate which commit introduced a bug](https://git-scm.com/docs/git-bisect):
 you tell it which version of your repository was bug-free and it runs a [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 between your current commit and the one that seems to have bug, asking you to
 confirm on whether the bug seems to be there at each step of the search.
@@ -126,7 +126,7 @@ Bisecting: 0 revisions left to test after this (roughly 1 step)
 /tmp/test-repo (11e5f96 ✔) ᐅ git bisect good
 affade823e7f0cb72a1a97052f700c31dc90cfee is the first bad commit
 commit affade823e7f0cb72a1a97052f700c31dc90cfee
-Author: odino <alessandro.nadalin@gmail.com>
+Author: odino <some.one@gmail.com>
 Date:   Sun Jun 24 23:29:02 2018 +0400
 
     Now: 10
