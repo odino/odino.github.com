@@ -13,7 +13,7 @@ geographical information of an IP address.
 <!-- more -->
 
 First and foremost, I'd like to clarify that this library is nothing but a CLI
-wrapper for the [ip-api.com](http://ip-api.com/), which does the actualy heavy-lifting
+wrapper for the [ip-api.com](http://ip-api.com/), which does the actual heavy-lifting
 for us.
 
 Long story short, `iploc` is a very small utility that let's you lookup geographical
@@ -55,7 +55,7 @@ iploc 12.34.56.78 | jq -r .city
 Columbus
 ```
 
-Installing iploc is fairly straighforward, as you can simply grab the right binary
+Installing `iploc` is fairly straightforward, as you can simply grab the right binary
 from the release page on GitHub:
 
 ```
@@ -87,7 +87,7 @@ iploc_linux_amd64_v1.0.0.tar.gz.1                     100%[=====================
 today I opted to use [cobra](https://github.com/spf13/cobra) as I wanted to see what overhead
 it would introduce in a tool this small: from my perspective, setting up the CLI app
 with cobra was fairly quick and straightforward, even though the binaries are a bit
-chubbier (the amd64 linux bin is 2.8mb vs 2.5mb, so nothing crazy to be honest).
+chubbier (the amd64 linux binary is 2.8mb vs 2.5mb, so nothing crazy to be honest).
 Definitely recommended.
 
 That's it for today!
