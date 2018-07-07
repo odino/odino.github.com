@@ -47,6 +47,8 @@ Except that, as the weeks went by, my timeline started to look like a Hooters jo
 
 {% img center /images/tweet-nsfw-2.png %}
 
+{% img center /images/tweet-nsfw-3.png %}
+
 The ads are practically identical: a burner account
 posting a link with a media and the content of the tweet being a mere "click here" --
 how hard would it be for Twitter to prevent this from happening?
