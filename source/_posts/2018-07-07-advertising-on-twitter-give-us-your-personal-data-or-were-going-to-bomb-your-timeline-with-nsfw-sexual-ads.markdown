@@ -13,7 +13,7 @@ A few months back I started writing on [freeCodeCamp](https://medium.freecodecam
 with the spirit of "giving back" to the community whatever I used to share on
 [my personal blog](https://odino.org) as well.
 
-FCC is a very interesting publications, and one of the personalities I got to
+FCC is a very interesting publication, and one of the personalities I got to
 "discover" was [Quincy Larson](https://twitter.com/ossia); it was by following
 Quincy that I discovered I could opt-out of Twitter's ad tracking, something
 that turned out to be quite of a journey.
@@ -26,13 +26,13 @@ Quincy's [pinned tweet](https://twitter.com/ossia/status/1003302742717292544) is
 
 "Amazing", I thought, let me do the same -- I would definitely like to opt out
 from all those personalized ads: not because of their content, but simply because
-I'd like advertisers (and Twitter) to connect less dots when it comes to my
+I'd like advertisers (and Twitter) to connect fewer dots when it comes to my
 interests and habits.
 
 {% img center /images/odino-privacy-twitter.png %}
 
 How beautiful was to "*Control how Twitter personalizes content and collects and shares certain data.*" --
-I never would have imagined what kind of Pandora's box I had just opened.
+I would never have imagined what kind of Pandora's box I had just opened.
 
 Within a few days from opting-out, I spot a relatively "weird" tweet on my timeline:
 
@@ -57,12 +57,12 @@ I'd say not so hard, and before you ask me to consider the technical implication
 of such a feature, let me introduce you to [Eega Beeva](https://en.wikipedia.org/wiki/Mickey_Mouse_universe#Eega_Beeva), an interesting character
 from the Mickey Mouse comics. "Why?", you ask -- just hold on for a second.
 
-Now, Eega is a funny character -- an human-sort-of-figure from the future who is
-very popular in the [italian version of the comic](http://disney.wikia.com/wiki/Eega_Beeva):
+Now, Eega is a funny character -- a human-sort-of-figure from the future who is
+very popular in the [Italian version of the comic](http://disney.wikia.com/wiki/Eega_Beeva):
 I know of him since my dad used to buy me the Mickey Mouse comics every single week,
 so I had a good understanding of the characters in the MM universe back then.
 
-A few days ago, I saw a tweet from the italian edition of the MM magazine that
+A few days ago, I saw a tweet from the Italian edition of the MM magazine that
 caught my attention, as it was flagged for containing what Twitter thought it might
 have been a sensitive picture:
 
@@ -73,12 +73,12 @@ have been a sensitive picture:
 
 And, right there, I knew that this was all about: Eega Beeva does not wear anything
 in the upper part of his body, so an algorithm deciding whether a tweet might contain
-explicit content might have though that because of his resemblance to a naked body,
+explicit content might have thought that because of his resemblance to a naked body,
 Eega Beeva must be flagged down...   ...and this was the "*may contain sensitive material*" picture:
 
 {% img center /images/eega-beeva-tweet.png %}
 
-> Note that "Eega Beeva" is translated to "Eta Beta" in the italian edition
+> Note that "Eega Beeva" is translated to "Eta Beta" in the Italian edition
 > of the magazine
 
 Now, Twitter, can you please tell me how the picture on the right may contain
