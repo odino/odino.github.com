@@ -152,8 +152,8 @@ other users
 * `s-maxage`, which is exactly like `max-age` but applies to shared caches only (hence the `s-` prefix)
 * `must-revalidate`, which indicates that once the resource is stale, the cache should not serve it without first re-validating it with the server
 * `proxy-revalidate`, same as `must-revalidate` but for shared caches
-* `no-cache`, basically meaning this response should not be cached at all
-* `no-store`, which means you should not cache the resource, as well as you should remove it from the cache if it was there from a previous session
+* `no-cache` tells the cache it always needs to revalidate the resource with the origin server
+* `no-store`, which means you should not cache the resource at all
 * `no-transform` says the intermediary should not toy around with the response payload at all (I've never seen intermediaries doing so, so I'm assuming this is how most softwares like browsers or gateway caches behave by default)
 
 {"Most people think that the Cache-Control is a response header, whereas it can be
