@@ -114,6 +114,10 @@ you a rough idea of the contents I'm planning to write about:
     * AWS Shield
 * Leveraging other services
   * An all in one solution: CloudFlare
+  * Travis-ci
+  * NPM audit
+  * Gemnasium and similar tools
+    * GH security alerts
 * Bug Bounty Programs
   * What's in a program?
   * HackerOne
