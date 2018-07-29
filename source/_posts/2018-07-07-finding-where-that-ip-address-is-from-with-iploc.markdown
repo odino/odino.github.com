@@ -7,7 +7,7 @@ description: "Get location information of an IP address with iploc, a small tool
 categories: [golang, ip, open source, github]
 ---
 
-Today I spend some time to build [iploc](https://github.com/odino/iploc), a small CLI utility that lets you retrieve
+Today I spent some time to build [iploc](https://github.com/odino/iploc), a small CLI utility that lets you retrieve
 geographical information of an IP address.
 
 <!-- more -->
