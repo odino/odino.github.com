@@ -7,6 +7,8 @@ categories: [security, WASEC, web application security, infosec, course, series]
 description: "I've decided to work on a short course / e-book on Web Application SECurity (WASEC since I like to shorten things)"
 ---
 
+{% render_partial series/wasec.markdown %}
+
 {% img right /images/wasec.jpeg %}
 
 I've been thinking of writing a long article around *everything a web developer
@@ -59,24 +61,6 @@ and what I like to keep in mind when trying to secure web applications.
 This table of contents is as stable as a table with three legs, but should give
 you a rough idea of the contents I'm planning to write about:
 
-* Miscellaneous (need to sort these out)
-  * OWASP
-    * Injection
-      * Understanding prepared statements
-    * XSS
-    * Dependencies with known vulnerabilities
-  * Have I been pwoned?
-    * Re-using credentials: a real-world story
-  * Common programming mistakes
-    * Blacklisting vs whitelisting
-    * Logging secrets
-  * Sub-resource integrity
-  * Secrets management
-    * Pushing to Github
-    * An isolated repository
-    * Encrypting secrets with SOPS
-    * Environment variables: not a silver bullet?
-  * Session invalidation in a stateless architecture
 * Introduction
 * Understanding a browser
 * HTTP(S)
@@ -96,7 +80,7 @@ you a rough idea of the contents I'm planning to write about:
     * Origin
     * CORS
       * CORS vs proxies
-* Cookies
+* Managing sessions
   * Understanding HTTP cookies
   * Session vs persistent cookies
   * Flags
@@ -105,24 +89,45 @@ you a rough idea of the contents I'm planning to write about:
       * CSRF tokens
     * httpOnly
   * Supercookies
-  * Alternatives to cookies: localStorage
+  * Alternatives
+    * localStorage
+    * tokens
+      * JWT
+* Situationals
+  * Blacklisting vs whitelisting
+  * Logging secrets
+  * Cookie tampering: never trust the client
+  * Injection
+    * Understanding prepared statements
+  * Dependencies with known vulnerabilities
+  * OWASP
+    * XSS
+  * Have I been pwoned?
+    * Re-using credentials: a real-world story
+  * Session invalidation in a stateless architecture
+  * Sub-resource integrity
 * DDOS attacks
   * Introduction
   * Don't panic!
     * CloudFlare
     * Cloud Armor
     * AWS Shield
+* Secrets management
+  * Pushing to Github
+  * An isolated repository
+  * Encrypting secrets with SOPS
+  * Environment variables: not a silver bullet?
+* Bug Bounty Programs
+  * What's in a program?
+  * HackerOne
+  * Dealing with security researchers
+  * "Malicious" reporters
 * Leveraging other services
   * An all in one solution: CloudFlare
   * Travis-ci
   * NPM audit
   * Gemnasium and similar tools
     * GH security alerts
-* Bug Bounty Programs
-  * What's in a program?
-  * HackerOne
-  * Dealing with security researchers
-  * "Malicious" reporters
 
 And I'm sure I'm forgetting half of the content I originally thought of... :)
 
