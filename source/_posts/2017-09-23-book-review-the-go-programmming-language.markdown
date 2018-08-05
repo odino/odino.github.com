@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Book review: The Go programmming language"
+title: "Book review: The Go programming language"
 date: 2017-09-23 22:07
 comments: true
 categories: [golang, book, review]
