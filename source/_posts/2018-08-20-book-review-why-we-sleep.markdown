@@ -8,7 +8,7 @@ categories: [book, review, sleep, habits]
 
 {% img right /images/why-we-sleep.png %}
 
-**PSA: book of the year candidate right here**
+**PSA: book of the year candidate right here.**
 
 I never started any of my book reviews with a "book of the year" disclaimer,
 but this deserves as much of your attention attention as I can grab: a book that's
