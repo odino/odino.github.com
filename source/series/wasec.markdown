@@ -5,7 +5,7 @@
 		<a href="/web-security-demistified/">Web security demistified: WASEC</a>
 	</li>
 	<li>
-		<a href="/web-application-security-introduction/">Introduction</a>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
 	</li>
 	<li>
 		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
