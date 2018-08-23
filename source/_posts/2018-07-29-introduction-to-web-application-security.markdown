@@ -4,6 +4,7 @@ title: "Introduction to Web Application SECurity"
 date: 2018-07-29 04:21
 comments: true
 categories: [wasec, book, security, web application security]
+description: "Attackers lurk, vulnerabilities proliferate: time to better understand how to secure web applications."
 ---
 
 {% render_partial series/wasec.markdown %}

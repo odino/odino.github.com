@@ -4,6 +4,7 @@ title: "WASEC: understanding the browser"
 date: 2018-07-29 13:54
 comments: true
 categories: [WASEC, security, browser]
+description: "How do browsers work? This is the question we're going to try to answer, with a focus on security."
 ---
 
 {% render_partial series/wasec.markdown %}

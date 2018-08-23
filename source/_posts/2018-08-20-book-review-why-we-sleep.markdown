@@ -4,6 +4,7 @@ title: "Book review: Why We Sleep"
 date: 2018-08-20 07:08
 comments: true
 categories: [book, review, sleep, habits]
+description: "Probably the best book I've read in a while: understand how sleep works and how it shapes your personality, mood and knowledge."
 ---
 
 {% img right /images/why-we-sleep.png %}

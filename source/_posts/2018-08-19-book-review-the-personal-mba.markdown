@@ -4,6 +4,7 @@ title: "Book review: The personal MBA"
 date: 2018-08-19 07:13
 comments: true
 categories: [book, review, mba, business]
+description: "An incredibly useful book that sheds some light on topics we, software engineers, often ignore."
 ---
 
 {% img right /images/personal-mba.jpg %}

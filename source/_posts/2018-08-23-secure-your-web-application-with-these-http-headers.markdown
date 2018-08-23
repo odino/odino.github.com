@@ -4,6 +4,7 @@ title: "Secure your web application with these HTTP headers"
 date: 2018-08-23 12:52
 comments: true
 categories: [WASEC, security, HTTP]
+description: "We can improve the security of our web apps by using a few, underestimated headers: let's check them out!"
 ---
 
 {% render_partial series/wasec.markdown %}

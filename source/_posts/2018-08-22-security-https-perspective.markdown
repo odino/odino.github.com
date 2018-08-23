@@ -4,6 +4,7 @@ title: "Security: HTTP's perspective"
 date: 2018-08-22 15:14
 comments: true
 categories: [WASEC, HTTP, security]
+description: "Deep dive into the HTTP protocol, from a security perspective: understand HTTPS and HTTP verbs."
 ---
 
 {% render_partial series/wasec.markdown %}
