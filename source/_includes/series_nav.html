@@ -1,0 +1,12 @@
+<div class="series_nav">
+  {% if prev_title %}
+  <div class="prev">
+    <a href="{{ prev_link }}">{{ prev_title }}</a>
+  </div>
+  {% endif %}
+  {% if next_title %}
+  <div class="next">
+    <a href="{{ next_link }}">{{ next_title }}</a>
+  </div>
+  {% endif %}
+</div>

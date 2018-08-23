@@ -3,7 +3,7 @@ layout: post
 title: "WASEC: understanding the browser"
 date: 2018-07-29 13:54
 comments: true
-categories:
+categories: [WASEC, security, browser]
 ---
 
 {% render_partial series/wasec.markdown %}
@@ -326,3 +326,9 @@ mostly going to cover, as they provide the largest number
 of **attack vectors** for malicious users. In the next article, we're going to
 take a deeper look at the HTTP protocol, and try to understand what measures we
 should take in order to secure HTTP exchanges.
+
+{% assign prev_title="Introduction" %}
+{% assign prev_link="/introduction-to-web-application-security/" %}
+{% assign next_title="Security at the HTTP level" %}
+{% assign next_link="/security-https-perspective/" %}
+{% render_partial _includes/series_nav.html %}

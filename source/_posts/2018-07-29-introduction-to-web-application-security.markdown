@@ -99,3 +99,7 @@ readers can benefit from your contribution.
 Enough with the formalities, it's now time to see what's cooking: in the next article
 we'll be taking a look at browsers, pieces of software we use on a daily basis that
 can reserve plenty of surprises for our users.
+
+{% assign next_title="Understanding the browser" %}
+{% assign next_link="/wasec-understanding-the-browser/" %}
+{% render_partial _includes/series_nav.html %}

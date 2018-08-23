@@ -120,15 +120,34 @@ ul li a, p a {
 }
 
 ol.aseries {
-  border-radius: 3em;
-  background-color: #F2EFDC;
-  padding: 2em;
-  margin-top: 2em;
-
+  border-radius: 1.5em;
+  padding: 1em;
+  margin-top: 1em;
   li {
     margin-left: 2em;
   }
+  font-size: 1em;
+  line-height: 1.3em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
+
+ol.aseries {
+	position: relative;
+	background: #ecf7ff;
+	border: 4px solid #c2e1f5;
+}
+ol.aseries:after, ol.aseries:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+
 
 .center {
   display: block;
@@ -137,4 +156,79 @@ ol.aseries {
 
 .nobo {
   box-shadow: none;
+}
+
+.series_nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.series_nav div {
+  width: 50%;
+  text-align: center;
+  margin: 1em;
+  padding: 1em;
+}
+
+.series_nav div a {
+  color: #ddf8c6;
+}
+
+.series_nav div.prev {
+	position: relative;
+	background: #262626;
+	border: 6px solid #5f6e78;
+}
+.series_nav div.prev:after, .series_nav div.prev:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.series_nav div.prev:after {
+	border-color: rgba(0, 0, 0, 0);
+	border-right-color: #262626;
+	border-width: 30px;
+	margin-top: -30px;
+}
+.series_nav div.prev:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #5f6e78;
+	border-width: 38px;
+	margin-top: -38px;
+}
+
+.series_nav div.next {
+	position: relative;
+	background: #262626;
+	border: 6px solid #5f6e78;
+}
+.series_nav div.next:after, .series_nav div.next:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.series_nav div.next:after {
+	border-color: rgba(0, 0, 0, 0);
+	border-left-color: #262626;
+	border-width: 30px;
+	margin-top: -30px;
+}
+.series_nav div.next:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #5f6e78;
+	border-width: 38px;
+	margin-top: -38px;
 }

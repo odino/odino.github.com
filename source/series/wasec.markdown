@@ -10,4 +10,7 @@
 	<li>
 		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
 	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
 </ol>
