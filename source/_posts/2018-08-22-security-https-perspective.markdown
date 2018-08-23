@@ -362,4 +362,6 @@ how to take advantage of them.
 
 {% assign prev_title="Understanding the browser" %}
 {% assign prev_link="/wasec-understanding-the-browser/" %}
+{% assign next_title="HTTP headers to secure your web application" %}
+{% assign next_link="/secure-your-web-application-with-these-http-headers/" %}
 {% render_partial _includes/series_nav.html %}

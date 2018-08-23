@@ -13,4 +13,7 @@
 	<li>
 		<a href="/security-https-perspective/">Security at the HTTP level</a>
 	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
 </ol>
