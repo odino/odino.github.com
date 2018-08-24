@@ -249,7 +249,7 @@ returns:
 {% img center /images/wasec/xss-lovely-kitten.png %}
 
 Amazing: our application incredibly understood our search and found a related image.
-If we dig deeper in the source code, available at [github.com/odino/wasec/tree/master/xss-example](https://github.com/odino/wasec/tree/master/xss-example),
+If we dig deeper in the source code, available at [github.com/odino/wasec/tree/master/xss](https://github.com/odino/wasec/tree/master/xss),
 we will soon realize that the application presents a security issue, as whatever
 keyword the user searches for is directly printed in the HTML served to the client:
 
@@ -376,7 +376,7 @@ X-XSS-Protection: 1; report=http://xssviolations.example.com/collector
 Reflected XSS is the most common type of attack, where an unsanitized input gets
 printed by the server without any validation, and it's where this header truly
 shines. If you want to see this yourself, I would recommend to try out the example
-at [github.com/odino/wasec/tree/master/xss-example](https://github.com/odino/wasec/tree/master/xss-example)
+at [github.com/odino/wasec/tree/master/xss](https://github.com/odino/wasec/tree/master/xss)
 as, by appending `xss=on` to the URL, it shows what a browser does when XSS protection
 is turned on. If we enter a malicious string in our search box, such as
 `<script>alert('hello')</script>`, the browser will politely refuse to execute the
