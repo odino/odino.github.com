@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Security: hardening HTTP cookies"
+title: "Web security: hardening HTTP cookies"
 date: 2018-09-14 09:44
 comments: true
 categories: [security, WASEC, HTTP, cookies]
@@ -83,7 +83,7 @@ after some time. This directive is expressed as a date in the form of
 `Date: Fri, 24 Aug 2018 04:33:00 GMT`. Here's a full example of a cookie that expires on the 1st
 of January 2018:
 ```
-access_token=1234;Expires=Fri, 24 Aug 2018 04:33:00 GMT
+access_token=1234;Expires=Mon, 1st Jan 2018 00:00:00 GMT
 ```
 
 ### Max-Age
@@ -315,7 +315,7 @@ your cookies are `Secure`, they will then have access to a very delicious meal.
 
 As we've seen earlier in this series, XSS attacks allow a malicious user to execute arbitrary
 JavaScript on a page: considering that you could read the contents of the cookie
-jar with a simple `document.cookie`, this means that protecting our cookies
+jar with a simple `document.cookie`, protecting our cookies
 from untrusted JavaScript access is a very important aspect of hardening cookies
 from a security standpoint.
 
@@ -416,7 +416,7 @@ we will see an example HTML form that will trigger a cross-site request:
 {% img center /images/wasec/cookies-ss-form.png %}
 
 If we click on the submit button of the form, we will then be able to understand
-the true power of this flag: the form will redirect us to [wasec.local:7888/](http://wasec.local:7888/),
+the true power of this flag -- the form will redirect us to [wasec.local:7888](http://wasec.local:7888/),
 but there is no trace of the `SameSite` cookie in the request made by the browser:
 
 {% img center /images/wasec/cookies-ss-ok.png %}
@@ -463,7 +463,7 @@ over HTTP. Every now and then I'm asked to evaluate alternatives to cookies,
 so I'm going to try and summarize a couple things that get mentioned very often:
 
 * [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage): especially in the context of single-page applications (SPA), localStorage gets
-sometimes mentioned when discussing where to store sensitive cookies: the problem
+sometimes mentioned when discussing where to store sensitive tokens: the problem
 with this approach, though, is that localStorage does not offer any kind of
 protection against XSS attacks. If an attacker is able to execute a simple
 `localStorage.getItem('token')` on a victim's browser, it's game over. `HttpOnly`
@@ -474,7 +474,9 @@ define where is the token going to be stored. In other words, you could store a
 JWT in a cookie, the localStorage or even in memory -- so it doesn't make sense
 to consider JWTs an "alternative" to cookies.
 
-## What would *Lebron* do?
+## What would *LeBron* do?
+
+{% img right /images/lebron.jpeg %}
 
 It's time to move on from the HTTP protocol and its features, such as cookies:
 we've been on a long journey, dissecting why cookies were born, how they're
