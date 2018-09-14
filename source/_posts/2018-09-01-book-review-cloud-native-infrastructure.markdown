@@ -15,7 +15,7 @@ disappointed me.
 The book is structured extremely well, so it comes out as a very enjoyable read.
 One downside, though, becomes fairly evident a few chapters in:
 it isn't practical at all, describes few patterns and instead focuses a lot
-on processes, advises and high-level description of approaches you should follow
+on processes, advices and high-level description of approaches you should follow
 to embrace CN infrastructure.
 
 <!-- more -->

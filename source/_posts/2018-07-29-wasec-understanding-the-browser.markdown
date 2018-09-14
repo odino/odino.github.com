@@ -12,7 +12,7 @@ description: "How do browsers work? This is the question we're going to try to a
 I want to open this series with an article aimed at understanding what browsers do,
 and a brief explanation on how they do so. It is important since most of your
 customers will interact with your web application through a browser, so it's
-imperative to understand the basics behind these wonderful programs.
+imperative to understand the basics of these wonderful programs.
 
 <!-- more -->
 
@@ -27,7 +27,7 @@ at that URL and renders it.
 
 {% img center /images/wasec/browser.png %}
 
-You might be used to work with one of the most popular browser such
+You might be used to work with one of the most popular browsers such
 as Chrome, Firefox, Edge or Safari, but that does not mean that
 there aren't different browsers out there: [lynx](https://lynx.browser.org/), for example,
 is a lightweight, text-based browser that works from your command
@@ -63,7 +63,7 @@ serve our request, it will initiate a TCP connection with it
 and begin the **HTTP exchange**: this is nothing but a way for
 the browser to communicate to the server what he wants, and
 for the server to reply back. HTTP is simply the name of the most popular
-protocol for communicating on the web, and browser mostly talk via HTTP when
+protocol for communicating on the web, and browsers mostly talk via HTTP when
 communicating with servers. An HTTP exchange involves the client (our browser)
 sending a **request**, and the server replying back with a **response**.
 
@@ -73,7 +73,7 @@ like the following:
 
 ```
 GET / HTTP/1.1
-Host: google.ae
+Host: google.com
 Accept: */*
 ```
 
@@ -82,12 +82,12 @@ Let's break the request down, line by line:
 * `GET / HTTP/1.1`: with this first line, the browser aks the server to retrieve
 the document at the location `/`, adding that the rest of the request will follow
 the HTTP/1.1 protocol (it could also used `1.0` or `2`)
-* `Host: google.ae`: this is **the only HTTP header mandatory in HTTP/1.1**. Since
+* `Host: google.com`: this is **the only HTTP header mandatory in HTTP/1.1**. Since
 the server might serve multiple domains (`google.com`, `google.co.uk`, etc) the
 client here mentions that the request was for that specific host
-* `Accept: */*`: an optional header, here the browser is telling the server that
+* `Accept: */*`: an optional header, where the browser is telling the server that
 it will accept any kind of response back. The server could have a resource that
-available in json, xml or html formats, so it can pick whichever format it prefers
+available in JSON, XML or HTML formats, so it can pick whichever format it prefers
 
 In this example, the browser, which acts as a **client**, is done with its request;
 now it's the turn of the server to reply back:
@@ -116,7 +116,7 @@ we will treat the HTTP protocol, its headers and so on later on in their dedicat
 chapters. For now, all you need to understand is that the client and the server
 are exchanging information, and that they do so via HTTP.
 
-Last but nor least, the **rendering** process: how good would a browser be if
+Last but not least, the **rendering** process: how good would a browser be if
 the only thing it would show to the user is a list of funny characters?
 
 ```
@@ -162,7 +162,7 @@ also engage with each other in order to improve the **web standards**, which are
 a sort of "minimum requirements" for browsers.
 
 The [W3C](https://www.w3.org/) is the body behind the development
-of the standards, but it's not unusual for browser to develop their own features
+of the standards, but it's not unusual for browsers to develop their own features
 that eventually make it as web standards, and security is no exception to that.
 
 Chrome 51, for example, [introduced SameSite cookies](https://www.chromestatus.com/feature/4672634709082112),
@@ -227,7 +227,7 @@ Companies like Google invest a relatively good amount of capital into their
 Bug Bounty programs, as it allows them to attract researchers by promising a financial
 benefit should they find any problem with the application.
 
-In a Bug Bounty program everyone wins: the vendor manages to improve the security of its software, and
+In a Bug Bounty program, everyone wins: the vendor manages to improve the security of its software, and
 researchers get paid for their findings. We will discuss these programs later on
 in the book, as I believe Bug Bounty initiatives deserve their own chapter in
 the security landscape.
@@ -245,7 +245,7 @@ By now, we should have understood a very simple but rather important concept:
 **browsers are simply HTTP clients built for the average internet surfer**.
 
 They are definitely more powerful than a platform's bare HTTP client (think of
-NodeJS's `require('http')`, for example), but at the end of the day they're "just"
+NodeJS's `require('http')`, for example), but at the end of the day, they're "just"
 a natural evolution of simpler HTTP clients.
 
 As developers, our HTTP client of choice is probably [cURL](http://curl.haxx.se)
@@ -325,7 +325,7 @@ API).
 As we mentioned, the **HTTP exchange** and **rendering** phases are the ones that we're
 mostly going to cover, as they provide the largest number
 of **attack vectors** for malicious users. In the next article, we're going to
-take a deeper look at the HTTP protocol, and try to understand what measures we
+take a deeper look at the HTTP protocol and try to understand what measures we
 should take in order to secure HTTP exchanges.
 
 {% assign prev_title="Introduction" %}

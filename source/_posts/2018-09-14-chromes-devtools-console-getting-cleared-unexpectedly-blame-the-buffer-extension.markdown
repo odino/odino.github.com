@@ -9,7 +9,7 @@ categories: [chrome, buffer, devtools]
 {% img right /images/devtools.png %}
 
 This was a funny one! After weeks thinking the Chrome team might have messed up,
-I finally got frustrated and looked for an solution to one of the weirdest problems
+I finally got frustrated and looked for a solution to one of the weirdest problems
 I had encountered: the DevTool's console getting cleared unexpectedly.
 
 <!-- more -->

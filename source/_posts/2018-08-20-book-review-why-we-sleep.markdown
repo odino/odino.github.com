@@ -12,7 +12,7 @@ description: "Probably the best book I've read in a while: understand how sleep 
 **PSA: book of the year candidate right here.**
 
 I never started any of my book reviews with a "book of the year" disclaimer,
-but this deserves as much of your attention attention as I can grab: a book that's
+but this deserves as much of your attention as I can grab: a book that's
 so simple, yet so revolutionary, tackling one of the most boring aspects
 of our life.
 
@@ -36,7 +36,7 @@ so I got a bit curious and bought it -- what a great decision.
 Long story short: it's insane how much sleep impacts our life -- it's not just our
 energy level, but things such as (but not limited to) our ability to absorb knowledge,
 understand other people's facial emotions, solve problems and regain memory. I
-particularly enjoyed the down-to-earth tone [the author](https://en.wikipedia.org/wiki/Matthew_Walker_(scientist) carries throughout the book,
+particularly enjoyed the down-to-earth tone [the author](https://en.wikipedia.org/wiki/Matthew_Walker_(scientist) carries throughout the book
 and the fact that you can easily understand the mechanics behind sleep even though
 the subject is very "technical".
 
@@ -119,5 +119,5 @@ One of the earliest studies found that using an iPad—an electronic tablet enri
 we have since discovered that under-slept managers and CEOs are less charismatic and have a harder time infusing their subordinate teams with inspiration and drive. Unfortunately for bosses, a sleep-deprived employee will erroneously perceive a well-rested leader as being significantly less inspiring and charismatic than they truly are. One can only imagine the multiplicative consequences to the success of a business if both the leader and the employees are overworked and under-slept. Allowing and encouraging employees, supervisors, and executives to arrive at work well rested turns them from simply looking busy yet ineffective, to being productive, honest, useful individuals who inspire, support, and help each other. Ounces of sleep offer pounds of business in return.
 {% endblockquote %}
 
-I could go on and on and on...   ...do me a favour instead: buy the book and enjoy
+I could go on and on and on...   ...do me a favor instead: buy the book and enjoy
 what I consider my read of the year.
