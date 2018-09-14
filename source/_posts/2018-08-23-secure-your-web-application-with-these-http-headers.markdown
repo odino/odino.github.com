@@ -619,4 +619,6 @@ information.
 
 {% assign prev_title="Security at the HTTP level" %}
 {% assign prev_link="/security-https-perspective/" %}
+{% assign next_title="Hardening HTTP cookies" %}
+{% assign next_link="/security-hardening-http-cookies/" %}
 {% render_partial _includes/series_nav.html %}
