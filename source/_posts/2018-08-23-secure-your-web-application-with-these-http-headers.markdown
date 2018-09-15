@@ -101,8 +101,8 @@ Public-Key-Pins:
   report-uri="https://pkpviolations.example.org/collect"
 ```
 
-The headers advertises what certificates the server will use (in this case it's two of them)
-using an hash of the certificates, and includes additional information such as
+The header advertises what certificates the server will use (in this case it's two of them)
+using a hash of the certificates, and includes additional information such as
 the time-to-live of this directive (`max-age=3600`), and a few other details. Sadly,
 there's no point in digging deeper to understand what we can do with public key pinning,
 as [this feature is being deprecated by Chrome](https://groups.google.com/a/chromium.org/forum/#!msg/blink-dev/he9tr7p3rZ8/eNMwKPmUBAAJ) -- a signal that its adoption is
@@ -146,7 +146,7 @@ The header takes this form:
 Expect-CT: max-age=3600, enforce, report-uri="https://ct.example.com/report"
 ```
 
-In this example the server is asking the browser to:
+In this example, the server is asking the browser to:
 
 * enable CT verification for the current app for a period of 1 hour (3600 seconds)
 * `enforce` this policy and prevent access to the app if a violation occurs
@@ -163,7 +163,7 @@ Imagine seeing a web page such as this popping in front of your screen:
 
 {% img center /images/wasec/win-hummer.png %}
 
-As soon as you click on the link, you then realize that all the money in your bank
+As soon as you click on the link, you realize that all the money in your bank
 account is gone. What happened?
 
 You were a victim of a *clickjacking* attack: an attacker directed you to their
@@ -192,7 +192,7 @@ Luckily, browsers have come up with a simple solution to the problem: `X-Frame-O
 (abbr. XFO) lets you decide whether your app
 can be embedded as an iframe on external websites. Popularized by Internet Explorer
 8, XFO was first introduced in 2009 and is still supported by all major browsers:
-when a browser sees an iframe, it loads it and verifies that its XFO allow its inclusion
+when a browser sees an iframe, it loads it and verifies that its XFO allows its inclusion
 in the current page before rendering it.
 
 {% img center /images/wasec/xfo-browser.png %}
@@ -297,7 +297,7 @@ http://localhost:7888/?search=%3Cscript+type%3D%22text%2Fjavascript%22%3Ealert%2
 
 {% img center /images/wasec/xss-mitigated.png %}
 
-As you see in the example above, we have told the broser that our CSP policy only
+As you see in the example above, we have told the browser that our CSP policy only
 allows scripts included from the same origin of the current URL, which we can easily
 verify by curling the URL:
 
@@ -314,7 +314,7 @@ Connection: keep-alive
 Since the XSS attack would be perpetrated through an *inline script* (a script
 directly embedded in the HTML content), the browser politely refused to execute it,
 keeping our user safe. Imagine if, instead of simply displaying an alert dialog,
-the attacker would have setup a redirect to its own domain, through some JavaScript
+the attacker would have set up a redirect to its own domain, through some JavaScript
 code that could look like:
 
 ``` js
@@ -357,7 +357,7 @@ This policy defines the following rules:
 As you can see, policies can become lengthy, and if we want to
 ensure the highest protection for our users this can become quite of a tedious process;
 nevertheless, writing a comprehensive CSP policy is an important step towards adding
-an additional layer on security to our web applications.
+an additional layer of security to our web applications.
 
 For more information around CSP I would recommend a deep dive at [developer.mozilla.org/en-US/docs/Web/HTTP/CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 
@@ -534,11 +534,11 @@ that brilliantly covers the whole specification at [developer.mozilla.org/en-US/
 
 ## X-Permitted-Cross-Domain-Policies
 
-Very much related to CORS, the `X-Permitted-Cross-Domain-Policies` targets cross domain
+Very much related to CORS, the `X-Permitted-Cross-Domain-Policies` targets cross-domain
 policies for Adobe products (namely Flash and Acrobat).
 
 I won't go much into the details, as this is a header that targets very specific
-use cases: long story short, Adobe products handle cross domain request through
+use cases: long story short, Adobe products handle cross-domain request through
 a `crossdomain.xml` file in the root of the domain the request is targeting, and
 the `X-Permitted-Cross-Domain-Policies` defines policies to access this file.
 
@@ -552,7 +552,7 @@ At the beginning of our careers, we all probably made the same mistake: use the 
 header to implement a security restriction on our website. If the header contains
 a specific URL in a whitelist we define, we're going to let users through.
 
-Ok, maybe that wasn't everyone of us -- but I damn sure made this mistake back then:
+Ok, maybe that wasn't every one of us -- but I damn sure made this mistake back then:
 trusting the `Referer` header to give us reliable information on the origin the user
 comes from. The header was really useful until we figured that sending
 this information to sites could pose a potential threat to our users' privacy.
@@ -571,7 +571,7 @@ Some of the most common values the `Referrer-Policy` can take are:
 It's worth to note that there are a lot more variations of the `Referrer-Policy`
 (`strict-origin`, `no-referrer-when-downgrade`, etc) but the ones I mentioned above
 are probably going to cover most of your use cases. If you wish to better understand
-each and every variation you can use, I would recommend to head to the
+each and every variation you can use, I would recommend heading to the
 [OWASP dedicated page](https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#rp).
 
 The `Origin` header is very similar to the `Referer`, as it's sent by the browser
@@ -607,14 +607,14 @@ allowing us to understand how they harden our web
 applications through protocol-specific features, together with a bit of help
 from mainstream browsers.
 
-In the next post we will delve deep into one of the most misunderstood features
+In the next post, we will delve deep into one of the most misunderstood features
 of the HTTP protocol: cookies.
 
 Born to bring some sort of state to the otherwise stateless HTTP, cookies have
 probably been used (and misused) by each and everyone of us in order to support
-sessions in our webapps: whenever there's some state we'd like to persist it's
+sessions in our web apps: whenever there's some state we'd like to persist it's
 always easy to say "store it in a cookie". As we will see, cookies are not always
-the safest of vaults, and must be treated carefully when dealing with sensitive
+the safest of vaults and must be treated carefully when dealing with sensitive
 information.
 
 {% assign prev_title="Security at the HTTP level" %}

@@ -381,7 +381,7 @@ such:
 
 See where this is getting? If you click on the submit button, cleverly disguised
 as an attractive prize, $1000 is going to be transferred from your account. This
-is a cross site request forgery -- nothing more, nothing less.
+is a cross-site request forgery -- nothing more, nothing less.
 
 Traditionally, there have been 2 ways to get rid of CSRF:
 
