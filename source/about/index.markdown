@@ -38,6 +38,14 @@ work at, both from a technical and interpersonal perspective;
 some of the feedback that I received includes:
 
 
+> Alex is "The" most motivated person I've ever dealt with throughout my entire career!
+> Having him as a manager and a mentor was an absolute privilege, he's inspired an exceptional growth in myself and within my teammates.
+> Fostered a progressive environment with aggressive eagerness to learn, grew and helped the business thrive, leading a team to build one of the most efficient and best-performing e-commerce platforms in the Middle East, yet maintaining a relaxed work-friendly atmosphere.
+> Technically, I never saw him settle for a subpar solution if something better can be done. And a big part of his technical excellence is that he never stops playing with new technologies, reading books or he is in an event on the other side of the world sharing learnings and experience.
+> His advocacy for methodologies and concepts like microservices, domain-driven development and cutting down the last 10ms from that endpoint, is what I see the perfect tale for a CTO pushing the business potentials even more and keeping the tech-stalk solid, shiny and a delight to work with
+>
+> **Mohamed Amin, Senior Frontend Engineer @ Namshi (2018)**
+>
 > I had the pleasure of working with Alessandro since the early stages of Namshi,
 > before it became the most successful fashion e-commerce in the Middle-East.
 > There is no doubt that Alessandro played a key role in the success of Namshi.
