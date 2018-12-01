@@ -39,7 +39,7 @@ title and a reference in our system.
 
 Let's add some records into our system:
 
-```
+``` sh
 mysql> INSERT INTO item (title, reference) VALUES("iPad - the best tablet in the world", "IPAD-64GB");
 Query OK, 1 row affected (0.00 sec)
 
@@ -54,7 +54,7 @@ Now, suppose that we'd like to allow for our API to allow sending the
 same request twice wthout throwing an error -- we can use
 an `INSERT IGNORE`:
 
-```
+``` sh
 mysql> SELECT * FROM item;
 +----+-------------------------------------+-----------+
 | id | title                               | reference |
@@ -86,7 +86,7 @@ insert and, if it causes an error, don't make a fuss out of it.
 
 But...Surprise, surprise! Let's try with a slightly different query:
 
-```
+``` sh
 mysql> SELECT * FROM item;
 +----+-------------------------------------+-----------+
 | id | title                               | reference |
@@ -126,14 +126,14 @@ string -- which is something I wasn't expecting at all.
 
 ## ON DUPLICATE KEY
 
-Turns out I simply decided to convert my `INSERT IGNORE`
+I simply decided to convert my `INSERT IGNORE`
 to `ON DUPLICATE KEY` in order to avoid sloppy clients
 sending data without some required fields and then
 finding empty strings all over the database.
 
 The switch was very simple:
 
-```
+``` sh
 mysql> SELECT * FROM item;
 Empty set (0.00 sec)
 

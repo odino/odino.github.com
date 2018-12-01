@@ -22,7 +22,7 @@ laptop's battery without even knowing how to.
 
 Last month I flew to the most beautiful continent in
 the world with the idea of spending a whole week doing safaris in
-Tanzania's national parks.
+[Tanzania's national parks](https://www.google.com/search?q=serengeti&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW9JXVqf_eAhWJ_lQKHYGgCYsQ_AUIDygC&biw=1920&bih=990).
 
 Suffice to say I wasn't super excited about bringing
 my laptop with me, mainly because:
@@ -59,7 +59,11 @@ means I can still go on for a couple of hours:
 
 {% img center /images/laptop-charge.png %}
 
-All I know is that I have a better battery, and I owe it to
+All I know is that I have a better battery{% fn_ref 1 %}, and I owe it to
 going on a vacation and being able to "disconnect". Probably, the underlying lesson is that it's good to disconnect once a year :)
 
 Adios!
+
+{% footnotes %}
+    {% fn Critics will argue that the battery life should generally trend north of 8h (https://www.google.com/search?q=dell+xps+battery+life&oq=dell+xps+battery+life&aqs=chrome..69i57j0l5.2957j0j7&sourceid=chrome&ie=UTF-8), but let's be realistic... %}
+{% endfootnotes %}
