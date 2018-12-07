@@ -226,13 +226,12 @@ ol.aseries:after, ol.aseries:before {
 }
 
 .entry-content, .content, .texas, code {
-  line-height: 1.6em;
-  font-size: 1.3em;
+  font-size: 1.1em; // remove to keep font style same as medium
 }
 
 h1, header h1 a, h2 {
   font-family: 'CharterITCPro-Regular', serif;
-  font-size: 1.8em;
+  font-size: 1.5em;
 }
 
 time {
