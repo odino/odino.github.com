@@ -41,9 +41,8 @@ than I did! We both laugh it off and while discussing our approach to counting
 uniques, Tommy comes up with a great idea:
 
 {% blockquote %}
-Alex, you know what? We can't go around with pen and paper and track down a list
-of names, it's really impractical! Today I spoke to 65 different people and counting
-their names on this paper was a real pain in the back...I lost count 3 times and had to start from scratch!
+Alex, you know what? We can't go around with pen and paper and track down a list of names, it's really impractical!
+Today I spoke to 65 different people and counting their names on this paper was a real pain in the back...I lost count 3 times and had to start from scratch!
 {% endblockquote %}
 
 {% blockquote %}
@@ -51,11 +50,9 @@ Yeah, I know, but do we even have an alternative?
 {% endblockquote %}
 
 {% blockquote %}
-What if, for our next conference, instead of asking for names, we ask people the
-last 5 digits of their phone number?
+What if, for our next conference, instead of asking for names, we ask people the last 5 digits of their phone number?
 
-Now, follow me: instead of winning by counting their names, the winner will be
-the one who spoke to someone with the longest sequence of leading zeroes in those digits.
+Now, follow me: instead of winning by counting their names, the winner will be the one who spoke to someone with the longest sequence of leading zeroes in those digits.
 {% endblockquote %}
 
 {% blockquote %}
@@ -64,9 +61,9 @@ Wait Tommy, you're going too fast! Slow down a second and give me an example...
 
 {% blockquote %}
 Sure, just ask people for those last 5 digits, ok? Let's suppose you get 54701.
-No leading zero, so the longest sequence of zeroes for you is 0. The next person
-you talk to tells you it's 02561 -- that's a leading zero! So your longest sequence
-comes to 1.
+No leading zero, so the longest sequence of zeroes for you is 0.
+
+The next person you talk to tells you it's 02561 -- that's a leading zero! So your longest sequence comes to 1.
 {% endblockquote %}
 
 {% blockquote %}
@@ -74,11 +71,9 @@ You're starting to make sense to me...
 {% endblockquote %}
 
 {% blockquote %}
-Yeah, so if we speak to a couple people, chances are that are longest zero-sequence
-will be 0. But if we talk to ~10 people, we have more chances of it being 1.
+Yeah, so if we speak to a couple people, chances are that are longest zero-sequence will be 0. But if we talk to ~10 people, we have more chances of it being 1.
 
-Now, imagine you tell me your longest zero-sequence is 5 -- you must have spoken
-to thousands of people to find someone with 00000 in their phone number!
+Now, imagine you tell me your longest zero-sequence is 5 -- you must have spoken to thousands of people to find someone with 00000 in their phone number!
 {% endblockquote %}
 
 {% blockquote %}

@@ -83,14 +83,6 @@ img, video{
   color: #cc0033;
 }
 
-h1, header h1 a, h2 {
-  font-family: 'CharterITCPro-Regular', serif;
-}
-
-time {
-  color: #777777;
-}
-
 article > footer {
   padding-bottom: 0;
   border: 0;
@@ -231,4 +223,19 @@ ol.aseries:after, ol.aseries:before {
 	border-left-color: #5f6e78;
 	border-width: 38px;
 	margin-top: -38px;
+}
+
+.entry-content, .content, .texas, code {
+  line-height: 1.6em;
+  font-size: 1.3em;
+}
+
+h1, header h1 a, h2 {
+  font-family: 'CharterITCPro-Regular', serif;
+  font-size: 1.8em;
+}
+
+time {
+  color: #777777;
+  font-size: 1.2em;
 }

@@ -5,7 +5,7 @@ date: 2018-12-07 18:30
 comments: true
 categories: [performance, benchmark]
 description: "When measuring performance, remember to pay attention to the weakest, not the strongest."
-published: false
+published: true
 ---
 
 The idea behind equal web performance is that you should
