@@ -51,7 +51,7 @@ map:
 {% img center /images/sales3.png %}
 
 This is a portion of [Jeddah, KSA](https://en.wikipedia.org/wiki/Jeddah) and yes,
-I'm just screwing around. Since I'm in the mood, let's have some fun while we play:
+I'm just screwing around. Since I'm in the mood, let's have some fun while at it:
 
 {% img center /images/sales4.png %}
 

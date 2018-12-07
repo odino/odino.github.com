@@ -1,44 +1,22 @@
 ---
 layout: post
 title: "(Equal) web application performance"
-date: 2018-11-30 12:32
+date: 2018-12-07 18:30
 comments: true
 categories: [performance, benchmark]
 description: "When measuring performance, remember to pay attention to the weakest, not the strongest."
 published: false
 ---
 
-{% img right /images/sicko.jpg %}
-
-Those who know me well are aware of
-my passion for [US filmmaker Michael Moore](https://en.wikipedia.org/wiki/Michael_Moore),
-which developed over 10 years of relentless enjoyment of
-Moore's political satire.
-
-In one of his documentaries, [Sicko](https://en.wikipedia.org/wiki/Sicko),
-Moore tried to expose the shortcomings of the US' private healthcare system.
-US politicians are often quick to point fingers in order to highlight the
-shortcomings of other nations' healthcare programs, often referred to as
-"socialized healthcare" -- like it's an insult.
-
-At some point during the documentary, someone tells Moore "*a nation
-should be judged by how it treats the poorest and not the richest*",
-a sentence that struck me.
-
-The bottom line is: we're all equal, and we deserve equal treatment --
-and that is a belief I started to incorporate when dealing with app
-performance as well.
+The idea behind equal web performance is that you should
+**stop looking at metrics other than the 99th percentile**:
+resources shoud be "equally" distributed across all of your clients so
+that a few clients don't act as a bottleneck for the others.
 
 <!-- more -->
 
-## The idea behind equal web performance...
-
-...is that, simply put, you should **stop looking at metrics other
-than the 99th percentile**.
-
-Resources shoud be "equally" distributed across all of your clients so that a few clients don't act as a bottleneck for the others.
-
-Note that during outages, or when you run at "degraded" performance, this is an acceptable practice instead -- drop some of the traffic to
+Note that during outages, or when you run at "degraded" performance,
+this is an acceptable practice instead -- drop some of the traffic to
 make sure a good portion of your users are able to use
 the service, rather than trying to serve more users with
 nefarious consequences.
@@ -73,13 +51,13 @@ looking at p50 and p99.
 ## p50
 
 The p50 (otherwise known as median), like the average, is kind of an illusion to me: it tells you that half of your traffic is served within a
-particular timframe. 
+particular timeframe. 
 
-TODO: IMAGE NR MEDIAN
+{% img center /images/p50-nr.png %}
 
 Even though it is definitely acceptable to look at the p50, I still
 feel this is a very "elitist" metric: what I'm really after is making
-it easier for everyone in the audience, not just half of it.
+it great for everyone in the audience, not just half of them.
 
 ## p99
 
@@ -88,7 +66,7 @@ I will define a certain number in my head (say 200ms) and think that
 "*I'd be extremely happy if all my traffic was served within that
 timeframe*" -- that's all I look at.
 
-TODO: IMAGE NR P99
+{% img center /images/p99-nr-overview.png %}
 
 I might sometime get distracted by the p50, but the p99 is
 really all that matters to me: if the p50 grows from 25 to
@@ -100,29 +78,29 @@ barely noticeable by our clients.
 ## p100
 
 Is a dream: systems fail, networks are unreliable, bugs happen.
-Consider the p100 a distant dream, and keep looking at the p99
+Consider the p100 utopia, and keep looking at the p99
 instead.
 
 ## Optimizing for the p99
 
 I also generally found out that when you optimize for the p99,
 you really end up optimizing for everyone: my suggestion is to
-look at the slowest responses you're service and tackling those
+look at the slowest responses you're serving and to tackle those
 first. Since they are the slowest, fixing these will improve your
 averages as well as help all other transactions execute faster,
 by removing a slow one that might hog CPU, or memory.
 
 Here are a couple examples of optimizing for the p99 from
-our work at Namshi -- the first is taken from our CloudWatch
-metrics, and is a result of optimizing the top queries in our
-slow query log:
+our work at [Namshi](https://tech.namshi.io) -- the first is taken
+from our RDS metrics, and it's the p99 CPU utilization after optimizing
+the top queries in our slow query log:
 
-TODO: IMAGE CLOUDWATCH
+{% img center /images/p99-cw.png %}
 
 The second one is from NewRelic, and it shows that by removing
-k8s resource limits (as advised by Zalando) we made apps a lot
+k8s resource limits (as advised by [Zalando](https://www.slideshare.net/try_except_/optimizing-kubernetes-resource-requestslimits-for-costefficiency-and-latency-highload/42)) we made apps a lot
 more reliable (this is super-duper counter-intuitive, I know):
 
-TODO: IMAGE K8S NO LIMITS
+{% img center /images/p99-newrelic.png %}
 
 Adios!
