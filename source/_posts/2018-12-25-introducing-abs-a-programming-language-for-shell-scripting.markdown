@@ -179,7 +179,7 @@ Python or Ruby you won't have troubles getting used to ABS.
 You can head over to [ABS' website](https://www.abs-lang.org/), and
 learn more about the language. The brave ones will instead make a trip
 to [ABS's github repo](https://github.com/abs-lang/abs) and
-[download a release](https://github.com/abs-lang/abs/releases) to installing
+[download a release](https://github.com/abs-lang/abs/releases) to install
 it locally.
 
 The braver ones will just:
