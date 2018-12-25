@@ -171,7 +171,7 @@ let me show you the weirder parts instead:
 
 You can skim through the whole [documentation](https://www.abs-lang.org/introduction/why-another-scripting-language)
 within 15 minutes: ABS' aim is not to be a general-purpose, feature-loaded language,
-so the surface isn't that wide. In addition, if you're worked with languages such as JavaScript,
+so the surface isn't that wide. In addition, if you've worked with languages such as JavaScript,
 Python or Ruby you won't have troubles getting used to ABS.
 
 ## What's going to happen now?
