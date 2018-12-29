@@ -1,0 +1,14 @@
+# Ask the user what is the best city in the world!
+echo("What is the best city in the world?")
+selection = stdin()
+
+echo("You picked %s", selection)
+
+tz = $(cat /etc/timezone)
+continent, city = tz.split("/")
+
+if selection == city {
+    echo("You might be biased...")
+} else {
+    echo("You know, I heard %s is a nice place as well...", city)
+}
