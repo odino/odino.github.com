@@ -37,7 +37,17 @@ I always try to make a positive impact in the organizations I
 work at, both from a technical and interpersonal perspective;
 some of the feedback that I received includes:
 
-
+> Alex is the rare gifted engineer who is also a caring and effective leader.
+> While he is happiest immersed in engineering and design problems, he cares deeply about his team and directly invests in their development and effectiveness 
+> in order to grow a high performance team.
+> For most of the 6 years that we worked together Alex's role didn't leave much time for programming during the week as he was working with his team and 
+> stakeholders, but he had a penchant for disappearing over the weekend and coming back with a beautifully engineered solution to a particularly tricky problem 
+> we were facing.
+> On a personal level, Alex is always a pleasure to be around and lightens the mood even in the most trying of circumstances. Alex would be a great addition to 
+> any organization!
+>
+> **Hisham Zarka, Managing Director @ Namshi (2019)**
+>
 > Alex is "The" most motivated person I've ever dealt with throughout my entire career!
 > Having him as a manager and a mentor was an absolute privilege, he's inspired an exceptional growth in myself and within my teammates.
 > Fostered a progressive environment with aggressive eagerness to learn, grew and helped the business thrive, leading a team to build one of the most efficient and best-performing e-commerce platforms in the Middle East, yet maintaining a relaxed work-friendly atmosphere.
