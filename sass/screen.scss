@@ -19,8 +19,8 @@ code {
 }
 
 .wrap {
-  width: 50%;
-  line-height: 1.7em;
+  width: 45%;
+  line-height: 1.5em;
   color: #3A4145;
 }
 
@@ -223,10 +223,6 @@ ol.aseries:after, ol.aseries:before {
 	border-left-color: #5f6e78;
 	border-width: 38px;
 	margin-top: -38px;
-}
-
-.entry-content, .content, .texas, code {
-  font-size: 1.1em; // remove to keep font style same as medium
 }
 
 h1, header h1 a, h2 {

@@ -30,7 +30,7 @@ inspiration.
 
 Even though you might not agree with everything the author puts on the
 table, you will find yourself going through some pearls on software design
-and how to design good software, tthrough simple & coincise code:
+and how to design good software, through simple & coincise code:
 
 {% blockquote %}
 The difference between a bad programmer and a good programmer is understanding.
