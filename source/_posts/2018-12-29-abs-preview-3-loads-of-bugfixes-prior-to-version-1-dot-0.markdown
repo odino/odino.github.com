@@ -129,7 +129,7 @@ if selection == city {
 Hope no more! Simply
 
 ```
-sh <(curl https://www.abs-lang.org/installer.sh)
+bash <(curl https://www.abs-lang.org/installer.sh)
 ```
 
 and start hacking like it's 2018!

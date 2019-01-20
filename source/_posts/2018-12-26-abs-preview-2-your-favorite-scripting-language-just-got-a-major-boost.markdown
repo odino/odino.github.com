@@ -105,7 +105,7 @@ dump it in your path and start hacking with ABS!
 If you're brave enough, just:
 
 ``` bash
-sh <(curl https://www.abs-lang.org/installer.sh)
+bash <(curl https://www.abs-lang.org/installer.sh)
 ```
 
 *(you might need to sudo right before that)*
