@@ -4,6 +4,7 @@ title: "ABS preview-2: your favorite scripting language just got a major boost"
 date: 2018-12-26 14:25
 comments: true
 categories: [abs, scripting, programming language, open source]
+description: "A new release of the ABS programming language, which introduces a whole bunch of interesting features."
 ---
 
 These days I got some spare time to work on the [2nd preview](https://github.com/abs-lang/abs/releases/tag/preview-2)

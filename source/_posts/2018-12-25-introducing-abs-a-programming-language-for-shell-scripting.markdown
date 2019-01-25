@@ -4,6 +4,7 @@ title: "Introducing ABS, a programming language for shell scripting"
 date: 2018-12-25 07:33
 comments: true
 categories: [abs, scripting, programming language, open source]
+description: "A few days ago I wrote ABS, an elegant programming language for shell scripting."
 ---
 
 Over the past few days I took some time to work on a project

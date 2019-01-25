@@ -4,6 +4,7 @@ title: "ABS preview-4: as the language matures, the features keep coming!"
 date: 2019-01-22 18:18
 comments: true
 categories: [abs, scripting, programming language, open source]
+description: "A new release for the ABS programming language, now closer than ever to 1.0."
 ---
 
 Thanks to [a few contributions](https://github.com/abs-lang/abs/graphs/contributors),

@@ -4,6 +4,7 @@ title: "Book review: Simplify: How the Best Businesses in the World Succeed"
 date: 2018-12-07 19:02
 comments: true
 categories: [book, review, business]
+description: "An interesting read for business-oriented technologists."
 ---
 
 {% img right /images/simplify-book.png %}

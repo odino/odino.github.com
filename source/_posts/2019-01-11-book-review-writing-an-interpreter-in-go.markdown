@@ -3,7 +3,8 @@ layout: post
 title: "Book review: Writing An Interpreter In Go"
 date: 2019-01-11 11:12
 comments: true
-categories: 
+categories: [book, review, golang]
+description: "THE most well-written book on lexers and parser -- truly a read that I'd recommend to every programmer."
 ---
 
 {% img right /images/interpreter-cover.png %}

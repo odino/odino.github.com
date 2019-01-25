@@ -4,6 +4,7 @@ title: "ABS preview-3: loads of bugfixes prior to version 1.0"
 date: 2018-12-29 12:43
 comments: true
 categories: [abs, scripting, programming language, open source]
+description: "Kind of a maintenance release for the ABS programming language: preview-3 brings on quite a few bugfixes."
 ---
 
 I just released the [preview-3](https://github.com/abs-lang/abs/releases/tag/preview-3) version of [ABS](https://www.abs-lang.org/), a terse, pragmatic
