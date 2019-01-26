@@ -4,7 +4,7 @@ title: "ABS 1.0.0: here we go!"
 date: 2019-01-26 16:21
 comments: true
 categories: [abs, scripting, programming language, open source]
-description: "A few days ago I wrote ABS, an elegant programming language for shell scripting."
+description: "We just released the first stable version of the ABS language."
 ---
 
 Eventually, the time has come: [ABS 1.0.0 is finally out](https://github.com/abs-lang/abs/releases/tag/1.0.0)!
