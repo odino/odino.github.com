@@ -89,7 +89,7 @@ some + thing # 2
 
 ## Backtick commands
 
-My *absolutely* favorite feature in this release is the ability
+My *absolute* favorite feature in this release is the ability
 to execute commands with the backtick shell syntax:
 
 ``` bash
@@ -125,7 +125,7 @@ arg = "-la"
 Well...every language has one!
 
 You can now pause execution of a script by
-sleeping for certain amount of milliseconds:
+sleeping for a certain amount of milliseconds:
 
 ```
 echo("This will be printed immediately")
@@ -133,9 +133,9 @@ sleep(10000)
 echo("This will be printed in 10s")
 ```
 
-## Hash builtin functions
+## Hash built-in functions
 
-With this release we've added a bunch of new builtin
+With this release we've added a bunch of new built-in
 functionalities to hashes:
 
 ```
