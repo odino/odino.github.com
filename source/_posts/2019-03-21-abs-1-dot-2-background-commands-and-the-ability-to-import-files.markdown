@@ -51,7 +51,7 @@ $ tail ~/.abs_history
 
 ## require(file)
 
-Big one here: you can now **require external files** through `require(path/to/file.abs  )`.
+A big one here: you can now **require external files** through `require(path/to/file.abs  )`.
 This is a stepping stone in order to allow creating base libraries that can be re-used
 across ABS scripts, and organize ABS code a tad better. 
 
@@ -101,12 +101,12 @@ A few more features that made it into this release:
 
 As usual, we managed to fix some minor bugs along the way:
 
-* fixed a few random panics when calling builting functions without enough arguments ([#193](https://github.com/abs-lang/abs/pull/193))
+* fixed a few random panics when calling built-in functions without enough arguments ([#193](https://github.com/abs-lang/abs/pull/193))
 * windows commands are now using cmd.exe rather than bash, as bash might not be available on the system ([#180](https://github.com/abs-lang/abs/pull/180))
 * better error messages when parsing "invalid" numbers ([#182](https://github.com/abs-lang/abs/pull/182))
 * the ABS installer was not working with wget 1.20.1 ([#178](https://github.com/abs-lang/abs/pull/178))
 * the ABS parser now supports numbers in scientific notation (eg. 8.366100560806463e-7, [#174](https://github.com/abs-lang/abs/pull/174))
-* errors on builtin functions would not report the correct error line / column numbers ([#168](https://github.com/abs-lang/abs/pull/168))
+* errors on built-in functions would not report the correct error line / column numbers ([#168](https://github.com/abs-lang/abs/pull/168))
 
 ## Now what?
 
