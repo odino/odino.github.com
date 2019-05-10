@@ -8,10 +8,10 @@ description: "A few weeks ago I used the ABS programming language for a fun task
 ---
 
 It's no secret I've been spending some time having fun with [ABS](https://www.abs-lang.org/),
-a programming language with a terse and coincise syntax that can simplify working with shell
+a programming language with a terse and concise syntax that can simplify working with shell
 commands.
 
-A few weeks ago I needed to remove a file from all of [Namshi](https://github.com/namshi)'s private GitHub repositories,
+A few weeks ago I needed to remove a file from all of [Namshi](https://github.com/namshi)'s private GitHub repositories
 and did so with an ABS script.
 
 Let's get to it!
