@@ -20,7 +20,7 @@ leading mid-sized development teams and managing complexity in distributed syste
 I am a forward-thinker by nature and I still love to get my hands dirty with code, or testing new platforms: I am quite active on [github](https://github.com/odino) and, from time to time,
 blog over here.
 
-I'm currently in Dubai, where I work as CTO @ [Namshi](http://namshi.com), a [Rocket Internet](http://www.rocket-internet.de) venture, leading our engineering team in developing our distributed, stateless microservice-based architecture: I am very proud of what we achieved in the past 6 years together, since we refactored our platform to become a SOA using the best of the tech ecosystem (ie. NodeJS, Docker, ReactJS, Golang, Redis) and the cloud (AWS & Google's Kubernetes among others).
+I'm currently in Dubai, where I last worked as CTO @ [Namshi](http://namshi.com), leading our engineering team in developing our distributed, stateless microservice-based architecture: I am very proud of what we achieved over 7 years together, since we refactored our platform to become a SOA using the best of the tech ecosystem (ie. NodeJS, Docker, ReactJS, Golang, Redis) and the cloud (AWS & Google's Kubernetes engine among others).
 I spend most of my time trying to innovate our stack with tools like Docker or React, taming the implicit complexity of a large scale distributed system and helping our team members adopt new tools, practices and patterns they have never used before, like 12-factor apps, containers or ChatOps.
 
 I'm a big supporter of **microservices**, the **REST** architectural style, asynchronous messaging systems and I'm used to work with some practices of extreme programming (and agile development, in general), like TDD and pair-programming.
