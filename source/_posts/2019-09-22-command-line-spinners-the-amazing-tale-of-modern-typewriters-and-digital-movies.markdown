@@ -13,7 +13,7 @@ like in many other command-line interfaces, we decided to
 add a "loader" to accompany the process, something that looks
 like this:
 
-<video controls><source src="/images/abs-installer-spinner.mp4" type="video/mp4" /></video>
+<video controls autobuffer playsinline><source src="/images/abs-installer-spinner.webm" type="video/webm" /></video>
 
 I want to take a moment to reflect on how we implemented
 the simple spinner you see in the video, a process that derives
@@ -128,7 +128,7 @@ this is the CLI we're talking about.
 
 This example illustrates the problem we're talking about:
 
-<video controls><source src="/images/fail-spinner.mp4" type="video/mp4" /></video>
+<video controls autobuffer playsinline><source src="/images/fail-spinner.webm" type="video/webm" /></video>
 
 Enter good old fashioned typewriters.
 
@@ -204,6 +204,6 @@ func main() {
 
 And the result is this beauty:
 
-<video controls><source src="/images/go-spinner.mp4" type="video/mp4" /></video>
+<video controls autobuffer playsinline><source src="/images/go-spinner.webm" type="video/webm" /></video>
 
 Adios!
