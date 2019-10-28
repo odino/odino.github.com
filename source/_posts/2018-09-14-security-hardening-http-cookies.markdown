@@ -492,4 +492,6 @@ It's time to introduce the *situationals*.
 
 {% assign prev_title="HTTP headers to secure your application" %}
 {% assign prev_link="/secure-your-web-application-with-these-http-headers/" %}
+{% assign next_title="Situationals: what to do when" %}
+{% assign next_link="/wasec-web-application-security-what-to-do-when-dot-dot-dot/" %}
 {% render_partial _includes/series_nav.html %}

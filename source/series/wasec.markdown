@@ -19,4 +19,7 @@
 	<li>
 		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
 	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
 </ol>
