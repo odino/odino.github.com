@@ -1,10 +1,11 @@
-web:
-  build: .
-  net: host
-  ports:
-   - "4000:4000"
-  volumes:
-   - .:/src
-   - ~/.ssh:/ssh
-   - .bashrc:/.bashrc
-  command: bash -c "mkdir ~/.ssh && cp -r /ssh/* ~/.ssh/ && chmod 600 ~/.ssh/id_rsa && eval `ssh-agent` && ssh-add ~/.ssh/id_rsa && bash"
+version: "3.7"
+services:
+  web:
+    build: .
+    network_mode: "host"
+    volumes:
+      - ".:/src"
+      - "/home/alex/.ssh:/ssh"
+      - ".bashrc:/.bashrc"
+    command: bash -c "mkdir ~/.ssh && cp -r /ssh/* ~/.ssh/ && chmod 600 ~/.ssh/id_rsa && eval `ssh-agent` && ssh-add ~/.ssh/id_rsa && bash"
+  
