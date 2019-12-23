@@ -37,6 +37,14 @@ I always try to make a positive impact in the organizations I
 work at, both from a technical and interpersonal perspective;
 some of the feedback that I received includes:
 
+> Alex is one of the best software engineers/architects I have ever worked with. If I say I have learned a lot from him that would be an understatement.
+> I remember my first feature flag in 2012 was supervised by him to solving a pretty complex programming problem pair programming with him. He is a gifted engineer and a great manager.
+> I have not seen another CTO who is still so hands-on who can take up any problem and come up with innovative solutions.
+> In addition to being product-oriented and profit-focused, he can make correct decisions in terms of tools, technologies and make the right strategy for the team and the business. He has amazing communication skills and I doubt I will meet another leader like him with impeccable skills from business and technical viewpoint.
+> Going beyond the hype and keeping things simple has been something I have learned from him. I wish him success in his future endeavors
+>
+> **Geshan Manandhar, Senior Software Engineer @ Namshi (2019)**
+>
 > Alex is the rare gifted engineer who is also a caring and effective leader.
 > While he is happiest immersed in engineering and design problems, he cares deeply about his team and directly invests in their development and effectiveness 
 > in order to grow a high performance team.
