@@ -3,7 +3,7 @@ layout: post
 title: "Local k8s development in 2020"
 date: 2019-12-31 15:45
 comments: true
-categories: k8s, kubernetes, open source
+categories: [k8s, kubernetes, open source]
 description: "This is how you can easily setup a local development workflow on a local kubernetes cluster."
 ---
 
