@@ -4,6 +4,7 @@ title: "Web security: hardening HTTP cookies"
 date: 2018-09-14 09:44
 comments: true
 categories: [security, WASEC, HTTP, cookies]
+description: "A deep-dive into HTTP cookies, how to secure them and live happily ever after."
 ---
 
 {% render_partial series/wasec.markdown %}
