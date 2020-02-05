@@ -33,7 +33,7 @@ complete chapters of the book.
 ## What if I can't afford the book?
 
 Reach out to me privately, and we'll sort something out. I will need to make sure you're not trying
-to *gable the system*, but I'd hate to see someone not being able to read the book simply because they
+to *gamble the system*, but I'd hate to see someone not being able to read the book simply because they
 can't afford it -- I will try to make an effort to reply to everyone who reaches out to me, and make sure
 financial conditions don't get in the way of knowledge.
 
