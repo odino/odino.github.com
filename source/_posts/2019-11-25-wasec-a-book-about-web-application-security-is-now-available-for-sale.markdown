@@ -11,7 +11,7 @@ description: "Today I released the WASEC ebook: grab it now and dig into the wor
 
 I'm pleased to announce (even though you might have already heard about this on [my Twitter stream](https://twitter.com/_odino_))
 that the ebook on web application security I've been working on over the past year is now
-officially available for sale, at the hopefully-reasonable price of $6.99.
+officially available for sale, at the hopefully-reasonable price of ~~$6.99~~ $9.99.
 
 You can now buy the book at [leanpub.com/wasec](https://leanpub.com/wasec), while Kindle enthusiasts will
 have to wait a few more days for it to become available there: it is currently available for [pre-order](https://www.amazon.com/dp/B081Z7SD48)
