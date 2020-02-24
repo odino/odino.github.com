@@ -326,7 +326,7 @@ cmd_up(){
 }
 
 # Deletes the app
-cmd_up(){
+cmd_delete(){
     skaffold delete
 }
 
