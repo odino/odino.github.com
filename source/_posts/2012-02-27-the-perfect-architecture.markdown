@@ -14,7 +14,7 @@ really solid, powerful and scalable architecture.
 
 ## Components: bye bye ESI
 
-I love ESI but I feel that [HInclude](http://127.0.0.1:4000/scaling-through-hinclude/) is a better
+I love ESI but I feel that [HInclude](/scaling-through-hinclude/) is a better
 solution for scaling out: there are a few open questions
 but the idea I have is that ESI is way less powerful
 than fully taking advantage of clients.
