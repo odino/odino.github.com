@@ -4,7 +4,7 @@ LC_ALL="en_US.UTF-8"
 source "http://rubygems.org"
 
 group :development do
-  gem 'rake', '~> 0.9'
+  gem 'rake', '~> 12.3'
   gem 'jekyll', '~> 0.12'
   gem 'rdiscount', '~> 2.0.7'
   gem 'pygments.rb', '~> 0.3.4'
