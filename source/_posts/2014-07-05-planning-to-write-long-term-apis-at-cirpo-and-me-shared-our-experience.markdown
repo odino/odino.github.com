@@ -3,7 +3,7 @@ layout: post
 title: "Planning to write long-term APIs? @cirpo and me shared our experience"
 date: 2014-07-05 23:34
 comments: true
-categories: [conference, talk, PHPDay, PHP, Symfony2, API]
+categories: [conference, talk, phpday, php, symfony2, api]
 ---
 
 A few weeks ago [@cirpo](https://twitter.com/cirpo) and me

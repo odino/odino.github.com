@@ -3,7 +3,7 @@ layout: post
 title: "Intro to React for busy people"
 date: 2017-10-08 16:55
 comments: true
-categories: [react, JavaScript, primer]
+categories: [react, javascript, primer]
 description: "A brief HOWTO for busy people who want to understand how ReactJS works."
 ---
 

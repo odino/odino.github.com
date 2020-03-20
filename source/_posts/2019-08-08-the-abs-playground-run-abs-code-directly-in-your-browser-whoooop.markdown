@@ -3,7 +3,7 @@ layout: post
 title: "The ABS playground: run ABS code directly in your browser (WHOOOOP!)"
 date: 2019-08-17 18:45
 comments: true
-categories: [ABS, open source, WebAssembly, JavaScript]
+categories: [abs, open source, webassembly, javascript]
 description: "An amazing journey into WebAssembly allowed me to build the ABS playground, where you can run ABS code directly in your browser."
 ---
 
@@ -89,4 +89,3 @@ the web editor: simply write some code, hit
 of your eyes!
 
 Let me know if you have any feedback!
-

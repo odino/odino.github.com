@@ -3,7 +3,7 @@ layout: post
 title: "Installing and configuring Varnish on Ubuntu"
 date: 2011-02-09 02:29
 comments: true
-categories: [Linux, Varnish]
+categories: [linux, varnish]
 ---
 
 On a brand new debian/*ubuntu distro, there are only a couple steps to do in order to make Varnish ~~act as a proxy~~ do its job in front of apache.

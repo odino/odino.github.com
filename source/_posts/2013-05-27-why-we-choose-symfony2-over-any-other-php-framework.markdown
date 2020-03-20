@@ -4,7 +4,7 @@ title: "Why our business chose Symfony2 over any other PHP framework"
 date: 2013-05-27 22:16
 comments: true
 published: true
-categories: [Symfony2, Namshi, PHP, Doctrine2, testing, framework, SOA]
+categories: [symfony2, namshi, php, doctrine2, testing, framework, soa]
 ---
 
 Everyone knows that I am a big fan of the

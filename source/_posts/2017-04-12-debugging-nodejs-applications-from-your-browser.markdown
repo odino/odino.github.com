@@ -3,7 +3,7 @@ layout: post
 title: "Debugging NodeJS applications from your browser"
 date: 2017-04-12 17:31
 comments: true
-categories: [DevTools, debugging, JavaScript, NodeJS]
+categories: [devtools, debugging, javascript, nodejs]
 description: "The best debugger for NodeJS? The Chrome DevTools!"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "The OrientDB PHP data mapper, from the trenches "
 date: 2011-05-29 13:32
 comments: true
-categories: [OrientDB]
+categories: [orientdb]
 alias: "/352/the-orientdb-php-data-mapper-from-the-trenches"
 ---
 

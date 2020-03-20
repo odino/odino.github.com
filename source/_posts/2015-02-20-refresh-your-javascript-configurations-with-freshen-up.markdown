@@ -3,7 +3,7 @@ layout: post
 title: "Refresh your JavaScript configurations with freshen-up"
 date: 2015-02-20 16:24
 comments: true
-categories: [nodejs, JavaScript, open source, oss]
+categories: [nodejs, javascript, open source, oss]
 published: true
 description: A handy utility to make sure you can refresh configurations in background
 ---

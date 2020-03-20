@@ -3,7 +3,7 @@ layout: post
 title: "Retrieve top rated products in Magento"
 date: 2010-09-11 13:52
 comments: true
-categories: [PHP, CMS]
+categories: [php, cms]
 alias: "/84/retrieve-top-rated-products-in-magento"
 ---
 

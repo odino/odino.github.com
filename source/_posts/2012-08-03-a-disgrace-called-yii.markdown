@@ -3,7 +3,7 @@ layout: post
 title: "A disgrace called Yii"
 date: 2012-08-03 19:23
 comments: true
-categories: [PHP]
+categories: [php]
 published: false
 ---
 

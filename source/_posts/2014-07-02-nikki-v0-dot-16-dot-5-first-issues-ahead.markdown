@@ -3,7 +3,7 @@ layout: post
 title: "Nikki v0.16.5: first issues ahead"
 date: 2014-07-02 22:47
 comments: true
-categories: [nikki, JavaScript, release, IDE, NodeJS]
+categories: [nikki, javascript, release, ide, nodejs]
 ---
 
 Today I migrated all the possible issues I knew

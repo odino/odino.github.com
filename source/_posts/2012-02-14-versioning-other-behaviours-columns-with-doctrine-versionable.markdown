@@ -3,7 +3,7 @@ layout: post
 title: "Versioning other behaviours' columns with Doctrine Versionable"
 date: 2010-11-23 13:54
 comments: true
-categories: [Doctrine]
+categories: [doctrine]
 alias: "/252/versioning-other-behaviours-columns-with-doctrine-versionable"
 ---
 

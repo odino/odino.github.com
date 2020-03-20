@@ -3,7 +3,7 @@ layout: post
 title: "tar: web.tar: Wrote only X of Y bytes"
 date: 2011-02-02 12:16
 comments: true
-categories: [Linux]
+categories: [linux]
 alias: "/278/tar-web-tar-wrote-only-x-of-y-bytes"
 ---
 

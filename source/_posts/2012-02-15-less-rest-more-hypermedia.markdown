@@ -3,7 +3,7 @@ layout: post
 title: "Less REST, more hypermedia"
 date: 2011-12-19 23:40
 comments: true
-categories: [hypermedia, REST]
+categories: [hypermedia, rest]
 alias: "/395/less-rest-more-hypermedia"
 ---
 

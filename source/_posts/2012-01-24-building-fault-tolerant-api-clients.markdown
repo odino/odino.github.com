@@ -4,7 +4,7 @@ layout: post
 title: "Building fault-tolerant API clients"
 date: 2012-01-24 12:19
 comments: true
-categories: [API]
+categories: [api]
 ---
 
 {% img right /images/broken.chain.jpg %}
@@ -62,4 +62,4 @@ like COM without interface pointers.
 
 ## Proxy caching
 
-First of all you need 
+First of all you need

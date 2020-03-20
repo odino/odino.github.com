@@ -3,7 +3,7 @@ layout: post
 title: "The 5 golden rules when writing open source software"
 date: 2014-07-05 21:29
 comments: true
-categories: [OSS, Open Source, coding]
+categories: [oss, open source, coding]
 ---
 
 There you are, you just opened your laptop

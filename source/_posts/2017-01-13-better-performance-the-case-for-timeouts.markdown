@@ -3,7 +3,7 @@ layout: post
 title: "Better performance: the case for timeouts"
 date: 2017-01-19 18:57
 comments: true
-categories: [performance, nodejs, memory, timeout, SOA, microservices]
+categories: [performance, nodejs, memory, timeout, soa, microservices]
 description: "Use timeouts to build more robust and less expensive distributed systems: less memory, less downtime, more fun!"
 ---
 

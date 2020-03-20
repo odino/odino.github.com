@@ -3,7 +3,7 @@ layout: post
 title: "Graph in PHP through OrientDB"
 date: 2011-04-16 14:11
 comments: true
-categories: [PHP, OrientDB]
+categories: [php, orientdb]
 alias: "/328/graph-in-php-through-orientdb"
 ---
 

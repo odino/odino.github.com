@@ -3,7 +3,7 @@ layout: post
 title: "Hello US, I'm coming to San Francisco"
 date: 2013-08-01 05:24
 comments: true
-categories: [conference, PHP, HTTP, SOA]
+categories: [conference, php, http, soa]
 ---
 
 At the end of August I will
@@ -31,4 +31,3 @@ way**.
 If you are going to be around San Francisco
 in the first days of Semptember, feel free to
 ping me!
-

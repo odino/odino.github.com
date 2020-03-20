@@ -3,7 +3,7 @@ layout: post
 title: "Magento's request doesn't collect GET and POST"
 date: 2010-10-25 10:59
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/226/magento-s-request-doesn-t-collect-get-and-post"
 ---
 <!-- more -->

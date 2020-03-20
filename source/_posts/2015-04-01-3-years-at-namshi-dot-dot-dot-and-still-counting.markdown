@@ -3,7 +3,7 @@ layout: post
 title: "3 years at Namshi...and still counting!"
 date: 2015-04-01 22:20
 comments: true
-categories: [Namshi, personal]
+categories: [namshi, personal]
 ---
 
 Today I celebrate my third birthday at Namshi, 3 long, long

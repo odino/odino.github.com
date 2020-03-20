@@ -3,7 +3,7 @@ layout: post
 title: "Graph databases: OrientDB to the rescue"
 date: 2011-04-16 14:02
 comments: true
-categories: [NoSQL, GraphDB, OrientDB]
+categories: [nosql, graphdb, orientdb]
 alias: "/327/graph-databases-orientdb-to-the-rescue"
 ---
 

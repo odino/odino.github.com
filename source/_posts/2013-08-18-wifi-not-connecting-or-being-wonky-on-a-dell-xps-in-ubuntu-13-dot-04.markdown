@@ -3,7 +3,7 @@ layout: post
 title: "WiFi not connecting or being wonky on a Dell XPS in Ubuntu 13.04"
 date: 2013-08-18 23:51
 comments: true
-categories: [ubuntu, linux, wifi, hardware, XPS]
+categories: [ubuntu, linux, wifi, hardware, xps]
 ---
 
 Today, even though I come from a weekend
@@ -35,5 +35,3 @@ sudo /etc/kernel/postrm.d/zz-update-grub 3.8.0-19-generic /boot/vmlinuz-3.8.0-19
 ```
 
 This solved the issue, at least for me ;-)
-
-

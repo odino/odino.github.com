@@ -3,7 +3,7 @@ layout: post
 title: "CakeFest 2013 wrap-up"
 date: 2013-09-21 16:58
 comments: true
-categories: [conference, CakePHP, CakeFest, USA, San Francisco]
+categories: [conference, cakephp, cakefest, usa, san francisco]
 ---
 
 I am taking some time off to describe my last trip between
@@ -127,5 +127,3 @@ the CakeFest is an event I would definitely like to join
 again in the future.
 
 Who knows where the [crazy band is heading next year!](http://bakery.cakephp.org/articles/predominant/2013/03/20/cakefest_2013_-_vote_for_the_location)
-
-

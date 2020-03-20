@@ -3,7 +3,7 @@ layout: post
 title: "Managing PHP dependencies with composer"
 date: 2012-01-25 11:44
 comments: true
-categories: [PHP]
+categories: [php]
 ---
 
 <!-- more -->

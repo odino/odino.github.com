@@ -3,7 +3,7 @@ layout: post
 title: "Beautifying JSON data from the shell"
 date: 2013-06-22 15:36
 comments: true
-categories: [JSON, shell, python]
+categories: [json, shell, python]
 ---
 
 Yesterday I bumped into a very

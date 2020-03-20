@@ -3,7 +3,7 @@ layout: post
 title: "Sending HipChat notifications in PHP"
 date: 2013-07-19 14:20
 comments: true
-categories: [HipChat, Notificator, Namshi, PHP, OSS]
+categories: [hipchat, notificator, namshi, php, oss]
 ---
 
 This morning I added a couple handlers to

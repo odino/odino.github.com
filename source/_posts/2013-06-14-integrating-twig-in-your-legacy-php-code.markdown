@@ -3,7 +3,7 @@ layout: post
 title: "Integrating Twig in your legacy PHP code"
 date: 2013-06-15 23:15
 comments: true
-categories: [twig, PHP, legacy]
+categories: [twig, php, legacy]
 published: true
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Singletons of the web"
 date: 2011-03-21 11:14
 comments: true
-categories: [REST]
+categories: [rest]
 alias: "/307/singletons-of-the-web"
 ---
 

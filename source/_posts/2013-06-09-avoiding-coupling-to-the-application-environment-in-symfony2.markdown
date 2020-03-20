@@ -3,7 +3,7 @@ layout: post
 title: "Avoiding coupling to the application environment in Symfony2"
 date: 2013-06-09 10:52
 comments: true
-categories: [Symfony2, PHP]
+categories: [symfony2, php]
 published: false
 ---
 

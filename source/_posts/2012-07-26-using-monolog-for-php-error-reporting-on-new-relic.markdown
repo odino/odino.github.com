@@ -3,7 +3,7 @@ layout: post
 title: "Using Monolog for PHP error reporting on New Relic"
 date: 2012-07-27 08:00
 comments: true
-categories: [PHP, Monolog, New Relic, log management]
+categories: [php, monolog, new relic, log management]
 ---
 
 I **do** really like [New Relic](http://newrelic.com/), a real-time

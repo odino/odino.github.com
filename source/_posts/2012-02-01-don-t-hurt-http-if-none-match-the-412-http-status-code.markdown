@@ -3,7 +3,7 @@ layout: post
 title: "Don't hurt HTTP: If-(None-)Match & the 412 HTTP status code"
 date: 2011-03-06 00:08
 comments: true
-categories: [HTTP, cache]
+categories: [http, cache]
 alias: "/don-t-rape-http-if-none-match-the-412-http-status-code"
 ---
 

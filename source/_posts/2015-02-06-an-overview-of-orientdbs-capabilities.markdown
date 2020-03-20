@@ -3,7 +3,7 @@ layout: post
 title: "An overview of OrientDB's capabilities"
 date: 2015-02-06 13:45
 comments: true
-categories: [orientdb, series, orientdb 101, database, ACID, RDBMS, NoSQL]
+categories: [orientdb, series, orientdb 101, database, acid, rdbms, nosql]
 published: true
 description: What makes OrientDB so special? Find out about this extraordinary NoSQL graph database
 ---

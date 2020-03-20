@@ -3,7 +3,7 @@ layout: post
 title: "The state of HTTP/2.0"
 date: 2012-10-15 23:45
 comments: true
-categories: [HTTP, SPDY, web]
+categories: [http, spdy, web]
 ---
 
 With a few days of delay I'm here reporting and commenting

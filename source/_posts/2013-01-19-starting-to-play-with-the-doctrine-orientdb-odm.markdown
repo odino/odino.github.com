@@ -3,7 +3,7 @@ layout: post
 title: "Starting to play with the Doctrine OrientDB ODM"
 date: 2013-01-20 23:00
 comments: true
-categories: [Doctrine, OrientDB, orientdb-odm]
+categories: [doctrine, orientdb, orientdb-odm]
 published: true
 ---
 

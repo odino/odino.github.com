@@ -3,7 +3,7 @@ layout: post
 title: "History of HTTP, SPDY and HTTP/2.0 - Video"
 date: 2014-07-07 17:22
 comments: true
-categories: [conference, talk, HTTP, SPDY, protocol, CakeFest]
+categories: [conference, talk, http, spdy, protocol, cakefest]
 ---
 
 ...and the folks from the [CakeFest](http://cakefest.org/) ended up

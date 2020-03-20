@@ -3,7 +3,7 @@ layout: post
 title: "AB testing in PHP with namshi/ab"
 date: 2013-07-13 14:27
 comments: true
-categories: [testing, AB testing, FOSS, Namshi, PHP, Github, Open Source]
+categories: [testing, ab testing, foss, namshi, php, github, open source]
 published: true
 ---
 

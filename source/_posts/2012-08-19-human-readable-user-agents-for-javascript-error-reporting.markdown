@@ -3,7 +3,7 @@ layout: post
 title: "Human-readable user agents for JavaScript error reporting"
 date: 2012-08-22 09:40
 comments: true
-categories: [JavaScript, log management]
+categories: [javascript, log management]
 published: true
 ---
 
@@ -182,5 +182,3 @@ if ($userAgent) {
 	);
 }
 ```
-
-

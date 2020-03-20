@@ -3,7 +3,7 @@ layout: post
 title: "Symfony2 console: permission denied during autocompletion"
 date: 2013-03-11 10:11
 comments: true
-categories: [Symfony2]
+categories: [symfony2]
 ---
 
 Yesterday I faced a pretty cryptic issue

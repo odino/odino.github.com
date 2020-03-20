@@ -3,7 +3,7 @@ layout: post
 title: "Generating badges / shields with NodeJS"
 date: 2015-05-16 19:05
 comments: true
-categories: [NodeJS, shields.io, SVG]
+categories: [nodejs, shields.io, svg]
 description: How can you generate badges (like the 'build status' ones) through Node? Let's find out!
 ---
 

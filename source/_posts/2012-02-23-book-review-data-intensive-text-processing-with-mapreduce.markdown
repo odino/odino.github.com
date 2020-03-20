@@ -3,7 +3,7 @@ layout: post
 title: "Book review: Data-Intensive Text Processing with MapReduce"
 date: 2012-02-23 12:57
 comments: true
-categories: [book, MapReduce]
+categories: [book, mapreduce]
 ---
 
 As part of my studies not directly connected to my job,

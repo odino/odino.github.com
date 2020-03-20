@@ -3,7 +3,7 @@ layout: post
 title: "PHP User Group Dubai, here we start again!"
 date: 2013-06-18 13:38
 comments: true
-categories: [PHP, PUG, Dubai]
+categories: [php, pug, dubai]
 ---
 
 After launching a couple

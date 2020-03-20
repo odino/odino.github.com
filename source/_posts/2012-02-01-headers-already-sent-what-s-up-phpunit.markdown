@@ -3,7 +3,7 @@ layout: post
 title: "Headers already sent... what's up PHPUnit?"
 date: 2010-09-11 13:50
 comments: true
-categories: [PHPUnit]
+categories: [phpunit]
 ---
 
 Here we go with a simple workaround to resolve a bad error that you can encounter with PHPUnit: `headers already sent` and failure of the tests.

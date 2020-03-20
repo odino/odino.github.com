@@ -3,7 +3,7 @@ layout: post
 title: "Hands on PHP 5.4: traits and other good stuff"
 date: 2011-07-25 14:03
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/373/hands-on-php-5-4-traits-and-other-good-stuff"
 ---
 
@@ -149,5 +149,3 @@ $a['logger']() ;
 which is awesome if you want to associatively store - for example - lambas in an array.
 
 You can see the full list of our crappy [PHP 5.4 experiments](https://gist.github.com/1102671) on this gist.
-
-

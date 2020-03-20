@@ -3,7 +3,7 @@ layout: post
 title: "Symfony2, HTTP cache & the good parts of both of'em"
 date: 2011-05-15 23:27
 comments: true
-categories: [HTTP, Symfony2]
+categories: [http, symfony2]
 alias: "/343/symfony2-http-cache-the-good-parts-of-both-of-em"
 ---
 

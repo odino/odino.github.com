@@ -3,7 +3,7 @@ layout: post
 title: "The shortest path problem in PHP: demystifying Dijkstra's algorithm"
 date: 2011-09-06 02:14
 comments: true
-categories: [PHP, algorithms]
+categories: [php, algorithms]
 alias: "/379/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm"
 ---
 

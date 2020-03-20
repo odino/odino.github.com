@@ -3,7 +3,7 @@ layout: post
 title: "Space to the youngsters..."
 date: 2013-09-23 18:26
 comments: true
-categories: [Namshi, team, BDD, Behat]
+categories: [namshi, team, bdd, behat]
 ---
 
 One of the best feeling ever, while heading

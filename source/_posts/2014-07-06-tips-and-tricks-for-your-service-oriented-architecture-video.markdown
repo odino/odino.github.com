@@ -3,7 +3,7 @@ layout: post
 title: "Tips and tricks for your Service Oriented Architecture - Video"
 date: 2014-07-06 00:05
 comments: true
-categories: [conference, talk, SOA, CakeFest]
+categories: [conference, talk, soa, cakefest]
 ---
 
 The folks from the [CakeFest](http://cakefest.org/) got to upload the video of my

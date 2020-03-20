@@ -3,7 +3,7 @@ layout: post
 title: "Logging JavaScript errors"
 date: 2012-07-27 09:00
 comments: true
-categories: [JavaScript, log management]
+categories: [javascript, log management]
 ---
 
 In one of my latest posts I talked about

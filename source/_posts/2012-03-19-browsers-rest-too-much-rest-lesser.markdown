@@ -3,7 +3,7 @@ layout: post
 title: "Browsers rest too much REST lesser"
 date: 2010-10-29 15:50
 comments: true
-categories: [REST]
+categories: [rest]
 alias: "/237/browsers-rest-too-much-rest-lesser"
 ---
 

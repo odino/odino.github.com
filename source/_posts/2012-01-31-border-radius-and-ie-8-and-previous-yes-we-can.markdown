@@ -3,7 +3,7 @@ layout: post
 title: "Border radius and IE 8 and previous yes we can"
 date: 2010-09-11 14:51
 comments: true
-categories: [CSS]
+categories: [css]
 alias: "/50/border-radius-and-ie-8-and-previous-yes-we-can"
 ---
 

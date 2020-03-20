@@ -3,7 +3,7 @@ layout: post
 title: "Using the Proxy pattern to implement lazy-loading"
 date: 2012-11-23 10:38
 comments: true
-categories: [PHP, design patterns, Proxy pattern, orient]
+categories: [php, design patterns, proxy pattern, orient]
 published: false
 ---
 

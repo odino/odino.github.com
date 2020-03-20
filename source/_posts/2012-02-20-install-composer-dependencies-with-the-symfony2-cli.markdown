@@ -4,7 +4,7 @@ layout: post
 title: "Create a Composer command line installer with the Symfony2 CLI"
 date: 2012-02-21 10:51
 comments: true
-categories: [Symfony2, PHP, CLI]
+categories: [symfony2, php, cli]
 ---
 
 {% render_partial series/symfony-components.markdown %}

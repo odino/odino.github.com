@@ -3,7 +3,7 @@ layout: post
 title: "The simplest template engine for NodeJS"
 date: 2018-03-23 17:59
 comments: true
-categories: [NodeJS, JavaScript, lodash, template engines]
+categories: [nodejs, javascript, lodash, template engines]
 description: "Let's take advantage of one of lodash's best-kept secrets and use the simplest template engine for Node."
 ---
 

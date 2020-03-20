@@ -3,7 +3,7 @@ layout: post
 title: "HTTP saves time, saves money, saves you"
 date: 2011-09-21 10:33
 comments: true
-categories: [HTTP]
+categories: [http]
 alias: "/384/http-saves-time-saves-money-saves-you"
 ---
 

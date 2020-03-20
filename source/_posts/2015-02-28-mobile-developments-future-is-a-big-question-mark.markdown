@@ -3,7 +3,7 @@ layout: post
 title: "Mobile development's future is a big question mark"
 date: 2015-02-28 18:48
 comments: true
-categories: [mobile, android, ios, development, JavaScript, ReactJS]
+categories: [mobile, android, ios, development, javascript, reactjs]
 published: true
 description: How will the mobile development ecosystem look in 5 years? The current landscape isn't very exciting, and I feel there might be revolutions ahead
 ---

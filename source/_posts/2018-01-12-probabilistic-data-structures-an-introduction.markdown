@@ -3,7 +3,7 @@ layout: post
 title: "Probabilistic data structures: an introduction"
 date: 2018-01-12 09:44
 comments: true
-categories: [data structures, probability, probabilistic data structures, series, HLL]
+categories: [data structures, probability, probabilistic data structures, series, hll]
 description: "Welcome to the world of probabilistic data structures, where ingenious algorithms meet real-life problems"
 ---
 

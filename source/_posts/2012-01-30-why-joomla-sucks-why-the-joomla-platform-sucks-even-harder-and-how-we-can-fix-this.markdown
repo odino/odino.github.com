@@ -3,7 +3,7 @@ layout: post
 title: "Why Joomla sucks, why the Joomla platform sucks even harder and how We can fix this"
 date: 2011-07-18 12:00
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/367/why-joomla-sucks-why-the-joomla-platform-sucks-even-harder-and-how-we-can-fix-this"
 ---
 

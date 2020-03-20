@@ -3,7 +3,7 @@ layout: post
 title: "A PHP library to retrieve WHOIS informations"
 date: 2012-02-03 03:40
 comments: true
-categories: [PHP, open source]
+categories: [php, open source]
 ---
 
 {% render_partial series/robowhois.markdown %}

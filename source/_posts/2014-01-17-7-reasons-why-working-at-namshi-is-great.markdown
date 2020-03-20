@@ -3,7 +3,7 @@ layout: post
 title: "7 reasons why working for Namshi is great"
 date: 2014-01-17 17:44
 comments: true
-categories: [Namshi, job, Dubai]
+categories: [namshi, job, dubai]
 ---
 
 I've been working for [Namshi](http://namshi.com) for almost 2

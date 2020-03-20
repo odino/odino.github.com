@@ -3,7 +3,7 @@ layout: post
 title: "A simple menu and the relational model collapses"
 date: 2011-04-17 16:07
 comments: true
-categories: [NoSQL]
+categories: [nosql]
 alias: "/329/a-simple-menu-and-the-relational-model-collapses"
 ---
 

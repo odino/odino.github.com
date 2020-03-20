@@ -3,7 +3,7 @@ layout: post
 title: "How to discover if a site has been built with Joomla!"
 date: 2010-09-11 13:44
 comments: true
-categories: [CMS]
+categories: [cms]
 alias: "/33/how-to-discover-if-a-site-has-been-built-with-joomla"
 ---
 

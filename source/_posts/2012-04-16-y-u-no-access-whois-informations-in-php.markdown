@@ -3,7 +3,7 @@ layout: post
 title: "Y U NO access WHOIS informations in PHP?"
 date: 2012-04-16 00:38
 comments: true
-categories: [WHOIS, open source, Robowhois, PHP]
+categories: [whois, open source, robowhois, php]
 ---
 
 {% render_partial series/robowhois.markdown %}

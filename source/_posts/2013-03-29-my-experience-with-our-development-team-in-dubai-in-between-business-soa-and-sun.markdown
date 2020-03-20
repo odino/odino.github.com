@@ -3,7 +3,7 @@ layout: post
 title: "My experience with our development team in Dubai: in between business, SOA and sun"
 date: 2013-03-29 18:08
 comments: true
-categories: [conference, Rocket Internet, Namshi, teams, SOA, recruiting]
+categories: [conference, rocket internet, namshi, teams, soa, recruiting]
 ---
 
 Today I had the opportunity to share with the

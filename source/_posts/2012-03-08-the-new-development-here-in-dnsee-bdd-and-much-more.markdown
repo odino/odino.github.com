@@ -3,7 +3,7 @@ layout: post
 title: "The \"new\" development here in DNSEE: BDD and much more"
 date: 2011-10-03 12:34
 comments: true
-categories: [BDD, DNSEE]
+categories: [bdd, dnsee]
 alias: "/386/the-new-development-here-in-dnsee-bdd-and-much-more"
 ---
 

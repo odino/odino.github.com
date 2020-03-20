@@ -3,7 +3,7 @@ layout: post
 title: "Roy Fielding on SOAP in the W3C context"
 date: 2012-01-27 15:20
 comments: true
-categories: [quotes, SOAP]
+categories: [quotes, soap]
 ---
 
 <!-- more -->

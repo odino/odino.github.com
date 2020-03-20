@@ -1,0 +1,21 @@
+files = `ls source/_posts`.lines()
+
+for file in files {
+    content = `cat source/_posts/$file`
+
+    parts = content.split('---')
+
+    if parts.len() > 2 {
+        frontmatter = parts[1]
+        frontmatter_parts = frontmatter.lines()
+
+        for k, text in frontmatter_parts {
+            if text.prefix('categories:') {
+                frontmatter_parts[k] = text.lower()
+            }
+        }
+        parts[1] = "\n" + frontmatter_parts.join("\n") + "\n"
+    }
+
+    parts.join('---') > "source/_posts/$file"
+}

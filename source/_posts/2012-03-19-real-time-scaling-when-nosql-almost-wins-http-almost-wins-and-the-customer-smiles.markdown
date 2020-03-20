@@ -3,7 +3,7 @@ layout: post
 title: "Real-time scaling: when NoSQL almost wins, HTTP almost wins, and the customer smiles"
 date: 2011-05-06 15:42
 comments: true
-categories: [ESI, NoSQL, scaling]
+categories: [esi, nosql, scaling]
 alias: "/319/real-time-scaling-when-nosql-almost-wins-http-almost-wins-and-the-customer-smiles"
 ---
 

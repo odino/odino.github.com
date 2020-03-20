@@ -3,7 +3,7 @@ layout: post
 title: "Ideas of March: REST better"
 date: 2011-03-15 12:57
 comments: true
-categories: [REST]
+categories: [rest]
 alias: "/299/ideas-of-march-rest-better"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "iMacro: JavaScript loops with variables"
 date: 2010-12-01 02:03
 comments: true
-categories: [JavaScript]
+categories: [javascript]
 alias: "/256/imacro-javascript-loops-with-variables"
 ---
 

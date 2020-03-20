@@ -3,7 +3,7 @@ layout: post
 title: "Long live XML (too sorry for JSON fanboyz)"
 date: 2011-04-02 11:47
 comments: true
-categories: [XML]
+categories: [xml]
 alias: "/320/long-live-xml-too-sorry-for-json-fanboyz"
 ---
 

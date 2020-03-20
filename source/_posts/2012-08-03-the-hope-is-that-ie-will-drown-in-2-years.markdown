@@ -46,4 +46,4 @@ IE leaving the market kicked out by the yougsters,
 nontheless it will be a great day for the
 internet: the day that who fights for the
 innovation will definitely overwhelm who
-sits on top of his past, glorious days. 
+sits on top of his past, glorious days.

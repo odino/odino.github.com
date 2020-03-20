@@ -3,7 +3,7 @@ layout: post
 title: "The web benefits from SPDY just as SPDY benefits from HTTP"
 date: 2012-01-27 19:27
 comments: true
-categories: [HTTP, SPDY]
+categories: [http, spdy]
 ---
 
 In these days [SPDY](http://www.chromium.org/spdy/spdy-protocol) it's gaining

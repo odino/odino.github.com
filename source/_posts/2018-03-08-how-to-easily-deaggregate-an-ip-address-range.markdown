@@ -3,7 +3,7 @@ layout: post
 title: "How to easily deaggregate an IP address range"
 date: 2018-03-08 14:11
 comments: true
-categories: [networking, linux, sysadmin, devops, SRE]
+categories: [networking, linux, sysadmin, devops, sre]
 published: true
 description: "Meet ipcalc, one of the most convenient networking tools ever."
 ---

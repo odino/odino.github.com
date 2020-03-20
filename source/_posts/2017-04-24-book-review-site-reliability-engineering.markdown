@@ -3,7 +3,7 @@ layout: post
 title: "Book review: Site Reliability Engineering"
 date: 2017-04-24 19:07
 comments: true
-categories: [book, review, readings, SRE, DevOps, Google]
+categories: [book, review, readings, sre, devops, google]
 description: "What an immense contribution from Google to the dev & sys community."
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS, (almost) a year later, at a PHP conference"
 date: 2014-11-27 21:18
 comments: true
-categories: [JavaScript, frontend, AngularJS, conference, talk]
+categories: [javascript, frontend, angularjs, conference, talk]
 ---
 
 The first day of the [SymfonyCon Madrid](http://madrid2014.symfony.com/) is almost

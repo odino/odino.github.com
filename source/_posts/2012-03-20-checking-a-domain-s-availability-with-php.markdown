@@ -3,7 +3,7 @@ layout: post
 title: "Checking a domain's availability with PHP"
 date: 2012-03-20 09:49
 comments: true
-categories: [Robowhois, WHOIS, PHP]
+categories: [robowhois, whois, php]
 ---
 
 {% render_partial series/robowhois.markdown %}
@@ -109,4 +109,3 @@ of the library (currently `0.8.0`) and start using it: the [README](https://gith
 exhaustively explains what you can do with this small client, and some
 [samples](https://github.com/robowhois/robowhois-php/tree/master/sample)
 are provided under the `sample` directory.
-

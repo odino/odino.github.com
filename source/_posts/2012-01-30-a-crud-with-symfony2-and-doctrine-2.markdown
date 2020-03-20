@@ -3,7 +3,7 @@ layout: post
 title: "A CRUD with Symfony2 and Doctrine 2"
 date: 2011-02-03 12:00
 comments: true
-categories: [Symfony2, Doctrine, PHP]
+categories: [symfony2, doctrine, php]
 alias: "/279/a-crud-with-symfony2-and-doctrine-2"
 ---
 

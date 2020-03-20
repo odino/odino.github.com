@@ -3,7 +3,7 @@ layout: post
 title: "Automated tests from a novice's perspective"
 date: 2013-05-27 22:01
 comments: true
-categories: [testing, TDD]
+categories: [testing, tdd]
 ---
 
 Today I got one of those moments of pride

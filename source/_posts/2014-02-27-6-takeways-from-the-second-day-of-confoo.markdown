@@ -3,7 +3,7 @@ layout: post
 title: "6 takeways from the second day of ConFoo"
 date: 2014-02-27 18:27
 comments: true
-categories: [ConFoo, conference, web, performance]
+categories: [confoo, conference, web, performance]
 ---
 
 Today it was an interesting day here at ConFoo, and I've

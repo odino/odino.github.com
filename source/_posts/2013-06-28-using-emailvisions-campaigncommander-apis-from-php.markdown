@@ -3,7 +3,7 @@ layout: post
 title: "Using Emailvision's CampaignCommander APIs from PHP"
 date: 2013-06-28 18:38
 comments: true
-categories: [PHP, email, open source]
+categories: [php, email, open source]
 ---
 
 {% img right /images/emailvision-template.png %}

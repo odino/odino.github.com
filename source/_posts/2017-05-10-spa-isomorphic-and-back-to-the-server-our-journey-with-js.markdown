@@ -3,7 +3,7 @@ layout: post
 title: "SPA, isomorphic and back to the server: our journey with JS"
 date: 2017-05-10 13:32
 comments: true
-categories: [talk, conference, JavaScript]
+categories: [talk, conference, javascript]
 description: "Slides of my presentation at the 2017 italian JsDay:  servers can be pretty darn fast too!"
 ---
 

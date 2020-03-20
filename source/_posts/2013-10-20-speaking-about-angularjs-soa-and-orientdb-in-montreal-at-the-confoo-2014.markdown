@@ -3,7 +3,7 @@ layout: post
 title: "Speaking about AngularJS, SOA and OrientDB in Montreal at the Confoo 2014"
 date: 2013-10-20 11:00
 comments: true
-categories: [confoo, conference, AngularJS, PHP, SOA, Symfony2, Namshi]
+categories: [confoo, conference, angularjs, php, soa, symfony2, namshi]
 ---
 
 I am very happy to announce that next February I will

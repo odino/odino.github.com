@@ -3,7 +3,7 @@ layout: post
 title: "Please welcome the Doctrine2 OrientDB ODM"
 date: 2012-12-28 23:12
 comments: true
-categories: [OrientDB, doctrine, NoSQL, orientdb-odm]
+categories: [orientdb, doctrine, nosql, orientdb-odm]
 ---
 
 It took almost 2 years from the

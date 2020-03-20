@@ -3,7 +3,7 @@ layout: post
 title: "MySQL's INSERT IGNORE and NOT NULL columns"
 date: 2018-11-30 18:35
 comments: true
-categories: [database, MySQL]
+categories: [database, mysql]
 description: "Hatin' on MySQL's INSERT IGNORE, as it's probably more dangerous than you think."
 ---
 

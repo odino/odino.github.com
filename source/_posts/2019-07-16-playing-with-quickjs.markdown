@@ -3,7 +3,7 @@ layout: post
 title: "Playing with QuickJS"
 date: 2019-07-23 12:14
 comments: true
-categories: [JavaScript, QuickJS]
+categories: [javascript, quickjs]
 description: "Fabrice Bellard just released QuickJS, a small, embeddable JS engine...and using it is simpler than I thought."
 ---
 

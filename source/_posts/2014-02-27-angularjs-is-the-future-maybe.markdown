@@ -3,7 +3,7 @@ layout: post
 title: "AngularJS is the future. Maybe."
 date: 2014-02-27 11:54
 comments: true
-categories: [AngularJS, JavaScript, ConFoo, conference, talk]
+categories: [angularjs, javascript, confoo, conference, talk]
 ---
 
 Today I gave my 2nd talk here at the ConFoo in Montreal,

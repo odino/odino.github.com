@@ -3,7 +3,7 @@ layout: post
 title: "Refactoring your architecture understanding SOA"
 date: 2013-03-23 17:35
 comments: true
-categories: [SOA, architecture, RabbitMQ, Messaging]
+categories: [soa, architecture, rabbitmq, messaging]
 published: true
 ---
 

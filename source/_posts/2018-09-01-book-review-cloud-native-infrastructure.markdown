@@ -3,7 +3,7 @@ layout: post
 title: "Book review: Cloud Native infrastructure"
 date: 2018-09-01 12:25
 comments: true
-categories: [book, review, cloud native, CNCF, kubernetes]
+categories: [book, review, cloud native, cncf, kubernetes]
 description: "A book with an interesting premise but few sparks."
 ---
 

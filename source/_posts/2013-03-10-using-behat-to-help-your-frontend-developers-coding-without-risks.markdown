@@ -3,7 +3,7 @@ layout: post
 title: "Using Selenium and Symfony2 to help your frontend developers coding without risks"
 date: 2013-03-10 11:39
 comments: true
-categories: [testing, Behat, webdriver, Symfony2, selenium]
+categories: [testing, behat, webdriver, symfony2, selenium]
 ---
 
 Since testing is one of those practices

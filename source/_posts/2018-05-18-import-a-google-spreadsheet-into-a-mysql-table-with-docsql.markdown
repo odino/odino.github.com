@@ -3,7 +3,7 @@ layout: post
 title: "Import a Google spreadsheet into a MySQL table with docsql"
 date: 2018-05-18 13:05
 comments: true
-categories: [MySQL, database, open source, github]
+categories: [mysql, database, open source, github]
 description: "A quick run-through docsql, a small piece of software I wrote to import Google spreadsheets into MySQL."
 ---
 

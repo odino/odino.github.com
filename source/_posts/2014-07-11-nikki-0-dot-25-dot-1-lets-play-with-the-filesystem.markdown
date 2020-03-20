@@ -3,7 +3,7 @@ layout: post
 title: "Nikki 0.25.1: let's play with the filesystem!"
 date: 2014-07-11 17:40
 comments: true
-categories: [nikki, OSS, open source, NodeJS, JavaScript]
+categories: [nikki, oss, open source, nodejs, javascript]
 ---
 
 In the last 24 hours I rolled out some changes

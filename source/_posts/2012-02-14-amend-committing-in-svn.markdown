@@ -3,7 +3,7 @@ layout: post
 title: "Amend committing in SVN"
 date: 2010-10-30 11:06
 comments: true
-categories: [SVN]
+categories: [svn]
 alias: "/239/amend-committing-in-svn"
 ---
 

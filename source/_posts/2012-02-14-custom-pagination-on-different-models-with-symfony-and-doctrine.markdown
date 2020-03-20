@@ -3,7 +3,7 @@ layout: post
 title: "Custom pagination on different models with symfony and Doctrine"
 date: 2010-10-24 12:03
 comments: true
-categories: [symfony, Doctrine]
+categories: [symfony, doctrine]
 alias: "/224/custom-pagination-on-different-models-with-symfony-and-doctrine"
 ---
 

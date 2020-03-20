@@ -3,7 +3,7 @@ layout: post
 title: "mysql/mysqldump: command not found on CentOS"
 date: 2010-10-13 10:42
 comments: true
-categories: [Linux]
+categories: [linux]
 alias: "/209/mysql-mysqldump-command-not-found-on-centos"
 ---
 <!-- more -->

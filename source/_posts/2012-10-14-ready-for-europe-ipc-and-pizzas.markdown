@@ -3,7 +3,7 @@ layout: post
 title: "Ready for europe, IPC and pizzas"
 date: 2012-10-14 21:21
 comments: true
-categories: [conference, IPC, PHP, travel]
+categories: [conference, ipc, php, travel]
 ---
 
 In 24 hourse I'll be on a plane which is gonna bring

@@ -3,7 +3,7 @@ layout: post
 title: "Integrating Zend Framework 2 in Symfony 1.4"
 date: 2011-07-21 14:14
 comments: true
-categories: [symfony, Zend Framework]
+categories: [symfony, zend framework]
 alias: "/370/integrating-zend-framework-2-in-symfony-1-4"
 ---
 

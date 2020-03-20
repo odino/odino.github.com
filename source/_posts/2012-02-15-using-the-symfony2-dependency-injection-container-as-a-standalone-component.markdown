@@ -3,7 +3,7 @@ layout: post
 title: "Using the Symfony2 DIC as a standalone component"
 date: 2012-02-15 20:06
 comments: true
-categories: [Symfony2, PHP]
+categories: [symfony2, php]
 ---
 
 {% render_partial series/symfony-components.markdown %}

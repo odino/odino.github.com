@@ -3,7 +3,7 @@ layout: post
 title: "Contributing to the Zend Framework via GitHub"
 date: 2011-07-18 13:05
 comments: true
-categories: [ZF2, Github]
+categories: [zf2, github]
 alias: "/368/contributing-to-the-zend-framework-via-github"
 ---
 

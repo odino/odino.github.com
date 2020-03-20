@@ -3,7 +3,7 @@ layout: post
 title: "FFMPEG: get a thumbnail from a video with PHP"
 date: 2010-09-11 10:28
 comments: true
-categories: [PHP, ffmpeg]
+categories: [php, ffmpeg]
 alias: "/72/ffmpeg-get-a-thumbnail-from-a-video-with-php"
 ---
 

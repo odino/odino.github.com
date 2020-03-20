@@ -3,7 +3,7 @@ layout: post
 title: "Design patterns explained: circuit-breakers"
 date: 2017-01-20 15:44
 comments: true
-categories: [design patterns, JavaScript, circuit-breaker, pattern]
+categories: [design patterns, javascript, circuit-breaker, pattern]
 description: "In this post we'll have a look at the circuit-breaker pattern and write a general-purpose implementation of it."
 published: false
 ---

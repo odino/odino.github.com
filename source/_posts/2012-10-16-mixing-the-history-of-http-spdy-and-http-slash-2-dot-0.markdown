@@ -3,7 +3,7 @@ layout: post
 title: "Mixing the history of HTTP, SPDY and HTTP/2.0"
 date: 2012-10-16 15:11
 comments: true
-categories: [HTTP, SPDY, conference, IPC]
+categories: [http, spdy, conference, ipc]
 ---
 
 Yesterday, from Doha's international airport, I
@@ -22,4 +22,3 @@ the guys here in Germany already heard a lot: **go back to
 the basics**.
 
 {% slideshare 14749994 850 730 %}
-

@@ -3,7 +3,7 @@ layout: post
 title: "Makefile 101"
 date: 2018-06-15 09:53
 comments: true
-categories: [Make, shell, bash, linux, unix]
+categories: [make, shell, bash, linux, unix]
 description: "A brief introduction to Make and Makefiles, one of Linux's true gems."
 ---
 

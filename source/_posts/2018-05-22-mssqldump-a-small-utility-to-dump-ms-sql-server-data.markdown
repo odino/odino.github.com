@@ -3,7 +3,7 @@ layout: post
 title: "mssqldump, a small utility to dump MS SQL Server data"
 date: 2018-05-22 14:56
 comments: true
-categories: [open source, oss, SQL, sql server, mssql]
+categories: [open source, oss, sql, sql server, mssql]
 description: "Let me introduce you a small utility I wrote to automate some tasks: mssqldump, mysqldump, for MS SQL Server."
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "REST in peace"
 date: 2011-03-05 11:19
 comments: true
-categories: [REST]
+categories: [rest]
 alias: "/290/rest-in-peace"
 ---
 

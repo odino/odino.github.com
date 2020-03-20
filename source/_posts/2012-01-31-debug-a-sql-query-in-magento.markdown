@@ -3,7 +3,7 @@ layout: post
 title: "Debug a SQL query in Magento"
 date: 2010-09-11 02:22
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/99/debug-a-sql-query-in-magento"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Get prepared for OrientDB's query builder "
 date: 2011-06-03 13:46
 comments: true
-categories: [OrientDB]
+categories: [orientdb]
 alias: "/357/get-prepared-for-orientdb-s-query-builder"
 ---
 

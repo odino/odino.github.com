@@ -3,7 +3,7 @@ layout: post
 title: "Video introduction about NoSQL graph databases and OrientDB"
 date: 2012-12-08 15:56
 comments: true
-categories: [conference, OrientDB, NoSQL]
+categories: [conference, orientdb, nosql]
 ---
 
 During October of the last year, me and my ex-colleague David

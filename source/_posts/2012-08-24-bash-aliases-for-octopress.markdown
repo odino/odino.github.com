@@ -3,7 +3,7 @@ layout: post
 title: "Shell aliases for Octopress"
 date: 2012-08-24 11:02
 comments: true
-categories: [octopress, shell, ZSH]
+categories: [octopress, shell, zsh]
 published: true
 ---
 

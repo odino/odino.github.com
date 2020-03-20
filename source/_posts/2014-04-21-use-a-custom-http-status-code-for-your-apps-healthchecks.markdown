@@ -3,7 +3,7 @@ layout: post
 title: "Use a custom HTTP status code for your apps' healthchecks"
 date: 2014-04-21 10:20
 comments: true
-categories: [HTTP, architecture]
+categories: [http, architecture]
 ---
 
 To have systems up & running is something, but to

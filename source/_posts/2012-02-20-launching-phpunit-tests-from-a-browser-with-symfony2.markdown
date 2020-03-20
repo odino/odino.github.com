@@ -3,7 +3,7 @@ layout: post
 title: "Launching PHPUnit tests from a browser with Symfony2"
 date: 2012-02-20 13:41
 comments: true
-categories: [Symfony2, PHP]
+categories: [symfony2, php]
 ---
 
 {% render_partial series/symfony-components.markdown %}

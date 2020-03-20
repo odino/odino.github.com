@@ -3,7 +3,7 @@ layout: post
 title: "3 deployments a day: how we are doing it, why it rocks and how it still sucks"
 date: 2014-11-12 02:24
 comments: true
-categories: [Namshi, tech, team]
+categories: [namshi, tech, team]
 published: false
 ---
 

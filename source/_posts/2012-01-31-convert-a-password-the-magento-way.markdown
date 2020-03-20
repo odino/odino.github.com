@@ -3,7 +3,7 @@ layout: post
 title: "Convert a password the Magento way"
 date: 2010-09-11 14:56
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/112/convert-a-password-the-magento-way"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "A warm welcome to Orient beta-4: data-mapping and much more"
 date: 2011-09-20 16:13
 comments: true
-categories: [OrientDB]
+categories: [orientdb]
 alias: "/383/a-warm-welcome-to-orient-beta-4-data-mapping-and-much-more"
 ---
 

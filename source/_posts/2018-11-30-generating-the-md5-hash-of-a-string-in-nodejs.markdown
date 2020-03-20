@@ -3,7 +3,7 @@ layout: post
 title: "Generating a MD5 hash in NodeJS"
 date: 2018-11-30 17:36
 comments: true
-categories: [JavaScript, NodeJS, crypto]
+categories: [javascript, nodejs, crypto]
 description: "How to generate an MD5 hash in NodeJS without relying on a 3rd party module."
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "It's client's fault"
 date: 2011-04-21 12:50
 comments: true
-categories: [hypermedia, REST]
+categories: [hypermedia, rest]
 alias: "/334/it-s-client-s-fault"
 ---
 <!-- more -->

@@ -3,7 +3,7 @@ layout: post
 title: "The current vague state of PUT and DELETE in HTML5"
 date: 2011-05-06 13:01
 comments: true
-categories: [HTML5, HTTP]
+categories: [html5, http]
 alias: "/316/the-current-vague-state-of-put-and-delete-in-html5"
 ---
 

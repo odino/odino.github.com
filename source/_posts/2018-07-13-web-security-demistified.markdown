@@ -3,7 +3,7 @@ layout: post
 title: "Web security demystified: WASEC"
 date: 2018-07-14 22:45
 comments: true
-categories: [security, WASEC, web application security, infosec, course, series]
+categories: [security, wasec, web application security, infosec, course, series]
 description: "I've decided to work on a short course / e-book on Web Application SECurity (WASEC since I like to shorten things)"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "ping: sendto: No buffer space available with DU DNSes"
 date: 2012-08-10 13:03
 comments: true
-categories: [UAE, DNS]
+categories: [uae, dns]
 published: true
 ---
 

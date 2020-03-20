@@ -3,7 +3,7 @@ layout: post
 title: "OrientDB, the Graph DB for the web"
 date: 2011-05-19 02:07
 comments: true
-categories: [OrientDB]
+categories: [orientdb]
 alias: "/346/orientdb-the-graph-db-for-the-web" 
 ---
 

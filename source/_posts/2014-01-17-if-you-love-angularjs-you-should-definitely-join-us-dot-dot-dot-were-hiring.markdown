@@ -3,7 +3,7 @@ layout: post
 title: "If you love AngularJS, you should definitely join us...we're hiring!"
 date: 2014-01-17 16:28
 comments: true
-categories: [Namshi, job, Dubai, AngularJS]
+categories: [namshi, job, dubai, angularjs]
 ---
 
 In order to expand our team we are now looking for a
@@ -44,4 +44,3 @@ the Middle East, through a website that should ideally
 render in ~100ms, powered by lotsa APIs.
 
 So yeah, what are you waiting for? `ng-apply` now!
-

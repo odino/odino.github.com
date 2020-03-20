@@ -3,7 +3,7 @@ layout: post
 title: "Drop OpenJDK and upgrade Java to the Oracle packages"
 date: 2013-11-10 08:59
 comments: true
-categories: [Java, Ubuntu]
+categories: [java, ubuntu]
 ---
 
 A few weeks back I started noticing some performance

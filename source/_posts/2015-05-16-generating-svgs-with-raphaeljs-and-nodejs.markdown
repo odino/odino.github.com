@@ -3,7 +3,7 @@ layout: post
 title: "Generating SVGs with RaphaelJS and NodeJS"
 date: 2015-05-16 02:52
 comments: true
-categories: [NodeJS, Javascript]
+categories: [nodejs, javascript]
 description: One of these mornings, in need of generating images with 'copyable' text with Node, I had the chance to play around with RaphaelJS
 ---
 

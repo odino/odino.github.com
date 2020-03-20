@@ -3,7 +3,7 @@ layout: post
 title: "Behaviour-driven development in PHP"
 date: 2011-08-27 23:32
 comments: true
-categories: [PHP, BDD, agile]
+categories: [php, bdd, agile]
 alias: "/378/behaviour-driven-development-in-php"
 ---
 

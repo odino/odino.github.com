@@ -3,7 +3,7 @@ layout: post
 title: "See you in Paris at the 2013 edition of the PHP Forum"
 date: 2013-09-21 16:04
 comments: true
-categories: [conference, PHP, Rocket Internet, Namshi]
+categories: [conference, php, rocket internet, namshi]
 ---
 
 In late november I will be for a few days in Paris,
@@ -31,4 +31,3 @@ Dustin Whittle who will give his insights about
 [scaling PHP apps](http://afup.org/pages/forumphp2013/sessions.php#964).
 
 See you in the core of europe!
-

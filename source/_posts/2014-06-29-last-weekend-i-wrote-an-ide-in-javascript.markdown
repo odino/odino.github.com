@@ -3,7 +3,7 @@ layout: post
 title: "Last weekend I wrote an IDE. In JavaScript."
 date: 2014-06-29 23:32
 comments: true
-categories: [nikki, OSS, NodeJS, JavaScript]
+categories: [nikki, oss, nodejs, javascript]
 ---
 
 In the past days I've been spending some hours on a project

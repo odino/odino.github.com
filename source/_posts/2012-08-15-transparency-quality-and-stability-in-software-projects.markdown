@@ -3,7 +3,7 @@ layout: post
 title: "Transparency, quality, stability: the keys to manage software-related projects"
 date: 2012-08-15 01:10
 comments: true
-categories: [team, project management, QA, testing, BDD, agile]
+categories: [team, project management, qa, testing, bdd, agile]
 published: false
 ---
 
@@ -39,4 +39,3 @@ sviluppate e testate dagli sviluppatori sulla base delle spec generate precedent
 in un colpo possiamo far giocare insieme una buona pianificazione, qualit' del sw e la sua stabilita'
 
 chiaramente ci sono altri aspetti che minano queste 3 variabili, ma le cose piu' importanti sono trattate qua
-

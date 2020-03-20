@@ -3,7 +3,7 @@ layout: post
 title: "Benchmarking different CDN providers"
 date: 2013-06-07 05:36
 comments: true
-categories: [performance, CDN, benchmark]
+categories: [performance, cdn, benchmark]
 published: false
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Yahoo's S4 stream computing platform"
 date: 2011-06-02 12:29
 comments: true
-categories: [S4]
+categories: [s4]
 alias: "/356/yahoo-s-s4-stream-computing-platform"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Benchmarking JavaScript snippets"
 date: 2017-04-12 18:32
 comments: true
-categories: JavaScript, performance, benchmark
+categories: javascript, performance, benchmark
 description: "How do you figure out if a particular snippet is faster than your existing code? Enter matcha."
 ---
 

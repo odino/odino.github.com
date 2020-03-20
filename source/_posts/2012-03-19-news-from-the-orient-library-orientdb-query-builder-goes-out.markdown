@@ -3,7 +3,7 @@ layout: post
 title: "News from the Orient library: OrientDB query-builder goes out"
 date: 2011-07-31 15:19
 comments: true
-categories: [OrientDB, PHP]
+categories: [orientdb, php]
 alias: "/376/news-from-the-orient-library-orientdb-query-builder-goes-out"
 ---
 

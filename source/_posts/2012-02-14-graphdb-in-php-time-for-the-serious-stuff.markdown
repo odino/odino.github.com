@@ -3,7 +3,7 @@ layout: post
 title: "GraphDB in PHP: time for the serious stuff"
 date: 2011-10-25 12:09
 comments: true
-categories: [graphdb, PHP]
+categories: [graphdb, php]
 alias: "/391/graphdb-in-php-time-for-the-serious-stuff"
 ---
 

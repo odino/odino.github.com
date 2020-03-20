@@ -3,7 +3,7 @@ layout: post
 title: "Web APIs of the Future"
 date: 2017-04-15 12:47
 comments: true
-categories: [web, api, JavaScript, frontend]
+categories: [web, api, javascript, frontend]
 description: "What are the hottest, upcoming browser features we should be excited about?"
 ---
 

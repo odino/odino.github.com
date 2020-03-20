@@ -3,7 +3,7 @@ layout: post
 title: "How to make your JavaScript apps SEO-friendly"
 date: 2014-01-17 14:15
 comments: true
-categories: [SEO, JavaScript, AngularJS, Prerender]
+categories: [seo, javascript, angularjs, prerender]
 ---
 
 One of the challenges in moving your application logic

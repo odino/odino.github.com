@@ -3,7 +3,7 @@ layout: post
 title: "Notificator, sending notifications through PHP in a clean and lightweight way"
 date: 2013-07-11 01:20
 comments: true
-categories: [PHP, Open Source, FOSS, notifications, messaging, RabbitMQ, Symfony2, Github]
+categories: [php, open source, foss, notifications, messaging, rabbitmq, symfony2, github]
 ---
 
 While implementing various pieces of our

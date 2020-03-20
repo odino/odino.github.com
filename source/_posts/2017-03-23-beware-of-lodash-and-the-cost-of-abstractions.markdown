@@ -3,7 +3,7 @@ layout: post
 title: "Beware of Lodash (and the cost of abstractions)"
 date: 2017-03-24 13:51
 comments: true
-categories: [JavaScript, performance]
+categories: [javascript, performance]
 description: "When abstractions cost: how we saved 5ms trading elegance for pragmatism."
 ---
 

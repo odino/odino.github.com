@@ -3,7 +3,7 @@ layout: post
 title: "Pass a variable to a .phtml block"
 date: 2010-09-11 13:57
 comments: true
-categories: [Magento]
+categories: [magento]
 alias: "/76/pass-a-variable-to-a-phtml-block"
 ---
 

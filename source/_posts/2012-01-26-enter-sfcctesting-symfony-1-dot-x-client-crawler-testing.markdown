@@ -3,7 +3,7 @@ layout: post
 title: "Enter SfCcTesting: Symfony 1.X Client-Crawler Testing"
 date: 2012-01-26 11:51
 comments: true
-categories: [symfony, testing, PHPUnit, PHP]
+categories: [symfony, testing, phpunit, php]
 ---
 
 Earlier today I introduced why and how we initially integrated the [Symfony2

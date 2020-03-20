@@ -3,7 +3,7 @@ layout: post
 title: "Resources about HATEOAS"
 date: 2011-07-16 13:50
 comments: true
-categories: [REST, hypermedia]
+categories: [rest, hypermedia]
 alias: "/363/resources-about-hateoas"
 ---
 

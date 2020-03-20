@@ -3,7 +3,7 @@ layout: post
 title: "Deliver content as XML with Zend Framework"
 date: 2010-09-11 12:00
 comments: true
-categories: [Zend Framework, PHP]
+categories: [zend framework, php]
 alias: "/78/deliver-content-as-xml-with-zend-framework"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Some common questions about Edge Side Includes"
 date: 2011-05-30 15:07
 comments: true
-categories: [ESI, cache]
+categories: [esi, cache]
 alias: "/345/some-common-questions-about-edge-side-includes"
 ---
 

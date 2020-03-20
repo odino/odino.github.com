@@ -3,7 +3,7 @@ layout: post
 title: "Valid SSL certificates for local development"
 date: 2018-09-01 12:57
 comments: true
-categories: [HTTPS, SSL, development, localhost]
+categories: [https, ssl, development, localhost]
 description: "Wondering how to create valid SSL certificates for local development? mkcert is the answer."
 ---
 

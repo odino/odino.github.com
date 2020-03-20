@@ -3,7 +3,7 @@ layout: post
 title: "Back in track with OrientDB"
 date: 2012-04-20 15:26
 comments: true
-categories: [OrientDB, open source, NoSQL]
+categories: [orientdb, open source, nosql]
 ---
 
 It's been a while since I don't release any update about

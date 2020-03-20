@@ -3,7 +3,7 @@ layout: post
 title: "The query builder for OrientDB"
 date: 2011-05-22 13:36
 comments: true
-categories: [OrientDB]
+categories: [orientdb]
 alias: "/348/the-query-builder-for-orientdb"
 ---
 

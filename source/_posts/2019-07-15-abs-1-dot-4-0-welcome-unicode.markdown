@@ -160,5 +160,3 @@ PPS: [1.5.0 is already well underway](https://github.com/abs-lang/abs/milestone/
 it in the next few days. We'll be introducing extremely
 interesting features such as file writers, so it's going
 to be an exciting release!
-
-

@@ -3,7 +3,7 @@ layout: post
 title: "Securing your HTTP API with JavaScript Object Signing and Encryption"
 date: 2013-06-04 00:31
 comments: true
-categories: [JavaScript, API, HTTP, AJAX, PHP]
+categories: [javascript, api, http, ajax, php]
 ---
 
 One thing that is always difficult, enough to

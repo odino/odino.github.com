@@ -3,7 +3,7 @@ layout: post
 title: "Tips and Tricks for you Service-Oriented Architecture"
 date: 2013-08-31 19:05
 comments: true
-categories: [SOA, conference, talk, CakeFest]
+categories: [soa, conference, talk, cakefest]
 ---
 
 Today I gave the first of my 2 presentations scheduled for the

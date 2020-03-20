@@ -3,7 +3,7 @@ layout: post
 title: "Nikki 0.19.1: awesomeness won't stop"
 date: 2014-07-07 17:30
 comments: true
-categories: [nikki, NodeJS, JavaScript, github, OSS, open source]
+categories: [nikki, nodejs, javascript, github, oss, open source]
 ---
 
 Given it's Ramadan and we have some spare time at the

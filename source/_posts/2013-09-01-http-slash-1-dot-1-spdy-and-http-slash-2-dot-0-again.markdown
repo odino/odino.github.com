@@ -3,7 +3,7 @@ layout: post
 title: "HTTP/1.1, SPDY and HTTP/2.0, again"
 date: 2013-09-01 17:48
 comments: true
-categories: [conference, CakeFest, HTTP, SPDY, cache, talk]
+categories: [conference, cakefest, http, spdy, cache, talk]
 ---
 
 Today, tired like hell due to an almost sleepless night,

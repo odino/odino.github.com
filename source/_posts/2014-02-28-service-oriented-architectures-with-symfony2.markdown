@@ -3,7 +3,7 @@ layout: post
 title: "Service Oriented Architectures with Symfony2"
 date: 2014-02-28 14:31
 comments: true
-categories: [SOA, PHP, Symfony2, RabbitMQ]
+categories: [soa, php, symfony2, rabbitmq]
 ---
 
 Last talk for me in the cold lands of Canada: today it was Symfony2's

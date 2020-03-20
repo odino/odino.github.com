@@ -3,7 +3,7 @@ layout: post
 title: "Benefits @ Namshi"
 date: 2016-08-07 15:42
 comments: true
-categories: [namshi, HR]
+categories: [namshi, hr]
 published: false
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Re-doing things with Symfony2"
 date: 2011-03-13 10:46
 comments: true
-categories: [Symfony2]
+categories: [symfony2]
 alias: "/298/re-doing-things-with-symfony2"
 ---
 

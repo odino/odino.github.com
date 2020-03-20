@@ -3,7 +3,7 @@ layout: post
 title: "OrientDB, the fastest document-based graph database"
 date: 2014-02-26 15:25
 comments: true
-categories: [conference, confoo, OrientDB, NoSQL, talk]
+categories: [conference, confoo, orientdb, nosql, talk]
 ---
 
 Today I gave the first of my talks here at the 2014 edition

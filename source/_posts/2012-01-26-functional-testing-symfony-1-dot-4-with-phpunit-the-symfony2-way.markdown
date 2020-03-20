@@ -3,7 +3,7 @@ layout: post
 title: "Functional testing symfony 1.X with PHPUnit: the Symfony2 way"
 date: 2012-01-26 00:45
 comments: true
-categories: [PHP, symfony, PHPUnit]
+categories: [php, symfony, phpunit]
 ---
 
 In the process of starting a brand new project here at

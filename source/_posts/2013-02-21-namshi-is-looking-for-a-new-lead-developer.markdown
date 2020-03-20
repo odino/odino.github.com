@@ -3,7 +3,7 @@ layout: post
 title: "Namshi is looking for a new Lead Developer!"
 date: 2013-02-21 19:28
 comments: true
-categories: [job, Namshi, PHP, lead developer, Rocket Internet]
+categories: [job, namshi, php, lead developer, rocket internet]
 ---
 
 As some of you know, I am currently employed by

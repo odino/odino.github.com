@@ -3,7 +3,7 @@ layout: post
 title: "This is how a (dumb) hash table works"
 date: 2018-04-04 05:27
 comments: true
-categories: [data structures, computer science, JavaScript]
+categories: [data structures, computer science, javascript]
 description: "Let's have a look at how hash tables work and why they're so fast by building one and understanding their inner mechanisms."
 ---
 

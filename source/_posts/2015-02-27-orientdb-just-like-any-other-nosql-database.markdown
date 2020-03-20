@@ -3,7 +3,7 @@ layout: post
 title: "OrientDB: just like any other NoSQL database?"
 date: 2015-02-27 19:44
 comments: true
-categories: [orientdb, orientdb 101, series, NoSQL]
+categories: [orientdb, orientdb 101, series, nosql]
 published: true
 description: What makes OrientDB so special? OOP, multiple protocols and much, much more
 ---

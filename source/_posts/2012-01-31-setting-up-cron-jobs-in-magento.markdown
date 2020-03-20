@@ -3,7 +3,7 @@ layout: post
 title: "Setting up cron jobs in Magento"
 date: 2010-09-11 14:53
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/88/setting-up-cron-jobs-in-magento"
 ---
 

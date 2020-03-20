@@ -3,7 +3,7 @@ layout: post
 title: "Changing the layout of Joomla! 'category blog' view"
 date: 2011-09-11 23:43
 comments: true
-categories: [PHP]
+categories: [php]
 alias: "/46/changing-the-layout-of-joomla-category-blog-view" 
 ---
 

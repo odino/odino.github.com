@@ -3,7 +3,7 @@ layout: post
 title: "Redis slow with PHP? Think again!"
 date: 2011-01-25 13:56
 comments: true
-categories: [PHP, Redis]
+categories: [php, redis]
 alias: "/276/redis-slow-with-php-think-again"
 ---
 

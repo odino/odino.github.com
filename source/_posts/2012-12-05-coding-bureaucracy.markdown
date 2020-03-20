@@ -3,7 +3,7 @@ layout: post
 title: "Coding bureaucracy"
 date: 2012-12-05 12:23
 comments: true
-categories: [Microsoft, teams]
+categories: [microsoft, teams]
 published: true
 ---
 

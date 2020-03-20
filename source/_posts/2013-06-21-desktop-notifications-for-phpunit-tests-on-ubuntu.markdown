@@ -3,7 +3,7 @@ layout: post
 title: "Desktop notifications for PHPUnit tests on Ubuntu"
 date: 2013-06-21 03:48
 comments: true
-categories: [PHPUnit, testing, linux, ubuntu, PHP]
+categories: [phpunit, testing, linux, ubuntu, php]
 ---
 
 {% img left /images/phpunit-notification-ko.png %}

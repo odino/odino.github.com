@@ -3,7 +3,7 @@ layout: post
 title: "Aspect-oriented logging with the Proxy pattern"
 date: 2012-11-23 10:39
 comments: true
-categories: [AOP, design patterns, log management, PHP, Proxy pattern]
+categories: [aop, design patterns, log management, php, proxy pattern]
 published: false
 ---
 

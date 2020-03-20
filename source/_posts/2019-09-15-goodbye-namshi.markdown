@@ -3,7 +3,7 @@ layout: post
 title: "My last day at Namshi: goodbye folks!"
 date: 2019-09-15 19:42
 comments: true
-categories: [personal, Namshi]
+categories: [personal, namshi]
 description: "The last day of a great adventure, but excited to see what's ahead for me."
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "REST better: HTTP cache"
 date: 2011-03-17 14:12
 comments: true
-categories: [REST, HTTP, cache]
+categories: [rest, http, cache]
 alias: "/301/rest-better-http-cache"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "The current status of my work with OrientDB"
 date: 2011-05-24 14:09
 comments: true
-categories: [OrientDB, Orient, open source]
+categories: [orientdb, orient, open source]
 alias: "/349/the-current-status-of-my-work-with-orientdb"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "Configuring a Symfony2 application to support SOA"
 date: 2013-06-06 13:00
 comments: true
-categories: [SOA, Symfony2, PHP]
+categories: [soa, symfony2, php]
 ---
 
 When you think in terms of

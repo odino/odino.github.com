@@ -3,7 +3,7 @@ layout: post
 title: "Emit a beeping sound with JavaScript"
 date: 2018-06-15 07:35
 comments: true
-categories: [JavaScript, browser, frontend]
+categories: [javascript, browser, frontend]
 description: "Writing an application where users do repetitive tasks? Nothing better than emitting a sound whenever something happens."
 ---
 

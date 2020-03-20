@@ -3,7 +3,7 @@ layout: post
 title: "The Pomodoro Tecnique on your Linux distro"
 date: 2010-11-01 13:33
 comments: true
-categories: [Linux]
+categories: [linux]
 alias: "/243/the-pomodoro-tecnique-on-your-linux-distro"
 ---
 

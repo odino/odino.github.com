@@ -3,7 +3,7 @@ layout: post
 title: "So yes, I'm writing a book"
 date: 2012-09-21 08:00
 comments: true
-categories: [OrientDB, book, OrientDB in Action]
+categories: [orientdb, book, orientdb in action]
 ---
 
 As announced on twitter a few days back, it seems

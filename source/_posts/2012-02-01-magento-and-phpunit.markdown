@@ -3,7 +3,7 @@ layout: post
 title: "Magento and PHPUnit"
 date: 2010-09-11 13:43
 comments: true
-categories: [PHP, PHPUnit, testing]
+categories: [php, phpunit, testing]
 alias: "/90/magento-and-phpunit"
 ---
 

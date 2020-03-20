@@ -3,7 +3,7 @@ layout: post
 title: "Frontend web development is not as fun as it could be"
 date: 2013-11-10 19:53
 comments: true
-categories: [JavaScript, AngularJS, CORS, NGINX, Internet Explorer, xDomain, Varnish, HTTP, JWS, Android]
+categories: [javascript, angularjs, cors, nginx, internet explorer, xdomain, varnish, http, jws, android]
 published: true
 ---
 

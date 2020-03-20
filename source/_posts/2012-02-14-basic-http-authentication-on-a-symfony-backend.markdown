@@ -3,7 +3,7 @@ layout: post
 title: "Basic HTTP authentication on a symfony backend"
 date: 2010-09-17 11:09
 comments: true
-categories: [symfony. PHP]
+categories: [symfony. php]
 alias: "/263/basic-http-authentication-on-a-symfony-backend"
 ---
 

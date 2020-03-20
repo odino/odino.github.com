@@ -3,7 +3,7 @@ layout: post
 title: "Increase mobile performances by implementing transparent redirects"
 date: 2014-03-03 17:58
 comments: true
-categories: [web, performances, HTTP, mobile]
+categories: [web, performances, http, mobile]
 ---
 
 Most of you are aware that one of the biggest problems while

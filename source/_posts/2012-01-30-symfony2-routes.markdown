@@ -3,7 +3,7 @@ layout: post
 title: "Symfony2 routes"
 date: 2011-01-09 13:57
 comments: true
-categories: [Symfony2, PHP]
+categories: [symfony2, php]
 alias: "/270/symfony2-routes"
 ---
 

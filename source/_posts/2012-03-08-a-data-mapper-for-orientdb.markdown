@@ -3,7 +3,7 @@ layout: post
 title: "A data mapper for OrientDB"
 date: 2011-05-06 13:43
 comments: true
-categories: [OrientDB]
+categories: [orientdb]
 alias: "/340/a-data-mapper-for-orientdb"
 ---
 

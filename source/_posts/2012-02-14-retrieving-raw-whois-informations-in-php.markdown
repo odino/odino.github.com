@@ -3,7 +3,7 @@ layout: post
 title: "Retrieving raw WHOIS informations in PHP"
 date: 2012-02-14 00:58
 comments: true
-categories: [Robowhois, PHP, WHOIS]
+categories: [robowhois, php, whois]
 ---
 
 {% render_partial series/robowhois.markdown %}
