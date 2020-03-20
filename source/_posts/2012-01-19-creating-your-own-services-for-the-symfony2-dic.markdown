@@ -3,7 +3,7 @@ layout: post
 title: "Creating your own services for the Symfony2 DIC"
 date: 2011-01-8 19:50
 comments: true
-categories: [Symfony2, PEAA]
+categories: [symfony2, peaa]
 alias: "/268/creating-your-own-services-for-the-symfony2-dic"
 ---
 

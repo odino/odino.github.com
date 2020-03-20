@@ -3,7 +3,9 @@ layout: post
 title: "I've decided to make the WASEC ebook free during these trying times"
 date: 2020-03-20 08:10
 comments: true
-categories: [WASEC]
+published: true
+description: "While the COVID-19 situation is ongoing, I'v decided to make the WASEC e-book free."
+categories: [wasec]
 ---
 
 Short post for the day to address an hopefully even shorter-lived situation

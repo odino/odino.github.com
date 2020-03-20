@@ -3,7 +3,7 @@ layout: post
 title: "Getting back on OrientDB"
 date: 2012-01-3 17:16
 comments: true
-categories: OrientDB
+categories: [orientdb]
 alias: "/397/getting-back-on-orientdb"
 ---
 

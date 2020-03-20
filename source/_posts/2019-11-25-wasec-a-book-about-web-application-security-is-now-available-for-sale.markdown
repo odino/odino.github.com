@@ -3,6 +3,7 @@ layout: post
 title: "WASEC, a book about Web Application Security, is now available for sale"
 date: 2019-11-25 22:41
 comments: true
+published: true
 categories: [wasec, web security]
 description: "Today I released the WASEC ebook: grab it now and dig into the world of web application security."
 ---

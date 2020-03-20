@@ -3,7 +3,7 @@ layout: post
 title: "Edge Side Includes, how to spare terabytes every day"
 date: 2012-01-20 14:16
 comments: true
-categories: [ESI, HTTP, scaling]
+categories: [esi, http, scaling]
 ---
 
 I have an idea for an RFC that I would like to write, based on some thoughts I

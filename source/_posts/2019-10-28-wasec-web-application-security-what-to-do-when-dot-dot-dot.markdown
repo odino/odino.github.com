@@ -3,7 +3,8 @@ layout: post
 title: "Web application security: what to do when..."
 date: 2019-10-28 14:43
 comments: true
-categories: [WASEC, security, browser]
+published: true
+categories: [wasec, security, browser]
 description: "A few security tips on what to do when developing web application and facing certain situations"
 ---
 
