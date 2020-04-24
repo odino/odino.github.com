@@ -186,3 +186,5 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I own a PS4 -- a generous gift from my better half. Though I suck at whatever game I try to play
 * I enjoy my solo-time more than I would care to admit
 * I smoke [dokha](https://en.wikipedia.org/wiki/Dokha)
+* in the span of 12 months I decided to turn down an MBA and a FAANG offer -- I told my wife we should set a reminder for 2030 to see how those 2 decisions panned out...
+* I bought a [PlaySeat](https://www.playseatstore.com/f1-aston-martin-red-bull-racing-new.html) well into my 30s: I don't particularly like racing games, but I have a soft spot for F1 having grown up during Ferrari's dominant years with [Jean Todt](https://en.wikipedia.org/wiki/Jean_Todt) at the helm and [Michael Schumacher](https://en.wikipedia.org/wiki/Michael_Schumacher) at the wheel
