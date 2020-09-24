@@ -5,6 +5,7 @@ date: 2020-03-20 09:21
 comments: true
 categories: [kubernetes, github, ci]
 description: "A brief guide on running your CI environment on Kubernetes through Github Actions."
+main_image: /images/github-actions-kubernetes.png
 ---
 
 {% img right /images/github-actions-kubernetes.png %}

@@ -4,9 +4,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" name="description">
+		{% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
+		<meta content="{{ description }}" name="description">
 		<meta content="{{ site.author }}" name="author">
-		<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+		{% capture title %}{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}{% endcapture %}
+		<title>{{ title }}</title>
 		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
 		<link href="{{ root_url }}/favicon.png" rel="icon">
 		<link href="{{ root_url }}/stylesheets/screen.css" rel="stylesheet">
@@ -14,6 +16,15 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="{{ canonical }}" />
+		<meta property="og:title" content="{{ title }}" />
+		<meta property="og:description" content="{{ description }}" />
+		{% if page.main_image %}
+		<meta property="og:image" content="{{site.url}}{{ page.main_image }}" />
+		{% endif %}
 	</head>
 	<body>
 		<div class="wrap">
@@ -41,7 +52,32 @@
 
       ga('create', 'UA-7407627-3', 'auto');
       ga('send', 'pageview');
-    </script>
+	</script>
+	{% if page.url != "/index.html" %}
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "{{site.url}}{{page.url}}"
+		},
+		"headline": "{{ title }}",
+		"description": "{{ description }}",
+		{% if page.main_image %}
+		"image": {
+			"@type": "ImageObject",
+			"url": "{{site.url}}{{ page.main_image }}"
+		},
+		{% endif %}
+		"author": {
+			"@type": "Person",
+			"name": "{{site.author}}"
+		},
+		"datePublished": "{{page.date}}"
+		}
+	</script>
+	{% endif %}
 	</body>
 </html>
 <!-- END _layouts/default.html -->
