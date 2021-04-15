@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Troll | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/troll/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I Trolled a Digital Salesman Because Their Tactics Are Simply Unethical]]></title>
+    <link href="https://odino.org/i-trolled-a-digital-salesman-because-their-techniques-are-just-plain-wrong/"/>
+    <updated>2018-01-10T17:21:00+00:00</updated>
+    <id>https://odino.org/i-trolled-a-digital-salesman-because-their-techniques-are-just-plain-wrong</id>
+    <content type="html"><![CDATA[<p>I don&rsquo;t know about you but, for me, since I got VP / CXO in my designation the
+amount of <a href="https://en.wikipedia.org/wiki/Cold_email">cold emails</a> I receive from salespeople at random companies has spiked
+up quite substantially &mdash; every day I need to go through countless of &ldquo;<em>Just the
+right thing to start the week</em>&rdquo; or &ldquo;<em>Alex, you will not regret this</em>&rdquo;, which is
+quite annoying to say the least.</p>
+
+<p>Fair game, though, as I can filter most of them out through amazing tools like
+<a href="https://www.sanebox.com/">SaneBox</a>. But this week I received one of those
+emails that are plain scam, blatantly unethical, and I wanted to share my
+experience with you because, yes, I didn&rsquo;t let this one go unnoticed.</p>
+
+<!-- more -->
+
+
+<h2>It all started with&hellip;</h2>
+
+<p><img class="right" src="/images/gcc.png"></p>
+
+<p>Background: I&rsquo;m the <a href="https://www.linkedin.com/in/alessandronadalin/">CTO</a> of <a href="https://en-ae.namshi.com/">Namshi</a>, the biggest fashion-focused online retailer
+in the Middle East. We operate across the <a href="https://en.wikipedia.org/wiki/Gulf_Cooperation_Council">GCC</a>
+(so we&rsquo;re pretty tied down to the area over here) and do not have any physical store
+because, well, e-commerce. Duh.</p>
+
+<p>So you can imagine the surprise when I received an email with a subject that
+sounded too friendly to be true:</p>
+
+<p><img class="center" src="/images/sales0.png"></p>
+
+<p>&hellip;and I&rsquo;m like wow, this person&rsquo;s girlfriend must have shopped from us &mdash; maybe
+while on vacation, maybe they actually live down here. So I must admit I got a
+little bit curious and decided to check if he had some interesting feedback about
+their shopping experience. I opened the email and:</p>
+
+<p><img class="center" src="/images/sales1.png"></p>
+
+<p>Now, again, let&rsquo;s focus on the first paragraph:</p>
+
+<p><img class="center" src="/images/sales2.png"></p>
+
+<p>and pretend for a second that you&rsquo;re me, trying to find Oxford Street on this
+map:</p>
+
+<p><img class="center" src="/images/sales3.png"></p>
+
+<p>This is a portion of <a href="https://en.wikipedia.org/wiki/Jeddah">Jeddah, KSA</a> and yes,
+I&rsquo;m just screwing around. Since I&rsquo;m in the mood, let&rsquo;s have some fun while at it:</p>
+
+<p><img class="center" src="/images/sales4.png"></p>
+
+<p>Alex, what a surprise, you&rsquo;re in the UK!</p>
+
+<p><img class="center" src="/images/sales5.png"></p>
+
+<p>What a coincidence, we&rsquo;re both on Oxford Street! (in hindsight, that &ldquo;<em>our office is <strong>actually</strong> in Oxford Street</em>&rdquo; sounds too
+funny)</p>
+
+<p>Anyhow, you know me, I&rsquo;m so attached to work that I don&rsquo;t want to waste time in the
+trip:</p>
+
+<p><img class="center" src="/images/sales6.png"></p>
+
+<p>So let&rsquo;s just confirm the address:</p>
+
+<p><img class="center" src="/images/sales7.png"></p>
+
+<p>You know what?</p>
+
+<p><img class="center" src="/images/sales8.png"></p>
+
+<p>&hellip;and you think that&rsquo;s it, he or she must have realized I was just screwing
+around and this is just a good laugh for me. Surprisingly, I <strong>still</strong> get
+a reply back because, hey, a true salesman never gives up:</p>
+
+<p><img class="center" src="/images/sales9.png"></p>
+
+<h2>People, this is not cool.</h2>
+
+<p>This has to stop &mdash; it&rsquo;s beyond annoying, beyond the follow-up emails, beyond
+the distracting subjects: it&rsquo;s simply <strong>unethical</strong>.</p>
+
+<p>You&rsquo;re lying to create a connection with a potential client, and I&rsquo;m sure as hell
+we would never do business with individuals (or companies) that employ such
+sneaky tactics. I&rsquo;ve been pondering whether I should reveal the identity behind
+those emails, but at the end of the day it&rsquo;s holiday season so Santa told me
+to let this one go.</p>
+
+<p>Look, I understand the job&rsquo;s not easy, you have targets to hit and the pressure&rsquo;s
+on, but if you cant be straight and get a client I don&rsquo;t know what makes you think
+you&rsquo;re better of lying and being sneaky.</p>
+
+<h2>Further readings</h2>
+
+<p>Turns out there&rsquo;s a lot of fun material around the web regarding these
+situations:</p>
+
+<ul>
+<li><a href="https://www.cbinsights.com/research/team-blog/cold-sales-emails/">I Analyzed 147 Cold Sales Emails And 93.9% Of Them Sucked</a></li>
+<li><a href="http://www.businessinsider.com/amazon-cto-werner-vogels-receives-dumb-cold-email-2016-11">An ill-informed salesperson sent this email pitch to Amazon’s CTO</a></li>
+<li><a href="https://blog.hubspot.com/sales/the-worst-linkedin-sales-emails">The 10 Worst LinkedIn Sales Emails Ever</a></li>
+<li><a href="https://medium.com/delivery/thank-you-for-your-cold-sales-email-the-names-chris-btw-5d6dd70d5baa">Thank you for your cold sales email. The name’s Chris, btw.</a></li>
+<li><a href="https://blog.hubspot.com/sales/salespeople-please-stop-sending-terrible-prospecting-emails">Salespeople, Please Stop Sending Terrible Prospecting Emails Like This One</a></li>
+</ul>
+
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

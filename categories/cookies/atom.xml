@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Cookies | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/cookies/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web Security: Hardening HTTP Cookies]]></title>
+    <link href="https://odino.org/security-hardening-http-cookies/"/>
+    <updated>2018-09-14T09:44:00+00:00</updated>
+    <id>https://odino.org/security-hardening-http-cookies</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>" series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I've written.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/web-security-demistified/">Web security demystified: WASEC</a>
+	</li>
+	<li>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
+	</li>
+	<li>
+		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
+	<li>
+		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
+	</br>
+	<p>
+		If you've enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+	</p>
+</ol>
+</p>
+
+<p><img class="right" src="/images/cookie.png"></p>
+
+<p>Imagine being a backend developer who needs to implement <em>sessions</em> in an application:
+the first thing that comes to your mind is to issue a <em>token</em> to clients and ask them
+to send this token with their subsequent requests. From there onwards
+you are going to be able to identify clients based on the token included in their
+request.</p>
+
+<p>HTTP cookies were born to standardize this sort of mechanism across browsers:
+they&rsquo;re nothing more than a way to store data sent by the server and send
+it along with future requests. The server sends a cookie, which contains small bits of data,
+the browsers stores it and sends it along with future requests to the same server.</p>
+
+<p>Why would we bother about cookies from a security perspective? Because the data
+they contain is, more often than not, extremely sensitive &mdash;
+cookies are generally used to store session IDs or access tokens, an attacker&rsquo;s  holy grail.
+Once they are exposed or compromised, attackers can
+impersonate users, or escalate their privileges on your application.</p>
+
+<p>Securing cookies is one of the most important aspects when implementing sessions
+on the web: this chapter will, therefore, give you a better understanding
+of cookies, how to secure them and what alternatives can be used.</p>
+
+<!-- more -->
+
+
+<h2>What&rsquo;s behind a cookie?</h2>
+
+<p>A server can send a cookie using the <code>Set-Cookie</code> header:</p>
+
+<p><code>
+HTTP/1.1 200 Ok
+Set-Cookie: access_token=1234
+...
+</code></p>
+
+<p>A client will then store this data and
+send it in subsequent requests through the <code>Cookie</code> header:</p>
+
+<p><code>
+GET / HTTP/1.1
+Host: example.com
+Cookie: access_token=1234
+...
+</code></p>
+
+<p>Note that servers can send multiple cookies at once:</p>
+
+<p><code>
+HTTP/1.1 200 Ok
+Set-Cookie: access_token=1234
+Set-Cookie: user_id=10
+...
+</code></p>
+
+<p>and clients can do the same in their request:</p>
+
+<p><code>
+GET / HTTP/1.1
+Host: example.com
+Cookie: access_token=1234; user_id=10
+...
+</code></p>
+
+<p>In addition to the plain <em>key</em> and <em>value</em>, cookies can carry additional
+directives that limit their time-to-live and scope:</p>
+
+<h3>Expires</h3>
+
+<p>Specifies when a cookie should expire, so that browsers do not store and
+transmit it indefinitely. A clear example is a session ID, which usually expires
+after some time. This directive is expressed as a date in the form of
+<code>Date: &lt;day-name&gt;, &lt;day&gt; &lt;month&gt; &lt;year&gt; &lt;hour&gt;:&lt;minute&gt;:&lt;second&gt; GMT</code>, like
+<code>Date: Fri, 24 Aug 2018 04:33:00 GMT</code>. Here&rsquo;s a full example of a cookie that expires on the 1st
+of January 2018:
+<code>
+access_token=1234;Expires=Mon, 1st Jan 2018 00:00:00 GMT
+</code></p>
+
+<h3>Max-Age</h3>
+
+<p>Similar to the <code>Expires</code> directive, <code>Max-Age</code> specifies the number of seconds
+until the cookie should expire. A cookie that should last 1 hour would look like
+the following:
+<code>
+access_token=1234;Max-Age=3600
+</code></p>
+
+<h3>Domain</h3>
+
+<p>This directive defines which hosts the cookie should be sent to. Remember,
+cookies generally contain sensitive data, so it&rsquo;s important for browsers not to
+leak them to untrusted hosts. A cookie with the directive <code>Domain=trusted.example.com</code>
+will not be sent along with requests to any domain other than <code>trusted.example.com</code>,
+not even the root domain (<code>example.com</code>).
+Here&rsquo;s a valid example of a cookie limited to a particular subdomain:
+<code>
+access_token=1234;Domain=trusted.example.com
+</code></p>
+
+<h3>Path</h3>
+
+<p>Similar to the <code>Domain</code> directive, but applies to the URL path (<code>/some/path</code>).
+This directive prevents a cookie from being shared with untrusted paths, such as
+in the following example:
+<code>
+access_token=1234;Path=/trusted/path
+</code></p>
+
+<h2>Session and persistent cookies</h2>
+
+<p>When a server sends a cookie without setting its <code>Expires</code> or <code>Max-Age</code>, browsers
+treat it as a <em>session cookie</em>: rather than guessing its time-to-live or apply
+funny heuristics, the browser deletes it when it shuts down.</p>
+
+<p>A <em>persistent cookie</em>, on the contrary, is stored on the client until the deadline set
+by its <code>Expires</code> or <code>Max-Age</code> directives.</p>
+
+<p>It is worth to note that browsers might employ a
+mechanism known as <em>session restoring</em>, where session cookies can be recovered after
+the client shuts down: browsers have implemented this kind of mechanism to conveniently
+let users resume a session after, for example, a crash. Session restoring could
+lead to <a href="https://stackoverflow.com/questions/777767/firefox-session-cookies">unexpected issues</a>
+if we&rsquo;re expecting session cookies to expire within a
+certain timeframe (eg. we&rsquo;re absolutely positive a session would not last more than
+X time). From a browser&rsquo;s perspective, session restoring is a perfectly valid feature,
+as those cookies are left in the hands of the client, without an expiration date.
+What the client does with those cookies does not affect the server, who is unable
+to detect whether the client shut down at any point in time. If the client wishes
+to keep session cookies alive forever that&rsquo;s no concern for the server &mdash; it would
+definitely be a questionable implementation, but there&rsquo;s nothing the server could
+do about it.</p>
+
+<p>I don&rsquo;t think there is a clear-cut winner between session and persistent cookies,
+as both might serve different purposes very well: what I&rsquo;ve observed, though, is
+that Facebook, Google, and similar services will use persistent cookies. From personal
+experience, I&rsquo;ve generally always used persistent cookies &mdash; but never had to tie
+critical information, such as a social security number or a bank account&rsquo;s balance,
+to a session. In some contexts you might be required to use session
+cookies due to compliance requirements: I&rsquo;ve seen auditors asking to convert all
+persistent cookies to session ones. When people ask me &ldquo;<em>should I use X or Y?</em>&rdquo;
+my answer is &ldquo;it depends on the context&rdquo;: building a guestbook for your blog
+carries different security ramifications than building a banking system. As we
+will see later in this series, I would recommend to understand your context and try
+to build a system that&rsquo;s <em>secure enough</em>: absolute security
+is utopia, just like a 100% SLA.</p>
+
+<h2>Host-only</h2>
+
+<p>When a server does not include a <code>Domain</code> directive the cookie is to be considered
+a <code>host-only</code> one, meaning that its validity is restricted to the current domain
+only.</p>
+
+<p>This is a sort of &ldquo;default&rdquo; behavior from browsers when they receive a cookie that
+does not have a <code>Domain</code> set. You can find a small example I wrote at <a href="https://github.com/odino/wasec/tree/master/cookies">github.com/odino/wasec/tree/master/cookies</a>:
+it&rsquo;s a simple web app that sets cookies based on URL parameters, and prints cookies
+on the page, through some JavaScript code:</p>
+
+<p>```
+<html>
+  <div id="output"/ >
+  <script></p>
+
+<pre><code>let content = "none";
+
+if (document.cookie) {
+  let cookies = document.cookie.split(';')
+  content = ''
+
+  cookies.forEach(c =&gt; {
+    content += "&lt;p&gt;&lt;code&gt;" + c + "&lt;/code&gt;&lt;/p&gt;"
+  })
+}
+
+document.getElementById('output').innerHTML = "Cookies on this document: &lt;div&gt;" + content + "&lt;/div&gt;"
+</code></pre>
+
+<p>  </script>
+<html>
+```</p>
+
+<p>If you follow the instructions in the <code>README</code> you will be able
+to access a webserver at <a href="http://wasec.local:7888">wasec.local:7888</a>, which illustrates how <code>host-only</code>
+cookies work:</p>
+
+<p><img class="center" src="/images/wasec/cookies-main.png"></p>
+
+<p>If we then try to visit a subdomain, the cookies we set on the main domain are
+not going to be visible &mdash; try navigating to <a href="http://sub.wasec.local:7888">sub.wasec.local:7888</a>:</p>
+
+<p><img class="center" src="/images/wasec/cookies-sub.png"></p>
+
+<p>A way to circumvent this limitation is, as we&rsquo;ve seen earlier, to specify the <code>Domain</code>
+directive of the cookie, something that we can do by visiting <a href="http://wasec.local:7888/?domain=on">wasec.local:7888/?domain=on</a>:</p>
+
+<p><img class="center" src="/images/wasec/cookies-domain-on.png"></p>
+
+<p>If we have a look at the application running on the subdomain, we will now be able
+to see cookies set on the parent domain, as they use <code>Domain=wasec.local</code>,
+which allows any domain &ldquo;under&rdquo; <code>wasec.local</code> to access the cookies:</p>
+
+<p><img class="center" src="/images/wasec/cookies-sub-on.png"></p>
+
+<p>In HTTP terms, this is how the responses sent from the server look like:</p>
+
+<p>```
+~ ᐅ curl -I <a href="http://wasec.local:7888">http://wasec.local:7888</a>
+HTTP/1.1 200 OK
+Set-Cookie: example=test_cookie
+Date: Fri, 24 Aug 2018 09:34:08 GMT
+Connection: keep-alive</p>
+
+<p>~ ᐅ curl -I &ldquo;<a href="http://wasec.local:7888/?domain=on">http://wasec.local:7888/?domain=on</a>&rdquo;
+HTTP/1.1 200 OK
+Set-Cookie: example=test_cookie
+Set-Cookie: example_with_domain=test_domain_cookie;Domain=wasec.local
+Date: Fri, 24 Aug 2018 09:34:11 GMT
+Connection: keep-alive
+```</p>
+
+<h2>Supercookies</h2>
+
+<p>What if we were able to set a cookie on a top-level domain (abbr. TLD) such as
+<code>.com</code> or <code>.org</code>? That would definitely be a huge security concern, for two main
+reasons:</p>
+
+<ul>
+<li>user privacy: every website running on that specific TLD would be able to track
+information about the user in a shared storage</li>
+<li>information leakage: a server could mistakenly store a sensitive piece of data
+in a cookie available to other sites</li>
+</ul>
+
+
+<p>Luckily, TLD-cookies, otherwise known as <a href="https://en.wikipedia.org/wiki/HTTP_cookie#Supercookie">supercookies</a>,
+are disabled by web browsers for the reasons I mentioned above: if you try to set
+a supercookie, the browser will simply refuse to do so. If we append the parameter
+<code>super=on</code> in our example, we will see the server trying to set a supercookie, while
+the browser ignores it:</p>
+
+<p><img class="center" src="/images/wasec/supercookie.png"></p>
+
+<p>In today&rsquo;s web, though, there are other ways to keep track of users
+&mdash; <a href="https://en.wikipedia.org/wiki/HTTP_ETag#Tracking_using_ETags">ETag tracking</a>
+being an example of this. Since cookies are usually associated with tracking,
+<a href="https://qz.com/634294/a-short-guide-to-supercookies-whether-youre-being-tracked-and-how-to-opt-out/">these techniques are often referred to as supercookies</a> as well, even though they
+do not rely on HTTP cookies. Other terms that may refer to the same set of technologies
+and practices are permacookies (permanent cookies) or zombiecookies (cookies that
+never die).</p>
+
+<blockquote><h2>Unwanted Verizon ads</h2>
+
+<p>Companies love to make money out of ads, that&rsquo;s no news.
+But when ISPs start to aggressively track their customers in order to serve unwanted
+ads &mdash; well, that&rsquo;s a different story.</p>
+
+<p>In 2016, <a href="https://www.theverge.com/2016/3/7/11173010/verizon-supercookie-fine-1-3-million-fcc">Verizon was found guilty of tracking users without their consent</a>,
+and sharing their information with advertisers. This resulted in a fine of $1.35
+million and the inability, for the company, to continue with their questionable
+tracking policy.</p>
+
+<p>Another interesting example was Comcast, who used to <a href="https://www.privateinternetaccess.com/blog/2016/12/comcast-still-uses-mitm-javascript-injection-serve-unwanted-ads-messages/">include custom JavaScript code
+in web pages served through its network</a>.</p>
+
+<p>Needless to say, if all web traffic would be served through HTTPS we wouldn&rsquo;t
+have this problem, as ISPs wouldn&rsquo;t be able to decrypt and manipulate traffic
+on-the-fly.</p></blockquote>
+
+<h2>Cookie flags that matter</h2>
+
+<p>Until now we&rsquo;ve barely scratched the surface of HTTP cookies: it&rsquo;s now time for
+us to taste the real juice.</p>
+
+<p>There are 3 very important directives (<code>Secure</code>, <code>HttpOnly</code>,
+and <code>SameSite</code>) that should be understood before using cookies, as they heavily
+impact how cookies are stored and secured.</p>
+
+<h3>Encrypt it or forget it</h3>
+
+<p>Cookies contain very sensitive information: if attackers can get a hold of a
+session ID, they can impersonate users by <a href="https://en.wikipedia.org/wiki/Session_hijacking">hijacking their sessions</a>.</p>
+
+<p>Most <em>session hijacking</em> attacks usually happen through a <em>man-in-the-middle</em> who can listen to
+the unencrypted traffic between the client and server, and steal any information
+that&rsquo;s been exchanged. If a cookie is exchanged via HTTP, then it&rsquo;s vulnerable
+to MITM attacks and session hijacking.</p>
+
+<p>To overcome the issue, we can use HTTPS when issuing the cookie and add the <code>Secure</code>
+flag to it: this instruct browsers to never send this cookie in plain HTTP requests.</p>
+
+<p>Going back to our practical example, we can test this out by navigating to
+<a href="https://wasec.local:7889/?secure=on">https://wasec.local:7889/?secure=on</a>.
+The server sets 2 additional cookies, one with the <code>Secure</code> flag and one without:</p>
+
+<p><img class="center" src="/images/wasec/secure-cookie.png"></p>
+
+<p>When we go back and navigate to the HTTP version of the site, we can clearly see
+that the <code>Secure</code> cookie is not available in the page &mdash; try navigating to <a href="http://wasec.local:7888">wasec.local:7888</a>:</p>
+
+<p><img class="center" src="/images/wasec/not-secure-cookie.png"></p>
+
+<p>We can clearly see that the HTTPS version of our app set a cookie that&rsquo;s
+available to the HTTP one (the <code>not_secure</code> one), but the other cookie, flagged as <code>Secure</code>,
+is nowhere to be seen.</p>
+
+<p>Marking sensitive cookies as <code>Secure</code> is an incredibly important aspect of cookie
+security: even if you serve all of your traffic to HTTPS, attackers could find a way to
+set up a plain old HTTP page under your domain and redirect users there. Unless
+your cookies are <code>Secure</code>, they will then have access to a very delicious meal.</p>
+
+<h3>JavaScript can&rsquo;t touch this</h3>
+
+<p>As we&rsquo;ve seen earlier in this series, XSS attacks allow a malicious user to execute arbitrary
+JavaScript on a page: considering that you could read the contents of the cookie
+jar with a simple <code>document.cookie</code>, protecting our cookies
+from untrusted JavaScript access is a very important aspect of hardening cookies
+from a security standpoint.</p>
+
+<p>Luckily, the HTTP spec took care of this with the <code>HttpOnly</code> flag: by using this
+directive we can instruct the browser not to share the cookie with JavaScript.
+The browser then removes the cookie from the <code>window.cookie</code> variable, making it
+impossible to access the cookie via JS.</p>
+
+<p>If we look at the example at <a href="http://wasec.local:7888/?httponly=on">wasec.local:7888/?httponly=on</a>
+we can clearly see how this works. The browser has stored the cookie (as seen on
+the DevTools) but won&rsquo;t share it with JavaScript:</p>
+
+<p><img class="center" src="/images/wasec/http-only-cookie.png"></p>
+
+<p>The browser will then keep sending the cookie to the server in subsequent requests,
+so the server can still keep track of the client through the cookie: the trick,
+in this case, is that the cookie is never exposed to the end-user, and remains
+&ldquo;private&rdquo; between the browser and the server.</p>
+
+<p>The <code>HttpOnly</code> flag helps mitigate XSS attacks by denying access to critical
+information stored in a cookie: using it makes it harder for an attacker to
+hijack a session.</p>
+
+<blockquote><h2>Circumventing HttpOnly</h2>
+
+<p>In 2003, researchers found an interesting vulnerability around the <code>HttpOnly</code>
+flag: <a href="https://www.owasp.org/index.php/Cross_Site_Tracing">Cross-Site Tracing</a>
+(abbr. XST).</p>
+
+<p>In a nutshell, browsers wouldn&rsquo;t prevent access to <code>HttpOnly</code> cookies when using
+the <code>TRACE</code> request method. While most browsers have now disabled this method,
+my recommendation would be to disable <code>TRACE</code> at your webserver&rsquo;s level,
+returning the <code>405 Not allowed</code> status code.</p></blockquote>
+
+<h3>SameSite: the CSRF killer</h3>
+
+<p>Last but not least, the <code>SameSite</code> flag &mdash; one of the latest entries in the cookie
+world.</p>
+
+<p>Introduced by Google Chrome v51, this flag effectively eliminates <em>Cross-Site
+Request Forgery</em> (abbr. CSRF) from the web: <code>SameSite</code> is a simple yet
+groundbreaking innovation as previous solutions to CSRF attacks were either incomplete or
+too much of a burden to site owners.</p>
+
+<p>In order to understand <code>SameSite</code>, we first need to have a look at the vulnerability
+it neutralizes: a CSRF is an unwanted request made by site A to site B while the
+user is authenticated on site B.</p>
+
+<p>Sounds complicated? Let me rephrase: suppose that you are logged in on your banking
+website, which has a mechanism to transfer money based on an HTML <code>&lt;form&gt;</code>
+and a few additional parameters (destination account and amount) &mdash; when the website
+receives a <code>POST</code> request with those parameters and your session cookie, it will
+process the transfer. Now, suppose a malicious 3rd party website sets up an HTML form as
+such:</p>
+
+<p><code>
+&lt;form action="https://bank.com/transfer" method="POST"&gt;
+&lt;input type="hidden" name="destination" value="attacker@email.com" /&gt;
+&lt;input type="hidden" name="amount" value="1000" /&gt;
+&lt;input type="submit" value="CLICK HERE TO WIN A HUMMER" /&gt;
+&lt;/form&gt;
+</code></p>
+
+<p>See where this is getting? If you click on the submit button, cleverly disguised
+as an attractive prize, $1000 is going to be transferred from your account. This
+is a cross-site request forgery &mdash; nothing more, nothing less.</p>
+
+<p>Traditionally, there have been 2 ways to get rid of CSRF:</p>
+
+<ul>
+<li><code>Origin</code> and <code>Referer</code> headers: the server could verify that these headers come from trusted sources (ie. <code>https://bank.com</code>).
+The downside of this approach is that, as we&rsquo;ve seen earlier in this series, neither
+the <code>Origin</code> nor the <code>Referer</code> are very reliable and could be &ldquo;turned off&rdquo; by the client
+in order to protect the user&rsquo;s privacy.</li>
+<li>CSRF tokens: the server could include a signed token in the form, and verify its validity
+once the form is submitted. This is a generally solid approach and it&rsquo;s been the
+recommended best practice for years. The drawback of CSRF tokens is that they&rsquo;re
+a technical burden for the backend, as you&rsquo;d have to integrate token generation
+and validation in your web application: this might not seem a
+complicated task, but a simpler solution would be more than welcome.</li>
+</ul>
+
+
+<p><code>SameSite</code> cookies aim to supersede the solutions mentioned above once and for all:
+when you tag a cookie with this flag, you tell the browser not to include the cookie
+in requests that were generated by different origins. When the browser initiates
+a request to your server and a cookie is tagged as <code>SameSite</code>, the browser will
+first check whether the origin of the request is the same origin that issued the
+cookie: if it&rsquo;s not, the browser will not include the cookie in the request.</p>
+
+<p>We can have a practical look at <code>SameSite</code> with the example at
+<a href="https://github.com/odino/wasec/tree/master/cookies">github.com/odino/wasec/tree/master/cookies</a>:
+when you browse to <a href="http://wasec.local:7888/?samesite=on">wasec.local:7888/?samesite=on</a>
+the server will set a <code>SameSite</code> cookie and a &ldquo;regular&rdquo; one.</p>
+
+<p><img class="center" src="/images/wasec/cookies-ss-on.png"></p>
+
+<p>If we then visit <a href="http://wasec2.local:7888/same-site-form">wasec2.local:7888/same-site-form</a>
+we will see an example HTML form that will trigger a cross-site request:</p>
+
+<p><img class="center" src="/images/wasec/cookies-ss-form.png"></p>
+
+<p>If we click on the submit button of the form, we will then be able to understand
+the true power of this flag &mdash; the form will redirect us to <a href="http://wasec.local:7888/">wasec.local:7888</a>,
+but there is no trace of the <code>SameSite</code> cookie in the request made by the browser:</p>
+
+<p><img class="center" src="/images/wasec/cookies-ss-ok.png"></p>
+
+<p>Don&rsquo;t get confused by seeing <code>same_site_cookie=test</code> on your screen: the cookie
+is made available by the browser, but it wasn&rsquo;t sent in the request itself. We
+can verify this by simply typing <code>http://wasec.local:7888/</code> in the address bar:</p>
+
+<p><img class="center" src="/images/wasec/cokies-ss-lax.png"></p>
+
+<p>Since the originator of the request is &ldquo;safe&rdquo; (no origin, <code>GET</code> method) the browser
+sends the <code>SameSite</code> cookie with the request.</p>
+
+<p>This ingenious flag has 2 variants: <code>Lax</code> and <code>Strict</code>. Our example uses the
+former, as it allows top-level navigation to a website to include the cookie;
+when you tag a cookies as <code>SameSite=Strict</code> instead, the browser will not send
+the cookie across any cross-origin request, including top-level navigation: this
+means that if you click a link to a website that uses <code>strict</code>
+cookies you won&rsquo;t be logged in at all &mdash; an extremely high amount of protection
+that, on the other hand, might surprise users. The <code>Lax</code> mode allows these cookies
+to be sent across requests using safe methods (such as <code>GET</code>), creating a very
+useful mix between security and user experience.</p>
+
+<blockquote><h2>Cookie flags are important</h2>
+
+<p>Let&rsquo;s recap what we&rsquo;ve learned about cookies flags as they are crucial when
+you&rsquo;re storing, or allowing access to, sensitive data through them &mdash; which
+is a very standard practice:</p>
+
+<ul>
+<li>marking cookies as <code>Secure</code> will make sure that they won&rsquo;t be sent across
+unencrypted requests, rendering man-in-the-middle attacks fairly useless</li>
+<li>with the <code>HttpOnly</code> flag we tell the browser not to share the cookie with the
+client (eg. allowing JavaScript access to the cookie), limiting the blast radius
+of an XSS attack</li>
+<li>tagging the cookie as <code>SameSite=Lax|Strict</code> will prevent the browser from sending
+it in cross-origin requests, rendering any kind of CSRF attack ineffective</li>
+</ul>
+</blockquote>
+
+<h2>Alternatives</h2>
+
+<p>Reading all of this material about cookies and security you might be tempted to
+say &ldquo;I really want to stay away from cookies!&rdquo;: the reality is that, as of now,
+cookies are your best bet if you want to implement some sort of session mechanism
+over HTTP. Every now and then I&rsquo;m asked to evaluate alternatives to cookies,
+so I&rsquo;m going to try and summarize a couple things that get mentioned very often:</p>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage</a>: especially in the context of single-page applications (SPA), localStorage gets
+sometimes mentioned when discussing where to store sensitive tokens: the problem
+with this approach, though, is that localStorage does not offer any kind of
+protection against XSS attacks. If an attacker is able to execute a simple
+<code>localStorage.getItem('token')</code> on a victim&rsquo;s browser, it&rsquo;s game over. <code>HttpOnly</code>
+cookies easily overcome this issue.</li>
+<li><a href="https://jwt.io/">JWT</a>: JSON Web Tokens define a way to securely create access tokens for a client. JWT
+is a specification that defines how an access token would look like and does not
+define where is the token going to be stored. In other words, you could store a
+JWT in a cookie, the localStorage or even in memory &mdash; so it doesn&rsquo;t make sense
+to consider JWTs an &ldquo;alternative&rdquo; to cookies.</li>
+</ul>
+
+
+<h2>What would <em>LeBron</em> do?</h2>
+
+<p><img class="right" src="/images/lebron.jpeg"></p>
+
+<p>It&rsquo;s time to move on from the HTTP protocol and its features, such as cookies:
+we&rsquo;ve been on a long journey, dissecting why cookies were born, how they&rsquo;re
+structured and how you can protect them by applying some restrictions on their
+<code>Domain</code>, <code>Expires</code>, <code>Max-Age</code> and <code>Path</code> attributes, and how other flags such as
+<code>Secure</code>, <code>HttpOnly</code> and <code>SameSite</code> are vital in hardening cookies.</p>
+
+<p>Let&rsquo;s move forward and try to understand what we should do, from
+a security perspective, when we encounter a particular situation: the next article
+will try to provide advice based on best practices and past experience.</p>
+
+<p>It&rsquo;s time to introduce the <em>situationals</em>.</p>
+
+<p>
+
+
+
+<div class="series_nav">
+  
+  
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Business | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/business/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Simplify: How the Best Businesses in the World Succeed]]></title>
+    <link href="https://odino.org/book-review-simplify-how-the-best-businesses-in-the-world-succeed/"/>
+    <updated>2018-12-07T19:02:00+00:00</updated>
+    <id>https://odino.org/book-review-simplify-how-the-best-businesses-in-the-world-succeed</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/simplify-book.png"></p>
+
+<p>Something I&rsquo;m extremely fascinated with is the power of simplicity:
+I&rsquo;ve found myself fighting complexity far too many times, and always
+realized that when planning and developing a system, we&rsquo;d achieve the
+best results when keeping things simple.</p>
+
+<p>What&rsquo;s more interesting, simple systems could be combined together to
+kind of form more structured organizations that would still benefit
+from their straightforward pillars.</p>
+
+<p>Naturally, my curiosity evolved over time and I wasn&rsquo;t keen on confining to the
+tech field &mdash; so once I saw this book, I thought I&rsquo;d like to see if businesses
+have similar tendencies to the systems we build with code.</p>
+
+<!-- more -->
+
+
+<p>&ldquo;<a href="https://www.amazon.com/dp/B01KEL4G4K">Simplify: How the Best Businesses in the World Succeed</a>&rdquo;
+is a very interesting read: it starts by introducing great
+simplifiers such as Henry Ford or Ingvar Kamprad (founder of IKEA),
+describing their ascent into their respective industries. The book
+quickly jumps to the conclusion that there are 2 strategic ways to simplify:</p>
+
+<ul>
+<li>price-simplifying (cutting down costs by a substantial margin)</li>
+<li>proposition-simplifying (making a much better product, eliminate the fuss)</li>
+</ul>
+
+
+<p>Now&hellip;this is where the book kind of stops: after introducing the 2 different
+ways of simplifying it goes on and on about numbers such as revenue growth
+of simplifiers vs competitors and so on &mdash; it gets fairly boring at some point :)
+overall I think part of the book could have been trimmed down in favor of the
+examples and anectodes (which are amazing).</p>
+
+<p>All in all, I would recommend this book as it&rsquo;s cost-effective as well as
+well-written &mdash; you might get bored at some point in the final couple of
+chapters: if so, feel free to skip ahead!</p>
+
+<p>A few interesting quotes from the book:</p>
+
+<p><blockquote><p>being mostly correct and decisive typically yields better results than taking the time to figure out what is perfectly correct</p></blockquote></p>
+
+<p><blockquote><p>The real breakthrough came with a proprietary innovation, designed by his production managers: the move from batch production to a continuously moving assembly line. This didn&rsquo;t happen until 1913, and it was then that Ford famously insisted that all of his cars would be painted black, because only Japan black paint could dry quickly enough to keep up with the speed of the line. The effect of simplification and scale was to move the price of a Model T down to $550 by 1914, when 248,307 of them were sold. By 1917, the price had fallen even further, to $360, with the result that sales soared to 785,432. In 1920, 1.25 million Model T&rsquo;s were bought. Compared to 1909, a price reduction of 63 percent — to almost a third of the original price of the Model T, which was itself a good fifth cheaper than comparable cars — had resulted in a sixty-sevenfold increase in the number of cars Ford sold.</p></blockquote></p>
+
+<p><blockquote><p>Reduce product-line variety and if possible standardize on a single &ldquo;universal product&rdquo;</p></blockquote></p>
+
+<p><blockquote><p>A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away.</p></blockquote></p>
+
+<p><blockquote><p>Product design is nearly everything in proposition-simplifying. The objective is to make the product a joy to use: first and foremost, easier to use; then, if possible, more useful and more aesthetically appealing.</p></blockquote></p>
+
+<p><blockquote><p>It seems that firms develop their own rules of thumb about acceptable margins and then become addicted to them. So, if simpler, lower-margin products come along it is hard for any successful company to embrace them and realize that, although the margins are lower, the overheads are too. New entrants with simpler products do not have the handicap of success in more complex, more profitable products, and the overhead and margin assumptions that such success generates.</p></blockquote></p>
+
+<p><blockquote><p>Once the iPod project was launched, Jobs immersed himself in it daily. His main demand was &ldquo;Simplify!&rdquo; He would go over each screen of the user interface and apply a rigid test: he should be able to get there in three clicks. And the click should be intuitive. If he couldn’t figure out how to navigate to something, or if it took more than three clicks, he would be brutal.</p></blockquote></p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: The Personal MBA]]></title>
+    <link href="https://odino.org/book-review-the-personal-mba/"/>
+    <updated>2018-08-19T07:13:00+00:00</updated>
+    <id>https://odino.org/book-review-the-personal-mba</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/personal-mba.jpg"></p>
+
+<p>One of my latest habits is to look for recommendations from high-profile
+tech influencers, and this came after reading an <a href="https://seths.blog/2006/04/the_personal_mb/">intriguing post</a>
+by <a href="https://www.sethgodin.com/">Seth Godin</a>. Even though the post is from 2006,
+I thought &ldquo;why not giving it a shot?&rdquo; and, boy, I was really pleased with my choice.</p>
+
+<p><a href="https://www.amazon.co.uk/Personal-MBA-World-Class-Business-Education/dp/0670919535">The Personal MBA</a>
+is a condensed business lesson you will not regret: I particularly enjoyed the
+chapter around accounting and financials, as it helped me understand a few more
+technical terms and get a high-level overview of the matter. As you might have guessed,
+the book is not about software, and rightly so; at the same time I would encourage anyone passionate
+about building products and amazing audiences to give it a shot, as the books sums
+up a lot of interesting concepts for people who intend to run a business or launch
+a product.</p>
+
+<!-- more -->
+
+
+<p>I am always biased towards the business side of things (I often, maybe too often, find myself asking
+&ldquo;how did we improve it for customers?&rdquo; rather than &ldquo;is it covered by unit tests?&rdquo;)
+so this was a very interesting read for me, but if you don&rsquo;t give a damn about
+the product / business this is not going to be something you&rsquo;d enjoy. However, I would
+encourage you to venture to the other side, as I believe it helps us being better
+professionals &mdash; code is the medium, not the goal.</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<p><blockquote><p>Whoever best describes the problem is the one most likely to solve it.</p></blockquote></p>
+
+<p><blockquote><p>Frederick Winslow Taylor, the pioneer of “scientific management” techniques that now form the foundation of modern management training, used a stopwatch to shave a few seconds off the average time a workman took to load iron ingots into a train car. That should give you a good idea of the underlying mind-set of most business school management programs.</p></blockquote></p>
+
+<p><blockquote><p>top executives consistently have the highest rates of divorce and family relationship issues.</p></blockquote></p>
+
+<p><blockquote><p>all successful businesses sell some combination of money, status, power, love, knowledge, protection, pleasure, and excitement.</p></blockquote></p>
+
+<p><blockquote><p>The best way to observe what your potential competitors are doing is to become a customer. Buy as much as you can of what they offer.</p></blockquote></p>
+
+<p><blockquote><p>I can’t give you a surefire formula for success, but I can give you a formula for failure: try to please everybody all the time. —HERBERT BAYARD SWOPE, PULITZER PRIZE–WINNING JOURNALIST</p></blockquote></p>
+
+<p><blockquote><p>Being Remarkable is the best way to attract Attention. In the classic marketing book Purple Cow, Seth Godin uses a wonderful metaphor to illustrate this principle. A field full of brown cows is boring. A purple cow violates the viewer’s expectations, which naturally attracts Attention and interest.</p></blockquote></p>
+
+<p><blockquote><p>Most drivers don’t buy expensive off-road-capable vehicles because they actually drive off the road. They buy them because off-road capability makes them feel adventurous and bold, capable of meeting any driving challenge. Most women don’t buy a $20 tube of lipstick for its color alone. They buy it because they believe it will make them more beautiful and desirable. Most college students don’t pay hundreds of thousands of dollars to Harvard or Stanford or Yale just to sit in a class. They go (or, rather, their parents send them) because they believe they’ll be perceived as sophisticated, intelligent, and powerful after they graduate.</p></blockquote></p>
+
+<p><blockquote><p>The product that will not sell without advertising will not sell profitably with advertising.</p></blockquote></p>
+
+<p><blockquote><p>In every negotiation, the power lies with the party that is able and willing to walk away from a bad deal.</p></blockquote></p>
+
+<p><blockquote><p>In Green to Gold, Daniel Esty and Andrew Winston describe several ways of making it easier to internalize the results of large decisions. The “newspaper rule” and “grandchild rule” are effective ways of personalizing the results of your decisions. The “newspaper rule” is a simulation of the following: assume your decision was publicized on the front page of tomorrow’s New York Times, and your parents and/or significant other read it. What would they think? Imagining the personal consequences of your decisions in this way is a much more accurate way to evaluate the impact of short-term decisions. The “grandchild rule” is a way of evaluating decisions with long-term consequences. Imagine that, thirty or forty years from now, your grandchild gives you feedback on the results of your decision. Will they laud you for your wisdom or reprimand you for your stupidity?</p></blockquote></p>
+
+<p><blockquote><p>Add an element of Scarcity to your offer, and you’ll encourage people to buy now instead of “later.”</p></blockquote></p>
+
+<p><blockquote><p>If you’re having difficulties making a Decision, Steve Pavlina, the author of Personal Development for Smart People, recommends using this question as the tiebreaker: “Out of the available options, which experience do I want to have?”</p></blockquote></p>
+
+<p><blockquote><p>Asking yourself good questions helps you discover good answers. Make it a Habit to consistently ask yourself good questions, and you’ll be surprised how easy it is to overcome the challenges you face.</p></blockquote></p>
+
+<p><blockquote><p>Negative Deadlines—The deadlines for work become more important than the quality of the work being done.</p></blockquote></p>
+
+<p><blockquote><p>Doing something is not always the best course of action. Consider doing nothing instead.</p></blockquote></p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

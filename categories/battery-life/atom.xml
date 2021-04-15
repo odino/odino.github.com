@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Battery Life | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/battery-life/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Something Strange Happened to My Laptop's Battery]]></title>
+    <link href="https://odino.org/something-strange-happened-to-my-laptops-battery/"/>
+    <updated>2018-11-30T17:48:00+00:00</updated>
+    <id>https://odino.org/something-strange-happened-to-my-laptops-battery</id>
+    <content type="html"><![CDATA[<p>A few weeks ago I got to the office and noticed something
+peculiar: my XPS' battery had around 7 remaining hours
+of life, while until the week earlier I had never seen it above 3 hours.</p>
+
+<p>This is the (very short) story of how I supercharged my
+laptop&rsquo;s battery without even knowing how to.</p>
+
+<!-- more-->
+
+
+<h2>A bit of background</h2>
+
+<p><img class="right" src="/images/laptop-charge-1.png"></p>
+
+<p>Last month I flew to the most beautiful continent in
+the world with the idea of spending a whole week doing safaris in
+<a href="https://www.google.com/search?q=serengeti&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=0ahUKEwiW9JXVqf_eAhWJ_lQKHYGgCYsQ_AUIDygC&amp;biw=1920&amp;bih=990">Tanzania&rsquo;s national parks</a>.</p>
+
+<p>Suffice to say I wasn&rsquo;t super excited about bringing
+my laptop with me, mainly because:</p>
+
+<ul>
+<li>I&rsquo;d be on a jeep the whole time, and carrying it with me would
+make no sense, since I&rsquo;d just put it under a lot of stress</li>
+<li>I spent most of my nights at a camp that did not have any
+internet access at all, so good luck getting online regardless</li>
+</ul>
+
+
+<p>Eventually, I decided to leave the laptop at home, something
+I hadn&rsquo;t done since a few years. Gone for a good week&hellip;</p>
+
+<p>Once I got home, I noticed something interesting:
+the light that signals the battery level is low was blinking &mdash;
+&ldquo;probably got drained over the week&rdquo;, I thought.</p>
+
+<p>Plugged in my charger, waited until the laptop was fully
+charged, then the miracle happened: since then,
+the battery life has been extended by &frac34; hours at least
+(you might think that&rsquo;s not crazy, but for a battery that
+used to give me &frac34; hours of love at most, being able to do 6/8 hours
+in a row is a blessing).</p>
+
+<h2>How did this happen?</h2>
+
+<p>Frankly, I do not know. I&rsquo;ve always been a big believer of letting the
+battery work &ldquo;at full capacity&rdquo;, meaning that I let it drain as much as
+possible before charging it until it&rsquo;s completely full.</p>
+
+<p>I think this week-long draining session, without small charges
+in between, has allowed the battery to calibrate (?) better,
+or <em>god-knows-what</em>. Right now, being left with 20% of battery
+means I can still go on for a couple of hours:</p>
+
+<p><img class="center" src="/images/laptop-charge.png"></p>
+
+<p>All I know is that I have a better battery<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, and I owe it to
+going on a vacation and being able to &ldquo;disconnect&rdquo;. Probably, the underlying lesson is that it&rsquo;s good to disconnect once a year :)</p>
+
+<p>Adios!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Critics will argue that the battery life should generally trend north of 8h (https://www.google.com/search?q=dell+xps+battery+life&amp;oq=dell+xps+battery+life&amp;aqs=chrome..69i57j0l5.2957j0j7&amp;sourceid=chrome&amp;ie=UTF-8), but let's be realistic... <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Debugging | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/debugging/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How Did That Bug Happen? Git Bisect to the Rescue!]]></title>
+    <link href="https://odino.org/how-did-that-bug-happen-git-bisect-to-the-rescue/"/>
+    <updated>2018-06-24T23:47:00+00:00</updated>
+    <id>https://odino.org/how-did-that-bug-happen-git-bisect-to-the-rescue</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/git.png"></p>
+
+<p><code>git bisect</code> is a very handy command that lets you <a href="https://git-scm.com/docs/git-bisect">isolate which commit introduced a bug</a>:
+you tell it which version of your repository was bug-free and it runs a <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>
+between your current commit and the one that seems to have bug, asking you to
+confirm on whether the bug seems to be there at each step of the search.</p>
+
+<p>Curious? Let&rsquo;s see it in action!</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s first create a repository with a bunch of &ldquo;fake&rdquo; commits:</p>
+
+<p>```
+/tmp ᐅ mkdir test-repo</p>
+
+<p>/tmp ᐅ cd test-repo</p>
+
+<p>/tmp/test-repo ᐅ git init
+Initialized empty Git repository in /tmp/test-repo/.git/</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ touch test.txt</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ for i in $(seq 1 100); do echo $i > test.txt &amp;&amp; git add test.txt &amp;&amp; git commit -m &ldquo;Now: $i&rdquo;; done
+[master (root-commit) 28ea863] Now: 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test.txt
+[master fc57245] Now: 2
+ 1 file changed, 1 insertion(+), 1 deletion(&ndash;)
+[master 81e693c] Now: 3
+ 1 file changed, 1 insertion(+), 1 deletion(&ndash;)
+&hellip;
+&hellip;
+&hellip;
+[master b68f338] Now: 100
+ 1 file changed, 1 insertion(+), 1 deletion(&ndash;)
+```</p>
+
+<p>Let&rsquo;s say that the commit that introduced our bug is where the number in the <code>test.txt</code>
+file is higher than 9 (so the commit that starts at 10 is the culprit) &mdash; how would we find it in real life?</p>
+
+<p>Enter <code>git bisect</code> &mdash; let&rsquo;s tell git that:</p>
+
+<ul>
+<li>we want to start <em>bisecting</em></li>
+<li>our current, latest commit seems to be broken</li>
+<li>a commit back in the history does not seem to have the bug</li>
+</ul>
+
+
+<p>&hellip;and let&rsquo;s have git do the heavy-lifting for us:</p>
+
+<p>```
+/tmp/test-repo (master ✔) ᐅ git bisect start</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ git bisect bad # Our last commit seems to have a bug</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ git checkout 28ea863 # let&rsquo;s go back to a commit we&rsquo;re sure does not have the bug
+Note: checking out &lsquo;28ea863&rsquo;.</p>
+
+<p>You are in &lsquo;detached HEAD&rsquo; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.</p>
+
+<p>If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:</p>
+
+<p>  git checkout -b &lt;new-branch-name></p>
+
+<p>HEAD is now at 28ea863&hellip; Now: 1</p>
+
+<p>/tmp/test-repo (28ea863 ✔) ᐅ git bisect good
+Bisecting: 49 revisions left to test after this (roughly 6 steps)
+[bcba603c516783f6ad42b9410f6889e10aea0717] Now: 50
+```</p>
+
+<p>Now git will checkout right in the middle of those 2 commits &mdash; it asks you to
+test your changes and ask you whether this commit is good or bad. Let&rsquo;s go ahead:</p>
+
+<p>```
+/tmp/test-repo (bcba603 ✔) ᐅ cat test.txt
+50</p>
+
+<p>/tmp/test-repo (bcba603 ✔) ᐅ git bisect bad
+Bisecting: 24 revisions left to test after this (roughly 5 steps)
+[b276476e9f1d989f011db4fefc5b92df1685b313] Now: 25</p>
+
+<p>/tmp/test-repo (b276476 ✔) ᐅ cat test.txt
+25</p>
+
+<p>/tmp/test-repo (b276476 ✔) ᐅ git bisect bad
+Bisecting: 11 revisions left to test after this (roughly 4 steps)
+[ba653f4df25a0192d83c813e14ca5851653ab30f] Now: 13</p>
+
+<p>/tmp/test-repo (ba653f4 ✔) ᐅ cat test.txt<br/>
+13</p>
+
+<p>/tmp/test-repo (ba653f4 ✔) ᐅ git bisect bad
+Bisecting: 5 revisions left to test after this (roughly 3 steps)
+[a77f93ed29fe3bfaac69c686ce140a4284acee68] Now: 7</p>
+
+<p>/tmp/test-repo (a77f93e ✔) ᐅ cat test.txt<br/>
+7</p>
+
+<p>/tmp/test-repo (a77f93e ✔) ᐅ git bisect good
+Bisecting: 2 revisions left to test after this (roughly 2 steps)
+[affade823e7f0cb72a1a97052f700c31dc90cfee] Now: 10</p>
+
+<p>/tmp/test-repo (affade8 ✔) ᐅ cat test.txt <br/>
+10</p>
+
+<p>/tmp/test-repo (affade8 ✔) ᐅ git bisect bad
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[11e5f969458ad51f4009e2e3ac81f38d1ede6d07] Now: 9</p>
+
+<p>/tmp/test-repo (11e5f96 ✔) ᐅ cat test.txt<br/>
+9</p>
+
+<p>/tmp/test-repo (11e5f96 ✔) ᐅ git bisect good
+affade823e7f0cb72a1a97052f700c31dc90cfee is the first bad commit
+commit affade823e7f0cb72a1a97052f700c31dc90cfee
+Author: odino <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#115;&#x6f;&#109;&#x65;&#46;&#x6f;&#x6e;&#101;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x73;&#x6f;&#x6d;&#101;&#46;&#111;&#110;&#x65;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a>
+Date:   Sun Jun 24 23:29:02 2018 +0400</p>
+
+<pre><code>Now: 10
+</code></pre>
+
+<p>:100644 100644 ec635144f60048986bc560c5576355344005e6e7 f599e28b8ab0d8c9c57a486c89c4a5132dcbd3b2 M  test.txt
+```</p>
+
+<p>Amazing, <code>git bisect</code> found out the exact commit our bug was introduced &mdash; nothing more,
+nothing less: just an amazing trick that can save you hours of debugging!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Little Bit of Strace Doesn't Hurt]]></title>
+    <link href="https://odino.org/a-little-bit-of-strace-doesnt-hurt/"/>
+    <updated>2018-01-11T14:05:00+00:00</updated>
+    <id>https://odino.org/a-little-bit-of-strace-doesnt-hurt</id>
+    <content type="html"><![CDATA[<p><a href="https://linux.die.net/man/1/strace">strace(1)</a> is an amazing tool that you can use to debug processes that went south
+when nothing else helps.</p>
+
+<!-- more -->
+
+
+<p>At it&rsquo;s core, strace simply runs a command and prints out all system calls
+executed:</p>
+
+<p>```
+$ strace echo &ldquo;1&rdquo; > test.txt</p>
+
+<p>execve(&ldquo;/bin/echo&rdquo;, [&ldquo;echo&rdquo;, &ldquo;1&rdquo;], [/<em> 79 vars </em>/]) = 0
+brk(NULL)                               = 0xa99000
+access(&ldquo;/etc/ld.so.nohwcap&rdquo;, F_OK)      = -1 ENOENT (No such file or directory)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a58000
+access(&ldquo;/etc/ld.so.preload&rdquo;, R_OK)      = -1 ENOENT (No such file or directory)
+open(&ldquo;/etc/ld.so.cache&rdquo;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=105962, &hellip;}) = 0
+mmap(NULL, 105962, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0fe9a3e000
+close(3)                                = 0
+access(&ldquo;/etc/ld.so.nohwcap&rdquo;, F_OK)      = -1 ENOENT (No such file or directory)
+open(&ldquo;/lib/x86_64-linux-gnu/libc.so.6&rdquo;, O_RDONLY|O_CLOEXEC) = 3
+read(3, &ldquo;\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\t\2\0\0\0\0\0&rdquo;&hellip;, 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1868984, &hellip;}) = 0
+mmap(NULL, 3971488, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0fe946b000
+mprotect(0x7f0fe962b000, 2097152, PROT_NONE) = 0
+mmap(0x7f0fe982b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c0000) = 0x7f0fe982b000
+mmap(0x7f0fe9831000, 14752, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9831000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a3d000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a3c000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a3b000
+arch_prctl(ARCH_SET_FS, 0x7f0fe9a3c700) = 0
+mprotect(0x7f0fe982b000, 16384, PROT_READ) = 0
+mprotect(0x606000, 4096, PROT_READ)     = 0
+mprotect(0x7f0fe9a5a000, 4096, PROT_READ) = 0
+munmap(0x7f0fe9a3e000, 105962)          = 0
+brk(NULL)                               = 0xa99000
+brk(0xaba000)                           = 0xaba000
+open(&ldquo;/usr/lib/locale/locale-archive&rdquo;, O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=10305248, &hellip;}) = 0
+mmap(NULL, 10305248, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0fe8a97000
+close(3)                                = 0
+fstat(1, {st_mode=S_IFREG|0664, st_size=0, &hellip;}) = 0
+write(1, &ldquo;1\n&rdquo;, 2)                      = 2
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+```</p>
+
+<p>Now, that&rsquo;s quite a bit of information: you will see each and every system call
+that&rsquo;s been run in order to execute your command, with arguments (up to a certain
+length) and the exit code.</p>
+
+<p>How is this useful? Well, in order to debug a running process you can simply
+<em>strace</em> it by its pid:</p>
+
+<p>```
+$ sleep 20 &amp;</p>
+
+<p>[1] 15977</p>
+
+<p>$ strace -p $!</p>
+
+<p>strace: Process 15977 attached
+restart_syscall(&lt;&hellip; resuming interrupted nanosleep &hellip;>) = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+[1]+  Done                    sleep 20
+```</p>
+
+<p>(note that <code>$!</code> is the pid of the previous process, it&rsquo;s just a magic shell variable)</p>
+
+<p>Now we&rsquo;re talking! Remember that process that inexplicably hangs after running
+for a couple minutes? Let&rsquo;s run it, then find its pid and strace it on the fly.</p>
+
+<p>You can even trace child processes and even threads with the <code>-f</code> option, so
+that you can literally follow anything your parent process triggers &mdash; just this
+week this turned out handy for me since I needed to debug an android app running
+on an emulated device, which can be easily done through something like:</p>
+
+<p>```
+$ adb shell</p>
+
+<p>(in the emulated device)</p>
+
+<p>$ ps -A | grep com.myapp</p>
+
+<p>(get the pid)</p>
+
+<p>$ strace -f -p $PID
+```</p>
+
+<p>Remember: when you think there&rsquo;s nothing left to try, strace(1) will always have
+your back.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging NodeJS Applications From Your Browser]]></title>
+    <link href="https://odino.org/debugging-nodejs-applications-from-your-browser/"/>
+    <updated>2017-04-12T17:31:00+00:00</updated>
+    <id>https://odino.org/debugging-nodejs-applications-from-your-browser</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/chrome-node-debug.png"></p>
+
+<p>If you&rsquo;ve worked with Node long enough, chances are you probably grew fed up with the lack
+of <em>plug-and-play</em> benchmarking and profiling tools in its ecosystem: well, at
+least for debugging, say no more!</p>
+
+<p>One of the most overlooked features that landed in Node over
+the past year is <a href="https://github.com/nodejs/node/pull/6792">enhanced debuggability</a>
+which, coupled with Chrome&rsquo;s DevTools, makes it extremely easy
+to debug and profile server-side JavaScript: it comes with full support of the
+<em>usual suspects</em> such as <strong>breakpoints</strong> and <strong>CPU profiles</strong>, and it&rsquo;s
+extremely easy to setup &mdash; no external dependency, no overhead, just Chrome.</p>
+
+<!-- more -->
+
+
+<p>The trick is very simple, as you just need to launch your node scrips with the
+<code>--inspect</code> flag!</p>
+
+<p>Say you have an HTTP server up &amp; running on port 8080:</p>
+
+<p>``` js index.js
+require(&lsquo;http&rsquo;).createServer((req, res) => {</p>
+
+<pre><code>console.log('Hello')
+res.write('Oh my ')
+res.end('gosh!')
+</code></pre>
+
+<p>}).listen(8080)
+```</p>
+
+<p>you simply need to start it with <code>node --inspect index.js</code> and head to the URL
+pointed out by the command line, something like:</p>
+
+<p>``` bash
+/tmp ᐅ node &mdash;inspect index.js
+Debugger listening on port 9229.
+Warning: This is an experimental feature and could change at any time.
+To start debugging, open the following URL in Chrome:</p>
+
+<pre><code>chrome-devtools://devtools/bundled/inspector.html?experiments=true&amp;v8only=true&amp;ws=127.0.0.1:9229/737e256b-8640-4331-a145-27a119ba43c8
+</code></pre>
+
+<p>```</p>
+
+<p>Needless to say, if you want to pick a specific port, you just need to tweak
+the <em>inspect</em> option with something like <code>--inspect=4000</code><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>See you next time!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>At Namshi, most of us develop on remote machines (EC2 in Mumbai) and we only expose a handful of ports from those machines, so we run our debuggers on more &ldquo;common&rdquo; ports such as 8090 <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[When Debugging Doesn't Suck: Beautiful Errors]]></title>
+    <link href="https://odino.org/when-debugging-doesnt-suck-beautiful-errors/"/>
+    <updated>2017-03-29T22:59:00+00:00</updated>
+    <id>https://odino.org/when-debugging-doesnt-suck-beautiful-errors</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/stacktrace-java.png"></p>
+
+<p>Exceptions happen everyday: the bigger (and the more distributed) the system, the
+higher the chances for things to go south.</p>
+
+<p>Most of us already learned the lesson when we idealized architectures and they
+bit us back in the form of a catastrophic downtime that could have been avoided,
+maybe by just <a href="/better-performance-the-case-for-timeouts/">adding a required timeout</a>
+or keeping a few <a href="/book-review-release-it-design-and-deploy-production-ready-software/">best practices for distributed systems</a>
+in mind: we are now better architects, who understand that <strong>failures are an option</strong>
+and we have to build resilient systems that embrace them and work towards mitigating
+their impact.</p>
+
+<p>There is one thing, though, that most of us (including me) still suck at: <strong>throwing
+beautiful errors</strong>.</p>
+
+<p>We have great infrastructures in place to log information and monitor our systems
+where, in theory, everything is taken care of; then the day comes when disaster, in the form
+of a nasty bug, strikes and we&rsquo;re left trying to understand what&rsquo;s
+going on with our software.</p>
+
+<p>How many times, after fixing a bug, you find yourself saying
+&ldquo;<em>let&rsquo;s add some more logs though</em>&rdquo;? If you&rsquo;ve been as frustrated as I&rsquo;ve been,
+I&rsquo;d recommend you to read on.</p>
+
+<!-- more -->
+
+
+<h2>Logging should be transparent to the app</h2>
+
+<p><code>stdout</code>/<code>stderr</code> work alright most of the time, that&rsquo;s where your app should
+log to in 99% of the cases: logging is generally part of the infrastructure,
+not the single app, so there&rsquo;s virtually no reason to make the app aware of a
+specific logging transport.</p>
+
+<p>Most logging libraries support <code>std***</code> out of the box, so that you can, at a higher
+level, collect those logs in a single place, without having to change a hundred apps when
+you decide to switch to a new log collector (ie. SumoLogic, ELK, Graylog).</p>
+
+<p>Make the app unaware of who&rsquo;s receiving the logs, it&rsquo;s the best way to centralize
+logging and make sure you&rsquo;re not trapped with one solution unless you change each
+and every app in your architecture.</p>
+
+<h2>Not too much, not too less</h2>
+
+<p>Nobody likes to ingest (and pay for) gigabytes of useless logs, especially when
+you&rsquo;re trying to debug and all that pops in your monitoring console is:</p>
+
+<p><code>
+Mar 17 17:53:35 app Received request for order #123
+Mar 17 17:53:35 app Opening mysql connection
+Mar 17 17:53:35 app Order #123 cannot be placed
+Mar 17 17:53:35 app There was some problem with order #123
+Mar 17 17:53:35 app Closing mysql connection (timeout)
+Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111
+Mar 17 17:53:35 app Unable to place order #123, responding to client with error code
+Mar 17 17:53:35 app Sent code 500 to client for order #123
+</code></p>
+
+<p>So, out of 8 messages we only care about 1 or 2 of them, the actual error
+(<code>connection timed out</code>) and maybe the incoming request message (first one above):
+most of those messages will not really add anything but clutter, and you&rsquo;re left
+looking at logs that you eventually have to <strong>filter out</strong>.</p>
+
+<p>A better strategy would probably be to log the error and provide some additional
+info, in case the reader wants to understand a bit more about the error:</p>
+
+<p><code>
+Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111 {
+  timeout: 10000,
+  httpStatus: 500,
+  orderParams: ...
+}
+</code></p>
+
+<p>This should help keeping logs as informative as possible, but it exposes you to
+a nasty problem, as you&rsquo;re only logging in case an error occurs. Supposing that
+your app is an HTTP server, I&rsquo;d strongly recommend to log the request (very high-level,
+no need for a lot of details) so that you know that the app is being hit:</p>
+
+<p><code>
+Mar 17 17:53:35 app POST /orders
+Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111 {
+  timeout: 10000,
+  httpStatus: 500,
+  orderParams: ...
+}
+</code></p>
+
+<p>else, when a bunch of requests ends up throwing a <code>500</code> error and you don&rsquo;t see
+logs in the console, you won&rsquo;t be able to tell if the problem is with the load
+balancer in front of the app that&rsquo;s rejecting some requests or what. Add <em>cheap</em>
+logs at an high level so that you don&rsquo;t have to make lots of assumption when
+things go wrong, so that when you see this in the logs:</p>
+
+<p>```
+Mar 17 17:53:35 Server starting on port 8080&hellip;</p>
+
+<p>```</p>
+
+<p>you know the app is probably not receiving traffic at all.</p>
+
+<h2>Cluster by identifiers</h2>
+
+<p><img class="right" src="/images/aws-xray.png"></p>
+
+<p>It&rsquo;s a good idea to be able to tag logs so that you can cluster them later on,
+especially if you have a multi-layered architecture: Amazon, for example, launched
+<a href="https://aws.amazon.com/xray/">X-Ray</a> to help in these exact scenarios.</p>
+
+<p>Assign a request ID to each and every request coming to your load balancers, and
+forward that ID to the inner levels of your architecture: this will help you
+giving more context to errors.</p>
+
+<p>For example, you might end up seeing that requests
+that came through the load balancer and hit service A with a particular query string
+parameter didn&rsquo;t eventually land on service B, thus you can now focus on
+understanding why service A is holding on all of the requests with that specific
+parameter.</p>
+
+<h2>What went wrong?</h2>
+
+<p>It&rsquo;s generally helpful to understand what exactly went wrong, or what kind of
+parameter we were expecting: most of the times it&rsquo;s a matter of being able
+to include the specific parameter that caused the error in the logs, as there&rsquo;s
+nothing worse than logging a generic <code>invalid parameters</code> error, leaving the
+next guy on-call trying to figure out what exactly triggered the error.</p>
+
+<p>Something as easy as:</p>
+
+<p>``` js
+app.post(&lsquo;/users&rsquo;, (req, res) {
+  let user = req.params</p>
+
+<p>  db.findUser(user).catch(err => {</p>
+
+<pre><code>console.log('Error creating new user', {err, params})
+</code></pre>
+
+<p>  })
+})
+```</p>
+
+<p>could help you understand the root cause of the failure.</p>
+
+<p>Bear in mind that you have to be very careful when embedding external parameters into your logs,
+as you might end up <strong>logging sensitive information such as DB credentials or credit
+card numbers</strong>: check the documentation of your specific logger to see if it supports
+<a href="https://github.com/pinojs/pino/blob/4c6170274abcd09721e9d37f668e01ec5083852a/docs/howtos.md#how-do-i-redact-sensitive-information">redacting</a> information, else you&rsquo;ll have to manually &ldquo;hide&rdquo; those values.</p>
+
+<h2>How do I fix this?</h2>
+
+<p>Another very important aspects of great logs is the ability to include
+remediation steps in the logs themselves, so that once a failure happens we&rsquo;re
+immediately able to troubleshoot.</p>
+
+<p>As easy as it sounds, it&rsquo;s not always feasible to include them:
+for example, when a clients sends the wrong parameter to a service, it&rsquo;s very
+easy to identify the root cause, but not so trivial to figure out what needs
+to be done to remediate the error.</p>
+
+<p>Was there a deployment that changed the
+parameter name from <code>userId</code> to <code>user_id</code>? Is the client broken due to an update
+on its side? Is it on &ldquo;our&rdquo; side or &ldquo;their&rdquo; side? No single, clear action can be
+taken without digging a bit further, and at that point it&rsquo;s better to avoid
+including vague, unhelpful remediation steps such as &ldquo;<em>contact the customer as they seem
+to be screwing up</em>&rdquo;, as it might lead you towards the wrong direction.</p>
+
+<p>An example of remediation steps for when a <a href="https://martinfowler.com/bliki/CircuitBreaker.html">circuit breaker</a>
+kicks in:</p>
+
+<p>```
+GET api.example.com &mdash; Circuit breaker prevented connection, if you believe this
+is an error you can manually open the circuit with the following command from our
+intranet:</p>
+
+<p>  curl -X POST -d &ldquo;state=open&rdquo; <a href="https://frontend.example.com/_breakers/api.namshi.com">https://frontend.example.com/_breakers/api.namshi.com</a>
+```</p>
+
+<p>Most of the time, the breaker will close the circuit for a valid reason; whenever
+that&rsquo;s not the case you have a solution right in front of you.</p>
+
+<p>It&rsquo;s worth noting that remediation steps, like any form of documentation,
+might get outdated quite fast: my advice is to not get too excited in order to avoid
+spamming your codebase with instructions that will change every 3 months.</p>
+
+<h2>Provide useful info</h2>
+
+<p>Most of the loggers available today let you specify some kind of context to
+surround your log message with: when a timeout connecting to MySQL occurs, for
+example, it would be nice to understand how your connections pool looked at the
+time, as well as other information like the timeout itself.</p>
+
+<p>``` js
+pool.getConnection({timeout})
+  .then(&hellip;)
+  .catch(err => {</p>
+
+<pre><code>logger.error(err, {
+  timeout,
+  pool: pool.getState(),
+})
+</code></pre>
+
+<p>  })<br/>
+```</p>
+
+<p>As usual, no rocket science.</p>
+
+<h2>Collect crashes</h2>
+
+<p><img class="left" src="/images/newrelic.jpg"></p>
+
+<p>Last but not least, something that might sound silly to many of you: <strong>collect
+crash reports</strong>.</p>
+
+<p>In some languages that&rsquo;s not as trivial as it sounds (for example, <a href="http://stackoverflow.com/questions/12928487/php-try-catch-and-fatal-error">PHP&rsquo;s
+fatal errors weren&rsquo;t catchable</a> until <a href="http://php.net/manual/en/language.errors.php7.php">PHP 7</a>),
+so you might need to look into other, lower-level solutions that are able
+to intercept and log crashes when userland code can do nothing about it.</p>
+
+<p><a href="https://newrelic.com/">NewRelic</a> seems to be the front-runner here, even though its
+host-based pricing model is quite quirky under certain circumstances
+(think containers or t2 instances on AWS).</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;ve done quite some damage in the past, so this is more of a collection of
+friendly advices from someone who banged his head against the wall several
+times.</p>
+
+<p>If you&rsquo;re curious about the infrastructure we use to handle monitoring and logging
+at Namshi let me just give you a brief overview:</p>
+
+<ul>
+<li>our legacy systems log to <a href="https://www.graylog.org/">Graylog</a> through specialized transports (ie. <a href="https://github.com/namshi/winston-graylog2">winston-graylog2</a>)</li>
+<li>the rest of our apps are running in containers and log to <code>stdout</code></li>
+<li>there&rsquo;s a container, on each host, that collects all docker logs and ships them to <a href="https://sematext.com/logsene/">sematext&rsquo;s logsene</a></li>
+<li>on staging, we give devs a bit more freedom and let them have a look at the <a href="https://github.com/kubernetes/dashboard#kubernetes-dashboard">kubernetes' dashboard</a></li>
+<li><a href="https://newrelic.com/">NewRelic</a> monitors crashes and performance</li>
+<li><a href="https://sensuapp.org/">Sensu</a> runs checks that ensure things are running smoothly (ie. <code>ping google.com</code> from the machines, check we have at least X products on the website, etc)</li>
+</ul>
+
+
+<p>If you&rsquo;d like to read more about logging, I&rsquo;d recommend <a href="http://www.masterzen.fr/2013/01/13/the-10-commandments-of-logging/">this article</a>
+that really helped me shape this post.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,215 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Last weekend I wrote an IDE. In JavaScript.</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/last-weekend-i-wrote-an-ide-in-javascript/" />
+		<meta property="og:title" content="Last weekend I wrote an IDE. In JavaScript." />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/last-weekend-i-wrote-an-ide-in-javascript/">Last weekend I wrote an IDE. In JavaScript.</a></h1>
+        <time>29 June 2014</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 7 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>In the past days I&rsquo;ve been spending some hours on a project
+I had in mind since a while, and finally got to roll out
+something I am already using on a daily basis: a fast IDE
+that runs within a browser.</p>
+
+<!-- more -->
+
+
+<h2>Nikki</h2>
+
+<p>The idea is very simple: why booting a Java monster like
+WebStorm / Eclipse / Netbeans when you can satisfy all
+of your basic needs with a simple <code>&lt;div contenteditable /&gt;</code>?</p>
+
+<p>Well, because a browser editor would still need to be able
+to talk with your filesystem, and that&rsquo;s something a completely
+&ldquo;frontend&rdquo; JS app wouldn&rsquo;t be able to do
+(<a href="https://hacks.mozilla.org/2014/06/webide-lands-in-nightly/">but might be able to do soon</a>).</p>
+
+<p>So, take JavaScript, put it on the frontend (browser), put
+it on the backend (NodeJS), get them to talk (socket.io) and
+use a pretty good web editor (ACE), add <code>ctrl + f</code> and <code>ctrl + s</code>
+and we&rsquo;re done:</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/odino/nikki/master/bin/images/nikki-ss.png?token=328420__eyJzY29wZSI6IlJhd0Jsb2I6b2Rpbm8vbmlra2kvbWFzdGVyL2Jpbi9pbWFnZXMvbmlra2kuZ2lmIiwiZXhwaXJlcyI6MTQwMzk4MDA4N30%3D--df43445fcfba173ae878bc6447c1169b61bc59cf"></p>
+
+<h2>How to get started</h2>
+
+<p>Simply install nikki with an <code>npm install -g nikki</code>, <code>cd</code>
+into a project&rsquo;s directory and launch the editor with the <code>nikki</code>
+command: the editor will launch a new browser window to let
+you have fun with your project.</p>
+
+<p>A <code>nikki --help</code> might get the confusion away, but if you
+really want to give the project a closer look simply check
+the <a href="https://github.com/odino/nikki">README on github</a>.</p>
+
+<p>Of course, of course, of course, I need to clarify a few points:
+first of all, nikki is not a &ldquo;real&rdquo; IDE, it&rsquo;s  more a text editor
+(the marketer in me!), and it didn&rsquo;t really come out in a single weekend
+(even though  the basics were setup last WE); last but not least,
+I&rsquo;m not a javascripter (<a href="http://osrc.dfm.io/odino/">I guess</a>), so most of the credit goes
+to <a href="http://socket.io/">socket.io</a>, the <a href="http://ace.c9.io/#nav=about">ACE editor</a>
+and <a href="https://it.linkedin.com/in/davidfunaro">David</a>, who made me write my
+very first lines of JS back in 2011 (I know, so late!)</p>
+
+<h2>Considerations</h2>
+
+<p>I&rsquo;ve started writing this thing 2 weeks ago and I&rsquo;m very happy
+with where I&rsquo;ve got so far; in fact, I am writing
+this post from &ldquo;my&rdquo; nikki, here&rsquo;s the proof:</p>
+
+<p><img class="center" src="/images/nikki-proof.png"></p>
+
+<p>I plan on fixing a few more bugs I have in my todo list
+(because they&rsquo;re &ldquo;bugging&rdquo; me) and would be extremely happy
+to fix anything you find while playing with nikki: I must admit
+that, by using the latest version of Chrome on Linux, I might
+have broken a few things on other browsers, so I&rsquo;d be very
+happy to fix anything that comes up (ofc don&rsquo;t mention IE).</p>
+
+<h2>One more thing</h2>
+
+<p>As per the README:</p>
+
+<blockquote><p>Hey, couldn&rsquo;t you simply use TextMate or LightTable?</p>
+
+<p>Yes, but then, where&rsquo;s the fun?</p></blockquote>
+
+<p>Remember, this is a pet project and I firstly did it for
+fun, learning and to practice a bit over my spare time:
+it is nothing groundbreaking or rocket-science, and I
+don&rsquo;t see this going anywhere but my laptop (in terms of
+userbase). If you wish to use (or at least try) nikki
+I would be very happy though :)</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/last-weekend-i-wrote-an-ide-in-javascript/"
+		},
+		"headline": "Last weekend I wrote an IDE. In JavaScript.",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2014-06-29 23:32:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

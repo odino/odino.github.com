@@ -1,0 +1,382 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="When abstractions cost: how we saved 5ms trading elegance for pragmatism." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Beware of Lodash (and the cost of abstractions)</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/beware-of-lodash-and-the-cost-of-abstractions/" />
+		<meta property="og:title" content="Beware of Lodash (and the cost of abstractions)" />
+		<meta property="og:description" content="When abstractions cost: how we saved 5ms trading elegance for pragmatism." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/beware-of-lodash-and-the-cost-of-abstractions/">Beware of Lodash (and the cost of abstractions)</a></h1>
+        <time>24 March 2017</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 4 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Yesterday, while profiling one of <a href="https://tech.namshi.com">our</a> NodeJS apps, I
+bumped into an interesting piece of code that seemed to take too long to run:
+interestingly enough, everything seemed to point to lodash&rsquo;s <code>pick</code> function.</p>
+
+<!-- more -->
+
+
+<p>For those of you who don&rsquo;t know what that function does, it basically creates a
+new object from an existing one, picking only a user-defined list of properties
+to &ldquo;move over&rdquo;.</p>
+
+<p>Easier in code than with words:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="nx">b</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span> <span class="c1">// {b: 1}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&rsquo;s kind of an elegant solution over doing these kind of
+operations manually:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Alex&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">lastName</span><span class="o">:</span> <span class="s1">&#39;Nadalin&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">job</span><span class="o">:</span> <span class="s1">&#39;less&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">age</span><span class="o">:</span> <span class="s1">&#39;still ok&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">hair</span><span class="o">:</span> <span class="s1">&#39;enough&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/full-user-details&#39;</span><span class="p">,</span> <span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="nx">user</span><span class="p">})</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/partial-user-details&#39;</span><span class="p">,</span> <span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="nx">user</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">lastName</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">lastName</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">age</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">age</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">}})</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// VS</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/partial-user-details&#39;</span><span class="p">,</span> <span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="nx">user</span><span class="o">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;lastName&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])})</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It doesn&rsquo;t really change much in terms of style although, in my opinion, it looks
+a bit more elegant and lets you <a href="https://blog.codinghorror.com/the-best-code-is-no-code-at-all/">type less code</a>.</p>
+
+<p>So what about the performance impact? I wrote a small script to test it over a
+long list of &ldquo;user&rdquo; objects:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Alex&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">lastName</span><span class="o">:</span> <span class="s1">&#39;Nadalin&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">job</span><span class="o">:</span> <span class="s1">&#39;less&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">age</span><span class="o">:</span> <span class="s1">&#39;still ok&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">gender</span><span class="o">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">hair</span><span class="o">:</span> <span class="s1">&#39;enough&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'><span class="nx">list</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;vanilla&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">list</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">lastName</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">lastName</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;vanilla&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">list</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">user</span> <span class="o">=&gt;</span> <span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;lastName&#39;</span><span class="p">]))</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, we&rsquo;re creating a list of a thousand objects with a handful of properies,
+loop through that list and map them, hand-picking a couple properies. The result:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/tmp ᐅ node beware-lodash.js
+</span><span class='line'>
+</span><span class='line'>vanilla: 1.064ms
+</span><span class='line'>lodash: 14.271ms
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>What the actual [expletive] is going on here?</h2>
+
+<p>Well, <a href="https://github.com/lodash/lodash/blob/4.17.4/lodash.js#L13537">Lodash needs to loop through all the keys in the object</a>
+to cherry-pick the specific properties and, additionally, &ldquo;needs&rdquo; to call a whole
+bunch of functions:</p>
+
+<ul>
+<li><code>pick</code></li>
+<li><code>basePick</code></li>
+<li><code>basePickBy</code></li>
+<li><code>hasIn</code></li>
+<li><code>hasPath</code></li>
+<li><code>castPath</code></li>
+<li><code>toKey</code></li>
+</ul>
+
+
+<p>&hellip;and I honestly lost the count by then &mdash; I wonder what that does to the
+stack :)</p>
+
+<p>So, even though I can&rsquo;t pinpoint the exact bottleneck, I think there are a bunch
+of different factors that make its implementation way slower compared to
+using some more tedious, vanilla JS: the Big O is in itself less efficient, plus
+the fact that it needs to call a few different functions and do some sanity
+checks around definitely play a role in the slowdown.</p>
+
+<p>In our case we used lodash in a loop that, worst-case scenario, involved ~100 items:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Use list.fill(100)</span>
+</span><span class='line'>/tmp ᐅ node beware-lodash.js
+</span><span class='line'>
+</span><span class='line'>vanilla: 0.357ms
+</span><span class='line'>lodash: 5.250ms
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Guess how much time did we save in our app? Exactly 5ms.</p>
+
+<p>To many, that might not seem too much, but considering that the response time of the given
+service was around 44ms, we basically cut it down by 10%.</p>
+
+<h2>Does this mean that Lodash suck?</h2>
+
+<p><strong>Heck, no!</strong> How would you do this?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// GET /users?fields=name&amp;fields=lastName</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:collection&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="err">`</span><span class="p">.</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">collection</span><span class="p">}.</span><span class="nx">json</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span><span class="nx">data</span><span class="o">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">d</span> <span class="o">=&gt;</span> <span class="nx">_</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">fields</span><span class="p">))})</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As always, there&rsquo;s a use case for everything<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, so you just need to understand
+if the function, API or library you&rsquo;re using is the best fit in your scenario:
+for us, since we always knew the properties to pick in advance, using <code>_.pick</code>
+and all the power it offers didn&rsquo;t make a lot of sense.</p>
+
+<p>Too often we rely on libraries and abstractions, thinking we&rsquo;re never going to
+&ldquo;pay&rdquo; for that: granted that many times these abstractions are necessary so that
+we don&rsquo;t re-invent the wheel and rely on someone else&rsquo;s great work, we still need
+to evaluate what consequences using a framework or library brings to the
+table.</p>
+
+<p>Cheers!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Okay, maybe requiring JSON files from the filesystem based on user-input pushes it too far&#8230; <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/beware-of-lodash-and-the-cost-of-abstractions/"
+		},
+		"headline": "Beware of Lodash (and the cost of abstractions)",
+		"description": "When abstractions cost: how we saved 5ms trading elegance for pragmatism.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2017-03-24 13:51:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

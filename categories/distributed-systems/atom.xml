@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Distributed Systems | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/distributed-systems/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Designing Distributed Systems]]></title>
+    <link href="https://odino.org/book-review-designing-distributed-systems/"/>
+    <updated>2019-01-25T14:03:00+00:00</updated>
+    <id>https://odino.org/book-review-designing-distributed-systems</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/book-cover-designing-distributed-systems.png"></p>
+
+<p>This was a fairly quick and informative read, one that maybe dosn&rsquo;t <em>fully</em>
+justify its price, currently trending at around $30 from Amazon.</p>
+
+<p>At the end of the day, though, I&rsquo;m happy with my choice and certainly
+cannot complain, as the book gave me a couple interesting ideas /
+perspectives that I would have missed otherwise &mdash; and I was pretty
+excited to read <a href="https://www.linkedin.com/in/brendan-burns-487aa590/">Brendan Burns</a>&lsquo; take, one of Kubernetes&rsquo; fathers,
+on distributed systems.</p>
+
+<!-- more -->
+
+
+<p>The book mostly covers basic topics around distributed systems, and
+pulls Kubernetes in when it comes down to examples: some have complained
+that this feels like a k8s book rather than a book on distributed systems,
+but I would argue that given the state of k8s within the ecosystem
+(clear leader by far, far away) it only seems fitting to use it when
+it comes to getting your hands dirty. If you, like me, also appreciate
+the design and primitives k8s offers, then you&rsquo;re going to enjoy this
+part as well.</p>
+
+<p>At the end of the day, as I mentioned, the price is a bit steep for a book
+that would take 3/4h to complete, but it&rsquo;s one of those reads I&rsquo;m glad
+to have gone through, even if a tad overpriced.</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<p><blockquote><p>Simply proxying traffic into an existing application is not the only use for a sidecar. Another common example is configuration synchronization.</p></blockquote></p>
+
+<p><blockquote><p>If a microservices architecture is made up of well-known patterns, then it is easier to design because many of the design practices are specified by the patterns.</p></blockquote></p>
+
+<p><blockquote><p>Often, session tracking is accomplished via a consistent hashing function. The benefit of a consistent hashing function becomes evident when the service is scaled up or down. Obviously, when the number of replicas changes, the mapping of a particular user to a replica may change. Consistent hashing functions minimize the number of users that actually change which replica they are mapped to, reducing the impact of scaling on your application.</p></blockquote></p>
+
+<p><blockquote><p>You might wonder why we include a v1 in the API definition. Will there ever be a v2 of this interface? It may not seem logical, but it costs very little to version your API when you initially define it. Refactoring versioning onto an API without it, on the other hand, is very expensive. Consequently, it is a best practice to always add versions to your APIs even if you’re not sure they will ever change. Better safe than sorry.</p></blockquote></p>
+
+<p><blockquote><p>Given implementations of the two container interfaces described previously, what is left to implement our reusable work queue implementation? The basic algorithm for the work queue is fairly straightforward: Load the available work by calling into source container interface. Consult with work queue state to determine which work items have been processed or are being processed currently. For these items, spawn jobs that use the worker container interface to process the work item. When one of these worker containers finishes successfully, record that the work item has been completed. While this algorithm is simple to express in words, it is somewhat more complicated to implement in reality. Fortunately for us, the Kubernetes container orchestrator contains a number of features that make it significantly easier to implement. Namely, Kubernetes contains a Job object that allows for the reliable execution of the work queue. The Job can be configured to either run the worker container once or to run it until it completes successfully. If the worker container is set to run to completion, then even if a machine in the cluster fails, the job will eventually be run to success. This dramatically simplifies the task of building a work queue because the orchestrator takes on responsibility for the reliable operation of each work item. Additionally, Kubernetes has annotations for each Job object that enable us to mark each job with the work item it is processing. This enables us to understand which items are being processed as well as those that have completed in either failure or success.</p></blockquote></p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Release It -- Design and Deploy Production-Ready Software]]></title>
+    <link href="https://odino.org/book-review-release-it-design-and-deploy-production-ready-software/"/>
+    <updated>2017-03-16T14:00:00+00:00</updated>
+    <id>https://odino.org/book-review-release-it-design-and-deploy-production-ready-software</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been reading quite a bit over the past 2/3 months (thanks to &mdash; believe it
+or not &mdash; my wife), and today I wanted to share my review of
+<a href="https://www.amazon.com/Release-Production-Ready-Software-Pragmatic-Programmers/dp/0978739213">Release It! Design and Deploy Production-Ready Software</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/book-release-it.jpg"></p>
+
+<p>The book is extremely interesting as it&rsquo;s a collection of patterns and practices
+to build reliable and robust distributed systems, with a few advices on process
+design as well: for example, I extremely liked, at the beginning of the book,
+the notion that a lot of software architects are living in the &ldquo;<a href="http://www.lessonsoffailure.com/developers/avoid-asshole-architect/">ivory tower</a>&rdquo;,
+meaning that they are distant from the real-world code that turns their ideas
+into working software, and rely too much on the <em>happy-path</em> rather than
+recognizing that, more often that we&rsquo;d like, systems are going to fail.</p>
+
+<p>Another trait of the book I really liked is the fact that the author brings his
+own experience to the table: you&rsquo;ll read about weird situations where an e-commerce
+portal used to be down every night at a specific time, how a &ldquo;dumb&rdquo; firewall can
+kill all of your idle connections and so on; by the end of the book you&rsquo;ll surely
+be hating on firewalls, connection pools and (missing) timeouts.</p>
+
+<p>The only negative I can think of is that the book is a bit too <em>java-ish</em>, as
+sometimes you might feel some ideas won&rsquo;t really apply to the platform you
+generally work with &mdash; but, to be honest, that&rsquo;s no biggie.</p>
+
+<p>Strongly, strongly recommended for software engineers that want to understand how
+their systems should be modeled once they reach a certain scale and, inevitably,
+need to deal with failure.</p>
+]]></content>
+  </entry>
+  
+</feed>

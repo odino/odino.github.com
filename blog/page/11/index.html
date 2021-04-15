@@ -1,0 +1,586 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Alessandro Nadalin</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/blog/page/11/index.html" />
+		<meta property="og:title" content="Alessandro Nadalin" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- START index.html -->
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/using-terraform-with-in-aws-mumbai/">Using Terraform in AWS Mumbai</a></h1>
+        <time>05 July 2016</time>
+    </header>
+    <div class="content">
+        <p>Terraform is a fantastic tool to manage your infrastructure
+with simple and declarative templates; you simply describe
+your infrastructure in a template file  that looks like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>resource "digitalocean_droplet" "web" {
+</span><span class='line'>    name = "tf-web"
+</span><span class='line'>    size = "512mb"
+</span><span class='line'>    image = "centos-5-8-x32"
+</span><span class='line'>    region = "sfo1"
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>resource "dnsimple_record" "hello" {
+</span><span class='line'>    domain = "example.com"
+</span><span class='line'>    name = "test"
+</span><span class='line'>    value = "${digitalocean_droplet.web.ipv4_address}"
+</span><span class='line'>    type = "A"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>run <code>terraform apply</code> and you&rsquo;re set: Terraform will boot
+the infrastructure for you.</p>
+
+<p>AWS recently launched their <code>ap-south-1</code> region (Mumbai, India)
+and, due to the fact that&rsquo;s much closer to our customer and EC2
+there seems to be ~10% cheaper than in AWS Singapore (where we&rsquo;re currently
+hosted), we wanted to start experiment moving part of our
+infrastructure to this region.</p>
+
+<p><a href="https://github.com/hashicorp/terraform/pull/7383#issuecomment-229169574">Terraform, though, has an hardcoded list of AWS regions</a> and,
+since Mumbai is a recent addition, it will throw an error saying that
+the region isn&rsquo;t supported.</p>
+
+
+        
+         <a href="/using-terraform-with-in-aws-mumbai/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/devops/'>devops</a>, <a class='category' href='/categories/terraform/'>terraform</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/a-message-to-all-the-tech-teams-out-there-start-doing-tech-trivias/">A message to all the tech teams out there: start doing Tech Trivias</a></h1>
+        <time>01 July 2016</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/trivia2.png"></p>
+
+<p>Every now and then you end up with a silly, stupid and simple idea
+that turns out to be an epic win: I am firmly convinced that introducing
+Tech Trivias was one of these ideas for <a href="http://tech.namshi.com">our team</a>.</p>
+
+
+        
+         <a href="/a-message-to-all-the-tech-teams-out-there-start-doing-tech-trivias/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/fun/'>fun</a>, <a class='category' href='/categories/teams/'>teams</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/bundling-static-files-within-your-golang-app/">Bundling static files within your Golang app</a></h1>
+        <time>30 June 2016</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/gopher.png"></p>
+
+<p>One of the nice features of golang is that you can simply distribute
+your programs through <em>executables</em>, meaning the user doesn&rsquo;t need to
+have custom libraries to install / run your software: just download the
+executable and you&rsquo;re set.</p>
+
+<p>What Go really does is to bundle together all your <code>*.go</code> files in a single,
+platform-dependent executable, that
+can be run with a single click &mdash; which works perfectly in 99% of our use cases.</p>
+
+<p>All of this seems great, until you have to bundle different kind of files
+in your application, for example an <code>.yml</code> config file or an <code>.xliff</code>
+translation file.</p>
+
+<p>How would you approach this? Enter the trick of the year.</p>
+
+
+        
+         <a href="/bundling-static-files-within-your-golang-app/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/golang/'>golang</a>, <a class='category' href='/categories/programming/'>programming</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/connecting-to-the-inflight-internet-on-emirates-flights/">Connecting to the inflight internet on Emirates&#8217; flights</a></h1>
+        <time>11 February 2016</time>
+    </header>
+    <div class="content">
+        <p>It would really be hard for you to find this article useful because
+you probably won&rsquo;t have internet to read this&hellip;</p>
+
+
+        
+         <a href="/connecting-to-the-inflight-internet-on-emirates-flights/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/wifi/'>wifi</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/enable-remote-debugging-on-chrome-for-react-natives-webviews/">Enable remote debugging on chrome for React Native&#8217;s webviews</a></h1>
+        <time>02 January 2016</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/android.jpg"></p>
+
+<p>In my <a href="/contributing-to-react-native-for-android/">last post</a> I explained how
+you can hack on react native for android locally, so that if you need any
+change to the java packages<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> you can do it yourself, with
+immediate feedback upon a <code>react-native run-android</code>.</p>
+
+<p>One thing I immediately patched was the ability to
+<a href="https://developer.chrome.com/devtools/docs/remote-debugging#debugging-webviews">enable remote debugging on webviews</a>,
+which is turned off in react native &mdash; and here&rsquo;s
+how you can do the same.</p>
+
+
+        
+         <a href="/enable-remote-debugging-on-chrome-for-react-natives-webviews/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/android/'>android</a>, <a class='category' href='/categories/chrome/'>chrome</a>, <a class='category' href='/categories/react-native/'>react native</a>, <a class='category' href='/categories/webview/'>webview</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/contributing-to-react-native-for-android/">Contributing to React Native for Android</a></h1>
+        <time>01 January 2016</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/reactjs.png"></p>
+
+<p>It is no news that we, at <a href="http://tech.namshi.com">Namshi</a>, like to play around with all
+sorts of interesting technologies: last but not least, we&rsquo;re
+taking a closer look at <a href="https://facebook.github.io/react-native/">react native</a>, the framework from Facebook
+that allows you to build mobile, native apps with <a href="https://facebook.github.io/react/">React components</a>.</p>
+
+<p>While developing a small prototype, we had a small issue with
+a <a href="http://developer.android.com/reference/android/webkit/WebView.html">WebView</a> that was supposed to run within our application and
+wanted to enable <a href="https://developer.chrome.com/devtools/docs/remote-debugging#debugging-webviews">remote debugging on chrome</a>
+to troubleshoot it: since this is <a href="https://github.com/facebook/react-native/blob/e4272b456e6948c0942c610d3bc65bc29f0a7be6/ReactAndroid/src/main/java/com/facebook/react/views/webview/ReactWebViewManager.java#L77-L82">turned
+off by default</a>, we had to recompile react native with webview
+debugging enabled, and I wanted to share my brief experience with
+it since, with the same approach, you can start hacking and
+contributing to react native itself.</p>
+
+
+        
+         <a href="/contributing-to-react-native-for-android/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/android/'>android</a>, <a class='category' href='/categories/github/'>github</a>, <a class='category' href='/categories/mobile/'>mobile</a>, <a class='category' href='/categories/oss/'>oss</a>, <a class='category' href='/categories/react/'>react</a>, <a class='category' href='/categories/react-native/'>react native</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/deploying-3-times-a-day-without-a-downtime/">Deploying 3 times a day without a downtime</a></h1>
+        <time>03 October 2015</time>
+    </header>
+    <div class="content">
+        <p><img class="left" src="/images/rocket-small.png"></p>
+
+<p>At the beginning of September, part of the
+<a href="http://tech.namshi.com/team">Namshi team</a>
+attended the 2015 <a href="http://www.techsummit2015.com/">Rocket Tech Summit</a>
+in Berlin, a 2-days event that brought together
+rocketers from <a href="https://www.rocket-internet.com/companies">all over the world</a>:
+the event was focused on knowledge sharing among many
+of the ventures that have been launched by
+<a href="https://www.rocket-internet.com/">Rocket</a>, but we also
+got the chance to hear some kick-ass presentations from
+industry leaders like Amazon, Google and ThoughtWorks.</p>
+
+
+        
+         <a href="/deploying-3-times-a-day-without-a-downtime/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/conference/'>conference</a>, <a class='category' href='/categories/docker/'>docker</a>, <a class='category' href='/categories/presentation/'>presentation</a>, <a class='category' href='/categories/slides/'>slides</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/how-docker-changed-me/">How Docker changed me</a></h1>
+        <time>07 August 2015</time>
+    </header>
+    <div class="content">
+        <p>A lot of people blog about their experiences with
+<a href="https://www.docker.com/">Docker</a> and how it helps
+them either running apps in production or easily
+replicating development environments, so I won&rsquo;t
+spend much time on that.</p>
+
+<p>This post is about how docker changed the way
+I think of my personal laptop which is, yes, used
+to deploy containers to production and develop
+apps through <a href="https://docs.docker.com/compose/">docker-compose</a>,
+but also to blog and do a lot of personal stuff
+with it.</p>
+
+
+        
+         <a href="/how-docker-changed-me/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/docker/'>docker</a>, <a class='category' href='/categories/linux/'>linux</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/i-have-built-my-own-ide-and-im-happy-to-trash-it-after-a-year/">I have built my own IDE and I&#8217;m happy to trash it after a year</a></h1>
+        <time>01 August 2015</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/nikki-logo.svg" width="180"></p>
+
+<p>Last year I dedicated quite some time, <a href="https://github.com/odino/nikki/graphs/contributors">during ramadan</a>, to a project
+I really cared about: building a <strong>fast and smart text editor</strong> to use
+on a daily basis.</p>
+
+<p>That&rsquo;s how <a href="/last-weekend-i-wrote-an-ide-in-javascript/">Nikki was born</a>, and today I am happy to announce that the
+project is dead, simply because I found another, very similar tool
+that does the job.</p>
+
+<p>This is the story of <strong>how open source projects get born and die</strong>,
+and why we should still celebrate it.</p>
+
+
+        
+         <a href="/i-have-built-my-own-ide-and-im-happy-to-trash-it-after-a-year/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/atom/'>atom</a>, <a class='category' href='/categories/github/'>github</a>, <a class='category' href='/categories/javascript/'>javascript</a>, <a class='category' href='/categories/nikki/'>nikki</a>, <a class='category' href='/categories/nodejs/'>nodejs</a>, <a class='category' href='/categories/open-source/'>open source</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
+        <h1><a href="/minimal-docker-run-your-nodejs-app-in-25mb-of-an-image/">Minimal docker : run your NodeJS app in <25mb of an image</a></h1>
+        <time>31 July 2015</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/docker.png"></p>
+
+<p>Managing Docker images might become a bit of a painful
+experience, especially when looking at your storages: very &ldquo;simple&rdquo;
+images like <a href="https://imagelayers.io/?images=node:latest">node</a>
+end up quite fat and contribute to sucking up a good
+chunck of your HDD.</p>
+
+<p>At the same time, the most painful moment with Docker
+images is, at least for me, when you want to pull
+and run a brand new image, not available on your
+machine (or production servers, not <em>much</em> difference):
+you will need to wait until the whole image gets
+downloaded before being able to play around with it<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>At the end of the day, one thing is clear: we&rsquo;d like
+to <a href="http://matthewkwilliams.com/index.php/2015/03/23/shrinking-docker-images/">shrink</a> <a href="http://stackoverflow.com/questions/24394243/why-are-docker-container-images-so-large">images</a> <a href="http://tuhrig.de/flatten-a-docker-container-or-image/">as much as possible</a>.
+Turns out, the easiest solution is, as often, the simplest one:
+<strong>start small, end small</strong>.</p>
+
+<p>There are plenty of resources on <a href="https://www.google.ae/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=shrinking%20docker%20images">limiting the size of your images / containers</a>,
+but today I am going to start with this very simple approach.</p>
+
+
+        
+         <a href="/minimal-docker-run-your-nodejs-app-in-25mb-of-an-image/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/alpine/'>alpine</a>, <a class='category' href='/categories/busybox/'>busybox</a>, <a class='category' href='/categories/docker/'>docker</a>, <a class='category' href='/categories/javascript/'>javascript</a>, <a class='category' href='/categories/linux/'>linux</a>, <a class='category' href='/categories/nodejs/'>nodejs</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+	<span class="total"><a class="newer" href="/archives">Archives</a></span>
+<!-- END index.html -->
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/blog/page/11/index.html"
+		},
+		"headline": "Alessandro Nadalin",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": ""
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

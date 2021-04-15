@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Ab Testing | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/ab-testing/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AB Testing in PHP With Namshi/ab]]></title>
+    <link href="https://odino.org/ab-testing-in-php-with-namshi-slash-ab/"/>
+    <updated>2013-07-13T14:27:00+00:00</updated>
+    <id>https://odino.org/ab-testing-in-php-with-namshi-slash-ab</id>
+    <content type="html"><![CDATA[<p>AB testing is a powerful tecnique that
+lets you gather metrics about different
+versions of a feature: it basically
+consist into displaying a number of
+different variations of it to your
+users and tracking the results to see
+which variation performed better.</p>
+
+<p><img class="right" src="/images/ab-testing.jpg"></p>
+
+<p>An example? In an e-commerce system,
+you usually have an &ldquo;Add to cart&rdquo; button:
+have you ever though about the impact that
+single sentence has on your customers?
+What would sound better, between &ldquo;Add to cart&rdquo;
+and &ldquo;Buy now&rdquo;, for example? Copywriters
+away, you want <strong>data</strong> to tell you that!</p>
+
+<p>This is why AB testing is important:
+you serve different versions of something,
+and track the results to improve the
+experience users have while using your
+application: for example, Google benchmarked
+<a href="http://gigaom.com/2009/07/09/when-it-comes-to-links-color-matters/">40 different shades of blue</a>
+to find out how the rate of clickthrough
+would be altered.</p>
+
+<p>At <a href="http://en-ae.namshi.com">Namshi</a> we
+decided to ease AB testing by creating a
+very simple library that would let you generate
+and manage tests in a very easy and practical
+way: that&rsquo;s how <a href="https://github.com/namshi/ab">Namshi/AB</a>
+was born.</p>
+
+<!--   more -->
+
+
+<h2>Installation</h2>
+
+<p>You can install the library via composer,
+as it&rsquo;s available on <a href="https://packagist.org/packages/namshi/ab">packagist</a>.</p>
+
+<p>Then include it, specifying a major and
+minor version, in your <code>composer.json</code>:</p>
+
+<p><code>
+"namshi/ab": "1.0.*"
+</code></p>
+
+<h2>Creating and running tests</h2>
+
+<p>The library is very small, and it comes bundled with
+2 classes, <code>Test</code> and <code>Container</code>: as you can probably
+guess, the first is a representation of an AB test and
+the 2nd serves as a convenient container for all of your
+test instances.</p>
+
+<p>Here&rsquo;s how you can create a test:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Namshi\AB\Test;
+use Namshi\AB\Container;</p>
+
+<p>$cssTest = new Test(&lsquo;css&rsquo;, array(</p>
+
+<pre><code>'default.css'   =&gt; 2,
+'new.css'       =&gt; 1,
+</code></pre>
+
+<p>));</p>
+
+<p>$abContainer = new Container(array(</p>
+
+<pre><code>$cssTest
+</code></pre>
+
+<p>));
+```</p>
+
+<p>At this point, for example, you can start
+AB testing your website by changing the CSS
+in the view:</p>
+
+<p>``` php
+<html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;link rel="stylesheet" type="text/css" href="&lt;?php echo $abContainer['css']-&gt;getVariation(); ?&gt;"  /&gt;
+    ...
+    ...
+</code></pre>
+
+<p>```</p>
+
+<p><code>getVariation()</code> will calculate the variation
+(<code>default.css</code> or <code>new.css</code>) according to the
+odds of each variation (66% for the first one,
+33% for the second one) and will return a string
+representing the variation.</p>
+
+<h2>Persisting the variations through an entire session</h2>
+
+<p>Of course, you want to display variations but be
+consistent with each user, so that if a user gets
+a variation, it will continue getting the same variation
+throughout his entire session: to do so, just calculate
+a random integer (seed), store it in session and pass it to
+each test:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>session_start();</p>
+
+<p>if (!isset($_SESSION[&lsquo;seed_for_example_test&rsquo;])) {</p>
+
+<pre><code>$_SESSION['seed_for_example_test'] = mt_rand();
+</code></pre>
+
+<p>}</p>
+
+<p>$test = new Test(&lsquo;example&rsquo;, array(</p>
+
+<pre><code>'a' =&gt; 1,
+'b' =&gt; 1,
+</code></pre>
+
+<p>));</p>
+
+<p>$test->setSeed($_SESSION[&lsquo;seed_for_example_test&rsquo;]);</p>
+
+<p>// as long as the seed doesn&rsquo;t change
+// getVariation() will always return the
+// same variation
+$test->getVariation();
+```</p>
+
+<p>Soon, you will realize that having a per-test seed
+is <strong>not efficient at all</strong>, that&rsquo;s why you can create
+a global seed and pass it to the container: from that
+seed, the container will take care of generating a seed
+for each test:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>session_start();</p>
+
+<p>if (!isset($_SESSION[&lsquo;seed&rsquo;])) {</p>
+
+<pre><code>$_SESSION['seed'] = mt_rand();
+</code></pre>
+
+<p>}</p>
+
+<p>// pass the seed into the constructor
+$abContainer = new Container(array(</p>
+
+<pre><code>new Test('greet', array(
+    'Hey dude!' =&gt; 1,
+    'Welcome'   =&gt; 1,
+)),
+new Test('background-color', array(
+    'yellow'    =&gt; 1,
+    'white'     =&gt; 1,
+)),
+</code></pre>
+
+<p>), $_SESSION[&lsquo;seed&rsquo;]);</p>
+
+<p>// or with a setter
+$abContainer->setSeed($_SESSION[&lsquo;seed&rsquo;]);
+```</p>
+
+<h2>Disabling the tests</h2>
+
+<p>Sometimes you might want to disable tests
+for different purposes, for example if
+the user agent who is visiting the page is a bot:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$test = new Test(&lsquo;my_ab_test&rsquo;, array(</p>
+
+<pre><code>'a' =&gt; 0,
+'b' =&gt; 1,
+</code></pre>
+
+<p>));</p>
+
+<p>$test->disable();</p>
+
+<p>$test->getVariation(); // will return &lsquo;a&rsquo;!
+```</p>
+
+<p>Once you disable the test and run it,
+it will always return the first variation,
+no matter what its odds are, even if it&rsquo;s zero.</p>
+
+<h2>An example</h2>
+
+<p>I would recommend you to have a look at the
+<a href="https://github.com/namshi/AB/tree/master/examples">example provided</a> under the <code>examples</code> directory:
+it&rsquo;s pretty silly, but it gives you an idea of
+how easy is to create and run AB tests with
+this library.</p>
+
+<p><img class="center" src="/images/ab.png"></p>
+
+<p>If you look at the code, you will soon realize that
+it&rsquo;s very simple:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>require <strong>DIR</strong> . &lsquo;/../vendor/autoload.php&rsquo;;</p>
+
+<p>use Namshi\AB\Test;
+use Namshi\AB\Container;</p>
+
+<p>session_start();</p>
+
+<p>if (!isset($_SESSION[&lsquo;seed&rsquo;])) {</p>
+
+<pre><code>$_SESSION['seed'] = mt_rand();
+</code></pre>
+
+<p>}</p>
+
+<p>$abt = new Container(array(</p>
+
+<pre><code>new Test('greet', array(
+    'Hey dude!' =&gt; 1,
+    'Welcome'   =&gt; 1,
+)),
+new Test('background-color', array(
+    'yellow'    =&gt; 1,
+    'white'     =&gt; 1,
+)),
+</code></pre>
+
+<p>), $_SESSION[&lsquo;seed&rsquo;]);</p>
+
+<p>?></p>
+
+<p><html></p>
+
+<pre><code>&lt;head&gt;
+    &lt;style&gt;
+        * {
+            background-color: &lt;?php echo $abt['background-color']-&gt;getVariation(); ?&gt;;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;
+        &lt;?php echo $abt['greet']-&gt;getVariation(); ?&gt;
+    &lt;/h1&gt;
+
+    &lt;div&gt;
+        Your seed is &lt;?php echo $_SESSION['seed']; ?&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p></html>
+```</p>
+
+<p>Of course, never write an application like this ;&ndash;)
+this serves just as an example.</p>
+
+<h2>Additional features</h2>
+
+<p>We tried to extensively cover the available features of
+the library in its <a href="https://github.com/namshi/ab">README</a>,
+so I will just sum them up here:</p>
+
+<ul>
+<li>the container implements the <code>ArrayAccess</code> interface, so you can
+retrieve tests like if they were stored into an array (<code>$abContainer['my_test']</code>)</li>
+<li>since AB tests are very useful only when you <strong>track</strong>
+the results, we added a <strong>tracking name</strong> that you can specify
+for each test: this is due to the fact that your test might be
+called <code>add_to_cart_text</code> but in your tracking tool, you
+have to reference the test with the tracking tool&rsquo;s ID, which
+might be a very clueless string (ie. <code>test_id_4njktn4t4tjjnn4on</code>)</li>
+<li>you can also add an array of parameters to each test and retrieve
+them later on: this is due to the fact that once you track the test&rsquo;s
+result, you might want to send additional data together with the
+tracking name, the variation and the result</li>
+</ul>
+
+
+<h2>Why not choosing an existing library</h2>
+
+<p>Of course we checked out what the market was
+offering, but weren&rsquo;t able to find out a very
+good, generic-purpose, library in order to
+generate AB tests:</p>
+
+<ul>
+<li><a href="https://packagist.org/packages/jm/ab-bundle">jm/ab-bundle</a>
+is unfortunately coupled with Symfony2 and Twig, so
+you can&rsquo;t really call it a stack-free library: even though
+we <strong>love</strong> Symfony2, not all of our services run with
+it and we don&rsquo;t want to <strong>force a technology just to
+have a functionality</strong></li>
+<li><a href="http://phpabtest.com/index">phpabtest</a> is a full-stack
+service, meaning that it provides a library to register and
+handle tests but also tracks stuff via Google Analytics; moreover,
+<a href="https://github.com/briancray/phpA-B/blob/master/phpab.php">we didn&rsquo;t like the code that much</a></li>
+</ul>
+
+
+<p>At the end of the day, <code>namshi/ab</code> is a <strong>1 man-day effort</strong>, so we
+spiked for a bit and decided that it was worth it.</p>
+
+<h2>Testing this library</h2>
+
+<p>We added a few PHPUnit tests, so you just have to:</p>
+
+<p>```
+cd /path/to/namshi/ab</p>
+
+<p>phpunit
+```</p>
+
+<p>The funny thing is that we also added some test to check that
+the library correctly <a href="https://github.com/namshi/AB/blob/master/tests/Namshi/AB/Test/TestTest.php#L161">generates variations according to their odds</a>.</p>
+
+<h2>FOSS</h2>
+
+<p>The library is available on
+<a href="https://github.com/namshi/AB">Github</a>: please let
+<a href="https://github.com/namshi">us</a> know if you
+would like to see something different, have a suggestion
+or whatsoever: even better than that, <strong>feel free to open
+a pull request</strong> if we screwed up with anything!</p>
+]]></content>
+  </entry>
+  
+</feed>

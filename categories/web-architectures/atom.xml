@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Web Architectures | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/web-architectures/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[On Monoliths, Service-oriented Architectures and Microservices]]></title>
+    <link href="https://odino.org/on-monoliths-service-oriented-architectures-and-microservices/"/>
+    <updated>2015-02-20T19:48:00+00:00</updated>
+    <id>https://odino.org/on-monoliths-service-oriented-architectures-and-microservices</id>
+    <content type="html"><![CDATA[<p>In the last few years web architectures have
+been evolving pretty fast, and the result is
+that now we have a few approaches to pick
+between when building your next software
+architecture.</p>
+
+<!-- more -->
+
+
+<h2>Monoliths</h2>
+
+<p><img class="right" src="/images/monolith.png"></p>
+
+<p>Monolithic architectures are the ones
+running on a single application layer
+that tends to bundle together all the functionalities
+needed by the architecture.</p>
+
+<p>At the architectural level, this is the
+simplest form of architecture simply
+because it doesn&rsquo;t involve
+as many actors as other architectural
+styles.</p>
+
+<p>If we, for example, want to build a web
+architecture with a monolithic approach,
+we would start developing the frontend of it and
+make it access data directly rather than
+giving it an abstraction layer such as an API.</p>
+
+<p>Most setups, nowadays, run through a monolithic
+approach as, for small/mid sized architectures,
+it runs pretty well and keeps complexity quite
+low: the <strong>problems tend to come when the
+architecture needs to scale up feature-wise</strong>;
+modules are extensively dependent to each other,
+the code becomes hard to refactor as
+it involves touching the whole monolith (think,
+for example, of doing an extensive refactoring on
+the <code>HttpRequest</code> class, which would impact
+every single request to every single functionality
+of the architecture).</p>
+
+<p>I personally recommend monoliths for projects with
+a <strong>very small and &ldquo;easy&rdquo; scope</strong>, where you don&rsquo;t
+need too much abstraction and won&rsquo;t likely have
+to maintain or evolve the codebase year after
+year.</p>
+
+<h2>Semi-monoliths</h2>
+
+<p><img class="left" src="/images/semi-monoliths.png"></p>
+
+<p>These are a bit tricky: I consider semi-monliths
+decoupled architecture that actually really on
+<strong>smaller, but still large, monoliths</strong>.</p>
+
+<p>This actually means that you think of, for example
+for performance reasons, decoupling your frontend
+from your backend but end up building 2 (or maybe
+even 3) large applications that turn into monoliths
+on their own.</p>
+
+<p>I find semi-monoliths <strong>quite harmful</strong> as they are,
+in my opinion, <strong>a wrong step in the right direction</strong>:
+you believe decoupling works well but do
+just a bit of it, ending up with the same problems
+you&rsquo;d have with monoliths, just on a bigger stage.</p>
+
+<p>In complex architectures it&rsquo;s usually much easier
+to keep each piece simple but small, whereas semi-monoliths
+end up solving just the surface of a problem (ie. performance
+bottlenecks) but then leave you with the complexity
+of each mini-monolith.</p>
+
+<p>I personally see very few scenarios in which
+semi-monoliths are a very good choice: my rule of thumb
+is that <strong>if the scope of the architecture is small
+you can use a (small) app, else be wild and use
+a service for each functionality</strong>, without limiting
+yourself to the frontend vs backend thingy.</p>
+
+<h2>SOA</h2>
+
+<p><img class="right" src="/images/lego-soa.png"></p>
+
+<p>SOAs (Service-Oriented Architectures) are a way
+to &ldquo;properly&rdquo; evolve from semi-monoliths to a more
+diversified architecture.</p>
+
+<p>SOAs usually incorporate functions into small/mid-sized
+applications (more on this later), <strong>a lot of them</strong>: you try to
+keep the complexity of each app / functionality very low
+and make them communicate over a set APIs (being them
+HTTP APIs, asynchronous messaging and so on);
+the services do multiple things all of which are
+limited to the scope of a single functionality,
+for example customer management.</p>
+
+<p>I like to describe SOAs as<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
+
+<blockquote><p>A software design based on discrete software components,
+&ldquo;services&rdquo;, that collectively provide the functionalities
+of the larger software architecture</p></blockquote>
+
+<p>A clear disadvantage of SOAs is that it might
+be overkill: I still remember my first advice
+about SOAs at the CakeFest in San Francisco 2
+years ago, &ldquo;<a href="http://www.slideshare.net/odino/tips-and-tricks-for-your-service-oriented-architecture-cakefest-2013-in-san-francisco/50">avoid SOA</a>&rdquo;.</p>
+
+<p>If you don&rsquo;t need to separate functionalities of
+your architecture, simply don&rsquo;t do it: tipically
+SOAs are reserved to complex products and systems
+that cannot be summed up in a briefing; I clearly
+remember, back at the time when I was working in
+an agency, that none of our projects was really
+suitable for full blown SOAs because the scope was
+so limited that there would be no reason to introduce
+complexity (at the architectural level).</p>
+
+<p>On the other end, I&rsquo;d recommend to buy into several services
+as soon as you realize that there is too much
+complexity in the architecture: you will definitely
+understand when this happens because you have clearly
+defined boundaries between software components, you
+start to realize that one piece of the architecture
+shouldn&rsquo;t bring down the rest of it if a deployment
+goes wrong and so on. In other terms, <strong>you&rsquo;ll feel it</strong>.</p>
+
+<p>SOAs usually give you a good flexibility but, as said, come
+at a cost: even though each piece has its own life,
+evolves independently, doesn&rsquo;t impact the others
+very much and it&rsquo;s simples, <strong>the architecture itself
+becomes more complex</strong>.</p>
+
+<p>One thing to clarify about SOAs is that, nowadays,
+the term has lost its appeal due to the fact that
+it <a href="http://martinfowler.com/bliki/ServiceOrientedAmbiguity.html">might mean too many things</a>:
+SOA is a very general term and it&rsquo;s hard to pinpoint
+what it actually represents, though, in recent years,
+it seems that we all agreed that a very good way to
+do SOA is through microservices.</p>
+
+<h2>Microservices</h2>
+
+<p><img class="right" src="/images/ants-microservices.png"></p>
+
+<p>And here we are with <a href="http://martinfowler.com/articles/microservices.html">microservices</a>.
+What do microservice-based architectures actually are?</p>
+
+<p>I could say a lot of things but, to simplify, I will
+pick my own definition:</p>
+
+<blockquote><p>microservice-based architectures are the ones
+that mimic SOAs with very small, <a href="http://en.wikipedia.org/wiki/Unix_philosophy">unix-inspired</a> services,
+which do one thing and do it well</p></blockquote>
+
+<p>What does that actually mean? Shrink those services,
+make them as small and indipendent as possible and
+create a hell lot of them; the only difference I see
+between traditional SOAs and microservices is that
+the latter clearly states that the size of a
+service should be minimal, else it needs to be split
+in multiple services. In other words, <strong>microservices
+are an implementation of SOA</strong>.</p>
+
+<p>As we&rsquo;ve seen with traditional SOAs, microservices bring
+a lot of complexity at the architectural level as there
+are even more, tiny actors involved, but the practical
+advantage is that they are all isolated, indipendent
+and only communicate through simple interfaces (any
+kind of API).</p>
+
+<p>This piece sums my thoughts up quite well:</p>
+
+<p><blockquote><p>[microservices are] one form of SOA,<br/>perhaps service orientation done right</p><footer><strong>Martin Fowler on microservices <a href="http://martinfowler.com/articles/microservices.html">http://martinfowler.com/articles/microservices.html</a></strong></footer></blockquote></p>
+
+<p>I am a fan of simplicity and good abstraction, which
+means that you should have clear, neat boundaries and
+APIs between your services but also should not forget
+of avoiding bloating or shrinking them too much, else you end
+up overengineering in both cases.</p>
+
+<p>Using microservices also requires quite of a shift in terms
+of mindset as there are a lot of things that change
+in your development lifecycle: things need to be simple,
+well documented, smooth and easy to run; imagine the next
+guy coming to your team that, to fix a bug, has to learn
+how to run 6 (micro)services together&hellip;hell! That is why
+you need to figure a solution out to allow fast development
+cycles and simplicity to run, deploy and evolve<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup> those
+small services.</p>
+
+<p>So yes, microservices add complexity at the architectural
+level (where you&rsquo;d likely be happy to have it) with the
+advantage of outrageously <strong>simplifying each software
+component</strong>, which makes it simple, for anyone, to get used
+to the architecture day after day, feature after feature,
+service after service.</p>
+
+<h2>So what?</h2>
+
+<p>I hope this clarifies some terminology and decisions
+you might wanna take when building your next (big or
+small) project; there will always be a lot of external
+factors, like timeline or resources, to keep in
+consideration but I believe it&rsquo;s very important to know
+about your options.</p>
+
+<p>Since we are talking about web architectures, I&rsquo;d like
+to leave you with a pearl on <a href="http://www.aol.com/">AOL</a>
+from <a href="http://highscalability.com/blog/2014/2/17/how-the-aolcom-architecture-evolved-to-99999-availability-8.html">highscalabilty</a>:</p>
+
+<p><blockquote><p>The architecture for AOL.com is in it’s 5th generation.</p></p><p><p>It has essentially been rebuilt from scratch 5 times over two decades.</p></p><p><p>The current architecture was designed<br/>6 years ago. Pieces have been upgraded and new componentshave been added along the way, but the overall design remains largely intact.</p></p><p><p>The code, tools, development and deployment processes are highly tuned over 6 years of continual improvement, making the AOL.com architecture battle tested and very stable.</p><footer><strong>Dave Hagler</strong> <cite>Systems Architect at AOL</cite></footer></blockquote></p>
+
+<p>Have fun with your next architecture folks!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>I&rsquo;m not sure if this definition is purely mine or if I read it somewhere &mdash; pardon my lack of memory! <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>This last point, evolving, is taking care by the architectural style itself. Small, indipendent services are easy to evolve by definition, as they are not complex <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

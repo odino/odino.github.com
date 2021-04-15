@@ -1,0 +1,353 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Low on disk space thanks to docker? Let's cleanup those containers!" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Spring cleaning of your docker containers</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/spring-cleaning-of-your-docker-containers/" />
+		<meta property="og:title" content="Spring cleaning of your docker containers" />
+		<meta property="og:description" content="Low on disk space thanks to docker? Let's cleanup those containers!" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/spring-cleaning-of-your-docker-containers/">Spring cleaning of your docker containers</a></h1>
+        <time>17 February 2015</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 6 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><a href="https://www.docker.com/">Docker</a> is an amazing tool, but sometimes you
+might find out that it isn&rsquo;t super-careful towards your HD space.</p>
+
+<!-- more -->
+
+
+<p>If you used Docker extensively you might
+have noticed that sometimes this tool consumes
+a lot of disk space, usually because you either
+have too many dead containers with <a href="https://docs.docker.com/userguide/dockervolumes/">persistent storages</a>
+attached or similar gotchas.</p>
+
+<p>I usually use three life-savers when I am running
+out of space on my machine.</p>
+
+<h2>Remove dead containers</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~  ᐅ docker rm $(docker ps -a -q)
+</span><span class='line'>686861e0ed5f
+</span><span class='line'>1e1fb6a3a484
+</span><span class='line'>8e1c38aadf64
+</span><span class='line'>17570bc2f79f
+</span><span class='line'>Error response from daemon: Conflict, You cannot remove a running container. Stop the container before attempting removal or use -f
+</span><span class='line'>87705c9ace3f
+</span><span class='line'>867b6bca775c
+</span><span class='line'>f2f2aaa872f4
+</span><span class='line'>a3a094e8580c
+</span><span class='line'>FATA[0000] Error: failed to remove one or more containers</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will try to remove all containers, even the
+running ones (don&rsquo;t worry, as you see from the snippet
+above Docker will prevent running containers to be killed)
+so that you can get rid of some dead stuff.</p>
+
+<h2>Remove untagged images</h2>
+
+<p>Sometimes you will notice that there are some
+docker images that are just the result of intermediate
+containers running. These images will show up as <code>&lt;none&gt;</code>
+and are the so-called &ldquo;untagged images&rdquo;:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~  ᐅ docker images | grep none                                              
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              40008f2b8e22        6 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              08b8be934a53        6 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              ed1b3d292f74        6 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              bc472bb30fb6        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              b3cd05e59b91        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              69e508db0285        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              0ca87c90be73        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              2ee3e785cd28        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              76696adc7a00        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              6bf0028f0b01        7 hours ago         412.6 MB
+</span><span class='line'>&lt;none&gt;                                                             &lt;none&gt;              8a6da7bae442        7 hours ago         412.6 MB
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jeez! Luckily, removing those layers it&rsquo;s a matters
+of knocking on awk&rsquo;s door:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~  ᐅ docker images | grep "&lt;none&gt;" | awk '{ print "docker rmi " $3 }' | bash                                                                               
+</span><span class='line'>Deleted: 529cae0c61835a5b7dd7ef681090dd9bce402a474ccd11715909990e3a95a968
+</span><span class='line'>Deleted: b854c13ebaac0f77359c4e9caa7523887a058f7a8782c3f1579daa1b960b3e92
+</span><span class='line'>Deleted: 7b39f624194fdf148dfe82cd88ad8176b0cdd9ab9d1d31c0a38ad32941e72ec4
+</span><span class='line'>Deleted: cf330b468b67499a46c859a44792ee1c089a4175568bff67f1455e2905d9b4e1
+</span><span class='line'>Deleted: 0a4b0dd1ec8217d51726ccfbb0410ff8074bd9654986f55d6c06f91ef6292c13
+</span><span class='line'>Deleted: 3e60ee2a9d34fdffdb121494925d1ffc3a32943310f991a2b6b5051e4fae187e
+</span><span class='line'>Deleted: d4e795c50ac25e88f71d1a5e6f6f7ebb197c7d4e9f4e3a316e4203cd04e68c4e
+</span><span class='line'>Deleted: 713c6007a60f91446ac7d811ab53463dbcea7fdd09e13f7f098027437c990dd1
+</span><span class='line'>Deleted: 929a45c5f4ae29a9489db677b7300e9044e34541a5d6777205c79eabfaed72c5
+</span><span class='line'>Deleted: e7b5083ceee33f29604505bc7157f624af351038ef44cc1145368863beaf4276
+</span><span class='line'>Deleted: 313cb946313d66f7bae33194429318b34b9aa422a88f08f0d63348c59e225376
+</span><span class='line'>Deleted: cf4a1e65f20930ffcd887a2a61fefe9b93b8fedc1d25bb0109aaae3319c68aec
+</span><span class='line'>Deleted: 2285b7f71bbbe9e7691d9ca08ae6d042c49d3424bfb29ecc923a5f9260ff7f9f
+</span><span class='line'>Deleted: 5d1b9d2ba21bb5de52baf97ed5fa7fe32f54c3f522f6c8f5631276a2b48951dc
+</span><span class='line'>Deleted: 41835ac9d16d2a064bdb470c217ef6533a032e9ae5cca723c7be98030cafd50d
+</span><span class='line'>Deleted: 8b17eb14ebdb2b431cb1a3e3a32c35be5b209473dc00487642f50164f496d26c
+</span><span class='line'>Deleted: a1178b9de7f1991c140ec789a69051668257d559a87c7a4384f2a042ddf564f1
+</span><span class='line'>Deleted: 7146a16101740c09a509717165039117407cb60aafb578a449cd7380b790a74b
+</span><span class='line'>Deleted: 36e834234f00dd3f6de02b3ffdde5618bade6e7399ea3bf0a55ef063c8c1c125
+</span><span class='line'>Deleted: 5a0c1ca6d8a0468751b767b3d187c4bb87f47bb581b607d637fa4ed9a1a091cf
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Removing containers and volumes the hard way</h2>
+
+<p>If you are still low on free disk-space and realize that
+Docker is still taking a big chunk of your HD there is a
+very <a href="https://github.com/dummymael/dotfiles/blob/1859a36afba2252f86a0a1ff8d5fb442e74b7a0e/tools/docker_clean_vfs.py">simple python script</a> I found around
+that does a great job at removing dangling volumes.</p>
+
+<p>Just download it, run <code>pip install docker-py</code> (a dependency
+needed by the script) and launch it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~  ᐅ python ~/Downloads/docker-clean.py       
+</span><span class='line'>INFO:root:Purging 26 dangling Docker volumes out of 26 total volumes found.
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/bc4ef2279968990683780eae0c36109a004683dcdc177b83a8082e5d8bfa16b5
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/46febc2cb7062618bb75ea36f23c1e82412300e735ab83bdefb3970809b801b6
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/104c873d78215c7029e0b08a1b303d9ea83ffd312e0d4f45794095c1678180b7
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/362c9d9c3a4d5121b58bb8270260caa98b8b7cfccb5e44e1ed2e51afc69f5a14
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/51a3537373684e253a9724c080afb31bcb2548a669bd2559a69beda605de7fb5
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/96e39a779484df8954231464bff79c417a030072fd43e102f821a46ed37a470b
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/dcd999b2279bfb681ed2359d29c1e0c06e6068150451df010138a635f9c114bc
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/06de438150717d12e8ab8bd91438babf2bcab3eac4213f6dfc75cc517e9656db
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/94800c94f4a3262780af89079192f3c7485cf63a7816817d226233a0b09d9b57
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/97e9f73c8d0f727ad34af20cb94a62c262956eaccc2f8c30a46660e51ca38179
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/8c5a76f831e67e5b01a36b1998d167967f0fc235b7771e25045f68d017589da1
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/2a5bb76ef6b0fec010a59412c0e71e9b4ac3976cb3b37125f17137d6e8d609eb
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/61185e81b4a16c70c8c826653e4588d10b4a610cb15d7905b491db8b37e7a82e
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/ec849b6ff72ad3dd14b126d0634cfc1b7ee0336197a02dd6f366ecc5699af8ef
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/e9f33eae896caecbdde0509cdd5d6039300381eb6174f18721f4f6234c5ab4ae
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/2997cef8ccd0a28705ecba5ec97f5b2bba5e6e0187a53a27b74a3dc9f790af22
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/9a134e05e0b48ede50cfa272fa05c5bd5fe5bd4b46fe95391c8025f5fa85ccf8
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/d6022665bd4158ee4f435b96e86ef226167f6def9ba70a33b76da5e005597e68
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/4b8bd4cd09b8651845dd1c7323846a49f5a5d745acf2c307242426f94a649ce3
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/a2241af35eb6f7a33cd6996b37d5c8227e06b7f5e951000271fdddb9a9fd4a2a
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/d2f2f7daad463ff06694b741d55aeb585026f5b521e859b092e8d7f3907fe83a
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/1191ada7b82a69dd8126b22280b56c31147242087a2ca5170aa0862017e626f5
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/16ff5f9fd98d3c8430556b7f244eebcbe21d4b498ed5bbfc8017f6249dbc079d
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/a641376773db93a058302853db5217ac0ea25fc95d32ba3e62aa00231b779a43
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/535a31d1a72aa2743837ed334db7a9f3669ea6b0b2409bf98cbf3807b08bdaaf
+</span><span class='line'>INFO:root:Purging directory: /var/lib/docker/vfs/dir/e22eb7c75eeedf111a425ae4c99e2d1f32c1b525688ed570a15b2c993c4a32b3
+</span><span class='line'>INFO:root:All done.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is it, folks!</p>
+
+<p>I wish there would be <strong>one</strong> way of doing this
+instead of having to tackle the issue from different perspectives
+(remove containers, remove untagged images, remove dangling volumes),
+but I believe there&rsquo;s gotta be something better out there, so feel
+free to reach out to suggest the best way of getting this done.</p>
+
+<p>At the same time, the Docker ecosystem is evolving at a very fast pace
+so I&rsquo;m sure the guys are going to come up with a simple, official
+solution that will make us forget about all of these bash voodoo very shortly.</p>
+
+<p>Happy containers to everyone!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/spring-cleaning-of-your-docker-containers/"
+		},
+		"headline": "Spring cleaning of your docker containers",
+		"description": "Low on disk space thanks to docker? Let's cleanup those containers!",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2015-02-17 01:43:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

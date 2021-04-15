@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Ci | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/ci/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Running CI Tests in Kubernetes Through Github Actions]]></title>
+    <link href="https://odino.org/running-ci-tests-in-kubernetes-through-github-actions/"/>
+    <updated>2020-03-20T09:21:00+00:00</updated>
+    <id>https://odino.org/running-ci-tests-in-kubernetes-through-github-actions</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/github-actions-kubernetes.png"></p>
+
+<p>Remember me? At the end of last decade I shared a post on <a href="/local-k8s-development-in-2020/">a simple way to run a Kubernetes cluster for local development</a>.</p>
+
+<p>Today I&rsquo;d like to show the other side of the medal &mdash; running your CI
+environment on Kubernetes (through <a href="https://github.com/features/actions">Github Actions</a>).</p>
+
+<p>It&rsquo;s simple, mimics your production environment and it&rsquo;s automated &mdash;
+let&rsquo;s get to it!</p>
+
+<!-- more -->
+
+
+<h2>How Github Actions work</h2>
+
+<p>If you&rsquo;ve ever used <a href="https://travis-ci.com/">Travis CI</a> or similar tools
+you&rsquo;re already familiar with Actions: they provide you an environment where
+you can test your applications &mdash; generally in the form of a server with
+your code checked out in a directory. When you push code to your Github
+repository, an environment is booted, your code gets checked out and you
+can run tasks on the environment &mdash; if any of the tasks fails, your CI
+task fail.</p>
+
+<p>This is not just useful for running automated tests &mdash; you could have
+builds of your app being compiled in your CI environment and uploaded
+to S3 or similar services, or send an email to your QA team to let them
+know what tests are passing / failing.</p>
+
+<p>So yes, you can think of Actions as Github booting a server, checking
+out your code in there and giving you the option to run any command you
+want on it &mdash; the actual implementation might be fairly different, but
+this is all the eli5 you need right now.</p>
+
+<h2>Like having a server. What now?</h2>
+
+<p>If your development environment runs on a k8s cluster, or if you&rsquo;re planning
+to run your CI environment in k8s, having a machine to play with everytime
+you push code to Github is like a <em>manna from heaven</em>: you can simply
+setup a k8s cluster in there and watch your application run like it would
+on production.</p>
+
+<p>You might be skeptical about installing k8s in your CI environment for
+a couple of very valid reasons:</p>
+
+<ul>
+<li>installing k8s on a server is not always a straightforward operation</li>
+<li>loads of moving parts that need to talk to each other (kubectl, apiserver, etcd, kubelet and so on),
+so it could require quite some time to get everything up &amp; running</li>
+</ul>
+
+
+<p>Given that a CI environment should ideally be up in seconds,
+the task of booting up a k8s cluster there seems quite daunting.</p>
+
+<p>Luckily, the folks at <a href="https://rancher.com/">Rancher</a> got us covered:
+they developed <a href="https://k3s.io/">k3s</a>, a lightweight Kubernetes distribution
+geared towards IoT &amp; edge computing &mdash; with the main selling point
+being the fact that the cluster is up &amp; running in a few seconds
+with a simple:</p>
+
+<p>```sh
+curl -sfL <a href="https://get.k3s.io">https://get.k3s.io</a> | sh &ndash;</p>
+
+<h1>wait ~30s</h1>
+
+<p>k3s kubectl get node
+```</p>
+
+<p>With k3s, bringing k8s into our Action is extremely simple &mdash; let&rsquo;s
+see it in action!</p>
+
+<h2>The Kubernetes Github Action</h2>
+
+<p>First off, create your action file, eg. <code>test.yml</code> under the folder
+<code>.github/workflows</code> in your repo &mdash; then add the following steps
+to the workflow:</p>
+
+<p>```yaml
+name: Example action</p>
+
+<p>on: [push]</p>
+
+<p>jobs:
+  build:</p>
+
+<pre><code>runs-on: ubuntu-latest
+timeout-minutes: 5
+steps:
+- uses: actions/checkout@v2
+- name: install k8s
+  run: |
+    curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=777 sh -
+    cat /etc/rancher/k3s/k3s.yaml
+    mkdir -p ~/.kube
+    cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+- name: example tests
+  run: |
+    # Whatever command you want to run
+</code></pre>
+
+<p>```</p>
+
+<p>As you can see, all the magic happens here:</p>
+
+<p><code>sh
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=777 sh -
+cat /etc/rancher/k3s/k3s.yaml
+mkdir -p ~/.kube
+cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+</code></p>
+
+<p>We download k3s, install it and copy its configuration into
+the usual kubeconfig path. This is done so that <code>kubectl</code>
+can talk to the cluster, else you have to use the one provided
+by k3s under the alias <code>k3s kubectl</code> (meaning you need to run
+commands such as <code>k3s kubectl get po</code>).</p>
+
+<p>If you&rsquo;re wondering how does this look like in action,
+you should probably head over to the sample repo I
+setup at <a href="https://github.com/odino/k8s-github-action">github.com/odino/k8s-github-action</a>:
+it&rsquo;s really not that crazy, as it simply contains the above
+code. What you might find interesting, though, is having
+a look at <a href="https://github.com/odino/k8s-github-action/actions">some of the &ldquo;builds&rdquo; that ran</a>, where you can clarly
+see k8s up &amp; running:</p>
+
+<p><img class="center" src="/images/k8s-github-action-example.png"></p>
+
+<p>As usual, <a href="https://github.com/odino/k8s-github-action/pull/1">Actions report their status on PRs</a>, so you get
+Github to confirm that everything ran smoothly whenever
+you push:</p>
+
+<p><img class="center" src="/images/k8s-github-action-pr.png"></p>
+
+<p>Hope this was helpful &mdash; peace!</p>
+]]></content>
+  </entry>
+  
+</feed>

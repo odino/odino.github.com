@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Conference | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/conference/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SPA, Isomorphic and Back to the Server: Our Journey With JS]]></title>
+    <link href="https://odino.org/spa-isomorphic-and-back-to-the-server-our-journey-with-js/"/>
+    <updated>2017-05-10T13:32:00+00:00</updated>
+    <id>https://odino.org/spa-isomorphic-and-back-to-the-server-our-journey-with-js</id>
+    <content type="html"><![CDATA[<p>This morning I gave a <a href="https://joind.in/event/jsday-2017/spa-isomorphic-and-back-to-the-server--our-journey-with-javascript">talk</a> at the <a href="https://2017.jsday.it/">JsDay</a> in Verona, describing how we went &ldquo;back
+to the basics&rdquo; with our latest revamp of our mobile website.</p>
+
+<!-- more -->
+
+
+<p>My presentation was mostly focused on performance and seeing how
+easy it is to combine fast servers (&ldquo;10ms or less&rdquo;) with frontend optimizations
+for extremely speedy web applications.</p>
+
+<p>Here are the slides of the talk:</p>
+
+<p><div class="slideshare" id="__ss_75852320"><iframe src="https://www.slideshare.net/slideshow/embed_code/75852320 " width="850" height="650" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>Unfortunately I had some videos and I&rsquo;m known
+for giving talks that require people to be there as the slides are half of it
+(tip: that&rsquo;s why you should come to these events!), but I think you can get the
+picture.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Tech Team of ~10 People]]></title>
+    <link href="https://odino.org/a-tech-team-of-%7E10-people/"/>
+    <updated>2016-09-22T15:18:00+00:00</updated>
+    <id>https://odino.org/a-tech-team-of-~10-people</id>
+    <content type="html"><![CDATA[<p>I am currently in Berlin, attending the <a href="http://www.techsummit2016.com/">2016 Rocket Tech Summit</a>: what a good
+opportunity to share some insights on how we run our business with such a small
+tech team.</p>
+
+<!-- more -->
+
+
+<p>Given <a href="https://www.ft.com/content/078ea8d2-809a-11e6-8e50-8ec15fb462f4">recent news</a>,
+I was extremely pleased to share some of our ideas / pillars with the
+Rocket-verse (and you as well):</p>
+
+<p><div class="slideshare" id="__ss_66307948"><iframe src="https://www.slideshare.net/slideshow/embed_code/66307948 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>To an even more fruitful 2017!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dockerize It: Stop Living in the Past and Embrace the Future]]></title>
+    <link href="https://odino.org/dockerize-it-stop-living-in-the-past-and-embrace-the-future/"/>
+    <updated>2016-08-18T15:49:00+00:00</updated>
+    <id>https://odino.org/dockerize-it-stop-living-in-the-past-and-embrace-the-future</id>
+    <content type="html"><![CDATA[<p>The guys from the codemotion recently released a bunch of
+videos from the last event they held in Rome &mdash; among those
+there&rsquo;s one of my talks about adopting docker for fun and
+profit :)</p>
+
+<!-- more -->
+
+
+<p>Hope you won&rsquo;t get bored!</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KtQ-kxAOYOU" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying 3 Times a Day Without a Downtime]]></title>
+    <link href="https://odino.org/deploying-3-times-a-day-without-a-downtime/"/>
+    <updated>2015-10-03T17:15:00+00:00</updated>
+    <id>https://odino.org/deploying-3-times-a-day-without-a-downtime</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/rocket-small.png"></p>
+
+<p>At the beginning of September, part of the
+<a href="http://tech.namshi.com/team">Namshi team</a>
+attended the 2015 <a href="http://www.techsummit2015.com/">Rocket Tech Summit</a>
+in Berlin, a 2-days event that brought together
+rocketers from <a href="https://www.rocket-internet.com/companies">all over the world</a>:
+the event was focused on knowledge sharing among many
+of the ventures that have been launched by
+<a href="https://www.rocket-internet.com/">Rocket</a>, but we also
+got the chance to hear some kick-ass presentations from
+industry leaders like Amazon, Google and ThoughtWorks.</p>
+
+<!-- more -->
+
+
+<p><a href="https://www.linkedin.com/in/manuelgruber">Manuel</a>
+and I had a couple slots to share how we handle a few
+things at Namshi (his presentation was more focused
+on how we do mobile) and I&rsquo;m happy to share, as usual,
+the slides here: my presentation was mostly dealing
+with how we try to build the architecture in order to be
+confident enough to change, deploy and evolve the
+software without getting tangled in those typical
+problems (read: slowness) that bigger companies
+usually face.</p>
+
+<p><div class="slideshare" id="__ss_53431188"><iframe src="https://www.slideshare.net/slideshow/embed_code/53431188 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>You can also have a look at the <a href="http://www.slideshare.net/odino/deploying-3-times-a-day-without-a-downtime-rocket-tech-summit-in-berlin">presentation on slideshare</a>&hellip;and I&rsquo;d be really glad to hear your feedback!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS, (Almost) a Year Later, at a PHP Conference]]></title>
+    <link href="https://odino.org/angularjs-almost-a-year-later/"/>
+    <updated>2014-11-27T21:18:00+00:00</updated>
+    <id>https://odino.org/angularjs-almost-a-year-later</id>
+    <content type="html"><![CDATA[<p>The first day of the <a href="http://madrid2014.symfony.com/">SymfonyCon Madrid</a> is almost
+over and, since I&rsquo;m done with my talk, I&rsquo;m gonna
+take the time to &ndash; as usual &ndash; put the slides here.</p>
+
+<!-- more -->
+
+
+<p>My talk went (I hope) well, and I am grateful
+to the guys that stopped me afterwards to
+clarify some of their doubts or to have
+a casual chat about Angular and other frontend-ish
+things.</p>
+
+<p>Here are the slides:</p>
+
+<p><div class="slideshare" id="__ss_42097528"><iframe src="https://www.slideshare.net/slideshow/embed_code/42097528 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>By the way: <strong>110% respect</strong> to
+SensioLabs for finding a venue which:</p>
+
+<ul>
+<li>has great WiFi</li>
+<li>serves yummy food</li>
+<li>is 20 minutes away from a shisha place</li>
+</ul>
+
+
+<p>Tomorrow it will be the second and last day
+of conference; afterwards I&rsquo;m gonna catch an overnight flight
+to come back to my beloved Dubai:
+if you are at the conference, do not hesitate
+and ping me since&hellip;<a href="http://tech.namshi.com/join-us/">we&rsquo;re still hiring</a>!</p>
+]]></content>
+  </entry>
+  
+</feed>

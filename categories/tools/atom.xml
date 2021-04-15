@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Tools | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/tools/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Test 3rd Party Hooks and Webservices Locally]]></title>
+    <link href="https://odino.org/how-to-test-3rd-party-hooks-and-webservices-locally/"/>
+    <updated>2015-07-15T20:35:00+00:00</updated>
+    <id>https://odino.org/how-to-test-3rd-party-hooks-and-webservices-locally</id>
+    <content type="html"><![CDATA[<p>In the past few months I have spent a bit of my spare time
+helping <a href="http://tech.namshi.com/">the Namshi team</a> build a
+very small <a href="https://nodejs.org/">NodeJS</a> app to trigger builds
+of our projects through Github.</p>
+
+<!-- more -->
+
+
+<p>The main idea is that when someone pushes changes to
+one of the github repos, we&rsquo;d want to build a new docker image
+with that code and push it to our private registry<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>After laying down most of the app, time had come to test
+the integration with Github&rsquo;s hooks, and I was left wondering
+how easy it would have been to test this on my local machine,
+without having to deploy the app somewhere where it would be
+publicly accessible.</p>
+
+<h2>ngrok to the rescue</h2>
+
+<p>Turns out that Github has a very good tutorial on <a href="https://developer.github.com/webhooks/configuring/">how to test
+hooks locally</a>
+through a very interesting software, <a href="https://ngrok.com/">ngrok</a>.</p>
+
+<p>Ngrok tunnels traffic from the internet to your local machine
+through some black magic. Just <a href="https://ngrok.com/download">download it</a>
+and create a sample NodeJS server on your machine:</p>
+
+<p><code>javascript
+require('http').createServer(function(req, res){
+  res.writeHead(200, {});
+  res.end('Hello');
+}).listen(8888);
+</code></p>
+
+<p>Running it through <code>node server.js</code> will, of course, make it accessible at
+<code>localhost:8888</code>.</p>
+
+<p>Now, <strong>the magic</strong>: run <code>./path/to/ngrok http 8888</code>
+and ngrok will tell you at what public address your server is now
+available:</p>
+
+<p>```
+ngrok by @inconshreveable                                                                                                                                                                    (Ctrl+C to quit)</p>
+
+<p>Tunnel Status                 online
+Version                       2.0.19/2.0.19
+Web Interface                 <a href="http://127.0.0.1:4040">http://127.0.0.1:4040</a>
+Forwarding                    <a href="http://b8b939d0.ngrok.io">http://b8b939d0.ngrok.io</a> &ndash;> localhost:8888
+Forwarding                    <a href="https://b8b939d0.ngrok.io">https://b8b939d0.ngrok.io</a> &ndash;> localhost:8888</p>
+
+<p>Connections                   ttl     opn     rt1     rt5     p50     p90</p>
+
+<pre><code>                          1       1       0.01    0.00    59.49   59.49
+</code></pre>
+
+<p>```</p>
+
+<p><img class="right" src="/images/ngrok.png"></p>
+
+<p>Open <code>http://xxxx.ngrok.io</code> (of course, the address / hash will be
+different everytime you launch ngrok) and you will now be able to access
+your local service from the internet.</p>
+
+<p>Icing on the cake: now, to test your application, you
+can simply point the github hook to <code>xxxx.ngrok.io</code> and receive
+hooks on your local machine.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>As much as I don&rsquo;t like to re-invent the wheel, the builds on the dockerhub were a bit too slow and using stuff like codeship would have been a bit too expensive, so while we were using the Dockerhub we started developing this tool &ldquo;for fun and profit&rdquo; <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

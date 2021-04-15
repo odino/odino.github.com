@@ -1,0 +1,335 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Welcome to the world of probabilistic data structures, where ingenious algorithms meet real-life problems" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Probabilistic data structures: an introduction</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/probabilistic-data-structures-an-introduction/" />
+		<meta property="og:title" content="Probabilistic data structures: an introduction" />
+		<meta property="og:description" content="Welcome to the world of probabilistic data structures, where ingenious algorithms meet real-life problems" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/probabilistic-data-structures-an-introduction/">Probabilistic data structures: an introduction</a></h1>
+        <time>12 January 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right" src="/images/dice.png"></p>
+
+<p>In the past few years I&rsquo;ve got more and more accustomed to computer science
+concepts that were foreign to me earlier in my career: one of the most interesting
+aspects that I&rsquo;ve focused on is <a href="https://dzone.com/articles/introduction-probabilistic-0">probabilistic data structures</a>,
+which I want to cover with a few posts in the upcoming months.</p>
+
+<p>My excitement around these structures come from the fact that they
+enable us to accomplish tasks that were impractical before, and can really influence
+the way we design software &mdash; for example, Reddit counts unique views with a
+probabilistic data structure as it lets them scale more efficiently.</p>
+
+<!-- more -->
+
+
+<h2>What&rsquo;s all the fuss about?</h2>
+
+<p>Let&rsquo;s get practical very quickly &mdash; imagine you have a set of records and want to calculate if an element is part
+of that set:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">let</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">set</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="err">`</span><span class="nx">test$</span><span class="p">{</span><span class="nx">x</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">set</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span> <span class="c1">// false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we are loading the entire set in memory and then loop (<code>.includes(...)</code>)
+over it to figure out if our element is part of it.</p>
+
+<p>Let&rsquo;s say we want to figure out the resources used by this script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">let</span> <span class="nx">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">set</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="err">`</span><span class="nx">test$</span><span class="p">{</span><span class="nx">x</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">set</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="o">~</span><span class="nx">$</span><span class="p">{</span><span class="nx">process</span><span class="p">.</span><span class="nx">memoryUsage</span><span class="p">().</span><span class="nx">heapUsed</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">}</span><span class="nx">mb</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// output:</span>
+</span><span class='line'><span class="c1">// false</span>
+</span><span class='line'><span class="c1">// search: 2.184ms</span>
+</span><span class='line'><span class="c1">// ~4.448288mb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, the time spent in running the script is minimal, and memory is
+also &ldquo;low&rdquo;. What happens when we beef up our original list?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">10000000</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">set</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="err">`</span><span class="nx">test$</span><span class="p">{</span><span class="nx">x</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// output:</span>
+</span><span class='line'><span class="c1">// false</span>
+</span><span class='line'><span class="c1">// search: 2383.794ms</span>
+</span><span class='line'><span class="c1">// ~532.511032mb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>See, the figures change quite drastically &mdash; it&rsquo;s not even the execution time
+that should scare you (most of the time is spent in filling the array, not in the
+<code>.includes(...)</code>), but rather the amount of memory the process is consuming: as usual,
+the more data we use, the more memory we consume (no shit, Sherlock!).</p>
+
+<p>This is exactly the problem that probabilistic data structures try to solve, as you:</p>
+
+<ul>
+<li>might not have enough available resources</li>
+<li>might not need a precise answer to your problem</li>
+</ul>
+
+
+<p>If you can trade certainty off for the sake of staying lightweight, a <a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filter</a>
+would, for example, be the right data structure for this particular use case:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">BloomFilter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bloomfilter&#39;</span><span class="p">).</span><span class="nx">BloomFilter</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">bloom</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BloomFilter</span><span class="p">(</span>
+</span><span class='line'>  <span class="mi">287551752</span><span class="p">,</span> <span class="c1">// number of bits to allocate.</span>
+</span><span class='line'>  <span class="mi">20</span>        <span class="c1">// number of hash functions.</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">10000000</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bloom</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="err">`</span><span class="nx">test$</span><span class="p">{</span><span class="nx">x</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bloom</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="o">~</span><span class="nx">$</span><span class="p">{</span><span class="nx">process</span><span class="p">.</span><span class="nx">memoryUsage</span><span class="p">().</span><span class="nx">heapUsed</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">}</span><span class="nx">mb</span><span class="err">`</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// output</span>
+</span><span class='line'><span class="c1">// false</span>
+</span><span class='line'><span class="c1">// search: 11644.863ms</span>
+</span><span class='line'><span class="c1">// ~10.738632mb</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case the bloom filter has given us the same output (with a <a href="https://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives">degree
+of certainty</a>) while using 10MB of RAM rather than 500MB.
+Oh, boy!</p>
+
+<p>This is exactly what probabilistic data structures help you with: you need an
+answer with a degree of certainty and don&rsquo;t care if they&rsquo;re off by a tiny
+bit &mdash; because to get an exact answer you would require an impractical amount of
+resources.</p>
+
+<p>Who cares if that video has been seen by 1M unique users or 1.000.371 ones? If
+you find yourself in this situation, chances are that a probabilistic structure
+would fit extremely well in your architecture.</p>
+
+<h2>Next steps</h2>
+
+<p>I have only really started to scratch the surface of what is possible thanks to
+probabilistic data structures but, if you are fascinated as much as I am, you
+will find some of my next articles interesting enough, as I am planning to cover
+the ones that I understand better in the upcoming weeks &mdash; namely <a href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog</a>
+(by far my favorite data structure) and
+<a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filters</a>.</p>
+
+<p>The papers behind these data structures are pretty <em>math-heavy</em> and I do not understand half of that jazz :)
+so we&rsquo;re going to take a look at them with more of a simplistic, practical view
+than a theoretical one.</p>
+
+<h2>Just before you leave&hellip;</h2>
+
+<p>One thing I want to clarify: the specific numbers you&rsquo;ve seen in this post will vary from platform to platform, so don&rsquo;t
+look at the absolute numbers but rather at the magnitude of the difference. Also,
+here I just focused on one application of Bloom filters, which demonstrates their
+advantage in terms of space complexity, but time complexity should be accounted
+for as well &mdash; that&rsquo;s material for another post!</p>
+
+<p>Cheers!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/probabilistic-data-structures-an-introduction/"
+		},
+		"headline": "Probabilistic data structures: an introduction",
+		"description": "Welcome to the world of probabilistic data structures, where ingenious algorithms meet real-life problems",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-01-12 09:44:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

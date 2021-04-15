@@ -1,0 +1,291 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="A new minor release for ABS (1.2.0): time for background commands and external imports!" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>ABS 1.2: background commands &amp; the ability to import files</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/abs-1-dot-2-background-commands-and-the-ability-to-import-files/" />
+		<meta property="og:title" content="ABS 1.2: background commands &amp; the ability to import files" />
+		<meta property="og:description" content="A new minor release for ABS (1.2.0): time for background commands and external imports!" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/abs-1-dot-2-background-commands-and-the-ability-to-import-files/">ABS 1.2: background commands &amp; the ability to import files</a></h1>
+        <time>21 March 2019</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 2 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>A few weeks ago the ABS team managed to pull together
+a new minor release of the language, <a href="https://github.com/abs-lang/abs/releases/tag/1.2.0">1.2.0</a>,
+which includes loads of interesting features &mdash; let&rsquo;s get to them!</p>
+
+<p><img class="center" src="/images/abs-12-intro.png"></p>
+
+<!-- more -->
+
+
+<h2>~/.absrc</h2>
+
+<p>ABS will now look for a default <code>~/.absrc</code> file to preload
+everytime you run a script: this is especially useful if you&rsquo;d
+like to dump &ldquo;base&rdquo; functions you&rsquo;re likely to re-use across
+scripts in a common place. Your <code>.absrc</code> could look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">tenth</span> <span class="o">=</span> f<span class="o">(</span>x<span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">return </span>x / 10
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>so that in any other abs script you can <code>tenth(x)</code>.</p>
+
+<h2>~/.abs_history</h2>
+
+<p>We also introduced an history file in order to be able to
+repeat commands easily when using the ABS repl: this is, by default,
+located at <code>~/.abs_history</code> and gets synced every time you close
+a repl session:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>abs
+</span><span class='line'>Hello alex, welcome to the ABS <span class="o">(</span>1.2.0<span class="o">)</span> programming language!
+</span><span class='line'>Type <span class="s1">&#39;quit&#39;</span> when you<span class="s1">&#39;re done, &#39;</span><span class="nb">help</span><span class="err">&#39;</span> <span class="k">if </span>you get lost!
+</span><span class='line'>⧐  <span class="sb">`</span>sleep 1<span class="sb">`</span>
+</span><span class='line'>
+</span><span class='line'>⧐  quit
+</span><span class='line'>Adios!
+</span><span class='line'><span class="nv">$ </span>tail ~/.abs_history
+</span><span class='line'><span class="sb">`</span>sleep 1<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>require(file)</h2>
+
+<p>A big one here: you can now <strong>require external files</strong> through <code>require(path/to/file.abs  )</code>.
+This is a stepping stone in order to allow creating base libraries that can be re-used
+across ABS scripts, and organize ABS code a tad better.</p>
+
+<h2>Background commands</h2>
+
+<p>Another big feature here: you can now issue &ldquo;background&rdquo; commands that won&rsquo;t block
+your ABS script (these commands are executed within a <a href="https://tour.golang.org/concurrency/1">Goroutine</a>).</p>
+
+<p>A background command differs from a regular one simply because it employs
+an <code>&amp;</code> at the end of the command itself &mdash; let&rsquo;s see them in action:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="sb">`</span>sleep 10<span class="sb">`</span>
+</span><span class='line'><span class="nb">echo</span><span class="o">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="o">)</span> <span class="c"># This will be printed after 10s</span>
+</span><span class='line'>
+</span><span class='line'><span class="sb">`</span>sleep 10 &amp;<span class="sb">`</span>
+</span><span class='line'><span class="nb">echo</span><span class="o">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="o">)</span> <span class="c"># This will be printed immediately</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can check whether a background command is done with the <code>.done</code> property:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">cmd</span> <span class="o">=</span> <span class="sb">`</span>sleep 10 &amp;<span class="sb">`</span>
+</span><span class='line'>cmd.done <span class="c"># false</span>
+</span><span class='line'><span class="nb">wait</span><span class="o">(</span>10000<span class="o">)</span>
+</span><span class='line'>cmd.done <span class="c"># true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and we&rsquo;ve added the <code>wait()</code> function if you need to block until
+the command is done:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">cmd</span> <span class="o">=</span> <span class="sb">`</span>sleep 10 &amp;<span class="sb">`</span>
+</span><span class='line'>cmd.wait<span class="o">()</span> <span class="c"># The script will be blocked for 10s</span>
+</span><span class='line'><span class="nb">echo</span><span class="o">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Misc</h2>
+
+<p>A few more features that made it into this release:</p>
+
+<ul>
+<li>number functions such as <code>floor</code>, <code>round</code> and <code>ceil</code></li>
+<li><code>cd()</code>, which switches the <code>cwd</code> of a script</li>
+<li>you can play around with your prompt by setting the environment variables <code>ABS_PROMPT_LIVE_PREFIX=true</code> and <code>ABS_PROMPT_PREFIX=templated_string</code>. The templated string can use <code>{dir}</code>, <code>{user}</code>, <code>{host}</code> that will be replaced on-the-fly. For further info, have a look at the sample <a href="https://github.com/abs-lang/abs/blob/d1e92899ed0d6b3abb7a0a3fc6ec18d13dbe3ff2/tests/test-absrc.abs">.absrc</a> file</li>
+</ul>
+
+
+<h2>Bugfixes</h2>
+
+<p>As usual, we managed to fix some minor bugs along the way:</p>
+
+<ul>
+<li>fixed a few random panics when calling built-in functions without enough arguments (<a href="https://github.com/abs-lang/abs/pull/193">#193</a>)</li>
+<li>windows commands are now using cmd.exe rather than bash, as bash might not be available on the system (<a href="https://github.com/abs-lang/abs/pull/180">#180</a>)</li>
+<li>better error messages when parsing &ldquo;invalid&rdquo; numbers (<a href="https://github.com/abs-lang/abs/pull/182">#182</a>)</li>
+<li>the ABS installer was not working with wget 1.20.1 (<a href="https://github.com/abs-lang/abs/pull/178">#178</a>)</li>
+<li>the ABS parser now supports numbers in scientific notation (eg. 8.366100560806463e-7, <a href="https://github.com/abs-lang/abs/pull/174">#174</a>)</li>
+<li>errors on built-in functions would not report the correct error line / column numbers (<a href="https://github.com/abs-lang/abs/pull/168">#168</a>)</li>
+</ul>
+
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt;<span class="o">(</span>curl https://www.abs-lang.org/installer.sh<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+
+<p>PS: Again, many thanks to <a href="https://github.com/ntwrick">Erich</a>,
+who&rsquo;s been taking a larger role as the weeks went by. Without him,
+many of the stuff included in 1.2 wouldn&rsquo;t be possible!</p>
+
+<p>PPS: <a href="https://github.com/abs-lang/abs/milestone/10">1.3.0 is already well underway</a> &mdash; expect
+it at some point in April. We&rsquo;ll be introducing extremely
+interesting features such as the ability to kill background commands,
+so it&rsquo;s going to be an exciting release!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/abs-1-dot-2-background-commands-and-the-ability-to-import-files/"
+		},
+		"headline": "ABS 1.2: background commands &amp; the ability to import files",
+		"description": "A new minor release for ABS (1.2.0): time for background commands and external imports!",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2019-03-21 05:50:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

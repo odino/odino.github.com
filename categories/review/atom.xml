@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Review | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/review/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Designing Distributed Systems]]></title>
+    <link href="https://odino.org/book-review-designing-distributed-systems/"/>
+    <updated>2019-01-25T14:03:00+00:00</updated>
+    <id>https://odino.org/book-review-designing-distributed-systems</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/book-cover-designing-distributed-systems.png"></p>
+
+<p>This was a fairly quick and informative read, one that maybe dosn&rsquo;t <em>fully</em>
+justify its price, currently trending at around $30 from Amazon.</p>
+
+<p>At the end of the day, though, I&rsquo;m happy with my choice and certainly
+cannot complain, as the book gave me a couple interesting ideas /
+perspectives that I would have missed otherwise &mdash; and I was pretty
+excited to read <a href="https://www.linkedin.com/in/brendan-burns-487aa590/">Brendan Burns</a>&lsquo; take, one of Kubernetes&rsquo; fathers,
+on distributed systems.</p>
+
+<!-- more -->
+
+
+<p>The book mostly covers basic topics around distributed systems, and
+pulls Kubernetes in when it comes down to examples: some have complained
+that this feels like a k8s book rather than a book on distributed systems,
+but I would argue that given the state of k8s within the ecosystem
+(clear leader by far, far away) it only seems fitting to use it when
+it comes to getting your hands dirty. If you, like me, also appreciate
+the design and primitives k8s offers, then you&rsquo;re going to enjoy this
+part as well.</p>
+
+<p>At the end of the day, as I mentioned, the price is a bit steep for a book
+that would take 3/4h to complete, but it&rsquo;s one of those reads I&rsquo;m glad
+to have gone through, even if a tad overpriced.</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<p><blockquote><p>Simply proxying traffic into an existing application is not the only use for a sidecar. Another common example is configuration synchronization.</p></blockquote></p>
+
+<p><blockquote><p>If a microservices architecture is made up of well-known patterns, then it is easier to design because many of the design practices are specified by the patterns.</p></blockquote></p>
+
+<p><blockquote><p>Often, session tracking is accomplished via a consistent hashing function. The benefit of a consistent hashing function becomes evident when the service is scaled up or down. Obviously, when the number of replicas changes, the mapping of a particular user to a replica may change. Consistent hashing functions minimize the number of users that actually change which replica they are mapped to, reducing the impact of scaling on your application.</p></blockquote></p>
+
+<p><blockquote><p>You might wonder why we include a v1 in the API definition. Will there ever be a v2 of this interface? It may not seem logical, but it costs very little to version your API when you initially define it. Refactoring versioning onto an API without it, on the other hand, is very expensive. Consequently, it is a best practice to always add versions to your APIs even if you’re not sure they will ever change. Better safe than sorry.</p></blockquote></p>
+
+<p><blockquote><p>Given implementations of the two container interfaces described previously, what is left to implement our reusable work queue implementation? The basic algorithm for the work queue is fairly straightforward: Load the available work by calling into source container interface. Consult with work queue state to determine which work items have been processed or are being processed currently. For these items, spawn jobs that use the worker container interface to process the work item. When one of these worker containers finishes successfully, record that the work item has been completed. While this algorithm is simple to express in words, it is somewhat more complicated to implement in reality. Fortunately for us, the Kubernetes container orchestrator contains a number of features that make it significantly easier to implement. Namely, Kubernetes contains a Job object that allows for the reliable execution of the work queue. The Job can be configured to either run the worker container once or to run it until it completes successfully. If the worker container is set to run to completion, then even if a machine in the cluster fails, the job will eventually be run to success. This dramatically simplifies the task of building a work queue because the orchestrator takes on responsibility for the reliable operation of each work item. Additionally, Kubernetes has annotations for each Job object that enable us to mark each job with the work item it is processing. This enables us to understand which items are being processed as well as those that have completed in either failure or success.</p></blockquote></p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Writing an Interpreter in Go]]></title>
+    <link href="https://odino.org/book-review-writing-an-interpreter-in-go/"/>
+    <updated>2019-01-11T11:12:00+00:00</updated>
+    <id>https://odino.org/book-review-writing-an-interpreter-in-go</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/interpreter-cover.png"></p>
+
+<p>Boy, what a book!</p>
+
+<p>This goes right into the list of books I would
+have wanted to read 10 years ago: a masterpiece
+on programming languages, with the author showcasing
+an excellent ability to write couple with
+extremely exhaustive &mdash; but never boring &mdash;
+content.</p>
+
+<p>Long story short, <a href="https://interpreterbook.com/">the interpreter book</a> should
+definitely be on your 2019 reading list unless
+you&rsquo;ve already read it. If that&rsquo;s the case,
+give the book another try, it&rsquo;s probably worth it.</p>
+
+<!-- more -->
+
+
+<p>First and foremost, I&rsquo;d like to start by saying that
+picking <a href="https://golang.org/">Go</a> for such a topic was an excellent choice:
+not everyone might be familiar with the language,
+but its standard library and &ldquo;strictness&rdquo; make it
+for a perfect choice for these kind of
+tasks.</p>
+
+<p>An epic feat is that the book manages to write an
+entire interpreter using only the <a href="https://golang.org/pkg/">Go standard library</a>:
+yes, no single dependency other than Go itself.</p>
+
+<p>I&rsquo;m not sure how to put it into words, but the writing
+style is also impeccable, as I started this book
+and <em>had to</em> finish it within 4 hours &mdash; I simply
+couldn&rsquo;t get over it.</p>
+
+<p><img class="left" src="/images/compiler-cover.png"></p>
+
+<p>Writing An Interpreter In Go will spoon-feed you
+through the journey of writing &ldquo;your own programming language&rdquo;,
+presenting topics such as writing a lexer and parser
+in such a way that even the silliest of human beings
+(<em>hey there, that&rsquo;s me!</em>) can understand them
+easily. I dunno, to me this book is simply a masterpiece.</p>
+
+<p>Worth to note that the author just recently doubled up
+with a sequel to this book, <a href="https://compilerbook.com/">Writing A Compiler In Go</a>,
+that takes the codebase you ended up with the interpreter
+book and writes a compiler and VM for the language you&rsquo;ve
+just built.</p>
+
+<p>Go grab your copy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Simplify: How the Best Businesses in the World Succeed]]></title>
+    <link href="https://odino.org/book-review-simplify-how-the-best-businesses-in-the-world-succeed/"/>
+    <updated>2018-12-07T19:02:00+00:00</updated>
+    <id>https://odino.org/book-review-simplify-how-the-best-businesses-in-the-world-succeed</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/simplify-book.png"></p>
+
+<p>Something I&rsquo;m extremely fascinated with is the power of simplicity:
+I&rsquo;ve found myself fighting complexity far too many times, and always
+realized that when planning and developing a system, we&rsquo;d achieve the
+best results when keeping things simple.</p>
+
+<p>What&rsquo;s more interesting, simple systems could be combined together to
+kind of form more structured organizations that would still benefit
+from their straightforward pillars.</p>
+
+<p>Naturally, my curiosity evolved over time and I wasn&rsquo;t keen on confining to the
+tech field &mdash; so once I saw this book, I thought I&rsquo;d like to see if businesses
+have similar tendencies to the systems we build with code.</p>
+
+<!-- more -->
+
+
+<p>&ldquo;<a href="https://www.amazon.com/dp/B01KEL4G4K">Simplify: How the Best Businesses in the World Succeed</a>&rdquo;
+is a very interesting read: it starts by introducing great
+simplifiers such as Henry Ford or Ingvar Kamprad (founder of IKEA),
+describing their ascent into their respective industries. The book
+quickly jumps to the conclusion that there are 2 strategic ways to simplify:</p>
+
+<ul>
+<li>price-simplifying (cutting down costs by a substantial margin)</li>
+<li>proposition-simplifying (making a much better product, eliminate the fuss)</li>
+</ul>
+
+
+<p>Now&hellip;this is where the book kind of stops: after introducing the 2 different
+ways of simplifying it goes on and on about numbers such as revenue growth
+of simplifiers vs competitors and so on &mdash; it gets fairly boring at some point :)
+overall I think part of the book could have been trimmed down in favor of the
+examples and anectodes (which are amazing).</p>
+
+<p>All in all, I would recommend this book as it&rsquo;s cost-effective as well as
+well-written &mdash; you might get bored at some point in the final couple of
+chapters: if so, feel free to skip ahead!</p>
+
+<p>A few interesting quotes from the book:</p>
+
+<p><blockquote><p>being mostly correct and decisive typically yields better results than taking the time to figure out what is perfectly correct</p></blockquote></p>
+
+<p><blockquote><p>The real breakthrough came with a proprietary innovation, designed by his production managers: the move from batch production to a continuously moving assembly line. This didn&rsquo;t happen until 1913, and it was then that Ford famously insisted that all of his cars would be painted black, because only Japan black paint could dry quickly enough to keep up with the speed of the line. The effect of simplification and scale was to move the price of a Model T down to $550 by 1914, when 248,307 of them were sold. By 1917, the price had fallen even further, to $360, with the result that sales soared to 785,432. In 1920, 1.25 million Model T&rsquo;s were bought. Compared to 1909, a price reduction of 63 percent — to almost a third of the original price of the Model T, which was itself a good fifth cheaper than comparable cars — had resulted in a sixty-sevenfold increase in the number of cars Ford sold.</p></blockquote></p>
+
+<p><blockquote><p>Reduce product-line variety and if possible standardize on a single &ldquo;universal product&rdquo;</p></blockquote></p>
+
+<p><blockquote><p>A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away.</p></blockquote></p>
+
+<p><blockquote><p>Product design is nearly everything in proposition-simplifying. The objective is to make the product a joy to use: first and foremost, easier to use; then, if possible, more useful and more aesthetically appealing.</p></blockquote></p>
+
+<p><blockquote><p>It seems that firms develop their own rules of thumb about acceptable margins and then become addicted to them. So, if simpler, lower-margin products come along it is hard for any successful company to embrace them and realize that, although the margins are lower, the overheads are too. New entrants with simpler products do not have the handicap of success in more complex, more profitable products, and the overhead and margin assumptions that such success generates.</p></blockquote></p>
+
+<p><blockquote><p>Once the iPod project was launched, Jobs immersed himself in it daily. His main demand was &ldquo;Simplify!&rdquo; He would go over each screen of the user interface and apply a rigid test: he should be able to get there in three clicks. And the click should be intuitive. If he couldn’t figure out how to navigate to something, or if it took more than three clicks, he would be brutal.</p></blockquote></p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Cloud Native Infrastructure]]></title>
+    <link href="https://odino.org/book-review-cloud-native-infrastructure/"/>
+    <updated>2018-09-01T12:25:00+00:00</updated>
+    <id>https://odino.org/book-review-cloud-native-infrastructure</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/cni-book.jpg"></p>
+
+<p>This goes right into the list of <a href="/book-review-nodejs-high-performance/">books I really wanted to like</a> but kind of
+disappointed me.</p>
+
+<p>The book is structured extremely well, so it comes out as a very enjoyable read.
+One downside, though, becomes fairly evident a few chapters in:
+it isn&rsquo;t practical at all, describes few patterns and instead focuses a lot
+on processes, advices and high-level description of approaches you should follow
+to embrace CN infrastructure.</p>
+
+<!-- more -->
+
+
+<p>I was probably expecting too much, but when I read the book&rsquo;s <a href="https://www.amazon.com/Cloud-Native-Infrastructure-Applications-Environment/dp/1491984309">description on the
+Kindle store</a>:</p>
+
+<blockquote><p>This <strong>practical</strong> guide shows you how to design and maintain infrastructure capable of managing the full lifecycle of these implementations.</p></blockquote>
+
+<p>I got fairly excited and proceeded to buy.</p>
+
+<p>Again, as I mentioned the book is really nice to read &mdash; I devoured it during my
+daily commute to work, and that&rsquo;s something you don&rsquo;t expect from most technical books.
+When it comes to content, though, I found it a tad repetitive and without many
+real-world examples / lessons, so it felt more of an &ldquo;abstract&rdquo; book around
+the Cloud Native ecosystem than anything else.</p>
+
+<p>I would have definitely appreciated
+if the last chapter, which serves as an introduction to interesting patterns
+such as circuit breaking, would have gone more into details: it might have been
+out of the scope of the book but would have definitely made it feel more &ldquo;hands-on&rdquo;.</p>
+
+<p>At the end of the day, Cloud Native infrastructure goes down as an introductory
+guide to the CN world. I’d recommend you to read it if you just started
+approaching the ecosystem.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Why We Sleep]]></title>
+    <link href="https://odino.org/book-review-why-we-sleep/"/>
+    <updated>2018-08-20T07:08:00+00:00</updated>
+    <id>https://odino.org/book-review-why-we-sleep</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/why-we-sleep.png"></p>
+
+<p><strong>PSA: book of the year candidate right here.</strong></p>
+
+<p>I never started any of my book reviews with a &ldquo;book of the year&rdquo; disclaimer,
+but this deserves as much of your attention as I can grab: a book that&rsquo;s
+so simple, yet so revolutionary, tackling one of the most boring aspects
+of our life.</p>
+
+<p>I used to think sleep was quite of a useless phase in our lives, there so that we
+can simply recharge our batteries and go on the following day &mdash; and this book
+managed to radically change my view on the importance of sleep: it&rsquo;s a scientific
+take on the process of sleeping, how it impacts and shapes us, giving you a 360
+degree overview on the consequences of a chronic lack of sleep.</p>
+
+<!-- more -->
+
+
+<p>As I mentioned in <a href="/book-review-the-personal-mba/">my previous post</a>, I started beefing up my reading list based on
+suggestions from internet personalities', and this came straight from <a href="http://david.heinemeierhansson.com/">DHH</a>:</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I attribute a significant share of my best ideas, sustained motivation, and life satisfaction with getting all the sleep the body and brain asks for whenever possible (8.5-9.5 hours per night most nights). Cheating sleep is the dumbest game. You will lose. <a href="https://t.co/p4CjE8p7Qi">https://t.co/p4CjE8p7Qi</a></p>&mdash; DHH (@dhh) <a href="https://twitter.com/dhh/status/1010622584361308161?ref_src=twsrc%5Etfw">June 23, 2018</a></blockquote>
+
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>Later in the 3d, <a href="https://twitter.com/dhh/status/1010882936072175616">DHH suggests to check this book</a>,
+so I got a bit curious and bought it &mdash; what a great decision.</p>
+
+<p>Long story short: it&rsquo;s insane how much sleep impacts our life &mdash; it&rsquo;s not just our
+energy level, but things such as (but not limited to) our ability to absorb knowledge,
+understand other people&rsquo;s facial emotions, solve problems and regain memory. I
+particularly enjoyed the down-to-earth tone <a href="https://en.wikipedia.org/wiki/Matthew_Walker_(scientist">the author</a> carries throughout the book
+and the fact that you can easily understand the mechanics behind sleep even though
+the subject is very &ldquo;technical&rdquo;.</p>
+
+<p>Some interesting quotes from the book &mdash; but, trust me, there&rsquo;s so many it&rsquo;s not
+even fun:</p>
+
+<p><blockquote><p>It is disquieting to learn that vehicular accidents caused by drowsy driving exceed those caused by alcohol and drugs combined.</p></blockquote></p>
+
+<p><blockquote><p>As one sleep scientist has said, &ldquo;If sleep does not serve an absolutely vital function, then it is the biggest mistake the evolutionary process has ever made.&rdquo;</p></blockquote></p>
+
+<p><blockquote><p>An adult’s owlness or larkness, also known as their chronotype, is strongly determined by genetics. If you are a night owl, it’s likely that one (or both) of your parents is a night owl.</p></blockquote></p>
+
+<p><blockquote><p>The night owls in the group would not be going to sleep until one or two a.m., and not waking until nine or ten a.m. The morning larks, on the other hand, would have retired for the night at nine p.m. and woken at five a.m. Consequently, the group as a whole is only collectively vulnerable (i.e., every person asleep) for just four rather than eight hours, despite everyone still getting the chance for eight hours of sleep. That’s potentially a 50 percent increase in survival fitness. Mother Nature would never pass on a biological trait—here, the useful variability in when individuals within a collective tribe go to sleep and wake up—that could enhance the survival safety and thus fitness of a species by this amount.</p></blockquote></p>
+
+<p><blockquote><p>For every day you are in a different time zone, your suprachiasmatic nucleus can only readjust by about one hour.</p></blockquote></p>
+
+<p><blockquote><p>Scientists have studied airplane cabin crews who frequently fly on long-haul routes and have little chance to recover. Two alarming results have emerged. First, parts of their brains—specifically those related to learning and memory—had physically shrunk, suggesting the destruction of brain cells caused by the biological stress of time-zone travel. Second, their short-term memory was significantly impaired.</p></blockquote></p>
+
+<p><blockquote><p>What percent of sleep will you lose? The logical answer is 25 percent, since waking up at six a.m. will lop off two hours of sleep from what would otherwise be a normal eight hours. But that’s not entirely true. Since your brain desires most of its REM sleep in the last part of the night, which is to say the late-morning hours, you will lose 60 to 90 percent of all your REM sleep, even though you are losing 25 percent of your total sleep time.</p></blockquote></p>
+
+<p><blockquote><p>When it comes to information processing, think of the wake state principally as reception (experiencing and constantly learning the world around you), NREM sleep as reflection (storing and strengthening those raw ingredients of new facts and skills), and REM sleep as integration (interconnecting these raw ingredients with each other, with all past experiences, and, in doing so, building an ever more accurate model of how the world works, including innovative insights and problem-solving abilities).</p></blockquote></p>
+
+<p><blockquote><p>Alcohol is one of the most powerful suppressors of REM sleep that we know of.</p></blockquote></p>
+
+<p><blockquote><p>deep sleep may be a driving force of brain maturation, not the other way around.</p></blockquote></p>
+
+<p><blockquote><p>That older adults simply need less sleep is a myth.</p></blockquote></p>
+
+<p><blockquote><p>Sleep before learning refreshes our ability to initially make new memories.</p></blockquote></p>
+
+<p><blockquote><p>following a night of sleep you regain access to memories that you could not retrieve before sleep.</p></blockquote></p>
+
+<p><blockquote><p>Sleep powerfully, yet very selectively, boosted the retention of those words previously tagged for “remembering,” yet actively avoided the strengthening of those memories tagged for “forgetting.” Participants who did not sleep showed no such impressive parsing and differential saving of the memories.</p></blockquote></p>
+
+<p><blockquote><p>In the Northern Hemisphere, the switch to daylight savings time in March results in most people losing an hour of sleep opportunity. Should you tabulate millions of daily hospital records, as researchers have done, you discover that this seemingly trivial sleep reduction comes with a frightening spike in heart attacks the following day. Impressively, it works both ways. In the autumn within the Northern Hemisphere, when the clocks move forward and we gain an hour of sleep opportunity time,</p></blockquote></p>
+
+<p><blockquote><p>remarkable discovery in 2002 demonstrated that sleep profoundly impacts your response to a standard flu vaccine. In the study, healthy young adults were separated into two groups: one had their sleep restricted to four hours a night for six nights, and the other group was allowed seven and a half to eight and a half hours of time in bed each night. At the end of the six days, everyone was given a flu shot. In the days afterward, researchers took blood samples to determine how effective these individuals were in generating an antibody response, determining whether or not the vaccination was a success. Those participants who obtained seven to nine hours’ sleep in the week before getting the flu shot generated a powerful antibody reaction, reflecting a robust, healthy immune system. In contrast, those in the sleep-restricted group mustered a paltry response, producing less than 50 percent of the immune reaction their well-slept counterparts were able to mobilize. Similar consequences of too little sleep have since been reported for the hepatitis A and B vaccines.</p></blockquote></p>
+
+<p><blockquote><p>mice were first injected with malignant cells, and tumor progression was then tracked across a four-week period. Half of the mice were allowed to sleep normally during this time; the other half had their sleep partially disrupted, reducing overall sleep quality. The sleep-deprived mice suffered a 200 percent increase in the speed and size of cancer growth, relative to the well-rested group.</p></blockquote></p>
+
+<p><blockquote><p>One of the earliest studies found that using an iPad—an electronic tablet enriched with blue LED light—for two hours prior to bed blocked the otherwise rising levels of melatonin by a significant 23 percent.</p></blockquote></p>
+
+<p><blockquote><p>we have since discovered that under-slept managers and CEOs are less charismatic and have a harder time infusing their subordinate teams with inspiration and drive. Unfortunately for bosses, a sleep-deprived employee will erroneously perceive a well-rested leader as being significantly less inspiring and charismatic than they truly are. One can only imagine the multiplicative consequences to the success of a business if both the leader and the employees are overworked and under-slept. Allowing and encouraging employees, supervisors, and executives to arrive at work well rested turns them from simply looking busy yet ineffective, to being productive, honest, useful individuals who inspire, support, and help each other. Ounces of sleep offer pounds of business in return.</p></blockquote></p>
+
+<p>I could go on and on and on&hellip;   &hellip;do me a favor instead: buy the book and enjoy
+what I consider my read of the year.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,298 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="The art of figuring out why things went south when nothing else helps" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>A little bit of strace doesn't hurt</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/a-little-bit-of-strace-doesnt-hurt/" />
+		<meta property="og:title" content="A little bit of strace doesn't hurt" />
+		<meta property="og:description" content="The art of figuring out why things went south when nothing else helps" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/a-little-bit-of-strace-doesnt-hurt/">A little bit of strace doesn't hurt</a></h1>
+        <time>11 January 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><a href="https://linux.die.net/man/1/strace">strace(1)</a> is an amazing tool that you can use to debug processes that went south
+when nothing else helps.</p>
+
+<!-- more -->
+
+
+<p>At it&rsquo;s core, strace simply runs a command and prints out all system calls
+executed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ strace echo "1" &gt; test.txt
+</span><span class='line'>
+</span><span class='line'>execve("/bin/echo", ["echo", "1"], [/* 79 vars */]) = 0
+</span><span class='line'>brk(NULL)                               = 0xa99000
+</span><span class='line'>access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+</span><span class='line'>mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a58000
+</span><span class='line'>access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+</span><span class='line'>open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+</span><span class='line'>fstat(3, {st_mode=S_IFREG|0644, st_size=105962, ...}) = 0
+</span><span class='line'>mmap(NULL, 105962, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0fe9a3e000
+</span><span class='line'>close(3)                                = 0
+</span><span class='line'>access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+</span><span class='line'>open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+</span><span class='line'>read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0P\t\2\0\0\0\0\0"..., 832) = 832
+</span><span class='line'>fstat(3, {st_mode=S_IFREG|0755, st_size=1868984, ...}) = 0
+</span><span class='line'>mmap(NULL, 3971488, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0fe946b000
+</span><span class='line'>mprotect(0x7f0fe962b000, 2097152, PROT_NONE) = 0
+</span><span class='line'>mmap(0x7f0fe982b000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c0000) = 0x7f0fe982b000
+</span><span class='line'>mmap(0x7f0fe9831000, 14752, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9831000
+</span><span class='line'>close(3)                                = 0
+</span><span class='line'>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a3d000
+</span><span class='line'>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a3c000
+</span><span class='line'>mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0fe9a3b000
+</span><span class='line'>arch_prctl(ARCH_SET_FS, 0x7f0fe9a3c700) = 0
+</span><span class='line'>mprotect(0x7f0fe982b000, 16384, PROT_READ) = 0
+</span><span class='line'>mprotect(0x606000, 4096, PROT_READ)     = 0
+</span><span class='line'>mprotect(0x7f0fe9a5a000, 4096, PROT_READ) = 0
+</span><span class='line'>munmap(0x7f0fe9a3e000, 105962)          = 0
+</span><span class='line'>brk(NULL)                               = 0xa99000
+</span><span class='line'>brk(0xaba000)                           = 0xaba000
+</span><span class='line'>open("/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+</span><span class='line'>fstat(3, {st_mode=S_IFREG|0644, st_size=10305248, ...}) = 0
+</span><span class='line'>mmap(NULL, 10305248, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0fe8a97000
+</span><span class='line'>close(3)                                = 0
+</span><span class='line'>fstat(1, {st_mode=S_IFREG|0664, st_size=0, ...}) = 0
+</span><span class='line'>write(1, "1\n", 2)                      = 2
+</span><span class='line'>close(1)                                = 0
+</span><span class='line'>close(2)                                = 0
+</span><span class='line'>exit_group(0)                           = ?
+</span><span class='line'>+++ exited with 0 +++</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, that&rsquo;s quite a bit of information: you will see each and every system call
+that&rsquo;s been run in order to execute your command, with arguments (up to a certain
+length) and the exit code.</p>
+
+<p>How is this useful? Well, in order to debug a running process you can simply
+<em>strace</em> it by its pid:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sleep 20 &
+</span><span class='line'>
+</span><span class='line'>[1] 15977
+</span><span class='line'>
+</span><span class='line'>$ strace -p $!
+</span><span class='line'>
+</span><span class='line'>strace: Process 15977 attached
+</span><span class='line'>restart_syscall(&lt;... resuming interrupted nanosleep ...&gt;) = 0
+</span><span class='line'>close(1)                                = 0
+</span><span class='line'>close(2)                                = 0
+</span><span class='line'>exit_group(0)                           = ?
+</span><span class='line'>+++ exited with 0 +++
+</span><span class='line'>[1]+  Done                    sleep 20</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(note that <code>$!</code> is the pid of the previous process, it&rsquo;s just a magic shell variable)</p>
+
+<p>Now we&rsquo;re talking! Remember that process that inexplicably hangs after running
+for a couple minutes? Let&rsquo;s run it, then find its pid and strace it on the fly.</p>
+
+<p>You can even trace child processes and even threads with the <code>-f</code> option, so
+that you can literally follow anything your parent process triggers &mdash; just this
+week this turned out handy for me since I needed to debug an android app running
+on an emulated device, which can be easily done through something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ adb shell
+</span><span class='line'>
+</span><span class='line'>(in the emulated device)
+</span><span class='line'>
+</span><span class='line'>$ ps -A | grep com.myapp
+</span><span class='line'>
+</span><span class='line'>(get the pid)
+</span><span class='line'>
+</span><span class='line'>$ strace -f -p $PID</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember: when you think there&rsquo;s nothing left to try, strace(1) will always have
+your back.</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/a-little-bit-of-strace-doesnt-hurt/"
+		},
+		"headline": "A little bit of strace doesn't hurt",
+		"description": "The art of figuring out why things went south when nothing else helps",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-01-11 14:05:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

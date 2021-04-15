@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Aws | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/aws/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using Terraform in AWS Mumbai]]></title>
+    <link href="https://odino.org/using-terraform-with-in-aws-mumbai/"/>
+    <updated>2016-07-05T16:04:00+00:00</updated>
+    <id>https://odino.org/using-terraform-with-in-aws-mumbai</id>
+    <content type="html"><![CDATA[<p>Terraform is a fantastic tool to manage your infrastructure
+with simple and declarative templates; you simply describe
+your infrastructure in a template file  that looks like:</p>
+
+<p>```
+resource &ldquo;digitalocean_droplet&rdquo; &ldquo;web&rdquo; {</p>
+
+<pre><code>name = "tf-web"
+size = "512mb"
+image = "centos-5-8-x32"
+region = "sfo1"
+</code></pre>
+
+<p>}</p>
+
+<p>resource &ldquo;dnsimple_record&rdquo; &ldquo;hello&rdquo; {</p>
+
+<pre><code>domain = "example.com"
+name = "test"
+value = "${digitalocean_droplet.web.ipv4_address}"
+type = "A"
+</code></pre>
+
+<p>}
+```</p>
+
+<p>run <code>terraform apply</code> and you&rsquo;re set: Terraform will boot
+the infrastructure for you.</p>
+
+<p>AWS recently launched their <code>ap-south-1</code> region (Mumbai, India)
+and, due to the fact that&rsquo;s much closer to our customer and EC2
+there seems to be ~10% cheaper than in AWS Singapore (where we&rsquo;re currently
+hosted), we wanted to start experiment moving part of our
+infrastructure to this region.</p>
+
+<p><a href="https://github.com/hashicorp/terraform/pull/7383#issuecomment-229169574">Terraform, though, has an hardcoded list of AWS regions</a> and,
+since Mumbai is a recent addition, it will throw an error saying that
+the region isn&rsquo;t supported.</p>
+
+<!-- more -->
+
+
+<p>The guys have already <a href="https://github.com/hashicorp/terraform/pull/7383/files">added the new region in master</a>, so
+we could just wait for the next stable release to be rolled out and we&rsquo;ll be
+able to rock it in Mumbai but, since we&rsquo;re troublemakers, let&rsquo;s just not wait
+and figure a way to boot our machines in Mumbai <strong>now</strong> :)</p>
+
+<p>Since the changes are already in <code>master</code>, we just need to clone the terraform
+repo and build it locally:</p>
+
+<p><code>
+git clone git@github.com:hashicorp/terraform.git
+cd terraform
+TF_DEV=1 ./scripts/build.sh
+</code></p>
+
+<p>That&rsquo;s it &mdash; a new <code>terraform</code> executable will be created with the latest code
+from master (if you&rsquo;re wondering, the <code>TF_DEV</code> variable makes it so we
+<a href="https://github.com/hashicorp/terraform/blob/master/scripts/build.sh#L27-L31">build terraform only for our architecture</a>, else the <code>build.sh</code> script will also
+build for bsd, darwin, etc).</p>
+
+<p>Nothing more, nothing less :) Have fun booting your infrastucture with
+Terraform: it&rsquo;s an amazing tool built by a <a href="https://www.hashicorp.com/#products">great company</a> in the DevOps
+landscape.</p>
+]]></content>
+  </entry>
+  
+</feed>

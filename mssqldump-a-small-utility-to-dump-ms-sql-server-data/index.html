@@ -1,0 +1,223 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Let me introduce you a small utility I wrote to automate some tasks: mssqldump, mysqldump, for MS SQL Server." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>mssqldump, a small utility to dump MS SQL Server data</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/mssqldump-a-small-utility-to-dump-ms-sql-server-data/" />
+		<meta property="og:title" content="mssqldump, a small utility to dump MS SQL Server data" />
+		<meta property="og:description" content="Let me introduce you a small utility I wrote to automate some tasks: mssqldump, mysqldump, for MS SQL Server." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/mssqldump-a-small-utility-to-dump-ms-sql-server-data/">mssqldump, a small utility to dump MS SQL Server data</a></h1>
+        <time>22 May 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right" src="/images/mssql-logo.png"></p>
+
+<p>In the past few months I found myself busier with moving data here and there, so
+much that scripts ending with <code>load(transform(extract()))</code> have become my bread
+and butter &mdash; sad life, some say!</p>
+
+<p>Last night I wanted to import a bunch of data stored in SQL Server
+into a MySQL database, but didn&rsquo;t want to get my hards dirty with a GUI or PowerShell
+because, well, <a href="https://www.google.ae/search?q=powershell+sucks&amp;oq=powershell+sucks&amp;aqs=chrome..69i57j69i61j0l4.3713j0j7&amp;sourceid=chrome&amp;ie=UTF-8">PowerShell</a>.</p>
+
+<p>The result was <a href="https://github.com/odino/mssqldump">mssqldump</a>, a small utility
+&ndash; similar to <code>mysqldump</code> &ndash; to export data into <a href="/tsv-better-than-csv/">TSV</a>.</p>
+
+<!-- more -->
+
+
+<h2>Usage</h2>
+
+<p><code>mssqldump</code> does one thing &mdash; and hopefully well &mdash; run a query against the
+database and export the results as TSV to the stdout:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./mssqldump -q "SELECT Name, 1 as ID, RAND() as thing from sys.Databases"
+</span><span class='line'>master    1    0.4318099474883688
+</span><span class='line'>tempdb    1    0.4318099474883688
+</span><span class='line'>model     1    0.4318099474883688
+</span><span class='line'>msdb      1    0.4318099474883688
+</span><span class='line'>test      1    0.4318099474883688</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also include headings (column names) with the <code>-c</code> option:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./mssqldump -q "SELECT Name, 1 as ID, RAND() as thing from sys.Databases"
+</span><span class='line'>Name      ID   thing
+</span><span class='line'>master    1    0.4318099474883688
+</span><span class='line'>tempdb    1    0.4318099474883688
+</span><span class='line'>model     1    0.4318099474883688
+</span><span class='line'>msdb      1    0.4318099474883688
+</span><span class='line'>test      1    0.4318099474883688</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to print <code>mssqldump</code>&rsquo;s version information you can just specify <code>v</code>
+or <code>version</code> as the query parameter:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./mssqldump -qversion
+</span><span class='line'>1.0.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to use <code>mssqldump</code> simply download the <a href="https://github.com/odino/mssqldump/releases">latest release from github</a>
+and start dumping data around!</p>
+
+<h2>A couple surprises</h2>
+
+<p>Building <code>mssqldump</code> was an experience on its own, as I discovered a couple useful
+things:</p>
+
+<ul>
+<li>Microsoft is killing it lately &mdash; I wanted to test this out and was resigned to
+spinning up a SQL Server instance on Azure. Turns out a simple <code>docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password123!' --net host -d --name mssql --rm microsoft/mssql-server-linux</code>
+does the trick!</li>
+<li>knowing I was developing a CLI tool in Golang, I thought I would <em>need</em> to resort
+to <a href="https://github.com/spf13/cobra">cobra</a> &mdash; wanting to try to simplify things
+up I instead opted for <a href="https://github.com/jessevdk/go-flags">go-flags</a>, which has way less
+features but is also less opinionated and faster to setup (cobra is probably overkill
+for a CLI app with only one command)</li>
+</ul>
+
+
+<p>Adios!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/mssqldump-a-small-utility-to-dump-ms-sql-server-data/"
+		},
+		"headline": "mssqldump, a small utility to dump MS SQL Server data",
+		"description": "Let me introduce you a small utility I wrote to automate some tasks: mssqldump, mysqldump, for MS SQL Server.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-05-22 14:56:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

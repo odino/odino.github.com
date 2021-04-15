@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Team | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/team/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Debugging Teams: Better Productivity Through Collaboration]]></title>
+    <link href="https://odino.org/book-review-debugging-teams-better-productivity-through-collaboration/"/>
+    <updated>2018-06-24T22:52:00+00:00</updated>
+    <id>https://odino.org/book-review-debugging-teams-better-productivity-through-collaboration</id>
+    <content type="html"><![CDATA[<p>Even though I have a physical copy of this book, I never got around finishing it
+until I bought it on Kindle &mdash; power of digital convenience :)</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/debugging-teams-book.png"></p>
+
+<p><a href="https://www.amazon.com/Debugging-Teams-Productivity-through-Collaboration/dp/1491932058">Debugging Teams</a>
+is a very interesting read, especially considering the experience the 2 authors
+bring to the table: large, Googl-y organizations and fat OS communities.</p>
+
+<p>The authors focus (a lot) on their personal experience, adding references and
+elements from other publications as well (for example <a href="https://en.wikipedia.org/wiki/Peopleware:_Productive_Projects_and_Teams">PeopleWare</a>
+by <a href="https://en.wikipedia.org/wiki/Tom_DeMarco">Tom DeMarco</a>), and suggest a
+framework called HRT (<strong>h</strong>umility, <strong>r</strong>espect and <strong>t</strong>rust) to cultivate
+great relationships and inspire the people you work with.</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<p><blockquote><p>Many people work on products that have great significance, but they are kept at arm’s length from the positive effects their products may have on their company, their customers, or even the world. Even in cases where the product may have a much smaller impact, you can motivate your team by seeking the reason for their efforts and making this reason clear to them.</p></blockquote></p>
+
+<p><blockquote><p>There’s an old saying to not let “the perfect be the enemy of the good,” and in your quest to create a high-performing team, you need to be just as vigilant about avoiding perfectionism as you are about calling out more obvious disruptive behaviors.</p></blockquote></p>
+
+<p><blockquote><p>Always start by giving the person the benefit of the doubt</p></blockquote></p>
+
+<p><blockquote><p>“If you don’t miss at least one flight a year, you’re getting to the airport too early.” This is a great metaphor for creating any sort of product: if you don’t fail at least once a year, you’re not taking enough risks.</p></blockquote></p>
+
+<p><blockquote><p>If you don’t take risks in your work, you’ll have fewer failures, but you’ll have fewer big successes as well.</p></blockquote></p>
+
+<p><blockquote><p>only rarely will you find a person in an organization who overcommunicates, so don’t hesitate to update your team’s leader on what you’re doing before she asks you what’s going on. Drop her a quick note when you hit an obstacle, score a victory, need something, or expect something.</p></blockquote></p>
+
+<p><blockquote><p>Fear of failure is one of the most common traits of bad managers. This insecurity tends to make them very conservative, which is antithetical to the work style of the typical engineer. If your manager doesn’t want you to take risks, there is little opportunity for you to inject your own ideas into your product and you’ll usually wind up implementing (by rote) the product someone else designed.</p></blockquote></p>
+
+<p><blockquote><p>It boils down to this: is your manager serving you? Or are you serving your manager? It should always be the former.</p></blockquote></p>
+
+<p><blockquote><p>Even if you’re prepared to beg for forgiveness, choose your battles wisely — every time you have to plead your case for something or go up against someone else in your company, you’re spending your political capital.</p></blockquote></p>
+
+<p><blockquote><p>Be strategic and fight for things either that matter or that you’re pretty sure you have some chance of winning.</p></blockquote></p>
+
+<p><blockquote><p>you need to underpromise and overdeliver whenever possible.</p></blockquote></p>
+
+<p><blockquote><p>a team should never spend more than one-third to one-half of its time and energy on defensive work, no matter how much technical debt there is. Any more time spent is a recipe for political suicide.</p></blockquote></p>
+
+<p><blockquote><p>people will remember you as the person who helped them out in a jam.</p></blockquote></p>
+
+<p><blockquote><p>A good Three Bullets and a Call to Action email contains (at most) three bullet points detailing the issue at hand, and one — and only one — call to action.</p></blockquote></p>
+
+<p><blockquote><p>Google is great at this; it has a deliberate policy of not preannouncing features for any product.</p></blockquote></p>
+
+<p><blockquote><p>“Speed is a feature.”</p></blockquote></p>
+
+<p><blockquote><p>Is your software trying to accomplish too much? This sounds like a silly question at first, but some of the worst software out there is bad because it’s overly ambitious. It tries to be absolutely everything to everyone. Some of the best software succeeds because it defines the problem narrowly and solves it well. Instead of solving every problem badly, it solves really common problems for most users and does it really well.</p></blockquote></p>
+
+<p><blockquote><p>think of your software as a simple toaster oven. Does it cook everything? Absolutely not. But it cooks a lot of really common food and is useful to almost everyone who encounters it without being overwhelming. Be the toaster oven. Less is more.</p></blockquote></p>
+
+<p><blockquote><p>This is what we like to call “hiding the complexity.” You take a complex problem and break it up, cover it, or do something to make the software seem simple anyway.</p></blockquote></p>
+
+<p><blockquote><p>Google Search is another well-known example of hiding complexity. Google’s interface (and barrier to entry) is almost nonexistent: it’s just a magic box to type in. Yet behind that box, there are thousands of machines across the planet responding in parallel and doing a search after every keystroke you type. By the time you hit Enter, the search results have already rendered on your screen. The amount of technology behind that text box is jaw-dropping, and yet the complexity of the problem is hidden from the user. It behaves like Magic.3 This is a great goal for a creative team to pursue since it’s essentially the epitome of product usability.</p></blockquote></p>
+
+<p><blockquote><p>Give users respect by default. A common misconception that powers our fear of direct user interaction is the myth that users are stupid. They’re not writing the software, after all, so they’re just “clueless users,” right? When you finally have an opportunity to interact with them, the most important thing to remember is to avoid condescension. Being a savvy computer user is not a fair measure of general intelligence. A lot of brilliant people out there use computers as a tool and nothing more. They’re not interested in debugging or following scientific methods to diagnose a problem. Remember that most of us have no idea how to take apart and fix our cars; assuming your users are stupid is akin to an auto mechanic thinking you are stupid because you don’t know how to rebuild a transmission, nor even care how to diagnose a transmission problem. The car is a black box — you just want to drive. For most people, the computer (and your software) is a black box, too. Users don’t want to participate in the analysis process; they just want to get some work done. It has nothing to do with intelligence!</p></blockquote></p>
+
+<p>The book is not super expensive (sells between 15 &ndash; 20$) and I&rsquo;d definitely
+recommend it &mdash; even if you&rsquo;re not in a managerial position (or don&rsquo;t even plan
+on getting there) it gives you quite a few interesting pointers on how to navigate
+in more structured orgs, teams and complex situations.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Tech Team of ~10 People]]></title>
+    <link href="https://odino.org/a-tech-team-of-%7E10-people/"/>
+    <updated>2016-09-22T15:18:00+00:00</updated>
+    <id>https://odino.org/a-tech-team-of-~10-people</id>
+    <content type="html"><![CDATA[<p>I am currently in Berlin, attending the <a href="http://www.techsummit2016.com/">2016 Rocket Tech Summit</a>: what a good
+opportunity to share some insights on how we run our business with such a small
+tech team.</p>
+
+<!-- more -->
+
+
+<p>Given <a href="https://www.ft.com/content/078ea8d2-809a-11e6-8e50-8ec15fb462f4">recent news</a>,
+I was extremely pleased to share some of our ideas / pillars with the
+Rocket-verse (and you as well):</p>
+
+<p><div class="slideshare" id="__ss_66307948"><iframe src="https://www.slideshare.net/slideshow/embed_code/66307948 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>To an even more fruitful 2017!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Space to the Youngsters...]]></title>
+    <link href="https://odino.org/space-to-the-youngsters-dot-dot-dot/"/>
+    <updated>2013-09-23T18:26:00+00:00</updated>
+    <id>https://odino.org/space-to-the-youngsters-dot-dot-dot</id>
+    <content type="html"><![CDATA[<p>One of the best feeling ever, while heading
+a team of (web) engineers, is when you lead
+them to one particular thing: do <strong>not make the
+same mistakes you made</strong> back at the time.</p>
+
+<!-- more -->
+
+
+<p><img class="center" src="/images/namshi-team.jpg"></p>
+
+<p>For our people it&rsquo;s pretty interesting, since
+most of them didn&rsquo;t work with automated tests
+and enterprise framework before we decided to
+go <a href="/tips-and-tricks-for-you-service-oriented-architecture/">SOA</a>,
+and the <strong>coolest thing</strong> is to see how juniors
+pick things up better, faster than you did back
+at the time.</p>
+
+<p>Today I want to introduce you to <a href="http://mohdhallal.github.io/">Mohammad Hallal</a>,
+who joined us around 3 months ago, fresh from
+university.</p>
+
+<p>His dedication and will led him to be a very
+valuable element of a team full of seniors,
+and he decided to make the big step,
+starting to <strong>share his experience</strong>
+with a technical blog.</p>
+
+<p>Kudos to Hallal, and don&rsquo;t miss his first post,
+an introduction about <a href="http://mohdhallal.github.io/blog/2013/09/22/behat-mink-and-parallel-runner-a-recipe-for-automated-web-testing/">BDD, Behat and automated testing</a>!</p>
+]]></content>
+  </entry>
+  
+</feed>

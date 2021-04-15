@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: S4 | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/s4/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Yahoo's S4 Stream Computing Platform]]></title>
+    <link href="https://odino.org/yahoo-s-s4-stream-computing-platform/"/>
+    <updated>2011-06-02T12:29:00+00:00</updated>
+    <id>https://odino.org/yahoo-s-s4-stream-computing-platform</id>
+    <content type="html"><![CDATA[<p>The internet had a huge bump during the late &lsquo;90s, and all the majors needed something web-scale in order to conquer the 'net.</p>
+
+<!-- more -->
+
+
+<p>Google, after its launch, suddenly became the king of the web, destroying the competitors year by year.</p>
+
+<p>Far from being a simple search engine, it evolved giving us incredible services, like Gmail and Docs: web-ready and web-scale services able to endure massive traffic and data-exchange.</p>
+
+<p>Furthermore, the search engine was accumulating an extraordinary amount of records and it probably needed a brand new algorithm to index and process its contents.</p>
+
+<p>It was 2004, and Google came out with <a href="http://en.wikipedia.org/wiki/MapReduce">MapReduce</a>, a new way of thinking the distribution of the workload.</p>
+
+<h2>Beyond MapReduce</h2>
+
+<p>MapReduce rocks, everybody thought.</p>
+
+<p>But then the problems came out: MR is solid and ass-kicking when you need to process tons of permanent data; when you need to do huge batch operations you should use it, nobody hesitates.</p>
+
+<p>But there is a scenario where MR probably isn&rsquo;t the best choice for your needs: processing huge streams of data.</p>
+
+<h2>Enters S4</h2>
+
+<p><a href="http://www.s4.io/">S4</a> &ndash; I really don&rsquo;t know the reason behind this name &ndash; is a framework developed by Yahoo for processing continuoos streams of data.</p>
+
+<p>Its entire architecture is thought to obviusly be event-driven, where computational units, known as <em>processing elements</em> (PE), process and possibly re-dispatch events emitted by the internal framework.</p>
+
+<p>It already supports client adapters and an high level API, so you should be able to integrate with the platform in any language you want to: unfortunately, the docs have a PERL example :)</p>
+]]></content>
+  </entry>
+  
+</feed>

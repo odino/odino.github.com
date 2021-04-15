@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Programming | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/programming/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[XYZ Programming Language Sucks]]></title>
+    <link href="https://odino.org/xyz-programming-language-sucks/"/>
+    <updated>2016-07-12T15:05:00+00:00</updated>
+    <id>https://odino.org/xyz-programming-language-sucks</id>
+    <content type="html"><![CDATA[<p>I would have tweeted this, but it&rsquo;s a bit longer than
+140 chars :)</p>
+
+<!-- more -->
+
+
+<p>I was recently  going through some articles about <a href="https://golang.org/">Go</a>&rsquo;s
+limitations, and stumbled on this <a href="https://news.ycombinator.com/item?id=7660924">HN comment</a>:</p>
+
+<p><blockquote><p>It&rsquo;s ironic that the &ldquo;better&rdquo; the language (for some hazy definition of &ldquo;better&rdquo;) the less actual work seems to get done with it.</p></p><p><p>So Go can be pretty annoying at times, and so can Java (I&rsquo;ve said before that I find the two almost identical, but that&rsquo;s beside the point now); and C is horrible and completely unsafe and downright dangerous.</p></p><p><p>Yet more useful working code has probably been written in Java and C than all other languages combined since the invention of the computer, and more useful code has been written in, what, 5 years of Go(?) than in 20(?) years of Haskell.</p></p><p><p>Here&rsquo;s the thing: I am willing to accept that Haskell is the best programming language ever created. People have been telling me this for over 15 years now. And yet it seems like the most complex code written in Haskell is the Haskell compiler itself (and maybe some tooling around it).<br/>If Haskell&rsquo;s clear advantages really make that much of a difference, maybe its (very vocal) supporters should start doing really impressive things with it rather than write compilers. I don&rsquo;t know, write a really safe operating system; a novel database; some crazy Watson-like machine; a never-failing hardware controller. Otherwise, all of this is just talk.</p><footer><strong>pron <a href="https://news.ycombinator.com/item?id=7661099">https://news.ycombinator.com/item?id=7661099</a></strong></footer></blockquote></p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bundling Static Files Within Your Golang App]]></title>
+    <link href="https://odino.org/bundling-static-files-within-your-golang-app/"/>
+    <updated>2016-06-30T20:23:00+00:00</updated>
+    <id>https://odino.org/bundling-static-files-within-your-golang-app</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/gopher.png"></p>
+
+<p>One of the nice features of golang is that you can simply distribute
+your programs through <em>executables</em>, meaning the user doesn&rsquo;t need to
+have custom libraries to install / run your software: just download the
+executable and you&rsquo;re set.</p>
+
+<p>What Go really does is to bundle together all your <code>*.go</code> files in a single,
+platform-dependent executable, that
+can be run with a single click &mdash; which works perfectly in 99% of our use cases.</p>
+
+<p>All of this seems great, until you have to bundle different kind of files
+in your application, for example an <code>.yml</code> config file or an <code>.xliff</code>
+translation file.</p>
+
+<p>How would you approach this? Enter the trick of the year.</p>
+
+<!-- more -->
+
+
+<h2>The idea</h2>
+
+<p>The idea is that you can create a go source file which <em>contains all of the
+non-go files you need to bundle</em>, something of this sort:</p>
+
+<p>``` go
+package something</p>
+
+<p>func GetAssetContents(string asset) string {
+  if asset = &ldquo;file.txt&rdquo; {</p>
+
+<pre><code>return "1234"
+</code></pre>
+
+<p>  }</p>
+
+<p>  if asset = &ldquo;file.css&rdquo; {</p>
+
+<pre><code>return "hello { display: block; }"
+</code></pre>
+
+<p>  }</p>
+
+<p>  // &hellip;
+}
+```</p>
+
+<p>and in your code you can then require those files
+by just doing <code>GetAssetContents("file.txt")</code>; when
+doing a <code>go build</code>, then, all of your assets will
+be &ldquo;included&rdquo; in your final binary.</p>
+
+<h2>Enter go-bindata</h2>
+
+<p>Now, you could argue that writing code like this isn&rsquo;t ideal,
+and that is true &mdash; that is why you&rsquo;ll find <a href="https://github.com/jteeuwen/go-bindata">go-bindata</a>
+useful, as it generates all of the code automatically:</p>
+
+<p><code>
+go get jteeuwen/go-bindata
+echo "1234" &gt; sample.txt
+go-bindata -pkg something -o sample.go ./sample.txt
+</code></p>
+
+<p>and <a href="https://github.com/odino/go-bindata-example/blob/master/sample.go">here&rsquo;s the result</a>:
+as you can see, go-bindata generated a new go file under the package <code>something</code>, and it
+<a href="https://github.com/odino/go-bindata-example/blob/10e59eee28251b657991b5eead29540143d8ba71/sample.go#L71">embedded the contents</a> of <code>sample.txt</code> in it.</p>
+
+<p>To access the contents you now just have to import your module and call the <code>Asset</code> function:</p>
+
+<p>``` go
+import (
+  &ldquo;github.com/you/library/something&rdquo;;
+  &ldquo;fmt&rdquo;
+)</p>
+
+<p>func main () {
+  fmt.Println(Asset(&ldquo;sample.txt&rdquo;)) // 1234
+}
+```</p>
+
+<p>Pretty neat, eh?</p>
+
+<p>I wrapped all of this together in a <a href="https://github.com/odino/go-bindata-example">github repo</a>,
+where you can see <a href="https://github.com/odino/go-bindata-example/blob/master/sample.txt">the asset</a>
+and how it can be <a href="https://github.com/odino/go-bindata-example/blob/master/sample.go">included in go code</a> with go-bindata:
+this is something I had to do in one of my libraries, <a href="https://github.com/odino/touchy">touchy</a>,
+and that I automated through a <a href="https://github.com/odino/touchy/blob/060559872547c05afe1406b212445b4c6e1bbc14/Makefile#L12-L17">Makefile</a>
+(no <code>go-generate</code> for me, too lazy :)).</p>
+
+<p>PS: on a side note, have you heard of <a href="https://github.com/jaredallard/nexe">nexe</a>?
+It&rsquo;s a compiling tool for node, which seems to alleviate the pain of distributing node executables.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My (Nice) Experience With Golang]]></title>
+    <link href="https://odino.org/my-take-on-golang/"/>
+    <updated>2015-04-19T22:30:00+00:00</updated>
+    <id>https://odino.org/my-take-on-golang</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/gopher.png"></p>
+
+<p>For the past six months (right after the <a href="http://europe.dockercon.com/">DockerCon</a>)
+I have been constantly taking some time out to play
+around with <a href="http://golang.org/">Go</a>, trying
+to understand why a lot of new tools were being
+written in this interesting language, especially
+in the DevOps world.</p>
+
+<p>In the last few days <a href="http://tech.namshi.com/">we</a>
+published our first open source
+library written in go, <a href="https://github.com/namshi/godo">godo</a>,
+and I wanted to share my impression
+of the language and the platform.</p>
+
+<!-- more -->
+
+
+<h2>Background</h2>
+
+<p>I have no solid experience in Go and you
+should understand that I come from a scripting
+background, starting from PHP all the way to
+JavaScript, 2 languages I both love &amp; hate
+depending on the day :)</p>
+
+<p>Even though my experience comes from 2 languages
+and platforms that have been <a href="http://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/">highly</a> <a href="http://www.boronine.com/2012/12/14/Why-JavaScript-Still-Sucks/">criticized</a>
+over the past years, I&rsquo;ve had a lot of fun
+trying to preach towards the adoption of of <a href="http://martinfowler.com/eaaCatalog/">PEAA</a>,
+automated testing<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> and good abstraction,
+so I&rsquo;ve seen both the <a href="http://programmers.stackexchange.com/questions/110797/why-is-php-so-frequently-used-on-web-servers">simplistic / simple</a> and the
+<a href="http://www.quora.com/What-are-the-most-ridiculous-Java-class-names-from-real-code">complex / structured</a>, which is why I always tend
+to play around with new tools and platforms: <strong>one
+more try, one more point of view</strong>.</p>
+
+<p>So, here starts the fun&hellip;</p>
+
+<h2>Getting started</h2>
+
+<p>So, it all started on my way back from Amsterdam
+(where DockerCon 2014 was held), I typed <code>mkdir holland</code>
+(what else?) and followed an advice <a href="http://www.matteocollina.com/#biography">a friend of mine</a>
+gave me, which was &ldquo;<em>Golang is really good with concurrency,
+[&hellip;] go ahead and write your next proxy with it</em>&rdquo;:
+let&rsquo;s write a proxy then!</p>
+
+<p>The first natural thing was to then write a simple
+Dockerfile starting with:</p>
+
+<p>```
+FROM golang</p>
+
+<p>MAINTAINER Alessandro Nadalin &ldquo;<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#97;&#108;&#x65;&#x73;&#115;&#97;&#x6e;&#x64;&#x72;&#x6f;&#x2e;&#110;&#97;&#x64;&#97;&#x6c;&#x69;&#110;&#64;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#109;">&#97;&#108;&#x65;&#115;&#115;&#97;&#110;&#x64;&#x72;&#x6f;&#46;&#110;&#97;&#x64;&#97;&#108;&#x69;&#110;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>&rdquo;</p>
+
+<p>RUN go get github.com/codegangsta/gin
+&hellip;
+```</p>
+
+<p>5 minutes and I was ready to play with Golang on my
+machine, writing my first &ldquo;hello world&rdquo; copying
+the sample code from <code>golang.org</code>.</p>
+
+<p><strong>Overall experience</strong>: it was fairly easy to setup
+everything on my system, but this is more thanks to
+Docker rather than Go itself.</p>
+
+<h2>Documentation</h2>
+
+<p>The next step was to try to find documentation
+on how to do the simplest tasks with Go, just like I
+did when I first started learning PHP 7 years ago and
+JS a few full-moons ago.</p>
+
+<p>To be honest, the experience wasn&rsquo;t pleasant, at least at first:
+there aren&rsquo;t as many tutorial guiding through your first
+steps with Go and, obviously, I was finding myself in trouble
+even to simply declare my own packages and understanding
+<a href="https://www.google.com/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=gopath">how the gopath works</a>.</p>
+
+<p>Luckily, I was able to figure these basic things out
+quite quickly, but not quick enough to avoid getting my
+wifi being cut off as I was getting on a plane to get back
+to Dubai; at that point, the greatest of all surprises:
+<code>godoc -http=:6060</code>. Pure magic.</p>
+
+<p><img class="right" src="/images/godoc.png"></p>
+
+<p>Yes, you can basically browse the whole golang.org website
+offline, which gave me a huge boost even though I was
+on a plane, without internet connection<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p><strong>Overall experience</strong>: what I still find hard is to be
+able to rely on a plethora of online tutorials on how to
+do some stuff (ie. <a href="https://www.google.com/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=golang+ssh+gateway+host">SSHing from Go through a gateway</a>),
+but you can live with it. The offline documentation is
+really great and, on a broader level, the whole Golang
+community is making a great effort to give newcomers a
+clue.</p>
+
+<h2>Compilation</h2>
+
+<p>One of the I was worried about is that Go is compiled,
+though it&rsquo;s also one of its biggest strenghts.</p>
+
+<p>The <em>meh</em> feeling you get once you hear that something is
+compiled, coming from a scripting environment, is that
+all of that jazz adds overhead, dead moments that
+get you out of the zone and so on; luckily, Golang was born
+at Google which means that it was designed to scale, both
+in production and during development, else imagine how many
+man days would be lost in a place like Google, who can
+count on <a href="http://www.quora.com/How-many-software-engineers-does-Google-have">~10k engineers</a><sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>.</p>
+
+<p>As a matter of fact, you can compile the entire Go source
+in <a href="http://www.quora.com/How-do-Rust-and-Go-compare-1/answer/Carmi-Grushko">8 seconds</a>,
+which gives you a fair idea. Your own software, which will
+probably use 5% of those dependencies, will probably take
+less than 300ms, which is pretty <strong>ideal</strong>.</p>
+
+<p>In JS I would develop much different applications,
+but if I have to think of how long I wait between editing a file
+in an angular app and being able to see the changes on the browser,
+I think it might be around the same time.
+This is not to compare JS and Go (how silly would that be?) but it&rsquo;s
+more to highlight the fact that if you&rsquo;ve already worked on frontend,
+the average Go program won&rsquo;t dramatically change your habits,
+at least from a development workflow perspective.</p>
+
+<p>And then, <a href="http://programmers.stackexchange.com/questions/83780/how-fast-can-go-go">Go is fast</a>. How fast?
+You don&rsquo;t really care, because your typical use case won&rsquo;t stress
+Go that much, but expect it to perform <a href="http://www.reddit.com/r/golang/comments/2r1ybd/speed_of_go_compared_to_java_and_python/">significantly better
+than scripted stuff like Python or Node</a>.</p>
+
+<p>Of course, it always depends on <strong>your application</strong>, <strong>your need</strong> and
+<strong>your coding skills</strong> &mdash; at the end of the day I can only point
+obvious truths out, and the fact that something compiled performs
+better than something interpreted isn&rsquo;t groundbreaking news :)</p>
+
+<p>One thing I don&rsquo;t particularly like is that whenever I comment
+some code, I find that the source hasn&rsquo;t been compiled because</p>
+
+<p><code>
+src/exec/exec.go:8: imported and not used: "sync"
+</code></p>
+
+<p>which means that I just commented some code that relied on an
+external package and now, since that code is not used anymore,
+the compiler warns me that &ldquo;<em>hey, why are you importing a useless package?</em>&rdquo;</p>
+
+<p>Can live with this kind of stuff.</p>
+
+<p><strong>Overall experience</strong>: pretty solid. I love the fact that whatever
+I write can be run on Windows without too much of a hassle, that
+it produces a binary that <strong>just works</strong> and that you don&rsquo;t have
+to worry about too many things. The transition, in terms of paradigm,
+was pretty straightforward.</p>
+
+<h2>Standard library</h2>
+
+<p>Go&rsquo;s standard library is rock-solid and quite vast:
+give a look at the <a href="http://golang.org/pkg/">list of packages</a> and you&rsquo;ll get
+an idea.</p>
+
+<p>The way the <code>godoc</code> commands presents packages, by the way, is
+pretty good: you will see the docblocks for every package / function,
+along with the annotated source:</p>
+
+<p><img class="right" src="/images/go-source.png"></p>
+
+<p>Overall, I feel someone&rsquo;s got my back when I have a problem:
+you will usually find some package or small utility function
+that will solve your problem or provide inspiration for your own
+use case.</p>
+
+<p><strong>Overall experience</strong>: I think there is still a lot that can
+be abstracted and put in Go&rsquo;s standard library, but the general
+feeling I have is that&rsquo;s already very good. Sometimes I miss the
+(3rd party) modularity that comes with JavaScript, but there are
+a lot of <a href="http://go-search.org/">external packages</a> for Go as well.</p>
+
+<h2>Generics</h2>
+
+<p>This has been reported to me by more than one person, and I never understood
+it until I actually had to face the &ldquo;problem&rdquo;.</p>
+
+<p>Go&rsquo;s <a href="http://golang.org/doc/faq#generics">lack of generics</a> irritates
+a few people, though I can ensure you can live without them without
+having to worry too much.</p>
+
+<p>In other words, <strong>consider not having generics a feature</strong>: you need to
+live without them and design software in a way that doesn&rsquo;t allow
+room for generics or, in other words, ambiguity.</p>
+
+<p><strong>Overall experience</strong>: it is probably true that generics add flexibility
+to your development experience, but like the golang&rsquo;s website says, they
+&ldquo;<em>add complexity and extra cost in the type system and run-time</em>&rdquo;, so you&rsquo;ll
+have to learn to live without them. I am ok with it.</p>
+
+<h2>go fmt ./&hellip;</h2>
+
+<p>I wont waste too much time on this, but let&rsquo;s just say that, in
+my opinion, we should have something like go&rsquo;s fmt in every single
+programming platform.</p>
+
+<p><img class="center" src="/images/go-fmt.png"></p>
+
+<p><strong>Overall experience</strong>: A W E S O M E ++</p>
+
+<h2>Wonkiness</h2>
+
+<p>There are other small weird things that make Go look
+wonky at first, ie. function visibility:</p>
+
+<p>``` go
+package mypackage</p>
+
+<p>// protected
+func doSomething() {
+  &hellip;
+}</p>
+
+<p>// public
+func DoSomething() {
+  &hellip;
+}
+```</p>
+
+<p>These sort of things might seem counter-intuitive,
+but at the end of the day they all contribute to a
+more coincise syntax<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup> and a more pragmatic
+way of programming.</p>
+
+<p><strong>Overall experience</strong>: I would say Go&rsquo;s wonky enough :)
+I don&rsquo;t like the syntax very much, but it&rsquo;s not like
+I was coming straight out of the 7th heaven, being used
+to JS and PHP. At the end of the day it&rsquo;s coincise and
+decent enough that I feel pretty ok about it.</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;m very happy of my experiment and I hope I&rsquo;ll be able
+to play more with Go, as it seems to fill some gaps where
+other programming languages / platforms aren&rsquo;t great at. I believe that
+the overall development experience is quite nice and the
+language is pretty easy to pick up, granted you have
+a couple years of experience with software development in general.</p>
+
+<p>Last but not least, lately I&rsquo;ve seen <a href="http://odino.org/5-technologies-you-should-keep-an-eye-on-in-2015/">so many DevOps tools
+being built with Golang</a>, and I can finally say
+<a href="https://github.com/namshi/godo">we joined the party</a> :)</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>lol, godo doesnt have tests #sorry <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>European airlines&hellip; <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Of course, not everyone does Go there, but you get the point <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>And, to be clear, I don&rsquo;t like Go&rsquo;s syntax overall <a href='#fnref:4' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

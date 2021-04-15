@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Ubuntu | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fwupd Is the Best Thing That Ever Happened to Linux]]></title>
+    <link href="https://odino.org/fwupd-is-the-best-thing-that-ever-happened-to-linux/"/>
+    <updated>2021-04-15T10:41:00+00:00</updated>
+    <id>https://odino.org/fwupd-is-the-best-thing-that-ever-happened-to-linux</id>
+    <content type="html"><![CDATA[<p>Honestly, I have no words:</p>
+
+<p>```console
+$ fwupd.fwupdmgr refresh   <br/>
+WARNING: This package has not been validated, it may not work properly.
+Updating lvfs
+Downloading…             [<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>]
+Downloading…             [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Successfully downloaded new metadata: 1 local device supported</p>
+
+<p>$ fwupd.fwupdmgr get-updates        <br/>
+WARNING: This package has not been validated, it may not work properly.
+Devices with no available firmware updates:
+ • Integrated Webcam HD
+ • KBG40ZPZ1T02 NVMe KIOXIA 1024GB
+ • UEFI Device Firmware
+ • UEFI Device Firmware
+ • UEFI dbx
+XPS 13 9310 2-in-1
+│
+└─System Firmware:
+  │   Device ID:          [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │   Current version:    1.1.1
+  │   Minimum Version:    1.1.1
+  │   Vendor:             Dell Inc. (DMI:Dell Inc.)
+  │   GUIDs:              [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │                       [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │                       [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │   Device Flags:       • Internal device
+  │                       • Updatable
+  │                       • System requires external power source
+  │                       • Supported on remote server
+  │                       • Needs a reboot after installation
+  │                       • Cryptographic hash verification is available
+  │                       • Device is usable for the duration of the update
+  │
+  └─XPS 13 9310 2-in-1 System Update:</p>
+
+<pre><code>    New version:      2.2.1
+    Remote ID:        lvfs
+    Summary:          Firmware for the Dell XPS 13 9310 2-in-1
+    License:          Proprietary
+    Size:             26.7 MB
+    Created:          2021-03-25
+    Urgency:          Critical
+    Vendor:           Dell Inc.
+    Flags:            is-upgrade
+    Description:      
+    This stable release fixes the following issues:
+
+    • Fixed the issue where there is no audio output from the external monitor when you close the lid after restarting the system.
+
+    Some new functionality has also been added:
+
+    • Updated the Intel Management Engine to enhance the Thunderbolt connectivity.
+    • Updated the Embedded Controller Engine firmware to enhance the battery life.
+    • Added secondary function key that is Fn+Left as Home and Fn+Right as End.
+</code></pre>
+
+<p>$ fwupd.fwupdmgr update       <br/>
+WARNING: This package has not been validated, it may not work properly.
+Devices with no available firmware updates:
+ • Integrated Webcam HD
+ • KBG40ZPZ1T02 NVMe KIOXIA 1024GB
+ • UEFI Device Firmware
+ • UEFI Device Firmware
+ • UEFI dbx
+Upgrade available for System Firmware from 1.1.1 to 2.2.1
+XPS 13 9310 2-in-1 must remain plugged into a power source for the duration of the update to avoid damage. Continue with update? [Y|n]:
+Downloading…             [<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>] Less than one minute remaining…
+Decompressing…           [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Authenticating…          [<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>]
+Authenticating…          [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Updating System Firmware…[<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>]
+Scheduling…              [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Successfully installed firmware</p>
+
+<p>An update requires a reboot to complete. Restart now? [y|N]:
+```</p>
+
+<p><img class="center" src="/images/fwupd.png"></p>
+
+<p><img class="center" src="/images/tearjoy.gif"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Drop OpenJDK and Upgrade Java to the Oracle Packages]]></title>
+    <link href="https://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages/"/>
+    <updated>2013-11-10T08:59:00+00:00</updated>
+    <id>https://odino.org/drop-openjdk-and-upgrade-java-to-the-oracle-packages</id>
+    <content type="html"><![CDATA[<p>A few weeks back I started noticing some performance
+issues on my <a href="http://www.jetbrains.com/phpstorm/">IDE</a> and decided to investigate a bit more
+on it: turns out that they recommended to 1) upgrade to
+the latest JDK (7) and stop using <a href="http://openjdk.java.net/">OpenJDK</a>, as it has
+some performance gotchas.</p>
+
+<!-- more -->
+
+
+<p><img class="left" src="/images/java.png"></p>
+
+<p>Turns out to be a no-brainer thanks to the <a href="https://github.com/flexiondotorg/oab-java6">apt repository manager provided by flexiondotorg</a>:</p>
+
+<p><code>
+cd ~/
+wget https://github.com/flexiondotorg/oab-java6/raw/0.3.0/oab-java.sh -O oab-java.sh
+chmod +x oab-java.sh
+sudo ./oab-java.sh
+</code></p>
+
+<p>After running it you just need to re-install all the packages:</p>
+
+<p><code>
+sudo apt-get install oracle-java7-jdk oracle-java7-jre oracle-java7-plugin
+</code></p>
+
+<p>and tell ubuntu that the JDK version and location has changed:</p>
+
+<p><code>
+sudo update-alternatives --config java
+</code></p>
+
+<p>A quick check with <code>java -version</code> and then enjoy it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WiFi Not Connecting or Being Wonky on a Dell XPS in Ubuntu 13.04]]></title>
+    <link href="https://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04/"/>
+    <updated>2013-08-18T23:51:00+00:00</updated>
+    <id>https://odino.org/wifi-not-connecting-or-being-wonky-on-a-dell-xps-in-ubuntu-13-dot-04</id>
+    <content type="html"><![CDATA[<p>Today, even though I come from a weekend
+of barely sleeping, I decided, after an entire
+day unable to connect to the WiFi of the office,
+to try to fix this issue that seems to be affecting
+the Dell XPS harder than other laptops.</p>
+
+<!-- more -->
+
+
+<p>After googling for a while and realizing that
+even at home I got no luck with my wireless,
+I decided to go on with my own usual solution,
+which means <strong>downgrading the kernel or grub</strong>.</p>
+
+<p>You can get a list of the <em>installables</em> from
+any terminal:</p>
+
+<p><code>
+ dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+</code></p>
+
+<p>And since I&rsquo;m currently using <code>3.8.0-27-generic</code>
+I decided to give a slightly previous one a try;
+let&rsquo;s edit grub:</p>
+
+<p><code>
+sudo /etc/kernel/postrm.d/zz-update-grub 3.8.0-19-generic /boot/vmlinuz-3.8.0-19-generic
+</code></p>
+
+<p>This solved the issue, at least for me ;&ndash;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Desktop Notifications for PHPUnit Tests on Ubuntu]]></title>
+    <link href="https://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu/"/>
+    <updated>2013-06-21T03:48:00+00:00</updated>
+    <id>https://odino.org/desktop-notifications-for-phpunit-tests-on-ubuntu</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/phpunit-notification-ko.png"></p>
+
+<p>As everyone knows, automated tests are great
+since they let you test a system without the need
+of proactively checking anything: you launch your suite
+and you get a feedback; moreover, systems like Jenkins or Travis-CI allow you
+to even forget about checking the status of
+a build since they can do all of this work for you:
+the problem, instead, happens when you need
+to run the tests locally, as you always need to
+check the shell to know whether the tests passed or not.</p>
+
+<p>A solution would be to launch the tests and mind
+your own business, instead of having to check the CLI
+output, waiting for a notification that tells
+use about the tests' result.</p>
+
+<!-- more -->
+
+
+<h2>Notifications to the rescue</h2>
+
+<p>A very simple program, written for Linux, can help
+you with this task: it&rsquo;s <code>notify-send</code>.</p>
+
+<p>Given that you have PHPUnit installed via composer
+(so the binary is accessible at <code>./vendor/bin/phpunit</code>)
+you can simply use a small shell function that can
+sends notifications about the tests' results, that I
+put on <a href="https://github.com/odino/phpunit-notifications">Github</a>.</p>
+
+<h2>Installation</h2>
+
+<p>Clone the repository and add the shell function to your
+shell profile<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>:</p>
+
+<p>```
+cd wherever</p>
+
+<p>git clone git@github.com:odino/phpunit-notifications.git</p>
+
+<p>chmod +x phpunit-notifications/phpunit-notifications.sh</p>
+
+<p>echo &lsquo;source wherever/phpunit-notifications/phpunit-notifications.sh&rsquo; >> ~/.zshrc
+```</p>
+
+<h2>Usage</h2>
+
+<p>At this point you can open a new shell and run your tests with
+the <code>phpunit</code> commmand:</p>
+
+<p>```
+cd ~/projects/my-project</p>
+
+<p>phpunit</p>
+
+<p>// or</p>
+
+<p>phpunit -c config</p>
+
+<p>// or</p>
+
+<p>phpunit tests/My/Example/ClassTest.php
+```</p>
+
+<p><img class="left" src="/images/phpunit-notification-ok.png"></p>
+
+<p>and see that as soon as the tests are over you will
+see one of those usual notifications on the top right
+of your screen, hopefully telling you that the automated
+tests suite is greener than ever.</p>
+
+<p>The <code>notify-send</code> utility is probably not available on
+Macs, but I guess you can just replace it with <code>growlnotify</code>.</p>
+
+<p>If you are interested into digging deeper into the topic,
+I would suggest you to read a very nice article from
+Giulio Di Donato which explains how to <a href="http://welcometothebundle.com/automate-test-and-code-inspection-in-php-with-guard-and-symfony2/">run PHPUnit tests for Symfony2 as soon as any file in your filesystem changes, and get the same type of notifications</a>:
+even though I personally think this approach is a little
+bit too extreme<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>, it is anyhow interesting as
+it pushes automation and time-management to their best limits.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Or, for example, to empty the tables of the right database after each test (there are different databases for each website) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>I am personally using ZSH: https://github.com/robbyrussell/oh-my-zsh <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>If you modify 5 files and your test suite is 30secs long, woul will already have to wait 2 and a half minutes <a href='#fnref:3' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

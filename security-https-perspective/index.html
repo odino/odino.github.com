@@ -1,0 +1,560 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Deep dive into the HTTP protocol, from a security perspective: understand HTTPS and HTTP verbs." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Security: HTTP's perspective</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/security-https-perspective/" />
+		<meta property="og:title" content="Security: HTTP's perspective" />
+		<meta property="og:description" content="Deep dive into the HTTP protocol, from a security perspective: understand HTTPS and HTTP verbs." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/security-https-perspective/">Security: HTTP's perspective</a></h1>
+        <time>22 August 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><ol class="aseries">
+    <p>This post is part of the &#8221;<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>&#8221; series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I&#8217;ve written.</p>
+    <p>Here is a list of all the articles in this series:</p>
+    <li>
+        <a href="/web-security-demistified/">Web security demystified: WASEC</a>
+    </li>
+    <li>
+        <a href="/introduction-to-web-application-security/">Introduction</a>
+    </li>
+    <li>
+        <a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+    </li>
+    <li>
+        <a href="/security-https-perspective/">Security at the HTTP level</a>
+    </li>
+    <li>
+        <a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+    </li>
+    <li>
+        <a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+    </li>
+    <li>
+        <a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+    </li>
+    </br>
+    <p>
+        If you&#8217;ve enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+    </p>
+</ol>
+
+
+<p>HTTP is a thing of beauty: a protocol that has survived longer than 20
+years without changing as much.</p>
+
+<p>As we&rsquo;ve seen in the <a href="/wasec-understanding-the-browser/">previous article</a>, browsers interact with web applications
+through the HTTP protocol, and this is the main reason we&rsquo;re drilling down on the
+subject. If users would enter their credit card details on a website
+and an attacker would be able to intercept the data before it reaches the server,
+we would definitely be in trouble: understanding how HTTP works,
+how we can secure the communication between clients and servers, and what
+security-related features the protocol offers is the first step towards improving
+our security posture.</p>
+
+<!-- more -->
+
+
+<p>When discussing HTTP, though, we should always discern between the semantics and
+technical implementation, as they&rsquo;re two very different aspects of how HTTP works.</p>
+
+<p>The key difference between the two can be explained with a very simple analogy:
+20 years ago people cared about their relatives as much as they do
+now, even though the way they interact has substantially changed. Our parents
+would probably take their car and head over to their sister&rsquo;s in order to catch
+up and spend some family time together. Instead, these days it&rsquo;s more common to
+drop a message on WhatsApp, make a phone call or use a Facebook group, things that
+weren&rsquo;t possible earlier on. This is not to say that people communicate or care
+more or less, but simply that the way they interact changed.</p>
+
+<p>HTTP is no different: the semantics behind the protocol hasn&rsquo;t changed much,
+while the technical implementation of how clients and servers talk to each other
+has been optimized over the years. If you look at an HTTP request from 1996 it
+will look very similar to the ones we saw in the <a href="(/wasec-understanding-the-browser/">previous article</a>, even though
+the way those packets fly through the network is very different.</p>
+
+<h2>Overview</h2>
+
+<p>As we&rsquo;ve seen before, HTTP follows a request/response model, where a client
+connected to the server issues a request, and the server replies back to it.</p>
+
+<p>An HTTP message (either a request or a response) contains multiple parts:</p>
+
+<ul>
+<li>&ldquo;first line&rdquo;</li>
+<li>headers</li>
+<li>body</li>
+</ul>
+
+
+<p>In a request, the first line indicates the verb used by the client, the path of
+the resource it wants as well as the version of the protocol it is going to use:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET /players/lebron-james HTTP/1.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case the client is trying to <code>GET</code> the resource at <code>/players/lebron-james</code>
+through version <code>1.1</code> of the protocol &mdash; nothing hard to understand.</p>
+
+<p>After the first line, HTTP allows us to add metadata to the message through headers,
+which take the form of key-value pairs, separated by a colon:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET /players/lebron-james HTTP/1.1
+</span><span class='line'>Host: nba.com
+</span><span class='line'>Accept: */*
+</span><span class='line'>Coolness: 9000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this request, for example, the client has attached 3 additional headers to the
+request: <code>Host</code>, <code>Accept</code> and <code>Coolness</code>.</p>
+
+<p>Wait, <code>Coolness</code>?!?!</p>
+
+<p>Headers do not have to use specific, reserved names, but it&rsquo;s generally
+recommended to rely on the ones standardized by the HTTP specification:
+the more you deviate from the standards, the less the other party in the exchange
+will understand you.</p>
+
+<p><code>Cache-Control</code> is, for example, a header used to define whether (and how) a response
+is cacheable: most proxies and reverse proxies understand it as they follow
+the HTTP specification to the letter. If you were to rename your <code>Cache-Control</code>
+header to <code>Awesome-Cache-Control</code>, proxies would have no idea on how to cache the response
+anymore, as they&rsquo;re not built to follow the specification you just came up with.</p>
+
+<p>Sometimes, though, might make sense to include a &ldquo;custom&rdquo; header into the message,
+as you might want to add metadata that is not really part of the HTTP spec: a server
+could decide to include technical information in its response, so that the client
+can, at the same time, execute requests and get important information regarding
+the status of the server that&rsquo;s replying back:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...
+</span><span class='line'>X-Cpu-Usage: 40%
+</span><span class='line'>X-Memory-Available: 1%
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When using custom headers, it is always preferred to prefix them with a key so
+that they would not conflict with other headers that might become standard in the
+future: historically, this has worked well until everyone started to use &ldquo;non-standard&rdquo;
+<code>X</code> prefixes which, in turn, became the norm. The <code>X-Forwarded-For</code> and <code>X-Forwarded-Proto</code>
+headers are examples of custom headers that are <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers#Proxies">widely used and understood by
+load balancers and proxies</a>, even though <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">they weren&rsquo;t part of the HTTP standard</a>.</p>
+
+<p>If you need to add your own custom header, nowadays it&rsquo;s generally better to use
+a vendored prefix, such as <code>Acme-Custom-Header</code> or <code>A-Custom-Header</code>.</p>
+
+<p>After the headers, a request might contain a body, which is separated from the
+headers by a blank line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POST /players/lebron-james/comments HTTP/1.1
+</span><span class='line'>Host: nba.com
+</span><span class='line'>Accept: */*
+</span><span class='line'>Coolness: 9000
+</span><span class='line'>
+</span><span class='line'>Best Player Ever</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our request is complete: first line (location and protocol information),
+headers and body. Note that the body is completely optional and, in most
+cases, it&rsquo;s only used when we want to send data to the server &mdash; that is why the
+example above uses the verb <code>POST</code>.</p>
+
+<p>A response is not very different:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Content-Type: application/json
+</span><span class='line'>Cache-Control: private, max-age=3600
+</span><span class='line'>
+</span><span class='line'>{"name": "Lebron James", "birthplace": "Akron, Ohio", ...}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first information the response advertises is the version of the protocol
+it uses, together with the status of this response; headers follow suit
+and, if required, a line break followed by the body.</p>
+
+<p>As mentioned, the protocol has undergone numerous revisions and has added features
+over time (new headers, status codes, etc), but the underlying structure hasn&rsquo;t changed
+much (first line, headers and body): what really changed is how client and servers
+are exchanging those messages &mdash; let&rsquo;s take a closer look at that.</p>
+
+<h2>HTTP vs HTTPS vs H2</h2>
+
+<p>HTTP has seen 2 considerable semantic changes: <code>HTTP/1.0</code> and <code>HTTP/1.1</code>.</p>
+
+<p>&ldquo;Where are HTTPS and <a href="https://httpwg.org/specs/rfc7540.html">HTTP2</a>?&rdquo;,
+you ask.</p>
+
+<p>HTTPS and HTTP2 (abbr. H2) are more of technical changes, as they introduced new ways
+to deliver messages over the internet, without heavily affecting the semantics
+of the protocol.
+HTTPS is a &ldquo;secure&rdquo; extension to <a href="HTTP:">HTTP:</a> it involves establishing a common secret
+between a client and a server, making sure we&rsquo;re communicating with the right party
+and encrypting messages that are exchanged with the common secret (more on this later).
+While HTTPS was aimed at improving the security of the HTTP protocol, H2 was geared
+towards bringing light-speed to it: H2 uses binary rather than
+plaintext messages, supports multiplexing, uses the HPACK algorithm to compress
+headers&hellip;   &hellip;long story short, H2 was a performance boost to HTTP/1.1.</p>
+
+<p>Websites owners were reluctant to switch to HTTPS since it involved additional round-trips
+between client and server (as mentioned, a common secret needs to be established between the 2 parties), thus slowing the user experience down:
+with H2, which is encrypted by default, there are no more excuses, as features such as multiplexing
+and server push make it <a href="https://www.troyhunt.com/i-wanna-go-fast-https-massive-speed-advantage/">perform better than plain HTTP/1.1</a>.</p>
+
+<h2>HTTPS</h2>
+
+<p>HTTPS (<em>HTTP Secure</em>) aims to let clients and servers talk securely through
+TLS (Transport Layer Security), the successor to SSL (Secure Socket Layer).</p>
+
+<p>The problem that TLS targets is fairly simple, and can be illustrated with one
+simple metaphor: your better half calls you in the middle of the day, while you&rsquo;re
+in a meeting, and asks you to tell them the password of your online banking account,
+as they need to execute a bank transfer to ensure your son&rsquo;s schooling fees are
+paid on time. It is critical that you communicate it <em>right now</em>, else you face the
+prospect of your kid being turned away from school the following morning.</p>
+
+<p>You are now faced with 2 challenges:</p>
+
+<ul>
+<li><strong>authentication</strong>: ensuring you&rsquo;re really talking to your better half, as it could
+just be someone pretending to be them</li>
+<li><strong>encryption</strong>: communicating the password without your coworkers being able to understand it
+and note it down</li>
+</ul>
+
+
+<p>What do you do? This is exactly the problem that HTTPS tries to solve.</p>
+
+<p>In order to verify who you&rsquo;re talking to, HTTPS uses Public Key Certificates,
+which are nothing but certificates stating the identity behind a particular server:
+when you connect, via HTTPS, to an IP address, the server behind that address will
+present you its certificate for you to verify their identity. Going back to our
+analogy, this could simply be you asking your better half to spell their social
+security number. Once you verify the number is correct, you gain an additional
+level of trust.</p>
+
+<p>This, though, does not prevent &ldquo;attackers&rdquo; from learning the victim&rsquo;s social security number,
+stealing your soulmate&rsquo;s smartphone and calling you.
+How do we verify the identity of the caller?</p>
+
+<p>Rather than directly asking your better half
+to spell your social security number, you make a phone call your mom instead (who happens to
+live right next door) and ask her to go to your apartment and make sure your better
+half is spelling their social security number. This adds an additional level of trust,
+as you do not consider your mom a threat, and rely on her to verify the identity
+of the caller.</p>
+
+<p>In HTTPS terms your mom&rsquo;s called a CA, short for Certificate Authority:
+a CA&rsquo;s job is to verify the identity
+behind a particular server, and issue a certificate with its own digital signature:
+this means that, when I connect to a particular domain, I will not be presented
+a certificate generated by the domain&rsquo;s owner (called <a href="https://en.wikipedia.org/wiki/Self-signed_certificate">self-signed certificate</a>),
+but rather by the CA.</p>
+
+<p>An authority&rsquo;s job is to make sure they verify the identity behind a domain and
+issue a certificate accordingly: when you &ldquo;order&rdquo; a certificate (commonly known as
+<em>SSL certificate</em>, even though nowadays TLS is used instead &mdash; names really stick around!), the authority
+might give you a phone call or ask you to change a DNS setting in order to verify
+you&rsquo;re in control of the domain in question. Once the verification process is
+completed, it will issue the certificate that you can then install on your webservers.</p>
+
+<p>Clients like browsers will then connect to your servers and be presented with this
+certificate, so that they can verify it looks genuine: browsers have some sort
+of &ldquo;relationship&rdquo; with CAs, in the sense that they keep track of a list of trusted
+CAs in order to verify that the certificate is really trustworthy. If a certificate
+is not signed by a trusted authority, the browser will display a big, informative
+warning to the users:</p>
+
+<p><img class="center" src="/images/wasec/symantec.png"></p>
+
+<p>We&rsquo;re halfway through our road towards securing the communication between you and
+your better half: now that we&rsquo;ve solved authentication (verifying the identity of
+the caller) we need to make sure we can communicate safely, without others
+eavesdropping in the process. As I mentioned, you&rsquo;re right in the middle of a
+meeting and need to spell your online banking password. You need to find a way
+to encrypt your communication, so that only you and your soulmate will be able to
+understand your conversation.</p>
+
+<p>You can do this by establishing a shared secret between the two of you, and encrypt
+messages through that secret: you could, for example, decide to use a variation
+of <a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a> based on the date of your wedding.</p>
+
+<p><img class="center" src="/images/wasec/cesarcypher.png"></p>
+
+<p>This would work well if both parties have an established relationship, like yourself
+and your soulmate, as they can create a secret based on a shared memory no one else
+has knowledge of. Browsers and servers, though, cannot use the same kind of mechanism
+as they have no prior knowledge of each other.</p>
+
+<p>Variations of the <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">Diffie-Hellman key exchange protocol</a> are used instead, which ensure
+parties without prior knowledge establish a shared secret without anyone else being able
+to &ldquo;sniff&rdquo; it: this involves <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#Cryptographic_explanation">using a bit of math</a>, an exercise left to the reader</p>
+
+<p><img class="center" src="/images/wasec/diffie-hellman.png"></p>
+
+<p>Once the secret is established, a client and a server can communicate without having
+to fear that someone might intercept their messages: even if attackers do so, they will
+not have the common secret that&rsquo;s necessary to decrypt the messages.</p>
+
+<p>For more information on HTTPS and Diffie-Hellman, I would recommend reading &ldquo;<a href="https://blog.hartleybrody.com/https-certificates/">How HTTPS secures connections</a>&rdquo;
+by Hartley Brody and &ldquo;<a href="https://robertheaton.com/2014/03/27/how-does-https-actually-work/">How does HTTPS actually work?</a>&rdquo; by Robert Heaton. In addition, &ldquo;<a href="https://en.wikipedia.org/wiki/9_Algorithms_That_Changed_the_Future">Nine Algorithms That Changed The Future</a>&rdquo; has an amazing chapter
+that explains Public-key encryption, and I warmly recommend it to Computer Science
+geeks interested in ingenious algorithms.</p>
+
+<h2>HTTPS everywhere</h2>
+
+<p>Still debating whether you should support HTTPS on your website? I don&rsquo;t have good
+news for you: browsers have started pushing users away from websites not supporting
+HTTPS in order to &ldquo;force&rdquo; web developers towards providing a fully encrypted browsing
+experience.</p>
+
+<p>Behind the motto &ldquo;<em><a href="https://www.eff.org/https-everywhere">HTTPS everywhere</a></em>&rdquo;,
+browsers started to take a stand against unencrypted connections &mdash; Google was
+the first browser vendor who gave web developers a deadline
+by announcing that starting with Chrome 68 (July 2018) it would mark
+HTTP websites as &ldquo;not secure&rdquo;:</p>
+
+<p><img class="center" src="/images/wasec/not-secure.png"></p>
+
+<p>Even more worrying for websites not taking advantage of HTTPS is the fact that,
+as soon as the user inputs anything on the webpage, the &ldquo;Not secure&rdquo; label turns
+red &mdash; a move that should encourage users to think twice before exchanging data
+with websites that don&rsquo;t support HTTPS.</p>
+
+<p><img class="center" src="/images/wasec/not-secure-red.png"></p>
+
+<p>Compare this to how a website running on HTTPS and equipped with a valid certificate
+looks like:</p>
+
+<p><img class="center" src="/images/wasec/secure.png"></p>
+
+<p>In theory, a website does not have to be secure; in practice, this scares users
+away &mdash; and rightfully so: back in the day, when H2 was not a reality, it could have made sense to stick to
+unencrypted, plain HTTP traffic. Nowadays there&rsquo;s almost no reason to do so:
+join the <em>HTTPS everywhere</em> movement and help us <a href="https://www.troyhunt.com/heres-why-your-static-website-needs-https/">make the web a safer place for
+surfers</a>.</p>
+
+<h2>GET vs POST</h2>
+
+<p>As we&rsquo;ve seen earlier, an HTTP request starts with a peculiar first line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET / HTTP/1.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First and foremost, a client tells the server what verbs it is using to perform the
+request: common HTTP verbs include <code>GET</code>, <code>POST</code>, <code>PUT</code> and <code>DELETE</code>, but the
+list could go on with less common (but still standard) verbs such as <code>TRACE</code>, <code>OPTIONS</code>,
+or <code>HEAD</code>.</p>
+
+<p>In theory, no method is safer than others; in practice, it&rsquo;s not
+that simple.</p>
+
+<p><code>GET</code> requests usually don&rsquo;t carry a body, so parameters are included in
+the URL (ie. <code>www.example.com/articles?article_id=1</code>) whereas <code>POST</code> requests are generally
+used to send (&ldquo;post&rdquo;) data which is included in the body. Another difference is
+in the side effects that these verbs carry with them: <code>GET</code> is an idempotent verb,
+meaning no matter how many requests you will send, you will not change the state
+of the webserver. <code>POST</code>, instead, is not idempotent: for every request you send
+you might be changing the state of the server (think of, for example, POSTing a
+new payment &mdash; now you probably understand why sites ask you not to refresh
+the page when executing a transaction).</p>
+
+<p>To illustrate an important difference between these methods we need to have a look
+at webservers&#8217; logs, which you might already be familiar with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>192.168.99.1 - [192.168.99.1] - - [29/Jul/2018:00:39:47 +0000] "GET /?token=1234 HTTP/1.1" 200 525 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" 404 0.002 [example-local] 172.17.0.8:9090 525 0.002 200
+</span><span class='line'>192.168.99.1 - [192.168.99.1] - - [29/Jul/2018:00:40:47 +0000] "GET / HTTP/1.1" 200 525 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" 393 0.004 [example-local] 172.17.0.8:9090 525 0.004 200
+</span><span class='line'>192.168.99.1 - [192.168.99.1] - - [29/Jul/2018:00:41:34 +0000] "PUT /users HTTP/1.1" 201 23 "http://example.local/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" 4878 0.016 [example-local] 172.17.0.8:9090 23 0.016 201</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, webservers log the request path: this means that, if you include sensitive
+data in your URL, it will be leaked by the webserver and saved somewhere in your
+logs &mdash; your secrets are going to be somewhere in plaintext, something we need to absolutely
+avoid. <a href="https://threatpost.com/leaky-backup-spills-157-gb-of-automaker-secrets/134293/">Imagine an attacker being able to gain access to one of your old log files</a>, which
+could contain credit card information, access tokens for your private services and so on:
+that would be a total disaster.</p>
+
+<p>Webservers do not log HTTP headers or bodies, as
+the data to be saved would be too large &mdash; this is why sending information through
+the request body, rather than the URL, is generally safer. From here we can derive
+that <code>POST</code> (and similar, non-idempotent methods) is safer than <code>GET</code>, even though
+it&rsquo;s more a matter of how data is sent when using a particular verb rather
+than a specific verb being intrinsically safer than others: if you were
+to include sensitive information in the body of a <code>GET</code> request, then you&rsquo;d face
+no more problems than when using a <code>POST</code>, even though the approach would be considered
+unusual.</p>
+
+<h2>In HTTP headers we trust</h2>
+
+<p>In this article we looked at HTTP, its evolution and how its secure extension
+integrates authentication and encryption to let clients and servers communicate through
+a safe(r) channel: this is not all HTTP has to offer in terms of security, as we
+will see in the next article. HTTP security headers offer a way to improve our
+application&rsquo;s security posture, and the next post is dedicated to understanding
+how to take advantage of them.</p>
+
+<div class="series_nav">
+  
+  <div class="prev">
+    <a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+  </div>
+  
+  
+  <div class="next">
+    <a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your web application</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/security-https-perspective/"
+		},
+		"headline": "Security: HTTP's perspective",
+		"description": "Deep dive into the HTTP protocol, from a security perspective: understand HTTPS and HTTP verbs.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-08-22 15:14:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

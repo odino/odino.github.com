@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Containers | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/containers/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Local Development With Rkt Containers]]></title>
+    <link href="https://odino.org/local-development-with-rkt-containers/"/>
+    <updated>2017-05-15T23:21:00+00:00</updated>
+    <id>https://odino.org/local-development-with-rkt-containers</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/rkt.png"></p>
+
+<p>A few weeks ago I stumbled upon an interesting <a href="https://news.ycombinator.com/item?id=14176191">hackernews discussion</a>
+about setting up development environments: from what I could tell it seemed like
+most people have been ditching Vagrant and VMs in order to move towards
+docker containers, through <a href="https://docs.docker.com/compose/">docker-compose</a>
+or <a href="https://github.com/kubernetes/minikube">minikube</a>.</p>
+
+<p>Compose, to be fair, provides a painless user experience and allows you to extend
+your Dockerfiles to be able to run containers with specific &ldquo;dev&rdquo; settings, like
+local volumes and different commands (think <code>node index.js</code> vs <code>nodemon index.js</code>).</p>
+
+<p>What if we could have a similar experience with <a href="https://coreos.com/rkt/docs/latest/">rkt</a>?</p>
+
+<!-- more -->
+
+
+<p>All in all, what you need to run docker containers locally are:</p>
+
+<ul>
+<li>a bunch of binaries (<code>docker</code> / <code>docker-compose</code>)</li>
+<li>a file to build your production image (<code>Dockerfile</code>)</li>
+<li>a file to extend that image with some dev settings (<code>docker-compose.yml</code>)</li>
+</ul>
+
+
+<p>Since I wanted to play with rkt and I couldn&rsquo;t find an easy way to maintain the
+same workflow I had using docker, I decided to build a small tool called <a href="https://github.com/odino/rkd">rkd</a>
+(<em>rkt dev</em>) that can help you achieve the same exact productivity you&rsquo;d have
+using docker and docker-compose. This is an early-stage experiment<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> and, as such,
+things might break here &amp; there.</p>
+
+<p>Let me recap it: like we&rsquo;d do with docker, we&rsquo;ll first need to <strong>download a bunch
+of binaries</strong>, then <strong>create a file that describes our production container</strong> and, last
+but not least, <strong>define our dev settings</strong> in another file.</p>
+
+<p>If the whole thing takes longer than 5 minutes we fail, so let&rsquo;s get to it!</p>
+
+<h2>Step 0: our sample NodeJS app</h2>
+
+<p>Create a brand new folder in your fs (<code>path/to/my/app</code>), a subfolder <code>src</code> and
+place an <code>index.js</code> there:</p>
+
+<p>``` js path/to/my/app/src/index.js
+require(&lsquo;http&rsquo;).createServer(function (req, res) {
+  res.end(&lsquo;Hello world!&rsquo;)
+  console.log(&lsquo;Request received&hellip;&rsquo;)
+}).listen(8080)</p>
+
+<p>console.log(&lsquo;server started&hellip;&rsquo;)
+```</p>
+
+<p>No rocket science.</p>
+
+<h2>Step 1: binaries</h2>
+
+<p>We will need to download binaries for our platform of 3 tools:</p>
+
+<ul>
+<li><a href="https://github.com/rkt/rkt/releases">rkt</a>, the container engine</li>
+<li><a href="https://github.com/containers/build/releases">acbuild</a>, the tool that&rsquo;s used to build <a href="https://coreos.com/rkt/docs/latest/app-container.html#aci">ACIs</a>, which are containers images that rkt can run</li>
+<li><a href="https://github.com/odino/rkd/releases">rkd</a>, a tool I&rsquo;ve built to be able to automate building &amp; running rkt containers</li>
+</ul>
+
+
+<p>Once you&rsquo;ve grabbed the binaries you can test them by running <code>rkt</code>, <code>acbuild</code> &amp;
+<code>rkd</code>.</p>
+
+<h2>Step 2: writing a &ldquo;Dockerfile&rdquo;</h2>
+
+<p>In order to build ACIs we would need to run a bunch of shell commands such as:</p>
+
+<p><code>bash
+acbuild begin
+acbuild set-name example.com/hello
+acbuild dep add quay.io/coreos/alpine-sh
+run -- apk add --update nodejs
+...
+...
+...
+acbuild end
+</code></p>
+
+<p>but that&rsquo;s a hella lot of commands and being repetitive is no fun at all &mdash; we
+can automate this task with <code>rkd</code>.</p>
+
+<p>Let&rsquo;s create a <code>prod.rkd</code> file:</p>
+
+<p><code>bash path/to/my/app/prod.rkd
+set-name example.com/node-hello
+dep add quay.io/coreos/alpine-sh
+run -- apk add --update nodejs
+copy src /src
+set-working-directory /src
+set-exec -- node index.js
+port add www tcp 8080
+</code></p>
+
+<p>Here we&rsquo;re describing how our &ldquo;production&rdquo; container should look like, similarly
+to what we&rsquo;d do with a Dockerfile:</p>
+
+<p><code>bash Dockerfile
+FROM quay.io/coreos/alpine-sh
+RUN apk add --update nodejs
+COPY src /src
+WORKDIR /src
+CMD node index.js
+EXPOSE 8080
+</code></p>
+
+<p>As you see, the syntax is extremely similar, you just need to familiarize with
+<code>acbuild</code>&rsquo;s commands.</p>
+
+<p>After writing our <code>prod.rkd</code> we are ready to extend it with our own development
+settings.</p>
+
+<h2>Step 3: writing a &ldquo;docker-compose.yml&rdquo;</h2>
+
+<p>Our <code>docker-compose.yml</code> will instead be named <code>dev.rkd</code>, and we just need a
+couple instruction in it to mount our local code and change the executable that
+is used to run the container:</p>
+
+<p><code>bash path/to/my/app/dev.rkd
+run -- npm install -g nodemon
+mount add . src
+set-exec -- nodemon index.js
+</code></p>
+
+<p>Nothing more, nothing less: we are now ready to rock!</p>
+
+<h2>Let&rsquo;s run our app!</h2>
+
+<p>In order to build the ACIs and run them in &ldquo;dev&rdquo; mode we simply need to type
+<code>rkd up</code>:</p>
+
+<p><code>bash
+$ sudo rkd up
+Building /root/.rkd/prod-5290facf0b502d01ba15b7de9a1b9633.aci
+acbuild begin
+acbuild set-name example.com/node-hello
+acbuild dep add quay.io/coreos/alpine-sh
+acbuild run -- apk add --update nodejs
+Downloading quay.io/coreos/alpine-sh: [========================] 2.65 MB/2.65 MB
+fetch http://dl-4.alpinelinux.org/alpine/v3.2/main/x86_64/APKINDEX.tar.gz
+(1/4) Installing libgcc (4.9.2-r6)
+(2/4) Installing libstdc++ (4.9.2-r6)
+(3/4) Installing libuv (1.5.0-r0)
+(4/4) Installing nodejs (0.12.10-r0)
+Executing busybox-1.23.2-r0.trigger
+OK: 28 MiB in 19 packages
+acbuild copy src /src
+acbuild set-working-directory /src
+acbuild set-exec -- node index.js
+acbuild port add www tcp 8080
+acbuild write /root/.rkd/prod-5290facf0b502d01ba15b7de9a1b9633.aci
+acbuild end
+Building /root/.rkd/dev-a023872855269062eca818f2ea8c0b32.aci
+acbuild begin ./prod.aci
+acbuild run -- npm install -g nodemon
+Downloading quay.io/coreos/alpine-sh: [========================] 2.65 MB/2.65 MB
+npm WARN optional dep failed, continuing fsevents@1.1.1
+/usr/bin/nodemon -&gt; /usr/lib/node_modules/nodemon/bin/nodemon.js
+nodemon@1.11.0 /usr/lib/node_modules/nodemon
+├── ignore-by-default@1.0.1
+├── undefsafe@0.0.3
+├── es6-promise@3.3.1
+├── debug@2.6.6 (ms@0.7.3)
+├── touch@1.0.0 (nopt@1.0.10)
+├── minimatch@3.0.4 (brace-expansion@1.1.7)
+├── ps-tree@1.1.0 (event-stream@3.3.4)
+├── lodash.defaults@3.1.2 (lodash.restparam@3.6.1, lodash.assign@3.2.0)
+├── chokidar@1.7.0 (path-is-absolute@1.0.1, inherits@2.0.3, async-each@1.0.1, glob-parent@2.0.0, is-binary-path@1.0.1, is-glob@2.0.1, readdirp@2.1.0, anymatch@1.3.0)
+└── update-notifier@0.5.0 (is-npm@1.0.0, semver-diff@2.1.0, chalk@1.1.3, string-length@1.0.1, repeating@1.1.3, configstore@1.4.0, latest-version@1.0.1)
+acbuild mount add src src
+acbuild set-exec -- nodemon index.js
+acbuild write /root/.rkd/dev-a023872855269062eca818f2ea8c0b32.aci
+acbuild end
+rkt --insecure-options=image --net=host run --interactive --volume src,kind=host,source=/home/odino/projects/go/src/github.com/odino/rkd/example/src /root/.rkd/dev-a023872855269062eca818f2ea8c0b32.aci
+[nodemon] 1.11.0
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching: *.*
+[nodemon] starting `node index.js`
+server started...
+</code></p>
+
+<p>Then open <a href="http://localhost:8080">localhost:8080</a> on your browser and&hellip;</p>
+
+<p><img class="center" src="/images/rkd-server.png"></p>
+
+<p>Hell yeah.</p>
+
+<h2>Conclusion</h2>
+
+<p>I hope you enjoyed this article and are excited about the progress made by rkt
+in order to provide a viable alternative to docker. I wrote rkd in a few hours
+and it really is just a wrapper around acbuild &amp; rkt, so kudos to those guys.</p>
+
+<p>In my opinion, rkt is still quite behind docker but they&rsquo;re filling the gaps,
+getting closer as the days go by &mdash; it won&rsquo;t be long until we&rsquo;ll be realistically
+able to switch over without &ldquo;feeling&rdquo; the difference.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>I&rsquo;ve been working on rkd during weekends, at conferences and over public WiFis, so you can imagine&hellip; :) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cannot Connect to the Internet From Your Docker Containers?]]></title>
+    <link href="https://odino.org/cannot-connect-to-the-internet-from-your-docker-containers/"/>
+    <updated>2015-02-06T00:54:00+00:00</updated>
+    <id>https://odino.org/cannot-connect-to-the-internet-from-your-docker-containers</id>
+    <content type="html"><![CDATA[<p>Stuck trying to figure out what&rsquo;s up with
+your containers, as they cannot seem to be
+able to access the network?</p>
+
+<!-- more -->
+
+
+<p>Well, that happened to a few of us at
+<a href="http://tech.namshi.com">Namshi</a> in the
+past couple of days.</p>
+
+<p>The good news is that you can clearly verify
+that something is just wrong with Docker by
+simply pinging <code>google.com</code> from your host
+and a simple container:</p>
+
+<p>```
+$ ping google.com
+PING google.com (173.194.124.7) 56(84) bytes of data.
+64 bytes from 173.194.124.7: icmp_req=1 ttl=56 time=11.1 ms
+64 bytes from 173.194.124.7: icmp_req=2 ttl=56 time=13.2 ms
+&hellip;</p>
+
+<p>$ docker run -ti ubuntu ping google.com</p>
+
+<h1>BLACK HOLE</h1>
+
+<p>```</p>
+
+<p>If you happen to get stuck in this kind of
+situation, you might want to look into what
+DNS server Docker is actually using to let
+your containers resolve onto the internet.</p>
+
+<p>In our case, we realized our firewall was
+acting pretty weirdly with Google&rsquo;s public
+DNSes (<code>8.8.8.8</code> and <code>8.8.4.4</code>), which happen
+to be the default ones Docker is gonna use in
+case you don&rsquo;t have anything custom specified
+in your <code>resolv.conf</code> and so on.</p>
+
+<p>The issue, overall, was quite easy to circumvent,
+as we just told docker to use OpenDNS in our
+<code>/etc/default/docker</code>:</p>
+
+<p>```</p>
+
+<h1>Docker Upstart and SysVinit configuration file</h1>
+
+<h1>Use DOCKER_OPTS to modify the daemon startup options.</h1>
+
+<p>DOCKER_OPTS=&ldquo;&mdash;dns 208.67.222.222 &mdash;dns 208.67.220.220&rdquo;
+```</p>
+
+<p>Then, you will only need to restart the Docker
+demon and everything should be fine:</p>
+
+<p>```
+$ sudo service docker restart<br/>
+docker stop/waiting
+docker start/running, process 26999</p>
+
+<p>$ docker run ubuntu ping google.com <br/>
+PING google.com (173.194.124.2) 56(84) bytes of data.
+64 bytes from 173.194.124.2: icmp_seq=1 ttl=55 time=11.4 ms
+64 bytes from 173.194.124.2: icmp_seq=2 ttl=55 time=11.2 ms
+&hellip;
+```</p>
+
+<p>Hope this helps! To be honest we&rsquo;ve googled
+around and found out that there might be <a href="https://github.com/docker/docker/issues/490">some</a>
+<a href="http://stackoverflow.com/questions/23810845/i-cant-get-docker-containers-to-access-the-internet">other</a>,
+<a href="https://github.com/docker/docker/issues/866#issuecomment-19218300">creepier</a>,
+issues that might cause the problem, so I&rsquo;d
+really hope yours is just as silly as the one
+I&rsquo;ve faced.</p>
+]]></content>
+  </entry>
+  
+</feed>

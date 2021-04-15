@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Social Media | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/social-media/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Advertising on Twitter: Give Us Your Personal Data or We're Going to Bomb Your Timeline With NSFW, Sexual Ads]]></title>
+    <link href="https://odino.org/advertising-on-twitter-give-us-your-personal-data-or-were-going-to-bomb-your-timeline-with-nsfw-sexual-ads/"/>
+    <updated>2018-07-07T15:50:00+00:00</updated>
+    <id>https://odino.org/advertising-on-twitter-give-us-your-personal-data-or-were-going-to-bomb-your-timeline-with-nsfw-sexual-ads</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/dark-twitter.png"></p>
+
+<p>A few months back I started writing on <a href="https://medium.freecodecamp.org/@alexnadalin">freeCodeCamp</a>,
+with the spirit of &ldquo;giving back&rdquo; to the community whatever I used to share on
+<a href="https://odino.org">my personal blog</a> as well.</p>
+
+<p>FCC is a very interesting publication, and one of the personalities I got to
+&ldquo;discover&rdquo; was <a href="https://twitter.com/ossia">Quincy Larson</a>; it was by following
+Quincy that I discovered I could opt-out of Twitter&rsquo;s ad tracking, something
+that turned out to be quite of a journey.</p>
+
+<!-- more -->
+
+
+<p>Quincy&rsquo;s <a href="https://twitter.com/ossia/status/1003302742717292544">pinned tweet</a> is a gem:</p>
+
+<p><img class="center" src="/images/quincy-tweet.png"></p>
+
+<p>&ldquo;Amazing&rdquo;, I thought, let me do the same &mdash; I would definitely like to opt out
+from all those personalized ads: not because of their content, but simply because
+I&rsquo;d like advertisers (and Twitter) to connect fewer dots when it comes to my
+interests and habits.</p>
+
+<p><img class="center" src="/images/odino-privacy-twitter.png"></p>
+
+<p>How beautiful was to &ldquo;<em>Control how Twitter personalizes content and collects and shares certain data.</em>&rdquo; &mdash;
+I would never have imagined what kind of Pandora&rsquo;s box I had just opened.</p>
+
+<p>Within a few days from opting-out, I spot a relatively &ldquo;weird&rdquo; tweet on my timeline:</p>
+
+<p><img class="center" src="/images/tweet-nsfw.png"></p>
+
+<p>&ldquo;Ouch&rdquo;, I told myself, &ldquo;this must the result of turning off personalized ad data&rdquo;:
+now Twitter will just serve ads from the richest bidder, and this time it was a NSFW
+one. Without jumping to conclusions, I quickly flagged the ad as not relevant, blocked
+the user and moved on, thinking this isolated episode wouldn&rsquo;t be much of a problem.</p>
+
+<p>Except that, as the weeks went by, my timeline started to look like a Hooters joint:</p>
+
+<p><img class="center" src="/images/tweet-nsfw-2.png"></p>
+
+<p><img class="center" src="/images/tweet-nsfw-3.png"></p>
+
+<p>The ads are practically identical: a burner account
+posting a link with a media and the content of the tweet being a mere &ldquo;click here&rdquo; &mdash;
+how hard would it be for Twitter to prevent this from happening?</p>
+
+<p><img class="right" src="/images/eega-beeva.png"></p>
+
+<p>I&rsquo;d say not so hard, and before you ask me to consider the technical implications
+of such a feature, let me introduce you to <a href="https://en.wikipedia.org/wiki/Mickey_Mouse_universe#Eega_Beeva">Eega Beeva</a>, an interesting character
+from the Mickey Mouse comics. &ldquo;Why?&rdquo;, you ask &mdash; just hold on for a second.</p>
+
+<p>Now, Eega is a funny character &mdash; a human-sort-of-figure from the future who is
+very popular in the <a href="http://disney.wikia.com/wiki/Eega_Beeva">Italian version of the comic</a>:
+I know of him since my dad used to buy me the Mickey Mouse comics every single week,
+so I had a good understanding of the characters in the MM universe back then.</p>
+
+<p>A few days ago, I saw a tweet from the Italian edition of the MM magazine that
+caught my attention, as it was flagged for containing what Twitter thought it might
+have been a sensitive picture:</p>
+
+<p><img class="center" src="/images/tweet-mm.png"></p>
+
+<blockquote><p>The tweet reads &ldquo;A good friend from the future is the co-star of the new
+edition of #MickeyMouseSuperStar&hellip;do you like Eega Beeva? #MickeyMouseMagazine&rdquo;</p></blockquote>
+
+<p>And, right there, I knew that this was all about: Eega Beeva does not wear anything
+in the upper part of his body, so an algorithm deciding whether a tweet might contain
+explicit content might have thought that because of his resemblance to a naked body,
+Eega Beeva must be flagged down&hellip;   &hellip;and this was the &ldquo;<em>may contain sensitive material</em>&rdquo; picture:</p>
+
+<p><img class="center" src="/images/eega-beeva-tweet.png"></p>
+
+<blockquote><p>Note that &ldquo;Eega Beeva&rdquo; is translated to &ldquo;Eta Beta&rdquo; in the Italian edition
+of the magazine</p></blockquote>
+
+<p>Now, Twitter, can you please tell me how the picture on the right may contain
+sensitive material, but you have no problem with the one on the left?</p>
+
+<p><img class="center" src="/images/tweet-wtf.png"></p>
+
+<p>So don&rsquo;t tell me there&rsquo;s nothing Twitter can do to fix this &mdash; it can be done,
+but it might also be that they don&rsquo;t really care about fixing the problem, as it
+would require for them to invest time and money into a part of the ad business
+(being able to serve pertinent ads to users who opted out of ad tracking)
+that&rsquo;s probably not very profitable. Who cares for those hippy, freedom-lover users!</p>
+
+<p>This was a sad realization: that <strong>when we try to protect our privacy Twitter
+thinks we&rsquo;re clickbait material</strong>.</p>
+
+<p>That&rsquo;s a really, really, really sad thing for me to write.</p>
+
+<blockquote><p>No photoshop skill was harmed in the writing of this blog post and editing
+of the images. That&rsquo;s because I have no skills to begin with.</p>
+
+<p>I would also like to take some (serious) time to mention that corrections to the
+way Twitter serves ads are more than welcome: sometimes these kind of glitches
+are not foreseen, and I&rsquo;m sure the engineering team at Twitter would love to get
+rid of such stuff. The question is, would the ad team want the same? ;&ndash;)</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[#OffFacebook: Half a Year Later]]></title>
+    <link href="https://odino.org/number-offfacebook-half-a-year-later/"/>
+    <updated>2018-05-20T16:46:00+00:00</updated>
+    <id>https://odino.org/number-offfacebook-half-a-year-later</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/fb-art.png"></p>
+
+<p>At the end of last year I decided to try completely removing Facebook from my life:
+truth to be told, FB does a great job at letting you disconnect by deactivating
+your account and decide when to come back &mdash; so it was an easy experiment.</p>
+
+<p>In this post I&rsquo;d like to report a few observations 5 months down the line.</p>
+
+<!-- more -->
+
+
+<h2>What, and how</h2>
+
+<p>Long story short, I de-activated my account and kept it as such for a good month.
+In February I then re-activated it and observed how much time I would spend on
+the platform on a daily basis.</p>
+
+<p>I basically wanted to see what would have changed by removing such a sometimes useless,
+sometimes crucial app from my life, and I was fairly pleased with my findings.
+Nothing groundbreaking, but it gave me a good idea of what facebook is really
+good for and how I should spend my time on the platform.</p>
+
+<h2>Moving to another social media platform</h2>
+
+<p>As soon as I de-activated my account, I noticed a &ldquo;void&rdquo;: I would leave work and
+tap on the blue icon &mdash; only to see a login screen asking me to re-activate my
+account. I resisted, and turned my attention towards a different social media
+platform: <a href="https://twitter.com/_odino_">twitter</a>.</p>
+
+<p>I generally like twitter more as it provides more &ldquo;useful&rdquo; content: articles,
+random strangers' observations around general topics and more professional
+content overall. Since disconnecting from facebook, I&rsquo;d say 50% of the time I used
+to spend there is now dedicated to twitter, which makes me feel a bit better about
+how I spend my (dead) time.</p>
+
+<h2>Vulpem pilum mutare, non mores</h2>
+
+<p>Since re-activating my account in February I started spending more and more time
+back on FB: for the first couple of weeks I would open it every couple of days or
+so, and for the first month I didn&rsquo;t even open it up from my laptop.</p>
+
+<p>Nowadays, I&rsquo;m back at it on a daily basis: you might think that&rsquo;s a fairly bad outcome,
+but my usage of FB has, quite drastically, changed. Earlier, I used to spend time
+scrolling through my feed searching for the elusive interesting post from an acquaintance
+I haven&rsquo;t seen in 10 years, whereas now I open the app, check my notifications,
+close it &mdash; much less time wasted away.</p>
+
+<h2>Reading, reading, reading, read&hellip;</h2>
+
+<p>Related to the &ldquo;void&rdquo;, I again found myself with a lot of time beside twitter:
+while commuting to work, right after waking up, while brushing my teeth&hellip;</p>
+
+<p>I went back to <a href="https://news.ycombinator.com/">HackerNews</a>: I used to devour HN on a daily basis, while over the past year
+I spent more time on my <a href="/categories/book/">kindle</a> and focused
+less on the daily inspiration HN brings you. This was definitely a plus for me,
+as I have now found the time for both books and tech news.</p>
+
+<h2>Disconnecting from everyone</h2>
+
+<p>One of the negative points was that a few people only get in touch through FB,
+and at that point I cut them out <em>just like that</em>. You now how I noticed it?</p>
+
+<p>Enter my dad:</p>
+
+<p><img class="center" src="/images/dad-fb.png"></p>
+
+<p>Should be easy to translate but, just in case:</p>
+
+<blockquote><p>Hi. Did you close FB?</p></blockquote>
+
+<p>Stunned, I went back and re-activated my account as I &mdash; ehm &mdash; felt quite bad. I&rsquo;m quite
+terrible at keeping in touch with people, and seeing pops asking me whether I was on
+FB or not made me realize he was probably gonna share some interesting NBA highlight
+with me, only to notice I wasn&rsquo;t available&hellip;</p>
+
+<h2>Unlike THAT!</h2>
+
+<p>I also noticed a pattern once back on FB: I was truly annoyed at the amount of
+random posts from pages I had liked in my teens that would pop in my feed.
+I found myself valuing my time far more, and started to &ldquo;unlike&rdquo; those pages like
+there&rsquo;s no tomorrow.</p>
+
+<p>Not sure how to describe it but, since I re-activated my account I started to dislike
+time-wasters much more than the usual. Guess it&rsquo;s not a bad thing after all.</p>
+
+<h2>What next?</h2>
+
+<p>As I mentioned, I don&rsquo;t think FB is (that) evil &mdash; it&rsquo;s just a matter of knowing
+how and when to use it. My relationship with the social network is in a much better place (in my opinion,
+which is probably not aligned with the advertisers') &mdash; sort
+of <em>it&rsquo;s not you, it&rsquo;s me</em> kind of thing.</p>
+
+<p>I would recommend you try to get off the hook for a few days, until you don&rsquo;t even
+bother tapping on the blue icon out of habit. I learned how valuable FB can be when
+keeping in touch with individuals who use it as a primary mean of communication,
+and I&rsquo;m probably spending the least amount of time on FB since I joined the platform
+(fun fact: when I joined I used to write in 3rd person &mdash; I guess it was a thing back then).</p>
+
+<p>Advertisers crying in 3, 2&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

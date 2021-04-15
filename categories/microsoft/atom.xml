@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Microsoft | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/microsoft/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Coding Bureaucracy]]></title>
+    <link href="https://odino.org/coding-bureaucracy/"/>
+    <updated>2012-12-05T12:23:00+00:00</updated>
+    <id>https://odino.org/coding-bureaucracy</id>
+    <content type="html"><![CDATA[<p>An interesting quote from an ex-Microsoft:
+it can take up to <strong>several months</strong>
+before you get an approval over a
+technical issue.</p>
+
+<!-- more -->
+
+
+<p><blockquote><p>In my short time at Microsoft, any project that desired to use an open source library, such as jQuery, would require approval from the organization&rsquo;s legal team. There were of course political strategies to speed up the process, but it could take as long as six months just to gain approval to use the code in a project. The implicit alternative to this draconian dilemma, naturally, is write substitute code for the OSS that perpetually seems out of reach.</p><footer><strong>Matt J. Sorenson <a href="http://www.quora.com/Software-Engineering/How-long-does-it-take-a-large-tech-company-to-push-a-single-line-of-code-to-production">http://www.quora.com/Software-Engineering/How-long-does-it-take-a-large-tech-company-to-push-a-single-line-of-code-to-production</a> How long does it take a large tech company to push a single line of code to production</strong></footer></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

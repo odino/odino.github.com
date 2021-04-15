@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Rant | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/rant/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Netflix, You Have a Problem]]></title>
+    <link href="https://odino.org/netflix-you-have-a-problem/"/>
+    <updated>2015-02-14T20:43:00+00:00</updated>
+    <id>https://odino.org/netflix-you-have-a-problem</id>
+    <content type="html"><![CDATA[<p>This is the story of how Netflix is really
+trying to be funny&hellip;no, super-funny!</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;ve ran a Netflix account for quite some
+time but, after moving from Rome to Dubai
+I stopped using the service as it would mean
+using a VPN and stuff like that which is quite
+against my principle of keeping things simple.</p>
+
+<p>In the past months, while checking the statements
+from my italian bank, I noticed that Netflix
+kept billing me (cool), so I decided to try unsubscribing
+from here, which turned out to be impossible.</p>
+
+<p>Since I forgot my password, I tried recovering it:</p>
+
+<p><img class="center" src="/images/netflix-password-recovery.png"></p>
+
+<p>Ok, no worries &mdash; it might be that I used another email!</p>
+
+<p>A quick look into my inbox revealed that I was
+going to face hard times:</p>
+
+<p><img class="center" src="/images/netflix-joining.png"></p>
+
+<p>I used my regular email but still, Netflix
+was refusing to let me in from their global
+website. Could it be that their customer DB is
+a bit messed up? Maybe if I go for the social
+login I&rsquo;ll be able to get into my account:</p>
+
+<p><img class="center" src="/images/facebook-netflix.png"></p>
+
+<p>Should have never tried this one, ya? It amazes me
+how they cannot even provide complete error
+messages.</p>
+
+<p>So here I am, unable to unsubscribe from a service
+I am not using anymore; the only reasonable thing
+was to try reaching out to these guys and ask them
+what to do: I did that <a href="https://twitter.com/_odino_/status/468734390537687040">once</a>,
+then a <a href="https://twitter.com/_odino_/status/465149059691339776">second time</a> and,
+just to be sure, I tried it <a href="https://twitter.com/_odino_/status/528982644688564225">a couple months ago</a> as well.</p>
+
+<p>All attempts went unheard: it was clear by now that
+<strong>Netflix didn&rsquo;t really seem to care that much</strong>.</p>
+
+<p>Luckily, the credit card I used to sign up expired
+this month and Netflix could not charge me anymore.</p>
+
+<p>That meant receiving one of the most sarcastic emails
+ever:</p>
+
+<p><img class="center" src="/images/netflix.png"></p>
+
+<p>No, Netflix, <strong>you</strong> have a problem.</p>
+]]></content>
+  </entry>
+  
+</feed>

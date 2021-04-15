@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Lodash | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/lodash/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Simplest Template Engine for NodeJS]]></title>
+    <link href="https://odino.org/the-simplest-template-engine-for-nodejs/"/>
+    <updated>2018-03-23T17:59:00+00:00</updated>
+    <id>https://odino.org/the-simplest-template-engine-for-nodejs</id>
+    <content type="html"><![CDATA[<p>This is the story of how I decided to dump <a href="https://mozilla.github.io/nunjucks/">nunjucks</a> and use the best
+templating engine hack in the world.</p>
+
+<p>&hellip;with one line of code.</p>
+
+<!-- more -->
+
+
+<h2>Background</h2>
+
+<p>Node does not seem to have a <a href="https://github.com/tj/consolidate.js/#supported-template-engines">clear-cut winner</a> when it comes to template engines &mdash;
+for the longest time, I banked on nunjucks but I&rsquo;ve been wondering if there&rsquo;s
+something <em>simpler</em> to take care of templating in small apps.
+I&rsquo;m not really bashing nunjucks here, I&rsquo;m simply wondering if anything else can
+get the job done without too much fuss.</p>
+
+<h2>Mounting the hack</h2>
+
+<p>Armed with an <a href="https://expressjs.com/">express</a>, a couple
+routes, 2 database queries and more documentation in the README than LoCs, I
+started writing the following:</p>
+
+<p>``` js
+app.get(&ldquo;/my-view&rdquo;, async (req, res) => {
+  res.send(render(&ldquo;my-view&rdquo;, {data: await db.getData()}))
+})</p>
+
+<p>function render(view, ctx = {}) {
+  return fs.readFileSync(<code>./views/${view}.html</code>) // WTF do I do with ctx?
+}
+```</p>
+
+<p>That&rsquo;s amazing, I just called a file reader a &ldquo;template engine&rdquo;!</p>
+
+<p>Knowing that rendering a file from the filesystem doesn&rsquo;t cut it (we need to pass and interpret variables etc etc), I then looked
+to find the most straighforward template engine on the planet and realized <a href="https://lodash.com/docs/4.17.5">lodash</a>
+has a built-in <a href="https://lodash.com/docs/4.17.5#template">_.template</a> method:</p>
+
+<p><code>js
+var compiled = _.template('hello ${ user }!');
+compiled({ 'user': 'tommy' });
+// =&gt; 'hello tommy!'
+</code></p>
+
+<p>Just what I needed &mdash; the syntax is not the jinja one but it mirrors
+template strings, so I can&rsquo;t complain too much.</p>
+
+<p>Let&rsquo;s put everything together:</p>
+
+<p>``` js
+app.get(&ldquo;/my-view&rdquo;, async (req, res) => {
+  res.send(render(&ldquo;my-view&rdquo;, {data: await db.getData()}))
+})</p>
+
+<p>function render(view, ctx = {}) {
+  return _.template(fs.readFileSync(<code>./views/${view}.html</code>))(ctx)
+}
+```</p>
+
+<p>Sure, we don&rsquo;t call <code>res.render</code>, but the difference is very minimal
+(<code>.render(tpl, ctx)</code> vs <code>.send(render(tpl, ctx))</code>).</p>
+
+<p><strong>Done. No more. That&rsquo;s it.</strong></p>
+
+<h2>Lessons learned</h2>
+
+<p><strong>I can be a pretty good liar</strong>: I didn&rsquo;t build a template engine, I simply took advantage
+of lodash' own minimalist <code>.template</code> method.</p>
+
+<p>At the same time, though, I love
+the fact that I&rsquo;m using a library I anyhow require 99% of the times I&rsquo;m working in node
+and I don&rsquo;t need extra dependencies. It definitely can&rsquo;t do everything nunjucks
+does, but, when all you need is rendering a couple templates from your application,
+this approach works well enough.</p>
+
+<p>And to those who are going to tell me what <code>fs.readFileSync</code> is bad I say: <em>well, it depends</em>.</p>
+
+<p>Do you need to render hundreds of templates per second? Then sure, <code>readFileSync</code>
+isn&rsquo;t the most optimized way of doing things. But in a low-traffic, internal app,
+this just fits the bill.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

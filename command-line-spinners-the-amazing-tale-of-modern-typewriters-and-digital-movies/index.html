@@ -1,0 +1,364 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="A brief journey into what it takes to build a command line spinner / loader, with a practical example" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Command line spinners: the magic tale of modern typewriters and terminal movies</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/command-line-spinners-the-amazing-tale-of-modern-typewriters-and-digital-movies/" />
+		<meta property="og:title" content="Command line spinners: the magic tale of modern typewriters and terminal movies" />
+		<meta property="og:description" content="A brief journey into what it takes to build a command line spinner / loader, with a practical example" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/command-line-spinners-the-amazing-tale-of-modern-typewriters-and-digital-movies/">Command line spinners: the magic tale of modern typewriters and terminal movies</a></h1>
+        <time>22 September 2019</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 2 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>In the latest release of ABS, we introduced a package manager
+that fetches an archive from GitHub and installs it locally:
+like in many other command-line interfaces, we decided to
+add a &ldquo;loader&rdquo; to accompany the process, something that looks
+like this:</p>
+
+<p><video controls autobuffer playsinline><source src="/images/abs-installer-spinner.webm" type="video/webm" /></video></p>
+
+<p>I want to take a moment to reflect on how we implemented
+the simple spinner you see in the video, a process that derives
+from typewriters and movies &mdash; let&rsquo;s get to it!</p>
+
+<!-- more -->
+
+
+<h2>We&rsquo;re going to see a picture???</h2>
+
+<p><img class="right" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Muybridge_race_horse_animated.gif"></p>
+
+<p>My wife usually refers to movies as pictures, something that leaves me
+confused as I&rsquo;m not familiar with the term. But
+when you think about it, we&rsquo;re often dealing with the same term in the
+context of award winning movies &mdash; who won <em>best picture</em> at the last
+<a href="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Picture">academy awards</a>?</p>
+
+<p>This happens because movies, in their essence, are simply a collection
+of pictures stitched together, put <em>in motion</em> to give us the illusion
+of something happening in front of our eyes while, in reality, it&rsquo;s just
+a very quick passing of images, aided by sounds, that trick us into
+believing a story is unfolding in front of our eyes.</p>
+
+<p>Now, we said we wanted to create a command-line spinner, and you can
+probably see where I&rsquo;m going already: we can borrow the very same concept
+of motion picture and apply it to the command-line &mdash; have a few different
+characters (pictures) that are swapped very quickly to give us the illusion
+of an animation, kinda like this:</p>
+
+<div style="border: 3px dotted black; padding: 50px; margin: 50px; text-align: center">
+    <p>
+        <span id="spinner">THIS SPINS</span>
+    </p>
+    <p>
+        <a onClick="spin()">start</a> - <a onClick="unspin()">stop</a>
+    </p>
+    <script>
+        let chars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+        let cancel;
+        function spin() {
+            cancel && clearInterval(cancel)
+            i = 0
+            cancel = setInterval(_ => {
+                if (i > chars.length - 1) {
+                    i = 0
+                }
+                document.getElementById("spinner").innerHTML = chars[i]
+                i++
+            }, 50)
+            
+        }
+
+        function unspin() {
+            cancel && clearInterval(cancel)
+        }
+    </script>
+</div>
+
+
+<p>The list of characters, or &ldquo;pictures&rdquo;, we&rsquo;ve used in this sequence is
+<code>['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']</code>, but you can
+try this one out yourself by playing around in the example below, where
+you decide both the speed of the &ldquo;animation&rdquo;, as well as the characters
+involved (I&rsquo;m using <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters#Box_Drawing">these unicode characters</a> in this example):</p>
+
+<div style="border: 3px dotted black; padding: 50px; margin: 50px; text-align: center">
+    <p>
+        <span id="spinner_custom">THIS SPINS</span>
+    </p>
+    <p>
+        <p>
+            Enter the list of comma-separated characters:
+        </p>
+        <textarea id="chars">▛,▜,▟,▙</textarea>
+    </p>
+    <p>
+        <p>
+            Enter the speed at which characters rotate (in ms):
+        </p>
+        <input type="text" value="75" id="speed" />
+    </p>
+    <p>
+        <a onClick="spin_custom()">start / update</a> - <a onClick="unspin_custom()">stop</a>
+    </p>
+    <script>
+        let cancel_custom
+        function spin_custom() {
+            cancel_custom && clearInterval(cancel_custom)
+            let chars = document.getElementById("chars").value.trim().split(",")
+            i = 0
+            cancel_custom = setInterval(_ => {
+                if (i > chars.length - 1) {
+                    i = 0
+                }
+                document.getElementById("spinner_custom").innerHTML = chars[i]
+                i++
+            }, document.getElementById("speed").value)
+            
+        }
+
+        function unspin_custom() {
+            cancel_custom && clearInterval(cancel_custom)
+        }
+    </script>
+</div>
+
+
+<p>Now, it should be very clear what the mechanics behind spinners
+are, but we&rsquo;re still missing one key element &mdash; on the command line, how can
+we &ldquo;override&rdquo; the previous characters? This is no HTML, where a simple
+<code>document.getElementById("id").innerHTML = "myNewChar"</code> does the trick,
+this is the CLI we&rsquo;re talking about.</p>
+
+<p>This example illustrates the problem we&rsquo;re talking about:</p>
+
+<p><video controls autobuffer playsinline><source src="/images/fail-spinner.webm" type="video/webm" /></video></p>
+
+<p>Enter good old fashioned typewriters.</p>
+
+<h2>Carriage returns</h2>
+
+<p><img class="right" src="/images/typewriter.png"></p>
+
+<p>Hey there! Have you ever set your hands on an old-school typewriter?</p>
+
+<p>If you say &ldquo;it&rsquo;s all good&rdquo; rather than &ldquo;<a href="https://www.urbandictionary.com/define.php?term=its%20all%20gucci">it&rsquo;s all gucci</a>&rdquo;,
+chances are you&rsquo;re old enough to have, at least, seen one of them. I&rsquo;ve
+personally never used one, but a mechanism they use is the basis of how modern terminals
+allow you to replace content inline.</p>
+
+<p>This animation by <a href="https://dribbble.com/haleyshbeeb">Haley Schbeeb</a> gives you a little bit more context &mdash;
+watch closely what happens when the typewriter reaches the end of the line:</p>
+
+<p><img class="center" src="https://cdn.dribbble.com/users/1000955/screenshots/2993972/ezgif.com-gif-maker.gif"></p>
+
+<p>It &ldquo;resets&rdquo;, right? This mechanism is called &ldquo;carriage return&rdquo; and it&rsquo;s best explained by
+Wikipedia:</p>
+
+<blockquote><p>Originally, the term &#8220;carriage return&#8221; referred to a mechanism or lever on a typewriter. For machines where the type element was fixed and the paper held in a moving carriage, this lever was operated after typing a line of text to cause the carriage to return to the far right so the type element would be aligned to the left side of the paper. The lever would also usually feed the paper to advance to the next line.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Carriage_return'>en.wikipedia.org/wiki/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Now, typewriters need to advance one line (&ldquo;line feed&rdquo;) as well as reset their
+position to the far left of the paper (&ldquo;carriage return&rdquo;). The same exact mechanisms can
+be applied to your terminal too: these two operations are done through the characters
+<code>\n</code> and <code>\r</code>.
+Nowadays, most systems consider <code>\n</code> the equivalent of <code>\n\r</code>,
+but understanding how these characters work is important to fully grasp how to
+replace a character in your terminal: <code>\n</code> will &ldquo;move the cursor down one line&rdquo;,
+while <code>\r</code> will move it all the way back to the starting position of the current
+line.</p>
+
+<p>With this understanding, we will now be able to create a CLI spinner using this
+simple loop:</p>
+
+<ul>
+<li>print character <code>X</code></li>
+<li>print a carriage return (<code>\r</code>): the cursor is moved back to the beginning of the line</li>
+<li>print character <code>Y</code>, it will override character <code>X</code> since they&rsquo;re printed at the same position</li>
+</ul>
+
+
+<h2>Put it altogether</h2>
+
+<p>The simple example I&rsquo;m going to use is written in Go, but you could build it
+in virtually any programming language. What we need to do is to simply start with a
+list of characters, then print one of them at a time, followed by a carriage
+return, so that the next character will be printed in place of the current one:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kn">package</span> <span class="nx">main</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="p">(</span>
+</span><span class='line'>    <span class="s">&quot;fmt&quot;</span>
+</span><span class='line'>    <span class="s">&quot;time&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">chars</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;⠋&quot;</span><span class="p">,</span> <span class="s">&quot;⠙&quot;</span><span class="p">,</span> <span class="s">&quot;⠹&quot;</span><span class="p">,</span> <span class="s">&quot;⠸&quot;</span><span class="p">,</span> <span class="s">&quot;⠼&quot;</span><span class="p">,</span> <span class="s">&quot;⠴&quot;</span><span class="p">,</span> <span class="s">&quot;⠦&quot;</span><span class="p">,</span> <span class="s">&quot;⠧&quot;</span><span class="p">,</span> <span class="s">&quot;⠇&quot;</span><span class="p">,</span> <span class="s">&quot;⠏&quot;</span><span class="p">}</span>
+</span><span class='line'>  <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">for</span> <span class="kc">true</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nx">i</span> <span class="p">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">chars</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s\r&quot;</span><span class="p">,</span> <span class="nx">chars</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span><span class='line'>    <span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">i</span><span class="o">++</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And the result is this beauty:</p>
+
+<p><video controls autobuffer playsinline><source src="/images/go-spinner.webm" type="video/webm" /></video></p>
+
+<p>Adios!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/command-line-spinners-the-amazing-tale-of-modern-typewriters-and-digital-movies/"
+		},
+		"headline": "Command line spinners: the magic tale of modern typewriters and terminal movies",
+		"description": "A brief journey into what it takes to build a command line spinner / loader, with a practical example",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2019-09-22 06:54:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

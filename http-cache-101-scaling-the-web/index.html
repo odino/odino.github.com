@@ -1,0 +1,745 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="A modern look at the HTTP cache: scaling on the web has never been easier." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>HTTP cache 101: scaling the web</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/http-cache-101-scaling-the-web/" />
+		<meta property="og:title" content="HTTP cache 101: scaling the web" />
+		<meta property="og:description" content="A modern look at the HTTP cache: scaling on the web has never been easier." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/http-cache-101-scaling-the-web/">HTTP cache 101: scaling the web</a></h1>
+        <time>18 June 2017</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 4 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right nobo" src="/images/internetz.png"></p>
+
+<p>I recently gave another read at my original post &ldquo;<a href="http://odino.org/rest-better-http-cache/">REST better: HTTP cache</a>&rdquo;
+and I felt compelled to write a more in-depth dive into the subject, especially since it&rsquo;s
+one of the most popular topics in this blog; at the same time, with the advent of
+new technologies such as <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">sevice workers</a>, people jumped into the bandwagon of
+offline applications without, in my opinion, understanding that the HTTP cache
+provides some basic but extremely interesting features for offline experiences
+&mdash; thus, I want to shed some light on one of the most ingenious sections of the
+HTTP protocol.</p>
+
+<!-- more -->
+
+
+<h2>What is the HTTP cache?</h2>
+
+<p>First of all, let&rsquo;s start by dividing HTTP into 2 entities:</p>
+
+<ul>
+<li>the <a href="https://www.w3.org/Protocols/rfc2616/rfc2616.txt">spec</a><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, which highlights how messages can be exchanged between clients and servers</li>
+<li>the implementation (for example, Google Chrome is an HTTP client, Nginx implements an HTTP server and so on)</li>
+</ul>
+
+
+<p>So, for example, with HTTP/2 we have seen a revamped <em>implementation</em>, one that
+brings TSL by default, that turned plaintext messages (the way messages were exchanged
+in HTTP/1) into binary, along with the introduction of <a href="https://en.wikipedia.org/wiki/Multiplexing">multiplexing</a>
+(in short: one connection can channel multiple requests and responses) and the
+likes &mdash; HTTP/2 was a massive upgrade to HTTP and is making the web a much
+safer, faster place. At the same time, <strong>the spec itself didn&rsquo;t change as much</strong>, as
+the semantics of the protocol have been widely unaffected by HTTP/2.</p>
+
+<p>HTTP caching falls under the HTTP spec, as it&rsquo;s simply a chapter that defines how messages can be cached by both clients &amp; servers: the current
+version of the HTTP caching spec is <a href="https://tools.ietf.org/html/rfc7234">RFC7234</a>,
+so you can always head there and have a look by yourself.</p>
+
+<p>The goal of the HTTP caching spec is, in short, to:</p>
+
+<blockquote><p>[&#8230;] significantly improve performance by reusing a prior response message to satisfy a current request.</p><footer><strong>RFC7234</strong> <cite><a href='https://tools.ietf.org/html/rfc7234'>tools.ietf.org/html/rfc7234/&hellip;</a></cite></footer></blockquote>
+
+
+<p>or, as <a href="https://tomayko.com/">some smart guy</a> once said:</p>
+
+<blockquote><p>[&#8230;] never generate the same response twice</p><footer><strong>Ryan Tomayko</strong> <cite><a href='https://tomayko.com/blog/2008/rack-cache-announce'>Introducing Rack Cache</a></cite></footer></blockquote>
+
+
+<p><span class='pullquote-right' data-pullquote='the HTTP cache is there so that we hit servers as less
+as possible'>
+As you might have guessed, the HTTP cache is there so that we hit servers as less
+as possible: if we can re-use an existing response, why sending a request to the
+origin server? The request needs to cross the network (slow, and TCP is a &ldquo;heavy&rdquo;
+protocol), hit the origin server (which could do better without the additional load)
+and come back to the client. <em>No bueno:</em> if we can avoid all of that we, first of
+all, take a huge burden off our servers and, second, make the web faster, as clients
+don&rsquo;t need to travel through the network to get the information they need.</p>
+
+<p>A side effect of HTTP caching is the fact that it makes the web inconsistent: a
+resource might have changed and, by serving a cached, stale version of it we don&rsquo;t
+feed the clients the latest version: this is, generally, an acceptable
+compromise we, as developers, make in order to scale better. In addition, these
+inconsistencies can be avoided by tweaking the <em>cacheability</em> of our responses, and
+we will look at how to do that in the next paragraphs.</p>
+
+<p>In defining mechanisms to implement this kind of performance optimizations, the
+W3C working group split caching into 2 main variants: <strong>expiration</strong>, which is simpler
+but very high-level, and <strong>validation</strong>, which gives you more granularity.</p>
+
+<p>Let&rsquo;s look at expiration first, as it&rsquo;s the way we use HTTP caching on a daily
+basis.
+</span></p>
+
+<h2>Expiration</h2>
+
+<p>This is the sort of caching you&rsquo;re used to see every day, which allows you to specify TTLs
+(<em>time to live</em>) for static assets like JS, CSS &amp; the likes: we know those assets
+are cacheable for a long time, so we specify an expiration date on those resources.</p>
+
+<p>As I mentioned, expiration is generally used for static assets, but can be used
+for any kind of resource (ie. <code>GET /news/1</code>), so don&rsquo;t just think caching is for
+content that never changes (such as a minified JS file).</p>
+
+<p>How can we implement expiration though? Through 2 very simple HTTP headers.</p>
+
+<h3>Expires</h3>
+
+<p>The <code>Expires</code> HTTP header allows  us to specify a future date that defines until
+when a resource should be cacheable:</p>
+
+<p><img class="center nobo" src="/images/expires.png"></p>
+
+<p>If the client needs to fetch the same resources later on, it will first figure out
+if it has expired and, if not, use the local copy stored in the cache, without
+hitting the origin server. An example implementation might look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">cache</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">cache</span><span class="p">[</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">cache</span><span class="p">[</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">].</span><span class="nx">headers</span><span class="p">.</span><span class="nx">expires</span> <span class="o">&gt;</span> <span class="nx">now</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">cache</span><span class="p">[</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">upstreamResponse</span> <span class="o">=</span> <span class="nx">server</span><span class="p">.</span><span class="nx">forward</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">upstreamResponse</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">expires</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">cache</span><span class="p">[</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">]</span> <span class="o">=</span> <span class="nx">upstreamResponse</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">upstreamResponse</span><span class="p">)</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is a very simplistic implementation, but should give you an idea of the
+process an <em>HTTP intermediary</em> (a browser, a proxy, etc) goes through when
+implementing basic HTTP cache through the <code>Expires</code> header.</p>
+
+<h3>Cache-Control</h3>
+
+<p>If we want to get a bit fancier, we can use the <code>Cache-Control</code> header, which allows
+us more control over how a response should be cached; for example, here&rsquo;s an HTTP
+response using <code>Cache-Control</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Content-Type: application/json
+</span><span class='line'>Content-Length: ...
+</span><span class='line'>Cache-Control: public, max-age<span class="o">=</span>3600, s-maxage<span class="o">=</span>60, stale-if-error<span class="o">=</span>600, no-transform
+</span><span class='line'>
+</span><span class='line'>// ...JS content here...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wow, that&rsquo;s a lot of stuff to process, so let&rsquo;s break it down:</p>
+
+<ul>
+<li><code>Cache-Control</code> allows you to embed multiple caching directives into one header</li>
+<li>directives are comma separated</li>
+<li>in most cases, directives are parsed as key-value pairs (ie. <code>key=val</code>) &mdash; some of them, though, require no value (ie. <code>no-transform</code>)</li>
+<li>they control different aspects of the cacheability of a resource</li>
+</ul>
+
+
+<p><span class='pullquote-right' data-pullquote='Most people think that the Cache-Control is a response header, whereas it can be
+included in HTTP requests as well'>
+So what directives can we use in here?</p>
+
+<ul>
+<li><code>public</code>, which means that the resource can be cached by <em>any</em> cache (read on)</li>
+<li><code>private</code>, which means that the resource can only be cached if the cache is not shared. <strong>A browser is a private cache</strong>, while <strong>a proxy is a shared cache</strong>, as it channels requests and responses from and to multiple clients. For example, the resource at <code>GET /customers/me</code> could possibly be cached by private caches (my own browser), but not by shared caches, as they would end up showing my user profile information to
+other users</li>
+<li><code>max-age</code>, the TTL, in seconds, of the resource. <code>max-age=60</code> means it is cacheable for 1 minute</li>
+<li><code>s-maxage</code>, which is exactly like <code>max-age</code> but applies to shared caches only (hence the <code>s-</code> prefix)</li>
+<li><code>must-revalidate</code>, which indicates that once the resource is stale, the cache should not serve it without first re-validating it with the server</li>
+<li><code>proxy-revalidate</code>, same as <code>must-revalidate</code> but for shared caches</li>
+<li><code>no-cache</code> tells the cache it always needs to revalidate the resource with the origin server</li>
+<li><code>no-store</code>, which means you should not cache the resource at all</li>
+<li><code>no-transform</code> says the intermediary should not toy around with the response payload at all (I&rsquo;ve never seen intermediaries doing so, so I&rsquo;m assuming this is how most softwares like browsers or gateway caches behave by default)</li>
+</ul>
+
+
+<p>Most people think that the Cache-Control is a response header, whereas it can be
+included in HTTP requests as well &mdash; and the directives you can use are slightly
+different:</p>
+
+<ul>
+<li><code>max-age</code>: the client will discard responses with an <code>Age</code> header older than the value of this directive</li>
+<li><code>max-stale</code>: here the client advertises that if the server is willing to serve a stale response (to avoid hitting the DB, for example) it can do so as long as the response is not older than the value of the directive (ie. <code>max-stale=60</code>). This is a very clever mechanism to allow servers to do less work!</li>
+<li><code>mix-fresh</code>: the opposite of <code>max-stale</code>. The client will accept cached responses only if they&rsquo;re fresher than this value</li>
+<li><code>no-cache</code>: don&rsquo;t even try&hellip; :)</li>
+<li><code>no-transform</code>: same meaning that it would have in an HTTP response</li>
+<li><code>only-if-cached</code>: the client will only accept cached responses
+</span></li>
+</ul>
+
+
+<h3>Stale-* directives</h3>
+
+<p>An ingenious trick, the <code>stale-while-revalidate</code> and <code>stale-if-error</code> cache-control
+directives are worth a mention on their own, as what they let you achieve is <a href="https://tools.ietf.org/html/rfc5861">pretty
+interesting</a>:</p>
+
+<ul>
+<li><code>stale-if-error</code> tells the cache that it can serve a cached response if, by any chance, it encounters an error when fetching a fresh response from the origin server. In other words, this means that an HTTP cache can be smart enough to serve cached content when you server starts returning 500 errors &mdash; talk about fault tolerance!</li>
+</ul>
+
+
+<p><img class="center nobo" src="/images/stale-if-error.png"></p>
+
+<ul>
+<li><code>stale-while-revalidate</code> lets you serve cached content while refreshing the cache instead. This is fairly interesting as, if 100 clients are accessing your cache at <em>T0</em>, you can serve them a cached resource at <em>T1</em> (even if it&rsquo;s  stale), while revalidating the cache in background. If a client then requests the same resource at <em>T2</em>, he will receive the version that&rsquo;s been revalidated from the origin server</li>
+</ul>
+
+
+<p><img class="center nobo" src="/images/stale-while-revalidate.png"></p>
+
+<p>Funny enough, <a href="https://www.mnot.net/blog/2014/06/01/chrome_and_stale-while-revalidate">Chrome has been considering implementing this directive</a> for quite
+some time, and last I heard it was still just <a href="https://www.chromestatus.com/features/5050913014153216">under consideration</a>,
+though it looks like <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=348877#c68">it might never going to make it to Chrome Stable</a>.</p>
+
+<h3>Pragma: an obsolete header you&rsquo;ll still see around</h3>
+
+<p><code>Cache-Control</code> was introduced in HTTP/1.1, meaning there had to be some way to
+control caches in the olden HTTP/1.0 days &mdash; that would be
+the <a href="https://tools.ietf.org/html/rfc7234#section-5.4">Pragma header</a>.</p>
+
+<p><code>Pragma</code> doesn&rsquo;t let you do much, as you can just tell caches not to cache through
+<code>Pragma: no-cache</code> &mdash; nothing too complicated here.</p>
+
+<p>What&rsquo;s interesting, though, is that a few HTTP clients will still consider responses
+cacheable if they don&rsquo;t see a <code>no-cache</code> in the <code>Pragma</code>, and so the best practice
+to avoid caching has been to send both <code>Cache-Control</code> and <code>Pragma</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>HTTP/1.1 200 Ok
+</span><span class='line'>Cache-Control: no-cache
+</span><span class='line'>Pragma: no-cache
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At the same time, a peculiar use of Pragma is by telling HTTP/1.0 caches not to
+cache (via <code>Pragma</code>) while allowing HTTP/1.1 caches to do so (via <code>Cache-Control</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>HTTP/1.1 200 Ok
+</span><span class='line'>Cache-Control: max-age<span class="o">=</span>3600
+</span><span class='line'>Pragma: no-cache
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Enough with expiration</strong>: it&rsquo;s now time to move on to validation, a more expensive
+but granular way to implement HTTP caching.</p>
+
+<h2>Validation</h2>
+
+<p>Expiration provides a very interesting way to keep clients off the server, at the
+cost of serving stale content more often than we&rsquo;d might like: in cases when that&rsquo;s
+not an acceptable compromise you can use <strong>validation</strong>, as it ensures clients will
+always be able to receive the latest, most fresh version of a resource.</p>
+
+<p><img class="right nobo" src="/images/if-none.png"></p>
+
+<p>At its core, validation works in a very simple manner: when you request a resource,
+the server assigns a &ldquo;tag&rdquo; to it (let&rsquo;s say <code>v1</code>) and the next time you request the
+same resource you include the tag in your request; the server, at this point, can
+quickly check if the resource has changed: if so, it returns the new version, else
+it tells you to use the cached version you should have with you.</p>
+
+<p>In HTTP words this is how it basically works:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># First request</span>
+</span><span class='line'>GET /news/1 HTTP/1.1
+</span><span class='line'>
+</span><span class='line'><span class="c"># Response</span>
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Etag: 1234
+</span><span class='line'>
+</span><span class='line'>The content of the resource
+</span><span class='line'>
+</span><span class='line'><span class="c"># Second request</span>
+</span><span class='line'>GET /news/1 HTTP/1.1
+</span><span class='line'>If-None-Match: 1234
+</span><span class='line'>
+</span><span class='line'><span class="c"># Response if the content has changed</span>
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Etag: 9876
+</span><span class='line'>
+</span><span class='line'>The NEW content of the resource
+</span><span class='line'>
+</span><span class='line'><span class="c"># Response if the content is the same</span>
+</span><span class='line'>HTTP/1.1 304 Not Modified
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, returning a <code>304 Not Modified</code> is cheaper as it doesn&rsquo;t contain as many
+information as the &ldquo;real&rdquo; resource: less packets traveling through the network, thus
+a faster response.</p>
+
+<p>At the same time, calculating an <code>Etag</code> (the HTTP header used to tag resources) is
+generally cheaper than rendering your resource again &mdash; let&rsquo;s look at some pseudo-code
+to understand what we&rsquo;re talking about:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// GET /news/:id</span>
+</span><span class='line'><span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">news</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">fetchNews</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">etag</span> <span class="o">===</span> <span class="nx">news</span><span class="p">.</span><span class="nx">version</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">304</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;news_template.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">news</span><span class="p">})</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We have saved the server some extra work by not rendering the news template all
+over again: this might feel like a small saving, but put it in the context of
+thousands of requests every day and you see where we&rsquo;re going.</p>
+
+<p>Looking back at our second request:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>GET /news/1 HTTP/1.1
+</span><span class='line'>If-None-Match: 1234
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>you might be wondering what&rsquo;s that <code>If-None-Match</code>, so let me break the whole
+process down for you:</p>
+
+<ul>
+<li>client requests a resource</li>
+<li>server returns it and tags it with the <code>Etag</code> header</li>
+<li>client requests the same resource again, and tells the server to return it only if the resource&rsquo;s etag doesnt match the one we&rsquo;re sending (that&rsquo;s why the header is called <code>If-None-Match</code>)</li>
+</ul>
+
+
+<p>A request that contains the <code>If-None-Match</code> header is called a &ldquo;conditional request&rdquo;:
+it&rsquo;s expected to fetch a resource only if the condition it is sending
+won&rsquo;t be satisfied (the condition is that the client&rsquo;s etag matches the server&rsquo;s).</p>
+
+<p>Conditional requests and validation can be implemented with etags as well as dates:
+if you&rsquo;re more comfortable using the latter (think of an <code>updated_at</code> column in the DB)
+you can replace <code>Etag</code> with <code>Last-Modified</code> and <code>If-None-Match</code> with <code>If-Modified-Since</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># First request</span>
+</span><span class='line'>GET /news/1 HTTP/1.1
+</span><span class='line'>
+</span><span class='line'><span class="c"># Response</span>
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Last-Modified: Wed, 21 Oct 2020 06:00:00 GMT
+</span><span class='line'>
+</span><span class='line'>The content of the resource
+</span><span class='line'>
+</span><span class='line'><span class="c"># Second request</span>
+</span><span class='line'>GET /news/1 HTTP/1.1
+</span><span class='line'>If-Modified-Since: Wed, 21 Oct 2020 06:00:00 GMT
+</span><span class='line'>
+</span><span class='line'><span class="c"># Response if the content was updated after that date</span>
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Last-Modified: Wed, 30 Oct 2020 06:05:00 GMT
+</span><span class='line'>
+</span><span class='line'>The NEW content of the resource
+</span><span class='line'>
+</span><span class='line'><span class="c"># Response if the content is the same</span>
+</span><span class='line'>HTTP/1.1 304 Not Modified
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Again, the spec is very simple and doesn&rsquo;t get too fancy, yet it&rsquo;s powerful enough
+to let you save so much time and data by returning <code>304</code> rather than &ldquo;full&rdquo; responses &mdash;
+that&rsquo;s why I like the HTTP caching spec: it&rsquo;s so clever and simple!</p>
+
+<h2>Who can cache my responses?</h2>
+
+<p>HTTP is a layered protocol, meaning there can be countless intermediaries between
+the client and the server &mdash; a picture is worth
+a thousand words:</p>
+
+<p><img class="center nobo" src="/images/types-caches.png"></p>
+
+<p>So, who are all these guys that can cache resources all along the way?</p>
+
+<ul>
+<li>nothing to explain in terms of <strong>browsers</strong>, as we&rsquo;re all familiar with them.
+Worth to note that, when you use <code>curl</code> from your command-line, that&rsquo;s your browser</li>
+<li><strong>proxies</strong>, instead, are generally installed between the client and the internet,
+and they provide a shield between the two. Proxies are shared caches as, for example,
+you could install them at your company so that multiple browsers use the same proxy
+&mdash; that way, if I request a cacheable resource and one of my co-workers requests the
+same, he will be served the cached response I generated, by the proxy</li>
+<li><strong>ISPs / the internet</strong>: well, that&rsquo;s the backbone of your internet connection, and
+they could implement caching on their own</li>
+<li>proxies installed on the server-side are called <strong>reverse proxies</strong> instead,
+as their job is to shield multiple servers from requests. Reverse proxies are also
+called &ldquo;HTTP accelerators&rdquo;, as their main job is to avoid requests from hitting
+the origin servers. <a href="https://varnish-cache.org/">Varnish</a> is one of the most popular reverse proxies out there</li>
+<li>last but not least you&rsquo;ve got your <strong>origin servers</strong>, where your applications
+run. They can implement HTTP caching on their own, even though it&rsquo;s generally
+preferred to have a dedicated reverse proxy to offload origins</li>
+</ul>
+
+
+<h2>Warning: when things don&rsquo;t go as planned&hellip;</h2>
+
+<p>An interesting header is <code>Warning</code>, as it&rsquo;s used to signal that <em>something went wrong</em>
+when fetching the response from the upstream, something that&rsquo;s hard to infer from the HTTP status code
+alone: for example, when the cache knows that the response being served is stale, it
+could include a <code>Warning: 110 - "Response is Stale"</code> to inform the client that the response
+he&rsquo;s receiving isn&rsquo;t fresh at all &mdash; that, for example, could happen when <code>stale-while-revalidate</code>
+or <code>stale-if-error</code> kick in:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># The HTTP status code says everything&#39;s good,</span>
+</span><span class='line'><span class="c"># but the warning header tells the client the</span>
+</span><span class='line'><span class="c"># response being served is not fresh</span>
+</span><span class='line'>HTTP/1.1 200 Ok
+</span><span class='line'>Warning: 110 - <span class="s2">&quot;Response is Stale&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>A note on Service Workers</h2>
+
+<p><span class='pullquote-right' data-pullquote='if all you need is caching static assets or do expiration-based
+caching, do not use service workers as the HTTP cache gets the same job done'>
+Here comes the fun part: if you&rsquo;re a web developer chances are you&rsquo;ve heard you
+should implement service workers in order to efficiently serve cached content, and
+<strong>that&rsquo;s quite misleading</strong> &mdash; to be clear, you can have offline apps working
+without service workers, as when you tap on a link and that renders a response with,
+say, <code>Cache-Control: max-age=3600</code>, you can still open that page for another hour,
+without an internet connection.</p>
+
+<p>Service workers give you a great deal of control on the network stack, allowing you
+to intercept HTTP requests being made, hijack them and, as many advise, cache them
+on-the-fly &mdash; but I&rsquo;d honestly avoid doing so as you can achieve the exact same thing
+with the HTTP cache and way less code.</p>
+
+<p>Let me rephrase it: if all you need is caching static assets or do expiration-based
+caching, do not use service workers as the HTTP cache gets the same job done. If you need some special functionality
+that is not included in the caching spec, then use a worker, but I&rsquo;d be very surprised
+to hear you needed to: the contexts where you would be able to take advantage of the
+SW&rsquo;s capabilities are quite advanced, and I could argue HTTP caching would anyhow
+get you ~95% there even in those cases.
+</span></p>
+
+<p><img class="right nobo" src="/images/99-devs.png"></p>
+
+<p>Service workers are great because they let us implement functionalities we traditionally
+never had on the web (think of <a href="https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/">push notifications</a>, <a href="https://developers.google.com/web/fundamentals/engage-and-retain/app-install-banners/">add to homescreen</a>, <a href="https://developers.google.com/web/updates/2015/12/background-sync">background sync</a>
+and the likes) but, for stuff that&rsquo;s been there, I
+would advise to stick to the basics.</p>
+
+<p>Let&rsquo;s have a look at an example code from a service worker that implements its own
+caching &mdash; as you see not most straightforward code you&rsquo;ll bump
+into:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">event</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">resp</span> <span class="o">||</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">caches</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">cache</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">caches</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="s1">&#39;/sw-test/gallery/myLittleVader.jpg&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As Jake Archibald, developer advocate at Google,
+puts it:</p>
+
+<blockquote><p>You can hack around poor caching in your service worker, but you&#8217;re way better off fixing the root of the problem. Getting your [HTTP] caching right makes things easier in service worker land, but also benefits browsers that don&#8217;t support service worker (Safari, IE/Edge), and lets you get the most out of your CDN.</p><footer><strong>Jake Archibald</strong> <cite><a href='https://jakearchibald.com/2016/caching-best-practices/'>Caching Best Practices</a></cite></footer></blockquote>
+
+
+<p>Ditto.</p>
+
+<h2>Conclusion</h2>
+
+<p>Caching in HTTP has been here for almost 2 decades, it&rsquo;s a battle-tested
+part of the protocol and allows you to efficiently trade freshness with scale
+(emphasis on <em>efficiently</em>): there&rsquo;s no reason to implement our own application-level
+caches when the protocol we use to exchange messages allows you to do the same,
+for free, by just jamming a bunch of headers in your responses.</p>
+
+<p>HTTP caching is truly the hidden gem of the protocol, and I wish more people would
+be aware of the inner workings of the spec &mdash; to me it is a great example of
+achieving great results without compromising on complexity, and this is the kind
+of design we should aim towards when building software.</p>
+
+<p>In short: <em>the HTTP cache is great. Be like the HTTP cache</em>.</p>
+
+<h2>Further readings</h2>
+
+<p>If you enjoyed this article I would suggest you to read further stuff on the HTTP
+cache:</p>
+
+<ul>
+<li>the complete <a href="https://tools.ietf.org/html/rfc7234">HTTP caching spec</a></li>
+<li>I have a <a href="/categories/cache/">few articles</a> on this very same blog</li>
+<li><a href="https://www.mnot.net/blog/">Mark Nottingham&rsquo;s blog</a> (Mark is known for his contribution to the HTTP protocol, web caching and for being the &ldquo;chairman&rdquo; of HTTP/2)</li>
+<li><a href="https://tomayko.com/blog/2008/rack-cache-announce">Ryan Tomayko</a> is a very smart guy who spoke about HTTP caching in the past. He turns whatever he touches into gold, so follow him ;&ndash;)</li>
+<li><a href="https://www.subbu.org/">Subbu Allamaraju</a> is a well-known member of the REST community and <a href="https://www.subbu.org/blog/2005/01/http-caching">has written about HTTP caching</a> in the past</li>
+</ul>
+
+
+<p>See you next time!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Worth to note that RFC2616 has been superseded by a few updates (RFCs 7230, 7231, 7232, 7233, 7234, 7235, which update part of the original spec) <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+
+
+
+<!--
+
+BALSAMIQ
+
+{"mockup":{"controls":{"control":[{"ID":"3","measuredH":"128","measuredW":"128","properties":{"icon":{"ID":"server","size":"xxlarge"}},"typeID":"Icon","x":"871","y":"251","zOrder":"2"},{"ID":"5","measuredH":"128","measuredW":"128","properties":{"icon":{"ID":"laptop","size":"xxlarge"}},"typeID":"Icon","x":"246","y":"261","zOrder":"3"},{"ID":"10","h":"50","measuredH":"126","measuredW":"100","properties":{"hasHeader":"false","icons":{"icons":[{"size":null}]},"rowHeight":"39","size":"17","text":"GET /static/app.js","verticalScrollbar":"false"},"typeID":"List","w":"190","x":"517","y":"220","zOrder":"4"},{"ID":"14","h":"55","measuredH":"54","measuredW":"439","properties":{"curvature":"1","direction":"top","leftArrow":"false","p0":{"x":0,"y":44},"p1":{"x":0.4808345264880343,"y":0.10920433626508488},"p2":{"x":439,"y":54},"rightArrow":"true","shape":"bezier","text":""},"typeID":"Arrow","w":"440","x":"401","y":"232","zOrder":"1"},{"ID":"16","h":"30","measuredH":"54","measuredW":"439","properties":{"curvature":"-1","direction":"top","leftArrow":"true","p0":{"x":0,"y":0},"p1":{"x":0.48416925542342376,"y":-0.055030313088304694},"p2":{"x":439,"y":10},"rightArrow":"false","shape":"bezier","text":""},"typeID":"Arrow","w":"440","x":"401","y":"378","zOrder":"0"},{"ID":"17","h":"120","measuredH":"140","measuredW":"200","properties":{"size":"18","text":"HTTP/1.1 200 Ok\nContent-Type: application/javascript\nContent-Length: 1234\n*Expires: Wed, 21 Oct 2020 07:00:00*"},"typeID":"TextArea","w":"332","x":"455","y":"351","zOrder":"5"}]},"measuredH":"471","measuredW":"999","mockupH":"251","mockupW":"753","version":"1.0"}}
+ -->
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/http-cache-101-scaling-the-web/"
+		},
+		"headline": "HTTP cache 101: scaling the web",
+		"description": "A modern look at the HTTP cache: scaling on the web has never been easier.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2017-06-18 22:05:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

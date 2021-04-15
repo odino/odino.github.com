@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Hiring | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/hiring/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[We're Hiring (Again)!]]></title>
+    <link href="https://odino.org/were-hiring-again/"/>
+    <updated>2016-08-07T12:28:00+00:00</updated>
+    <id>https://odino.org/were-hiring-again</id>
+    <content type="html"><![CDATA[<p>Cross-posting never hurts :)</p>
+
+<!-- more -->
+
+
+<p>We&rsquo;re currently <a href="http://tech.namshi.com/blog/2016/08/07/currently-hiring-a-devops-engineer-and-a-js-hacker-here-in-dubai/">looking for a Sr. DevOps engineer and a Sr. JavaScript engineer</a>
+here at <a href="https://www.namshi.com">Namshi</a>: the package is attractive and the
+learning experience is, in my opinion, well-worth it.</p>
+
+<p>From a DevOps perspective, we work a lot with Docker, Kubernetes, SaltStack, Terraform,
+Golang and Python &mdash; and everything we run is on AWS.
+As a JS engineer instead, expect to be working on SPAs with Angular or React. And a bit of isomorphic JavaScript never
+hurts, as well as the ability to dive into the backend with NodeJS.
+With 50+ microservices, there&rsquo;s always a chance to learn and experiment over here :)</p>
+
+<p>If you are interested, or happen to know anyone<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> feel free to get in touch with me, or drop
+a line to <code>work-in-tech@namshi.com</code>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>We have a referral program to reward you in case you forward us a very interesting profile :) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Things I Ask During Interviews]]></title>
+    <link href="https://odino.org/things-i-ask-during-interviews/"/>
+    <updated>2015-03-02T18:47:00+00:00</updated>
+    <id>https://odino.org/things-i-ask-during-interviews</id>
+    <content type="html"><![CDATA[<p>Today I was wasting my time on a trip <a href="https://www.google.com/maps/dir/The+Dubai+Mall+-+Financial+Center+Road,+Near+Souk+Al+Bahar+Bridge,+DownTown+Dubai+-+%D8%A5%D9%85%D8%A7%D8%B1%D8%A9+%D8%AF%D8%A8%D9%8A%D9%91+-+United+Arab+Emirates%E2%80%AD/Dubai+Marina+-+Dubai+-+United+Arab+Emirates/@25.14228,55.1815421,13z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3e5f68282fe3dbb1:0xc9a673f9ef407801!2m2!1d55.278896!2d25.197628!1m5!1m1!1s0x3e5f6b5402c126e3:0xb9511e6655c46d7c!2m2!1d55.144075!2d25.08135">back home</a>
+and finally got to create an OS repo I was
+thinking of for the past &frac34; weeks: a brief list
+of <a href="https://github.com/odino/interviews">questions I ask during interviews</a>.</p>
+
+<!-- more -->
+
+
+<p>You will find the list split in conceptual
+areas: there&rsquo;s some stuff related to <a href="https://github.com/odino/interviews#frontend">frontend</a>,
+some <a href="https://github.com/odino/interviews#reasoning">purely logical</a> question, something related
+to <a href="https://github.com/odino/interviews#personalities">history of programming</a> and so on. This will
+definitely help me doing my next interview, and
+you might as well take some inspiration for when
+you don&rsquo;t really know what to ask.</p>
+
+<p>If you want to contribute to the list
+simply <a href="https://github.com/odino/interviews/edit/master/README.md">send a PR</a> and I will be more than
+happy to merge your suggestion!</p>
+
+<h2>PS: the way I structure interviews</h2>
+
+<p>As an addendum, I wanted to share the way I conduct
+interviews (it would be nice to get a feedback on this,
+if you don&rsquo;t mind): I usually spend 5/10 minutes describing
+the company, the organization of the tech team and
+what we are looking for, to then let the candidate
+talk about himself for another 10 minutes.</p>
+
+<p>After that, it&rsquo;s time for some of these questions
+and, when I think I&rsquo;m done, I let the candidate ask
+me anything, since I think it&rsquo;s important to have
+clear ideas on both sides.</p>
+
+<p>Suggestions are mostly welcome!</p>
+]]></content>
+  </entry>
+  
+</feed>

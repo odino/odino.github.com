@@ -1,0 +1,273 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Using Selenium and Symfony2 to help your frontend developers coding without risks</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/" />
+		<meta property="og:title" content="Using Selenium and Symfony2 to help your frontend developers coding without risks" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/using-behat-to-help-your-frontend-developers-coding-without-risks/">Using Selenium and Symfony2 to help your frontend developers coding without risks</a></h1>
+        <time>10 March 2013</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 8 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Since testing is one of those practices
+that many consider <em>boring</em> (unless a major
+catastrophe happens), you should help people
+is easing their job while testing.</p>
+
+<p>Today I am going to show the approach that
+we just kickstarted, at Namshi, in order to
+help designers and developers testing
+frontend changes in a more automated, thus
+easier, way.</p>
+
+<!-- more -->
+
+
+<p>Thanks to the <a href="https://github.com/namshi/NamshiVoyeurBundle">NamshiVoyeurBundle</a>,
+it is really easy to start increasing
+the efficiency of your testing department,
+even if coders do not want to write
+automated tests.</p>
+
+<p>The bundle, that you can use <strong>inside a Symfony2
+application</strong>, is actually very small and can be
+extrapolated to be integrated in other frameworks
+(like ZF2 or Cake).</p>
+
+<p>The idea is very simple: you take some screenshots
+of a website, deploy a new version, take another set of
+screenshots (at the same URLs) and then compare
+them, generating an image diff.</p>
+
+<p>After you install the <code>NamshiVoyeurBundle</code> (via composer),
+it is really easy to start taking screenshots;
+you just have to configure a few services
+and some parameters:</p>
+
+<figure class='code'><figcaption><span>Configuring the bundle</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">namshi_voyeur</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">browsers</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">firefox</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">safari</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chrome</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">urls</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">homepage</span><span class="p-Indicator">:</span>     <span class="s">&quot;/&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">new-arrivals</span><span class="p-Indicator">:</span> <span class="s">&quot;new-products&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">women</span><span class="p-Indicator">:</span>        <span class="s">&quot;women-shoes&quot;</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">shots_dir</span><span class="p-Indicator">:</span> <span class="s">&quot;/Users/you/Downloads/screenshots&quot;</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">base_url</span><span class="p-Indicator">:</span>       <span class="s">&quot;http://en-ae.namshi.com/&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">safari</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Behat\Mink\Driver\Selenium2Driver</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">start</span><span class="p-Indicator">]</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">browser</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">safari</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">firefox</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Behat\Mink\Driver\Selenium2Driver</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">start</span><span class="p-Indicator">]</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">chrome</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">Behat\Mink\Driver\Selenium2Driver</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">calls</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="p-Indicator">-</span> <span class="p-Indicator">[</span><span class="nv">start</span><span class="p-Indicator">]</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">browser</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">chrome</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This configuration basically tells Voyeur that
+you will be taking screenshots of three URLs:</p>
+
+<ul>
+<li><code>http://en-ae.namshi.com/</code></li>
+<li><code>http://en-ae.namshi.com/new-products</code></li>
+<li><code>http://en-ae.namshi.com/women-shoes</code></li>
+</ul>
+
+
+<p>with safari, firefox and google chrome.</p>
+
+<p>To run the Voyeur, use the <code>cli</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>php app/console namshi:voyeur
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Screenshots will be saved at <code>/Users/you/Downloads/screenshots</code>.</p>
+
+<p>At this point, after you deployed a new version of the code,
+run the Voyeur again, and you will be reay to generate the
+diffs between the screenshots:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>php app/console namshi:voyeur:diff /Users/you/Downloads/screenshots/firefox/2013/03/10/1200 /Users/you/Downloads/screenshots/firefox/2013/03/10/1205
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Diffs will be generated at <code>/Users/you/Downloads/screenshots/firefox/2013/03/10/1205/diff</code>.</p>
+
+<p>That&rsquo;s it: now you can start having a look at what changed and
+ask your developers to do the same, even on their local
+machine, before committing any changes.</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/using-behat-to-help-your-frontend-developers-coding-without-risks/"
+		},
+		"headline": "Using Selenium and Symfony2 to help your frontend developers coding without risks",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2013-03-10 11:39:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

@@ -1,0 +1,321 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Bootstrap of a Travis-CI test-machine</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/bootstrap-of-a-travis-ci-test-machine/" />
+		<meta property="og:title" content="Bootstrap of a Travis-CI test-machine" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/bootstrap-of-a-travis-ci-test-machine/">Bootstrap of a Travis-CI test-machine</a></h1>
+        <time>27 July 2012</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 9 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><a href="http://travis-ci.org/">Travis-CI</a> is an awesome open source service which
+makes continuos integration really easy in the context
+of <em>github-hosted</em> projects.</p>
+
+<!-- more -->
+
+
+<p>Developing Orient, I found out about Travis when one of
+the 3 active guys actively collaborating to the project,
+<a href="https://github.com/nrk">Daniele</a> created his own fork of the library to create
+the CI environment on Travis.</p>
+
+<h2>More than testing</h2>
+
+<p>Travis doesn&rsquo;t only provide a machine in which you can
+continuosly running tests, it gives you a <strong>free</strong> VM
+which you can <strong>freely</strong> manage in the context of testing
+an application: although they don&rsquo;t actually give you a &ldquo;real&rdquo; VM, they provide
+you an <strong>temporary VM</strong> which gets bootstrapped following
+your indications and executes the tasks that <strong>you</strong>
+indicate: in that sense, Travis gives you VMs
+<em>on-demand</em>.</p>
+
+<p>So think about it: it&rsquo;s not only about testing, it&rsquo;s about
+having an environment ready to do anything you want for
+your own project, like running reports.</p>
+
+<h2>A real world example</h2>
+
+<p>For <a href="http://github.com/congow/Orient">Orient</a>, Daniele managed to setup a quite clever
+bootstrap script.</p>
+
+<p>We have a quite comprehensive test-suite which you can
+execute with the single <code>phpunit</code> command, from the root
+of the library, but it just executes tests which dont
+directly talk to OrientDB.</p>
+
+<p>To execute the full test-suite, including integration
+tests, you just need to pass the test directory to the
+CLI:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">phpunit test/</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>but you&rsquo;ll need a working instance of OrientDB, with
+predefined admin credentials (<code>admin</code>/<code>admin</code>) listening
+on port <code>:2480</code>.</p>
+
+<p>So our challenge was to use Travis and being able to trigger
+the integration tests.</p>
+
+<p>In the <code>.travis.yml</code> configuration file, we have:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">language: php</span>
+</span><span class='line'><span class="x">php:</span>
+</span><span class='line'><span class="x">  - 5.3</span>
+</span><span class='line'><span class="x">  - 5.4</span>
+</span><span class='line'><span class="x">before_script:</span>
+</span><span class='line'><span class="x">  - sh -c ./bin/initialize-ci.sh 1.0rc6</span>
+</span><span class='line'><span class="x">script: phpunit test/</span>
+</span><span class='line'><span class="x">notifications:</span>
+</span><span class='line'><span class="x">  email:</span>
+</span><span class='line'><span class="x">    - ...@gmail.com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, as you see, we have a bash script which
+takes care of everything:</p>
+
+<figure class='code'><figcaption><span>./bin/initialize-ci.sh 1.0rc6</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">PARENT_DIR</span><span class="o">=</span><span class="k">$(</span>dirname <span class="k">$(</span><span class="nb">cd</span> <span class="s2">&quot;$(dirname &quot;</span><span class="nv">$0</span><span class="s2">&quot;)&quot;</span>; <span class="nb">pwd</span><span class="k">))</span>
+</span><span class='line'><span class="nv">CI_DIR</span><span class="o">=</span><span class="s2">&quot;$PARENT_DIR/ci-stuff/environment&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">ODB_VERSION</span><span class="o">=</span><span class="k">${</span><span class="nv">1</span><span class="k">:-</span><span class="s2">&quot;1.0rc6&quot;</span><span class="k">}</span>
+</span><span class='line'><span class="nv">ODB_PACKAGE</span><span class="o">=</span><span class="s2">&quot;orientdb-${ODB_VERSION}&quot;</span>
+</span><span class='line'><span class="nv">ODB_DIR</span><span class="o">=</span><span class="s2">&quot;${CI_DIR}/${ODB_PACKAGE}&quot;</span>
+</span><span class='line'><span class="nv">ODB_LAUNCHER</span><span class="o">=</span><span class="s2">&quot;${ODB_DIR}/bin/server.sh&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;=== Initializing CI environment ===&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">cd</span> <span class="s2">&quot;$PARENT_DIR&quot;</span>
+</span><span class='line'>
+</span><span class='line'>. <span class="s2">&quot;$PARENT_DIR/bin/odb-shared.sh&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">&quot;$CI_DIR&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>  <span class="c"># Fetch the stuff needed to run the CI session.</span>
+</span><span class='line'>  git clone --quiet git://gist.github.com/1370152.git <span class="nv">$CI_DIR</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c"># Download and extract OrientDB</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;--- Downloading OrientDB v${ODB_VERSION} ---&quot;</span>
+</span><span class='line'>  odb_download <span class="s2">&quot;http://orient.googlecode.com/files/${ODB_PACKAGE}.zip&quot;</span> <span class="nv">$CI_DIR</span>
+</span><span class='line'>  unzip -q <span class="s2">&quot;${CI_DIR}/${ODB_PACKAGE}.zip&quot;</span> -d <span class="nv">$ODB_DIR</span> <span class="o">&amp;&amp;</span> chmod +x <span class="nv">$ODB_LAUNCHER</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c"># Copy the configuration file and the demo database</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;--- Setting up OrientDB ---&quot;</span>
+</span><span class='line'>  tar xf <span class="nv">$CI_DIR</span>/databases.tar.gz -C <span class="s2">&quot;${ODB_DIR}/&quot;</span>
+</span><span class='line'>  cp <span class="nv">$PARENT_DIR</span>/ci-stuff/orientdb-server-config.xml <span class="s2">&quot;${ODB_DIR}/config/&quot;</span>
+</span><span class='line'>  cp <span class="nv">$PARENT_DIR</span>/ci-stuff/orientdb-server-log.properties <span class="s2">&quot;${ODB_DIR}/config/&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;!!! Directory $CI_DIR exists, skipping downloads !!!&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Start OrientDB in background.</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;--- Starting an instance of OrientDB ---&quot;</span>
+</span><span class='line'>sh -c <span class="nv">$ODB_LAUNCHER</span> &lt;/dev/null &amp;&gt;/dev/null &amp;
+</span><span class='line'>
+</span><span class='line'><span class="c"># Wait a bit for OrientDB to finish the initialization phase.</span>
+</span><span class='line'>sleep 5
+</span><span class='line'><span class="nb">printf</span> <span class="s2">&quot;\n=== The CI environment has been initialized ===\n&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think the script speaks for itsef: we directly download
+OrientDB from the official website, de-compress it, configure
+OrientDB with our standard configuration file and launch the
+ODB server, outputting in <code>/dev/null</code>.</p>
+
+<p>Now, all of this happens everytime someone commits to the <code>master</code>
+on Github: pretty easy, simple but so powerful.</p>
+
+<p>I really recommend you to start having a look at Travi-CI
+and how you can benefit from a CI server, fully configurable,
+for free, for the sake of your own code.</p>
+
+<p>One last note: yes, all of this comes for free, but if you use
+Travis you should really consider making a donation to
+show the guys behind the project <a href="http://love.travis-ci.org/">your love</a>.</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/bootstrap-of-a-travis-ci-test-machine/"
+		},
+		"headline": "Bootstrap of a Travis-CI test-machine",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2012-07-27 07:00:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

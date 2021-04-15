@@ -1,0 +1,286 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="A new release for the ABS programming language, now closer than ever to 1.0." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>ABS preview-4: as the language matures, the features keep coming!</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/abs-preview-4-as-the-language-matures-the-features-keep-coming/" />
+		<meta property="og:title" content="ABS preview-4: as the language matures, the features keep coming!" />
+		<meta property="og:description" content="A new release for the ABS programming language, now closer than ever to 1.0." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/abs-preview-4-as-the-language-matures-the-features-keep-coming/">ABS preview-4: as the language matures, the features keep coming!</a></h1>
+        <time>22 January 2019</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 2 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Thanks to <a href="https://github.com/abs-lang/abs/graphs/contributors">a few contributions</a>,
+I got around to releasing another preview of ABS, the dynamic and modern
+language for shell scripting.</p>
+
+<!-- more -->
+
+
+<p>First and foremost: a huge <em>thank you</em> to <a href="https://github.com/nicerobot">nicerobot</a>
+and <a href="https://github.com/ntwrick">ntwrick</a> who managed to take a crack at some of
+the pain points I didn&rsquo;t manage to have a look at myself &mdash; their contributions
+added some interesting features to the language and I can only hope they&rsquo;ll keep
+coming!</p>
+
+<p>Let&rsquo;s now run throgh the most notable changes in this new release.</p>
+
+<h2>Features</h2>
+
+<p>The most important &ldquo;feature&rdquo; of this release is the ability, for ABS, to help
+you locate parsing and execution errors by pin-pointing the code that causes
+the error, including the line and column number:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat tests/test-eval.abs 
+</span><span class='line'># eval fails
+</span><span class='line'>
+</span><span class='line'>test_num = int(arg(2))
+</span><span class='line'>
+</span><span class='line'>if test_num == 1 {
+</span><span class='line'>    # mismatched type
+</span><span class='line'>    s = "string"
+</span><span class='line'>    s = s + 1   # this is a comment
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>if test_num == 2 {
+</span><span class='line'>    # invalid property
+</span><span class='line'>    a = [1,2,3]
+</span><span class='line'>    a.junk
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>if test_num == 3 {
+</span><span class='line'>    # invalid function as index
+</span><span class='line'>    {"name": "Abs"}[f(x) {x}];  
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>$ abs tests/test-eval.abs 1
+</span><span class='line'>ERROR: type mismatch: STRING + NUMBER
+</span><span class='line'>  [8:11]      s = s + 1   # this is a comment
+</span><span class='line'>
+</span><span class='line'>$ abs tests/test-eval.abs 2
+</span><span class='line'>ERROR: invalid property 'junk' on type ARRAY
+</span><span class='line'>  [14:6]      a.junk
+</span><span class='line'>
+</span><span class='line'>$ abs tests/test-eval.abs 3
+</span><span class='line'>ERROR: index operator not supported: f(x) {x} on HASH
+</span><span class='line'>  [19:20]     {"name": "Abs"}[f(x) {x}];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now also access command line flags passed to your script
+with the <code>flag(...)</code> function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>abs --foo<span class="o">=</span>1 --bar 2 --baz
+</span><span class='line'>Hello user, welcome to the ABS <span class="o">(</span>preview-4<span class="o">)</span> programming language!
+</span><span class='line'>Type <span class="s1">&#39;quit&#39;</span> when you<span class="s1">&#39;re done, &#39;</span><span class="nb">help</span><span class="err">&#39;</span> <span class="k">if </span>you get lost!
+</span><span class='line'>⧐  flag<span class="o">(</span><span class="s2">&quot;foo&quot;</span><span class="o">)</span>
+</span><span class='line'>1
+</span><span class='line'>⧐  flag<span class="o">(</span><span class="s2">&quot;bar&quot;</span><span class="o">)</span>
+</span><span class='line'>2
+</span><span class='line'>⧐  flag<span class="o">(</span><span class="s2">&quot;baz&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="nb">true</span>
+</span><span class='line'>⧐
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other small additions:</p>
+
+<ul>
+<li>both single (<code>'hello'</code>) and double (<code>"hello"</code>) quotes are supported in strings,
+allowing for an easier syntax when you need quotes in your string (<code>"She said 'hello!'"</code>)</li>
+<li>added <code>"string".is_number()</code></li>
+<li>ABS will now output its version when called with the <code>--version</code> argument alone (<code>abs --version</code>)</li>
+</ul>
+
+
+<h2>Bugfixes</h2>
+
+<ul>
+<li>shell commands <a href="https://github.com/abs-lang/abs/pull/113">wouldn&rsquo;t receive the stdin</a> passed to the abs interpreter</li>
+<li>you <a href="https://github.com/abs-lang/abs/issues/112">could not loop more than once over an array</a> when using the <code>for ... in</code> syntax</li>
+</ul>
+
+
+<h2>What are you waiting for?</h2>
+
+<p>Grab the <a href="https://github.com/abs-lang/abs/releases/tag/preview-4">latest release</a> for your platform,
+dump it in your path and start hacking with ABS!</p>
+
+<p>If you&rsquo;re brave enough, just:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt;<span class="o">(</span>curl https://www.abs-lang.org/installer.sh<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adios!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/abs-preview-4-as-the-language-matures-the-features-keep-coming/"
+		},
+		"headline": "ABS preview-4: as the language matures, the features keep coming!",
+		"description": "A new release for the ABS programming language, now closer than ever to 1.0.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2019-01-22 18:18:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

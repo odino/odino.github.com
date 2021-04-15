@@ -1,0 +1,612 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Today we have a look at Bloom filters, an ingenious probabilistic data structure that allows to verify membership at scale." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Bloom filters: when data structures get smart</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/bloom-filters-when-data-structures-get-smart/" />
+		<meta property="og:title" content="Bloom filters: when data structures get smart" />
+		<meta property="og:description" content="Today we have a look at Bloom filters, an ingenious probabilistic data structure that allows to verify membership at scale." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/bloom-filters-when-data-structures-get-smart/">Bloom filters: when data structures get smart</a></h1>
+        <time>10 February 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content bloom"><p><img class="right" src="/images/membership.png"></p>
+
+<p>Keeping up with my quest on exploring <a href="/categories/probabilistic-data-structures/">probabilistic data structures</a>,
+today I am going to present you <a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filters</a>,
+an ingenious idea that allows us to quickly verify membership within a set.</p>
+
+<p>As usual, I sound awful when using grown-up words: filters? Membership? Verification?
+Just bear with me for a few minutes as we&rsquo;re about to delve into one of the most
+ingenious ideas in the world of computer science, one that was born almost 50
+years ago.</p>
+
+<!-- more -->
+
+
+<h2>Who invited this guy?!?</h2>
+
+<p>If you remember my recent <a href="/my-favorite-data-structure-hyperloglog/">post on HyperLogLog and the cardinality-estimation problem</a>,
+there I introduced Tommy, a friend of mine that joins me at meetups and conferences.</p>
+
+<p>Today Tommy and I are extremely busy trying to organize an invite-only hackathon
+for the best developers in the area: we recently setup a website with sign ups capped at
+100 people, and have just reached the venue with a printed list of people who have made it through.</p>
+
+<p>Unfortunately, since we have limited space at the venue, we need to make sure that
+each and every person who wants to come in signed up online and,
+if not, we unfortunately have to turn them down. Armed with a list of names,
+Tommy starts processing each and everyone while I take care of setting up the rooms
+and so on:</p>
+
+<blockquote><p>Hi there, I am Tommy! Did you by any chance sign up online? What is your name?</p></blockquote>
+
+
+
+
+<blockquote><p>Yeah man, I definitely did! Why do you need my name?</p></blockquote>
+
+
+
+
+<blockquote><p>Unfortunately we only have seats and food for 100 people, so we can&#8217;t let<br/>everyone in. Let me just check if your name is on the list&#8230;</p></blockquote>
+
+
+
+
+<blockquote><p>Ok man, no problem&#8230;name&#8217;s Greg Sestero!</p></blockquote>
+
+
+
+
+<blockquote><p>&#8230;mmm&#8230;</p></blockquote>
+
+
+
+
+<blockquote><p>Is there any problem?</p></blockquote>
+
+
+
+
+<blockquote><p>&#8230;mmm&#8230;</p></blockquote>
+
+
+
+
+<blockquote><p>&#8230;hello?</p></blockquote>
+
+
+
+
+<blockquote><p>Damn Greg, give me some time! I have to go through 100 names to find yours!</p></blockquote>
+
+
+<p>Quickly, Tommy realizes that this is going to take him too long, so he comes over
+and starts telling me that we need to find another way to figure out whether people
+have signed up or not: with hundreds of people in front of him, he can&rsquo;t go over the list
+for each and everyone of them!</p>
+
+<blockquote><p>Alex, man&#8230;I can&#8217;t go over the list for each and everyone out there. We need to<br/>find a way to check if these people signed up way faster than this, as it&#8217;s taking<br/>me too long! At this pace, we&#8217;ll start the hackathon in 2 hours!</p><p>Even if it&#8217;s not 100% accurate, we need to find another method of processing<br/>each and everyone&#8230;at the end of the day we don&#8217;t care if we let in 98 or 106 people,<br/>but we need to do it real quick!</p></blockquote>
+
+
+
+
+<blockquote><p>Tommy, we can&#8217;t turn people down if they subscribed, I&#8217;d be pretty pissed if that<br/>happened to me! We should let everyone who subscribed in, and maybe have some<br/>false positives so that a couple people who didn&#8217;t subscribe make it in&#8230;but again,<br/>there&#8217;s no way we can deny entry to people who actually subscribed!</p></blockquote>
+
+
+
+
+<blockquote><p>So, false positives are ok but false negatives aren&#8217;t&#8230;I think I&#8217;ve got this!</p></blockquote>
+
+
+
+
+<blockquote><p>Tell me Tommy, what are you thinking about?</p></blockquote>
+
+
+
+
+<blockquote><p>You remember in our signup form we asked people for their birthday? Can you quickly<br/>print me a list of all years, months and days people were born in? It should look like:</p><p>YEAR<br/>1978<br/>1979<br/>1984<br/>1985<br/>1986<br/>&#8230;</p><p>MONTH<br/>01<br/>03<br/>04<br/>05<br/>07<br/>&#8230;</p><p>DAY<br/>01<br/>02<br/>09<br/>10<br/>11<br/>12<br/>15<br/>17<br/>&#8230;</p><p>I&#8217;m gonna ask people what year they were born.<br/>If it&#8217;s in the list, I&#8217;m going to ask them what month.<br/>If it&#8217;s in the list, I&#8217;m going to ask them what day.</p><p>If they&#8217;re all in the list, there&#8217;s a good chance these guys signed up! We will<br/>definitely have false positives, but I don&#8217;t have to go through a list of 100 names,<br/>just, maybe, 20 years, 10 months and 20 days&#8230;it&#8217;s still half of the original list<br/>of names!</p></blockquote>
+
+
+
+
+<blockquote><p>You&#8217;re a genius! Not an exact science but we should be able to get this going!</p></blockquote>
+
+
+<p>Bloom filters work a little bit differently, but the idea behind them is quite
+similar to the one I just presented &mdash; let&rsquo;s get more technical!</p>
+
+<h2>The technical bits&hellip;</h2>
+
+<p>&hellip;because we&rsquo;re literally talking about <strong>bits</strong>! Instead of birth dates, a Bloom
+filter simply uses a bit array such as:</p>
+
+<table>
+<thead>
+<tr>
+<th> 0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<p>Now, like in a regular set, let&rsquo;s start adding elements to the filter: we first need to pick a hashing
+function (like <a href="https://en.wikipedia.org/wiki/MurmurHash">murmur</a>) and then <strong>flip a bit to 1 when the hashing function returns
+the index of such bit</strong>.</p>
+
+<p>For example, the string <code>some_test</code> would return <code>2</code> in an evenly distributed murmur
+(you can test it <a href="http://murmurhash.shorelabs.com/">here</a>), so we flip the element
+at index <code>2</code>:</p>
+
+<table>
+<thead>
+<tr>
+<th>0 </th>
+<th> 0 </th>
+<th> 1 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<p>Let&rsquo;s add another element to the filter &mdash; <code>another_test</code> hashes to <code>4</code>:</p>
+
+<table>
+<thead>
+<tr>
+<th>0 </th>
+<th> 0 </th>
+<th> 1 </th>
+<th>0 </th>
+<th> 1 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<p>And now let&rsquo;s test the bloom filter! Is <code>I_DONT_EXISTS</code> in the filter?</p>
+
+<p>Taken from <a href="http://murmurhash.shorelabs.com/">murmurhash.shorelabs.com</a>:</p>
+
+<p><img class="center" src="/images/murmur.png"></p>
+
+<p>This element hashes to <code>5</code>, and the value of the element at index <code>5</code> in our
+filter is <code>0</code>. This means that the element is not in the original set.</p>
+
+<p>Let&rsquo;s do another test? Let&rsquo;s see if <code>not_exist_no_no</code> is in the filter:</p>
+
+<p><img class="center" src="/images/murmur2.png"></p>
+
+<p>This element hashes to <code>2</code>, and the value of the element at index <code>2</code> in our
+filter is <code>1</code>. This would suggest that the element was in our original set &mdash;
+here&rsquo;s where Bloom filters trick you.</p>
+
+<p>A Bloom filter guarantees certainty when it tells you an element is not in a set,
+but can only give you a probability of whether the element was in it. This means
+that you can reliably use these filters to exclude values from a set, but are not
+going to be 100% sure they are in the set if the filter returns a positive result
+&mdash; in other words: <strong>Bloom filters never give you false negatives, but can give you false
+positives</strong>.</p>
+
+<p>If you&rsquo;re still having some trouble to understand how they work (I&rsquo;m not the best at this, I&rsquo;ll admit it)
+I would strongly encourage you to have a look at this <a href="http://llimllib.github.io/bloomfilter-tutorial/">interactive explanation of Bloom filters</a>.</p>
+
+<h2>Even MOAR technical bits!</h2>
+
+<p>Bloom filters are actually different &mdash; I tend to
+oversimplify for the sake of understanding. The two most important differences from
+the approach I explained above are that:</p>
+
+<ul>
+<li>the length of the bit array needs to be &ldquo;quite&rdquo; proportional (more on this later) to the number
+of elements in the original set, as a set with 100 elements represented in a filter
+with only 2 bits would be useless (there&rsquo;s an incredibly strong chance both bits
+would be positive, increasing the chances of false positives)</li>
+<li>multiple hashing functions are used to increase entropy within the distribution
+of 1-value bits, as <a href="https://www.quora.com/Why-do-bloom-filters-have-multiple-hash-functions">a single hashing function could lead to a higher number of collisions</a></li>
+</ul>
+
+
+<p>There are generally four variables you want to keep an eye on when using a Bloom
+filter:</p>
+
+<ul>
+<li>the number of items in the filter (= number of items in the original set, <strong>n</strong>)</li>
+<li>the probability of false positives (<strong>p</strong>)</li>
+<li>number of bits in the filter (<strong>m</strong>)</li>
+<li>number of hash functions used to convert element into bits (<strong>k</strong>)</li>
+</ul>
+
+
+<p>You start by knowing (or by having a good estimate of) your <strong>n</strong> and defining an
+acceptable <strong>p</strong>; at that point you derive <strong>m</strong> and <strong>k</strong> by:</p>
+
+<ul>
+<li><code>m = ceil((n * log(p)) / log(1.0 / (pow(2.0, log(2.0)))))</code></li>
+<li><code>k = round(log(2.0) * m / n)</code></li>
+</ul>
+
+
+<p>We can test this out by using <a href="https://hur.st/bloomfilter">this interesting calculator</a> made available by
+<a href="https://hur.st/">Thomas Hurst</a>:</p>
+
+<table>
+<thead>
+<tr>
+<th>items (n) </th>
+<th> probability (p) </th>
+<th> space (m) </th>
+<th> hash fn (k)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 </td>
+<td> 0.5 </td>
+<td> 145b </td>
+<td> 1</td>
+</tr>
+<tr>
+<td>100 </td>
+<td> 0.1 </td>
+<td> 480b </td>
+<td> 3</td>
+</tr>
+<tr>
+<td>1k </td>
+<td> 0.5 </td>
+<td> 175B </td>
+<td> 1</td>
+</tr>
+<tr>
+<td>1k </td>
+<td> 0.1 </td>
+<td> 600B </td>
+<td> 3</td>
+</tr>
+<tr>
+<td>1M </td>
+<td> 0.1 </td>
+<td> 600KB </td>
+<td> 3</td>
+</tr>
+<tr>
+<td>1M </td>
+<td> 0.01 </td>
+<td> 1.2MB </td>
+<td> 7</td>
+</tr>
+<tr>
+<td>1M </td>
+<td> 0.001 </td>
+<td> 1.7MB </td>
+<td> 10</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Now it&rsquo;s the &ldquo;show me some code!&rdquo; time, so let&rsquo;s grab the <a href="https://www.npmjs.com/package/bloomfilter">bloomfilter</a>
+package on NPM and <a href="https://github.com/odino/bloom-test">let&rsquo;s run some benchmarks</a>.
+We will first create a list of a 10k elements and check 1k random elements against it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">originalSet</span> <span class="o">=</span> <span class="nx">generateSet</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="nx">tests</span> <span class="o">=</span> <span class="nx">generateSet</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nx">test</span> <span class="nx">of</span> <span class="nx">tests</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">originalSet</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">test</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// HERE BE DRAGONS!</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and let&rsquo;s try to compare it with a high-precision (0.01% probability of false positives)
+filter:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">let</span> <span class="nx">BloomFilter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bloomfilter&#39;</span><span class="p">).</span><span class="nx">BloomFilter</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">originalSet</span> <span class="o">=</span> <span class="nx">generateSet</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</span><span class='line'><span class="nx">tests</span> <span class="o">=</span> <span class="nx">generateSet</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// m=10k,p=0.01</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">bloom</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BloomFilter</span><span class="p">(</span>
+</span><span class='line'>  <span class="mi">95851</span><span class="p">,</span> <span class="c1">// number of bits to allocate.</span>
+</span><span class='line'>  <span class="mi">7</span>        <span class="c1">// number of hash functions.</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nx">elem</span> <span class="nx">of</span> <span class="nx">originalSet</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bloom</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">elem</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;bloom-high-precision&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nx">test</span> <span class="nx">of</span> <span class="nx">tests</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">bloom</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">test</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// HERE BE DRAGONS!</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;bloom-high-precision&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the lolz, let&rsquo;s also have a very imprecise bloom filter thrown into the mix:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// m=10k,p=0.5</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">bloom</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BloomFilter</span><span class="p">(</span>
+</span><span class='line'>  <span class="mi">14427</span><span class="p">,</span> <span class="c1">// number of bits to allocate.</span>
+</span><span class='line'>  <span class="mi">1</span>        <span class="c1">// number of hash functions.</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and let&rsquo;s run them together:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>plain: 29.210ms
+</span><span class='line'>bloom-high-precision: 0.694ms
+</span><span class='line'>bloom-yolo: 0.357ms
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Quite of a difference! Such performance gains are quite understandable since the
+filter does not need to loop through the set (<code>O(n)</code>), it just needs to hash the
+element it has received as many times as the number of hash functions in the filter (<code>O(k)</code>)
+and then access the list at the index produced by the hash functions (<code>O(1)</code>), ending
+up at a complexity of <code>O(k)</code> &mdash; which is pretty darn fast!</p>
+
+<p>Another important thing to consider is, beside the time-advantage,
+is that <strong>the space advantage of Bloom filters is quite significant</strong>: since they don&rsquo;t need
+to store the original elements of the set, but just a fixed-length bit sequence, they tend
+to consume less space than hash tables, tries or plain lists.</p>
+
+<p>An interesting thing to consider is how these filters relate to hash tables:</p>
+
+<blockquote><p>hash tables gain a space and time advantage if they begin ignoring collisions and store only whether each bucket contains an entry; in this case, they have effectively become Bloom filters with k = 1</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Bloom_filter#Space_and_time_advantages'>Space and Time Advantages of Bloom Filters</a></cite></footer></blockquote>
+
+
+<h2>A note on hashing functions</h2>
+
+<p>It&rsquo;s really important to pick the right hashing functions when implementing a Bloom
+filter, as they need to:</p>
+
+<ul>
+<li><strong>be extremely fast</strong>: strong cryptographic hashing functions are not suitable since
+they are generally computationally expensive (= slow), while you will want your
+<code>O(k)</code> to be as fast as possible</li>
+<li><strong>distribute outputs uniformly</strong>: it&rsquo;s important for the filter to &ldquo;turn bits
+on&rdquo; as uniformly as possible, as a &ldquo;biased&rdquo; hash function would end up increasing
+the probability of false positive</li>
+</ul>
+
+
+<p>For example, a unanimous choice seems to be <a href="https://en.wikipedia.org/wiki/MurmurHash">MurMurHash3</a>,
+which guarantees a good degree of uniformity in terms of distribution and was
+designed with speed, <a href="https://en.wikipedia.org/wiki/List_of_hash_functions#Non-cryptographic_hash_functions">not security</a>, in mind.</p>
+
+<h2>Closing remarks</h2>
+
+<p>Have you ever visited a website and seen a security notice from your browser,
+telling you the URL you&rsquo;re about to access could be malicious? How do you think
+your browser can efficiently check whether the URL is among a huge list of
+malicious ones?</p>
+
+<p>Well, up until a few years ago <a href="http://blog.alexyakunin.com/2010/03/nice-bloom-filter-application.html">Chrome used Bloom filters</a>
+and that&rsquo;s just one interesting, beneficial application of this amazingly clever
+data structure (if you&rsquo;re curious, it since <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=71832">switched to prefix sets</a> &mdash;
+&ldquo;Searches take about 3x as long, but it should scale well&rdquo;).</p>
+
+<p>To give you some more context, Bloom filters appeared in July 1970 &mdash; that is 7 months into the unix timestamp.</p>
+
+<p>Here I sit speechless.</p>
+
+<h2>Further readings</h2>
+
+<ul>
+<li><a href="https://dl.acm.org/citation.cfm?doid=362686.362692">the original paper</a></li>
+<li><a href="https://blog.medium.com/what-are-bloom-filters-1ec2a50c68ff">What are Bloom filters (and how Medium uses them)?</a></li>
+<li><a href="https://cloud.google.com/blog/big-data/2017/05/after-lambda-exactly-once-processing-in-cloud-dataflow-part-2-ensuring-low-latency">After Lambda: Exactly-once processing in Cloud Dataflow</a></li>
+<li><a href="http://blog.kiip.me/engineering/sketching-scaling-bloom-filters/">Sketching &amp; Scaling: Bloom Filters</a></li>
+<li><a href="http://www.michaelnielsen.org/ddi/why-bloom-filters-work-the-way-they-do/">Why Bloom filters work the way they do</a></li>
+<li><a href="https://bdupras.github.io/filter-tutorial/">Probablistic Filters Visualized</a></li>
+<li><a href="https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf">Cuckoo Filter: Practically Better Than Bloom</a></li>
+<li><a href="https://eugene-eeo.github.io/blog/bloom-filter-explained.html">Bloom Filters Explained</a></li>
+</ul>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/bloom-filters-when-data-structures-get-smart/"
+		},
+		"headline": "Bloom filters: when data structures get smart",
+		"description": "Today we have a look at Bloom filters, an ingenious probabilistic data structure that allows to verify membership at scale.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-02-10 21:09:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

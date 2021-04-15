@@ -1,0 +1,311 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Let's dive deep into the NoSQL world to eventually meet one of its rising stars: OrientDB" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>The strange case of OrientDB and graph databases</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/the-strange-case-of-orientdb-and-graph-databases/" />
+		<meta property="og:title" content="The strange case of OrientDB and graph databases" />
+		<meta property="og:description" content="Let's dive deep into the NoSQL world to eventually meet one of its rising stars: OrientDB" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/the-strange-case-of-orientdb-and-graph-databases/">The strange case of OrientDB and graph databases</a></h1>
+        <time>06 February 2015</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 6 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><ol class="aseries">
+    <p>This post is part of the &#8221;<strong><a href="/categories/orientdb-101/">OrientDB 101</a></strong>&#8221; series, derived from a previous work started in 2013/2014: some
+    information might be outdated, but the core of this series should still be intact.</p>
+    <p>Here is a list of all the articles in this series:</p>
+    <li>
+        <a href="/the-strange-case-of-orientdb-and-graph-databases/">The strange case of OrientDB and graph databases</a>
+    </li>
+    <li>
+        <a href="/an-overview-of-orientdbs-capabilities/">An overview of OrienDB&#8217;s capabilities</a>
+    </li>
+    <li>
+        <a href="/going-beyond-rdbms/">Going beyond RDBMS</a>
+    </li>
+    <li>
+        <a href="/orientdb-just-like-any-other-nosql-database/">Just like any other NoSQL database?</a>
+    </li>
+</ol>
+
+
+<p>I&rsquo;d  like to start this new series by providing some
+context and all-around information about the subject,
+so this article will mostly be a boring cascade of
+words rather than real-world examples: I plan to publish
+~10 articles on OrientDB in the next 2/3 months (as I have some
+old drafts that I finally got to complete) so&hellip;just be patient ;&ndash;)</p>
+
+<!-- more -->
+
+
+<h2>OrientDB in a sentence</h2>
+
+<p><a href="http://www.orientechnologies.com/orientdb/">OrientDB</a> in a sentence?
+Let&rsquo;s try with:</p>
+
+<blockquote><p>A NoSQL graph database that recently gained lot of attention
+due to its performances and features which, combined together,
+offer a tool that is by far different from any other product
+in the DBMS ecosystem</p></blockquote>
+
+<p>The aim of this series is to guide the reader through understanding
+what are the most interesting  features that OrientDB brings on
+the table out-of-the-box and how, melding them altogether,
+this database differs from traditional relational systems and
+other NoSQL products, being it document DBs like MongoDB or
+key-value stores like Redis or Memcache.</p>
+
+<p><span class='pullquote-right' data-pullquote='OrientDB is a game-changer in the DB market'>
+OrientDB, in a few more words, is a NoSQL database that belongs
+to the family of <a href="http://en.wikipedia.org/wiki/Graph_database">graph DBs</a>, a type of storage engines particularly
+suited to represent and store data in graphs, composed of <a href="http://en.wikipedia.org/wiki/Graph_%28mathematics%29">nodes
+and edges</a>,
+which are structures connecting nodes to each other.</p>
+
+<p>Orient is extremely versatile, as <strong>it includes features from relational
+databases, object oriented engines, document DBs and, of course, graph
+models</strong>: it is also capable of storing and serving records as JSON documents
+and performs very well thanks to its indexing algorithm, named <a href="https://groups.google.com/forum/#!topic/orient-database/vSV6dWHQRyk">MVRB-Tree</a>:
+OrientDB is so impressive that, even though it’s pretty young, big players
+like <a href="http://www.orientechnologies.com/customers/">Sky, Lufthansa, Cisco and UltraDNS</a>
+are already using it in production.</p>
+
+<p>Since it provides a wide variety of different and powerful features that we
+can’t find altogether in any other database, OrientDB can be considered
+a <strong>new-generation DB</strong>, as it differs from all of its competitors by aggregating
+features from different engines: from having an object-oriented model to
+exposing a REST interface, from being able to traverse a graph of thousands
+records, at any level of depth, in milliseconds, to its simplified SQL
+syntax, all of the features that make this DB engine so unique will lead
+us to the conclusion that OrientDB is a game-changer in the DB market, as
+it provides to the developers a toolset and a variety of functionalities that
+they can never take advantage of with any other database management system.
+</span></p>
+
+<h2>Why looking into OrientDB?</h2>
+
+<p>It would be easier, but probably too less interesting, to start this series
+by immediately introducing the reader to the incredible meshup of features
+and scenarios that OrientDB offers and covers; so before digging into the
+product itself, a good question we should ask ourselves would be:
+why should we look at another database engine?</p>
+
+<p>One thing that we &ndash; software engineers &ndash; are always eager to do is to learn
+new patterns, tools and practices, as the process of learning stimulates us
+and seems to be a good workaround for our day-to-day routine.</p>
+
+<p>On an opposite note, what we find really hard to accept, is to apply very old
+technologies and schemes to new contexts, as we tend to think that what has been
+working for us in the past few years will always work and be there for us.</p>
+
+<p>If you, for example, think about the NoSQL ecosystem, you will find that those
+concepts that are really attractive in our times are an implementation of <strong>ideas
+engineers had 20, 30 or even 40 years ago</strong>: when Mikio Hirabayashi released,
+in 2007, Tokyo Cabinet, a key-value storage engine,  it was clear that most of
+Hirabayashi’s work was a re-implementation a tool he already wrote 4 years before,
+named QDBM; an interesting thing that a few know is that QDBM itself is almost 40
+years old, as it is a direct descendant of <a href="http://en.wikipedia.org/wiki/Dbm">DBM</a>, a generic database library written
+by <a href="http://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> &ndash; also known for being the main contributor to the UNIX operating
+system &ndash; in 1979.</p>
+
+<p>When we look at Hirabayashi’s work, we can think of it as a &ldquo;<a href="http://en.wikipedia.org/wiki/Kaizen">Kaizen</a>&rdquo; &ndash; a Japanese
+word which stands for “continuous improvement“ &ndash; as he took concepts and an initial
+design (DBM) and developed 3 tools, in rapid succession, based on that 30+ years
+old original tool: QDBM, Tokyo and Kyoto Cabinet<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p><span class='pullquote-right' data-pullquote='it is often
+difficult for us to realize that sometimes, even though RDBMS serve for a wide
+range of purposes, they are not the best tools to work with'>
+But to reach his own Kaizen one does not only have to improve and re-elaborate
+old ideas and make them better, as there are some scenarios where the problem
+is caused by the idea itself, not the implementation: it is the “one size fits
+all” problem; one has a good solution, tries to adapt it to all possible scenarios
+and projects he faces&hellip;and drowns with it.</p>
+
+<p>As we are all used to relational database management systems (RDBMS), it is often
+difficult for us to realize that sometimes, even though RDBMS serve for a wide
+range of purposes, they are not the best tools to work with for a specific
+problem: we often pick them among other solutions because we’re used to them,
+thinking “it worked until now”, without wondering if we could utilize a very
+different tool for the job.</p>
+
+<p>For us, most of the time, “RDBMS fit all”, and persistency of our applications
+is enslaved to their patterns, limitations and design.
+</span></p>
+
+<h2>NoSQL to the rescue</h2>
+
+<p>But this was a few years back, right?</p>
+
+<p>In the last ~5 years we saw a huge  growth in utilization of NoSQL
+storage engines like CouchDB, MongoDB, Redis  or whatsoever buzzword of
+the moment: we first took a look at those tools, thought that they were
+pretty attractive and eventually used them, without
+really asking ourselves “why are we using a NoSQL database?” and &ndash; most
+important &ndash; “why is it called NoSQL?”.</p>
+
+<p>As most of us know, <strong>NoSQL is not a negation of the traditional RDBMS ecosystem</strong>,
+it just stands for “Not only SQL”, as if there is no war between relational
+engines and NoSQL databases: fact is that there is no conflict between relational
+and non-relational models, as they serve for different needs; comparing the 2
+is like comparing pizza with eggs: one can chose based on his own taste, but at
+the end the final decision is made considering external requirements, like if
+you are on a diet or out for dinner with your better half; we, as software engineers,
+are bound to the same constraint: we cannot decide based on our own taste, we
+need to first consider the project’s requirements and eventually pick the right
+tool for the situation.</p>
+
+<p>This is why I am writing this series dealing with a NoSQL database &ndash; <em>one of a kind</em>, I would
+say &ndash; as it’s build on top of innovative concepts as well as ten-years-old ones,
+it’s a direct descendant of other DBMS and brings brand new possibilities in
+data storage and management.</p>
+
+<p>Categorizing a tool such as OrientDB is a very difficult job: sure, we can
+define OrientDB as a NoSQL graph database, but limiting ourselves to a mere
+definition wouldn’t allow us to comprehend the power of the tool itself;
+OrientDB, for example, also includes a document layer and can be therefore
+classified also as a document DB: given the mix of concepts and features
+included in it, this storage engine pushes a developer’s boundaries further
+ahead compared to what any other DBMS can offer.</p>
+
+<p>Ready to <a href="http://pettergraff.blogspot.sg/2013/12/orientdb-thanks.html">be amazed</a>?
+Let&rsquo;s have a closer look at Orient&rsquo;s power features in the next article!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Hirabayashi eventually developed Kyoto 2009, to review the implementation of Tokyo <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/the-strange-case-of-orientdb-and-graph-databases/"
+		},
+		"headline": "The strange case of OrientDB and graph databases",
+		"description": "Let's dive deep into the NoSQL world to eventually meet one of its rising stars: OrientDB",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2015-02-06 01:29:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

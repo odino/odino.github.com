@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Webassembly | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/webassembly/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The ABS Playground: Run ABS Code Directly in Your Browser (WHOOOOP!)]]></title>
+    <link href="https://odino.org/the-abs-playground-run-abs-code-directly-in-your-browser-whoooop/"/>
+    <updated>2019-08-17T18:45:00+00:00</updated>
+    <id>https://odino.org/the-abs-playground-run-abs-code-directly-in-your-browser-whoooop</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/wasm.png"></p>
+
+<p>Remember the last time you thought &ldquo;ough, JavaScript&rdquo;?</p>
+
+<p>Well, that&rsquo;s me every other day: I love JS for
+its flexibility and dynamism, but I also sometimes find
+it painful to deal with, especially in some
+specific programming contexts.</p>
+
+<p>If you, like me, hoped to be able to write
+something other than JavaScript in order to get
+stuff done on the web, chances are you bumbed
+into <a href="https://en.wikipedia.org/wiki/WebAssembly">WebAssembly</a> (abbr. WASM),
+and considered it your holy grail. WASM
+is a portable binary format that&rsquo;s been
+<a href="https://caniuse.com/#search=wasm">implemented by all major browsers</a> and
+allows other languages to be compiled for the
+web.</p>
+
+<p>Why is that important? Well, that&rsquo;s the key
+of how I managed to run an ABS playground
+(a code runner) on the browser.</p>
+
+<!-- more -->
+
+
+<h2>The original issue</h2>
+
+<p>One of ABS' main contributors, Ming, <a href="https://github.com/abs-lang/abs/issues/236">smartly
+suggested</a> that it would be interesting to let
+users play around with ABS without having it
+installed on their systems.</p>
+
+<p>My first thought was to replicate the <a href="https://play.golang.org/">Go playground</a>,
+but that would have meant setting up a server-side
+code-runner, and that would have required
+more time (maintenance) and money (server cost)
+that we had on hand.</p>
+
+<p>We abandoned the idea of a code runner for a while,
+until we thought of something creative&hellip;</p>
+
+<h2>WASM to the rescue</h2>
+
+<p><a href="https://github.com/golang/go/wiki/WebAssembly">Go recently added support for WASM</a>
+as one of its compilation targets, meaning you can
+run Go applications on the browser &mdash; you just
+need a simple <code>GOOS=js GOARCH=wasm go build -o script.js script.go</code>
+and you&rsquo;re set with an executable that can run within the
+browser.</p>
+
+<p>I then thought: what if we could compile the ABS interpreter,
+which is purely written in Go, to WASM?</p>
+
+<p>The result is a simple <a href="https://github.com/abs-lang/abs/blob/4112e3ef13b595ef39e55c4be8d5314004037d62/js/js.go">&ldquo;JS&rdquo; distribution of the ABS
+interpreter</a>,
+50 lines of code that bring ABS to the browser!</p>
+
+<p>The downside of compiling Go into WASM is that the
+binaries are a bit heavy (<a href="https://github.com/abs-lang/abs/blob/master/docs/abs.wasm">ABS is 4.3 MB</a>),
+but, considering that this is more of a proof-of-concept
+than a serious attempt to run ABS in the browser, I
+can&rsquo;t really complain.</p>
+
+<p>Armed with a distribution of the ABS interpreter that
+can run within your browser, I then setup a <a href="https://raw.githubusercontent.com/abs-lang/abs/4112e3ef13b595ef39e55c4be8d5314004037d62/docs/playground.md">silly HTML
+page in our docs</a>
+that would load the WASM binary and give you a textboxt
+to play around, which brings me to the big announcement&hellip;</p>
+
+<h2>Welcome to the ABS playground!</h2>
+
+<p>Without further ado, please head over to
+<a href="https://www.abs-lang.org/playground">www.abs-lang.org/playground</a>:</p>
+
+<p><img class="center" src="/images/abs-playground.png"></p>
+
+<p>You can try most of ABS' features directly in
+the web editor: simply write some code, hit
+<code>Ctrl+Enter</code> and see the result pop in front
+of your eyes!</p>
+
+<p>Let me know if you have any feedback!</p>
+]]></content>
+  </entry>
+  
+</feed>

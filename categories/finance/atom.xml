@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Finance | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/finance/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: An Introduction to Stock and Options]]></title>
+    <link href="https://odino.org/book-review-an-introduction-to-stock-and-options/"/>
+    <updated>2017-01-20T15:23:00+00:00</updated>
+    <id>https://odino.org/book-review-an-introduction-to-stock-and-options</id>
+    <content type="html"><![CDATA[<p>For $2.99 you surely can&rsquo;t complain:
+this book certainly offers what you&rsquo;re
+looking for.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/introduction-stock.jpg"></p>
+
+<p>It&rsquo;s a very brief <em>dossier</em> on everything you possibly
+need to know about equity and stock options, or, I
+better say, it&rsquo;s everything you need to know <strong>unless
+you need an expert&rsquo;s view on the topic</strong>.</p>
+
+<p>It will take you less than an hour to read and
+is definitely <strong>more helpful to startup</strong> employees or people,
+like me, who want a bit more technical background on
+the subject<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>The verdict? Well, I would highly recommend it for people
+who would like to have a brief, &ldquo;technical&rdquo; overview on
+the subject.</p>
+
+<p>Again, it&rsquo;s <a href="https://www.amazon.com/Introduction-Stock-Options-David-Weekly-ebook/dp/B0055PQ4H8">$2.99</a> :)</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>If you&rsquo;re a founder, it certainly won&rsquo;t help you figure out what kind of grant structure you should give your employees, but that was never the purpose of the book.<a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

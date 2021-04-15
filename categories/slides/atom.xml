@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Slides | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/slides/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Tech Team of ~10 People]]></title>
+    <link href="https://odino.org/a-tech-team-of-%7E10-people/"/>
+    <updated>2016-09-22T15:18:00+00:00</updated>
+    <id>https://odino.org/a-tech-team-of-~10-people</id>
+    <content type="html"><![CDATA[<p>I am currently in Berlin, attending the <a href="http://www.techsummit2016.com/">2016 Rocket Tech Summit</a>: what a good
+opportunity to share some insights on how we run our business with such a small
+tech team.</p>
+
+<!-- more -->
+
+
+<p>Given <a href="https://www.ft.com/content/078ea8d2-809a-11e6-8e50-8ec15fb462f4">recent news</a>,
+I was extremely pleased to share some of our ideas / pillars with the
+Rocket-verse (and you as well):</p>
+
+<p><div class="slideshare" id="__ss_66307948"><iframe src="https://www.slideshare.net/slideshow/embed_code/66307948 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>To an even more fruitful 2017!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying 3 Times a Day Without a Downtime]]></title>
+    <link href="https://odino.org/deploying-3-times-a-day-without-a-downtime/"/>
+    <updated>2015-10-03T17:15:00+00:00</updated>
+    <id>https://odino.org/deploying-3-times-a-day-without-a-downtime</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/rocket-small.png"></p>
+
+<p>At the beginning of September, part of the
+<a href="http://tech.namshi.com/team">Namshi team</a>
+attended the 2015 <a href="http://www.techsummit2015.com/">Rocket Tech Summit</a>
+in Berlin, a 2-days event that brought together
+rocketers from <a href="https://www.rocket-internet.com/companies">all over the world</a>:
+the event was focused on knowledge sharing among many
+of the ventures that have been launched by
+<a href="https://www.rocket-internet.com/">Rocket</a>, but we also
+got the chance to hear some kick-ass presentations from
+industry leaders like Amazon, Google and ThoughtWorks.</p>
+
+<!-- more -->
+
+
+<p><a href="https://www.linkedin.com/in/manuelgruber">Manuel</a>
+and I had a couple slots to share how we handle a few
+things at Namshi (his presentation was more focused
+on how we do mobile) and I&rsquo;m happy to share, as usual,
+the slides here: my presentation was mostly dealing
+with how we try to build the architecture in order to be
+confident enough to change, deploy and evolve the
+software without getting tangled in those typical
+problems (read: slowness) that bigger companies
+usually face.</p>
+
+<p><div class="slideshare" id="__ss_53431188"><iframe src="https://www.slideshare.net/slideshow/embed_code/53431188 " width="850" height="730" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>You can also have a look at the <a href="http://www.slideshare.net/odino/deploying-3-times-a-day-without-a-downtime-rocket-tech-summit-in-berlin">presentation on slideshare</a>&hellip;and I&rsquo;d be really glad to hear your feedback!</p>
+]]></content>
+  </entry>
+  
+</feed>

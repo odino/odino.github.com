@@ -1,0 +1,417 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Go is an incredibly exciting language: what made me fall in love with it?" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>My (nice) experience with Golang</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/my-take-on-golang/" />
+		<meta property="og:title" content="My (nice) experience with Golang" />
+		<meta property="og:description" content="Go is an incredibly exciting language: what made me fall in love with it?" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/my-take-on-golang/">My (nice) experience with Golang</a></h1>
+        <time>19 April 2015</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 6 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right" src="/images/gopher.png"></p>
+
+<p>For the past six months (right after the <a href="http://europe.dockercon.com/">DockerCon</a>)
+I have been constantly taking some time out to play
+around with <a href="http://golang.org/">Go</a>, trying
+to understand why a lot of new tools were being
+written in this interesting language, especially
+in the DevOps world.</p>
+
+<p>In the last few days <a href="http://tech.namshi.com/">we</a>
+published our first open source
+library written in go, <a href="https://github.com/namshi/godo">godo</a>,
+and I wanted to share my impression
+of the language and the platform.</p>
+
+<!-- more -->
+
+
+<h2>Background</h2>
+
+<p>I have no solid experience in Go and you
+should understand that I come from a scripting
+background, starting from PHP all the way to
+JavaScript, 2 languages I both love &amp; hate
+depending on the day :)</p>
+
+<p>Even though my experience comes from 2 languages
+and platforms that have been <a href="http://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/">highly</a> <a href="http://www.boronine.com/2012/12/14/Why-JavaScript-Still-Sucks/">criticized</a>
+over the past years, I&rsquo;ve had a lot of fun
+trying to preach towards the adoption of of <a href="http://martinfowler.com/eaaCatalog/">PEAA</a>,
+automated testing<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> and good abstraction,
+so I&rsquo;ve seen both the <a href="http://programmers.stackexchange.com/questions/110797/why-is-php-so-frequently-used-on-web-servers">simplistic / simple</a> and the
+<a href="http://www.quora.com/What-are-the-most-ridiculous-Java-class-names-from-real-code">complex / structured</a>, which is why I always tend
+to play around with new tools and platforms: <strong>one
+more try, one more point of view</strong>.</p>
+
+<p>So, here starts the fun&hellip;</p>
+
+<h2>Getting started</h2>
+
+<p>So, it all started on my way back from Amsterdam
+(where DockerCon 2014 was held), I typed <code>mkdir holland</code>
+(what else?) and followed an advice <a href="http://www.matteocollina.com/#biography">a friend of mine</a>
+gave me, which was &ldquo;<em>Golang is really good with concurrency,
+[&hellip;] go ahead and write your next proxy with it</em>&rdquo;:
+let&rsquo;s write a proxy then!</p>
+
+<p>The first natural thing was to then write a simple
+Dockerfile starting with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FROM golang
+</span><span class='line'>
+</span><span class='line'>MAINTAINER Alessandro Nadalin "alessandro.nadalin@gmail.com"
+</span><span class='line'>
+</span><span class='line'>RUN go get github.com/codegangsta/gin
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5 minutes and I was ready to play with Golang on my
+machine, writing my first &ldquo;hello world&rdquo; copying
+the sample code from <code>golang.org</code>.</p>
+
+<p><strong>Overall experience</strong>: it was fairly easy to setup
+everything on my system, but this is more thanks to
+Docker rather than Go itself.</p>
+
+<h2>Documentation</h2>
+
+<p>The next step was to try to find documentation
+on how to do the simplest tasks with Go, just like I
+did when I first started learning PHP 7 years ago and
+JS a few full-moons ago.</p>
+
+<p>To be honest, the experience wasn&rsquo;t pleasant, at least at first:
+there aren&rsquo;t as many tutorial guiding through your first
+steps with Go and, obviously, I was finding myself in trouble
+even to simply declare my own packages and understanding
+<a href="https://www.google.com/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=gopath">how the gopath works</a>.</p>
+
+<p>Luckily, I was able to figure these basic things out
+quite quickly, but not quick enough to avoid getting my
+wifi being cut off as I was getting on a plane to get back
+to Dubai; at that point, the greatest of all surprises:
+<code>godoc -http=:6060</code>. Pure magic.</p>
+
+<p><img class="right" src="/images/godoc.png"></p>
+
+<p>Yes, you can basically browse the whole golang.org website
+offline, which gave me a huge boost even though I was
+on a plane, without internet connection<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p><strong>Overall experience</strong>: what I still find hard is to be
+able to rely on a plethora of online tutorials on how to
+do some stuff (ie. <a href="https://www.google.com/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=golang+ssh+gateway+host">SSHing from Go through a gateway</a>),
+but you can live with it. The offline documentation is
+really great and, on a broader level, the whole Golang
+community is making a great effort to give newcomers a
+clue.</p>
+
+<h2>Compilation</h2>
+
+<p>One of the I was worried about is that Go is compiled,
+though it&rsquo;s also one of its biggest strenghts.</p>
+
+<p>The <em>meh</em> feeling you get once you hear that something is
+compiled, coming from a scripting environment, is that
+all of that jazz adds overhead, dead moments that
+get you out of the zone and so on; luckily, Golang was born
+at Google which means that it was designed to scale, both
+in production and during development, else imagine how many
+man days would be lost in a place like Google, who can
+count on <a href="http://www.quora.com/How-many-software-engineers-does-Google-have">~10k engineers</a><sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>.</p>
+
+<p>As a matter of fact, you can compile the entire Go source
+in <a href="http://www.quora.com/How-do-Rust-and-Go-compare-1/answer/Carmi-Grushko">8 seconds</a>,
+which gives you a fair idea. Your own software, which will
+probably use 5% of those dependencies, will probably take
+less than 300ms, which is pretty <strong>ideal</strong>.</p>
+
+<p>In JS I would develop much different applications,
+but if I have to think of how long I wait between editing a file
+in an angular app and being able to see the changes on the browser,
+I think it might be around the same time.
+This is not to compare JS and Go (how silly would that be?) but it&rsquo;s
+more to highlight the fact that if you&rsquo;ve already worked on frontend,
+the average Go program won&rsquo;t dramatically change your habits,
+at least from a development workflow perspective.</p>
+
+<p>And then, <a href="http://programmers.stackexchange.com/questions/83780/how-fast-can-go-go">Go is fast</a>. How fast?
+You don&rsquo;t really care, because your typical use case won&rsquo;t stress
+Go that much, but expect it to perform <a href="http://www.reddit.com/r/golang/comments/2r1ybd/speed_of_go_compared_to_java_and_python/">significantly better
+than scripted stuff like Python or Node</a>.</p>
+
+<p>Of course, it always depends on <strong>your application</strong>, <strong>your need</strong> and
+<strong>your coding skills</strong> &mdash; at the end of the day I can only point
+obvious truths out, and the fact that something compiled performs
+better than something interpreted isn&rsquo;t groundbreaking news :)</p>
+
+<p>One thing I don&rsquo;t particularly like is that whenever I comment
+some code, I find that the source hasn&rsquo;t been compiled because</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>src/exec/exec.go:8: imported and not used: "sync"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which means that I just commented some code that relied on an
+external package and now, since that code is not used anymore,
+the compiler warns me that &ldquo;<em>hey, why are you importing a useless package?</em>&rdquo;</p>
+
+<p>Can live with this kind of stuff.</p>
+
+<p><strong>Overall experience</strong>: pretty solid. I love the fact that whatever
+I write can be run on Windows without too much of a hassle, that
+it produces a binary that <strong>just works</strong> and that you don&rsquo;t have
+to worry about too many things. The transition, in terms of paradigm,
+was pretty straightforward.</p>
+
+<h2>Standard library</h2>
+
+<p>Go&rsquo;s standard library is rock-solid and quite vast:
+give a look at the <a href="http://golang.org/pkg/">list of packages</a> and you&rsquo;ll get
+an idea.</p>
+
+<p>The way the <code>godoc</code> commands presents packages, by the way, is
+pretty good: you will see the docblocks for every package / function,
+along with the annotated source:</p>
+
+<p><img class="right" src="/images/go-source.png"></p>
+
+<p>Overall, I feel someone&rsquo;s got my back when I have a problem:
+you will usually find some package or small utility function
+that will solve your problem or provide inspiration for your own
+use case.</p>
+
+<p><strong>Overall experience</strong>: I think there is still a lot that can
+be abstracted and put in Go&rsquo;s standard library, but the general
+feeling I have is that&rsquo;s already very good. Sometimes I miss the
+(3rd party) modularity that comes with JavaScript, but there are
+a lot of <a href="http://go-search.org/">external packages</a> for Go as well.</p>
+
+<h2>Generics</h2>
+
+<p>This has been reported to me by more than one person, and I never understood
+it until I actually had to face the &ldquo;problem&rdquo;.</p>
+
+<p>Go&rsquo;s <a href="http://golang.org/doc/faq#generics">lack of generics</a> irritates
+a few people, though I can ensure you can live without them without
+having to worry too much.</p>
+
+<p>In other words, <strong>consider not having generics a feature</strong>: you need to
+live without them and design software in a way that doesn&rsquo;t allow
+room for generics or, in other words, ambiguity.</p>
+
+<p><strong>Overall experience</strong>: it is probably true that generics add flexibility
+to your development experience, but like the golang&rsquo;s website says, they
+&ldquo;<em>add complexity and extra cost in the type system and run-time</em>&rdquo;, so you&rsquo;ll
+have to learn to live without them. I am ok with it.</p>
+
+<h2>go fmt ./&hellip;</h2>
+
+<p>I wont waste too much time on this, but let&rsquo;s just say that, in
+my opinion, we should have something like go&rsquo;s fmt in every single
+programming platform.</p>
+
+<p><img class="center" src="/images/go-fmt.png"></p>
+
+<p><strong>Overall experience</strong>: A W E S O M E ++</p>
+
+<h2>Wonkiness</h2>
+
+<p>There are other small weird things that make Go look
+wonky at first, ie. function visibility:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kn">package</span> <span class="nx">mypackage</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// protected</span>
+</span><span class='line'><span class="kd">func</span> <span class="nx">doSomething</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// public</span>
+</span><span class='line'><span class="kd">func</span> <span class="nx">DoSomething</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These sort of things might seem counter-intuitive,
+but at the end of the day they all contribute to a
+more coincise syntax<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup> and a more pragmatic
+way of programming.</p>
+
+<p><strong>Overall experience</strong>: I would say Go&rsquo;s wonky enough :)
+I don&rsquo;t like the syntax very much, but it&rsquo;s not like
+I was coming straight out of the 7th heaven, being used
+to JS and PHP. At the end of the day it&rsquo;s coincise and
+decent enough that I feel pretty ok about it.</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;m very happy of my experiment and I hope I&rsquo;ll be able
+to play more with Go, as it seems to fill some gaps where
+other programming languages / platforms aren&rsquo;t great at. I believe that
+the overall development experience is quite nice and the
+language is pretty easy to pick up, granted you have
+a couple years of experience with software development in general.</p>
+
+<p>Last but not least, lately I&rsquo;ve seen <a href="http://odino.org/5-technologies-you-should-keep-an-eye-on-in-2015/">so many DevOps tools
+being built with Golang</a>, and I can finally say
+<a href="https://github.com/namshi/godo">we joined the party</a> :)</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>lol, godo doesnt have tests #sorry <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>European airlines&#8230; <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Of course, not everyone does Go there, but you get the point <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>And, to be clear, I don&#8217;t like Go&#8217;s syntax overall <a href='#fnref:4' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/my-take-on-golang/"
+		},
+		"headline": "My (nice) experience with Golang",
+		"description": "Go is an incredibly exciting language: what made me fall in love with it?",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2015-04-19 22:30:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

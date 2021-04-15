@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Gem | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/gem/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What's Up With My Gem Install? Symbol SSLv2_method, Version OPENSSL_1.0.0 Not Defined]]></title>
+    <link href="https://odino.org/undefined-method-invoke-with-build-args-for-nil-nilclass/"/>
+    <updated>2017-03-14T17:33:00+00:00</updated>
+    <id>https://odino.org/undefined-method-invoke-with-build-args-for-nil-nilclass</id>
+    <content type="html"><![CDATA[<p>Ever met this guy?</p>
+
+<p>```
+ERROR:  Loading command: install (LoadError)</p>
+
+<pre><code>/usr/lib/x86_64-linux-gnu/ruby/2.1.0/openssl.so: symbol SSLv2_method, version OPENSSL_1.0.0 not defined in file libssl.so.1.0.0 with link time reference - /usr/lib/x86_64-linux-gnu/ruby/2.1.0/openssl.so
+</code></pre>
+
+<p>ERROR:  While executing gem &hellip; (NoMethodError)</p>
+
+<pre><code>undefined method `invoke_with_build_args' for nil:NilClass
+</code></pre>
+
+<p>```</p>
+
+<!-- more -->
+
+
+<p>I have encountered it in a bunch of docker containers that are running ubuntu
+and doing a gem install. Looks like we&rsquo;re trying to install a ruby / rubygems
+version that&rsquo;s not compatible with the pre-configured OpenSSL shipped on
+our Ubuntu machine &mdash; so the easy fix is:</p>
+
+<p><code>
+apt-get update
+apt-get install openssl
+</code></p>
+
+<p>which will upgrade OpenSSL.</p>
+
+<p>An alternative method (thanks to <a href="https://medium.com/@MohamedAmin88">Mohamed</a>):</p>
+
+<p><code>
+apt-get install -y libssl-dev
+</code></p>
+
+<p>which I assume takes care of updating OpenSSL as well.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Algorithms | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/algorithms/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My Favorite Algorithm (and Data Structure): HyperLogLog]]></title>
+    <link href="https://odino.org/my-favorite-data-structure-hyperloglog/"/>
+    <updated>2018-01-13T21:09:00+00:00</updated>
+    <id>https://odino.org/my-favorite-data-structure-hyperloglog</id>
+    <content type="html"><![CDATA[<p>Every now and then I bump into a concept that&rsquo;s so simple and powerful that I want
+to stab my brain for missing out on such an incredible and beautiful idea.</p>
+
+<p>I discovered <a href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog</a> (HLL) a
+couple years ago and fell in love with it right after reading how
+<a href="http://antirez.com/news/75">redis decided to add a HLL data structure</a>:
+the idea behind HLL is devastatingly simple but extremely powerful, and it&rsquo;s
+what makes it such a widespread algorithm, used by giants of the internet such
+as Google and Reddit.</p>
+
+<!-- more -->
+
+
+<h2>So, what&rsquo;s your phone number?</h2>
+
+<p>My friend Tommy and I planned to go to a conference and, while heading to
+its location, decide to wager on who will talk to the most strangers.
+So once we reach the place we start conversing around and keep a counter of
+how many people we talk to.</p>
+
+<p><img class="center" src="/images/networking-event.png"></p>
+
+<p>At the end of the event Tommy comes to me with his figure (17) and I tell him
+that I had a word with 46 people: I clearly am the winner, but Tommy&rsquo;s frustrated
+as he thinks I&rsquo;ve counted the same people multiple times, as he only saw me with
+15/20 people in total. So, the wager&rsquo;s off and we decide that,
+for our next event, we&rsquo;ll be taking down names instead, so that we&rsquo;re sure we&rsquo;re
+going to be counting unique people, and not just the total number of conversations.</p>
+
+<p>At the end of the following conference we enthusiastically meet each other with
+a very long list of names and, guess what, Tommy had a couple more encounters
+than I did! We both laugh it off and while discussing our approach to counting
+uniques, Tommy comes up with a great idea:</p>
+
+<p><blockquote><p>Alex, you know what? We can&rsquo;t go around with pen and paper and track down a list of names, it&rsquo;s really impractical!<br/>Today I spoke to 65 different people and counting their names on this paper was a real pain in the back&hellip;I lost count 3 times and had to start from scratch!</p></blockquote></p>
+
+<p><blockquote><p>Yeah, I know, but do we even have an alternative?</p></blockquote></p>
+
+<p><blockquote><p>What if, for our next conference, instead of asking for names, we ask people the last 5 digits of their phone number?</p></p><p><p>Now, follow me: instead of winning by counting their names, the winner will be the one who spoke to someone with the longest sequence of leading zeroes in those digits.</p></blockquote></p>
+
+<p><blockquote><p>Wait Tommy, you&rsquo;re going too fast! Slow down a second and give me an example&hellip;</p></blockquote></p>
+
+<p><blockquote><p>Sure, just ask people for those last 5 digits, ok? Let&rsquo;s suppose you get 54701.<br/>No leading zero, so the longest sequence of zeroes for you is 0.</p></p><p><p>The next person you talk to tells you it&rsquo;s 02561 &mdash; that&rsquo;s a leading zero! So your longest sequence comes to 1.</p></blockquote></p>
+
+<p><blockquote><p>You&rsquo;re starting to make sense to me&hellip;</p></blockquote></p>
+
+<p><blockquote><p>Yeah, so if we speak to a couple people, chances are that are longest zero-sequence will be 0. But if we talk to ~10 people, we have more chances of it being 1.</p></p><p><p>Now, imagine you tell me your longest zero-sequence is 5 &mdash; you must have spoken to thousands of people to find someone with 00000 in their phone number!</p></blockquote></p>
+
+<p><blockquote><p>Dude, you&rsquo;re a damn genius!</p></blockquote></p>
+
+<p>And that, my friends, is how HyperLogLog fundamentally works: it allows us to
+estimate uniques within a large dataset by recording the longest sequence of
+zeroes within that set. This ends up creating an incredible advantage over keeping
+track of each and every element in the set, making it an incredibly efficient way
+to count unique values with relatively high accuracy:</p>
+
+<p><blockquote><p>The HyperLogLog algorithm can estimate cardinalities well beyond 10<sup>9</sup> with a relative accuracy (standard error) of 2% while only using 1.5kb of memory.</p><footer><strong>Fangjin Yang <a href="http://druid.io/blog/2012/05/04/fast-cheap-and-98-right-cardinality-estimation-for-big-data.html">http://druid.io/blog/2012/05/04/fast-cheap-and-98-right-cardinality-estimation-for-big-data.html</a> Fast</strong> <cite>Cheap</cite></footer></blockquote></p>
+
+<p>Since this is the usual me oversimplifying things
+that I find hard to understand, let&rsquo;s have a look at some more details of HLL.</p>
+
+<h2>More HLL details</h2>
+
+<p>HLL is part of a family of algorithms that aim to address
+<a href="https://en.wikipedia.org/wiki/Count-distinct_problem">cardinality estimation</a>,
+otherwise known as <em>count-distinct problem</em>,
+which are extremely useful for lots of today&rsquo;s web applications &mdash; for example
+when you want to count how many unique views an article on your site has generated.</p>
+
+<p>When HLL runs, it takes your input data and hashes it, turning into a bit
+sequence:</p>
+
+<p>```
+IP address of the viewer: 54.134.45.789</p>
+
+<p>HLL hash: 010010101010101010111010&hellip;
+```</p>
+
+<p>Now, an important part of HLL is to make sure that your hashing function
+distributes bits as evenly as possible, as you don&rsquo;t want to use a weak function
+such as:</p>
+
+<p>`&ldquo; js
+function hash(ip) {
+  let h = &rdquo;</p>
+
+<p>  ip.replace(/\D/g,&lsquo;&rsquo;).split(&lsquo;&rsquo;).forEach(number => {</p>
+
+<pre><code>h += number &lt; 5 ? 0 : 1
+</code></pre>
+
+<p>  })</p>
+
+<p>  return h
+}
+```</p>
+
+<p>A HLL using this hashing function would return biased results if, for example,
+the <a href="https://stackoverflow.com/a/277537/934439">distribution of your visitors is tied to a specific geographic region</a>.</p>
+
+<p>The <a href="http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf">original paper</a>
+has a few more details on what a good hashing function means for HLL:</p>
+
+<p><blockquote><p>All known efficient cardinality estimators rely on randomization, which is ensured by the use of hash functions.</p></p><p><p>The elements to be counted belonging to a certain data domain D, we assume given a hash function, h : D → {0, 1}∞; that is, we assimilate hashed values to infinite binary strings of {0, 1}∞, or equivalently to real numbers of the unit interval.</p></p><p><p>[&hellip;]</p></p><p><p>We postulate that the hash function has been designed in such a way that the hashed values closely resemble a uniform model of randomness, namely, bits of hashed values are assumed to be independent and to have each probability [0.5] of occurring.</p><footer><strong>Philippe Flajolet <a href="http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf">http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf</a> HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm</strong></footer></blockquote></p>
+
+<p>Now, after we&rsquo;ve picked a suitable hash function we need to address another pitfall:
+<a href="https://en.wikipedia.org/wiki/Variance">variance</a>.</p>
+
+<p>Going back to our example, imagine that the first person you talk to at the conference
+tells you their number ends with <code>00004</code> &mdash; jackpot! You might have won a wager
+against Tommy, but if you use this method in real life chances are that specific
+data in your set will negatively influence the estimation.</p>
+
+<p>Fear no more, as this is <strong>a problem HLL was born to solve</strong>: not many are aware that <a href="https://en.wikipedia.org/wiki/Philippe_Flajolet">Philippe
+Flajolet</a>, one of the brains behind HLL, was quite involved in cardinality-estimation
+problems for a long time, long enough to have come up with the <a href="https://en.wikipedia.org/wiki/Flajolet%E2%80%93Martin_algorithm#Improving_accuracy">Flajolet-Martin
+algorithm in 1984</a> and
+<a href="http://algo.inria.fr/flajolet/Publications/DuFl03-LNCS.pdf">(super-)LogLog in 2003</a>,
+which already addressed some of the problems with outlying hashed values by dividing
+measurements into buckets, and (somewhat) averaging values across buckets.</p>
+
+<p>If you got lost here, let me go back to our original example: instead of just
+taking the last 5 digits of a phone number, we take 6 of them and store the longest
+sequence of leading zeroes together with the first digit (the bucket). This means
+that our data will look like:</p>
+
+<p>```
+Input:
+708942 &mdash;> in the 7th bucket, the longest sequence of zeroes is 1
+518942 &mdash;> in the 5th bucket, the longest sequence of zeroes is 0
+500973 &mdash;> in the 5th bucket, the longest sequence of zeroes is now 2
+900000 &mdash;> in the 9th bucket, the longest sequence of zeroes is 5
+900672 &mdash;> in the 9th bucket, the longest sequence of zeroes stays 5</p>
+
+<p>Buckets:
+0: 0
+1: 0
+2: 0
+3: 0
+4: 0
+5: 2
+6: 0
+7: 1
+8: 0
+9: 5</p>
+
+<p>Output:
+avg(buckets) = 0.8
+```</p>
+
+<p>As you see, if we weren&rsquo;t employing buckets we would instead use 5 as the longest
+sequence of zeroes, which would negatively impact our estimation: even though I
+simplified the math behind buckets (it&rsquo;s not just a simple average), you can
+totally see how this approach makes sense.</p>
+
+<p>It&rsquo;s interesting to see how Flajolet addresses variance throughout his
+works:</p>
+
+<p><blockquote><p>While we&rsquo;ve got an estimate that&rsquo;s already pretty good, it&rsquo;s possible to get a lot better. Durand and Flajolet make the observation that outlying values do a lot to decrease the accuracy of the estimate; by throwing out the largest values before averaging, accuracy can be improved.</p></p><p><p>Specifically, by throwing out the 30% of buckets with the largest values, and averaging only 70% of buckets with the smaller values, accuracy can be improved from 1.30/sqrt(m) to only 1.05/sqrt(m)! That means that our earlier example, with 640 bytes of state and an average error of 4% now has an average error of about 3.2%, with no additional increase in space required.</p></p><p><p>Finally, the major contribution of Flajolet et al in the HyperLogLog paper is to use a different type of averaging, taking the harmonic mean instead of the geometric mean we just applied. By doing this, they&rsquo;re able to edge down the error to  1.04/sqrt(m), again with no increase in state required.</p><footer><strong>Nick Johnson <a href="http://blog.notdot.net/2012/09/Dam-Cool-Algorithms-Cardinality-Estimation">http://blog.notdot.net/2012/09/Dam-Cool-Algorithms-Cardinality-Estimation</a> Improving accuracy: SuperLogLog and HyperLogLog</strong></footer></blockquote></p>
+
+<h2>HLL in the wild</h2>
+
+<p>So, where can we find HLLs? Two great web-scale examples are:</p>
+
+<ul>
+<li><a href="https://cloud.google.com/blog/big-data/2017/07/counting-uniques-faster-in-bigquery-with-hyperloglog">BigQuery</a>,
+to efficiently count uniques in a table (<code>APPROX_COUNT_DISTINCT()</code>)</li>
+<li><a href="https://redditblog.com/2017/05/24/view-counting-at-reddit/">Reddit</a>, where it&rsquo;s used to calculate how many unique views a post has gathered</li>
+</ul>
+
+
+<p>In particular, see how HLL impacts queries on BigQuery:</p>
+
+<p><code>`` bash
+SELECT COUNT(DISTINCT actor.login) exact_cnt
+FROM</code>githubarchive.year.2016`</p>
+
+<blockquote><p>6,610,026 (4.1s elapsed, 3.39 GB processed, 320,825,029 rows scanned)</p></blockquote>
+
+<p>SELECT APPROX_COUNT_DISTINCT(actor.login) approx_cnt
+FROM <code>githubarchive.year.2016</code></p>
+
+<blockquote><p>6,643,627 (2.6s elapsed, 3.39 GB processed, 320,825,029 rows scanned)
+```</p></blockquote>
+
+<p>The second result is an approximation (with an error rate of ~0.5%), but takes
+a fraction of the time.</p>
+
+<p>Long story short: <strong>HyperLogLog is amazing!</strong> You now know what it is and when it can be
+used, so go out and do incredible stuff with it!</p>
+
+<h2>Just before you leave&hellip;</h2>
+
+<p>One thing I&rsquo;d like to clarify is that even though I&rsquo;ve referred to HLL as a data structure before, it
+should be noted that it is an algorithm first, while some databases (eg. Redis, Riak, BigQuery)
+have implemented their own data structures based on HLL (so while saying HLL is a data structure is technically incorrect, it&rsquo;s also not
+entirely wrong).</p>
+
+<h2>Further readings</h2>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog on Wikipedia</a></li>
+<li>the <a href="http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf">original paper</a></li>
+<li><a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40671.pdf">HyperLogLog++, Google&rsquo;s improved implementation of HLL</a></li>
+<li><a href="http://antirez.com/news/75">Redis new data structure: the HyperLogLog</a></li>
+<li><a href="http://blog.notdot.net/2012/09/Dam-Cool-Algorithms-Cardinality-Estimation">Damn Cool Algorithms: Cardinality Estimation</a></li>
+<li><a href="https://github.com/basho/riak_kv/blob/develop/docs/hll/hll.pdf">HLL data types in Riak</a></li>
+<li><a href="http://tech.adroll.com/blog/data/2013/07/10/hll-minhash.html">HyperLogLog and MinHash</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quality Isn't Always Better Than Quantity]]></title>
+    <link href="https://odino.org/quality-isnt-always-better-than-quality/"/>
+    <updated>2012-01-25T13:43:00+00:00</updated>
+    <id>https://odino.org/quality-isnt-always-better-than-quality</id>
+    <content type="html"><![CDATA[<p>Reading about <a href="http://www.amazon.com/Data-Intensive-Processing-MapReduce-Synthesis-Technologies/dp/1608453421">data processing with MapReduce</a>
+I was astonished when I first encountered the <em><a href="http://books.google.it/books?id=GxFYuVZHG60C&amp;pg=PA134&amp;lpg=PA134&amp;dq=stupid+backoff+algorithm&amp;source=bl&amp;ots=fMzZNlaNaN&amp;sig=mcEdim6-_wZL4aWKebh3s79KMS4&amp;hl=it&amp;sa=X&amp;ei=z_kfT56BG-vP4QSY2N2ODw&amp;ved=0CD0Q6AEwAzgK#v=onepage&amp;q=stupid%20backoff%20algorithm&amp;f=false">Stupid backoff</a></em>
+algorithm&rsquo;s tale.</p>
+
+<!-- more -->
+
+
+<p>The story is pretty simple: the <a href="diom.ucsd.edu/~rlevy/lign256/winter2008/kneser_ney_mini_example.pdf">Kneser-Ney</a>
+smoothing strategy was a <em>state-of-the-art</em> way for processing data, but it
+had an heavy computational cost.</p>
+
+<p><blockquote><p>We introduce a new smoothing method, dubbed Stupid Backoff, that is inexpensive to train on large data sets and approaches the quality of Kneser-Ney Smoothing as the amount of training data increases.</p><footer><strong>Thorsten Brants <a href="http://acl.ldc.upenn.edu/D/D07/D07-1090.pdf">http://acl.ldc.upenn.edu/D/D07/D07-1090.pdf</a> Large Language Models in Machine Translation</strong></footer></blockquote></p>
+
+<p>In 2007 <a href="http://www.coli.uni-saarland.de/~thorsten/">Thorsten Brants</a> developed
+a new smoothing algorithm, simpler than the Kneser-Ney one, which was very lean
+and appliable to large amounts of data.</p>
+
+<h2>The result?</h2>
+
+<p>These algorithms were heavily used in machine translations, and you can already
+figure out what happened: with small datasets the <em>backoff</em> was generating
+less-accurate translations but, as the amount of data analized growed, it was
+able to extract more valid translations, eventually beating Kneser-Ney&rsquo;s score<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>I&rsquo;d like you to read a few notes about the <em>stupid backoff</em>&rsquo;s introductory paper:</p>
+
+<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Facl.ldc.upenn.edu%2FD%2FD07%2FD07-1090.pdf&embedded=true" width="100%" height="780" style="border: none;"></iframe>
+
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>This was possible, in the machine-translation scenario, thanks to the fact that the algorithm could be &ldquo;trained&rdquo; to perform better translations as the dataset grew <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Shortest Path Problem in PHP: Demystifying Dijkstra's Algorithm]]></title>
+    <link href="https://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm/"/>
+    <updated>2011-09-06T02:14:00+00:00</updated>
+    <id>https://odino.org/the-shortest-path-problem-in-php-demystifying-dijkstra-s-algorithm</id>
+    <content type="html"><![CDATA[<p>After a very long, but intensive, night, I&rsquo;m happy to announce that <a href="https://github.com/congow/Orient">Orient</a>, the PHP library used to work with <a href="http://www.orientechnologies.com/orient-db.htm">OrientDB</a>, has integrated an interesting feature, an implementation of <a href="http://en.wikipedia.org/wiki/Dijkstra's_algorithm">Dijkstra&rsquo;s algorithm</a>.</p>
+
+<!-- more -->
+
+
+<p>First of all, let me tell you that, as a pretty new implementation, I&rsquo;m pretty sure a couple bugs will be spotted in the next days; second, the design of the algorithm and the entities connected to it could probably be better, so I recommend you to just take a look at the final result, &lsquo;cause the internals will probably change a bit.</p>
+
+<h2>The problem</h2>
+
+<p>Given the following graph:</p>
+
+<p><img class="center" src="/images/graph-sp.png"></p>
+
+<p>how do you calculate the <strong>best way to reach Tokio from Rome</strong>?</p>
+
+<p>Ok, that&rsquo;s easy, you can count with your mind when you have such a small dataset:</p>
+
+<p><img class="center" src="/images/graph-sp.png"></p>
+
+<p>and as you probably already know, the simplest solution is to fly from Rome to Amsterdam To LA to Tokio: the distance is 13 (hours? 13k miles? No matter now).</p>
+
+<p>(You can also reach Amsterdam via Paris, but we don&rsquo;t care for the aim of this post)</p>
+
+<h2>The dataset grows&hellip; enter Orient</h2>
+
+<p>But as your dataset grows, you need to automate the process of <strong>finding shortest paths</strong>.</p>
+
+<p>Just install Orient:</p>
+
+<p><code>bash
+git clone git@github.com:congow/Orient.git
+</code></p>
+
+<p>and create your <code>path.php</code> script, which should use the <a href="https://gist.github.com/221634">PSR-0</a> autoloader:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$classLoader = new SplClassLoader(&lsquo;Congow\Orient&rsquo;, <strong>DIR</strong> . &ldquo;/Orient/src&rdquo;);
+$classLoader->register();</p>
+
+<p>use Congow\Orient\Graph;
+use Congow\Orient\Graph\Vertex;
+use Congow\Orient\Algorithm;
+```</p>
+
+<p>At this point you might think that the algorithm&rsquo;s implementation is pretty coupled with the rest of the library we&rsquo;re developing, and you would be terribly wrong.</p>
+
+<p>Take a look on how to create the graph</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$graph = new Graph();
+```</p>
+
+<p>how to create vertices</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$rome      = new Vertex(&lsquo;Rome&rsquo;);
+$paris     = new Vertex(&lsquo;Paris&rsquo;);
+$london    = new Vertex(&lsquo;London&rsquo;);
+$amsterdam = new Vertex(&lsquo;Amsterdam&rsquo;);
+$ny        = new Vertex(&lsquo;New York&rsquo;);
+$la        = new Vertex(&lsquo;Los Angeles&rsquo;);
+$tokio     = new Vertex(&lsquo;Tokio&rsquo;);
+```</p>
+
+<p>and how to connect vertices between themselves:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$rome->connect($paris, 2);
+$rome->connect($london, 3);
+$rome->connect($amsterdam, 3);
+$paris->connect($london, 1);
+$paris->connect($amsterdam, 1);
+$london->connect($ny, 10);
+$amsterdam->connect($la, 8);
+$la->connect($tokio, 2);
+$ny->connect($tokio, 3);
+```</p>
+
+<p>final step, add the vertices to the graph:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$graph->add($rome);
+$graph->add($paris);
+$graph->add($london);
+$graph->add($amsterdam);
+$graph->add($ny);
+$graph->add($la);
+$graph->add($tokio);
+```</p>
+
+<p>So, you have basically created some fixtures ( a fake graph, the one of the pictures above ), and we can finally calculate the shortest path from Rome to Tokio:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$algorithm = new Algorithm\Dijkstra($graph);
+$algorithm->setStartingVertex($rome);
+$algorithm->setEndingVertex($tokio);</p>
+
+<p>echo $algorithm->getLiteralShortestPath() . &ldquo;: distance &rdquo; . $algorithm->getDistance();
+// the real method to get the SP is $algorithm->solve(), the ones used above are for printing a nice result
+```</p>
+
+<p>which will output:</p>
+
+<p><code>bash
+Rome - Amsterdam - Los Angeles - Tokio : distance 13
+</code></p>
+
+<p>If you have suggestions and questions, feel free to ask everything here; also, if you spot a bug, pull requests are welcome.</p>
+]]></content>
+  </entry>
+  
+</feed>

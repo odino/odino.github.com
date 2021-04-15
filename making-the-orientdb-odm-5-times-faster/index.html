@@ -1,0 +1,232 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Making the OrientDB ODM 5 times faster</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/making-the-orientdb-odm-5-times-faster/" />
+		<meta property="og:title" content="Making the OrientDB ODM 5 times faster" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/making-the-orientdb-odm-5-times-faster/">Making the OrientDB ODM 5 times faster</a></h1>
+        <time>25 January 2013</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 8 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Today, after heavily testing performances
+on a project, I pushed some small but
+precious changes to the
+<a href="https://github.com/doctrine/orientdb-odm">orientdb-odm</a>.</p>
+
+<!-- more -->
+
+
+<h2>Prelude</h2>
+
+<blockquote><p>Premature optimization is the root of all evil</p><footer><strong>Donald Knuth</strong> <cite><a href='http://c2.com/cgi/wiki?PrematureOptimization'>C2 Wiki</a></cite></footer></blockquote>
+
+
+<p></p>
+
+<p>In these days I was testing performances of a
+service I am building with
+<a href="https://github.com/nuvolabase/orientdb">OrientDB</a>
+and the doctrine ODM that
+<a href="/please-welcome-the-doctrine-orientdb-odm/">we built so far</a>.</p>
+
+<p>Following one of the golden rules for software
+architects, we didn&rsquo;t paid attention to performances &ndash; at first &ndash;
+but rather went for a design which would allow us
+to inject behaviours and easily change portions of code
+(also thanks to the <a href="https://travis-ci.org/doctrine/orientdb-odm">test suite</a>),
+I knew that I would have noticed huge flaws at
+performance level when testing it with
+<strong>production data</strong>.</p>
+
+<p>A few days ago we committed fetchplans for repository
+classes, but it wasnt enough: rather then concentrating
+on which data we should fetch, I realized one major
+improvement could be applied on how we <strong>map</strong> data.</p>
+
+<h2>The golden rule</h2>
+
+<p><span class='pullquote-right' data-pullquote='abstraction comes with a cost:
+slow performances'>
+When you write a OXM (object-something mapper) you will
+shortly understand that a huge portion of your job
+consist into abstract your design, to ease
+integration of multiple components into your application:
+repositories, the object manager, POXO, the data mapper,
+proxy classes and so on.</p>
+
+<p>Of course, abstraction comes with a cost:
+slow performances, so one of the first things that you do is starting
+to <strong>cache everything</strong>.
+</span></p>
+
+<h2>How we did it</h2>
+
+<p>With a <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec">single commit</a>
+&ndash; there&rsquo;s always room for improvements &ndash; the ODM is now able
+to hydrate objects <strong>5 times faster</strong>: when you hydrate similar
+objects from OrientDB (for example, 2 records that share the same
+attributes&#8217; values, like <code>is_published</code> or <code>country</code>), there is
+no need to duplicate operations, so we added a <a href="https://github.com/doctrine/orientdb-odm/blob/df875c946e02a9c84eee22f0c86e0a3b06bd70ec/src/Doctrine/OrientDB/Util/Inflector/Cached.php">cached inflector</a>
+(with an in-memory / single request cache) and did some other
+improvements to the <code>Mapper</code>:</p>
+
+<ul>
+<li>cached the relations between <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L297">PHP classes and OrientDB classes</a> (if 2 records of the same OrientDB class are hydrated, there is only one single <em>search</em> operation to find the PHP class that should map them)</li>
+<li>cached the <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L223">casting of properties</a> (if 2 objects have the same value for the <code>is_published</code> attribute, casting is done once)</li>
+<li>cached <a href="https://github.com/doctrine/orientdb-odm/commit/df875c946e02a9c84eee22f0c86e0a3b06bd70ec#L0L466">properties&#8217; annotations</a> (property-level annotations are inspected once per class)</li>
+</ul>
+
+
+<p>There is no rocket science in what we did, but benchmarks ensure that
+it&rsquo;s a <strong>huge performance improvement</strong>.</p>
+
+<h2>By the way, we used Webgrind</h2>
+
+<p><img class="right" src="/images/webgrind.png"></p>
+
+<p>Doing almost all of my work from a Mac, I kind of
+missed <a href="http://kcachegrind.sourceforge.net/html/Home.html">KCacheGrind</a>
+for profiling, so I was looking for an
+alternative (no, installing
+<a href="https://github.com/facebook/xhprof">XHPROF</a> isn&rsquo;t an alternative at 2 in the morning)
+and I found Webgrind (which is cross-platform), a web profiler
+that requires zero setup:
+you basically just need to provide it access from the webserver
+and, by opening it with a browser, the application automatically
+launches and parses the cachegrind files generated by XDebug.</p>
+
+<p>Webgrind&rsquo;s code is a bit of a mess, but then, the
+result is still pretty good &ndash; you get a good overview
+of the expensiveness of your calls as well as a
+call graph compiled in <a href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>,
+which is a de-facto standard for graph generation.</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/making-the-orientdb-odm-5-times-faster/"
+		},
+		"headline": "Making the OrientDB ODM 5 times faster",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2013-01-25 17:39:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

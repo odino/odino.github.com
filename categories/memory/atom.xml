@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Memory | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/memory/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Better Performance: The Case for Timeouts]]></title>
+    <link href="https://odino.org/better-performance-the-case-for-timeouts/"/>
+    <updated>2017-01-19T18:57:00+00:00</updated>
+    <id>https://odino.org/better-performance-the-case-for-timeouts</id>
+    <content type="html"><![CDATA[<p>Most of the larger-scale services that we design
+nowadays depend, more or less, on external APIs:
+you&rsquo;ve heard it multiple times, as soon as your codebase
+starts to look like a monolith it&rsquo;s time to start
+splitting it into <a href="https://en.wikipedia.org/wiki/Microservices">smaller services</a>
+that can evolve independently and aren&rsquo;t strongly
+coupled with the monolith.</p>
+
+<p>Even if you don&rsquo;t really employ microservices, chances
+are that you already depend on external services, such
+as <a href="https://en.wikipedia.org/wiki/Elasticsearch">elasticsearch</a>,
+<a href="https://redis.io/">redis</a> or a payment gateway, and need to integrate
+with them via some kind of APIs.</p>
+
+<p>What happens when those services are slow or unavailable? Well,
+you can&rsquo;t process search queries, or payments, but your
+app would still be working &ldquo;fine&rdquo; &mdash; right?</p>
+
+<p><strong>That is not always the case</strong>, and I want to run a few
+benchmarks to show you how a little tweak, <a href="https://en.wikipedia.org/wiki/Timeout_(computing">timeouts</a>,
+prove beneficial when dealing with external services.</p>
+
+<!-- more -->
+
+
+<h2>Our case</h2>
+
+<p>We&rsquo;ve started a new <em>Hello World!</em> startup that,
+surprisingly, makes money by deploying a useless
+service that prints a string retrieved from another
+service: as you understand,
+this is an oversimplification of a real-world
+scenario, but it will serve our purpose well enough.</p>
+
+<p><img class="center" src="/images/a-b-service.png"></p>
+
+<p>Our clients will be connecting to our main frontend,
+<code>server1.js</code> which will then make an HTTP request towards
+another service, <code>server2.js</code> which will reply back:
+once we have an answer from <code>server2.js</code>  we can then
+return the response body to our client.</p>
+
+<p>``` js server1.js
+let http = require(&lsquo;http&rsquo;)</p>
+
+<p>http.createServer((req, res) => {
+  require(&lsquo;unirest&rsquo;).get(&lsquo;<a href="http://localhost:3001">http://localhost:3001</a>&rsquo;).end(function&reg; {</p>
+
+<pre><code>res.writeHead(r.error ? 500 : 200)
+res.write(r.error ? r.error.message : r.body)
+res.end()
+</code></pre>
+
+<p>  })
+}).listen(3000)
+```</p>
+
+<p>``` js server2.js
+let http = require(&lsquo;http&rsquo;)</p>
+
+<p>http.createServer((req, res) => {
+  setTimeout(_ => {</p>
+
+<pre><code>res.writeHead(200)
+res.write('Hello!')
+res.end()  
+</code></pre>
+
+<p>  }, 100)
+}).listen(3001)
+```</p>
+
+<p>A few things to note:</p>
+
+<ul>
+<li>the servers run on port <code>3000</code> (main app) and <code>3001</code> (&ldquo;backend&rdquo; server): so once the client will make a request to <code>localhost:3000</code> a new HTTP request will be sent to <code>localhost:3001</code></li>
+<li>the backend service will wait 100ms (this is to simulate real-world use cases) before returning a response</li>
+<li>I&rsquo;m using the <a href="https://github.com/Mashape/unirest-nodejs">unirest</a> HTTP client: I like it a lot and, even though we could have simply used the built-in <code>http</code> module, I&rsquo;m confident this will gives us a better feeling in terms of real-world applications</li>
+<li>unirest is nice enough to tell us if there was an error on our request, so we can just check <code>response.error</code> and handle the drama from there</li>
+<li>I&rsquo;m going to be using <a href="https://www.docker.com/">docker</a> to run these tests, and the code is <a href="https://github.com/odino/the-case-for-timeouts">available on github</a></li>
+</ul>
+
+
+<h2>Let&rsquo;s run our first tests</h2>
+
+<p>Let&rsquo;s run our servers and start bombing <code>server1.js</code> with
+requests: we&rsquo;ll be using <a href="https://www.joedog.org/siege-home/">siege</a> (I&rsquo;m too hipster for <a href="https://httpd.apache.org/docs/2.4/programs/ab.html">AB</a>),
+which provides some useful info upon executing the load test:</p>
+
+<p>```
+siege -c 5 www.google.com
+<strong> SIEGE 3.0.5
+</strong> Preparing 5 concurrent users for battle.
+The server is now under siege&hellip;^C
+Lifting the server siege&hellip;      done.</p>
+
+<p>Transactions:                 26 hits
+Availability:             100.00 %
+Elapsed time:               6.78 secs
+Data transferred:           0.20 MB
+Response time:              0.52 secs
+Transaction rate:           3.83 trans/sec
+Throughput:             0.03 MB/sec
+Concurrency:                2.01
+Successful transactions:          27
+Failed transactions:               0
+Longest transaction:            1.28
+Shortest transaction:           0.36
+```</p>
+
+<p>The <code>-c</code> option, in siege, defines how many concurrent requests
+we should send to the server, and you can even specify how many
+repetitions (<code>-r</code>) you&rsquo;d like to run: for example, <code>-c 10 -r 5</code>
+would mean we&rsquo;d be sending to the server 50 total requests, in
+batches of 10 concurrent requests. For the purpose of our benchmark
+I decided, though, to keep the tests running for 3 minutes and
+analyze the results afterwards, without setting a max number of
+repetitions.</p>
+
+<p>Additionally, in my next examples I will be trimming down the results
+to the most important items provided by siege:</p>
+
+<ul>
+<li>availability: how many of our requests was the server able to handle</li>
+<li>transaction rate: how many requests per second we were able to male</li>
+<li>successful / failed transactions: how many requests ended up with successful / failure status codes (ie. 2xx vs 5xx)</li>
+</ul>
+
+
+<p>Let&rsquo;s start by sending 500 concurrent requests to observe how the services
+behave.</p>
+
+<p>```
+docker run &mdash;net host -v $(pwd):/src -d mhart/alpine-node:7.1 node /src/server1.js
+docker run &mdash;net host -v $(pwd):/src -d mhart/alpine-node:7.1 node /src/server2.js</p>
+
+<p>siege -c 500 127.0.0.1:3000
+```</p>
+
+<p>After around 3 minutes, it&rsquo;s time to stop siege (<code>ctrl+c</code>) and see how the results
+look like:</p>
+
+<p><code>
+Availability:             100.00 %
+Transaction rate:        1156.89 trans/sec
+Successful transactions:      205382
+Failed transactions:               0
+</code></p>
+
+<p>Not bad, as we&rsquo;ve been able to serve 1156 transactions per second;
+even better than that, it doesn&rsquo;t seem like we&rsquo;ve got any
+error, which means our success rate is 100%.
+What if we up our game and go for 1k concurrent transactions?</p>
+
+<p>```
+siege -c 1000 127.0.0.1:3000
+&hellip;</p>
+
+<p>Availability:             100.00 %
+Transaction rate:        1283.61 trans/sec
+Successful transactions:      232141
+Failed transactions:               0
+```</p>
+
+<p>Well, well done: we slightly increased throughput, as now our app
+is able to handle 1283 requests per second: since the apps
+do very less (print a string and that&rsquo;s it) it is likely that
+the more concurrent requests we&rsquo;ll send the higher the throughput.</p>
+
+<p>These numbers might be useless now (we&rsquo;re not comparing them
+to anything) but will prove essential in the next paragraphs.</p>
+
+<h2>Introducing failure</h2>
+
+<p>This is not how real-world webservices behave: you have
+to <strong>accept failures</strong> and build resilient applications
+that are capable of overcoming them.</p>
+
+<p>For example, suppose our backend service is going through
+a hard phase and starts lagging every now and then:</p>
+
+<p>``` js server2.js
+let http = require(&lsquo;http&rsquo;)</p>
+
+<p>let i = 0</p>
+
+<p>http.createServer((req, res) => {
+  let delay = 100
+  if (i % 10 === 0) {</p>
+
+<pre><code>delay = 10000
+</code></pre>
+
+<p>  }</p>
+
+<p>  i++</p>
+
+<p>  setTimeout(_ => {</p>
+
+<pre><code>res.writeHead(200)
+res.write('Hello!')
+res.end()
+</code></pre>
+
+<p>  }, delay)
+}).listen(3001)
+```</p>
+
+<p>In this example, 1 out of 10 requests will be served after a
+timeout of 10s has passed, whereas the other ones will be
+processed with the &ldquo;standard&rdquo; delay of 100ms: this kind of
+simulates a scenario where we have multiple servers behind
+a load balancer, and one of them starts throwing random
+errors or becomes slower due to excessive load.</p>
+
+<p>Let&rsquo;s go back to our benchmark and see how our <code>server1.js</code>
+performs now that its dependency will start to slow down:</p>
+
+<p>```
+siege -c 1000 127.0.0.1:3000</p>
+
+<p>Availability:             100.00 %
+Transaction rate:         853.93 trans/sec
+Successful transactions:      154374
+Failed transactions:               0
+```</p>
+
+<p><strong>What a bummer</strong>: our transaction rate has plummeted,
+down by more than 30%, just because some of the responses
+are lagging &mdash; this means that <code>server1.js</code> needs
+to hold on for longer in order to receive responses
+from <code>server2.js</code>, thus using more resources and being
+able to serve less requests than it theoretically can.</p>
+
+<h2>An error now is better than a response tomorrow</h2>
+
+<p>The case for timeouts starts by recognizing one simple
+fact: <strong>users won&rsquo;t wait for slow responses</strong>.</p>
+
+<p>After 1 or 2 seconds, their attention will fade away and the
+chances that they might still be hooked to your content
+will vanish as soon as you cross the 4/5s threshold &mdash;
+this mean that <strong>it&rsquo;s generally better to give them
+an immediate feedback,
+even if negative</strong> (&ldquo;<em>An error occurred, please try again</em>&rdquo;),
+rather than letting them get frustrated over how slow your
+service is.</p>
+
+<p>In the spirit of &ldquo;<a href="https://en.wikipedia.org/wiki/Fail-fast">fail fast</a>&rdquo;, we decide to add a timeout
+in order to make sure that our responses meet a certain SLA:
+in this case, we decide that our SLA is 3s, which is the
+time our users will possibly wait to use our service<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>``` js server1.js
+&hellip;</p>
+
+<p>require(&lsquo;unirest&rsquo;).get(&lsquo;<a href="http://localhost:3001">http://localhost:3001</a>&rsquo;).timeout(3000).end(function&reg; {</p>
+
+<p>&hellip;
+```</p>
+
+<p>Let&rsquo;s see how the numbers look like with timeouts enabled:</p>
+
+<p><code>
+Availability:              90.14 %
+Transaction rate:        1125.26 trans/sec
+Successful transactions:      209861
+Failed transactions:           22964
+</code></p>
+
+<p>Oh boy, we&rsquo;re back into the game: the transaction rate is
+again higher than 1k per second and we can almost serve
+as many requests as we&rsquo;d do under ideal conditions (when
+there&rsquo;s no lag in the backend service).</p>
+
+<p>Of course, one of the drawbacks is that we have now
+increased the number of failures (10% of total requests),
+which means that some
+users will be presented an error page &mdash; still better,
+though, than serving them after 10s, as most of them
+would have abandoned our service anyway.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>Let&rsquo;s dig into it.</p>
+
+<h2>The RAM factor</h2>
+
+<p>In order to figure out how much memory our <code>server1.js</code>
+is consuming, we need to measure, at intervals, the amount
+of memory the server is using; in production, we would
+use tools such as <a href="https://newrelic.com/">NewRelic</a> or <a href="https://keymetrics.io/">KeyMetrics</a>
+but, for our simple scripts, we&rsquo;ll resort to the poor man&rsquo;s
+version of such tools: we&rsquo;ll be printing the amount of
+memory from <code>server1.js</code> and we&rsquo;ll use another script
+to record the output and print some simple stats.</p>
+
+<p>Let&rsquo;s make sure <code>server1.js</code> prints the amount of memory
+used every 100ms:</p>
+
+<p>``` js server1.js
+&hellip;</p>
+
+<p>setInterval(_ => {
+  console.log(process.memoryUsage().heapUsed / 1000000)
+}, 100)</p>
+
+<p>&hellip;
+```</p>
+
+<p>If we start the server we should see something like:</p>
+
+<p><code>
+3.990176
+4.066752
+4.076024
+4.077784
+4.079544
+4.081304
+4.083064
+4.084824
+</code></p>
+
+<p>which is the amount of memory, in MB, that the server is
+using: in order to crunch the numbers I wrote a simple script
+that reads the input from the <code>stdin</code> and computes the stats:</p>
+
+<p>``` js
+let inputs = []</p>
+
+<p>process.stdin.on(&lsquo;data&rsquo;, (data) => {
+  inputs.push(parseInt(data.toString(), 10))</p>
+
+<p>  let min = Math.round(Math.min(&hellip;inputs))
+  let max = Math.round(Math.max(&hellip;inputs))
+  let avg = Math.round(inputs.reduce((a, b) => a + b) / inputs.length)
+  let cur = Math.round(inputs[inputs.length &ndash; 1])</p>
+
+<p>  process.stdout.write(<code>Meas: ${inputs.length} Min: ${min} Max: ${max} Avg: ${avg} Cur: ${cur}\r</code>)
+});
+```</p>
+
+<p>The module is <a href="https://github.com/odino/node-number-aggregator-stats">public</a>
+and <a href="https://www.npmjs.com/package/number-aggregator-stats">available on NPM</a>,
+so we can just install it globally and redirect the output of the server to it:</p>
+
+<p>```
+docker run &mdash;net host -v $(pwd):/src -ti mhart/alpine-node:7.1 sh
+npm install -g number-aggregator-stats
+node /src/server1.js | number-aggregator-stats</p>
+
+<p>Meas: 18 Min: 3 Max: 4 Avg: 4 Cur: 4
+```</p>
+
+<p>Let&rsquo;s now run our benchmark again &mdash; 3 minutes, 1k
+concurrent requests, no timeouts:</p>
+
+<p>```
+node /src/server1.js | number-aggregator-stats</p>
+
+<p>Meas: 1745 Min: 3 Max: 349 Avg: 194 Cur: 232
+```</p>
+
+<p>And now let&rsquo;s enable the 3s timeout:</p>
+
+<p>```
+node /src/server1.js | number-aggregator-stats</p>
+
+<p>Meas: 1429 Min: 3 Max: 411 Avg: 205 Cur: 172
+```</p>
+
+<p>Whoa, at a first look it seems like <strong>timeouts aren&rsquo;t helping
+after all: our memory usage hits a high with timeouts enabled
+and is, on average, 5% higher as well</strong>. Is there any reasonable
+explanation to that?</p>
+
+<p>There is, of course, as we just need to go back to siege and
+look at the rps:</p>
+
+<p><code>
+853.60 trans/sec --&gt; without timeouts
+1134.48 trans/sec --&gt; with timeouts
+</code></p>
+
+<p><img class="right" src="/images/vegeta.jpg"></p>
+
+<p>Here we&rsquo;re comparing <strong>apples to oranges</strong>: it&rsquo;s useless
+to look at memory usage of 2 servers that are serving
+a different number of rps, as we should instead
+make sure they are both offering the same throughput,
+and only measure the memory at that point, else the
+server that&rsquo;s serving more requests will always start
+with some disadvantage!</p>
+
+<p>To do so, we need some kind of tool that makes it easy
+to generate rps-based load, and siege is not very
+suitable for that: it&rsquo;s time to call our friend <a href="https://github.com/tsenart/vegeta">vegeta</a>,
+a modern load testing tool written in <a href="https://golang.org/">golang</a>.</p>
+
+<h2>Enter vegeta</h2>
+
+<p>Vegeta is very simple to use, just start &ldquo;attacking&rdquo;
+a server and let it report the results:</p>
+
+<p><code>
+echo "GET http://google.com" | vegeta attack --duration 1h -rate 1000 | tee results.bin | vegeta report
+</code></p>
+
+<p>2 very interesting options here:</p>
+
+<ul>
+<li><code>--duration</code>, so that vegeta will stop after a certain time</li>
+<li><code>--rate</code>, as in rps</li>
+</ul>
+
+
+<p>Looks like vegeta is the right tool for us &mdash; we can then issue
+a command tailored to our server and see the results:</p>
+
+<p><code>
+echo "GET http://localhost:3000" | vegeta attack --duration 3m --insecure -rate 1000 | tee results.bin | vegeta report
+</code></p>
+
+<p>This is what vegeta outputs without timeouts:</p>
+
+<p><code>
+Requests      [total, rate]            180000, 1000.01
+Duration      [total, attack, wait]    3m10.062132905s, 2m59.998999675s, 10.06313323s
+Latencies     [mean, 50, 95, 99, max]  1.172619756s, 170.947889ms, 10.062145485s, 10.134037994s, 10.766903205s
+Bytes In      [total, mean]            1080000, 6.00
+Bytes Out     [total, mean]            0, 0.00
+Success       [ratio]                  100.00%
+Status Codes  [code:count]             200:180000  
+Error Set:
+</code></p>
+
+<p>and this is what we get when <code>server1.js</code> has
+the 3s timeout enabled:</p>
+
+<p><code>
+Requests      [total, rate]            180000, 1000.01
+Duration      [total, attack, wait]    3m3.028009507s, 2m59.998999479s, 3.029010028s
+Latencies     [mean, 50, 95, 99, max]  455.780741ms, 162.876833ms, 3.047947339s, 3.070030628s, 3.669993753s
+Bytes In      [total, mean]            1142472, 6.35
+Bytes Out     [total, mean]            0, 0.00
+Success       [ratio]                  90.00%
+Status Codes  [code:count]             500:18000  200:162000  
+Error Set:
+500 Internal Server Error
+</code></p>
+
+<p>as you see, the total number of requests and
+elapsed time is the same between the 2
+benchmarks, meaning that we&rsquo;ve put the servers
+under the same level of stress: now that we&rsquo;ve
+got them to perform the same tasks, under the
+same load, we can look at memory usage to see
+if timeouts helped us keeping a lower memory
+footprint.</p>
+
+<p>Without timeouts:</p>
+
+<p>```
+node /src/server1.js | number-aggregator-stats</p>
+
+<p>Meas: 1818 Min: 3 Max: 372 Avg: 212 Cur: 274
+```</p>
+
+<p>and with timeouts:</p>
+
+<p>```
+node /src/server1.js | number-aggregator-stats</p>
+
+<p>Meas: 1886 Min: 3 Max: 299 Avg: 149 Cur: 292
+```</p>
+
+<p>This looks more like it: timeouts have
+helped us keeping the <strong>memory usage, on average,
+30% lower</strong><sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>All of this thanks to a simple <code>.timeout(3000)</code>:
+what a win!</p>
+
+<h2>Avoiding the domino effect</h2>
+
+<p>Quoting myself:</p>
+
+<p><blockquote><p>What happens when those services are slow or unavailable? Well,<br/>you can&rsquo;t process search queries, or payments, but your<br/>app would still be working &ldquo;fine&rdquo; &mdash; right?</p></blockquote></p>
+
+<p>Fun fact: <strong>a missing timeout can
+cripple your entire infrastructure!</strong></p>
+
+<p><img class="left" src="/images/domino.jpg"></p>
+
+<p>In our basic example we saw how a service that
+starts to fail at a 10% rate can significantly
+increase memory
+usage of the services depending on it, and that&rsquo;s
+not an unrealistic scenario &mdash; it&rsquo;s basically
+just a single, wonky server in a pool of ten.</p>
+
+<p>Imagine you have a webpage that relies on a
+backend service, behind a load balancer, that
+starts to perform slower than usual: the service
+still works (it&rsquo;s just way slower than it should),
+your healthcheck is probably
+still getting a <code>200 Ok</code> from the service (even
+though it comes after several seconds rather than
+milliseconds), so the service won&rsquo;t be removed from
+the load balancer.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>A note on timeouts</h2>
+
+<p>If you thought waiting is dangerous, let&rsquo;s add to the
+fire:</p>
+
+<ul>
+<li>we&rsquo;re not talking HTTP only &mdash; everytime we rely on an external system we should <a href="https://github.com/mysqljs/mysql#connection-options">use timeouts</a></li>
+<li>a server could have an open port and drop every packet you send &mdash; this will result in a TCP connection timeout. Try this in your terminal: <code>time curl example.com:81</code>. Good luck!</li>
+<li>a server could reply instantly, but be very slow at sending each packet (as in, seconds between packets). You would then need to protect yourself against a <strong>read timeout</strong></li>
+</ul>
+
+
+<p>&hellip;and many more edge cases to list. I know, distributed systems are nasty.</p>
+
+<p>Luckily, high-level APIs (like the one <a href="https://github.com/Mashape/unirest-nodejs#requesttimeoutnumber">exposed by unirest</a>)
+are generally helpful since they take care of all of the hiccups that
+might happen on the way.</p>
+
+<h2>Closing remarks: I&rsquo;ve broken every single benchmarking rule</h2>
+
+<p>If you have any &ldquo;aggressive&rdquo; feedback about my <em>rusty</em> benchmarking skills&hellip;
+&hellip;well, I would agree with you, as I purposely took some shortcuts
+for the sake of simplifying my job and the ability, for you, to
+easily reproduce these benchmarks.</p>
+
+<p>Things you should do if you&rsquo;re serious about benchmarks:</p>
+
+<ul>
+<li>do not run the code you&rsquo;re benchmarking and the tool you use to benchmark on the same machine. Here I ran everything on my XPS which is powerful enough to let me run these tests, though running siege / vegeta on the same machine the servers run definitely has an impact on the results (I say <code>ulimit</code> and you figure out the rest). My advice is to try to get some hardware on AWS and benchmark from there &mdash; more isolation, less doubts</li>
+<li>do not measure memory by logging it out with a <code>console.log</code>, instead use a tool such as NewRelic which, I think, is less invasive</li>
+<li>measure more data: benchmarking for 3 minutes is ok for the sake of this post, but if we want to look at real-world data, to give a better estimate of how helpful timeouts are, you should leave the benchmarks running for way longer</li>
+<li>keep Gmail closed while you run <code>siege ...</code>, the tenants living in <code>/proc/cpuinfo</code> will be grateful</li>
+</ul>
+
+
+<p>And&hellip;I&rsquo;m done for the day: I hope you enjoyed this post and, if otherwise, feel
+free to rant in the comment box below!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>For system-to-system integrations it could even be 10 to 20 seconds, depending on how slow the backend you have to connect to is (sigh: don&rsquo;t ask me) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>But don&rsquo;t be naive and think that the 30% of memory saved will be the same in your production infrastructure. It really depends on your setup &mdash; it could be lower (most likely) or even higher. Benchmark for yourself and see what you&rsquo;re missing out on! <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

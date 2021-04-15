@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Considered Harmful | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/considered-harmful/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Are "Considered Harmful" Lists Considered Harmful?]]></title>
+    <link href="https://odino.org/are-considered-harmful-lists-considered-harmful/"/>
+    <updated>2015-07-17T01:35:00+00:00</updated>
+    <id>https://odino.org/are-considered-harmful-lists-considered-harmful</id>
+    <content type="html"><![CDATA[<p>In the past weeks I&rsquo;ve been thinking of collecting
+a list of posts of the &ldquo;<em>X considered harmful</em>&rdquo; articles,
+so yesterday I just created a simple <a href="https://github.com/odino/considered-harmful">github repo</a>
+with the very first few articles I&rsquo;ve been able to
+find (interesting).</p>
+
+<!-- more -->
+
+
+<p>There has been <a href="http://meyerweb.com/eric/comment/chech.html">a lot of criticism</a>
+around these type of posts, but I believe, especially for the
+more recent ones, that they are written with good intentions
+(ie. <a href="http://lea.verou.me/2015/04/jquery-considered-harmful/">Lea Verou on jQuery</a>).</p>
+
+<p>Would love to get your inputs on the list!</p>
+]]></content>
+  </entry>
+  
+</feed>

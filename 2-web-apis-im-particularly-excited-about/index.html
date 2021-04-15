@@ -1,0 +1,351 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Web Push Notifications and Payment Requests are exciting, as they open up new frontiers in web development." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>2 Web APIs I'm particularly excited about</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/2-web-apis-im-particularly-excited-about/" />
+		<meta property="og:title" content="2 Web APIs I'm particularly excited about" />
+		<meta property="og:description" content="Web Push Notifications and Payment Requests are exciting, as they open up new frontiers in web development." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/2-web-apis-im-particularly-excited-about/">2 Web APIs I'm particularly excited about</a></h1>
+        <time>25 October 2016</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 5 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>In the past few months we have seen Google and Apple push in 2
+very different directions &mdash; as much as Apple has been steady
+pushing publishers to embrace their app market, Google has been
+working on a bunch of initiatives to improve the &ldquo;web platform&rdquo;,
+rolling out projects like <a href="http://tech.namshi.com/blog/2016/09/20/embracing-amp-for-the-speed-and-profit/">AMP</a> and giving a lot of coverage to
+technologies like <a href="https://developers.google.com/web/progressive-web-apps/">PWAs</a>.</p>
+
+<p>I&rsquo;m particularly excited about the work that Google is putting
+on the web as they&rsquo;re slowly bridging the gap with the native experience,
+and there are 2 Web APIs I can&rsquo;t really wait to use in
+production to give <a href="https://www.namshi.com/">our users</a> an enhanced
+experience on the web.</p>
+
+<!--  more -->
+
+
+<p>As much as these aren&rsquo;t coming just from Google, I need to tribute them
+to big G as they&rsquo;re the ones who are throwing them onto the mainstream:
+I&rsquo;m talking about <a href="https://www.w3.org/TR/payment-request/">Web Payments</a> and
+<a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/">Web Push Notifications</a>.</p>
+
+<h2>Web Push Notifications</h2>
+
+<p>You can start adding push notifications to your web app today: they involve
+installing a <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service worker</a>
+which &ldquo;lives&rdquo; in background and is capable of listening for push events.</p>
+
+<p><img class="center" src="https://blog.kissmetrics.com/wp-content/uploads/2015/11/push-notifications-desktop-mobile.png"></p>
+
+<p>Let&rsquo;s test it out real quick on Chrome:</p>
+
+<ul>
+<li>if you&rsquo;re reading this article from a <strong>desktop machine</strong>:
+
+<ul>
+<li>head <a href="https://gauntface.github.io/simple-push-demo/">here</a></li>
+<li>accept permissions</li>
+<li>copy the curl command</li>
+<li>close that webpage</li>
+<li>open a terminal and run that curl</li>
+<li>be amazed</li>
+</ul>
+</li>
+<li>if you&rsquo;re reading this article from a <strong>mobile device</strong>:
+
+<ul>
+<li>head <a href="https://gauntface.github.io/simple-push-demo/">here</a></li>
+<li>accept permissions</li>
+<li>copy that curl command and send it to a friend</li>
+<li>close the browser</li>
+<li>ask your friend to run it</li>
+<li>be amazed</li>
+</ul>
+</li>
+</ul>
+
+
+<p>If you close your browser (at least on android) the service worker
+keeps living, making it possible to reach your users until the SW dies,
+which generally happens when the app (chrome) crashes or the phone
+is rebooted, which are unlikely to happen on a frequent basis<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>You will need a good understanding of service workers but the code
+to implement push notifications is <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/push-messaging-and-notifications/service-worker.js">really trivial</a>
+and the &ldquo;backend&rdquo; implementation is very well explained by &ndash; again &ndash; the <a href="https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/">Google guys</a>, which use
+Firebase Cloud Messaging (formerly known as GCM) to deliver pushes
+to the subscribed clients.</p>
+
+<p>Web Push requires <a href="http://caniuse.com/#feat=serviceworkers">service workers</a>, and support
+is currently limited to <a href="http://caniuse.com/#feat=push-api">Chrome / Firefox / Opera</a>.</p>
+
+<h2>Payment Request API</h2>
+
+<p>This one isn&rsquo;t as immediate as Web Pushes, especially since it <a href="https://9to5google.com/2016/08/08/chrome-53-beta-features/">landed in Chrome just a few weeks back</a>, so support is
+pretty experimental &mdash; but have a look at the following video to get an idea
+of how checkouts could be much simpler through a native way of collecting payment
+details:</p>
+
+<iframe width="760" height="415" src="https://www.youtube.com/embed/hmqZxP6iTpo" frameborder="0" allowfullscreen></iframe>
+
+
+<p>This API isn&rsquo;t a payment solution but rather a sophisticated way to collect payment
+data from your users, without needing to implement payment forms on your own &mdash; you
+simply create a payment request and the browser does the rest:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// is this real?</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">PaymentRequest</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// what kind of payments are we accepting?</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">methodData</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nx">supportedMethods</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;visa&#39;</span><span class="p">,</span> <span class="s1">&#39;mastercard&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// what is the user purchasing?</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">details</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">displayItems</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Argo, Blue-Ray movie&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">amount</span><span class="o">:</span> <span class="p">{</span> <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;USD&#39;</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:</span> <span class="s1">&#39;15.00&#39;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Power customer discount&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">amount</span><span class="o">:</span> <span class="p">{</span> <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;USD&#39;</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:</span> <span class="s1">&#39;-10.00&#39;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'>    <span class="nx">total</span><span class="o">:</span>  <span class="p">{</span>
+</span><span class='line'>      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">amount</span><span class="o">:</span> <span class="p">{</span> <span class="nx">currency</span><span class="o">:</span> <span class="s1">&#39;USD&#39;</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:</span> <span class="s1">&#39;5.00&#39;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">PaymentRequest</span><span class="p">(</span><span class="nx">methodData</span><span class="p">,</span> <span class="nx">details</span><span class="p">,</span> <span class="p">{});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// start the fun!</span>
+</span><span class='line'>  <span class="nx">request</span><span class="p">.</span><span class="nx">show</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">result</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// example of result.details:</span>
+</span><span class='line'>    <span class="c1">//  - cardNumber</span>
+</span><span class='line'>    <span class="c1">//  - cardSecurityCode</span>
+</span><span class='line'>    <span class="c1">//  - expiryMonth</span>
+</span><span class='line'>    <span class="c1">//  - expiryYear</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">apiCallToThePaymentGateway</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">details</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="s1">&#39;fail&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You simply need to create a <code>PaymentRequest</code> and <code>.show()</code> it &mdash; the browser
+will then show the native UI and you&rsquo;ll eventually receive the details once
+the user is done entering his / her details: it&rsquo;s pretty neat since it&rsquo;s a very
+simple yet powerful way of offloading this kind of annoying &ldquo;feature&rdquo; to the
+browser (who&rsquo;s really happy to write a new credit card form in 2016? anyone who actually likes <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">luhn</a>?).</p>
+
+<p>As I said, this is pretty experimental, meaning that support is&hellip; &hellip;well,
+you&rsquo;re <a href="http://caniuse.com/#feat=payment-request">on your own for now</a>, as
+the <strong>only</strong> browser that supports it is chrome for mobile<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<h2>So?</h2>
+
+<p>Who could have though things like these could actually happen in a browser
+3 years ago?</p>
+
+<p>I bet most of us didn&rsquo;t, which is why I&rsquo;m excited to see the
+web growing and adding capabilities that make the browsing experience
+better day after day.</p>
+
+<p>And with things like <a href="https://www.chromestatus.com/feature/5298357018820608">Ambient Light Sensor API</a>,
+<a href="https://www.chromestatus.com/feature/5762982487261184">CompositorWorkers</a> (worker threads that can respond to input and update visuals)
+and <a href="https://www.chromestatus.com/feature/4532810371039232">WebVR</a> in the pipeline,
+the future of browsers looks yummier than ever!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>How many times do you reboot your phone daily? Sorry, what? You have a Samsung? Oh&#8230; <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>What&#8217;s  scary, though, is that &#8220;Apple provides an equivalent proprietary API called Apple Pay JS&#8221; (http://caniuse.com/#feat=payment-request) <a href='#fnref:2' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/2-web-apis-im-particularly-excited-about/"
+		},
+		"headline": "2 Web APIs I'm particularly excited about",
+		"description": "Web Push Notifications and Payment Requests are exciting, as they open up new frontiers in web development.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2016-10-25 01:02:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

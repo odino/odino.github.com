@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Email | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/email/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using Emailvision's CampaignCommander APIs From PHP]]></title>
+    <link href="https://odino.org/using-emailvisions-campaigncommander-apis-from-php/"/>
+    <updated>2013-06-28T18:38:00+00:00</updated>
+    <id>https://odino.org/using-emailvisions-campaigncommander-apis-from-php</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/emailvision-template.png"></p>
+
+<p>This weekend I finally had the chance to
+work a couple hours on the <code>namshi/emailvision</code>
+library, which lets you integrate CampaignCommander
+as (email) notification solution in your
+PHP projects.</p>
+
+<p>I already had a proof-of-concept of this library since weeks,
+and it was already pushed to Github, but since I had no
+valid API account to do some integration tests, I
+could not really &ldquo;publicize&rdquo; it.</p>
+
+<p>Right now I refactored the library and added a couple integration
+tests which are working flawlessy, so, in this post, I&rsquo;m
+going to show you how easy it is to send emails with
+Emailvision&rsquo;s solution directly from PHP.</p>
+
+<!-- more -->
+
+
+<h2>Installation</h2>
+
+<p>As usual with the latest libraries built for PHP,
+the installation can simply be done with composer,
+as the library itself is available over
+<a href="https://packagist.org/packages/namshi/emailvision">packagist</a>:</p>
+
+<p><code>bash composer.json
+"namshi/emailvision": "dev-master"
+</code></p>
+
+<p>then you simply have to run a <code>php composer.phar update</code> and
+you can start utilizing it in your codebase (the namespace is
+<code>Namshi\Emailvision</code>, as this library has been built in the
+context of our company, <a href="http://en-ae.namshi.com">namshi.com</a>).</p>
+
+<p>As of today, the latest stable release is <code>1.0.0</code>, which is the
+one we recommend to run in production &ndash; keep an eye on packagist
+if we come up with changes, but I bet it won&rsquo;t change that much
+in the near future, as emailvision&rsquo;s API is pretty simple.</p>
+
+<h2>Usage</h2>
+
+<p>After you configure transactional email templates in the
+CampaignCommander web interface, you just need to keep in mind
+(and in your code) the unique identifier and the security tag
+of the template; the rest is very straightforward:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Namshi\Emailvision\Client;</p>
+
+<p>$config = array(</p>
+
+<pre><code>'random'            =&gt; 'UNIQUE_IDENTIFIER',
+'encrypt'           =&gt; 'SECURITY_TAG',
+'senddate'          =&gt; new \DateTime(),
+'uidkey'            =&gt; 'EMAIL',
+'stype'             =&gt; 'NOTHING',
+</code></pre>
+
+<p>);</p>
+
+<p>$emailvisionClient = new Client($config);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#58;&#115;&#x6f;&#109;&#101;&#111;&#x6e;&#101;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#x73;&#111;&#109;&#101;&#111;&#x6e;&#x65;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;</a>&rdquo;);
+```</p>
+
+<p>The nice thing here is that Emailvision lets you schedule
+emails, so you can just play with the <code>senddate</code> parameter
+and set it to the future &ndash; just be aware that it needs to
+be a <code>DateTime</code> instance:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>use Namshi\Emailvision\Client;</p>
+
+<p>$date = new \DateTime(&lsquo;2025-01-01 12:45:00&rsquo;);</p>
+
+<p>$config = array(</p>
+
+<pre><code>'random'            =&gt; 'UNIQUE_IDENTIFIER',
+'encrypt'           =&gt; 'SECURITY_TAG',
+'senddate'          =&gt;  $date,
+'uidkey'            =&gt; 'EMAIL',
+'stype'             =&gt; 'NOTHING',
+</code></pre>
+
+<p>);</p>
+
+<p>$emailvisionClient = new Client($config);
+$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#115;&#x6f;&#109;&#x65;&#x6f;&#x6e;&#101;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#109;">&#x73;&#x6f;&#109;&#101;&#x6f;&#x6e;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a>&rdquo;);
+```</p>
+
+<p>This code will tell CampaignCommander to trigger
+the email on the 1st of January 2025, at 12:45.</p>
+
+<h2>Dynamic content in your emails</h2>
+
+<p>If we would stop here, the library would be pretty
+useless, since the power of transactional emails
+is to be able to serve dynamic content: in fact, the API
+allows you to pass as much variables as you want
+that can be configured and used in the email templates
+you&rsquo;ve created in emailvision&rsquo;s web interface.</p>
+
+<p>To do so, once you call the <code>sendEmail</code> method of the
+client, just pass an array of variables (strings) as second
+argument:</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$emailvisionClient->sendEmail(&ldquo;<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x73;&#111;&#x6d;&#x65;&#x6f;&#110;&#x65;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#115;&#x6f;&#109;&#101;&#111;&#x6e;&#x65;&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a>&rdquo;, array(</p>
+
+<pre><code>'name' =&gt; 'Alex!',
+</code></pre>
+
+<p>));
+```</p>
+
+<p>and then you will start receiving personalized emails:</p>
+
+<p><img class="center" src="/images/emailvision-received.png"></p>
+
+<h2>Running the tests</h2>
+
+<p>Of course, we&rsquo;ve added some unit and <strong>integration</strong>
+tests which let us refactor the library and add
+functionalities to it without regressions; to run
+the test suite, just use <code>phpunit</code>:</p>
+
+<p>``` bash
+cd /path/to/namshi/emailvision</p>
+
+<p>phpunit
+```</p>
+
+<p>You will notice that even though the tests should contain
+some actual HTTP calls, they are very fast: this is because,
+unless you provide some real credentials for emailvision,
+integration tests aren&rsquo;t run by default.</p>
+
+<p>To run them, you will have to create a new dummy email template
+on CampaignCommander and store the credentials you get
+after saving it and the email address that is going to
+receive the test emails in a file named <code>emailvision.config</code>
+in your system&rsquo;s temporary folder (you can get it by
+running <code>php -r "echo sys_get_temp_dir();"</code>):</p>
+
+<p>``` php /tmp/emailvision.config
+&lt;?php</p>
+
+<p>$encrypt    = &lsquo;email_template_security_tag&rsquo;;
+$random     = &lsquo;email_template_unique_id&rsquo;;
+$email  = &lsquo;<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#121;&#111;&#117;&#x72;&#x2e;&#97;&#100;&#100;&#x72;&#x65;&#115;&#x73;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#x6f;&#117;&#114;&#46;&#x61;&#100;&#x64;&#114;&#101;&#115;&#115;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#109;</a>&rsquo;;
+```</p>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+</feed>

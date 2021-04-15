@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Reactjs | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/reactjs/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Development's Future Is a Big Question Mark]]></title>
+    <link href="https://odino.org/mobile-developments-future-is-a-big-question-mark/"/>
+    <updated>2015-02-28T18:48:00+00:00</updated>
+    <id>https://odino.org/mobile-developments-future-is-a-big-question-mark</id>
+    <content type="html"><![CDATA[<p>In the past 5 years, mobile devices have taken
+the world by storm, creating new opportunities
+for both consumers and vendors: truth is, the
+landscape of mobile <strong>development</strong> still looks
+very immature and we should be prepared to see a
+radical change in the next 2 to 5 years.</p>
+
+<!-- more -->
+
+
+<h2>A suboptimal development industry</h2>
+
+<p>As we all agree, <a href="http://en.wikipedia.org/wiki/Duplicate_code">duplication is something bad</a>
+in software engineering: it leads to unmaintainable,
+error-prone code that requires a signicant effort
+to be fixed.</p>
+
+<p>If you are a mobile factory or a product-company
+with its own apps-development team, you might be
+familiar with the annoying problem of fixing, or
+implementing, the same thing twice.</p>
+
+<p>Nowadays, unfortunately, <strong>duplicate efforts are the norm
+while developing mobile apps</strong>: you have to reproduce
+the same behaviour across different platforms (ios
+and android, but add blackberry or windows phone if you&rsquo;re
+not that lucky) which led people to create tools like
+<a href="http://cordova.apache.org">cordova</a>.</p>
+
+<p>Problem is, these tools ain&rsquo;t the solution: they don&rsquo;t work
+as nicely as native apps, they probably hide too
+much from the developer and vendors aren&rsquo;t keen
+on supporting them that much. If you, like me,
+gave stuff like <a href="http://ionicframework.com/">ionic</a> a try,
+you probably first found yourself surprised by
+how nice your demo app would look and behave,
+to then just find out that <strong>the more you were
+implementing, the quirkier it looked</strong>.</p>
+
+<p>On another note, the decision on how to structure
+the team isn&rsquo;t trivial as well: shall
+I get devs who can hack on both
+platforms? Let&rsquo;s create 2 separate teams? Shall I
+get 2 lead developers or 1 guy that has a good
+sense on how both platforms work?</p>
+
+<p>We need things to be better: just like the web,
+mobile is now a scary land of vendors-dictated
+&ldquo;standards&rdquo;. <strong>We don&rsquo;t need another JavaScript.</strong></p>
+
+<h2>The need for standards</h2>
+
+<p>I don&rsquo;t think mobile is much different to what
+JavaScript used to look like until 3/5 years ago:
+a lot of vendor-specific standards, weird tools
+that try to uniform these platforms and a plethora
+of things that just don&rsquo;t feel &ldquo;right&rdquo;.</p>
+
+<p>We need uniform APIs, we need to be able to rely
+on the same toolchain (for example, official <a href="https://support.google.com/googleplay/android-developer/answer/3131213?hl=en">staged rollouts</a> on the Apple Store)
+and we need the same kind of transition the JS
+ecosystem has seen: vendors need to
+come together and design all of these things
+altogether, agree on a minimal interface to share
+and get ready to kill the mess.</p>
+
+<p>Of course, there are a bit more complications here,
+as we are talking about very different platforms,
+with different development tools and workflow, which
+is why I think we will see huge changes, from this
+point of view, in the next 3 years.</p>
+
+<h2>How will it look like?</h2>
+
+<p>I have been telling people for a while that I do not
+believe this multi-platform, fragmented ecosystem
+can last for long, as I think it will eventually
+lead vendors to agree on a common platform to work on.</p>
+
+<p>I don&rsquo;t necessarily think it needs to be Objective-C,
+but it definitely <a href="http://www.reddit.com/r/androiddev/comments/27mu3v/why_do_android_dev_tools_still_suck/">won&rsquo;t be Android on Java</a>.
+At the same time, I don&rsquo;t know how interested Apple
+would be in making Swift / Objective-C a thing for the
+masses (<a href="http://stackoverflow.com/questions/7133728/objective-c-in-linux">the masses are interested though</a>).</p>
+
+<p>At the end of the day, thinking of <strong>one, unified mobile
+platform</strong> seems kind of crazy today but, in 5 years,
+devs would look back and wonder &ldquo;how could we do it like
+that, to be wasting efforts on so many different platforms?&rdquo;.</p>
+
+<h2>My personal feeling?</h2>
+
+<p>At the end of the day, all we need is to give a popular
+language a simple API to be able to completely access
+your device.</p>
+
+<p>That language&rsquo;s name is probably JavaScript<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.
+And that API is probably something like <a href="http://trac.webkit.org/wiki/JavaScriptCore">JavaScriptCore</a>.</p>
+
+<p>Since <a href="http://www.railslove.com/stories/fresh-on-our-radar-react-native">React Native</a>
+seems to be already halfway through the journey of
+making all of this real, my feeling is that it won&rsquo;t
+take long until vendors will realize that the
+easiest thing to do is to <strong>give JavaScript a (real) shot</strong>.</p>
+
+<p>KTHXBYE.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>I know that it sounds a bit counter-intuitive since I earlier said that &ldquo;we don&rsquo;t need another JavaScript&rdquo;, but there I was referring to what JS used to look like 3/5 years back (= a mess). We&rsquo;ve come a long way, though there&rsquo;s still a lot we can do :)  <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

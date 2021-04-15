@@ -1,0 +1,410 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Human-readable user agents for JavaScript error reporting</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/human-readable-user-agents-for-javascript-error-reporting/" />
+		<meta property="og:title" content="Human-readable user agents for JavaScript error reporting" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/human-readable-user-agents-for-javascript-error-reporting/">Human-readable user agents for JavaScript error reporting</a></h1>
+        <time>22 August 2012</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 9 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Some time ago I published a few posts
+on logging, one on how to <a href="/logging-javascript-errors/">report JavaScript errors</a> and another one
+which illustrates how to <a href="/using-monolog-for-php-error-reporting-on-new-relic/">log on New Relic with Monolog</a>.</p>
+
+<p>In this post I&rsquo;d like to go even
+further with JavaScript error logging
+and tell you how we &ndash; at <a href="http://namshi.com">Namshi</a> &ndash;
+are trying to ease frontend debugging
+across multiple browsers.</p>
+
+<!-- more -->
+
+
+<h2>User agents, the gotchas</h2>
+
+<p>With JavaScript, it&rsquo;s pretty easy to detect
+the user agent from a client ( you just need
+to access <code>navigator.userAgent</code>), the problem
+is that user agents are one of the most incredible
+<em>gotchas</em> in web development.</p>
+
+<p>For example, how would you guess that</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mozilla/5.0
+</span><span class='line'>(Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4)
+</span><span class='line'>Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>represents Firefox 14 on Windows 7?</p>
+
+<p>Let me tell you, <strong>you wouldn&rsquo;t</strong>, that&rsquo;s why
+you should convert user agents in a human-readable
+format for the people who are going to debug
+the frontend.</p>
+
+<h2>Converting user agents with remote calls</h2>
+
+<p>Luckily, <a href="http://www.useragentstring.com/">UserAgentString</a> is a service which allows
+you to query them whenever you need to retrieve useful
+and <strong>meaningful</strong> informations from a user agent string;
+combined with <a href="http://guzzlephp.org/">Guzzle</a>, you can directly have meaningful
+JavaScript errors&#8217; reports with a few lines of code.</p>
+
+<p>For example, this is a simple class which retrieves the informations from
+the service:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">Vendor\Service</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Guzzle\Http\ClientInterface</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">UserAgentConverter</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">const</span> <span class="no">URL_USERAGENT_API</span> <span class="o">=</span> <span class="s1">&#39;http://www.useragentstring.com/&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="no">BROWSER_INFO</span>      <span class="o">=</span> <span class="s1">&#39;%s %s on %s&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="nv">$client</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Instantiates the service and injects the HTTP client that will be used</span>
+</span><span class='line'><span class="sd">     * to perform requests.</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @param ClientInterface $client </span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">ClientInterface</span> <span class="nv">$client</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client</span> <span class="o">=</span> <span class="nv">$client</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * Retrieves a human-readable string identifying the $userAgent for error</span>
+</span><span class='line'><span class="sd">     * reporting (ie Internet Explorer 8 on Windows 7).</span>
+</span><span class='line'><span class="sd">     * </span>
+</span><span class='line'><span class="sd">     * @param string $userAgent</span>
+</span><span class='line'><span class="sd">     * @return string|null</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">lookup</span><span class="p">(</span><span class="nv">$userAgent</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$request</span>  <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">URL_USERAGENT_API</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;uas=%s&amp;getJSON=all&#39;</span><span class="p">,</span> <span class="nv">$userAgent</span><span class="p">));</span>
+</span><span class='line'>        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">(</span><span class="k">true</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and you can use it like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ua</span>         <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$uaService</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Vendor\Service\UserAgentConverter</span><span class="p">(</span><span class="k">new</span> <span class="nx">Guzzle\Http\Client</span><span class="p">());</span>
+</span><span class='line'><span class="nv">$userAgent</span>  <span class="o">=</span> <span class="nv">$uaService</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$userAgent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// outputs &quot;Firefox 14.0.1 on Windows 7&quot;</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nb">sprintf</span><span class="p">(</span>
+</span><span class='line'>      <span class="s2">&quot;%s %d on %s&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_name&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_version&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;os_name&#39;</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s pretty easy, even easier if you use the
+<a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">dependency injection container of Symfony2</a>,
+where you can just do the instantiation
+in a config file:</p>
+
+<figure class='code'><figcaption><span>container.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>services:
+</span><span class='line'>  http.client:
+</span><span class='line'>    class: <span class="s2">&quot;Guzzle\\Http\\Client&quot;</span>
+</span><span class='line'>  useragent.converter:
+</span><span class='line'>    class: <span class="s2">&quot;Vendor\\Service\\UserAgentConverter&quot;</span>
+</span><span class='line'>    arguments:
+</span><span class='line'>      client: @http.client
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>The one liner to get the user agent&#8217;s informations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;useragent.converter&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Caching</h2>
+
+<p>At this point it becomes obvious that you should put
+a <strong>caching layer</strong> in front of the <code>UserAgentConverter</code>
+since you don&rsquo;t want to always query a remote service
+to retrieve informations that you already have:
+something like Redis should perfectly do the job,
+as a cache &ndash; in this scenario &ndash; is essential, needs
+to be as fast as hell and you don&rsquo;t need a SLA with it,
+so if the Redis server is down you are gracefully
+degradating: at the same time, Memcache can be a good candidate
+to substitute Redis, but remember that you will
+renounce to persistence, since you won&rsquo;t be able to
+store informations on the disk as you would
+do with Redis.</p>
+
+<p>The implementations is very trivial:</p>
+
+<figure class='code'><figcaption><span>Adding a caching layer to our code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ua</span>         <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Windows; U; Windows NT 6.1; WOW64; en-US; rv:2.0.4) Gecko/20120718 AskTbAVR-IDW/3.12.5.17700 Firefox/14.0.1&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$cache</span>      <span class="o">=</span> <span class="k">new</span> <span class="nx">CacheProvider</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$userAgent</span>  <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$userAgent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$uaService</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Vendor\Service\UserAgentConverter</span><span class="p">(</span><span class="k">new</span> <span class="nx">Guzzle\Http\Client</span><span class="p">());</span>
+</span><span class='line'>  <span class="nv">$userAgent</span>  <span class="o">=</span> <span class="nv">$uaService</span><span class="o">-&gt;</span><span class="na">lookup</span><span class="p">(</span><span class="nv">$ua</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$userAgent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">store</span><span class="p">(</span><span class="nv">$ua</span><span class="p">,</span> <span class="nv">$userAgent</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// outputs &quot;Firefox 14.0.1 on Windows 7&quot;</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nb">sprintf</span><span class="p">(</span>
+</span><span class='line'>      <span class="s2">&quot;%s %d on %s&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_name&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;agent_version&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nv">$userAgent</span><span class="p">[</span><span class="s1">&#39;os_name&#39;</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/human-readable-user-agents-for-javascript-error-reporting/"
+		},
+		"headline": "Human-readable user agents for JavaScript error reporting",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2012-08-22 09:40:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

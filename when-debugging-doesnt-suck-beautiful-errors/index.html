@@ -1,0 +1,426 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Debugging and analyzing logs can be a painful activity, especially if we don't raise the right kind of exceptions." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>When debugging doesn't suck: beautiful errors</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/when-debugging-doesnt-suck-beautiful-errors/" />
+		<meta property="og:title" content="When debugging doesn't suck: beautiful errors" />
+		<meta property="og:description" content="Debugging and analyzing logs can be a painful activity, especially if we don't raise the right kind of exceptions." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/when-debugging-doesnt-suck-beautiful-errors/">When debugging doesn't suck: beautiful errors</a></h1>
+        <time>29 March 2017</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 4 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right" src="/images/stacktrace-java.png"></p>
+
+<p>Exceptions happen everyday: the bigger (and the more distributed) the system, the
+higher the chances for things to go south.</p>
+
+<p>Most of us already learned the lesson when we idealized architectures and they
+bit us back in the form of a catastrophic downtime that could have been avoided,
+maybe by just <a href="/better-performance-the-case-for-timeouts/">adding a required timeout</a>
+or keeping a few <a href="/book-review-release-it-design-and-deploy-production-ready-software/">best practices for distributed systems</a>
+in mind: we are now better architects, who understand that <strong>failures are an option</strong>
+and we have to build resilient systems that embrace them and work towards mitigating
+their impact.</p>
+
+<p>There is one thing, though, that most of us (including me) still suck at: <strong>throwing
+beautiful errors</strong>.</p>
+
+<p>We have great infrastructures in place to log information and monitor our systems
+where, in theory, everything is taken care of; then the day comes when disaster, in the form
+of a nasty bug, strikes and we&rsquo;re left trying to understand what&rsquo;s
+going on with our software.</p>
+
+<p>How many times, after fixing a bug, you find yourself saying
+&ldquo;<em>let&rsquo;s add some more logs though</em>&rdquo;? If you&rsquo;ve been as frustrated as I&rsquo;ve been,
+I&rsquo;d recommend you to read on.</p>
+
+<!-- more -->
+
+
+<h2>Logging should be transparent to the app</h2>
+
+<p><code>stdout</code>/<code>stderr</code> work alright most of the time, that&rsquo;s where your app should
+log to in 99% of the cases: logging is generally part of the infrastructure,
+not the single app, so there&rsquo;s virtually no reason to make the app aware of a
+specific logging transport.</p>
+
+<p>Most logging libraries support <code>std***</code> out of the box, so that you can, at a higher
+level, collect those logs in a single place, without having to change a hundred apps when
+you decide to switch to a new log collector (ie. SumoLogic, ELK, Graylog).</p>
+
+<p>Make the app unaware of who&rsquo;s receiving the logs, it&rsquo;s the best way to centralize
+logging and make sure you&rsquo;re not trapped with one solution unless you change each
+and every app in your architecture.</p>
+
+<h2>Not too much, not too less</h2>
+
+<p>Nobody likes to ingest (and pay for) gigabytes of useless logs, especially when
+you&rsquo;re trying to debug and all that pops in your monitoring console is:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mar 17 17:53:35 app Received request for order #123
+</span><span class='line'>Mar 17 17:53:35 app Opening mysql connection
+</span><span class='line'>Mar 17 17:53:35 app Order #123 cannot be placed
+</span><span class='line'>Mar 17 17:53:35 app There was some problem with order #123
+</span><span class='line'>Mar 17 17:53:35 app Closing mysql connection (timeout)
+</span><span class='line'>Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111
+</span><span class='line'>Mar 17 17:53:35 app Unable to place order #123, responding to client with error code
+</span><span class='line'>Mar 17 17:53:35 app Sent code 500 to client for order #123</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, out of 8 messages we only care about 1 or 2 of them, the actual error
+(<code>connection timed out</code>) and maybe the incoming request message (first one above):
+most of those messages will not really add anything but clutter, and you&rsquo;re left
+looking at logs that you eventually have to <strong>filter out</strong>.</p>
+
+<p>A better strategy would probably be to log the error and provide some additional
+info, in case the reader wants to understand a bit more about the error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111 {
+</span><span class='line'>  timeout: 10000,
+</span><span class='line'>  httpStatus: 500,
+</span><span class='line'>  orderParams: ...
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should help keeping logs as informative as possible, but it exposes you to
+a nasty problem, as you&rsquo;re only logging in case an error occurs. Supposing that
+your app is an HTTP server, I&rsquo;d strongly recommend to log the request (very high-level,
+no need for a lot of details) so that you know that the app is being hit:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mar 17 17:53:35 app POST /orders
+</span><span class='line'>Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111 {
+</span><span class='line'>  timeout: 10000,
+</span><span class='line'>  httpStatus: 500,
+</span><span class='line'>  orderParams: ...
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>else, when a bunch of requests ends up throwing a <code>500</code> error and you don&rsquo;t see
+logs in the console, you won&rsquo;t be able to tell if the problem is with the load
+balancer in front of the app that&rsquo;s rejecting some requests or what. Add <em>cheap</em>
+logs at an high level so that you don&rsquo;t have to make lots of assumption when
+things go wrong, so that when you see this in the logs:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mar 17 17:53:35 Server starting on port 8080...
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>you know the app is probably not receiving traffic at all.</p>
+
+<h2>Cluster by identifiers</h2>
+
+<p><img class="right" src="/images/aws-xray.png"></p>
+
+<p>It&rsquo;s a good idea to be able to tag logs so that you can cluster them later on,
+especially if you have a multi-layered architecture: Amazon, for example, launched
+<a href="https://aws.amazon.com/xray/">X-Ray</a> to help in these exact scenarios.</p>
+
+<p>Assign a request ID to each and every request coming to your load balancers, and
+forward that ID to the inner levels of your architecture: this will help you
+giving more context to errors.</p>
+
+<p>For example, you might end up seeing that requests
+that came through the load balancer and hit service A with a particular query string
+parameter didn&rsquo;t eventually land on service B, thus you can now focus on
+understanding why service A is holding on all of the requests with that specific
+parameter.</p>
+
+<h2>What went wrong?</h2>
+
+<p>It&rsquo;s generally helpful to understand what exactly went wrong, or what kind of
+parameter we were expecting: most of the times it&rsquo;s a matter of being able
+to include the specific parameter that caused the error in the logs, as there&rsquo;s
+nothing worse than logging a generic <code>invalid parameters</code> error, leaving the
+next guy on-call trying to figure out what exactly triggered the error.</p>
+
+<p>Something as easy as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">db</span><span class="p">.</span><span class="nx">findUser</span><span class="p">(</span><span class="nx">user</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Error creating new user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">err</span><span class="p">,</span> <span class="nx">params</span><span class="p">})</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>could help you understand the root cause of the failure.</p>
+
+<p>Bear in mind that you have to be very careful when embedding external parameters into your logs,
+as you might end up <strong>logging sensitive information such as DB credentials or credit
+card numbers</strong>: check the documentation of your specific logger to see if it supports
+<a href="https://github.com/pinojs/pino/blob/4c6170274abcd09721e9d37f668e01ec5083852a/docs/howtos.md#how-do-i-redact-sensitive-information">redacting</a> information, else you&rsquo;ll have to manually &ldquo;hide&rdquo; those values.</p>
+
+<h2>How do I fix this?</h2>
+
+<p>Another very important aspects of great logs is the ability to include
+remediation steps in the logs themselves, so that once a failure happens we&rsquo;re
+immediately able to troubleshoot.</p>
+
+<p>As easy as it sounds, it&rsquo;s not always feasible to include them:
+for example, when a clients sends the wrong parameter to a service, it&rsquo;s very
+easy to identify the root cause, but not so trivial to figure out what needs
+to be done to remediate the error.</p>
+
+<p>Was there a deployment that changed the
+parameter name from <code>userId</code> to <code>user_id</code>? Is the client broken due to an update
+on its side? Is it on &ldquo;our&rdquo; side or &ldquo;their&rdquo; side? No single, clear action can be
+taken without digging a bit further, and at that point it&rsquo;s better to avoid
+including vague, unhelpful remediation steps such as &ldquo;<em>contact the customer as they seem
+to be screwing up</em>&rdquo;, as it might lead you towards the wrong direction.</p>
+
+<p>An example of remediation steps for when a <a href="https://martinfowler.com/bliki/CircuitBreaker.html">circuit breaker</a>
+kicks in:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">GET</span> <span class="nx">api</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">com</span> <span class="o">--</span> <span class="nx">Circuit</span> <span class="nx">breaker</span> <span class="nx">prevented</span> <span class="nx">connection</span><span class="p">,</span> <span class="k">if</span> <span class="nx">you</span> <span class="nx">believe</span> <span class="k">this</span>
+</span><span class='line'><span class="nx">is</span> <span class="nx">an</span> <span class="nx">error</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">manually</span> <span class="nx">open</span> <span class="nx">the</span> <span class="nx">circuit</span> <span class="kd">with</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">command</span> <span class="nx">from</span> <span class="nx">our</span>
+</span><span class='line'><span class="nx">intranet</span><span class="o">:</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">curl</span> <span class="o">-</span><span class="nx">X</span> <span class="nx">POST</span> <span class="o">-</span><span class="nx">d</span> <span class="s2">&quot;state=open&quot;</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//frontend.example.com/_breakers/api.namshi.com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Most of the time, the breaker will close the circuit for a valid reason; whenever
+that&rsquo;s not the case you have a solution right in front of you.</p>
+
+<p>It&rsquo;s worth noting that remediation steps, like any form of documentation,
+might get outdated quite fast: my advice is to not get too excited in order to avoid
+spamming your codebase with instructions that will change every 3 months.</p>
+
+<h2>Provide useful info</h2>
+
+<p>Most of the loggers available today let you specify some kind of context to
+surround your log message with: when a timeout connecting to MySQL occurs, for
+example, it would be nice to understand how your connections pool looked at the
+time, as well as other information like the timeout itself.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">pool</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">({</span><span class="nx">timeout</span><span class="p">})</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">then</span><span class="p">(...)</span>
+</span><span class='line'>  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">timeout</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">pool</span><span class="o">:</span> <span class="nx">pool</span><span class="p">.</span><span class="nx">getState</span><span class="p">(),</span>
+</span><span class='line'>    <span class="p">})</span>
+</span><span class='line'>  <span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As usual, no rocket science.</p>
+
+<h2>Collect crashes</h2>
+
+<p><img class="left" src="/images/newrelic.jpg"></p>
+
+<p>Last but not least, something that might sound silly to many of you: <strong>collect
+crash reports</strong>.</p>
+
+<p>In some languages that&rsquo;s not as trivial as it sounds (for example, <a href="http://stackoverflow.com/questions/12928487/php-try-catch-and-fatal-error">PHP&rsquo;s
+fatal errors weren&rsquo;t catchable</a> until <a href="http://php.net/manual/en/language.errors.php7.php">PHP 7</a>),
+so you might need to look into other, lower-level solutions that are able
+to intercept and log crashes when userland code can do nothing about it.</p>
+
+<p><a href="https://newrelic.com/">NewRelic</a> seems to be the front-runner here, even though its
+host-based pricing model is quite quirky under certain circumstances
+(think containers or t2 instances on AWS).</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;ve done quite some damage in the past, so this is more of a collection of
+friendly advices from someone who banged his head against the wall several
+times.</p>
+
+<p>If you&rsquo;re curious about the infrastructure we use to handle monitoring and logging
+at Namshi let me just give you a brief overview:</p>
+
+<ul>
+<li>our legacy systems log to <a href="https://www.graylog.org/">Graylog</a> through specialized transports (ie. <a href="https://github.com/namshi/winston-graylog2">winston-graylog2</a>)</li>
+<li>the rest of our apps are running in containers and log to <code>stdout</code></li>
+<li>there&rsquo;s a container, on each host, that collects all docker logs and ships them to <a href="https://sematext.com/logsene/">sematext&rsquo;s logsene</a></li>
+<li>on staging, we give devs a bit more freedom and let them have a look at the <a href="https://github.com/kubernetes/dashboard#kubernetes-dashboard">kubernetes&#8217; dashboard</a></li>
+<li><a href="https://newrelic.com/">NewRelic</a> monitors crashes and performance</li>
+<li><a href="https://sensuapp.org/">Sensu</a> runs checks that ensure things are running smoothly (ie. <code>ping google.com</code> from the machines, check we have at least X products on the website, etc)</li>
+</ul>
+
+
+<p>If you&rsquo;d like to read more about logging, I&rsquo;d recommend <a href="http://www.masterzen.fr/2013/01/13/the-10-commandments-of-logging/">this article</a>
+that really helped me shape this post.</p>
+
+<p>Cheers!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/when-debugging-doesnt-suck-beautiful-errors/"
+		},
+		"headline": "When debugging doesn't suck: beautiful errors",
+		"description": "Debugging and analyzing logs can be a painful activity, especially if we don't raise the right kind of exceptions.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2017-03-29 22:59:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

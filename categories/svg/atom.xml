@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Svg | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/svg/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Generating Badges / Shields With NodeJS]]></title>
+    <link href="https://odino.org/generating-badges-slash-shields-with-nodejs/"/>
+    <updated>2015-05-16T19:05:00+00:00</updated>
+    <id>https://odino.org/generating-badges-slash-shields-with-nodejs</id>
+    <content type="html"><![CDATA[<p>In the last post, I wrote a simple example
+to be able to generate SVGs through <a href="http://raphaeljs.com/">RaphaelJS</a>
+on the server.</p>
+
+<p><img class="right <a" src="href="https://img.shields.io/travis/joyent/node.svg">https://img.shields.io/travis/joyent/node.svg</a>">
+<img class="right <a" src="href="https://img.shields.io/github/downloads/atom/atom/latest/total.svg">https://img.shields.io/github/downloads/atom/atom/latest/total.svg</a>"></p>
+
+<p>Now I would like to showcase how to accomplish
+a similar task &ndash; generating <a href="http://shields.io/">badges</a> &ndash; again with
+a simple NodeJS server.</p>
+
+<!-- more -->
+
+
+<h2>The approach</h2>
+
+<p>Shields are made of 3 main parts, a text on the <strong>left</strong>,
+a text on the <strong>right</strong> and the background <strong>color</strong> of the
+latter.</p>
+
+<p>That said, it&rsquo;s pretty clear we will want to receive those
+parameters in the HTTP request to the server and generate
+an SVG accordingly: we will simply use a base template
+and generate the image on the fly.</p>
+
+<p>For the templating part we will use <a href="http://paularmstrong.github.io/swig/">swig</a>,
+and to simplify the process of extracting request
+parameters we will simply rely on the evergreen express.</p>
+
+<h2>Show me the code!</h2>
+
+<p>First, let&rsquo;s create a package json so that we can
+<code>npm install</code>  the required dependencies:</p>
+
+<p>```
+{
+  &ldquo;name&rdquo;: &ldquo;nodejs-badges&rdquo;,
+  &ldquo;version&rdquo;: &ldquo;1.0.0&rdquo;,
+  &ldquo;description&rdquo;: &ldquo;&rdquo;,
+  &ldquo;main&rdquo;: &ldquo;index.js&rdquo;,
+  &ldquo;scripts&rdquo;: {</p>
+
+<pre><code>"test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+</code></pre>
+
+<p>  },
+  &ldquo;author&rdquo;: &ldquo;&rdquo;,
+  &ldquo;license&rdquo;: &ldquo;MIT&rdquo;,
+  &ldquo;dependencies&rdquo;: {</p>
+
+<pre><code>"express": "^4.12.3",
+"swig": "^1.4.2"
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Now, down to the &ldquo;real&rdquo; code : let&rsquo;s start by simply creating a
+brand new express app that receives requests at
+<code>/badge/:left/:right/:color</code> and renders an SVG
+template:</p>
+
+<p>``` javascript
+var express = require(&lsquo;express&rsquo;)
+var app = express()
+var swig = require(&lsquo;swig&rsquo;)
+var path = require(&lsquo;path&rsquo;)</p>
+
+<p>app.get(&lsquo;/badge/:left/:right/:color&rsquo;, function (req, res) {
+  var badge = swig.renderFile(path.join(__dirname, &lsquo;badge.svg&rsquo;), req.params);</p>
+
+<p>  res.writeHead(200, {&ldquo;Content-Type&rdquo;: &ldquo;image/svg+xml&rdquo;})
+  res.write(badge);
+  res.end();
+});</p>
+
+<p>var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;</p>
+
+<p>  console.log(&lsquo;Badge generator listening at <a href="http://%s:%s">http://%s:%s</a>&rsquo;, host, port);
+});
+```</p>
+
+<p>At this point, we will need to create the SVG template,
+and we will take inspiration from <a href="https://raw.githubusercontent.com/badges/shields/ecde9bb3d09cd8600882448275459b0de6e7e247/templates/plastic-template.svg">shields.io&rsquo;s one</a>,
+which is quite battle-tested:</p>
+
+<p>``` html
+
+{% set leftWidth = left.length * 10 %}
+{% set rightWidth = right.length * 12.5 %}
+{% set totalWidth = leftWidth + rightWidth &ndash; 10 %}
+
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ totalWidth }}" height="18">
+  <linearGradient id="smooth" x2="0" y2="100%"></p>
+
+<pre><code>&lt;stop offset="0"  stop-color="#fff" stop-opacity=".7"/&gt;
+&lt;stop offset=".1" stop-color="#aaa" stop-opacity=".1"/&gt;
+&lt;stop offset=".9" stop-color="#000" stop-opacity=".3"/&gt;
+&lt;stop offset="1"  stop-color="#000" stop-opacity=".5"/&gt;
+</code></pre>
+
+<p>  </linearGradient></p>
+
+<p>  <mask id="round"></p>
+
+<pre><code>&lt;rect width="{{ totalWidth }}" height="18" rx="4" fill="#fff"/&gt;
+</code></pre>
+
+<p>  </mask></p>
+
+<p>  <g mask="url(#round)"></p>
+
+<pre><code>&lt;rect width="{{ leftWidth }}" height="18" fill="#555"/&gt;
+&lt;rect x="{{ leftWidth }}" width="{{ rightWidth }}" height="18" fill="{{ color }}"/&gt;
+&lt;rect width="{{ totalWidth }}" height="18" fill="url(#smooth)"/&gt;
+</code></pre>
+
+<p>  </g></p>
+
+<p>  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="12"></p>
+
+<pre><code>&lt;text x="{{ leftWidth /2+1 }}" y="14" fill="#010101" fill-opacity=".3"&gt;{{ left }}&lt;/text&gt;
+&lt;text x="{{ leftWidth /2+1 }}" y="13"&gt;{{ left }}&lt;/text&gt;
+&lt;text x="{{ leftWidth + rightWidth /2.5-1 }}" y="14" fill="#010101" fill-opacity=".3"&gt;{{ right }}&lt;/text&gt;
+&lt;text x="{{ leftWidth + rightWidth /2.5-1 }}" y="13"&gt;{{ right }}&lt;/text&gt;
+</code></pre>
+
+<p>  </g>
+</svg>
+```</p>
+
+<p>At this point we&rsquo;re set; we can just run <code>node index.js</code> and
+hit <code>localhost:3000/my%20 badge/is%20great/green</code> to see
+the generated badge appear:</p>
+
+<p><img class="center" src="/images/generated-badge.png"></p>
+
+<h2>MOAR!</h2>
+
+<p>Keeping in mind that you have to URLescape special characters,
+you can now play around with many different combinations:</p>
+
+<ul>
+<li><code>http://localhost:3000/badge/code/bad/red</code> is a very simple badge</li>
+<li><code>http://localhost:3000/badge/code/bad/%23cc0033</code> shows that you
+can also specify colors in the traditional <a href="http://en.wikipedia.org/wiki/Hexadecimal">hex notation</a></li>
+</ul>
+
+
+<p>and so on and so fort: you can definitely feel free to
+customize the code to add some more variables, tweak the
+template and make small adjustments.</p>
+
+<p>All in all, now I guess you see how <a href="http://shields.io/">these shields</a>
+are generated :)</p>
+
+<h2>For the lazy ones&hellip;</h2>
+
+<p>Since I wanted to have a working example that people could
+run, rather than simply copypasting code from this post around,
+I created a simple github repo for <a href="https://github.com/odino/nodejs-badges">nodejs-badges</a>
+so that you can play around with more ease.</p>
+]]></content>
+  </entry>
+  
+</feed>

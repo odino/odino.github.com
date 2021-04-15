@@ -1,0 +1,304 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>News from the Orient library: OrientDB query-builder goes out</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out/" />
+		<meta property="og:title" content="News from the Orient library: OrientDB query-builder goes out" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/news-from-the-orient-library-orientdb-query-builder-goes-out/">News from the Orient library: OrientDB query-builder goes out</a></h1>
+        <time>31 July 2011</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 10 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>There are times to celebrate, like this one, that I was expecting since 2 months; a moment I delayed because of an amount of things that you can&rsquo;t even imagine.</p>
+
+<!-- more -->
+
+
+<p>But <a href="http://www.odino.org/349/the-current-status-of-my-work-with-orientdb">as I stated earlier</a>, a product should respect its estimated lifecycle and be released with the announced features: that&rsquo;s why I&rsquo;m proud to announce the immediate availability of the <a href="https://github.com/congow/Orient/tree/beta-3">beta-3 tag of Orient</a>, which ( stand up who does not know what it is ), last time I repeat it, is a library which lets you easily work with <a href="http://www.orientechnologies.com/">OrientDB</a> from PHP.</p>
+
+<h2>What&rsquo;s new?</h2>
+
+<p>Nothing <em>that</em> special.</p>
+
+<p>As I remarked via Twitter and in the first post I linked in this article, the beta-3 was a solidifying release:</p>
+
+<ul>
+<li>we added the last SQL commands that were missing, like <code>ALTER CLASS</code></li>
+<li>we refactored lots of the code involved in order to eliminate lots of the hardcoded new Class in the code</li>
+<li>integration tests for the QB have been written</li>
+<li>believe it or not, the most crucial and time-consuming task was digging deeper into these tests, so we spent lot of time trying to have more meaningful integrations</li>
+<li>we previewed a big refactoring, introducing the concept of Validators &ndash; <em>a la&#8217; symfony1</em> &ndash; which are probably gonna replace those ugly and static formatters</li>
+<li>we eliminated all the <code>@TODO</code>s from the PHPDOC, which means we solved them</li>
+</ul>
+
+
+<h2>Swishes the code</h2>
+
+<p>As always, we tried to make it clear enough for Doctrine 1.2 users to be able not to get lost writing a simple <code>SELECT</code>:</p>
+
+<figure class='code'><figcaption><span>Creating a simple SQL query</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">use</span> <span class="nx">Orient\Query</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Query</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;username = ? AND gender = ?&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">orWhere</span><span class="p">(</span><span class="s1">&#39;gender = ?&#39;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">echo</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">getRaw</span><span class="p">();</span>
+</span><span class='line'><span class="c1">// SELECT FROM users WHERE username = &quot;admin&quot; AND gender = &quot;male&quot; OR gender = &quot;female&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can obviously do more complex stuff or use any of OrientDB SQL-like operators:</p>
+
+<figure class='code'><figcaption><span>More examples of SQL queries and operators</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">revoke</span><span class="p">(</span><span class="s1">&#39;myPermission&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;user1&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;cluster&#39;</span><span class="p">);</span> <span class="c1">// Revoke access to a user</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">findReferences</span><span class="p">(</span><span class="s1">&#39;12:0&#39;</span><span class="p">);</span> <span class="c1">// Who&#39;s referring to record 12:0?</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;index:inEdges&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">between</span><span class="p">(</span><span class="s1">&#39;12:0&#39;</span><span class="p">,</span> <span class="s1">&#39;12:40&#39;</span><span class="p">);</span> <span class="c1">// look at some indexes between two ranges</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h2>Status of the library</h2>
+
+<p>If you want, before looking at some nice pictures a few lines below, read these considerations about the current state of Orient.</p>
+
+<p>&hellip;there we go: the most boring parts of the library are done and I&rsquo;m glad these moments are past, from now.</p>
+
+<p>As far as I &ndash; now &ndash; know, a few refactorings will be performed on the QB, but the test coverage is high enough to let us perform these operations without being scared at all: the first thing I want to work on are the formatters and the entire way the query tokens are handled; since the formatters introduce a lot of static code I primarily want to see if I can replace them with <a href="https://github.com/congow/Orient/tree/beta-3/Validator">validators</a>, then re-think the entire structure of the tokens, because the implementation is a bit sucky nowadays ( I want to type-hint them! ).</p>
+
+<p>But don&rsquo;t think these 2 steps will really be the first things I will do: with the beginning of August, thus vacations, I&rsquo;ll spend lot of time on the data mapper, which is the most funny and complex part of the whole system; being able to spend some time during this month will let us have a really buggy preview of the final mapper by the end of august, I suppose.</p>
+
+<h2>Magic pictures</h2>
+
+<p>Developers like metrics and related pictures.</p>
+
+<p>I want to share with you a few pictures and number from the beta-3 tag of the library, but please, be aware that without having thousand of systems that use it in production all of these numbers are meaningless! :)</p>
+
+<p>Here is the code coverage, generated by PHPUnit:</p>
+
+<p><img class="center" src="/images/cc.png"></p>
+
+<p>and some really interesting numbers, like cyclomatic complexity, thanks to PHPLOC:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Directories:                                         32
+</span><span class='line'>Files:                                               84
+</span><span class='line'>Lines of Code <span class="o">(</span>LOC<span class="o">)</span>:                               6622
+</span><span class='line'>  Cyclomatic Complexity / Lines of Code:           0.03
+</span><span class='line'>Comment Lines of Code <span class="o">(</span>CLOC<span class="o">)</span>:                      3411
+</span><span class='line'>Non-Comment Lines of Code <span class="o">(</span>NCLOC<span class="o">)</span>:                 3211
+</span><span class='line'>Namespaces:                                          33
+</span><span class='line'>Interfaces:                                          17
+</span><span class='line'>Classes:                                             67
+</span><span class='line'>  Abstract:                                           3 <span class="o">(</span>4.48%<span class="o">)</span>
+</span><span class='line'>  Concrete:                                          64 <span class="o">(</span>95.52%<span class="o">)</span>
+</span><span class='line'>  Average Class Length <span class="o">(</span>NCLOC<span class="o">)</span>:                      40
+</span><span class='line'>Methods:                                            351
+</span><span class='line'>  Scope:
+</span><span class='line'>    Non-Static:                                     306 <span class="o">(</span>87.18%<span class="o">)</span>
+</span><span class='line'>    Static:                                          45 <span class="o">(</span>12.82%<span class="o">)</span>
+</span><span class='line'>  Visibility:
+</span><span class='line'>    Public:                                         278 <span class="o">(</span>79.20%<span class="o">)</span>
+</span><span class='line'>    Non-Public:                                      73 <span class="o">(</span>20.80%<span class="o">)</span>
+</span><span class='line'>  Average Method Length <span class="o">(</span>NCLOC<span class="o">)</span>:                      7
+</span><span class='line'>  Cyclomatic Complexity / Number of Methods:       1.31
+</span><span class='line'>Anonymous Functions:                                  3
+</span><span class='line'>Functions:                                            0
+</span><span class='line'>Constants:                                           32
+</span><span class='line'>Global constants:                                     0
+</span><span class='line'>Class constants:                                     32
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;without forgetting the fact that I created a report.sh file that can be run to inspect the health of the code; for example, take a lot at the phpDepend pyramid:</p>
+
+<p><img class="center" src="/images/pyramid-depend.png"></p>
+
+<p>Last but not least, if you like interactive PHPDOC tools ( I don&rsquo;t, they all suck hard ), I set up a small Doxygen init script that you can use to generate the documentation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>doxygen Docs/orient.d
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then you can look at <code>Docs/html</code> to read the generated documentation.</p>
+
+<p>So, what are you waiting for? Go out there and <a href="https://github.com/congow/Orient">get oriented</a>!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/news-from-the-orient-library-orientdb-query-builder-goes-out/"
+		},
+		"headline": "News from the Orient library: OrientDB query-builder goes out",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2011-07-31 15:19:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

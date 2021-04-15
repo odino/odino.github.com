@@ -1,0 +1,695 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="This is how you can easily setup a local development workflow on a local kubernetes cluster." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Local k8s development in 2020</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/local-k8s-development-in-2020/" />
+		<meta property="og:title" content="Local k8s development in 2020" />
+		<meta property="og:description" content="This is how you can easily setup a local development workflow on a local kubernetes cluster." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a></h1>
+        <time>31 December 2019</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 2 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right" src="/images/kubernetes-logo.png"></p>
+
+<p>This decade&rsquo;s about to wrap up, so I decided to spend some time
+describing my development workflow as the year nears its end.</p>
+
+<p>What I find interesting in my setup is that it entertains
+working on a local k8s cluster &mdash; mainly to keep in touch
+with the systems that run in production.</p>
+
+<p>Running k8s locally isn&rsquo;t what
+you&rsquo;d want to do to begin with, but rather a natural path
+once you start wanting to replicate the environment that runs
+your live applications. Again, you don&rsquo;t need a local k8s
+cluster just &lsquo;cause, so make sure you have a good reason
+before going through the rest of this article.</p>
+
+<!-- more -->
+
+
+<h2>Cluster setup</h2>
+
+<p>Once a monstrous task, setting up a local k8s cluster is
+now as simple as installing a package on your system:
+Docker for Win/Mac allow you to run this very easily, and
+Canonical has made it possible on Linux through <a href="https://microk8s.io/">microk8s</a>
+(that&rsquo;s my boy!).</p>
+
+<p>One of the funny things about running on microk8s
+(or snaps, in general) is how it will automagically
+upgrade under your nose &mdash; sometimes with breaking changes.
+There was a recent change that <a href="https://github.com/ubuntu/microk8s/issues/382">swapped docker for containerd
+as microk8s&#8217; default container runtime</a>, and it broke some
+local workflows (more on that later, as it&rsquo;s easy to fix).
+In general, you can always force a snap to use a particular
+revision, so if anything&rsquo;s funky just downgrade and let others
+figure it out :)</p>
+
+<p>I&rsquo;d be keen to try <a href="https://k3s.io/">k3s</a> out, as it seem to provide an even more
+lightweight way to run the local cluster. Built mainly for
+IoT and edge computing, k3s is interesting as running
+microk8s is sometime resource-intesive &mdash; once I&rsquo;m done
+working on code, I usually prefer to <code>sudo snap disable microk8s</code>
+in order to preserve RAM, CPU and battery life (<a href="https://github.com/odino/dev/commit/20749dd50c590ec376b7eed2db558615f1ef6fda">proof here</a>).</p>
+
+<p>In the past, I&rsquo;ve also tried to work on a remote k8s cluster
+in the GKE from my local machine, but that proved to be too
+much of a hassle &mdash; the beauty of <code>kubectl</code> is that you don&rsquo;t
+really care where the cluster is running, but your IDE and
+other tools work best when everything is present and running
+locally.</p>
+
+<h2>Development tool</h2>
+
+<p>This has been fairly stable until late this year, when I
+decided to switch things around.</p>
+
+<p>I&rsquo;ve historically used helm and a bunch of shell magic
+to run apps locally: you would clone a repo and expect
+an <code>helm/</code> folder to be available, with the chart being
+able to install a whole bunch of k8s resources on your
+cluster. Then, a bash script run simply apply the chart
+with a bunch of pre-configured values: you would run <code>dev up</code>
+and what the script would do would simply be something
+along the lines of:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker build -t $CURRENT_FOLDER .
+</span><span class='line'>helm install --name $CURRENT_FOLDER ./helm/ --set mountPath=/home/alex/path/to/$CURRENT_FOLDER --set image=$CURRENT_FOLDER
+</span><span class='line'>kubectl logs -f deploy/$CURRENT_FOLDER --tail=100</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nothing too crazy&hellip;but with a few downsides:</p>
+
+<ul>
+<li>I started off with Helm 2, and v3 brought in a few changes I didn&rsquo;t want to go through</li>
+<li>helm is perfect if I want to package a generic app made up of multiple resources (service, ingress, etc) and release it to the outside world. Locally, I probably don&rsquo;t need all of that verbosity (<code>chart.yaml</code> and so on)</li>
+<li>most of the templating I did on development was <code>{{ .Release.name }}</code>. What&rsquo;s the point then?</li>
+</ul>
+
+
+<p>Towards the end of this year I went back to the drawing board
+and started to think what if there was anything else I could
+use that was simple enough and gave me enough flexibility.
+I knew I could use simple k8s manifests but it wasn&rsquo;t clear
+to me how I could integrate it into my workflow in a way
+that made it simpler than using a chart &mdash; and that&rsquo;s when I
+gave <a href="https://skaffold.dev/">skaffold</a> another chance.</p>
+
+<p>Skaffold is an interesting tool, promoted by Google, that
+supposedly handles local k8s development &mdash; and I say &ldquo;supposedly&rdquo;
+because I&rsquo;ve tried it in the past and have been extremely
+underwhelmed by its workflow.</p>
+
+<p>Let me explain: whenever a chance is detected in your codebase, skaffold
+wants to redeploy your manifests but, rather than simply
+working on an application-reload logic, is instead happy
+to:</p>
+
+<ul>
+<li>re-build your local image</li>
+<li>push it to a registry</li>
+<li>update the k8s deployment so a brand new pod comes up</li>
+</ul>
+
+
+<p>If you&rsquo;ve made it so far you probably realized that
+the whole operation doesn&rsquo;t either come cheap nor fast
+&mdash; you could be waiting several seconds for your changes
+to take effect&hellip;</p>
+
+<p>That was, until skaffold introduced <a href="https://skaffold.dev/docs/pipeline-stages/filesync/">file sync</a>
+to avoid the need to rebuild, redeploy and restart pods.
+This feature is currently in beta, but it&rsquo;s already working
+well enough that I&rsquo;ve decided to give it a shot, with very
+positive results.</p>
+
+<p>Now, rather than having an entire chart to mantain locally,
+my development setup has a simple <code>skaffold.yaml</code> that
+looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">apiVersion</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">skaffold/v1</span>
+</span><span class='line'><span class="l-Scalar-Plain">kind</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Config</span>
+</span><span class='line'><span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">artifacts</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">context</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">.</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">sync</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">manual</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">src</span><span class="p-Indicator">:</span> <span class="s">&quot;**&quot;</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">dest</span><span class="p-Indicator">:</span> <span class="s">&quot;/src&quot;</span>
+</span><span class='line'><span class="l-Scalar-Plain">deploy</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">kubectl</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">manifests</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">skaffold/*.yaml</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and I reduced the manifests to a simple k8s manifest
+containing multiple resources, separated by <code>---</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">apiVersion</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">apps/v1</span>
+</span><span class='line'><span class="l-Scalar-Plain">kind</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Deployment</span>
+</span><span class='line'><span class="l-Scalar-Plain">metadata</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">labels</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">app</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'><span class="l-Scalar-Plain">spec</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">replicas</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">selector</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">matchLabels</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">app</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">template</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">metadata</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">labels</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">app</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">spec</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">restartPolicy</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Always</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">containers</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">imagePullPolicy</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">IfNotPresent</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">tty</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">stdin</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ENV</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">value</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">dev</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">terminationGracePeriodSeconds</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+</span><span class='line'><span class="nn">---</span>
+</span><span class='line'><span class="l-Scalar-Plain">apiVersion</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">extensions/v1beta1</span>
+</span><span class='line'><span class="l-Scalar-Plain">kind</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ingress</span>
+</span><span class='line'><span class="l-Scalar-Plain">metadata</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">annotations</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">kubernetes.io/ingress.class</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">nginx</span>
+</span><span class='line'><span class="l-Scalar-Plain">spec</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">tls</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">my-app.dev</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">rules</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my-app.dev</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">http</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">backend</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">serviceName</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">servicePort</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my-app.dev</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">http</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">paths</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">backend</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">serviceName</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">servicePort</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http</span>
+</span><span class='line'><span class="nn">---</span>
+</span><span class='line'><span class="l-Scalar-Plain">apiVersion</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">v1</span>
+</span><span class='line'><span class="l-Scalar-Plain">kind</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Service</span>
+</span><span class='line'><span class="l-Scalar-Plain">metadata</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span><span class='line'><span class="l-Scalar-Plain">spec</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">ports</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">80</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">protocol</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">TCP</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">targetPort</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">8080</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">selector</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">app</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_app</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s about it. Now my <code>dev up</code> is mapped to a simple
+<code>skaffold dev</code>, and skaffold takes care of re-building
+the image when needed, syncing changes locally and so on.
+One of the advantages of using this tool is that it automatically
+detects changes to the manifests and the Dockerfile, so
+it re-builds the image without you having to trigger the
+process manually (which wasn&rsquo;t possible with Helm alone).</p>
+
+<p>Another interesting benefit of using skaffold is the support
+for base registries as well as build stages. The former
+allows you to run a registry at any given URL, and tell
+skaffold to prepend that URL to any image that&rsquo;s being pushed
+to the k8s cluster.</p>
+
+<p>As I mentioned, I use microk8s, which doesn&rsquo;t play very well
+with <a href="https://microk8s.io/docs/registry-images">locally-built images</a>,
+so I simply run the built-in registry on port <code>32000</code>. Others
+in my team simply run Docker for Mac which doesn&rsquo;t need a registry
+as any image built locally is automatically available to k8s.</p>
+
+<p>This would mean that I would have to update the <code>image</code> field
+of my deployments, manually, to <code>localhost:32000/my_app</code>, a
+tedious and annoying operation (and I&rsquo;d also have to make sure
+those changes aren&rsquo;t pushed to git). Skaffold frees you from the
+drama with a simple <code>skaffold config set default-repo localhost:32000</code>,
+a trick that will tell skaffold to parse all the manifests it deploys
+and replace the <code>image</code> fields, prepending the URL of your own registry.
+The feature is documented extensively <a href="https://skaffold.dev/docs/environment/image-registries/">here</a>,
+and it&rsquo;s a life saver!</p>
+
+<p>The support for build stages is another great trick up in
+skaffold&rsquo;s sleeve, as it allows to use the power of Docker&rsquo;s
+multi-stage builds in your development environment.</p>
+
+<p>If you have a Dockerfile that looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">FROM golang:1.13 as dev</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">RUN go get -v github.com/codegangsta/gin</span>
+</span><span class='line'><span class="l-Scalar-Plain">WORKDIR /src</span>
+</span><span class='line'><span class="l-Scalar-Plain">COPY go.mod /src</span>
+</span><span class='line'><span class="l-Scalar-Plain">COPY go.sum /src</span>
+</span><span class='line'><span class="l-Scalar-Plain">RUN go mod download</span>
+</span><span class='line'><span class="l-Scalar-Plain">COPY . /src</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">RUN go build -o my_go_binary main.go</span>
+</span><span class='line'><span class="l-Scalar-Plain">CMD gin run main.go</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">FROM gcr.io/distroless/base as prod</span>
+</span><span class='line'><span class="l-Scalar-Plain">COPY --from=dev /src /</span>
+</span><span class='line'><span class="l-Scalar-Plain">CMD [&quot;/my_go_binary&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can tell skaffold that, locally, it should simply stop at the
+<code>dev</code> stage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">apiVersion</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">skaffold/v1</span>
+</span><span class='line'><span class="l-Scalar-Plain">kind</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Config</span>
+</span><span class='line'><span class="l-Scalar-Plain">build</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">artifacts</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_go_app</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">docker</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">target</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">dev</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">context</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">.</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">sync</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">manual</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">src</span><span class="p-Indicator">:</span> <span class="s">&quot;**&quot;</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">dest</span><span class="p-Indicator">:</span> <span class="s">&quot;/src&quot;</span>
+</span><span class='line'><span class="l-Scalar-Plain">deploy</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">kubectl</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">manifests</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">skaffold/*.yaml</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, the <code>target</code> field does the trick.</p>
+
+<p>Believe me, skaffold has made my life so much easier and it&rsquo;s a tool
+I would gladly recommend. Before introducing file syncing I didn&rsquo;t
+want to get my hads dirty with it, as I did not find the development
+workflow sustainable (re-build and re-deploy at every file change),
+but right now it works much better than anything I could have come
+up with on my own.</p>
+
+<h2>Hands on the code</h2>
+
+<p>Last but not least, we went over running a cluster as well as our
+application &mdash; but how do we actually debug our code or run tests?</p>
+
+<p>Ideally, we&rsquo;d like a script that would be able to:</p>
+
+<ul>
+<li>build and run your app (<code>up</code>)</li>
+<li>execute commands inside the container (<code>exec</code>)</li>
+<li>jump inside the container (<code>in</code>)</li>
+<li>execute tests (<code>test</code>)</li>
+</ul>
+
+
+<p>Wouldn&rsquo;t it be nice to simply open a shell and run your tests with <code>dev test</code>?</p>
+
+<p>Turns out, creating a simple wrapper over our wokflow is very
+straightforward, and here&rsquo;s a sample of the code one could write:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># dev $command</span>
+</span><span class='line'><span class="nv">arg</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nb">command</span><span class="o">=</span><span class="s2">&quot;cmd_$1&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Boot the app through skaffold.</span>
+</span><span class='line'>cmd_up<span class="o">(){</span>
+</span><span class='line'>    skaffold dev
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Deletes the app</span>
+</span><span class='line'>cmd_delete<span class="o">(){</span>
+</span><span class='line'>    skaffold delete
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># This will drop you inside the container.</span>
+</span><span class='line'><span class="c"># We use bash, if available, else &quot;sh&quot;</span>
+</span><span class='line'>cmd_in<span class="o">(){</span>
+</span><span class='line'>    <span class="nv">app</span><span class="o">=</span><span class="k">$(</span>get_app_name<span class="k">)</span>
+</span><span class='line'>    kubectl <span class="nb">exec</span> -ti deploy/<span class="nv">$app</span> -- sh -c <span class="s2">&quot;command -v bash &amp;&amp; bash || sh&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Read the app name based on the image we</span>
+</span><span class='line'><span class="c"># build inside the skaffold.yaml</span>
+</span><span class='line'>get_app_name<span class="o">(){</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="k">$(</span>yq <span class="nb">read </span>skaffold.yaml build.artifacts.0.image<span class="k">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Main function: if a command has been passed,</span>
+</span><span class='line'><span class="c"># check if it&#39;s available, and execute it. If</span>
+</span><span class='line'><span class="c"># the command is not available, we print the</span>
+</span><span class='line'><span class="c"># default help.</span>
+</span><span class='line'>main<span class="o">(){</span>
+</span><span class='line'>    <span class="nb">declare</span> -f <span class="nv">$command</span> &gt; /dev/null
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 0 <span class="o">]</span>
+</span><span class='line'>    <span class="k">then</span>
+</span><span class='line'>        <span class="nv">$command</span> <span class="nv">$@</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'><span class="k">        </span><span class="nb">printf</span> <span class="s2">&quot;&#39;$arg&#39; is not a recognized command.\n\n&quot;</span>
+</span><span class='line'>        <span class="nb">exit </span>1
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">shift</span>
+</span><span class='line'>main <span class="nv">$@</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All this script does is to read the command passed to it
+and run it as a bash function. As you see, <code>up</code> is mapped
+to <code>skaffold dev</code>, and <code>in</code> is mapped to <code>kubectl exec ... -- bash</code>
+(so that you can jump into the container and run whatever
+command you&rsquo;d like).</p>
+
+<p>The actual <code>dev</code> I run locally is on github, under <a href="https://github.com/odino/k8s-dev">odino/k8s-dev</a>,
+and I believe I should credit <a href="https://www.linkedin.com/in/hzarka/">Hisham</a> for the original idea
+&mdash; this is a script we&rsquo;ve been using (and polishing) since ages.</p>
+
+<p>If you&rsquo;re wondering how does it look on the
+terminal, here&rsquo;s an asciicast where tests
+are run succesfully (<code>dev test</code>), we update
+the code to make the tests fail and then
+we jump into the container (<code>dev in</code>), before
+cleaning up (<code>dev delete</code>):</p>
+
+<script id="asciicast-07QLv6MRWkgurAu7uHxYfA421" src="https://asciinema.org/a/07QLv6MRWkgurAu7uHxYfA421.js" async></script>
+
+
+<h2>That&rsquo;s a wrap</h2>
+
+<p>Oh boy, right on time to close 2019 with a splash!</p>
+
+<p>Developing on a local k8s cluster isn&rsquo;t super straightforward,
+and I hope that by sharing my toolbox it should be easier for
+you to set your environment up for a productive day.</p>
+
+<p>Happy new decade!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/local-k8s-development-in-2020/"
+		},
+		"headline": "Local k8s development in 2020",
+		"description": "This is how you can easily setup a local development workflow on a local kubernetes cluster.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2019-12-31 15:45:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

@@ -1,0 +1,1295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Series | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/series/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web Security Demystified: WASEC]]></title>
+    <link href="https://odino.org/web-security-demistified/"/>
+    <updated>2018-07-14T22:45:00+00:00</updated>
+    <id>https://odino.org/web-security-demistified</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>" series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I've written.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/web-security-demistified/">Web security demystified: WASEC</a>
+	</li>
+	<li>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
+	</li>
+	<li>
+		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
+	<li>
+		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
+	</br>
+	<p>
+		If you've enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+	</p>
+</ol>
+</p>
+
+<p><img class="right" src="/images/wasec.jpeg"></p>
+
+<p>I&rsquo;ve been thinking of writing a long article around <em>everything a web developer
+should know about application security</em> for quite some time, and it&rsquo;s clear to me
+that this mastodontic exercise is never going to take place all at once.</p>
+
+<p>In order to get things rolling, I&rsquo;ve decided that,
+instead of writing one long, exhaustive article, I&rsquo;ll be splitting my efforts
+over a longer period of time, and come up with a series around
+Web Application SECurity (WASEC, since I like to shorten things).</p>
+
+<p>In this article I&rsquo;d like to introduce the contents I&rsquo;m going to write about,
+and how I&rsquo;m planning to publish them.</p>
+
+<p>Interested in learning how a compromised CDN wouldn&rsquo;t affect your users?
+Want to know why CSRF is going to die? Read on.</p>
+
+<!-- more -->
+
+
+<h2>Why?</h2>
+
+<p>This is how I like to sum up the goal of WASEC, a series on <strong>W</strong>eb <strong>A</strong>pplication <strong>SEC</strong>urity:</p>
+
+<blockquote><p>As software engineers, we often think of security as an afterthought: build it, then fix it later.</p>
+
+<p>Truth is, knowing a few simple browser features can save you countless of hours banging your head against a security vulnerability reported by a user. This book is a solid read that aims to save you days learning about security fundamentals for Web applications, and provide you a concise and condensed idea of everything you should be aware of when developing on the Web from a security standpoint.</p>
+
+<p>Don&rsquo;t understand prepared statements very well? Can&rsquo;t think of a good way to make sure that if your CDN gets compromised your users aren&rsquo;t affected? Still adding CSRF tokens to every form around? Then this book will definitely help you get a better understanding of how to build strong, secure Web applications made to last.</p>
+
+<p>Security is often an afterthought because we don&rsquo;t understand how simple measures can improve our application&rsquo;s defense by multiple orders of magnitude, so let&rsquo;s learn it together.</p></blockquote>
+
+<p>It&rsquo;s been a while I&rsquo;ve been thinking of <em>writing</em> something meaningful: not that
+I think my previous articles are terrible, but I always wanted to try to make
+something more &ldquo;durable&rdquo; &mdash; if you get what I mean.</p>
+
+<p>With WASEC, my goal is to publish a reference for developing web application with
+security in mind, so that instead of receiving 100 vulnerability reports&hellip;
+&hellip;you could probably reduce that number to 90 :)</p>
+
+<h2>So now you&rsquo;re a security guru?!?!</h2>
+
+<p>Not at all, that&rsquo;s why I&rsquo;d like to emphasize that <strong>this is content for the everyday
+software engineer</strong> that writes web applications: I&rsquo;ve made a living of writing web
+apps for <a href="https://www.linkedin.com/in/alessandronadalin/">various employers</a>, and have seen things going south as well as strong, solid
+approaches to security &mdash; with this, I&rsquo;m simply trying to share my experience
+and what I like to keep in mind when trying to secure web applications.</p>
+
+<h2>Contents</h2>
+
+<p>This table of contents is as stable as a table with three legs, but should give
+you a rough idea of the contents I&rsquo;m planning to write about:</p>
+
+<ul>
+<li>Introduction</li>
+<li>Understanding a browser</li>
+<li>HTTP(S)
+
+<ul>
+<li>HTTP vs HTTPS vs HTTP/2
+
+<ul>
+<li>Cloudflare: a twist of the tale</li>
+</ul>
+</li>
+<li>GET vs POST</li>
+<li>Security-related headers
+
+<ul>
+<li>HTTP Strict Transport Security (HSTS)</li>
+<li>Public Key Pinning Extension for HTTP (HPKP)</li>
+<li>X-Frame-Options</li>
+<li>X-XSS-Protection</li>
+<li>X-Content-Type-Options</li>
+<li>Content-Security-Policy</li>
+<li>X-Permitted-Cross-Domain-Policies</li>
+<li>Referrer-Policy</li>
+<li>Expect-CT</li>
+<li>Origin</li>
+<li>CORS
+
+<ul>
+<li>CORS vs proxies</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Managing sessions
+
+<ul>
+<li>Understanding HTTP cookies</li>
+<li>Session vs persistent cookies</li>
+<li>Flags
+
+<ul>
+<li>secure</li>
+<li>same-site
+
+<ul>
+<li>CSRF tokens</li>
+</ul>
+</li>
+<li>httpOnly</li>
+</ul>
+</li>
+<li>Supercookies</li>
+<li>Alternatives
+
+<ul>
+<li>localStorage</li>
+<li>tokens
+
+<ul>
+<li>JWT</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Situationals
+
+<ul>
+<li>Blacklisting vs whitelisting</li>
+<li>Logging secrets</li>
+<li>Cookie tampering: never trust the client</li>
+<li>Injection
+
+<ul>
+<li>Understanding prepared statements</li>
+</ul>
+</li>
+<li>Dependencies with known vulnerabilities</li>
+<li>OWASP
+
+<ul>
+<li>XSS</li>
+</ul>
+</li>
+<li>Have I been pwoned?
+
+<ul>
+<li>Re-using credentials: a real-world story</li>
+</ul>
+</li>
+<li>Session invalidation in a stateless architecture</li>
+<li>Sub-resource integrity</li>
+</ul>
+</li>
+<li>DDOS attacks
+
+<ul>
+<li>Introduction</li>
+<li>Don&rsquo;t panic!
+
+<ul>
+<li>CloudFlare</li>
+<li>Cloud Armor</li>
+<li>AWS Shield</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Secrets management
+
+<ul>
+<li>Pushing to Github</li>
+<li>An isolated repository</li>
+<li>Encrypting secrets with SOPS</li>
+<li>Environment variables: not a silver bullet?</li>
+</ul>
+</li>
+<li>Bug Bounty Programs
+
+<ul>
+<li>What&rsquo;s in a program?</li>
+<li>HackerOne</li>
+<li>Dealing with security researchers</li>
+<li>&ldquo;Malicious&rdquo; reporters</li>
+</ul>
+</li>
+<li>Leveraging other services
+
+<ul>
+<li>An all in one solution: CloudFlare</li>
+<li>Travis-ci</li>
+<li>NPM audit</li>
+<li>Gemnasium and similar tools
+
+<ul>
+<li>GH security alerts</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>And I&rsquo;m sure I&rsquo;m forgetting half of the content I originally thought of&hellip; :)</p>
+
+<h2>Series? E-book?</h2>
+
+<p>If you have followed me throughout the years, you surely noticed how I like to
+open-source as much as possible: helping the community comes first, the same way it
+helped me &mdash; if it wasn&rsquo;t for the first conference
+I attended, I would have never become the kind of software engineer I am today (hint: <em>a very bad one!</em>).</p>
+
+<p>I have a short history at publishing series, but over the years I&rsquo;ve managed to
+come up with a few, connected series of articles that saw the light on this blog:</p>
+
+<ul>
+<li><a href="/probabilistic-data-structures-an-introduction/">Probabilistic Data Structures</a></li>
+<li><a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Symfony2 components in your own userland</a></li>
+<li><a href="/the-strange-case-of-orientdb-and-graph-databases/">OrientDB</a></li>
+</ul>
+
+
+<p>These are very short series (by the way, the probabilistic data structures one is still in progress),
+and I&rsquo;d like to mimic my previous approach for WASEC: short articles that make
+an interesting story &mdash; or, in this case, a book.</p>
+
+<p>I&rsquo;m going to be publishing <a href="https://leanpub.com/wasec">WASEC as a book, through LeanPub</a>,
+and post 80% of its chapters in this blog (as well as in its <a href="https://medium.com/@AlexNadalin">medium</a> copy).</p>
+
+<p>Why not replicate the entire book on this blog? Well, I want to make sure you&rsquo;d'be
+interested in grabbing a copy of the book as well, which I&rsquo;m planning to publish
+in a few stores (Kindle, LeanPub) for a ridicolous amount of money. LeanPub sets
+the minimum price for a book at $4.99 but, if it was for me, I&rsquo;d ask for $2.99
+(and that&rsquo;s because <a href="/book-review-an-introduction-to-stock-and-options/">one of my most satisfying reads costed me that much</a>).</p>
+
+<p>Long story short: <a href="https://leanpub.com/wasec">grab the book, it&rsquo;s going to be worth it</a>.</p>
+
+<h2>Cadence</h2>
+
+<p>I&rsquo;m planning to release a new chapter every 45 days, meaning WASEC should be
+completed within a year, year and a half (~10 chapters). If this sounds like a very long-term
+commitment, consider this a diversion in the topics that I generally like to write
+about: I&rsquo;ll be mainly focusing on Web Application SECurity rather than, for example,
+<a href="/categories/probabilistic-data-structures/">probabilistic data structures</a> (or <a href="/advertising-on-twitter-give-us-your-personal-data-or-were-going-to-bomb-your-timeline-with-nsfw-sexual-ads/">rant about Twitter&rsquo;s ads</a>).</p>
+
+<p>This does not mean that I will forget about everything else I used to write about,
+but rather than 2 out of 3, maybe 3 out of 4, or 4 out of 5 articles I publish
+are going to be related to WASEC.</p>
+
+<h2>In the end&hellip;</h2>
+
+<p>Game on! Off to writing&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bloom Filters: When Data Structures Get Smart]]></title>
+    <link href="https://odino.org/bloom-filters-when-data-structures-get-smart/"/>
+    <updated>2018-02-10T21:09:00+00:00</updated>
+    <id>https://odino.org/bloom-filters-when-data-structures-get-smart</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/membership.png"></p>
+
+<p>Keeping up with my quest on exploring <a href="/categories/probabilistic-data-structures/">probabilistic data structures</a>,
+today I am going to present you <a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filters</a>,
+an ingenious idea that allows us to quickly verify membership within a set.</p>
+
+<p>As usual, I sound awful when using grown-up words: filters? Membership? Verification?
+Just bear with me for a few minutes as we&rsquo;re about to delve into one of the most
+ingenious ideas in the world of computer science, one that was born almost 50
+years ago.</p>
+
+<!-- more -->
+
+
+<h2>Who invited this guy?!?</h2>
+
+<p>If you remember my recent <a href="/my-favorite-data-structure-hyperloglog/">post on HyperLogLog and the cardinality-estimation problem</a>,
+there I introduced Tommy, a friend of mine that joins me at meetups and conferences.</p>
+
+<p>Today Tommy and I are extremely busy trying to organize an invite-only hackathon
+for the best developers in the area: we recently setup a website with sign ups capped at
+100 people, and have just reached the venue with a printed list of people who have made it through.</p>
+
+<p>Unfortunately, since we have limited space at the venue, we need to make sure that
+each and every person who wants to come in signed up online and,
+if not, we unfortunately have to turn them down. Armed with a list of names,
+Tommy starts processing each and everyone while I take care of setting up the rooms
+and so on:</p>
+
+<p><blockquote><p>Hi there, I am Tommy! Did you by any chance sign up online? What is your name?</p></blockquote></p>
+
+<p><blockquote><p>Yeah man, I definitely did! Why do you need my name?</p></blockquote></p>
+
+<p><blockquote><p>Unfortunately we only have seats and food for 100 people, so we can&rsquo;t let<br/>everyone in. Let me just check if your name is on the list&hellip;</p></blockquote></p>
+
+<p><blockquote><p>Ok man, no problem&hellip;name&rsquo;s Greg Sestero!</p></blockquote></p>
+
+<p><blockquote><p>&hellip;mmm&hellip;</p></blockquote></p>
+
+<p><blockquote><p>Is there any problem?</p></blockquote></p>
+
+<p><blockquote><p>&hellip;mmm&hellip;</p></blockquote></p>
+
+<p><blockquote><p>&hellip;hello?</p></blockquote></p>
+
+<p><blockquote><p>Damn Greg, give me some time! I have to go through 100 names to find yours!</p></blockquote></p>
+
+<p>Quickly, Tommy realizes that this is going to take him too long, so he comes over
+and starts telling me that we need to find another way to figure out whether people
+have signed up or not: with hundreds of people in front of him, he can&rsquo;t go over the list
+for each and everyone of them!</p>
+
+<p><blockquote><p>Alex, man&hellip;I can&rsquo;t go over the list for each and everyone out there. We need to<br/>find a way to check if these people signed up way faster than this, as it&rsquo;s taking<br/>me too long! At this pace, we&rsquo;ll start the hackathon in 2 hours!</p></p><p><p>Even if it&rsquo;s not 100% accurate, we need to find another method of processing<br/>each and everyone&hellip;at the end of the day we don&rsquo;t care if we let in 98 or 106 people,<br/>but we need to do it real quick!</p></blockquote></p>
+
+<p><blockquote><p>Tommy, we can&rsquo;t turn people down if they subscribed, I&rsquo;d be pretty pissed if that<br/>happened to me! We should let everyone who subscribed in, and maybe have some<br/>false positives so that a couple people who didn&rsquo;t subscribe make it in&hellip;but again,<br/>there&rsquo;s no way we can deny entry to people who actually subscribed!</p></blockquote></p>
+
+<p><blockquote><p>So, false positives are ok but false negatives aren&rsquo;t&hellip;I think I&rsquo;ve got this!</p></blockquote></p>
+
+<p><blockquote><p>Tell me Tommy, what are you thinking about?</p></blockquote></p>
+
+<p><blockquote><p>You remember in our signup form we asked people for their birthday? Can you quickly<br/>print me a list of all years, months and days people were born in? It should look like:</p></p><p><p>YEAR<br/>1978<br/>1979<br/>1984<br/>1985<br/>1986<br/>&hellip;</p></p><p><p>MONTH<br/>01<br/>03<br/>04<br/>05<br/>07<br/>&hellip;</p></p><p><p>DAY<br/>01<br/>02<br/>09<br/>10<br/>11<br/>12<br/>15<br/>17<br/>&hellip;</p></p><p><p>I&rsquo;m gonna ask people what year they were born.<br/>If it&rsquo;s in the list, I&rsquo;m going to ask them what month.<br/>If it&rsquo;s in the list, I&rsquo;m going to ask them what day.</p></p><p><p>If they&rsquo;re all in the list, there&rsquo;s a good chance these guys signed up! We will<br/>definitely have false positives, but I don&rsquo;t have to go through a list of 100 names,<br/>just, maybe, 20 years, 10 months and 20 days&hellip;it&rsquo;s still half of the original list<br/>of names!</p></blockquote></p>
+
+<p><blockquote><p>You&rsquo;re a genius! Not an exact science but we should be able to get this going!</p></blockquote></p>
+
+<p>Bloom filters work a little bit differently, but the idea behind them is quite
+similar to the one I just presented &mdash; let&rsquo;s get more technical!</p>
+
+<h2>The technical bits&hellip;</h2>
+
+<p>&hellip;because we&rsquo;re literally talking about <strong>bits</strong>! Instead of birth dates, a Bloom
+filter simply uses a bit array such as:</p>
+
+<table>
+<thead>
+<tr>
+<th> 0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<p>Now, like in a regular set, let&rsquo;s start adding elements to the filter: we first need to pick a hashing
+function (like <a href="https://en.wikipedia.org/wiki/MurmurHash">murmur</a>) and then <strong>flip a bit to 1 when the hashing function returns
+the index of such bit</strong>.</p>
+
+<p>For example, the string <code>some_test</code> would return <code>2</code> in an evenly distributed murmur
+(you can test it <a href="http://murmurhash.shorelabs.com/">here</a>), so we flip the element
+at index <code>2</code>:</p>
+
+<table>
+<thead>
+<tr>
+<th>0 </th>
+<th> 0 </th>
+<th> 1 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<p>Let&rsquo;s add another element to the filter &mdash; <code>another_test</code> hashes to <code>4</code>:</p>
+
+<table>
+<thead>
+<tr>
+<th>0 </th>
+<th> 0 </th>
+<th> 1 </th>
+<th>0 </th>
+<th> 1 </th>
+<th> 0 </th>
+<th>0 </th>
+<th> 0 </th>
+<th> 0 </th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<p>And now let&rsquo;s test the bloom filter! Is <code>I_DONT_EXISTS</code> in the filter?</p>
+
+<p>Taken from <a href="http://murmurhash.shorelabs.com/">murmurhash.shorelabs.com</a>:</p>
+
+<p><img class="center" src="/images/murmur.png"></p>
+
+<p>This element hashes to <code>5</code>, and the value of the element at index <code>5</code> in our
+filter is <code>0</code>. This means that the element is not in the original set.</p>
+
+<p>Let&rsquo;s do another test? Let&rsquo;s see if <code>not_exist_no_no</code> is in the filter:</p>
+
+<p><img class="center" src="/images/murmur2.png"></p>
+
+<p>This element hashes to <code>2</code>, and the value of the element at index <code>2</code> in our
+filter is <code>1</code>. This would suggest that the element was in our original set &mdash;
+here&rsquo;s where Bloom filters trick you.</p>
+
+<p>A Bloom filter guarantees certainty when it tells you an element is not in a set,
+but can only give you a probability of whether the element was in it. This means
+that you can reliably use these filters to exclude values from a set, but are not
+going to be 100% sure they are in the set if the filter returns a positive result
+&mdash; in other words: <strong>Bloom filters never give you false negatives, but can give you false
+positives</strong>.</p>
+
+<p>If you&rsquo;re still having some trouble to understand how they work (I&rsquo;m not the best at this, I&rsquo;ll admit it)
+I would strongly encourage you to have a look at this <a href="http://llimllib.github.io/bloomfilter-tutorial/">interactive explanation of Bloom filters</a>.</p>
+
+<h2>Even MOAR technical bits!</h2>
+
+<p>Bloom filters are actually different &mdash; I tend to
+oversimplify for the sake of understanding. The two most important differences from
+the approach I explained above are that:</p>
+
+<ul>
+<li>the length of the bit array needs to be &ldquo;quite&rdquo; proportional (more on this later) to the number
+of elements in the original set, as a set with 100 elements represented in a filter
+with only 2 bits would be useless (there&rsquo;s an incredibly strong chance both bits
+would be positive, increasing the chances of false positives)</li>
+<li>multiple hashing functions are used to increase entropy within the distribution
+of 1-value bits, as <a href="https://www.quora.com/Why-do-bloom-filters-have-multiple-hash-functions">a single hashing function could lead to a higher number of collisions</a></li>
+</ul>
+
+
+<p>There are generally four variables you want to keep an eye on when using a Bloom
+filter:</p>
+
+<ul>
+<li>the number of items in the filter (= number of items in the original set, <strong>n</strong>)</li>
+<li>the probability of false positives (<strong>p</strong>)</li>
+<li>number of bits in the filter (<strong>m</strong>)</li>
+<li>number of hash functions used to convert element into bits (<strong>k</strong>)</li>
+</ul>
+
+
+<p>You start by knowing (or by having a good estimate of) your <strong>n</strong> and defining an
+acceptable <strong>p</strong>; at that point you derive <strong>m</strong> and <strong>k</strong> by:</p>
+
+<ul>
+<li><code>m = ceil((n * log(p)) / log(1.0 / (pow(2.0, log(2.0)))))</code></li>
+<li><code>k = round(log(2.0) * m / n)</code></li>
+</ul>
+
+
+<p>We can test this out by using <a href="https://hur.st/bloomfilter">this interesting calculator</a> made available by
+<a href="https://hur.st/">Thomas Hurst</a>:</p>
+
+<table>
+<thead>
+<tr>
+<th>items (n) </th>
+<th> probability (p) </th>
+<th> space (m) </th>
+<th> hash fn (k)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 </td>
+<td> 0.5 </td>
+<td> 145b </td>
+<td> 1</td>
+</tr>
+<tr>
+<td>100 </td>
+<td> 0.1 </td>
+<td> 480b </td>
+<td> 3</td>
+</tr>
+<tr>
+<td>1k </td>
+<td> 0.5 </td>
+<td> 175B </td>
+<td> 1</td>
+</tr>
+<tr>
+<td>1k </td>
+<td> 0.1 </td>
+<td> 600B </td>
+<td> 3</td>
+</tr>
+<tr>
+<td>1M </td>
+<td> 0.1 </td>
+<td> 600KB </td>
+<td> 3</td>
+</tr>
+<tr>
+<td>1M </td>
+<td> 0.01 </td>
+<td> 1.2MB </td>
+<td> 7</td>
+</tr>
+<tr>
+<td>1M </td>
+<td> 0.001 </td>
+<td> 1.7MB </td>
+<td> 10</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Now it&rsquo;s the &ldquo;show me some code!&rdquo; time, so let&rsquo;s grab the <a href="https://www.npmjs.com/package/bloomfilter">bloomfilter</a>
+package on NPM and <a href="https://github.com/odino/bloom-test">let&rsquo;s run some benchmarks</a>.
+We will first create a list of a 10k elements and check 1k random elements against it:</p>
+
+<p>``` js
+originalSet = generateSet(10000)
+tests = generateSet(1000)</p>
+
+<p>console.time(&lsquo;plain&rsquo;)
+for (test of tests) {
+  if (originalSet.includes(test)) {</p>
+
+<pre><code>// HERE BE DRAGONS!
+</code></pre>
+
+<p>  }
+}
+console.timeEnd(&lsquo;plain&rsquo;)
+```</p>
+
+<p>and let&rsquo;s try to compare it with a high-precision (0.01% probability of false positives)
+filter:</p>
+
+<p>``` js
+let BloomFilter = require(&lsquo;bloomfilter&rsquo;).BloomFilter</p>
+
+<p>originalSet = generateSet(10000)
+tests = generateSet(1000)</p>
+
+<p>// m=10k,p=0.01
+var bloom = new BloomFilter(
+  95851, // number of bits to allocate.
+  7        // number of hash functions.
+);</p>
+
+<p>for (elem of originalSet) {
+  bloom.add(elem)
+}</p>
+
+<p>console.time(&lsquo;bloom-high-precision&rsquo;)
+for (test of tests) {
+  if (bloom.test(test)) {</p>
+
+<pre><code>// HERE BE DRAGONS!
+</code></pre>
+
+<p>  }
+}
+console.timeEnd(&lsquo;bloom-high-precision&rsquo;)
+```</p>
+
+<p>For the lolz, let&rsquo;s also have a very imprecise bloom filter thrown into the mix:</p>
+
+<p><code>js
+// m=10k,p=0.5
+var bloom = new BloomFilter(
+  14427, // number of bits to allocate.
+  1        // number of hash functions.
+);
+</code></p>
+
+<p>&hellip;and let&rsquo;s run them together:</p>
+
+<p><code>bash
+plain: 29.210ms
+bloom-high-precision: 0.694ms
+bloom-yolo: 0.357ms
+</code></p>
+
+<p>Quite of a difference! Such performance gains are quite understandable since the
+filter does not need to loop through the set (<code>O(n)</code>), it just needs to hash the
+element it has received as many times as the number of hash functions in the filter (<code>O(k)</code>)
+and then access the list at the index produced by the hash functions (<code>O(1)</code>), ending
+up at a complexity of <code>O(k)</code> &mdash; which is pretty darn fast!</p>
+
+<p>Another important thing to consider is, beside the time-advantage,
+is that <strong>the space advantage of Bloom filters is quite significant</strong>: since they don&rsquo;t need
+to store the original elements of the set, but just a fixed-length bit sequence, they tend
+to consume less space than hash tables, tries or plain lists.</p>
+
+<p>An interesting thing to consider is how these filters relate to hash tables:</p>
+
+<p><blockquote><p>hash tables gain a space and time advantage if they begin ignoring collisions and store only whether each bucket contains an entry; in this case, they have effectively become Bloom filters with k = 1</p><footer><strong>Wikipedia <a href="https://en.wikipedia.org/wiki/Bloom_filter#Space_and_time_advantages">https://en.wikipedia.org/wiki/Bloom_filter#Space_and_time_advantages</a> Space and Time advantages of Bloom filters</strong></footer></blockquote></p>
+
+<h2>A note on hashing functions</h2>
+
+<p>It&rsquo;s really important to pick the right hashing functions when implementing a Bloom
+filter, as they need to:</p>
+
+<ul>
+<li><strong>be extremely fast</strong>: strong cryptographic hashing functions are not suitable since
+they are generally computationally expensive (= slow), while you will want your
+<code>O(k)</code> to be as fast as possible</li>
+<li><strong>distribute outputs uniformly</strong>: it&rsquo;s important for the filter to &ldquo;turn bits
+on&rdquo; as uniformly as possible, as a &ldquo;biased&rdquo; hash function would end up increasing
+the probability of false positive</li>
+</ul>
+
+
+<p>For example, a unanimous choice seems to be <a href="https://en.wikipedia.org/wiki/MurmurHash">MurMurHash3</a>,
+which guarantees a good degree of uniformity in terms of distribution and was
+designed with speed, <a href="https://en.wikipedia.org/wiki/List_of_hash_functions#Non-cryptographic_hash_functions">not security</a>, in mind.</p>
+
+<h2>Closing remarks</h2>
+
+<p>Have you ever visited a website and seen a security notice from your browser,
+telling you the URL you&rsquo;re about to access could be malicious? How do you think
+your browser can efficiently check whether the URL is among a huge list of
+malicious ones?</p>
+
+<p>Well, up until a few years ago <a href="http://blog.alexyakunin.com/2010/03/nice-bloom-filter-application.html">Chrome used Bloom filters</a>
+and that&rsquo;s just one interesting, beneficial application of this amazingly clever
+data structure (if you&rsquo;re curious, it since <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=71832">switched to prefix sets</a> &mdash;
+&ldquo;Searches take about 3x as long, but it should scale well&rdquo;).</p>
+
+<p>To give you some more context, Bloom filters appeared in July 1970 &mdash; that is 7 months into the unix timestamp.</p>
+
+<p>Here I sit speechless.</p>
+
+<h2>Further readings</h2>
+
+<ul>
+<li><a href="https://dl.acm.org/citation.cfm?doid=362686.362692">the original paper</a></li>
+<li><a href="https://blog.medium.com/what-are-bloom-filters-1ec2a50c68ff">What are Bloom filters (and how Medium uses them)?</a></li>
+<li><a href="https://cloud.google.com/blog/big-data/2017/05/after-lambda-exactly-once-processing-in-cloud-dataflow-part-2-ensuring-low-latency">After Lambda: Exactly-once processing in Cloud Dataflow</a></li>
+<li><a href="http://blog.kiip.me/engineering/sketching-scaling-bloom-filters/">Sketching &amp; Scaling: Bloom Filters</a></li>
+<li><a href="http://www.michaelnielsen.org/ddi/why-bloom-filters-work-the-way-they-do/">Why Bloom filters work the way they do</a></li>
+<li><a href="https://bdupras.github.io/filter-tutorial/">Probablistic Filters Visualized</a></li>
+<li><a href="https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf">Cuckoo Filter: Practically Better Than Bloom</a></li>
+<li><a href="https://eugene-eeo.github.io/blog/bloom-filter-explained.html">Bloom Filters Explained</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Favorite Algorithm (and Data Structure): HyperLogLog]]></title>
+    <link href="https://odino.org/my-favorite-data-structure-hyperloglog/"/>
+    <updated>2018-01-13T21:09:00+00:00</updated>
+    <id>https://odino.org/my-favorite-data-structure-hyperloglog</id>
+    <content type="html"><![CDATA[<p>Every now and then I bump into a concept that&rsquo;s so simple and powerful that I want
+to stab my brain for missing out on such an incredible and beautiful idea.</p>
+
+<p>I discovered <a href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog</a> (HLL) a
+couple years ago and fell in love with it right after reading how
+<a href="http://antirez.com/news/75">redis decided to add a HLL data structure</a>:
+the idea behind HLL is devastatingly simple but extremely powerful, and it&rsquo;s
+what makes it such a widespread algorithm, used by giants of the internet such
+as Google and Reddit.</p>
+
+<!-- more -->
+
+
+<h2>So, what&rsquo;s your phone number?</h2>
+
+<p>My friend Tommy and I planned to go to a conference and, while heading to
+its location, decide to wager on who will talk to the most strangers.
+So once we reach the place we start conversing around and keep a counter of
+how many people we talk to.</p>
+
+<p><img class="center" src="/images/networking-event.png"></p>
+
+<p>At the end of the event Tommy comes to me with his figure (17) and I tell him
+that I had a word with 46 people: I clearly am the winner, but Tommy&rsquo;s frustrated
+as he thinks I&rsquo;ve counted the same people multiple times, as he only saw me with
+15/20 people in total. So, the wager&rsquo;s off and we decide that,
+for our next event, we&rsquo;ll be taking down names instead, so that we&rsquo;re sure we&rsquo;re
+going to be counting unique people, and not just the total number of conversations.</p>
+
+<p>At the end of the following conference we enthusiastically meet each other with
+a very long list of names and, guess what, Tommy had a couple more encounters
+than I did! We both laugh it off and while discussing our approach to counting
+uniques, Tommy comes up with a great idea:</p>
+
+<p><blockquote><p>Alex, you know what? We can&rsquo;t go around with pen and paper and track down a list of names, it&rsquo;s really impractical!<br/>Today I spoke to 65 different people and counting their names on this paper was a real pain in the back&hellip;I lost count 3 times and had to start from scratch!</p></blockquote></p>
+
+<p><blockquote><p>Yeah, I know, but do we even have an alternative?</p></blockquote></p>
+
+<p><blockquote><p>What if, for our next conference, instead of asking for names, we ask people the last 5 digits of their phone number?</p></p><p><p>Now, follow me: instead of winning by counting their names, the winner will be the one who spoke to someone with the longest sequence of leading zeroes in those digits.</p></blockquote></p>
+
+<p><blockquote><p>Wait Tommy, you&rsquo;re going too fast! Slow down a second and give me an example&hellip;</p></blockquote></p>
+
+<p><blockquote><p>Sure, just ask people for those last 5 digits, ok? Let&rsquo;s suppose you get 54701.<br/>No leading zero, so the longest sequence of zeroes for you is 0.</p></p><p><p>The next person you talk to tells you it&rsquo;s 02561 &mdash; that&rsquo;s a leading zero! So your longest sequence comes to 1.</p></blockquote></p>
+
+<p><blockquote><p>You&rsquo;re starting to make sense to me&hellip;</p></blockquote></p>
+
+<p><blockquote><p>Yeah, so if we speak to a couple people, chances are that are longest zero-sequence will be 0. But if we talk to ~10 people, we have more chances of it being 1.</p></p><p><p>Now, imagine you tell me your longest zero-sequence is 5 &mdash; you must have spoken to thousands of people to find someone with 00000 in their phone number!</p></blockquote></p>
+
+<p><blockquote><p>Dude, you&rsquo;re a damn genius!</p></blockquote></p>
+
+<p>And that, my friends, is how HyperLogLog fundamentally works: it allows us to
+estimate uniques within a large dataset by recording the longest sequence of
+zeroes within that set. This ends up creating an incredible advantage over keeping
+track of each and every element in the set, making it an incredibly efficient way
+to count unique values with relatively high accuracy:</p>
+
+<p><blockquote><p>The HyperLogLog algorithm can estimate cardinalities well beyond 10<sup>9</sup> with a relative accuracy (standard error) of 2% while only using 1.5kb of memory.</p><footer><strong>Fangjin Yang <a href="http://druid.io/blog/2012/05/04/fast-cheap-and-98-right-cardinality-estimation-for-big-data.html">http://druid.io/blog/2012/05/04/fast-cheap-and-98-right-cardinality-estimation-for-big-data.html</a> Fast</strong> <cite>Cheap</cite></footer></blockquote></p>
+
+<p>Since this is the usual me oversimplifying things
+that I find hard to understand, let&rsquo;s have a look at some more details of HLL.</p>
+
+<h2>More HLL details</h2>
+
+<p>HLL is part of a family of algorithms that aim to address
+<a href="https://en.wikipedia.org/wiki/Count-distinct_problem">cardinality estimation</a>,
+otherwise known as <em>count-distinct problem</em>,
+which are extremely useful for lots of today&rsquo;s web applications &mdash; for example
+when you want to count how many unique views an article on your site has generated.</p>
+
+<p>When HLL runs, it takes your input data and hashes it, turning into a bit
+sequence:</p>
+
+<p>```
+IP address of the viewer: 54.134.45.789</p>
+
+<p>HLL hash: 010010101010101010111010&hellip;
+```</p>
+
+<p>Now, an important part of HLL is to make sure that your hashing function
+distributes bits as evenly as possible, as you don&rsquo;t want to use a weak function
+such as:</p>
+
+<p>`&ldquo; js
+function hash(ip) {
+  let h = &rdquo;</p>
+
+<p>  ip.replace(/\D/g,&lsquo;&rsquo;).split(&lsquo;&rsquo;).forEach(number => {</p>
+
+<pre><code>h += number &lt; 5 ? 0 : 1
+</code></pre>
+
+<p>  })</p>
+
+<p>  return h
+}
+```</p>
+
+<p>A HLL using this hashing function would return biased results if, for example,
+the <a href="https://stackoverflow.com/a/277537/934439">distribution of your visitors is tied to a specific geographic region</a>.</p>
+
+<p>The <a href="http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf">original paper</a>
+has a few more details on what a good hashing function means for HLL:</p>
+
+<p><blockquote><p>All known efficient cardinality estimators rely on randomization, which is ensured by the use of hash functions.</p></p><p><p>The elements to be counted belonging to a certain data domain D, we assume given a hash function, h : D → {0, 1}∞; that is, we assimilate hashed values to infinite binary strings of {0, 1}∞, or equivalently to real numbers of the unit interval.</p></p><p><p>[&hellip;]</p></p><p><p>We postulate that the hash function has been designed in such a way that the hashed values closely resemble a uniform model of randomness, namely, bits of hashed values are assumed to be independent and to have each probability [0.5] of occurring.</p><footer><strong>Philippe Flajolet <a href="http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf">http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf</a> HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm</strong></footer></blockquote></p>
+
+<p>Now, after we&rsquo;ve picked a suitable hash function we need to address another pitfall:
+<a href="https://en.wikipedia.org/wiki/Variance">variance</a>.</p>
+
+<p>Going back to our example, imagine that the first person you talk to at the conference
+tells you their number ends with <code>00004</code> &mdash; jackpot! You might have won a wager
+against Tommy, but if you use this method in real life chances are that specific
+data in your set will negatively influence the estimation.</p>
+
+<p>Fear no more, as this is <strong>a problem HLL was born to solve</strong>: not many are aware that <a href="https://en.wikipedia.org/wiki/Philippe_Flajolet">Philippe
+Flajolet</a>, one of the brains behind HLL, was quite involved in cardinality-estimation
+problems for a long time, long enough to have come up with the <a href="https://en.wikipedia.org/wiki/Flajolet%E2%80%93Martin_algorithm#Improving_accuracy">Flajolet-Martin
+algorithm in 1984</a> and
+<a href="http://algo.inria.fr/flajolet/Publications/DuFl03-LNCS.pdf">(super-)LogLog in 2003</a>,
+which already addressed some of the problems with outlying hashed values by dividing
+measurements into buckets, and (somewhat) averaging values across buckets.</p>
+
+<p>If you got lost here, let me go back to our original example: instead of just
+taking the last 5 digits of a phone number, we take 6 of them and store the longest
+sequence of leading zeroes together with the first digit (the bucket). This means
+that our data will look like:</p>
+
+<p>```
+Input:
+708942 &mdash;> in the 7th bucket, the longest sequence of zeroes is 1
+518942 &mdash;> in the 5th bucket, the longest sequence of zeroes is 0
+500973 &mdash;> in the 5th bucket, the longest sequence of zeroes is now 2
+900000 &mdash;> in the 9th bucket, the longest sequence of zeroes is 5
+900672 &mdash;> in the 9th bucket, the longest sequence of zeroes stays 5</p>
+
+<p>Buckets:
+0: 0
+1: 0
+2: 0
+3: 0
+4: 0
+5: 2
+6: 0
+7: 1
+8: 0
+9: 5</p>
+
+<p>Output:
+avg(buckets) = 0.8
+```</p>
+
+<p>As you see, if we weren&rsquo;t employing buckets we would instead use 5 as the longest
+sequence of zeroes, which would negatively impact our estimation: even though I
+simplified the math behind buckets (it&rsquo;s not just a simple average), you can
+totally see how this approach makes sense.</p>
+
+<p>It&rsquo;s interesting to see how Flajolet addresses variance throughout his
+works:</p>
+
+<p><blockquote><p>While we&rsquo;ve got an estimate that&rsquo;s already pretty good, it&rsquo;s possible to get a lot better. Durand and Flajolet make the observation that outlying values do a lot to decrease the accuracy of the estimate; by throwing out the largest values before averaging, accuracy can be improved.</p></p><p><p>Specifically, by throwing out the 30% of buckets with the largest values, and averaging only 70% of buckets with the smaller values, accuracy can be improved from 1.30/sqrt(m) to only 1.05/sqrt(m)! That means that our earlier example, with 640 bytes of state and an average error of 4% now has an average error of about 3.2%, with no additional increase in space required.</p></p><p><p>Finally, the major contribution of Flajolet et al in the HyperLogLog paper is to use a different type of averaging, taking the harmonic mean instead of the geometric mean we just applied. By doing this, they&rsquo;re able to edge down the error to  1.04/sqrt(m), again with no increase in state required.</p><footer><strong>Nick Johnson <a href="http://blog.notdot.net/2012/09/Dam-Cool-Algorithms-Cardinality-Estimation">http://blog.notdot.net/2012/09/Dam-Cool-Algorithms-Cardinality-Estimation</a> Improving accuracy: SuperLogLog and HyperLogLog</strong></footer></blockquote></p>
+
+<h2>HLL in the wild</h2>
+
+<p>So, where can we find HLLs? Two great web-scale examples are:</p>
+
+<ul>
+<li><a href="https://cloud.google.com/blog/big-data/2017/07/counting-uniques-faster-in-bigquery-with-hyperloglog">BigQuery</a>,
+to efficiently count uniques in a table (<code>APPROX_COUNT_DISTINCT()</code>)</li>
+<li><a href="https://redditblog.com/2017/05/24/view-counting-at-reddit/">Reddit</a>, where it&rsquo;s used to calculate how many unique views a post has gathered</li>
+</ul>
+
+
+<p>In particular, see how HLL impacts queries on BigQuery:</p>
+
+<p><code>`` bash
+SELECT COUNT(DISTINCT actor.login) exact_cnt
+FROM</code>githubarchive.year.2016`</p>
+
+<blockquote><p>6,610,026 (4.1s elapsed, 3.39 GB processed, 320,825,029 rows scanned)</p></blockquote>
+
+<p>SELECT APPROX_COUNT_DISTINCT(actor.login) approx_cnt
+FROM <code>githubarchive.year.2016</code></p>
+
+<blockquote><p>6,643,627 (2.6s elapsed, 3.39 GB processed, 320,825,029 rows scanned)
+```</p></blockquote>
+
+<p>The second result is an approximation (with an error rate of ~0.5%), but takes
+a fraction of the time.</p>
+
+<p>Long story short: <strong>HyperLogLog is amazing!</strong> You now know what it is and when it can be
+used, so go out and do incredible stuff with it!</p>
+
+<h2>Just before you leave&hellip;</h2>
+
+<p>One thing I&rsquo;d like to clarify is that even though I&rsquo;ve referred to HLL as a data structure before, it
+should be noted that it is an algorithm first, while some databases (eg. Redis, Riak, BigQuery)
+have implemented their own data structures based on HLL (so while saying HLL is a data structure is technically incorrect, it&rsquo;s also not
+entirely wrong).</p>
+
+<h2>Further readings</h2>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog on Wikipedia</a></li>
+<li>the <a href="http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf">original paper</a></li>
+<li><a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40671.pdf">HyperLogLog++, Google&rsquo;s improved implementation of HLL</a></li>
+<li><a href="http://antirez.com/news/75">Redis new data structure: the HyperLogLog</a></li>
+<li><a href="http://blog.notdot.net/2012/09/Dam-Cool-Algorithms-Cardinality-Estimation">Damn Cool Algorithms: Cardinality Estimation</a></li>
+<li><a href="https://github.com/basho/riak_kv/blob/develop/docs/hll/hll.pdf">HLL data types in Riak</a></li>
+<li><a href="http://tech.adroll.com/blog/data/2013/07/10/hll-minhash.html">HyperLogLog and MinHash</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Probabilistic Data Structures: An Introduction]]></title>
+    <link href="https://odino.org/probabilistic-data-structures-an-introduction/"/>
+    <updated>2018-01-12T09:44:00+00:00</updated>
+    <id>https://odino.org/probabilistic-data-structures-an-introduction</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/dice.png"></p>
+
+<p>In the past few years I&rsquo;ve got more and more accustomed to computer science
+concepts that were foreign to me earlier in my career: one of the most interesting
+aspects that I&rsquo;ve focused on is <a href="https://dzone.com/articles/introduction-probabilistic-0">probabilistic data structures</a>,
+which I want to cover with a few posts in the upcoming months.</p>
+
+<p>My excitement around these structures come from the fact that they
+enable us to accomplish tasks that were impractical before, and can really influence
+the way we design software &mdash; for example, Reddit counts unique views with a
+probabilistic data structure as it lets them scale more efficiently.</p>
+
+<!-- more -->
+
+
+<h2>What&rsquo;s all the fuss about?</h2>
+
+<p>Let&rsquo;s get practical very quickly &mdash; imagine you have a set of records and want to calculate if an element is part
+of that set:</p>
+
+<p>``` js
+let set = new Array()</p>
+
+<p>for (let x = 0; x &lt; 10; x++) {
+  set.push(<code>test${x}</code>)
+}</p>
+
+<p>console.log(set.includes(&lsquo;a&rsquo;)) // false
+```</p>
+
+<p>Here we are loading the entire set in memory and then loop (<code>.includes(...)</code>)
+over it to figure out if our element is part of it.</p>
+
+<p>Let&rsquo;s say we want to figure out the resources used by this script:</p>
+
+<p>``` js
+console.time(&lsquo;search&rsquo;)
+let set = new Array()</p>
+
+<p>for (let x = 0; x &lt; 10; x++) {
+  set.push(<code>test${x}</code>)
+}</p>
+
+<p>console.log(set.includes(&lsquo;a&rsquo;))
+console.timeEnd(&lsquo;search&rsquo;)
+console.log(<code>~${process.memoryUsage().heapUsed / 1000000}mb</code>)</p>
+
+<p>// output:
+// false
+// search: 2.184ms
+// ~4.448288mb
+```</p>
+
+<p>As you can see, the time spent in running the script is minimal, and memory is
+also &ldquo;low&rdquo;. What happens when we beef up our original list?</p>
+
+<p><code>`` js
+...
+for (let x = 0; x &lt; 10000000; x++) {
+  set.push(</code>test${x}`)
+}
+&hellip;</p>
+
+<p>// output:
+// false
+// search: 2383.794ms
+// ~532.511032mb
+```</p>
+
+<p>See, the figures change quite drastically &mdash; it&rsquo;s not even the execution time
+that should scare you (most of the time is spent in filling the array, not in the
+<code>.includes(...)</code>), but rather the amount of memory the process is consuming: as usual,
+the more data we use, the more memory we consume (no shit, Sherlock!).</p>
+
+<p>This is exactly the problem that probabilistic data structures try to solve, as you:</p>
+
+<ul>
+<li>might not have enough available resources</li>
+<li>might not need a precise answer to your problem</li>
+</ul>
+
+
+<p>If you can trade certainty off for the sake of staying lightweight, a <a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filter</a>
+would, for example, be the right data structure for this particular use case:</p>
+
+<p>``` js
+const BloomFilter = require(&lsquo;bloomfilter&rsquo;).BloomFilter
+console.time(&lsquo;search&rsquo;)
+var bloom = new BloomFilter(
+  287551752, // number of bits to allocate.
+  20        // number of hash functions.
+);</p>
+
+<p>for (let x = 0; x &lt; 10000000; x++) {
+  bloom.add(<code>test${x}</code>)
+}</p>
+
+<p>console.log(bloom.test(&lsquo;a&rsquo;))
+console.timeEnd(&lsquo;search&rsquo;)
+console.log(<code>~${process.memoryUsage().heapUsed / 1000000}mb</code>)</p>
+
+<p>// output
+// false
+// search: 11644.863ms
+// ~10.738632mb
+```</p>
+
+<p>In this case the bloom filter has given us the same output (with a <a href="https://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives">degree
+of certainty</a>) while using 10MB of RAM rather than 500MB.
+Oh, boy!</p>
+
+<p>This is exactly what probabilistic data structures help you with: you need an
+answer with a degree of certainty and don&rsquo;t care if they&rsquo;re off by a tiny
+bit &mdash; because to get an exact answer you would require an impractical amount of
+resources.</p>
+
+<p>Who cares if that video has been seen by 1M unique users or 1.000.371 ones? If
+you find yourself in this situation, chances are that a probabilistic structure
+would fit extremely well in your architecture.</p>
+
+<h2>Next steps</h2>
+
+<p>I have only really started to scratch the surface of what is possible thanks to
+probabilistic data structures but, if you are fascinated as much as I am, you
+will find some of my next articles interesting enough, as I am planning to cover
+the ones that I understand better in the upcoming weeks &mdash; namely <a href="https://en.wikipedia.org/wiki/HyperLogLog">HyperLogLog</a>
+(by far my favorite data structure) and
+<a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filters</a>.</p>
+
+<p>The papers behind these data structures are pretty <em>math-heavy</em> and I do not understand half of that jazz :)
+so we&rsquo;re going to take a look at them with more of a simplistic, practical view
+than a theoretical one.</p>
+
+<h2>Just before you leave&hellip;</h2>
+
+<p>One thing I want to clarify: the specific numbers you&rsquo;ve seen in this post will vary from platform to platform, so don&rsquo;t
+look at the absolute numbers but rather at the magnitude of the difference. Also,
+here I just focused on one application of Bloom filters, which demonstrates their
+advantage in terms of space complexity, but time complexity should be accounted
+for as well &mdash; that&rsquo;s material for another post!</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OrientDB: Just Like Any Other NoSQL Database?]]></title>
+    <link href="https://odino.org/orientdb-just-like-any-other-nosql-database/"/>
+    <updated>2015-02-27T19:44:00+00:00</updated>
+    <id>https://odino.org/orientdb-just-like-any-other-nosql-database</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/orientdb-101/">OrientDB 101</a></strong>" series, derived from a previous work started in 2013/2014: some
+	information might be outdated, but the core of this series should still be intact.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/the-strange-case-of-orientdb-and-graph-databases/">The strange case of OrientDB and graph databases</a>
+	</li>
+	<li>
+		<a href="/an-overview-of-orientdbs-capabilities/">An overview of OrienDB's capabilities</a>
+	</li>
+	<li>
+		<a href="/going-beyond-rdbms/">Going beyond RDBMS</a>
+	</li>
+	<li>
+		<a href="/orientdb-just-like-any-other-nosql-database/">Just like any other NoSQL database?</a>
+	</li>
+</ol>
+</p>
+
+<p>In the <a href="/going-beyond-rdbms/">previous post of this series</a> we saw a few features that make
+NoSQL storage engines different from RDBMS and we anticipated
+that OrientDB goes beyond both relational and non-relational system.</p>
+
+<p>What makes this document-oriented NoSQL graph database so
+different from other non-traditional engines?</p>
+
+<!-- more -->
+
+
+<h2>Multi-protocol support</h2>
+
+<p>First of all, as we already saw, OrientDB supports 2 different
+protocols, <strong>binary and HTTP</strong>.</p>
+
+<p>The difference, here, is that since these interfaces are extremely
+important for different cases, they both share the &ndash; almost &ndash; same
+amount of features, and there is no standard protocol defined by
+the development team, although the binary protocol is the most popular
+as the native Java API works through it.</p>
+
+<p>While a product like CouchDB only supports the HTTP protocol and MongoDB
+weakly supports it<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, one of the key features of OrientDB is to almost
+<code>1:1</code> map the functionalities you can access via the binary protocol on
+the HTTP one: an example of this is the support of stored procedures,
+called <a href="https://github.com/orientechnologies/orientdb/wiki/Functions">functions</a>, available over both protocols.</p>
+
+<p>But multi-protocol support is not OrientDB’s killer feature, as it’s
+pretty easy to achieve and doesn’t really innovate the way we intend
+storage engines &ndash; it is, however, a good example of Programming By
+Adapters.</p>
+
+<h2>Object-oriented model</h2>
+
+<p>Another interesting feature we are going to take a look at is the
+object-oriented implementation under the document DB: with OrientDB
+you are able to define a hierarchy between tables (they are called
+&ldquo;classes&rdquo;) and thus being able to take advantage of inheritance.</p>
+
+<p>Since a practical example is worth a million words, suppose you have
+a collection of animals and want to iterate through them and output
+their call. With some pseudo-code, your Animal interface and
+implementing classes would look like</p>
+
+<p>``` ruby
+interface Animal
+{</p>
+
+<pre><code>def call();
+</code></pre>
+
+<p>}</p>
+
+<p>class Dog
+{</p>
+
+<pre><code>def call()
+{
+    puts ‘Arf!’;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Cat
+{</p>
+
+<pre><code>def call()
+{
+    puts ‘Meow!’;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The question is, how would you represent animals in the DB?</p>
+
+<p>The code  itself is clean, but the data in the DB would lack
+of differentiation:</p>
+
+<p><img class="center" src="/images/orient-101/orient-animal-call.png"></p>
+
+<p>As you see, different animals with different characteristics are
+represented together in the same table, which is half empty since
+lots of attributes don’t make sense for most animals: dogs don’t
+have whiskers, while snakes like cobras, not being domestic,
+don’t usually have names.</p>
+
+<p>Representing data in this way is a bad smell (called <strong>NULLfull
+antipattern</strong>, as it leads to records full of NULL attributes),
+but having different tables is not always a viable solution:</p>
+
+<p><img class="center" src="/images/orient-101/animal-different-tables.png"></p>
+
+<p>What if you need to look for all animals with a name starting
+with the letter <code>J</code> ?</p>
+
+<p>You would need to do N queries (given
+N as the number of tables representing animals with the “name”
+attribute) and then merge the result or use some special
+operator provided by the DBMS itself &ndash; with MySQL, for example,
+you could use a <code>UNION</code>, but it wouldn’t be much practical.</p>
+
+<p>In OrientDB we can take advantage of the OO support for this
+exact scenarios, as you can simply create N classes (<code>Cat</code>, <code>Dog</code>, &hellip;)
+which extend a parent class (<code>Animal</code>) and run a query on the parent class:</p>
+
+<p><code>
+SELECT name FROM Animal WHERE name LIKE ‘J%’
+</code></p>
+
+<p>You don’t have to create a &ldquo;master class&rdquo; containing all the
+possible attributes for every subclass which are mostly going
+to be <code>NULL</code> (thing that you can do with any document-oriented
+storage engine) but at the same time <strong>this query will return
+results from the Animal class and its subclasses</strong>, like no other
+document database, as they are not capable to isolate and group
+classes via inheritance.</p>
+
+<h2>ACIDity</h2>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>Following the philosophy of re-using good implementations,
+patterns and practices, OrientDB supports a syntax which is
+very similar to SQL:</p>
+
+<p><code>
+SELECT name AS aliased_name FROM Person
+</code></p>
+
+<p>As you see here we are executing a <code>SELECT</code>, retrieving a single
+field &ndash; (<code>name</code>) with an alias (<code>aliased_name</code>) from a class (<code>Person</code>):
+in RDBMS we would talk about selecting a column from a table,
+but the main idea is that you can easily write OrientDB’s pseudo-SQL
+queries if you have a good SQL background: this has been a wise
+choice made by the development team to ensure that most programmers
+would find themselves in a sweet spot when dealing with
+a pretty new and innovative tool.</p>
+
+<h2>Support for relations: linked data</h2>
+
+<p>Last but not least, in the previos posts we saw that
+even if it isn’t a relational database, OrientDB provides
+support for linked data, as it eventually is a graph
+database.</p>
+
+<p>Coming from the relational world, you would ask yourself
+how a JOIN looks like:</p>
+
+<p><code>
+SELECT owner.first_name from pet where name = ‘Snoopy’
+</code></p>
+
+<p>In the above example, we are joining 2 classes &ndash; <code>pet</code> and <code>owner</code> &ndash;
+via the <code>.</code> operator: OrientDB embeds pointers to other
+records directly in the record themselves, and you can access
+the related records with the embedded field’s name (<code>owner</code>):
+the properties of the related record are accessed with the dot
+and the example means “select the first name of the owner of
+a pet named Snoopy”. While we are directly querying on a class
+(<code>pet</code>) we can access related records without the complexity
+of a <code>JOIN</code>.</p>
+
+<p>In SQL we would need to write something like:</p>
+
+<p><code>
+SELECT owner.first_name FROM pet
+LEFT JOIN owner ON (owner.id = pet.owner_id)
+WHERE pet.name = ‘Snoopie’
+</code></p>
+
+<p>As you see, the way OrientDB handles JOINs lets you save a lot
+of time and results in being very intuitive when you are
+reading queries, without any tradeoff: what you call JOINs in
+RDBMS are called LINKs, or edges, in OrientDB.</p>
+
+<p>But if OrientDB supports relational data, why is it classified
+as a NoSQL storage engine?</p>
+
+<p>The answer is not trivial, and its the subject of the next post
+of this series.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>through Mongo Wire protocol (<a href="http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol">http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol</a>) or via the simple REST interface (<a href="http://www.mongodb.org/display/DOCS/Http+Interface#HttpInterface-JSONinthesimpleRESTinterface">http://www.mongodb.org/display/DOCS/Http+Interface#HttpInterface-JSONinthesimpleRESTinterface</a>) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

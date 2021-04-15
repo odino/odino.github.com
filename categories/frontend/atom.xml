@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Frontend | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/frontend/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Emit a Beeping Sound With JavaScript]]></title>
+    <link href="https://odino.org/emit-a-beeping-sound-with-javascript/"/>
+    <updated>2018-06-15T07:35:00+00:00</updated>
+    <id>https://odino.org/emit-a-beeping-sound-with-javascript</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/cashier.png"></p>
+
+<p>When you go to your favorite grocery store and the cashier processes your products,
+he or she will most likely scan them through a barcode scanner which will emit a
+sound &mdash; a sound that&rsquo;s only there to signal that the scan was successful, and
+he or she can move onto the next product.</p>
+
+<p>When you develop user interfaces for repetitive tasks, and especially when some sort
+of scanning is required, it might make a lot of sense to think of giving your
+users additional feedback so that they don&rsquo;t have to go back and look at the screen
+every time they process an action &mdash; they can probably simply <em>hear</em> a confirmation
+sound, or <em>feel</em> an alarming buzz.</p>
+
+<p>Let&rsquo;s dig a bit deeper.</p>
+
+<!-- more -->
+
+
+<h2>Bzzzzzz</h2>
+
+<p>If you&rsquo;re giving your users a mobile device, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API">vibration API</a>
+is a low-hanging fruit: by just <code>navigator.vibrate(1000)</code> you&rsquo;ll have a device
+that buzzes for a second. Want to create interesting patterns? Then do something
+such as:</p>
+
+<ul>
+<li><code>navigator.vibrate(200)</code>, a short buzz indicating the action went fine</li>
+<li><code>navigator.vibrate(2000)</code>, a long buzz indicating there was some sort of error</li>
+<li><code>navigator.vibrate([300, 300, 300])</code>, 3 short buzzes indicating a task is completed</li>
+</ul>
+
+
+<p>&hellip;and so on and so forth: the vibration API is absurdly easy, so I&rsquo;m simply leaving
+it for you to experiment with it.</p>
+
+<h2>BEEP! BEEP! BEEP! BOOP!</h2>
+
+<p>Something a tad better is a snippet I found today, which simplifies audio feedback
+quite significantly:</p>
+
+<p>``` js
+a=new AudioContext() // browsers limit the number of concurrent audio contexts, so you better re-use'em</p>
+
+<p>function beep(vol, freq, duration){
+  v=a.createOscillator()
+  u=a.createGain()
+  v.connect(u)
+  v.frequency.value=freq
+  v.type=&ldquo;square&rdquo;
+  u.connect(a.destination)
+  u.gain.value=vol<em>0.01
+  v.start(a.currentTime)
+  v.stop(a.currentTime+duration</em>0.001)
+}
+```</p>
+
+<script type="text/javascript">
+a=new AudioContext()
+function beep(vol, freq, duration){
+  v=a.createOscillator()
+  u=a.createGain()
+  v.connect(u)
+  v.frequency.value=freq
+  v.type="square"
+  u.connect(a.destination)
+  u.gain.value=vol*0.01
+  v.start(a.currentTime)
+  v.stop(a.currentTime+duration*0.001)
+}
+</script>
+
+
+<p>This snippet can be used to generate interesting sounds such as:</p>
+
+<p><button style="width: 30%; height: 150px; font-size: 2em" onclick="beep(100, 520, 200)">Beep</button>
+<button style="width: 30%; height: 150px; font-size: 2em" onclick="beep(999, 220, 300)">Boop</button>
+<button style="width: 30%; height: 150px; font-size: 2em" onclick="beep(999, 210, 800); beep(999, 500, 800);">Cool noise</button></p>
+
+<p>You can actually <a href="https://www.beepbox.co">create songs with this kind of stuff</a> (<a href="https://www.beepbox.co/#6n42s6k7l02e0zt9m0a7g0Dj9i1r1o323200T1d0c2AbF0B0V7Q2500Pd4c0E7171T1d1c0A2F1B7V1Q4000Pf700E8911T0w4f1d1c0h8v1T0w1f1d1c0h0v0T0w2f3d1c0h0v2T1d1c0A2F1B8V1Q4000Pa600E8901T1d1c0A3F0B8V1Q5310Pcda0E0631T1d1c0A1F0B0V1Q7300Pebc0E06b1T2w1d1v3T2w1d1v2T2w4d1v4T2w4d1v4b4x8i4w004xgB88smAa2g04q74x4i4N8j51ci4M844N0k4Ngk4xck4g830w430Al0kxdUxh8N4z4264kh8i4x8k5h8O438i4x820C8k9h8h40018h4N4h4N4j4h4hgR0i0g4g4g018y8i8y8x8x8y4w020h80404hp288kPUj7gM7bN74cyRCfeXJjJOe8VKlBVEqMQxYHaOI_fPYyTpTtGqWMTkQxLFF38QQxA6W2F31xBE6AdwraWWlevMgVop2Addmjgswd58mCOSUdBBA3tpnnjpmYlljARpdejjCddapAFHB4TpGStICGqWoAoRFH84idFIa9QKh8YBhpIp5O0rntuw0C5ctM96CC2GFFwkPQllkQRFFHHFFwtc_sgM71chN38JpzPKXlWD9UxwelBVMqMRxVE39zwhOFxQj_ifXyu9KOqsCD4fbwo233tpp0TSlRQSlwFBF0j7i7uelcbByOxMgWwQ1j2w2gt0i7NUGAdl8qp4dcA6UyTn1FLGJ3m3r3N0dC6j6i2VlEqraHgFxU2h1i2CzdKH2CdcVoK0aoCmm1G3i6CGEdgqgGpCi0rgS5Rj20ySMdllwqgRwi0gOGhFzUOGUdgqgJdlgqwQCk04NFwpho2Cyw58aqa0kwqqagkQk0F1jhg2A5d58aqa0kwFEE1i1jc0H3m6AK000">proof</a>).</p>
+
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">WebAudio API</a> is <a href="https://caniuse.com/#search=AudioContext">widely supported</a>, so you shouldn&rsquo;t have too many problems
+rolling it out across platforms:</p>
+
+<p><img class="center" src="/images/webaudio.png"></p>
+
+<p>At <a href="https://www.namshi.com">Namshi</a>, we have provided our warehouse agents with devices to store, locate and
+move inventory &mdash; needless to say, combining these 2 APIs (vibration + sound) allows
+our efficiency to increase while working on more repetitive tasks.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web APIs of the Future]]></title>
+    <link href="https://odino.org/web-apis-of-the-future/"/>
+    <updated>2017-04-15T12:47:00+00:00</updated>
+    <id>https://odino.org/web-apis-of-the-future</id>
+    <content type="html"><![CDATA[<p>I generally like to think of myself as a server-side guy but, since a few
+years, I&rsquo;ve been more and more involved with the frontend &mdash; especially
+since logic, and not just UI, started to become a hot-topic for the client as
+well (this is all thanks to Angular, y'all remember that thingy?).</p>
+
+<p>So, more often than I admit, I keep an eye on the upcoming features of various
+browsers through their <em>platform status</em> pages, and I&rsquo;ve decided to start sharing
+a bunch of the stuff you should probably be excited as well. I plan of writing
+a couple articles like this one on a yearly basis, as browsers evolve quickly and
+there&rsquo;s always lots of stuff to be looking forward to.</p>
+
+<!-- more -->
+
+
+<h2>First things first: sources</h2>
+
+<ul>
+<li><a href="https://www.chromestatus.com/features">Chrome</a></li>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/">Edge</a></li>
+<li><a href="https://platform-status.mozilla.org/">Firefox</a></li>
+<li><a href="https://webkit.org/status/">Webkit</a></li>
+</ul>
+
+
+<p>These browsers provide different functionalities on their status pages, so I
+generally tend to spend more time on Chrome &amp; Edge&rsquo;s since they let me filter
+stuff out with ease. Webkit allows the same but, hell let&rsquo;s be honest, I&rsquo;m not
+very interested in their roadmap, as I think they&rsquo;re being
+<a href="https://arstechnica.com/information-technology/2015/06/op-ed-safari-is-the-new-internet-explorer/">strangely slow to adopt</a>.</p>
+
+<h2>Notable highlights</h2>
+
+<p>The past few days were a boom for MS Edge, which rolled out some <a href="https://blogs.windows.com/msedgedev/2017/04/11/introducing-edgehtml-15/?utm_content=buffer9f1e8&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer#JYTlGJyKDuRVomoG.97">major updates</a>
+including:</p>
+
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/discovery-and-monetization/payment-request/">PaymentRequest API</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async/await</a></li>
+<li><a href="https://github.com/google/brotli">Brotli</a></li>
+<li><a href="https://www.w3.org/TR/CSP2/">CSP level 2</a></li>
+</ul>
+
+
+<p>This was personally very surprising for me, as I always considered Edge an
+afterthought &mdash; how naive of me. These guys are here to push forward, and
+quickly buying into the PaymentRequest API is a huge sign for online payments. Love it!</p>
+
+<h2>Upcoming stuff</h2>
+
+<p><img class="right" src="/images/chrome.jpg"></p>
+
+<p>In Chrome canary:</p>
+
+<ul>
+<li><a href="https://www.chromestatus.com/features/5694225681219584">Feature Policy</a>, a way to <a href="https://wicg.github.io/feature-policy/">selectively disable browser features</a></li>
+<li><a href="https://www.chromestatus.com/features/5695378309513216">Get Installed Related Apps API</a>,
+which will let website owners figure out <a href="https://github.com/WICG/get-installed-related-apps/blob/master/EXPLAINER.md">if the user has a (related) native app installed</a></li>
+<li><a href="https://www.chromestatus.com/features/6443143280984064">Temporarily stop permission requests after 3 dismissals</a>,
+so that annoying websites won&rsquo;t screw around as much</li>
+</ul>
+
+
+<p>Under development:</p>
+
+<ul>
+<li><a href="https://www.chromestatus.com/features/5861289330999296">Asynchronous Clipboard API</a>,
+a modern clipboard API</li>
+<li><a href="https://www.chromestatus.com/features/5684934484164608">Dynamc imports (from ESNext)</a>,
+to dynamically load modules at runtime</li>
+<li><a href="https://www.chromestatus.com/features/5365692190687232">ES6 modules</a></li>
+<li><a href="https://www.chromestatus.com/features/5669923372138496">Web Authentication</a>,
+to support serious <a href="https://w3c.github.io/webauthn/">authentication on the client</a></li>
+<li><a href="https://www.chromestatus.com/features/5662315307335680">Web Share Target</a>, a consequence of the <a href="https://developers.google.com/web/updates/2016/10/navigator-share">Web Share API</a>,
+so that websites can register themselves as &ldquo;targets&rdquo; of a share action (check this <a href="https://blog.hospodarets.com/demos/web-share-api/">demo of Web Share on Chrome for Android</a>)</li>
+<li><a href="https://www.chromestatus.com/features/4532810371039232">WebVR</a>, which integrates
+VR gears such as the Oculus with your browser (fun times ahead!)</li>
+</ul>
+
+
+<p><img class="right" src="/images/edge.png"></p>
+
+<p>MS Edge has previews of <a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/?q=edge%3A%27Preview%20Release%27">Web Assembly and ES6 modules</a>
+as well, but what&rsquo;s under development is even more exciting:</p>
+
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/backgroundsyncapi/?q=edge%3A%27In%20Development%27">Background Sync API</a>,
+to let Service Workers know when the user&rsquo;s back online</li>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/serviceworker/?q=edge%3A%27In%20Development%27">Service Workers</a> of course :)</li>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/pushapi/?q=edge%3A%27In%20Development%27">Web Push notifications</a></li>
+<li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/urlapi/?q=edge%3A%27In%20Development%27">URL API</a>, to manipulate URLs, a feature that&rsquo;s there in all of the other major browsers</li>
+</ul>
+
+
+<p>Looks like Edge is gaining momentum and closing the gap, which is definitely the
+right direction for them. Of course, as you might notice, the road ahead is <a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/consoletable/?q=edge%3A%27Under%20Consideration%27">still
+long</a> ;&ndash;)</p>
+
+<p><img class="right" src="/images/firefox.png"></p>
+
+<p>Firefox&rsquo;s <a href="https://platform-status.mozilla.org/">focusing</a> on:</p>
+
+<ul>
+<li>Background Sync</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM">Shadow DOM</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">Web Manifest</a></li>
+<li>PaymentRequest</li>
+</ul>
+
+
+<p><img class="right" src="/images/safari.gif"></p>
+
+<p>whereas <a href="https://webkit.org/status/">Safari is probably at its lamest</a> with:</p>
+
+<ul>
+<li><a href="http://asmjs.org/">ASM.js</a></li>
+<li><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></li>
+<li><a href="http://webassembly.org/">WebAssembly</a></li>
+</ul>
+
+
+<p>currently being developed &mdash; or, at least, those are the features that I think
+are going to impact us, common mortals, the most.</p>
+
+<p>Service Workers, Web Authentication, Web App Manifest and <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity</a>
+are all under consideration though.</p>
+
+<h2>Conclusion</h2>
+
+<p>As usual, I think Chrome is pushing ahead, even though sometimes their ideas are
+quite weird &mdash; but that&rsquo;s part of trying to innovate. I&rsquo;m very happy to see
+Firefox working on solid stuff and Edge catching up with the biggest themes of
+2016 (<em>aka Service Workers</em>).</p>
+
+<p>I see the <strong>PaymentRequest API as the clear winner of the past 6 months</strong>, and I&rsquo;m
+really excited as this will mean a lot for online payments and e-commerce as well.
+Browsers are becoming more of a platform rather than just a rendering engine, and
+that makes it possible to create app-like experiences for your users<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>Last but not least, time has come to <strong>start shipping <a href="https://github.com/google/brotli">Brotli</a> to your users</strong>:
+<a href="https://community.akamai.com/thread/2956#comment-15758">Akamai supports it since few weeks</a>
+and <a href="https://caniuse.com/#search=brotli">browser support is kind of complete</a> (again, Safari&hellip;)
+&mdash; time to knock on your CDN provider&rsquo;s door!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>And that&rsquo;s why, in my opinion, Safari is pushing back big time <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS, (Almost) a Year Later, at a PHP Conference]]></title>
+    <link href="https://odino.org/angularjs-almost-a-year-later/"/>
+    <updated>2014-11-27T21:18:00+00:00</updated>
+    <id>https://odino.org/angularjs-almost-a-year-later</id>
+    <content type="html"><![CDATA[<p>The first day of the <a href="http://madrid2014.symfony.com/">SymfonyCon Madrid</a> is almost
+over and, since I&rsquo;m done with my talk, I&rsquo;m gonna
+take the time to &ndash; as usual &ndash; put the slides here.</p>
+
+<!-- more -->
+
+
+<p>My talk went (I hope) well, and I am grateful
+to the guys that stopped me afterwards to
+clarify some of their doubts or to have
+a casual chat about Angular and other frontend-ish
+things.</p>
+
+<p>Here are the slides:</p>
+
+<p><div class="slideshare" id="__ss_42097528"><iframe src="https://www.slideshare.net/slideshow/embed_code/42097528 " width="100%" height="550" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div></p>
+
+<p>By the way: <strong>110% respect</strong> to
+SensioLabs for finding a venue which:</p>
+
+<ul>
+<li>has great WiFi</li>
+<li>serves yummy food</li>
+<li>is 20 minutes away from a shisha place</li>
+</ul>
+
+
+<p>Tomorrow it will be the second and last day
+of conference; afterwards I&rsquo;m gonna catch an overnight flight
+to come back to my beloved Dubai:
+if you are at the conference, do not hesitate
+and ping me since&hellip;<a href="http://tech.namshi.com/join-us/">we&rsquo;re still hiring</a>!</p>
+]]></content>
+  </entry>
+  
+</feed>

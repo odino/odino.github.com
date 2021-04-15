@@ -1,0 +1,28 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3507011, 2018-01-08T17:38:50-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: CharterITCPro-Regular by ITC
+ * URL: https://www.myfonts.com/fonts/itc/charter/pro-regular/
+ * Copyright: Copyright 1999, 2005 International Typeface Corporation. All rights reserved.
+ * Licensed pageviews: 250,000
+ * 
+ * 
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3507011
+ * 
+ * © 2018 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/358343");
+
+  
+@font-face {font-family: 'CharterITCPro-Regular';src: url('webfonts/358343_0_0.eot');src: url('webfonts/358343_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/358343_0_0.woff2') format('woff2'),url('webfonts/358343_0_0.woff') format('woff'),url('webfonts/358343_0_0.ttf') format('truetype');}
+ 

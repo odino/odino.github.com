@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Infosec | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/infosec/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web Security Demystified: WASEC]]></title>
+    <link href="https://odino.org/web-security-demistified/"/>
+    <updated>2018-07-14T22:45:00+00:00</updated>
+    <id>https://odino.org/web-security-demistified</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>" series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I've written.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/web-security-demistified/">Web security demystified: WASEC</a>
+	</li>
+	<li>
+		<a href="/introduction-to-web-application-security/">Introduction</a>
+	</li>
+	<li>
+		<a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+	</li>
+	<li>
+		<a href="/security-https-perspective/">Security at the HTTP level</a>
+	</li>
+	<li>
+		<a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+	</li>
+	<li>
+		<a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+	</li>
+	<li>
+		<a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+	</li>
+	</br>
+	<p>
+		If you've enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+	</p>
+</ol>
+</p>
+
+<p><img class="right" src="/images/wasec.jpeg"></p>
+
+<p>I&rsquo;ve been thinking of writing a long article around <em>everything a web developer
+should know about application security</em> for quite some time, and it&rsquo;s clear to me
+that this mastodontic exercise is never going to take place all at once.</p>
+
+<p>In order to get things rolling, I&rsquo;ve decided that,
+instead of writing one long, exhaustive article, I&rsquo;ll be splitting my efforts
+over a longer period of time, and come up with a series around
+Web Application SECurity (WASEC, since I like to shorten things).</p>
+
+<p>In this article I&rsquo;d like to introduce the contents I&rsquo;m going to write about,
+and how I&rsquo;m planning to publish them.</p>
+
+<p>Interested in learning how a compromised CDN wouldn&rsquo;t affect your users?
+Want to know why CSRF is going to die? Read on.</p>
+
+<!-- more -->
+
+
+<h2>Why?</h2>
+
+<p>This is how I like to sum up the goal of WASEC, a series on <strong>W</strong>eb <strong>A</strong>pplication <strong>SEC</strong>urity:</p>
+
+<blockquote><p>As software engineers, we often think of security as an afterthought: build it, then fix it later.</p>
+
+<p>Truth is, knowing a few simple browser features can save you countless of hours banging your head against a security vulnerability reported by a user. This book is a solid read that aims to save you days learning about security fundamentals for Web applications, and provide you a concise and condensed idea of everything you should be aware of when developing on the Web from a security standpoint.</p>
+
+<p>Don&rsquo;t understand prepared statements very well? Can&rsquo;t think of a good way to make sure that if your CDN gets compromised your users aren&rsquo;t affected? Still adding CSRF tokens to every form around? Then this book will definitely help you get a better understanding of how to build strong, secure Web applications made to last.</p>
+
+<p>Security is often an afterthought because we don&rsquo;t understand how simple measures can improve our application&rsquo;s defense by multiple orders of magnitude, so let&rsquo;s learn it together.</p></blockquote>
+
+<p>It&rsquo;s been a while I&rsquo;ve been thinking of <em>writing</em> something meaningful: not that
+I think my previous articles are terrible, but I always wanted to try to make
+something more &ldquo;durable&rdquo; &mdash; if you get what I mean.</p>
+
+<p>With WASEC, my goal is to publish a reference for developing web application with
+security in mind, so that instead of receiving 100 vulnerability reports&hellip;
+&hellip;you could probably reduce that number to 90 :)</p>
+
+<h2>So now you&rsquo;re a security guru?!?!</h2>
+
+<p>Not at all, that&rsquo;s why I&rsquo;d like to emphasize that <strong>this is content for the everyday
+software engineer</strong> that writes web applications: I&rsquo;ve made a living of writing web
+apps for <a href="https://www.linkedin.com/in/alessandronadalin/">various employers</a>, and have seen things going south as well as strong, solid
+approaches to security &mdash; with this, I&rsquo;m simply trying to share my experience
+and what I like to keep in mind when trying to secure web applications.</p>
+
+<h2>Contents</h2>
+
+<p>This table of contents is as stable as a table with three legs, but should give
+you a rough idea of the contents I&rsquo;m planning to write about:</p>
+
+<ul>
+<li>Introduction</li>
+<li>Understanding a browser</li>
+<li>HTTP(S)
+
+<ul>
+<li>HTTP vs HTTPS vs HTTP/2
+
+<ul>
+<li>Cloudflare: a twist of the tale</li>
+</ul>
+</li>
+<li>GET vs POST</li>
+<li>Security-related headers
+
+<ul>
+<li>HTTP Strict Transport Security (HSTS)</li>
+<li>Public Key Pinning Extension for HTTP (HPKP)</li>
+<li>X-Frame-Options</li>
+<li>X-XSS-Protection</li>
+<li>X-Content-Type-Options</li>
+<li>Content-Security-Policy</li>
+<li>X-Permitted-Cross-Domain-Policies</li>
+<li>Referrer-Policy</li>
+<li>Expect-CT</li>
+<li>Origin</li>
+<li>CORS
+
+<ul>
+<li>CORS vs proxies</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Managing sessions
+
+<ul>
+<li>Understanding HTTP cookies</li>
+<li>Session vs persistent cookies</li>
+<li>Flags
+
+<ul>
+<li>secure</li>
+<li>same-site
+
+<ul>
+<li>CSRF tokens</li>
+</ul>
+</li>
+<li>httpOnly</li>
+</ul>
+</li>
+<li>Supercookies</li>
+<li>Alternatives
+
+<ul>
+<li>localStorage</li>
+<li>tokens
+
+<ul>
+<li>JWT</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Situationals
+
+<ul>
+<li>Blacklisting vs whitelisting</li>
+<li>Logging secrets</li>
+<li>Cookie tampering: never trust the client</li>
+<li>Injection
+
+<ul>
+<li>Understanding prepared statements</li>
+</ul>
+</li>
+<li>Dependencies with known vulnerabilities</li>
+<li>OWASP
+
+<ul>
+<li>XSS</li>
+</ul>
+</li>
+<li>Have I been pwoned?
+
+<ul>
+<li>Re-using credentials: a real-world story</li>
+</ul>
+</li>
+<li>Session invalidation in a stateless architecture</li>
+<li>Sub-resource integrity</li>
+</ul>
+</li>
+<li>DDOS attacks
+
+<ul>
+<li>Introduction</li>
+<li>Don&rsquo;t panic!
+
+<ul>
+<li>CloudFlare</li>
+<li>Cloud Armor</li>
+<li>AWS Shield</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Secrets management
+
+<ul>
+<li>Pushing to Github</li>
+<li>An isolated repository</li>
+<li>Encrypting secrets with SOPS</li>
+<li>Environment variables: not a silver bullet?</li>
+</ul>
+</li>
+<li>Bug Bounty Programs
+
+<ul>
+<li>What&rsquo;s in a program?</li>
+<li>HackerOne</li>
+<li>Dealing with security researchers</li>
+<li>&ldquo;Malicious&rdquo; reporters</li>
+</ul>
+</li>
+<li>Leveraging other services
+
+<ul>
+<li>An all in one solution: CloudFlare</li>
+<li>Travis-ci</li>
+<li>NPM audit</li>
+<li>Gemnasium and similar tools
+
+<ul>
+<li>GH security alerts</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>And I&rsquo;m sure I&rsquo;m forgetting half of the content I originally thought of&hellip; :)</p>
+
+<h2>Series? E-book?</h2>
+
+<p>If you have followed me throughout the years, you surely noticed how I like to
+open-source as much as possible: helping the community comes first, the same way it
+helped me &mdash; if it wasn&rsquo;t for the first conference
+I attended, I would have never become the kind of software engineer I am today (hint: <em>a very bad one!</em>).</p>
+
+<p>I have a short history at publishing series, but over the years I&rsquo;ve managed to
+come up with a few, connected series of articles that saw the light on this blog:</p>
+
+<ul>
+<li><a href="/probabilistic-data-structures-an-introduction/">Probabilistic Data Structures</a></li>
+<li><a href="/using-the-symfony2-dependency-injection-container-as-a-standalone-component/">Symfony2 components in your own userland</a></li>
+<li><a href="/the-strange-case-of-orientdb-and-graph-databases/">OrientDB</a></li>
+</ul>
+
+
+<p>These are very short series (by the way, the probabilistic data structures one is still in progress),
+and I&rsquo;d like to mimic my previous approach for WASEC: short articles that make
+an interesting story &mdash; or, in this case, a book.</p>
+
+<p>I&rsquo;m going to be publishing <a href="https://leanpub.com/wasec">WASEC as a book, through LeanPub</a>,
+and post 80% of its chapters in this blog (as well as in its <a href="https://medium.com/@AlexNadalin">medium</a> copy).</p>
+
+<p>Why not replicate the entire book on this blog? Well, I want to make sure you&rsquo;d'be
+interested in grabbing a copy of the book as well, which I&rsquo;m planning to publish
+in a few stores (Kindle, LeanPub) for a ridicolous amount of money. LeanPub sets
+the minimum price for a book at $4.99 but, if it was for me, I&rsquo;d ask for $2.99
+(and that&rsquo;s because <a href="/book-review-an-introduction-to-stock-and-options/">one of my most satisfying reads costed me that much</a>).</p>
+
+<p>Long story short: <a href="https://leanpub.com/wasec">grab the book, it&rsquo;s going to be worth it</a>.</p>
+
+<h2>Cadence</h2>
+
+<p>I&rsquo;m planning to release a new chapter every 45 days, meaning WASEC should be
+completed within a year, year and a half (~10 chapters). If this sounds like a very long-term
+commitment, consider this a diversion in the topics that I generally like to write
+about: I&rsquo;ll be mainly focusing on Web Application SECurity rather than, for example,
+<a href="/categories/probabilistic-data-structures/">probabilistic data structures</a> (or <a href="/advertising-on-twitter-give-us-your-personal-data-or-were-going-to-bomb-your-timeline-with-nsfw-sexual-ads/">rant about Twitter&rsquo;s ads</a>).</p>
+
+<p>This does not mean that I will forget about everything else I used to write about,
+but rather than 2 out of 3, maybe 3 out of 4, or 4 out of 5 articles I publish
+are going to be related to WASEC.</p>
+
+<h2>In the end&hellip;</h2>
+
+<p>Game on! Off to writing&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

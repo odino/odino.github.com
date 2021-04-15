@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Mysql | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/mysql/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL's INSERT IGNORE and NOT NULL Columns]]></title>
+    <link href="https://odino.org/mysqls-insert-ignore-and-not-null-columns/"/>
+    <updated>2018-11-30T18:35:00+00:00</updated>
+    <id>https://odino.org/mysqls-insert-ignore-and-not-null-columns</id>
+    <content type="html"><![CDATA[<p>Last week I was working on an application that has an idempotent
+API, meaning the same request can come in multiple times without
+generating errors or side effects: the request can be safely
+replayed, as it won&rsquo;t affect the state of the server.</p>
+
+<p>Since I was using MySQL as a storage engine behind this API, <code>INSERT IGNORE</code>
+was my first thought.</p>
+
+<p>What a tragic mistake.</p>
+
+<!-- more -->
+
+
+<h2>Hidden problems with IGNORE</h2>
+
+<p>Let&rsquo;s create a dummy table with a couple fields:</p>
+
+<p><code>sql
+CREATE TABLE `item` (
+  `id` INT(11) COLLATE utf8_unicode_ci AUTO_INCREMENT NOT NULL,
+  `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `reference` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`reference`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+</code></p>
+
+<p>Let&rsquo;s say we want to insert in this table a list of items
+we have to sell &mdash; each item will have a unique human-readable
+title and a reference in our system.</p>
+
+<p>Let&rsquo;s add some records into our system:</p>
+
+<p>``` sh
+mysql> INSERT INTO item (title, reference) VALUES(&ldquo;iPad &ndash; the best tablet in the world&rdquo;, &ldquo;IPAD-64GB&rdquo;);
+Query OK, 1 row affected (0.00 sec)</p>
+
+<p>mysql> INSERT INTO item (title, reference) VALUES(&ldquo;iPad &ndash; the best tablet in the world&rdquo;, &ldquo;IPAD-64GB&rdquo;);
+ERROR 1062 (23000): Duplicate entry &lsquo;IPAD-64GB&rsquo; for key &lsquo;reference&rsquo;
+```</p>
+
+<p>as expected, the second insert fails it an item with the same reference already
+exists in the database.</p>
+
+<p>Now, suppose that we&rsquo;d like to allow for our API to allow sending the
+same request twice wthout throwing an error &mdash; we can use
+an <code>INSERT IGNORE</code>:</p>
+
+<p>``` sh
+mysql> SELECT * FROM item;
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| id | title                               | reference |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+|  1 | iPad &ndash; the best tablet in the world | IPAD-64GB |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+1 row in set (0.00 sec)</p>
+
+<p>mysql> INSERT IGNORE INTO item (title, reference) VALUES(&ldquo;iPad &ndash; the best tablet in the world&rdquo;, &ldquo;IPAD-64GB&rdquo;);
+Query OK, 0 rows affected, 1 warning (0.01 sec)</p>
+
+<p>mysql> SHOW WARNINGS;
++&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| Level   | Code | Message                                         |
++&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| Warning | 1062 | Duplicate entry &lsquo;IPAD-64GB&rsquo; for key &lsquo;reference&rsquo; |
++&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+1 row in set (0.00 sec)</p>
+
+<p>mysql>
+```</p>
+
+<p>Perfect, we tried to re-insert a record with an existing reference
+and the query went through, without throwing errors or adding / updating
+records in the DB.</p>
+
+<p>Now, this is exactly what <code>INSERT IGNORE</code> is supposed to do: trigger an
+insert and, if it causes an error, don&rsquo;t make a fuss out of it.</p>
+
+<p>But&hellip;Surprise, surprise! Let&rsquo;s try with a slightly different query:</p>
+
+<p>``` sh
+mysql> SELECT * FROM item;
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| id | title                               | reference |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+|  1 | iPad &ndash; the best tablet in the world | IPAD-64GB |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+1 row in set (0.00 sec)</p>
+
+<p>mysql> INSERT IGNORE INTO item (reference) VALUES(&ldquo;SOMETHING&rdquo;);
+Query OK, 1 row affected, 1 warning (0.01 sec)</p>
+
+<p>mysql> SHOW WARNINGS;
++&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| Level   | Code | Message                                    |
++&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+| Warning | 1364 | Field &lsquo;title&rsquo; doesn&rsquo;t have a default value |
++&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+
+1 row in set (0.00 sec)</p>
+
+<p>mysql> SELECT * FROM item;
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| id | title                               | reference |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+|  1 | iPad &ndash; the best tablet in the world | IPAD-64GB |
+|  6 |                                     | SOMETHING |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+2 rows in set (0.00 sec)</p>
+
+<p>mysql>
+```</p>
+
+<p>What the heck is happening here? Rather than silencing an error
+(no value provided for the non-nullable column <code>title</code>) the
+<code>INSERT IGNORE</code> simply decides that it&rsquo;s better to let the <code>INSERT</code>
+go through with all the missing non-nullable values set to an empty
+string &mdash; which is something I wasn&rsquo;t expecting at all.</p>
+
+<h2>ON DUPLICATE KEY</h2>
+
+<p>I simply decided to convert my <code>INSERT IGNORE</code>
+to <code>ON DUPLICATE KEY</code> in order to avoid sloppy clients
+sending data without some required fields and then
+finding empty strings all over the database.</p>
+
+<p>The switch was very simple:</p>
+
+<p>``` sh
+mysql> SELECT * FROM item;
+Empty set (0.00 sec)</p>
+
+<p>mysql> INSERT INTO item (title, reference) VALUES(&ldquo;iPad &ndash; the best tablet in the world&rdquo;, &ldquo;IPAD-64GB&rdquo;) ON DUPLICATE KEY UPDATE id  = id;
+Query OK, 1 row affected (0.01 sec)</p>
+
+<p>mysql> INSERT INTO item (title, reference) VALUES(&ldquo;iPad &ndash; the best tablet in the world&rdquo;, &ldquo;IPAD-64GB&rdquo;) ON DUPLICATE KEY UPDATE id  = id;
+Query OK, 0 rows affected (0.01 sec)</p>
+
+<p>mysql> SELECT * FROM item;
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+| id | title                               | reference |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+|  7 | iPad &ndash; the best tablet in the world | IPAD-64GB |
++&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+
+1 row in set (0.00 sec)</p>
+
+<p>mysql>
+```</p>
+
+<p>&hellip;and that&rsquo;s about it: I must say I was very surprised at this behavior
+but I guess it makes sense since <code>INSERT IGNORE</code> ignores <strong>all</strong> errors,
+not just duplicate key ones.</p>
+
+<p>To be honest, it looks like I&rsquo;d better stop using <code>INSERT IGNORE</code>
+sooner rather than later :)</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Import a Google Spreadsheet Into a MySQL Table With Docsql]]></title>
+    <link href="https://odino.org/import-a-google-spreadsheet-into-a-mysql-table-with-docsql/"/>
+    <updated>2018-05-18T13:05:00+00:00</updated>
+    <id>https://odino.org/import-a-google-spreadsheet-into-a-mysql-table-with-docsql</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/google-docs.jpg"></p>
+
+<p>There&rsquo;s a lot of open-source software I&rsquo;m not proud of; probably, though, nothing
+compares to <a href="https://github.com/odino/docsql">docsql</a>, as this rare piece of
+Golang qualifies as one of the weirdest of my creations.</p>
+
+<!-- more -->
+
+
+<p>At Namshi, we&rsquo;ve been using spreadsheets as a mean of configuration for quite some
+time &mdash; you tell the stakeholder &ldquo;hey, here&rsquo;s a google doc, if you need to change
+one of the translations just edit the doc and wait 5 mins&rdquo; and the bets are down.</p>
+
+<p>Sometimes we actually need to import this data into MySQL (could be a <em>una-tantum</em>
+import as well as a scheduled job) and we traditionally did this manually,
+by pulling down a <code>.tsv</code> export from Google docs, amending it and running something
+such as <code>LOAD DATA LOCAL INFILE</code>.</p>
+
+<p>One evening, I found myself wifeless and with a strong desire to try out
+<a href="https://github.com/spf13/cobra">cobra</a> and <a href="https://github.com/spf13/viper">viper</a>,
+so I started to look into automating the process of importing a spreadsheet hosted
+on Google Docs into a MySQL table: the result was <a href="https://github.com/odino/docsql">docsql</a>, a small piece of
+weird software that simply:</p>
+
+<ul>
+<li><a href="https://github.com/odino/docsql/blob/bdfd6deeaf5dfb34ee1e00f23c48e0f1658c6d17/gdocs/gdocs.go#L13-L46">downloads a spreadsheet</a> in <a href="/tsv-better-than-csv/">TSV format</a></li>
+<li>creates a <a href="https://github.com/odino/docsql/blob/bdfd6deeaf5dfb34ee1e00f23c48e0f1658c6d17/db/mysql.go#L51-L67">tmp table</a></li>
+<li><a href="https://github.com/odino/docsql/blob/bdfd6deeaf5dfb34ee1e00f23c48e0f1658c6d17/db/mysql.go#L70-L86">imports the TSV</a> in the tmp table</li>
+<li><a href="https://github.com/odino/docsql/blob/bdfd6deeaf5dfb34ee1e00f23c48e0f1658c6d17/db/mysql.go#L90-L111">swaps the tmp table with the original table</a> you want to import the spreadsheet to (this allows <a href="https://stackoverflow.com/a/34391961/934439">atomic operations</a> on the DB)</li>
+</ul>
+
+
+<p>and turns this:</p>
+
+<p><img class="center <a" src="href="https://raw.githubusercontent.com/odino/docsql/master/images/doc.png">https://raw.githubusercontent.com/odino/docsql/master/images/doc.png</a>"></p>
+
+<p>into this:</p>
+
+<p><img class="center <a" src="href="https://raw.githubusercontent.com/odino/docsql/master/images/docsql.png">https://raw.githubusercontent.com/odino/docsql/master/images/docsql.png</a>"></p>
+
+<p>Considering this was a funny experiment to try to automate a task I do quite
+infrequently<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, I don&rsquo;t think I&rsquo;m going to spend a lot more time
+expanding it or adding random features<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>, but I&rsquo;m happy to share the
+source code as I was pleasantly surprised with how straightforward it was to build
+such a small, isolated CLI tool.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Even if infrequent, it&rsquo;s still a pain <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Especially considering my good old love for the Unix philosophy of &ldquo;do one thing and do it well&hellip;&rdquo; <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The MySQL ARCHIVE Storage Engine]]></title>
+    <link href="https://odino.org/the-mysql-archive-storage-engine/"/>
+    <updated>2015-07-25T18:24:00+00:00</updated>
+    <id>https://odino.org/the-mysql-archive-storage-engine</id>
+    <content type="html"><![CDATA[<p>Ever wondered how you can treat MySQL as an append-only storage?
+Enter the <a href="https://dev.mysql.com/doc/refman/5.5/en/archive-storage-engine.html">ARCHIVE storage engine</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/mysql.png"></p>
+
+<p>I am pretty sure there will be other, more effective and efficient
+solutions in the market, but if you want to go the simple way
+I guess this is a pretty solid solution.</p>
+
+<p>Append-only storages make it impossible to update  or delete data that has been
+written to them (think of logs or a <a href="https://en.wikipedia.org/wiki/Ledger">ledger</a>),
+so that, once an entry is in the DB, you can (kind of) confidently
+access the DB knowing that clients won&rsquo;t  be able to screw the data
+much. I believe this is a pretty good use-case when you want to enforce
+some business logic principles at the storage level.</p>
+
+<p>Of course, it seems like there are some quirks with this
+<a href="https://en.wikipedia.org/wiki/MySQL_Archive">engine</a>:</p>
+
+<p><blockquote><p>One of the current restrictions of Archive tables is that they do not support any indexes, thus necessitating a table scan for any SELECT tasks.<br/>[&hellip;] MySQL is examining index support for Archive tables in upcoming releases.<br/>The engine is not ACID compliant.</p><footer><strong>MySQL Archive <a href="https://en.wikipedia.org/wiki/MySQL_Archive">https://en.wikipedia.org/wiki/MySQL_Archive</a> Wikipedia</strong></footer></blockquote></p>
+
+<p>It is, though, an interesting option for some scenarios: when implementing
+a ledger for <a href="https://www.namshi.com">Namshi</a> we bumped into
+this requirement (have an append-only table) but then decided to work it
+out at the application level rather than at the storage level, simply because
+we didn&rsquo;t find many battle-tested solutions (or a lot of feedback) for
+<a href="http://aws.amazon.com/rds/mysql/">RDS</a>, plus the points highlighted by
+the article on wikipedia felt a bit <em>scary</em><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> at that time.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>And, by the way, there isn&rsquo;t much on StackOverflow as well (<a href="http://stackoverflow.com/questions/612428/pros-and-cons-of-the-mysql-archive-storage-engine">http://stackoverflow.com/questions/612428/pros-and-cons-of-the-mysql-archive-storage-engine</a> and <a href="http://stackoverflow.com/questions/3546567/for-a-stats-systems-whats-better-in-mysql-innodb-archive-or-myisam">http://stackoverflow.com/questions/3546567/for-a-stats-systems-whats-better-in-mysql-innodb-archive-or-myisam</a>) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

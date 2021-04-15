@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Quora | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/quora/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why Did Google Create the Go Language?]]></title>
+    <link href="https://odino.org/why-did-google-create-the-go-language/"/>
+    <updated>2016-08-22T05:19:00+00:00</updated>
+    <id>https://odino.org/why-did-google-create-the-go-language</id>
+    <content type="html"><![CDATA[<p>A few days ago a very interesting digest popped up in my
+inbox, straight away from <a href="https://www.quora.com/Why-did-Google-create-the-Go-language-Isnt-Python-good-enough/answer/Garry-Taylor-5?srid=pefr">Quora</a>:</p>
+
+<p><blockquote><p>The key point here is our programmers are Googlers, they’re not researchers. They’re typically, fairly young, fresh out of school, probably learned Java, maybe learned C or C++, probably learned Python.</p></p><p><p>They’re not capable of understanding a brilliant language but we want to use them to build good software.</p></p><p><p>So, the language that we give them has to be easy for them to understand and easy to adopt.</p><footer><strong>Rob Pike <a href="https://en.wikipedia.org/wiki/Rob_Pike">https://en.wikipedia.org/wiki/Rob_Pike</a></strong></footer></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

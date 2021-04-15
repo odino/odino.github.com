@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Https | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/https/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Valid SSL Certificates for Local Development]]></title>
+    <link href="https://odino.org/valid-ssl-certificates-for-local-development/"/>
+    <updated>2018-09-01T12:57:00+00:00</updated>
+    <id>https://odino.org/valid-ssl-certificates-for-local-development</id>
+    <content type="html"><![CDATA[<p>A few weeks ago I bumped into <a href="https://github.com/FiloSottile/mkcert">mkcert</a>, a tool written by <a href="https://github.com/FiloSottile">Filippo</a>,
+the same guy behind the popular <a href="https://filippo.io/Heartbleed/">heartbleed test tool</a>.</p>
+
+<!-- more -->
+
+
+<p>The tool in question answers one simple need:</p>
+
+<p><img class="center" src="/images/mkcert-ko.png"></p>
+
+<p>By creating a local root CA file that gets installed in your system, making all
+certificates issued by <code>mkcert</code> trusted:</p>
+
+<p><img class="center" src="/images/mkcert-ok.png"></p>
+
+<p>After downloading the latest release from Github you can simply &ldquo;install&rdquo; it
+by running <code>mkcert -install</code>. Once that is done, you can create your first,
+trusted (by your own system) certificate:</p>
+
+<p>```
+$ mkcert somedomain.local</p>
+
+<p>Using the local CA at &ldquo;/home/alex/.local/share/mkcert&rdquo; ✨</p>
+
+<p>Created a new certificate valid for the following names 📜
+ &ndash; &ldquo;somedomain.local&rdquo;</p>
+
+<p>The certificate is at &ldquo;./somedomain.local.pem&rdquo; and the key at &ldquo;./somedomain.local-key.pem&rdquo; ✅
+```</p>
+
+<p>For example, here&rsquo;s how it would look like if you had to boot a node server with
+SSL support:</p>
+
+<p>``` js
+const fs = require(&lsquo;fs&rsquo;)</p>
+
+<p>const options = {
+  key: fs.readFileSync(<strong>dirname + &lsquo;/somedomain.local-key.pem&rsquo;),
+  cert: fs.readFileSync(</strong>dirname + &lsquo;/somedomain.local.pem&rsquo;)
+};</p>
+
+<p>require(&lsquo;https&rsquo;).createServer(options, (req, res) => {
+  res.writeHead(200)
+  res.end(<code>Got SSL?</code>)
+}).listen(443)
+```</p>
+
+<p>Pretty neat, ah? What <code>mkcert</code> does is to simply add another CA file
+in your system (I guess under <code>/etc/ssl/certs/ca-certificates.crt</code>, but I&rsquo;m not
+entirely sure) so that browsers consider these certificates trusted &mdash; a nice
+workaround to trick any HTTP client.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

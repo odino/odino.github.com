@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Istio | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/istio/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Istio Is the Real Deal]]></title>
+    <link href="https://odino.org/istio-is-the-real-deal/"/>
+    <updated>2018-03-23T14:06:00+00:00</updated>
+    <id>https://odino.org/istio-is-the-real-deal</id>
+    <content type="html"><![CDATA[<p>I don&rsquo;t generally spend time blogging (or bragging) about technologies I don&rsquo;t
+use in production, but today I wanted to make sure <a href="https://gist.github.com/odino/7ce4dc3bb77d6282b2f2aaf1050c29e3">Istio</a> gets a special mention on
+this blog.</p>
+
+<!-- more -->
+
+
+<p>The original problem was: how do I package and run apps with ease? And Docker came.</p>
+
+<p>Then it was a matter of how do we organize all of these containers. And Kubernetes came.</p>
+
+<p>Last but not least, we now have to sort out how to make services communicate
+to each other, how to route them conditionally and secure this layer of communication.
+That&rsquo;s where Istio, a <a href="https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/">service mesh</a> for microservices developed <a href="https://developer.ibm.com/dwblog/2017/istio/">Google, IBM and Lyft</a>, kicks in.</p>
+
+<p>Some of the cool things you can do with this service mesh?</p>
+
+<ul>
+<li><a href="https://istio.io/docs/tasks/policy-enforcement/rate-limiting.html">rate limiting</a></li>
+<li><a href="https://istio.io/docs/concepts/traffic-management/handling-failures.html">circuit breakers</a></li>
+<li><a href="https://istio.io/docs/concepts/traffic-management/rules-configuration.html#timeouts-and-retries">auto-retry API calls</a></li>
+<li><a href="https://istio.io/blog/2017/0.1-canary.html">canary releases</a></li>
+<li><a href="https://istio.io/docs/reference/config/istio.mixer.v1.config.client.html#JWT">JWT authn/authz</a></li>
+</ul>
+
+
+<p>&hellip;and much, much more.</p>
+
+<p>I&rsquo;ll leave you with this talk by Kelsey Hightower &mdash; I&rsquo;m sure that, with time,
+Istio will blow your mind:</p>
+
+<iframe width="860" height="615" src="https://www.youtube.com/embed/s4qasWn_mFc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+</feed>

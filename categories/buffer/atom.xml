@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Buffer | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/buffer/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome's DevTools Console Getting Cleared Unexpectedly? Blame the Buffer Extension!]]></title>
+    <link href="https://odino.org/chromes-devtools-console-getting-cleared-unexpectedly-blame-the-buffer-extension/"/>
+    <updated>2018-09-14T13:11:00+00:00</updated>
+    <id>https://odino.org/chromes-devtools-console-getting-cleared-unexpectedly-blame-the-buffer-extension</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/devtools.png"></p>
+
+<p>This was a funny one! After weeks thinking the Chrome team might have messed up,
+I finally got frustrated and looked for a solution to one of the weirdest problems
+I had encountered: the DevTool&rsquo;s console getting cleared unexpectedly.</p>
+
+<!-- more -->
+
+
+<p>I use the console on a daily basis to be able to debug applications,
+so it was fairly annoying to see the logs being wiped out unless I ticked the
+&ldquo;<em>Preserve log</em>&rdquo; checkbox &mdash; an error would occur, I would open the console only
+to find it blank. To make the matter worse, if I&rsquo;d try to reload the page, I could
+see the error blink on the console for a fraction of a second, only for it to be
+cleared under mysterious circumstances.</p>
+
+<p>Eventually, after a few weeks of enabling &ldquo;<em>Preserve log</em>&rdquo;, I bumped into <a href="https://productforums.google.com/forum/#!topic/chrome/NIdgxE4UnGQ">this
+thread on Chrome&rsquo;s forum</a>
+and realized I had Buffer installed as well: turning off the extension magically
+gave me my console back. Don&rsquo;t ask why, don&rsquo;t ask how &mdash; all that matters to me
+is that I got my DevTools back :)</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

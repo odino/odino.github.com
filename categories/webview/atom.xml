@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Webview | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/webview/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Enable Remote Debugging on Chrome for React Native's Webviews]]></title>
+    <link href="https://odino.org/enable-remote-debugging-on-chrome-for-react-natives-webviews/"/>
+    <updated>2016-01-02T09:00:00+00:00</updated>
+    <id>https://odino.org/enable-remote-debugging-on-chrome-for-react-natives-webviews</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/android.jpg"></p>
+
+<p>In my <a href="/contributing-to-react-native-for-android/">last post</a> I explained how
+you can hack on react native for android locally, so that if you need any
+change to the java packages<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> you can do it yourself, with
+immediate feedback upon a <code>react-native run-android</code>.</p>
+
+<p>One thing I immediately patched was the ability to
+<a href="https://developer.chrome.com/devtools/docs/remote-debugging#debugging-webviews">enable remote debugging on webviews</a>,
+which is turned off in react native &mdash; and here&rsquo;s
+how you can do the same.</p>
+
+<!-- more -->
+
+
+<p>If you look at the <code>ReactWebViewManager.java</code> you immediately notice that
+<a href="https://github.com/facebook/react-native/blob/master/ReactAndroid/src/main/java/com/facebook/react/views/webview/ReactWebViewManager.java#L79-L80">debugging is commented</a>: this is because
+it needs to be enabled on the <a href="http://stackoverflow.com/questions/3652560/what-is-the-android-uithread-ui-thread">UI thread</a>, else android is funny enough to <a href="https://android.googlesource.com/platform/frameworks/webview/+/3e9cdbe3fe00ef50eff256e7b5f4b6a1ae796ec5/chromium/java/com/android/webview/chromium/WebViewChromiumFactoryProvider.java#343">crash the application through a RuntimeException</a>.
+Putting it in a static initializer makes it run on any thread that requires
+this class, which is <a href="https://github.com/facebook/react-native/issues/4857">why is disabled</a>.</p>
+
+<p>At the same time, you can just move it around to have it enabled in your dev environment;
+just place the line that enables debugging in the <code>onPageStarted</code> method:</p>
+
+<p>```java
+@Override
+public void onPageStarted(WebView webView, String url, Bitmap favicon) {
+  super.onPageStarted(webView, url, favicon);
+  mLastLoadFailed = false;</p>
+
+<p>  ReactContext reactContext = (ReactContext) ((ReactWebView) webView).getContext();</p>
+
+<p>  WebView.setWebContentsDebuggingEnabled(true);</p>
+
+<p>  &hellip;
+```</p>
+
+<p>and, after re-running <code>react native run-android</code>, you should be good to go:</p>
+
+<p><img class="center" src="/images/webview-remote-debugging.png"></p>
+
+<p>Other stuff like live screencasting work as expected:</p>
+
+<p><img class="center" src="/images/webview-remote-debugging-screencast.jpg"></p>
+
+<p>Sweet!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>BTW hey, it&rsquo;s 2016 and Java is still a thing! <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

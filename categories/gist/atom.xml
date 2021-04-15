@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Gist | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/gist/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using Gists Like Git Repositories]]></title>
+    <link href="https://odino.org/using-gists-like-git-repositories/"/>
+    <updated>2015-07-14T17:27:00+00:00</updated>
+    <id>https://odino.org/using-gists-like-git-repositories</id>
+    <content type="html"><![CDATA[<p>In the past couple of years I&rsquo;ve been using <a href="https://gist.github.com/">gist</a>
+to take notes and stash around small utility scripts I&rsquo;ve had to run
+once in a while.</p>
+
+<p>For all of this time, though, I didn&rsquo;t really take advantage
+of the fact that <a href="https://help.github.com/articles/about-gists/">each gist is an actual git repo</a>, which
+gives you a lot of flexibility the online interface doesn&rsquo;t
+bring to the table.</p>
+
+<!-- more -->
+
+
+<p>Once you create a gist, you can simply note down its id and
+clone it locally:</p>
+
+<p><code>
+git clone git@github.com:YOUR_GIST_ID.git that-infamous-script
+</code></p>
+
+<p>and after applying your changes and committing, you can simply
+push the changes to the gist (with a good old fashioned <code>git push origin master</code>)
+and you will see them at
+<code>https://gist.github.com/YOUR_USERNAME/YOUR_GIST_ID</code>.</p>
+
+<p>Never underestimate the power of gists!</p>
+]]></content>
+  </entry>
+  
+</feed>

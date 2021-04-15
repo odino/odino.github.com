@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Mobile | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/mobile/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Contributing to React Native for Android]]></title>
+    <link href="https://odino.org/contributing-to-react-native-for-android/"/>
+    <updated>2016-01-01T11:19:00+00:00</updated>
+    <id>https://odino.org/contributing-to-react-native-for-android</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/reactjs.png"></p>
+
+<p>It is no news that we, at <a href="http://tech.namshi.com">Namshi</a>, like to play around with all
+sorts of interesting technologies: last but not least, we&rsquo;re
+taking a closer look at <a href="https://facebook.github.io/react-native/">react native</a>, the framework from Facebook
+that allows you to build mobile, native apps with <a href="https://facebook.github.io/react/">React components</a>.</p>
+
+<p>While developing a small prototype, we had a small issue with
+a <a href="http://developer.android.com/reference/android/webkit/WebView.html">WebView</a> that was supposed to run within our application and
+wanted to enable <a href="https://developer.chrome.com/devtools/docs/remote-debugging#debugging-webviews">remote debugging on chrome</a>
+to troubleshoot it: since this is <a href="https://github.com/facebook/react-native/blob/e4272b456e6948c0942c610d3bc65bc29f0a7be6/ReactAndroid/src/main/java/com/facebook/react/views/webview/ReactWebViewManager.java#L77-L82">turned
+off by default</a>, we had to recompile react native with webview
+debugging enabled, and I wanted to share my brief experience with
+it since, with the same approach, you can start hacking and
+contributing to react native itself.</p>
+
+<!-- more -->
+
+
+<p>The guys have created a <a href="https://facebook.github.io/react-native/docs/android-building-from-source.html#content">small guide on how to compile RN from source</a>,
+which can be summarized in just a couple steps: first, add the <a href="http://developer.android.com/tools/sdk/ndk/index.html">android NDK</a> to
+your environment and then configure the build system to build from source and
+not from the <a href="http://mvnrepository.com/artifact/com.facebook.react/react-native">pre-built react-native packages</a>.</p>
+
+<h2>Download and configure the Android NDK</h2>
+
+<p>Download the latest version of the NDK, make it executable
+and run it: the package extracts itself in the current folder
+and then you only need to set an environment variable
+pointing to the NDK, so that the android build system will
+be able to locate the NDK:</p>
+
+<p><code>
+cd /somewhere
+wget http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
+chmod a+x android-ndk-r10e-linux-x86_64.bin
+./android-ndk-r10e-linux-x86_64.bin
+export ANDROID_NDK=/somewhere/android-ndk-r10e
+</code></p>
+
+<h2>Configure RN to build from source</h2>
+
+<p>This involves a few manual steps, but should be pretty straightforward.</p>
+
+<p>In your react project, open <code>android/app/build.gradle</code>, you should see a
+<code>dependencies</code> section like the following:</p>
+
+<p>```
+dependencies {</p>
+
+<pre><code>compile fileTree(dir: "libs", include: ["*.jar"])
+compile "com.android.support:appcompat-v7:23.0.1"
+
+compile "com.facebook.react:react-native:0.17.+"
+</code></pre>
+
+<p>}
+```</p>
+
+<p>See, <code>compile "com.facebook.react:react-native:0.17.+"</code> tells the build system
+to get the pre-built packages, released by facebook, rather that building react-native
+from your local sources.</p>
+
+<p>Now, change that line to:</p>
+
+<p><code>
+compile project(':ReactAndroid')
+</code></p>
+
+<p>then open <code>android/settings.gradle</code> and tell the build system how to locate
+the new project that will be compiled; add, at the bottom of the file:</p>
+
+<p>```
+include &lsquo;:ReactAndroid&rsquo;</p>
+
+<p>project(&lsquo;:ReactAndroid&rsquo;).projectDir = new File(</p>
+
+<pre><code>rootProject.projectDir, '../node_modules/react-native/ReactAndroid')
+</code></pre>
+
+<p>```</p>
+
+<p>Last but not least, you will need 1 change in <code>android/build.gradle</code>, in the
+<code>dependencies</code> section:</p>
+
+<p><code>
+classpath 'de.undercouch:gradle-download-task:2.0.0'
+</code></p>
+
+<p>That&rsquo;s it!</p>
+
+<h2>At the end</h2>
+
+<p>Now, when you run <code>react-native run-android</code>, you should notice that the
+build is slightly slower, due to the fact that <a href="http://gradle.org/">gradle</a>
+is trying to compile RN from source rather than from the pre-built packages.</p>
+
+<p>You can then open <code>./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/</code>
+and start hacking around, making your own changes and testing them with a simple
+<code>react-native run-android</code>.</p>
+
+<p>For us, we were eventually able to enable remote debugging on webviews and found out
+why our webview wasn&rsquo;t running: it simply needed access to the
+<a href="https://developer.mozilla.org/en/docs/Web/API/Window/localStorage">localStorage</a>,
+which is turned off by default on android webviews<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>We then sent a PR (<a href="https://github.com/facebook/react-native/commit/67931284350ebd2b60d1e11870690272079b1726">https://github.com/facebook/react-native/commit/67931284350ebd2b60d1e11870690272079b1726</a>) so that we can turn DOM storage on at will ;&ndash;) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mobile Development's Future Is a Big Question Mark]]></title>
+    <link href="https://odino.org/mobile-developments-future-is-a-big-question-mark/"/>
+    <updated>2015-02-28T18:48:00+00:00</updated>
+    <id>https://odino.org/mobile-developments-future-is-a-big-question-mark</id>
+    <content type="html"><![CDATA[<p>In the past 5 years, mobile devices have taken
+the world by storm, creating new opportunities
+for both consumers and vendors: truth is, the
+landscape of mobile <strong>development</strong> still looks
+very immature and we should be prepared to see a
+radical change in the next 2 to 5 years.</p>
+
+<!-- more -->
+
+
+<h2>A suboptimal development industry</h2>
+
+<p>As we all agree, <a href="http://en.wikipedia.org/wiki/Duplicate_code">duplication is something bad</a>
+in software engineering: it leads to unmaintainable,
+error-prone code that requires a signicant effort
+to be fixed.</p>
+
+<p>If you are a mobile factory or a product-company
+with its own apps-development team, you might be
+familiar with the annoying problem of fixing, or
+implementing, the same thing twice.</p>
+
+<p>Nowadays, unfortunately, <strong>duplicate efforts are the norm
+while developing mobile apps</strong>: you have to reproduce
+the same behaviour across different platforms (ios
+and android, but add blackberry or windows phone if you&rsquo;re
+not that lucky) which led people to create tools like
+<a href="http://cordova.apache.org">cordova</a>.</p>
+
+<p>Problem is, these tools ain&rsquo;t the solution: they don&rsquo;t work
+as nicely as native apps, they probably hide too
+much from the developer and vendors aren&rsquo;t keen
+on supporting them that much. If you, like me,
+gave stuff like <a href="http://ionicframework.com/">ionic</a> a try,
+you probably first found yourself surprised by
+how nice your demo app would look and behave,
+to then just find out that <strong>the more you were
+implementing, the quirkier it looked</strong>.</p>
+
+<p>On another note, the decision on how to structure
+the team isn&rsquo;t trivial as well: shall
+I get devs who can hack on both
+platforms? Let&rsquo;s create 2 separate teams? Shall I
+get 2 lead developers or 1 guy that has a good
+sense on how both platforms work?</p>
+
+<p>We need things to be better: just like the web,
+mobile is now a scary land of vendors-dictated
+&ldquo;standards&rdquo;. <strong>We don&rsquo;t need another JavaScript.</strong></p>
+
+<h2>The need for standards</h2>
+
+<p>I don&rsquo;t think mobile is much different to what
+JavaScript used to look like until 3/5 years ago:
+a lot of vendor-specific standards, weird tools
+that try to uniform these platforms and a plethora
+of things that just don&rsquo;t feel &ldquo;right&rdquo;.</p>
+
+<p>We need uniform APIs, we need to be able to rely
+on the same toolchain (for example, official <a href="https://support.google.com/googleplay/android-developer/answer/3131213?hl=en">staged rollouts</a> on the Apple Store)
+and we need the same kind of transition the JS
+ecosystem has seen: vendors need to
+come together and design all of these things
+altogether, agree on a minimal interface to share
+and get ready to kill the mess.</p>
+
+<p>Of course, there are a bit more complications here,
+as we are talking about very different platforms,
+with different development tools and workflow, which
+is why I think we will see huge changes, from this
+point of view, in the next 3 years.</p>
+
+<h2>How will it look like?</h2>
+
+<p>I have been telling people for a while that I do not
+believe this multi-platform, fragmented ecosystem
+can last for long, as I think it will eventually
+lead vendors to agree on a common platform to work on.</p>
+
+<p>I don&rsquo;t necessarily think it needs to be Objective-C,
+but it definitely <a href="http://www.reddit.com/r/androiddev/comments/27mu3v/why_do_android_dev_tools_still_suck/">won&rsquo;t be Android on Java</a>.
+At the same time, I don&rsquo;t know how interested Apple
+would be in making Swift / Objective-C a thing for the
+masses (<a href="http://stackoverflow.com/questions/7133728/objective-c-in-linux">the masses are interested though</a>).</p>
+
+<p>At the end of the day, thinking of <strong>one, unified mobile
+platform</strong> seems kind of crazy today but, in 5 years,
+devs would look back and wonder &ldquo;how could we do it like
+that, to be wasting efforts on so many different platforms?&rdquo;.</p>
+
+<h2>My personal feeling?</h2>
+
+<p>At the end of the day, all we need is to give a popular
+language a simple API to be able to completely access
+your device.</p>
+
+<p>That language&rsquo;s name is probably JavaScript<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.
+And that API is probably something like <a href="http://trac.webkit.org/wiki/JavaScriptCore">JavaScriptCore</a>.</p>
+
+<p>Since <a href="http://www.railslove.com/stories/fresh-on-our-radar-react-native">React Native</a>
+seems to be already halfway through the journey of
+making all of this real, my feeling is that it won&rsquo;t
+take long until vendors will realize that the
+easiest thing to do is to <strong>give JavaScript a (real) shot</strong>.</p>
+
+<p>KTHXBYE.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>I know that it sounds a bit counter-intuitive since I earlier said that &ldquo;we don&rsquo;t need another JavaScript&rdquo;, but there I was referring to what JS used to look like 3/5 years back (= a mess). We&rsquo;ve come a long way, though there&rsquo;s still a lot we can do :)  <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Increase Mobile Performances by Implementing Transparent Redirects]]></title>
+    <link href="https://odino.org/increase-mobile-performances-by-implementing-transparent-redirects/"/>
+    <updated>2014-03-03T17:58:00+00:00</updated>
+    <id>https://odino.org/increase-mobile-performances-by-implementing-transparent-redirects</id>
+    <content type="html"><![CDATA[<p>Most of you are aware that one of the biggest problems while
+developing mobile apps / websites, is the reduced bandwidth / connectivity
+that the user has on his phone compared to traditional devices
+connected to a solid WiFi or via cable.</p>
+
+<p>How can you actually improve connectivity to the app? There are tricks to
+improve performances, like <strong>transparent redirects</strong>.</p>
+
+<!-- more -->
+
+
+<h2>An heavy stack</h2>
+
+<p>The stack on which your web apps will run will be heavy, by definition:
+HTTP wasn&rsquo;t built with performances in mind<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>, and you might
+want to add SSL, to provide your users with an additional security layer,
+on top of that.</p>
+
+<p>Now imagine your users requesting <code>GET /my-page</code> and you serving a redirect:</p>
+
+<p><code>
+HTTP/1.1 302 Moved temporarily
+Host: example.org
+Location: /my-new-page
+</code></p>
+
+<p>Even though, semantically, this is a logic operation,
+it doesnt work well with the demand of great performances, since the user will need to
+make nother roundtrip connection to get the new resource</p>
+
+<h2>Transparent redirects</h2>
+
+<p>What you can do, instead, is to serve a <em>transparent redirect</em> to the user, so that there is
+no additional request to be made:</p>
+
+<p>```
+HTTP/1.1 200 Ok
+Host: example.org
+Transparent-Status-Code: 302 Moved temporarily
+Transparent-Location-Location: /my-new-page</p>
+
+<p>&lt;html &hellip;
+```</p>
+
+<p>In this way the client already has all the information it needs in
+order to show the user the data he requested.</p>
+
+<p>Even better: if you are serving contents from an API you can have your main
+application handle the transparent redirect with the <code>history.pushState(...)</code>
+API of <code>HTML5</code>.</p>
+
+<h2>Current implemetation</h2>
+
+<p>At the moment you will have to be cautious with it, as current browsers (or, at least,
+a few of them) treat non <code>2XX</code> status codes as errors, thing that becomes tricky when you
+handle things with JS callbacks / promises:</p>
+
+<p>```
+http.get(&hellip;, onSuccess, onError)</p>
+
+<p>// the browser will call onError if the response status code is
+// different than 2XX
+```</p>
+
+<p>I remember banging our heads over our desks here at the <a href="https://www.namshi.com">Namshi</a>
+office, so we decided to use a very simple approach, using <strong>custom headers</strong> with a <code>200 Ok</code>:
+if the response ends up in a redirect, we use 2 custom headers (<code>N-Status-Code</code> and <code>N-Location</code>),
+intercept the response in our frontends and do our trick with <code>#pushState(...)</code>.</p>
+
+<h2>Future considerations</h2>
+
+<p>It would be nice if, one day, the HTTP spec would be able to incorporate this
+behavior natively, with a status code like <code>308 Transparent redirect</code>, so that browser will be able to
+automatically update the state of the apps and the user wouldn&rsquo;t need to wait for another roundtrip
+connection to see the data they have been requesting, no matter the location.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>We're talking about  raw performances, scalability is another matter, which is implemented almost flawlessy in the protocol <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Busybox | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/busybox/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Minimal Docker : Run Your NodeJS App in <25mb of an Image]]></title>
+    <link href="https://odino.org/minimal-docker-run-your-nodejs-app-in-25mb-of-an-image/"/>
+    <updated>2015-07-31T09:27:00+00:00</updated>
+    <id>https://odino.org/minimal-docker-run-your-nodejs-app-in-25mb-of-an-image</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/docker.png"></p>
+
+<p>Managing Docker images might become a bit of a painful
+experience, especially when looking at your storages: very &ldquo;simple&rdquo;
+images like <a href="https://imagelayers.io/?images=node:latest">node</a>
+end up quite fat and contribute to sucking up a good
+chunck of your HDD.</p>
+
+<p>At the same time, the most painful moment with Docker
+images is, at least for me, when you want to pull
+and run a brand new image, not available on your
+machine (or production servers, not <em>much</em> difference):
+you will need to wait until the whole image gets
+downloaded before being able to play around with it<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>At the end of the day, one thing is clear: we&rsquo;d like
+to <a href="http://matthewkwilliams.com/index.php/2015/03/23/shrinking-docker-images/">shrink</a> <a href="http://stackoverflow.com/questions/24394243/why-are-docker-container-images-so-large">images</a> <a href="http://tuhrig.de/flatten-a-docker-container-or-image/">as much as possible</a>.
+Turns out, the easiest solution is, as often, the simplest one:
+<strong>start small, end small</strong>.</p>
+
+<p>There are plenty of resources on <a href="https://www.google.ae/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=shrinking%20docker%20images">limiting the size of your images / containers</a>,
+but today I am going to start with this very simple approach.</p>
+
+<!-- more -->
+
+
+<h2>Busybox</h2>
+
+<p><img class="right" src="/images/busybox.png"></p>
+
+<p>If you are not familiar with it, let me introduce <a href="http://busybox.net/">busybox</a>
+to you: a very tiny linux distribution (~2.5mb) which can be
+summarized in &ldquo;an OS with a bunch of bare-minimum binaries&rdquo;:
+busybox is so well done that has been <a href="https://registry.hub.docker.com/_/busybox/">dockerized</a>
+and used quite extensively within the <a href="https://registry.hub.docker.com/search?q=busybox">docker ecosystem</a>.</p>
+
+<p>The nice thing is that, being so small, busybox takes nothing to run:</p>
+
+<p>```
+~ (master ✔) ᐅ time docker run busybox whoami
+Unable to find image &lsquo;busybox:latest&rsquo; locally
+latest: Pulling from busybox</p>
+
+<p>6ce2e90b0bc7: Pull complete
+8c2e06607696: Already exists
+cf2616975b4a: Already exists
+busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.</p>
+
+<p>Digest: sha256:38a203e1986cf79639cfb9b2e1d6e773de84002feea2d4eb006b52004ee8502d
+Status: Downloaded newer image for busybox:latest
+root
+docker run busybox whoami  0.03s user 0.02s system 0% cpu 17.068 total
+```</p>
+
+<p>This is it, I downloaded and ran <code>whoami</code> on busybox in 17 seconds,
+tethering from my phone<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>The only problem with busybox is the following:</p>
+
+<p><code>
+~ (master ✔) ᐅ docker run busybox apt-get update
+exec: "apt-get": executable file not found in $PATH
+Error response from daemon: Cannot start container 8030d68b740b0f48cb776500cdd1d4c6483ff2d04138e7d227c45d7cd514b75c: [8] System error: exec: "apt-get": executable file not found in $PATH
+</code></p>
+
+<p>You got it, busybox is so bare that it only includes a
+few binaries to let you play with<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>:</p>
+
+<p>```
+~ (master ✔) ᐅ docker run busybox busybox
+BusyBox v1.22.1 (2014-05-22 23:22:11 UTC) multi-call binary.
+BusyBox is copyrighted by many authors between 1998-2012.
+Licensed under GPLv2. See source distribution for detailed
+copyright notices.</p>
+
+<p>Usage: busybox [function [arguments]&hellip;]
+   or: busybox &mdash;list[-full]
+   or: busybox &mdash;install [-s] [DIR]
+   or: function [arguments]&hellip;</p>
+
+<pre><code>BusyBox is a multi-call binary that combines many common Unix
+utilities into a single executable.  Most people will create a
+link to busybox for each function they wish to use and BusyBox
+will act like whatever it was invoked as.
+</code></pre>
+
+<p>Currently defined functions:</p>
+
+<pre><code>[, [[, addgroup, adduser, ar, arping, ash, awk, basename, blkid, brctl,
+bunzip2, bzcat, cat, catv, chattr, chgrp, chmod, chown, chroot, chrt,
+chvt, cksum, clear, cmp, cp, cpio, crond, crontab, cut, date, dc, dd,
+deallocvt, delgroup, deluser, devmem, df, diff, dirname, dmesg, dnsd,
+dnsdomainname, dos2unix, du, dumpkmap, echo, egrep, eject, env,
+ether-wake, expr, false, fdflush, fdformat, fgrep, find, fold, free,
+freeramdisk, fsck, fstrim, fuser, getopt, getty, grep, gunzip, gzip,
+halt, hdparm, head, hexdump, hostid, hostname, hwclock, id, ifconfig,
+ifdown, ifup, inetd, init, insmod, install, ip, ipaddr, ipcrm, ipcs,
+iplink, iproute, iprule, iptunnel, kill, killall, killall5, klogd,
+last, less, linux32, linux64, linuxrc, ln, loadfont, loadkmap, logger,
+login, logname, losetup, ls, lsattr, lsmod, lsof, lspci, lsusb, lzcat,
+lzma, makedevs, md5sum, mdev, mesg, microcom, mkdir, mkfifo, mknod,
+mkswap, mktemp, modprobe, more, mount, mountpoint, mt, mv, nameif, nc,
+netstat, nice, nohup, nslookup, od, openvt, passwd, patch, pidof, ping,
+pipe_progress, pivot_root, poweroff, printenv, printf, ps, pwd, rdate,
+readlink, readprofile, realpath, reboot, renice, reset, resize, rm,
+rmdir, rmmod, route, run-parts, runlevel, sed, seq, setarch,
+setconsole, setkeycodes, setlogcons, setserial, setsid, sh, sha1sum,
+sha256sum, sha3sum, sha512sum, sleep, sort, start-stop-daemon, strings,
+stty, su, sulogin, swapoff, swapon, switch_root, sync, sysctl, syslogd,
+tail, tar, tee, telnet, test, tftp, time, top, touch, tr, traceroute,
+true, tty, udhcpc, umount, uname, uniq, unix2dos, unlzma, unxz, unzip,
+uptime, usleep, uudecode, uuencode, vconfig, vi, vlock, watch,
+watchdog, wc, wget, which, who, whoami, xargs, xz, xzcat, yes, zcat
+</code></pre>
+
+<p>```</p>
+
+<p>So, not having a package manager might be quite of a painful thing
+if you need to run real world apps that need to rely on environments
+such as python, nodejs and so on: we need to find another minimal
+distribution that can give us a substantial help on that front.</p>
+
+<h2>Alpine</h2>
+
+<p><img class="right" src="/images/alpine.png"></p>
+
+<p>Alpine is a <a href="http://www.alpinelinux.org/">busybox-based linux distribution on steroids</a>:
+it is gaining so much traction in the Docker ecosystem since it
+has 2 features that, combined together, make it quite of a valuable
+base image: it is <a href="https://registry.hub.docker.com/u/library/alpine/">~5mb in size</a> and uses the <a href="http://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management">apk</a>
+package manager.</p>
+
+<p>So, of course, <a href="https://registry.hub.docker.com/search?q=alpine">people love it</a>:</p>
+
+<p>```
+~ (master ✔) ᐅ time docker run alpine apk &mdash;update add python
+Unable to find image &lsquo;alpine:latest&rsquo; locally
+latest: Pulling from alpine</p>
+
+<p>31f630c65071: Already exists
+alpine:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.</p>
+
+<p>Digest: sha256:c471fce1d08618adf4c6c0d72c047b9f3d5ef82cae0ca9a157ce1c800d42722f
+Status: Downloaded newer image for alpine:latest
+fetch <a href="http://dl-4.alpinelinux.org/alpine/v3.2/main/x86_64/APKINDEX.tar.gz">http://dl-4.alpinelinux.org/alpine/v3.2/main/x86_64/APKINDEX.tar.gz</a>
+(1/9) Installing libbz2 (1.0.6-r3)
+(2/9) Installing expat (2.1.0-r1)
+(3/9) Installing libffi (3.2.1-r0)
+(4/9) Installing gdbm (1.11-r0)
+(5/9) Installing ncurses-terminfo-base (5.9-r3)
+(6/9) Installing ncurses-libs (5.9-r3)
+(7/9) Installing readline (6.3.008-r0)
+(8/9) Installing sqlite-libs (3.8.10.2-r0)
+(9/9) Installing python (2.7.9-r4)
+Executing busybox-1.23.2-r0.trigger
+OK: 45 MiB in 24 packages
+docker run alpine apk &mdash;update add python  0.02s user 0.01s system 0% cpu 1:44.34 total
+```</p>
+
+<p>There you go: a super-shrunk python environment in less than 2 minutes, without
+&ldquo;dirtying&rdquo; your own hardware.</p>
+
+<h2>Your node app with Alpine</h2>
+
+<p>Once I discovered alpine I started wondering if I could run
+some of my node apps on it &mdash; which led me to this simple
+<a href="https://github.com/odino/docker-node-alpine/blob/master/Dockerfile">Dockerfile</a>:</p>
+
+<p>```
+FROM alpine</p>
+
+<p>RUN apk add &mdash;update nodejs
+```</p>
+
+<p>Nothing more, nothing less; at this point, let me create a <a href="https://gist.github.com/odino/4f4dfdbd830e8ac3e2f0">simple server</a>
+and run it through this image:</p>
+
+<p><code>
+~/projects/gists/4f4dfdbd830e8ac3e2f0 (master ✔) ᐅ docker run -ti -v $(pwd):/src -p  8888:8888 odino/docker-node-alpine node /src/simple-server.js
+Hello...
+Hello...
+Hello...
+</code></p>
+
+<p>And what about the size of our image?</p>
+
+<p><code>
+~/projects/gists/4f4dfdbd830e8ac3e2f0 (master ✔) ᐅ docker images | grep "node-alpine"
+odino/docker-node-alpine   latest              e75f895e7cf6        6 days ago          22.51 MB
+</code></p>
+
+<p>Quite sweet, less than 25mb!</p>
+
+<p>(you can also use <a href="https://imagelayers.io/">imagelayers</a> to compare
+it to <a href="https://imagelayers.io/?images=node:latest,iojs:latest,odise%2Fbusybox-node:latest,smebberson%2Falpine-nodejs:latest,odino%2Fdocker-node-alpine:latest">other public Docker images</a><sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup>)</p>
+
+<h2>Conclusion</h2>
+
+<p>The easiest solution is always the simplest one: start from a very small
+base image, add as you need:</p>
+
+<ul>
+<li>use Alpine when you can simply rely on a package manager</li>
+<li>use a full-blown image, for example, when you need to compile stuff or to use the uber-latest version of some library</li>
+<li>use busybox if you&rsquo;re the <a href="https://xkcd.com/378/">emacs guy</a></li>
+</ul>
+
+
+<p>Personally, I think I will be experimenting a lot with Alpine in the
+upcoming weeks: since we, at <a href="https://www.namshi.com">Namshi</a>, rely on
+containers in all our apps<sup id='fnref:5'><a href='#fn:5' rel='footnote'>5</a></sup> it&rsquo;d be quite intriguing to
+test alpine in development and production environments.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Sure, Docker caches and re-uses layer, but the first time is always painful! <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>A Samsung Galaxy S3, so quite lame of a phone as well&hellip; :) <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>busybox is actually one binary that implements the usual unix commands like cat, etc etc <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>I am quite sure someone has a smaller, more complete NodeJS image on the hub, just search for it <a href='#fnref:4' rev='footnote'>↩</a></li><li id='fn:5'>Or, say, 90%  of them: there is still some legacy stuff&hellip; :) <a href='#fnref:5' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

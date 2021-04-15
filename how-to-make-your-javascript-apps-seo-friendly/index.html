@@ -1,0 +1,281 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>How to make your JavaScript apps SEO-friendly</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/how-to-make-your-javascript-apps-seo-friendly/" />
+		<meta property="og:title" content="How to make your JavaScript apps SEO-friendly" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/how-to-make-your-javascript-apps-seo-friendly/">How to make your JavaScript apps SEO-friendly</a></h1>
+        <time>17 January 2014</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 7 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>One of the challenges in moving your application logic
+from the backend (Rails, Django or whatsoever) to the
+new frontier of JS web frameworks like AngularJS and
+EmberJS is how you can make them SEO-friendly, as these
+JavaScript applications get sent to the browser by your
+webserver as a <code>200 OK</code>, no matter if, once the app boots,
+the page that its being represented is not found, or has
+some specific metatags, like title and description.</p>
+
+<!-- more -->
+
+
+<p>This is, for example, how a tipical angular app&rsquo;s <code>HEAD</code>
+section of the HTML looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>
+</span><span class='line'>      {{ pageTitle }}
+</span><span class='line'>    <span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;keywords&quot;</span> <span class="na">content=</span><span class="s">&quot;{{ metaKeywords }}&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span> <span class="na">content=</span><span class="s">&quot;{{ metaDescription }}&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">type=</span><span class="s">&quot;image/x-icon&quot;</span> <span class="na">data-ng-href=</span><span class="s">&quot;https://example.org/favicon.ico&quot;</span> <span class="na">rel=</span><span class="s">&quot;shortcut icon&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;https://example.org/screen.css&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>As you see, the page title, which is what SE like Google use
+as main text in your indexed pages, is a mere placeholder for
+a variable that come after the JS framework has booted and
+executed its own logic, eventually leading to SERP results
+like this:</p>
+
+<p><img class="center" src="/images/google-result-placeholders.png"></p>
+
+<p>So, how will you make sure that search engines will actually
+see the post-processed HTML and not the very first one that
+gets sent from your server?</p>
+
+<p>You have at least a couple different solutions that use the
+same underlying tecnique.</p>
+
+<h2>Once feared, Cloaking is your only way</h2>
+
+<p>The practice of <a href="http://en.wikipedia.org/wiki/Cloaking">cloaking</a>
+has been penalized by search engines for years but turned out to
+be <a href="https://developers.google.com/webmasters/ajax-crawling/docs/html-snapshot">endorsed by Google</a>
+when you have JS-based apps.</p>
+
+<p>It basically consist in serving to the search engine a different
+version of the webpage, already rendered, instead of the one
+that you would serve to a normal visitor, which has to run
+the JS framework on the browser.</p>
+
+<p>The workflow is very simple: instead of serving, from the webserver,
+your traditional app that you would serve to a normal user, in case
+of a bot you simply <strong>forward the request to another application</strong>,
+which will request the original page, wait for it to render through
+an headless browser like <a href="http://phantomjs.org/">PhantomJS</a> and then
+<strong>serve back the fully rendered content</strong> to the bot:</p>
+
+<p><img class="center" src="/images/prerender-seo.svg"></p>
+
+<p>This is a very straightforward way to effectively implement SEO in
+JS apps, and it can be achieved with a couple tools instead of
+having to write the whole thing on your own.</p>
+
+<h2>BromBone</h2>
+
+<p><a href="http://www.brombone.com/">BromBone</a> is a service that crawls your
+sitemap, generates a snapshot of the rendered HTML, stores it on
+Amazon (presumably <a href="http://aws.amazon.com/s3/">S3</a>) and relieves you
+from the pain of setting up the middleware SEO app on your own.</p>
+
+<p>It basically acts as the SEO app seen in the picture, but instead of
+rendering pages on the fly it does it by looking at your sitemap: once
+the bot hits the webserver, you can then proxy it to the BromBone page
+so that it gets the actual response from the server.</p>
+
+<p>Even though the service is <a href="http://www.brombone.com/#pricing">very affordable</a>
+relying on the sitemap it&rsquo;s a bit tricky, because, well&hellip;what happens
+if you have new pages that are not included in the sitemap?</p>
+
+<p>After bumping into this requirement we, at Namshi, decided to opt for
+something else.</p>
+
+<h2>Prerender</h2>
+
+<p><a href="https://prerender.io/">Prerender</a> is both a SaaS and an
+<a href="https://github.com/collectiveip/prerender">open source library</a>
+that prerendrs pages on the fly using PhantomJS and some other
+nice tricks to <a href="https://prerender.io/server#http-headers">serve the correct status codes and HTTP headers</a>.</p>
+
+<p>The only disadvantage with rendering on the fly is that the bot will
+have to wait a bit longer in order to get the response, and this might
+result in a penalization from search engines: the solution is very simple,
+as you can simply warm up prerender&rsquo;s cache on your own by hitting the URLs
+that you want to cache.
+In order to refresh the cache, Prerender lets you do <code>POST</code> requests, so
+that:</p>
+
+<ul>
+<li>a <code>GET</code> request to <code>http://prerender.example.org/http://example.org/foo.html</code>
+will prerender the page on the fly, so that you can cache for future requests
+by real bots</li>
+<li>a <code>POST</code> request to <code>http://prerender.example.org/http://example.org/foo.html</code>
+will refresh the prerendered content</li>
+</ul>
+
+
+<p>Prerender gives you a bit more freedom compared to Brombone but it requires you
+to do some manual work, at least if you want to run it on your own servers
+without using their solution as a SaaS; in any case, their pricing modes
+is <a href="https://prerender.io/pricing">very affordable</a> as well.</p>
+
+<h2>What shall I use?</h2>
+
+<p><span class='pullquote-right' data-pullquote='making SEO-friendly JavaScript apps is not a hassle anymore'>
+It really depends, as both are very interesting tools: given our confidence
+with NodeJS and the will of developing some of the SEO-related stuff in-house,
+so that we have a bit more control over these things, we opted to give
+Prerender a go, but if you feel the sitemap solution proposed by BromBone
+is good enough for you, I&rsquo;d recommend you that service, as it&rsquo;s easier to
+run and requires very less configuration / manual work.</p>
+
+<p>All in all, the good thing is that, in 2014, we can finally say that
+making SEO-friendly JavaScript apps is not a hassle anymore!
+</span></p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/how-to-make-your-javascript-apps-seo-friendly/"
+		},
+		"headline": "How to make your JavaScript apps SEO-friendly",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2014-01-17 14:15:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

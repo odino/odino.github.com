@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Tech | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/tech/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[5 Technologies You Should Keep an Eye on in 2015]]></title>
+    <link href="https://odino.org/5-technologies-you-should-keep-an-eye-on-in-2015/"/>
+    <updated>2015-02-27T15:55:00+00:00</updated>
+    <id>https://odino.org/5-technologies-you-should-keep-an-eye-on-in-2015</id>
+    <content type="html"><![CDATA[<p>It&rsquo;s been a very short while since we landed
+in 2015, but the technology scene is already
+taking shape: here I&rsquo;d like to point at some
+of the technologies that you should definitely
+keep an eye on this year.</p>
+
+<!-- more -->
+
+
+<h2>React native</h2>
+
+<p>Right out of <a href="http://jlongster.com/First-Impressions-using-React-Native">an article</a> describing the experience
+using react native:</p>
+
+<p><blockquote><p>It only takes a few minutes playing with React Native to realize the potential it has. This works.</p></p><p><p>It feels like I&rsquo;m developing for the web. But I&rsquo;m writing a real native app, and you seriously can&rsquo;t tell the difference.</p></p><p><p>At the UI level, there is no difference; these are all native UIViews beautifully sliding around like normal.</p></p><p><p>This is solid engineering. And it completely reinforces the fact that React.js is the right way to build apps.<br/>I can write a native app using the same techniques as I would write web app.</p></p><p><p>Let&rsquo;s start treating the DOM as an implementation detail, just like UIViews.</p></blockquote></p>
+
+<p>For those of you who have missed the news, Facebook
+is planning to completely <a href="https://www.youtube.com/watch?v=KVZ-P-ZI6W4">open source it&rsquo;s react native</a>
+framework which is a layer to build native apps (on ios only, for now)
+with good old DOM and a layer of JavaScript.</p>
+
+<p>Not that similar tools do not exist as of now (among them
+<a href="http://ionicframework.com/">ionic</a> seems to be very popular,
+as it&rsquo;s built over <a href="http://cordova.apache.org/">cordova</a> and angular)
+but the real deal is that it seems that react native
+<strong>feels really native</strong>: the limitation of hybrid solutions
+has always been the fact that the UI turns quite sluggish
+and doesn&rsquo;t feel very smooth, which is why react native
+is kind of uber-exciting.</p>
+
+<h2>Docker&rsquo;s ecosystem</h2>
+
+<p><img class="right" src="/images/docker.png"></p>
+
+<p>During the DockerCon in Amsterdam, at the end of last year,
+the docker guys announced that <a href="https://blog.docker.com/2014/12/announcing-docker-machine-swarm-and-compose-for-orchestrating-distributed-apps/">a bunch of new tools</a> were
+coming along to support <a href="https://blog.docker.com/2015/02/orchestrating-docker-with-machine-swarm-and-compose/">better orchestration</a>.</p>
+
+<p>In these days those tools have seen their first
+decent beta and stable releases:</p>
+
+<ul>
+<li><a href="https://blog.docker.com/2015/02/scaling-docker-with-swarm/">swarm</a>, a tool for clustering / scaling containers</li>
+<li><a href="https://blog.docker.com/2015/02/announcing-docker-compose/">compose</a>, a way to orchestrate those clusters</li>
+<li><a href="https://blog.docker.com/2015/02/announcing-docker-machine-beta/">machine</a>, the easiest way to get started with your first container</li>
+</ul>
+
+
+<p>As someone stated durint the european docker event:</p>
+
+<blockquote><p>Docker was on no one&rsquo;s agenda in 2014, it&rsquo;s on everyone&rsquo;s agenda in 2015</p></blockquote>
+
+<p>Can&rsquo;t use better words than those to describe how docker
+is changing the way we want apps to be running.</p>
+
+<p>Now, with the advent of these new tools that should provide
+a better experience in terms of getting started / orchestration
+things are just going to be more interesting.</p>
+
+<h2>JavaScript</h2>
+
+<p>For better or for worse, JavaScript has taken the programming
+ecosystem by storm over the past 5 years: it used to be just a
+tool to make nicer interfaces whereas now hordes of programmers
+are writing business logic with it<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>,
+thanks to NodeJS and modern client-side frameworks like
+AngularJS or Ember.</p>
+
+<p>Truth is, JavaScript opens the door for <a href="http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/">isomorphic apps</a>
+which is something developers are quite keen on (the ability
+of running the &ldquo;same&rdquo; app / code both on the browser and the
+server): the idea sounds quite crazy but it might become
+more than a <em>weirdo</em> as we get more robust and solid solutions
+to implement isomorphism.</p>
+
+<p><img class="center" src="/images/isomorphic-trend.png"></p>
+
+<p>In other words, <strong>JavaScript ain&rsquo;t done yet</strong>.</p>
+
+<h2>Microservices</h2>
+
+<p>Microservices, an <a href="/on-monoliths-service-oriented-architectures-and-microservices/">implementation of SOA</a>,
+are gaining a lot of attention simply because
+the tooling around them has become much more
+powerful in recent years: you can provision
+hardware in minutes thanks to platforms like AWS
+and deploy images of your application <a href="https://www.digitalocean.com/features/one-click-apps/docker/">in seconds</a>
+thanks to Docker.</p>
+
+<p>There&rsquo;s a lot to <a href="http://tech.namshi.com/blog/2015/02/27/reflecting-on-microservices/">figure out when using microservices</a>,
+and everyone quite agrees on the fact that to roll
+this kind of architectures out your entire infrastructure
+needs to be very mature and robust, but at the same time
+a lot more organizations seem keen on giving them a shot,
+as they provide great flexibility when compared to good
+old monoliths.</p>
+
+<p>I recently watched <a href="https://www.youtube.com/watch?v=wgdBVIX9ifA&amp;index=2&amp;list=PLEx5khR4g7PIIBNcNhHOMmOhzxcwI5joG">Martin Fowler&rsquo;s take on microservices</a>
+and read the <a href="http://nginx.com/blog/microservices-at-netflix-architectural-best-practices/">best practices Netflix uses</a> in this kind
+of architecture. I strongly recommend keeping an eye on the
+topic as there will be more to come this year.</p>
+
+<h2>Golang</h2>
+
+<p><img class="right" src="/images/golang.png"></p>
+
+<p>Now, seriously, I have lost the count of how many
+technologies are being built with <a href="http://golang.org/">Golang</a>
+these days!</p>
+
+<p>You want me to mention a few of them?</p>
+
+<ul>
+<li>docker</li>
+<li><a href="https://github.com/hashicorp/terraform">terraform</a></li>
+<li><a href="https://github.com/tsenart/vegeta">vegeta</a></li>
+<li><a href="https://github.com/rancherio/os">rancher/os</a></li>
+<li><a href="https://github.com/joewalnes/websocketd">websocketd</a></li>
+<li><a href="https://github.com/GoogleCloudPlatform/kubernetes">kubernetes</a></li>
+<li><a href="https://github.com/hashicorp/consul">consul</a></li>
+</ul>
+
+
+<p>The list can go on for a while&hellip;</p>
+
+<p>What is clear is that it seems like we are witnesses
+of a shift into 2 programming emispheres: on one side,
+web development is being taken by storm by JavaScript;
+on the other end, it looks like <strong>Golang is ruling the
+DevOps side of things</strong>.</p>
+
+<p>I am exploring Go these days mostly because I&rsquo;m seeing a
+lot of people going crazy for it, and I can understand where
+they come from: sometimes you need strong typing and the
+feeling that distributing your packages will be a painless
+experience, plus the performances are great and the built-in
+stuff in the <a href="http://golang.org/pkg/">standard library</a> is
+quite awesome. I&rsquo;m not a big fan of some things of the language
+(ie. not a big supporter of how error handling works<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>)
+but, hey, who&rsquo;s perfect?</p>
+
+<p>So, yeah, I like Go for some of the things it can do and I like
+other tools for doing other stuff, which is, I think, the
+essence of technology: <strong>pick the right tool for the right
+job</strong>.</p>
+
+<p>Nowadays DevOps is leaning towards Golang and that is why,
+I believe, we will see an even bigger shift in 2015.</p>
+
+<p>The next Varnish? Probably written in Go.</p>
+
+<h2>To wrap up</h2>
+
+<p>This list gets a clear bias because of the fact that
+I mostly work with the web, thus most of the tools
+are either web-related or come from a web-ish background,
+this is why you won&rsquo;t read about wearables or those
+kind of things here.</p>
+
+<p>I think these 5 technologies are something that we should
+be closely monitoring in 2015 as they indicate which path
+big players, industry leaders and the open source community
+are taking.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>How crazy, right? <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Which I hate in JS as well :) <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

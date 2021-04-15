@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Open Source | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/open-source/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Local K8s Development in 2020]]></title>
+    <link href="https://odino.org/local-k8s-development-in-2020/"/>
+    <updated>2019-12-31T15:45:00+00:00</updated>
+    <id>https://odino.org/local-k8s-development-in-2020</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/kubernetes-logo.png"></p>
+
+<p>This decade&rsquo;s about to wrap up, so I decided to spend some time
+describing my development workflow as the year nears its end.</p>
+
+<p>What I find interesting in my setup is that it entertains
+working on a local k8s cluster &mdash; mainly to keep in touch
+with the systems that run in production.</p>
+
+<p>Running k8s locally isn&rsquo;t what
+you&rsquo;d want to do to begin with, but rather a natural path
+once you start wanting to replicate the environment that runs
+your live applications. Again, you don&rsquo;t need a local k8s
+cluster just &lsquo;cause, so make sure you have a good reason
+before going through the rest of this article.</p>
+
+<!-- more -->
+
+
+<h2>Cluster setup</h2>
+
+<p>Once a monstrous task, setting up a local k8s cluster is
+now as simple as installing a package on your system:
+Docker for Win/Mac allow you to run this very easily, and
+Canonical has made it possible on Linux through <a href="https://microk8s.io/">microk8s</a>
+(that&rsquo;s my boy!).</p>
+
+<p>One of the funny things about running on microk8s
+(or snaps, in general) is how it will automagically
+upgrade under your nose &mdash; sometimes with breaking changes.
+There was a recent change that <a href="https://github.com/ubuntu/microk8s/issues/382">swapped docker for containerd
+as microk8s' default container runtime</a>, and it broke some
+local workflows (more on that later, as it&rsquo;s easy to fix).
+In general, you can always force a snap to use a particular
+revision, so if anything&rsquo;s funky just downgrade and let others
+figure it out :)</p>
+
+<p>I&rsquo;d be keen to try <a href="https://k3s.io/">k3s</a> out, as it seem to provide an even more
+lightweight way to run the local cluster. Built mainly for
+IoT and edge computing, k3s is interesting as running
+microk8s is sometime resource-intesive &mdash; once I&rsquo;m done
+working on code, I usually prefer to <code>sudo snap disable microk8s</code>
+in order to preserve RAM, CPU and battery life (<a href="https://github.com/odino/dev/commit/20749dd50c590ec376b7eed2db558615f1ef6fda">proof here</a>).</p>
+
+<p>In the past, I&rsquo;ve also tried to work on a remote k8s cluster
+in the GKE from my local machine, but that proved to be too
+much of a hassle &mdash; the beauty of <code>kubectl</code> is that you don&rsquo;t
+really care where the cluster is running, but your IDE and
+other tools work best when everything is present and running
+locally.</p>
+
+<h2>Development tool</h2>
+
+<p>This has been fairly stable until late this year, when I
+decided to switch things around.</p>
+
+<p>I&rsquo;ve historically used helm and a bunch of shell magic
+to run apps locally: you would clone a repo and expect
+an <code>helm/</code> folder to be available, with the chart being
+able to install a whole bunch of k8s resources on your
+cluster. Then, a bash script run simply apply the chart
+with a bunch of pre-configured values: you would run <code>dev up</code>
+and what the script would do would simply be something
+along the lines of:</p>
+
+<p><code>
+docker build -t $CURRENT_FOLDER .
+helm install --name $CURRENT_FOLDER ./helm/ --set mountPath=/home/alex/path/to/$CURRENT_FOLDER --set image=$CURRENT_FOLDER
+kubectl logs -f deploy/$CURRENT_FOLDER --tail=100
+</code></p>
+
+<p>Nothing too crazy&hellip;but with a few downsides:</p>
+
+<ul>
+<li>I started off with Helm 2, and v3 brought in a few changes I didn&rsquo;t want to go through</li>
+<li>helm is perfect if I want to package a generic app made up of multiple resources (service, ingress, etc) and release it to the outside world. Locally, I probably don&rsquo;t need all of that verbosity (<code>chart.yaml</code> and so on)</li>
+<li>most of the templating I did on development was <code>{{ .Release.name }}</code>. What&rsquo;s the point then?</li>
+</ul>
+
+
+<p>Towards the end of this year I went back to the drawing board
+and started to think what if there was anything else I could
+use that was simple enough and gave me enough flexibility.
+I knew I could use simple k8s manifests but it wasn&rsquo;t clear
+to me how I could integrate it into my workflow in a way
+that made it simpler than using a chart &mdash; and that&rsquo;s when I
+gave <a href="https://skaffold.dev/">skaffold</a> another chance.</p>
+
+<p>Skaffold is an interesting tool, promoted by Google, that
+supposedly handles local k8s development &mdash; and I say &ldquo;supposedly&rdquo;
+because I&rsquo;ve tried it in the past and have been extremely
+underwhelmed by its workflow.</p>
+
+<p>Let me explain: whenever a chance is detected in your codebase, skaffold
+wants to redeploy your manifests but, rather than simply
+working on an application-reload logic, is instead happy
+to:</p>
+
+<ul>
+<li>re-build your local image</li>
+<li>push it to a registry</li>
+<li>update the k8s deployment so a brand new pod comes up</li>
+</ul>
+
+
+<p>If you&rsquo;ve made it so far you probably realized that
+the whole operation doesn&rsquo;t either come cheap nor fast
+&mdash; you could be waiting several seconds for your changes
+to take effect&hellip;</p>
+
+<p>That was, until skaffold introduced <a href="https://skaffold.dev/docs/pipeline-stages/filesync/">file sync</a>
+to avoid the need to rebuild, redeploy and restart pods.
+This feature is currently in beta, but it&rsquo;s already working
+well enough that I&rsquo;ve decided to give it a shot, with very
+positive results.</p>
+
+<p>Now, rather than having an entire chart to mantain locally,
+my development setup has a simple <code>skaffold.yaml</code> that
+looks like:</p>
+
+<p>```yml
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  &ndash; image: my_app</p>
+
+<pre><code>context: .
+sync:
+  manual:
+    - src: "**"
+      dest: "/src"
+</code></pre>
+
+<p>deploy:
+  kubectl:</p>
+
+<pre><code>manifests:
+  - skaffold/*.yaml
+</code></pre>
+
+<p>```</p>
+
+<p>and I reduced the manifests to a simple k8s manifest
+containing multiple resources, separated by <code>---</code>:</p>
+
+<p>```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my_app
+  labels:</p>
+
+<pre><code>app: my_app
+</code></pre>
+
+<p>spec:
+  replicas: 1
+  selector:</p>
+
+<pre><code>matchLabels:
+  app: my_app
+</code></pre>
+
+<p>  template:</p>
+
+<pre><code>metadata:
+  name: my_app
+  labels:
+    app: my_app
+spec:
+  restartPolicy: Always
+  containers:
+  - image: my_app
+    name: my_app
+    imagePullPolicy: IfNotPresent
+    tty: true
+    stdin: true
+    env:
+    - name: ENV
+      value: dev
+  terminationGracePeriodSeconds: 1
+</code></pre>
+
+<hr />
+
+<p>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my_app
+  annotations:</p>
+
+<pre><code>kubernetes.io/ingress.class: nginx
+</code></pre>
+
+<p>spec:
+  tls:</p>
+
+<pre><code>- hosts:
+    - my-app.dev
+</code></pre>
+
+<p>  rules:
+  &ndash; host: my-app.dev</p>
+
+<pre><code>http:
+  paths:
+  - path: /
+    backend:
+      serviceName: my_app
+      servicePort: http
+</code></pre>
+
+<ul>
+<li>host: my-app.dev
+<a href="http:">http:</a>
+  paths:
+
+<ul>
+<li>path: /
+backend:
+  serviceName: my_app
+  servicePort: http</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>apiVersion: v1
+kind: Service
+metadata:
+  name: my_app
+spec:
+  ports:
+  &ndash; name: http</p>
+
+<pre><code>port: 80
+protocol: TCP
+targetPort: 8080
+</code></pre>
+
+<p>  selector:</p>
+
+<pre><code>app: my_app
+</code></pre>
+
+<p>```</p>
+
+<p>That&rsquo;s about it. Now my <code>dev up</code> is mapped to a simple
+<code>skaffold dev</code>, and skaffold takes care of re-building
+the image when needed, syncing changes locally and so on.
+One of the advantages of using this tool is that it automatically
+detects changes to the manifests and the Dockerfile, so
+it re-builds the image without you having to trigger the
+process manually (which wasn&rsquo;t possible with Helm alone).</p>
+
+<p>Another interesting benefit of using skaffold is the support
+for base registries as well as build stages. The former
+allows you to run a registry at any given URL, and tell
+skaffold to prepend that URL to any image that&rsquo;s being pushed
+to the k8s cluster.</p>
+
+<p>As I mentioned, I use microk8s, which doesn&rsquo;t play very well
+with <a href="https://microk8s.io/docs/registry-images">locally-built images</a>,
+so I simply run the built-in registry on port <code>32000</code>. Others
+in my team simply run Docker for Mac which doesn&rsquo;t need a registry
+as any image built locally is automatically available to k8s.</p>
+
+<p>This would mean that I would have to update the <code>image</code> field
+of my deployments, manually, to <code>localhost:32000/my_app</code>, a
+tedious and annoying operation (and I&rsquo;d also have to make sure
+those changes aren&rsquo;t pushed to git). Skaffold frees you from the
+drama with a simple <code>skaffold config set default-repo localhost:32000</code>,
+a trick that will tell skaffold to parse all the manifests it deploys
+and replace the <code>image</code> fields, prepending the URL of your own registry.
+The feature is documented extensively <a href="https://skaffold.dev/docs/environment/image-registries/">here</a>,
+and it&rsquo;s a life saver!</p>
+
+<p>The support for build stages is another great trick up in
+skaffold&rsquo;s sleeve, as it allows to use the power of Docker&rsquo;s
+multi-stage builds in your development environment.</p>
+
+<p>If you have a Dockerfile that looks like:</p>
+
+<p>```
+FROM golang:1.13 as dev</p>
+
+<p>RUN go get -v github.com/codegangsta/gin
+WORKDIR /src
+COPY go.mod /src
+COPY go.sum /src
+RUN go mod download
+COPY . /src</p>
+
+<p>RUN go build -o my_go_binary main.go
+CMD gin run main.go</p>
+
+<p>FROM gcr.io/distroless/base as prod
+COPY &mdash;from=dev /src /
+CMD [&ldquo;/my_go_binary&rdquo;]
+```</p>
+
+<p>You can tell skaffold that, locally, it should simply stop at the
+<code>dev</code> stage:</p>
+
+<p>```yml
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  &ndash; image: my_go_app</p>
+
+<pre><code>docker:
+  target: dev
+context: .
+sync:
+  manual:
+    - src: "**"
+      dest: "/src"
+</code></pre>
+
+<p>deploy:
+  kubectl:</p>
+
+<pre><code>manifests:
+  - skaffold/*.yaml
+</code></pre>
+
+<p>```</p>
+
+<p>As you see, the <code>target</code> field does the trick.</p>
+
+<p>Believe me, skaffold has made my life so much easier and it&rsquo;s a tool
+I would gladly recommend. Before introducing file syncing I didn&rsquo;t
+want to get my hads dirty with it, as I did not find the development
+workflow sustainable (re-build and re-deploy at every file change),
+but right now it works much better than anything I could have come
+up with on my own.</p>
+
+<h2>Hands on the code</h2>
+
+<p>Last but not least, we went over running a cluster as well as our
+application &mdash; but how do we actually debug our code or run tests?</p>
+
+<p>Ideally, we&rsquo;d like a script that would be able to:</p>
+
+<ul>
+<li>build and run your app (<code>up</code>)</li>
+<li>execute commands inside the container (<code>exec</code>)</li>
+<li>jump inside the container (<code>in</code>)</li>
+<li>execute tests (<code>test</code>)</li>
+</ul>
+
+
+<p>Wouldn&rsquo;t it be nice to simply open a shell and run your tests with <code>dev test</code>?</p>
+
+<p>Turns out, creating a simple wrapper over our wokflow is very
+straightforward, and here&rsquo;s a sample of the code one could write:</p>
+
+<p>```bash</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>dev $command</h1>
+
+<p>arg=$1
+command=&ldquo;cmd_$1&rdquo;</p>
+
+<h1>Boot the app through skaffold.</h1>
+
+<p>cmd_up(){</p>
+
+<pre><code>skaffold dev
+</code></pre>
+
+<p>}</p>
+
+<h1>Deletes the app</h1>
+
+<p>cmd_delete(){</p>
+
+<pre><code>skaffold delete
+</code></pre>
+
+<p>}</p>
+
+<h1>This will drop you inside the container.</h1>
+
+<h1>We use bash, if available, else &ldquo;sh&rdquo;</h1>
+
+<p>cmd_in(){</p>
+
+<pre><code>app=$(get_app_name)
+kubectl exec -ti deploy/$app -- sh -c "command -v bash &amp;&amp; bash || sh"
+</code></pre>
+
+<p>}</p>
+
+<h1>Read the app name based on the image we</h1>
+
+<h1>build inside the skaffold.yaml</h1>
+
+<p>get_app_name(){
+  echo $(yq read skaffold.yaml build.artifacts.0.image)
+}</p>
+
+<h1>Main function: if a command has been passed,</h1>
+
+<h1>check if it&rsquo;s available, and execute it. If</h1>
+
+<h1>the command is not available, we print the</h1>
+
+<h1>default help.</h1>
+
+<p>main(){</p>
+
+<pre><code>declare -f $command &gt; /dev/null
+
+if [ $? -eq 0 ]
+then
+    $command $@
+else
+    printf "'$arg' is not a recognized command.\n\n"
+    exit 1
+fi
+</code></pre>
+
+<p>}</p>
+
+<p>shift
+main $@
+```</p>
+
+<p>All this script does is to read the command passed to it
+and run it as a bash function. As you see, <code>up</code> is mapped
+to <code>skaffold dev</code>, and <code>in</code> is mapped to <code>kubectl exec ... -- bash</code>
+(so that you can jump into the container and run whatever
+command you&rsquo;d like).</p>
+
+<p>The actual <code>dev</code> I run locally is on github, under <a href="https://github.com/odino/k8s-dev">odino/k8s-dev</a>,
+and I believe I should credit <a href="https://www.linkedin.com/in/hzarka/">Hisham</a> for the original idea
+&mdash; this is a script we&rsquo;ve been using (and polishing) since ages.</p>
+
+<p>If you&rsquo;re wondering how does it look on the
+terminal, here&rsquo;s an asciicast where tests
+are run succesfully (<code>dev test</code>), we update
+the code to make the tests fail and then
+we jump into the container (<code>dev in</code>), before
+cleaning up (<code>dev delete</code>):</p>
+
+<script id="asciicast-07QLv6MRWkgurAu7uHxYfA421" src="https://asciinema.org/a/07QLv6MRWkgurAu7uHxYfA421.js" async></script>
+
+
+<h2>That&rsquo;s a wrap</h2>
+
+<p>Oh boy, right on time to close 2019 with a splash!</p>
+
+<p>Developing on a local k8s cluster isn&rsquo;t super straightforward,
+and I hope that by sharing my toolbox it should be easier for
+you to set your environment up for a productive day.</p>
+
+<p>Happy new decade!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.7.0: Ctrl+r and Other Optimizations]]></title>
+    <link href="https://odino.org/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations/"/>
+    <updated>2019-08-30T19:15:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations</id>
+    <content type="html"><![CDATA[<p>A few days ago I released a new minor version of the ABS
+programming language, <a href="https://github.com/abs-lang/abs/releases/tag/1.7.0">1.7.0</a>,
+which adds some syntactic sugar as well as improvments to
+the REPL &mdash; let&rsquo;s get to them!</p>
+
+<p><img class="center" src="/images/abs-1.7.png"></p>
+
+<!-- more -->
+
+
+<h2>Reverse search in the REPL through ctrl+r</h2>
+
+<p>You can type something in the REPL and, by pressing
+<code>ctrl+r</code>, ABS will try to find the last command that
+was executed that matches what you typed.</p>
+
+<p>See it in action:</p>
+
+<p><a href="https://asciinema.org/a/0yT7ZRCeIwGAYNRg5hmoykyoe"><img src="https://asciinema.org/a/0yT7ZRCeIwGAYNRg5hmoykyoe.svg" alt="asciicast" /></a></p>
+
+<p>If you press <code>ctrl+r</code> multiple times, the REPL will
+walk its way back into the history to find the previous
+command matching your input, until it reaches the end
+of the history.</p>
+
+<p>This feature has been implemented thanks to some improvements
+in <a href="https://github.com/c-bata/go-prompt">go-prompt</a>, so hats off to
+<a href="https://github.com/c-bata">Masashi Shibata</a> for helping out!</p>
+
+<h2>Number abbreviations</h2>
+
+<p>Easily my favorite, this feature allows you to append a suffix to a
+number in order to specify the &ldquo;order of magnitude&rdquo; of the number itself.
+Confused? It&rsquo;s actually quite simple:</p>
+
+<p><code>bash
+1k # 1000 - thousand
+1m # 1000000 - million
+1b # 1000000000 - billion
+1t # 1000000000000 - trillion
+</code></p>
+
+<p>Suffixes are case-insensitive, so you can express <code>1000000</code>
+with either <code>1m</code> or <code>1M</code>.</p>
+
+<h2>Improvements to some builtin functions</h2>
+
+<p>We&rsquo;ve decided to ease using some of the standard functions:
+you can now, for example, print a message before exiting
+a script directly through the <code>exit</code> function.</p>
+
+<p>Your code would have previously looked like:</p>
+
+<p>``` go
+if err {</p>
+
+<pre><code>echo("an error occurred, goodbye!")
+exit(1)
+</code></pre>
+
+<p>}
+```</p>
+
+<p>while now you can simply do:</p>
+
+<p>``` go
+if err {</p>
+
+<pre><code>exit(1, "an error occurred, goodbye!")
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Similarly, we made it easier to use the <code>replace</code> function on
+strings: you can now omit the last argument (number of replacements),
+with its default value being <code>-1</code> (no limit):</p>
+
+<p>``` bash
+&ldquo;aaa&rdquo;.replace(&ldquo;a&rdquo;, &ldquo;b&rdquo;, -1) # &ldquo;bbb&rdquo;</p>
+
+<h1>is now the same as</h1>
+
+<p>&ldquo;aaa&rdquo;.replace(&ldquo;a&rdquo;, &ldquo;b&rdquo;) # &ldquo;bbb&rdquo;
+```</p>
+
+<p>and you can now also specify a list of characters to replace:</p>
+
+<p><code>bash
+"a_0".replace(["a", "_", "0"], "b") # "bbb"
+</code></p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.6.0: The Convenience of Index Ranges and Default Return Values]]></title>
+    <link href="https://odino.org/abs-1-dot-6-0-the-convenience-of-index-ranges-and-default-return-values/"/>
+    <updated>2019-08-18T18:15:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-6-0-the-convenience-of-index-ranges-and-default-return-values</id>
+    <content type="html"><![CDATA[<p>Here we are with a new release of ABS, the elegant programming language
+for all of your scripting needs!</p>
+
+<p><img class="center" src="/images/abs-1.6.png"></p>
+
+<p>Even though small, 1.6 (with <a href="https://github.com/abs-lang/abs/releases/tag/1.6.0">1.6.0</a>
+and <a href="https://github.com/abs-lang/abs/releases/tag/1.6.1">1.6.1</a>) introduces a
+couple interesting features, so let&rsquo;s check them out!</p>
+
+<!-- more -->
+
+
+<h2>Index ranges</h2>
+
+<p>You can now access ranges within strings and arrays by using the
+popular <code>[start:end]</code> syntax: <code>[1,2,3,4][0:2]</code> will return <code>[1,2]</code>.</p>
+
+<p>Start and end can be ommitted &mdash; you could simplify the expression
+above with <code>[1,2,3,4][:2]</code>.</p>
+
+<h2>Default return values</h2>
+
+<p>You can now simply use a <code>return;</code> at the end of a function, and
+it will return the default value <code>null</code>:</p>
+
+<p>``` go
+fn = f() {</p>
+
+<pre><code>return;
+</code></pre>
+
+<p>}</p>
+
+<p>echo(fn())
+```</p>
+
+<h2>Deprecation of $(&hellip;)</h2>
+
+<p>If you&rsquo;ve followed ABS since its initial release, chances are you first
+used system commands through the <code>$(command)</code> syntax: we&rsquo;ve now deprecated
+it and make sure the documentation reflects the fact that <code>`command`</code>
+is the standard, preferred way to run commands.</p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The ABS Playground: Run ABS Code Directly in Your Browser (WHOOOOP!)]]></title>
+    <link href="https://odino.org/the-abs-playground-run-abs-code-directly-in-your-browser-whoooop/"/>
+    <updated>2019-08-17T18:45:00+00:00</updated>
+    <id>https://odino.org/the-abs-playground-run-abs-code-directly-in-your-browser-whoooop</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/wasm.png"></p>
+
+<p>Remember the last time you thought &ldquo;ough, JavaScript&rdquo;?</p>
+
+<p>Well, that&rsquo;s me every other day: I love JS for
+its flexibility and dynamism, but I also sometimes find
+it painful to deal with, especially in some
+specific programming contexts.</p>
+
+<p>If you, like me, hoped to be able to write
+something other than JavaScript in order to get
+stuff done on the web, chances are you bumbed
+into <a href="https://en.wikipedia.org/wiki/WebAssembly">WebAssembly</a> (abbr. WASM),
+and considered it your holy grail. WASM
+is a portable binary format that&rsquo;s been
+<a href="https://caniuse.com/#search=wasm">implemented by all major browsers</a> and
+allows other languages to be compiled for the
+web.</p>
+
+<p>Why is that important? Well, that&rsquo;s the key
+of how I managed to run an ABS playground
+(a code runner) on the browser.</p>
+
+<!-- more -->
+
+
+<h2>The original issue</h2>
+
+<p>One of ABS' main contributors, Ming, <a href="https://github.com/abs-lang/abs/issues/236">smartly
+suggested</a> that it would be interesting to let
+users play around with ABS without having it
+installed on their systems.</p>
+
+<p>My first thought was to replicate the <a href="https://play.golang.org/">Go playground</a>,
+but that would have meant setting up a server-side
+code-runner, and that would have required
+more time (maintenance) and money (server cost)
+that we had on hand.</p>
+
+<p>We abandoned the idea of a code runner for a while,
+until we thought of something creative&hellip;</p>
+
+<h2>WASM to the rescue</h2>
+
+<p><a href="https://github.com/golang/go/wiki/WebAssembly">Go recently added support for WASM</a>
+as one of its compilation targets, meaning you can
+run Go applications on the browser &mdash; you just
+need a simple <code>GOOS=js GOARCH=wasm go build -o script.js script.go</code>
+and you&rsquo;re set with an executable that can run within the
+browser.</p>
+
+<p>I then thought: what if we could compile the ABS interpreter,
+which is purely written in Go, to WASM?</p>
+
+<p>The result is a simple <a href="https://github.com/abs-lang/abs/blob/4112e3ef13b595ef39e55c4be8d5314004037d62/js/js.go">&ldquo;JS&rdquo; distribution of the ABS
+interpreter</a>,
+50 lines of code that bring ABS to the browser!</p>
+
+<p>The downside of compiling Go into WASM is that the
+binaries are a bit heavy (<a href="https://github.com/abs-lang/abs/blob/master/docs/abs.wasm">ABS is 4.3 MB</a>),
+but, considering that this is more of a proof-of-concept
+than a serious attempt to run ABS in the browser, I
+can&rsquo;t really complain.</p>
+
+<p>Armed with a distribution of the ABS interpreter that
+can run within your browser, I then setup a <a href="https://raw.githubusercontent.com/abs-lang/abs/4112e3ef13b595ef39e55c4be8d5314004037d62/docs/playground.md">silly HTML
+page in our docs</a>
+that would load the WASM binary and give you a textboxt
+to play around, which brings me to the big announcement&hellip;</p>
+
+<h2>Welcome to the ABS playground!</h2>
+
+<p>Without further ado, please head over to
+<a href="https://www.abs-lang.org/playground">www.abs-lang.org/playground</a>:</p>
+
+<p><img class="center" src="/images/abs-playground.png"></p>
+
+<p>You can try most of ABS' features directly in
+the web editor: simply write some code, hit
+<code>Ctrl+Enter</code> and see the result pop in front
+of your eyes!</p>
+
+<p>Let me know if you have any feedback!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.5.0: File Writers Have Landed!]]></title>
+    <link href="https://odino.org/abs-1-dot-5-0-file-writers-have-landed/"/>
+    <updated>2019-07-16T19:00:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-5-0-file-writers-have-landed</id>
+    <content type="html"><![CDATA[<p>A few hours ago I released a new minor version of the ABS programming
+language, <a href="https://github.com/abs-lang/abs/releases/tag/1.5.0">1.5.0</a>,
+which includes a couple of interesting features &mdash; let&rsquo;s get to them!</p>
+
+<p><img class="center" src="/images/abs-15-intro.png"></p>
+
+<!-- more -->
+
+
+<h2>File writers</h2>
+
+<p>Probably one of the most exciting things coming out of this release
+are file writers: <code>&gt;</code> and <code>&gt;&gt;</code>.</p>
+
+<p>``` go
+for x in 1..3 {</p>
+
+<pre><code>x &gt;&gt; "file.txt"
+</code></pre>
+
+<p>}</p>
+
+<p><code>cat file.txt</code> // 1\n2\n3</p>
+
+<p>for x in 1..3 {</p>
+
+<pre><code>x &gt; "file.txt"
+</code></pre>
+
+<p>}</p>
+
+<p><code>cat file.txt</code> // 3
+```</p>
+
+<p>These operators work as file writers when both the left and right
+arguments are strings, and proceed to either truncate and write
+(<code>&gt;</code>) or append (<code>&gt;&gt;</code>).</p>
+
+<h2>[].unique()</h2>
+
+<p>Arrays now have a <code>.unique()</code> method, used to filter out
+duplicated elements:</p>
+
+<p><code>go
+[1, 2, 2, 3].unique() // [1, 2, 3]
+</code></p>
+
+<p>An element is considered duplicate if both its type and string
+representation match:</p>
+
+<p><code>go
+[1, "1", 2, 2].unique() // [1, "1", 2]
+</code></p>
+
+<p>For example, different hashes with the same content are
+considered duplicates:</p>
+
+<p><code>go
+a = {"key": "value"}
+b = {"key": "value"}
+[a, b].unique() // [{"key": "value"}]
+</code></p>
+
+<h2>Break and continue in for loops</h2>
+
+<p>We finally implemented <code>break</code> and <code>continue</code>
+within for loops: earlier on you could use <code>return</code>
+to exit a loop but it always felt a tad awkward &mdash;
+with this release this has been fixed.</p>
+
+<p>``` go
+x = 0</p>
+
+<p>for v in 1..10 {</p>
+
+<pre><code>if v &lt; 10 {
+    continue
+}
+
+x += v
+</code></pre>
+
+<p>}</p>
+
+<p>x // 10</p>
+
+<p>for v in 1..10 {</p>
+
+<pre><code>if v &gt; 1 {
+    break
+}
+
+x += v
+</code></pre>
+
+<p>}</p>
+
+<p>x // 11
+```</p>
+
+<h2>for..in stackoverflow</h2>
+
+<p>We also fixed a bug that resulted in a stack overflow when looping
+a high number of times in a <code>for..in</code> loop:</p>
+
+<p><code>bash
+$ for x in 1..10_000_000 { 1 &amp; 2 }
+runtime: goroutine stack exceeds 1000000000-byte limit
+fatal error: stack overflow
+</code></p>
+
+<p>This has been fixed. As a bonus point, <code>for..in</code> loops are
+also significantly faster with this change (especially noticeable
+on larger loops, at around 30% faster):</p>
+
+<p><code>`` bash
+$ cat for-benchmark.abs
+start =</code>echo $(($(date +%s%N)/1000000))<code>
+for x in 1..1_000_000 { 1 &amp; 2 }
+end =</code>echo $(($(date +%s%N)/1000000))`
+echo(end.int() &ndash; start.int())</p>
+
+<p>$ abs1.4 for-benchmark.abs       <br/>
+820
+$ abs1.5 for-benchmark.abs
+546
+```</p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,253 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="ABS 1.7 introduces reverse search in the REPL as well as some syntactic sugar." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>ABS 1.7.0: ctrl+r and other optimizations</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations/" />
+		<meta property="og:title" content="ABS 1.7.0: ctrl+r and other optimizations" />
+		<meta property="og:description" content="ABS 1.7 introduces reverse search in the REPL as well as some syntactic sugar." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations/">ABS 1.7.0: ctrl+r and other optimizations</a></h1>
+        <time>30 August 2019</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 2 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>A few days ago I released a new minor version of the ABS
+programming language, <a href="https://github.com/abs-lang/abs/releases/tag/1.7.0">1.7.0</a>,
+which adds some syntactic sugar as well as improvments to
+the REPL &mdash; let&rsquo;s get to them!</p>
+
+<p><img class="center" src="/images/abs-1.7.png"></p>
+
+<!-- more -->
+
+
+<h2>Reverse search in the REPL through ctrl+r</h2>
+
+<p>You can type something in the REPL and, by pressing
+<code>ctrl+r</code>, ABS will try to find the last command that
+was executed that matches what you typed.</p>
+
+<p>See it in action:</p>
+
+<p><a href="https://asciinema.org/a/0yT7ZRCeIwGAYNRg5hmoykyoe"><img src="https://asciinema.org/a/0yT7ZRCeIwGAYNRg5hmoykyoe.svg" alt="asciicast" /></a></p>
+
+<p>If you press <code>ctrl+r</code> multiple times, the REPL will
+walk its way back into the history to find the previous
+command matching your input, until it reaches the end
+of the history.</p>
+
+<p>This feature has been implemented thanks to some improvements
+in <a href="https://github.com/c-bata/go-prompt">go-prompt</a>, so hats off to
+<a href="https://github.com/c-bata">Masashi Shibata</a> for helping out!</p>
+
+<h2>Number abbreviations</h2>
+
+<p>Easily my favorite, this feature allows you to append a suffix to a
+number in order to specify the &ldquo;order of magnitude&rdquo; of the number itself.
+Confused? It&rsquo;s actually quite simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>1k <span class="c"># 1000 - thousand</span>
+</span><span class='line'>1m <span class="c"># 1000000 - million</span>
+</span><span class='line'>1b <span class="c"># 1000000000 - billion</span>
+</span><span class='line'>1t <span class="c"># 1000000000000 - trillion</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Suffixes are case-insensitive, so you can express <code>1000000</code>
+with either <code>1m</code> or <code>1M</code>.</p>
+
+<h2>Improvements to some builtin functions</h2>
+
+<p>We&rsquo;ve decided to ease using some of the standard functions:
+you can now, for example, print a message before exiting
+a script directly through the <code>exit</code> function.</p>
+
+<p>Your code would have previously looked like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">if</span> <span class="nx">err</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">echo</span><span class="p">(</span><span class="s">&quot;an error occurred, goodbye!&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>while now you can simply do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">if</span> <span class="nx">err</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;an error occurred, goodbye!&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similarly, we made it easier to use the <code>replace</code> function on
+strings: you can now omit the last argument (number of replacements),
+with its default value being <code>-1</code> (no limit):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;aaa&quot;</span>.replace<span class="o">(</span><span class="s2">&quot;a&quot;</span>, <span class="s2">&quot;b&quot;</span>, -1<span class="o">)</span> <span class="c"># &quot;bbb&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># is now the same as</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&quot;aaa&quot;</span>.replace<span class="o">(</span><span class="s2">&quot;a&quot;</span>, <span class="s2">&quot;b&quot;</span><span class="o">)</span> <span class="c"># &quot;bbb&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and you can now also specify a list of characters to replace:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="s2">&quot;a_0&quot;</span>.replace<span class="o">([</span><span class="s2">&quot;a&quot;</span>, <span class="s2">&quot;_&quot;</span>, <span class="s2">&quot;0&quot;</span><span class="o">]</span>, <span class="s2">&quot;b&quot;</span><span class="o">)</span> <span class="c"># &quot;bbb&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt;<span class="o">(</span>curl https://www.abs-lang.org/installer.sh<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations/"
+		},
+		"headline": "ABS 1.7.0: ctrl+r and other optimizations",
+		"description": "ABS 1.7 introduces reverse search in the REPL as well as some syntactic sugar.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2019-08-30 19:15:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Async | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/async/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Concise Async / Await in ExpressJS]]></title>
+    <link href="https://odino.org/async-slash-await-in-expressjs/"/>
+    <updated>2017-10-04T17:36:00+00:00</updated>
+    <id>https://odino.org/async-slash-await-in-expressjs</id>
+    <content type="html"><![CDATA[<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">Async / await</a> is one of the biggest revolutions (<em>read: one of the sweetest
+syntactical sugars</em>) that has come to JavaScript over the past few months,
+and has personally helped me appreciate the language a lot more.</p>
+
+<p>At <a href="http://tech.namshi.io">work</a>, we rely quite a lot on <a href="https://expressjs.com/">ExpressJS</a> to build small services deployed in our
+architecture and, as you can imagine, have converted a whole bunch of them to
+async / await over time.</p>
+
+<p>One interesting problem, though, has been converting express routes to use
+async functions: my personal solution has been to write <a href="https://github.com/odino/express-async-await">express-async-await</a>,
+and I want to share the reasons and ideas behind the library in this post.</p>
+
+<!-- more -->
+
+
+<h2>A typical express scenario</h2>
+
+<p>Before we understand the problem, I want to clarify the scenario we&rsquo;re looking
+at &mdash; a simple app with a few routes and an error handler to <em>catch'em all</em>:</p>
+
+<p>``` js
+app.get(&lsquo;/users&rsquo;, function(req, res, next){
+  db.getUsers().then(function(users) => {</p>
+
+<pre><code>res.json(users)
+</code></pre>
+
+<p>  }).catch(next)
+})</p>
+
+<p>app.get(&lsquo;/users/:id&rsquo;, function(req, res, next){
+  db.getUser(req.params.id).then(function(users) => {</p>
+
+<pre><code>res.json(users)
+</code></pre>
+
+<p>  }).catch(next)
+})</p>
+
+<p>app.use(function(err, req, res, next) {
+  console.error(err)
+  res.status(500).json({message: &lsquo;an error occurred&rsquo;})
+})
+```</p>
+
+<p>As you see, we simply have a couple routes which use some promise-based service
+(we could even use callbacks, I&rsquo;m using promises here just for the sake&hellip;)
+and an error handler that intercepts any error and returns a &ldquo;standard&rdquo; response
+should anything fail in the routes.</p>
+
+<p>Can we do better?</p>
+
+<h2>The problem with async functions</h2>
+
+<p>Lauded for its simplicity and readability, async / await can help us make the
+code a bit more elegant:</p>
+
+<p>``` js
+app.get(&lsquo;/users&rsquo;, async function(req, res, next){
+  try {</p>
+
+<pre><code>res.json(await db.getUsers())
+</code></pre>
+
+<p>  } catch(err) {</p>
+
+<pre><code>next(err)
+</code></pre>
+
+<p>  }
+})</p>
+
+<p>app.get(&lsquo;/users/:id&rsquo;, async function(req, res, next){
+  try {</p>
+
+<pre><code>res.json(await db.getUser(req.params.id))
+</code></pre>
+
+<p>  } catch(err) {</p>
+
+<pre><code>next(err)
+</code></pre>
+
+<p>  }
+})</p>
+
+<p>app.use(function(err, req, res, next) {
+  console.error(err)
+  res.status(500).json({message: &lsquo;an error occurred&rsquo;})
+})
+```</p>
+
+<p>Now, you probably see where I&rsquo;m headed: each and every route we add needs to have
+some boilerplate to catch errors and forward them to the error handler, and that&rsquo;s
+where my OCD kicked in &mdash; there needs to be a better way of doing this.</p>
+
+<h2>Solution 1: the wrapper</h2>
+
+<p>Turns out that the solution is quite simple, you can just create a wrapper that catches
+the error and calls <code>next</code>:</p>
+
+<p>``` js
+const asyncMiddleware = fn =>
+  (req, res, next) => {</p>
+
+<pre><code>Promise.resolve(fn(req, res, next))
+  .catch(next);
+</code></pre>
+
+<p>  };</p>
+
+<p>app.get(&lsquo;/users&rsquo;, asyncMiddleware(async function(req, res, next){
+  res.json(await db.getUsers())
+}))</p>
+
+<p>app.get(&lsquo;/users/:id&rsquo;, asyncMiddleware(async function(req, res, next){
+  res.json(await db.getUser(req.params.id))
+}))</p>
+
+<p>app.use(function(err, req, res, next) {
+  console.error(err)
+  res.status(500).json({message: &lsquo;an error occurred&rsquo;})
+})
+```</p>
+
+<p>Much better, right? Well, at least I think so: now our routes are one-liners that
+defer to a service and error handling is out of the picture, as it&rsquo;s taken care by
+the <code>asyncMiddleware</code> function (here&rsquo;s a <a href="https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016">good article on the topic</a>).</p>
+
+<p>The biggest drawback, in my opinion, is that the routes are now looking less
+&ldquo;pure&rdquo; than they should: they&rsquo;re all wrapped in this <code>asyncMiddleware</code> which looks
+kind of awkward. What if we were able to &ldquo;hide&rdquo; this implementation detail from
+our code?</p>
+
+<h2>Solution 2: express-async-await</h2>
+
+<p>That&rsquo;s where <a href="https://github.com/odino/express-async-await">express-async-await</a>
+kicks in: it&rsquo;s a tiny library I wrote to be able to monkey-patch your express app
+so that you don&rsquo;t need to wrap each and every route:</p>
+
+<p>``` js
+require(&lsquo;express-async-await&rsquo;)(app)</p>
+
+<p>app.get(&lsquo;/users&rsquo;, async function(req, res, next){
+  res.json(await db.getUsers())
+})</p>
+
+<p>app.get(&lsquo;/users/:id&rsquo;, async function(req, res, next){
+  res.json(await db.getUser(req.params.id))
+})</p>
+
+<p>app.use(function(err, req, res, next) {
+  console.error(err)
+  res.status(500).json({message: &lsquo;an error occurred&rsquo;})
+})
+```</p>
+
+<p>&hellip;and that&rsquo;s it! The library takes care of monkey-patching express' <a href="https://github.com/odino/express-async-await/blob/7e86c2b1ba58e95613c5d38c1b641c8eca6b35d4/index.js#L4">HTTP methods</a> (like <code>app.get</code>, <code>app.post</code>, etc)
+and <a href="https://github.com/odino/express-async-await/blob/7e86c2b1ba58e95613c5d38c1b641c8eca6b35d4/index.js#L8-L16">automatically wrap them</a> with the <code>asyncMiddleware</code> we&rsquo;ve seen earlier on.</p>
+
+<p>Biggest drawback? Well, some are really against monkey-patching (for good reasons) but,
+when used with caution, I think it can be a really effective way to enhance a library
+that&rsquo;s missing an interesting feature<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>By the way, my bet is that within a year express is going to support this &ldquo;natively&rdquo; <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

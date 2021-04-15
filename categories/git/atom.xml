@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Git | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/git/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How Did That Bug Happen? Git Bisect to the Rescue!]]></title>
+    <link href="https://odino.org/how-did-that-bug-happen-git-bisect-to-the-rescue/"/>
+    <updated>2018-06-24T23:47:00+00:00</updated>
+    <id>https://odino.org/how-did-that-bug-happen-git-bisect-to-the-rescue</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/git.png"></p>
+
+<p><code>git bisect</code> is a very handy command that lets you <a href="https://git-scm.com/docs/git-bisect">isolate which commit introduced a bug</a>:
+you tell it which version of your repository was bug-free and it runs a <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">binary search</a>
+between your current commit and the one that seems to have bug, asking you to
+confirm on whether the bug seems to be there at each step of the search.</p>
+
+<p>Curious? Let&rsquo;s see it in action!</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s first create a repository with a bunch of &ldquo;fake&rdquo; commits:</p>
+
+<p>```
+/tmp ᐅ mkdir test-repo</p>
+
+<p>/tmp ᐅ cd test-repo</p>
+
+<p>/tmp/test-repo ᐅ git init
+Initialized empty Git repository in /tmp/test-repo/.git/</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ touch test.txt</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ for i in $(seq 1 100); do echo $i > test.txt &amp;&amp; git add test.txt &amp;&amp; git commit -m &ldquo;Now: $i&rdquo;; done
+[master (root-commit) 28ea863] Now: 1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test.txt
+[master fc57245] Now: 2
+ 1 file changed, 1 insertion(+), 1 deletion(&ndash;)
+[master 81e693c] Now: 3
+ 1 file changed, 1 insertion(+), 1 deletion(&ndash;)
+&hellip;
+&hellip;
+&hellip;
+[master b68f338] Now: 100
+ 1 file changed, 1 insertion(+), 1 deletion(&ndash;)
+```</p>
+
+<p>Let&rsquo;s say that the commit that introduced our bug is where the number in the <code>test.txt</code>
+file is higher than 9 (so the commit that starts at 10 is the culprit) &mdash; how would we find it in real life?</p>
+
+<p>Enter <code>git bisect</code> &mdash; let&rsquo;s tell git that:</p>
+
+<ul>
+<li>we want to start <em>bisecting</em></li>
+<li>our current, latest commit seems to be broken</li>
+<li>a commit back in the history does not seem to have the bug</li>
+</ul>
+
+
+<p>&hellip;and let&rsquo;s have git do the heavy-lifting for us:</p>
+
+<p>```
+/tmp/test-repo (master ✔) ᐅ git bisect start</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ git bisect bad # Our last commit seems to have a bug</p>
+
+<p>/tmp/test-repo (master ✔) ᐅ git checkout 28ea863 # let&rsquo;s go back to a commit we&rsquo;re sure does not have the bug
+Note: checking out &lsquo;28ea863&rsquo;.</p>
+
+<p>You are in &lsquo;detached HEAD&rsquo; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.</p>
+
+<p>If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:</p>
+
+<p>  git checkout -b &lt;new-branch-name></p>
+
+<p>HEAD is now at 28ea863&hellip; Now: 1</p>
+
+<p>/tmp/test-repo (28ea863 ✔) ᐅ git bisect good
+Bisecting: 49 revisions left to test after this (roughly 6 steps)
+[bcba603c516783f6ad42b9410f6889e10aea0717] Now: 50
+```</p>
+
+<p>Now git will checkout right in the middle of those 2 commits &mdash; it asks you to
+test your changes and ask you whether this commit is good or bad. Let&rsquo;s go ahead:</p>
+
+<p>```
+/tmp/test-repo (bcba603 ✔) ᐅ cat test.txt
+50</p>
+
+<p>/tmp/test-repo (bcba603 ✔) ᐅ git bisect bad
+Bisecting: 24 revisions left to test after this (roughly 5 steps)
+[b276476e9f1d989f011db4fefc5b92df1685b313] Now: 25</p>
+
+<p>/tmp/test-repo (b276476 ✔) ᐅ cat test.txt
+25</p>
+
+<p>/tmp/test-repo (b276476 ✔) ᐅ git bisect bad
+Bisecting: 11 revisions left to test after this (roughly 4 steps)
+[ba653f4df25a0192d83c813e14ca5851653ab30f] Now: 13</p>
+
+<p>/tmp/test-repo (ba653f4 ✔) ᐅ cat test.txt<br/>
+13</p>
+
+<p>/tmp/test-repo (ba653f4 ✔) ᐅ git bisect bad
+Bisecting: 5 revisions left to test after this (roughly 3 steps)
+[a77f93ed29fe3bfaac69c686ce140a4284acee68] Now: 7</p>
+
+<p>/tmp/test-repo (a77f93e ✔) ᐅ cat test.txt<br/>
+7</p>
+
+<p>/tmp/test-repo (a77f93e ✔) ᐅ git bisect good
+Bisecting: 2 revisions left to test after this (roughly 2 steps)
+[affade823e7f0cb72a1a97052f700c31dc90cfee] Now: 10</p>
+
+<p>/tmp/test-repo (affade8 ✔) ᐅ cat test.txt <br/>
+10</p>
+
+<p>/tmp/test-repo (affade8 ✔) ᐅ git bisect bad
+Bisecting: 0 revisions left to test after this (roughly 1 step)
+[11e5f969458ad51f4009e2e3ac81f38d1ede6d07] Now: 9</p>
+
+<p>/tmp/test-repo (11e5f96 ✔) ᐅ cat test.txt<br/>
+9</p>
+
+<p>/tmp/test-repo (11e5f96 ✔) ᐅ git bisect good
+affade823e7f0cb72a1a97052f700c31dc90cfee is the first bad commit
+commit affade823e7f0cb72a1a97052f700c31dc90cfee
+Author: odino <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#115;&#111;&#109;&#101;&#46;&#x6f;&#110;&#101;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#x73;&#x6f;&#x6d;&#101;&#x2e;&#x6f;&#x6e;&#x65;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a>
+Date:   Sun Jun 24 23:29:02 2018 +0400</p>
+
+<pre><code>Now: 10
+</code></pre>
+
+<p>:100644 100644 ec635144f60048986bc560c5576355344005e6e7 f599e28b8ab0d8c9c57a486c89c4a5132dcbd3b2 M  test.txt
+```</p>
+
+<p>Amazing, <code>git bisect</code> found out the exact commit our bug was introduced &mdash; nothing more,
+nothing less: just an amazing trick that can save you hours of debugging!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Gists Like Git Repositories]]></title>
+    <link href="https://odino.org/using-gists-like-git-repositories/"/>
+    <updated>2015-07-14T17:27:00+00:00</updated>
+    <id>https://odino.org/using-gists-like-git-repositories</id>
+    <content type="html"><![CDATA[<p>In the past couple of years I&rsquo;ve been using <a href="https://gist.github.com/">gist</a>
+to take notes and stash around small utility scripts I&rsquo;ve had to run
+once in a while.</p>
+
+<p>For all of this time, though, I didn&rsquo;t really take advantage
+of the fact that <a href="https://help.github.com/articles/about-gists/">each gist is an actual git repo</a>, which
+gives you a lot of flexibility the online interface doesn&rsquo;t
+bring to the table.</p>
+
+<!-- more -->
+
+
+<p>Once you create a gist, you can simply note down its id and
+clone it locally:</p>
+
+<p><code>
+git clone git@github.com:YOUR_GIST_ID.git that-infamous-script
+</code></p>
+
+<p>and after applying your changes and committing, you can simply
+push the changes to the gist (with a good old fashioned <code>git push origin master</code>)
+and you will see them at
+<code>https://gist.github.com/YOUR_USERNAME/YOUR_GIST_ID</code>.</p>
+
+<p>Never underestimate the power of gists!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Source Code Workflow After 3 Months of Github]]></title>
+    <link href="https://odino.org/source-code-workflow-after-3-months-of-github/"/>
+    <updated>2012-08-05T23:16:00+00:00</updated>
+    <id>https://odino.org/source-code-workflow-after-3-months-of-github</id>
+    <content type="html"><![CDATA[<p>When I joined <em>Rocket Internet</em> 4 months ago,
+here in Dubai, the team was about to experience
+the transition from the very old SVN to Git, with
+everything hosted on <a href="https://github.com">Github</a>.</p>
+
+<p>In this post I try to wrap-up the impressions
+of the team and the changes in the lifecycle of
+our source code with the adoption of the
+Git+Github combo.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/github.png"></p>
+
+<h2>Premise</h2>
+
+<p>We had our first meeting about the switch to Git
+after our CTO migrated our repositories from
+our hosted SVN repos to Github with
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-svn.html">git-svn</a>.</p>
+
+<p>In that meeting &ndash; useful for a lot of people who
+never used Git before &ndash; we explained the basic
+stuff that you should know to get started with
+this VCS:</p>
+
+<ul>
+<li>distribute vs centralized versioning system</li>
+<li>Github act as a remote</li>
+<li><code>commit</code> is local</li>
+<li><code>push</code>, <code>pull</code> and <code>fetch</code></li>
+<li>rebasing</li>
+<li>branching and merging</li>
+<li><a href="http://nvie.com/posts/a-successful-git-branching-model/">gitflow</a></li>
+</ul>
+
+
+<p>All in all we wanted to follow gitflow but at the
+end it turned out that in some parts we had to simplify
+the workflow and add more complexity somewhere else:
+keep reading to get more insights.</p>
+
+<h2>Our development workflow</h2>
+
+<p>So let&rsquo;s say that today we have <code>master</code> and <code>dev</code> aligned:</p>
+
+<ul>
+<li><code>master</code> is an <em>always-ready-to-be-released</em> branch, in which
+you commit code that is tested and works on production: the aim is
+to have a solid fallback if you deploy and need to rollback ( <a href="https://github.com/capistrano/capistrano/wiki/">capistrano</a>
+would probably be a better solution, since it&rsquo;s more immediate, but
+again you need an history of working versions )</li>
+<li><code>dev</code> branches from <code>master</code>: it&rsquo;s the integration branch, where
+you merge features developed for your next release</li>
+</ul>
+
+
+<p>As the days go by, people will branch from develop to
+implement new features/fix bugs:</p>
+
+<p><code>bash
+git checkout develop
+git checkout -b bug-1123
+</code></p>
+
+<p>The developer is free to handle its <em>ticket</em> with both
+local and remote branches: although pushing to the remote
+makes <a href="http://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/">squashing</a> harder, I would always recommend to push
+every day.</p>
+
+<p>Let&rsquo;s say that the bugfixing seems done and we are ready
+to include that code in the <code>develop</code>, which is gonna lead
+to our next release: the developer now opens a <a href="https://help.github.com/articles/using-pull-requests/">pull request</a>
+from its branch to <code>develop</code>:</p>
+
+<p><img class="center" src="/images/pull-request.jpeg"></p>
+
+<p>It&rsquo;s always useful to name the PR like <code>TICKET-ID Headline</code>
+and add a few more comments to explain your changes, if it&rsquo;s worth it:
+given that you <strong>name your branches after the tickets</strong> that they
+implement/fix, adding the ticket ID to the PR&rsquo;s title lets
+who needs to merge it into develop to directly copy the branch
+name from Github &ndash; otherwise you need to type it manully<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<p>The release manager ( who reviews PRs and merges them into
+the integration branch ) can now have a look at your PR,
+comment it and accept or reject it:</p>
+
+<ul>
+<li>if it&rsquo;s accepted it gets merged and the ticket status
+changes from <code>bugfixing</code><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> to <code>Ready for QA</code></li>
+<li>if rejected it&rsquo;s re-assigned back to the developer, and
+technical comments are added <strong>directly on Github</strong></li>
+</ul>
+
+
+<p><code>bash After the release manager has positively evaluated your PR, ctrl+c on the branch name...
+git fetch
+git checkout TICKET-ID
+git checkout develop
+git merge --no-ff TICKET-ID
+</code></p>
+
+<p><img class="left" src="/images/pull-request-namshi.png"></p>
+
+<p>Now times has come to go live with a set of changes:
+a <strong>release branch</strong> is created and we tag version
+<code>X.Y.Z-beta1</code>, that is gonna be deployed in the first
+development environment ( sort of pre-staging ).</p>
+
+<p>If some tests are not passing, the developers add the
+related fixes and open the PRs in the release branch
+( <code>release-X.Y.Z</code> ), so we re-tag and redeploy ( <code>X.Y.Z-beta2</code> ):
+if someone is working on other tickets, which don&rsquo;t have to
+be included in version <code>X.Y.Z</code>, the integration branch
+is still <code>develop</code>.</p>
+
+<p>After this, a new tag <code>X.Y.Z-rc1</code> is deployed into the
+staging environment: if everything is good we create a
+new tag, <code>X.Y.Z</code> and go live with it.</p>
+
+<p>After a few hours, we can consider this tag <strong>valid</strong>
+and update both <code>master</code> and <code>develop</code>:</p>
+
+<p><code>bash
+git checkout master
+git merge --no-ff X.Y.Z
+git push origin master
+git checkout develop
+git rebase master
+git push -f origin develop
+</code></p>
+
+<p>The development cycle starts again.</p>
+
+<h2>Critical paths</h2>
+
+<p>There are some problematic aspects to consider when
+you are working with almost 10 people daily pushing/pulling
+from the same remote:</p>
+
+<ul>
+<li>when you rebase <code>develop</code>, pull request can include old commits
+that are already merged, so you just need to ask for a rebase of the
+PR&rsquo;s branch</li>
+<li>when you rebase <code>develop</code>, always ask people to pull the remote
+develop in their local ones, otherwise they will be working with a
+different tree ( after the rebase Git is not smart enough to
+connect the pre-rebase and after-rebase trees )</li>
+<li>if you need to do an hotfix deployment, always branch from
+<code>master</code> or the release branch ( if the related tag wasn&rsquo;t merged into
+<code>master</code> ): you don&rsquo;t want to <code>cherry-pick</code> commits and then
+manually update the PR which takes care of the hotfix</li>
+</ul>
+
+
+<h2>Conclusions</h2>
+
+<p>All in all I think our process has improved so much: first of all
+we see less conflicts, thanks to the Git engine<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>, second we have more <strong>control,
+transparency and visibility</strong> towards code: being able to comment
+every single line of code on Github really helps you when you need
+to handle several PRs at once; not to mention the fact that doing
+<strong>release-management is way easier</strong>.</p>
+
+<p>By the way, pull request are another good stage of the workflow, since
+they let the developer take a final look at the code, review it for
+the last time and explain it in the PR message, something that with
+SVN and SVN-based services ( like GH ) was <strong>nearly impossible</strong>.</p>
+
+<p>Additionally, coming from Atlassian&rsquo;s hosted services, Github gives
+you the reliability I always missed: no apparent downtime so far
+and pulling/pushing is really fast; compared to SVN,
+this is a huge win for us.</p>
+
+<p>At the end I&rsquo;d say that <strong>we almost doubled our potential</strong> with
+these changes, and I think it&rsquo;s 50% because of Git and another 50%
+&lsquo;cause of Github: if you don&rsquo;t use them, I definitely recommend
+you to switch as soon as possible<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup>.</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>We use &lsquo;bigfixing&rsquo; both for new features and bugs, it&rsquo;s just to identify a status in which the developer is working on the ticket <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Github&rsquo;s markup makes it difficult to <code>ctrl+c</code> it from the &ldquo;You&rsquo;re asking @user to merge 1 commit into repo:develop from repo:TICKET-ID&rdquo; string <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>But this can just be just my personal feeling <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>BitBucket is a pretty cheap alternative to Github <a href='#fnref:4' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

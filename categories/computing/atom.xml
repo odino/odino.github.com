@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Computing | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/computing/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Computing, a Coincise History]]></title>
+    <link href="https://odino.org/book-review-computing-a-coincise-history/"/>
+    <updated>2017-03-16T14:25:00+00:00</updated>
+    <id>https://odino.org/book-review-computing-a-coincise-history</id>
+    <content type="html"><![CDATA[<p>New book review &mdash; getting tired?</p>
+
+<p>This time I wanted to know a little bit more
+about the history of computing, but didn&rsquo;t want to spend too much time on it,
+thus I decided to give <a href="https://www.amazon.com/Computing-Concise-History-Essential-Knowledge/dp/0262517671">Computing: A Concise History</a> a go.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/book-computing.jpg"></p>
+
+<p>The book is honestly <em>ok</em>, meaning you can definitely live without reading it:
+it&rsquo;s surely a good wrap-up on the history of computing, but I can&rsquo;t really say
+I was extremely happy by the time I finished it.</p>
+
+<p>At the end of the day, though, I need to also consider that the author wanted
+to give a very brief (hence the word <em>coincise</em>) overview of the matter, so it&rsquo;s natural
+the book doesn&rsquo;t dig deep into the topic. Overall, I think it&rsquo;s an interesting
+read to go back to when you want to discuss the subject with others, but you won&rsquo;t
+really find hidden gems in here.</p>
+
+<p>One thing that I really didn&rsquo;t like is that there are very few
+mind-blowing stories: the history of computing probably has an incredible
+amount of funny or interesting anectodes, but you won&rsquo;t find many of them here.
+Faithful to its title, the book describes how computing evolved, from war machines
+to the internet, assuming that the reader doesn&rsquo;t have too much time to waste;
+in that sense it definitely delivers on its premise.</p>
+
+<p>Like we use to say in italy: <em><a href="https://forum.wordreference.com/threads/senza-lode-senza-infamia.620099/">no praise, no blame</a></em>.</p>
+]]></content>
+  </entry>
+  
+</feed>

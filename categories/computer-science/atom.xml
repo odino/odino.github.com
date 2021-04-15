@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Computer Science | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/computer-science/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[This Is How a (Dumb) Hash Table Works]]></title>
+    <link href="https://odino.org/this-is-how-a-dumb-hashtable-works/"/>
+    <updated>2018-04-04T05:27:00+00:00</updated>
+    <id>https://odino.org/this-is-how-a-dumb-hashtable-works</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/hashtable.png"></p>
+
+<p>How beautiful is <code>{}</code>?</p>
+
+<p>It lets you store values by key, and retrieve them in a very cost-efficient manner
+(<code>O(1)</code>, more on this later).</p>
+
+<p>In this post I want to implement a very basic hash table, and have a look at its inner
+workings to explain one of the most ingenious ideas in computer science.</p>
+
+<!-- more -->
+
+
+<h2>The problem</h2>
+
+<p>Imagine you&rsquo;re building a new programming language: you start by having pretty
+simple types (strings, integers, floats, &hellip;) and then proceed to implement very basic
+data structures &mdash; first you come up with the array (<code>[]</code>), then comes the hash table
+(otherwise known as dictionary, associative array, hashmap, map and&hellip;the list goes on).</p>
+
+<p>Ever wondered how they work? How they&rsquo;re so damn fast?</p>
+
+<p>Well, let&rsquo;s say that JavaScript did not have have <code>{}</code> or <code>new Map()</code>, and let&rsquo;s
+implement our very own <code>DumbMap</code>!</p>
+
+<h2>A note on complexity</h2>
+
+<p>Before we get the ball rolling, we need to understand how complexity of a function works:
+Wikipedia has a good refresher on <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory">computational complexity</a>,
+but I&rsquo;ll add a brief explanation for the lazy ones.</p>
+
+<p>Complexity measures how many steps are required by our function &mdash; the fewer steps,
+the faster the execution (also known as &ldquo;running time&rdquo;).</p>
+
+<p>Let&rsquo;s a look at the following snippet:</p>
+
+<p><code>js
+function fn(n, m) {
+  return n * m
+}
+</code></p>
+
+<p>The computational complexity (from now simply &ldquo;complexity&rdquo;) of <code>fn</code> is <code>O(1)</code>,
+meaning that it&rsquo;s constant (you can read <code>O(1)</code> as &ldquo;<em>the cost is one</em>&rdquo;): no matter
+what arguments you pass, the platform that runs this code only has to do one
+operation (multiply <code>n</code> into <code>m</code>). Again, since it&rsquo;s one operation, the cost is
+referred as <code>O(1)</code>.</p>
+
+<p>Complexity is measured by assuming arguments of your function could have very large values.
+Let&rsquo;s look at this example:</p>
+
+<p>``` js
+function fn(n, m) {
+  let s = 0</p>
+
+<p>  for (i = 0; i &lt; 3; i++) {</p>
+
+<pre><code>s += n * m
+</code></pre>
+
+<p>  }</p>
+
+<p>  return s
+}
+```</p>
+
+<p>You would think its complexity is <code>O(3)</code>, right?</p>
+
+<p>Again, since complexity is measured in the context of very large arguments,
+we tend to &ldquo;drop&rdquo; constants and consider <code>O(3)</code> the same as <code>O(1)</code>. So, even in this case, we would say that the complexity of
+<code>fn</code> is <code>O(1)</code>. No matter what the value of <code>n</code> and <code>m</code> are, you always end up
+doing 3 operations &mdash; which, again, is a constant cost (therefore <code>O(1)</code>).</p>
+
+<p>Now this example is a little bit different:</p>
+
+<p>``` js
+function fn(n, m) {
+  let s = []</p>
+
+<p>  for (i = 0; i &lt; n; i++) {</p>
+
+<pre><code>s.push(m)
+</code></pre>
+
+<p>  }</p>
+
+<p>  return s
+}
+```</p>
+
+<p>As you see, we&rsquo;re looping as many times as the value of <code>n</code>, which could be in the
+millions. In this case we define the complexity of this function as <code>O(n)</code>, as you
+will need to do as many operations as the value of one of your arguments.</p>
+
+<p>Other examples?</p>
+
+<p>``` js
+function fn(n, m) {
+  let s = []</p>
+
+<p>  for (i = 0; i &lt; 2 * n; i++) {</p>
+
+<pre><code>s.push(m)
+</code></pre>
+
+<p>  }</p>
+
+<p>  return s
+}
+```</p>
+
+<p>This examples loops <code>2 * n</code> times, meaning the complexity should be <code>O(2n)</code>.
+Since we mentioned that constants are &ldquo;ignored&rdquo; when calculating the complexity
+of a function, this example is also classified as <code>O(n)</code>.</p>
+
+<p>One more?</p>
+
+<p>``` js
+function fn(n, m) {
+  let s = []</p>
+
+<p>  for (i = 0; i &lt; n; i++) {</p>
+
+<pre><code>for (i = 0; i &lt; n; i++) {
+  s.push(m)
+}
+</code></pre>
+
+<p>  }</p>
+
+<p>  return s
+}
+```</p>
+
+<p>Here we are looping over <code>n</code> and looping again inside the main loop, meaning the
+complexity is &ldquo;squared&rdquo; (<code>n * n</code>): if <code>n</code> is 2, we will run <code>s.push(m)</code> 4 times,
+if 3 we will run it 9 times, and so on.</p>
+
+<p>In this case, the complexity of the function is referred as <code>O(n²)</code>.</p>
+
+<p>One last example?</p>
+
+<p>``` js
+function fn(n, m) {
+  let s = []</p>
+
+<p>  for (i = 0; i &lt; n; i++) {</p>
+
+<pre><code>s.push(n)
+</code></pre>
+
+<p>  }</p>
+
+<p>  for (i = 0; i &lt; m; i++) {</p>
+
+<pre><code>s.push(m)
+</code></pre>
+
+<p>  }</p>
+
+<p>  return s
+}
+```</p>
+
+<p>In this case we don&rsquo;t have nested loops, but we loop twice over two different arguments:
+the complexity is defined as <code>O(n+m)</code>. Crystal clear.</p>
+
+<p>Now that you&rsquo;ve just got a brief introduction (or refresher) on complexity, it&rsquo;s
+very easy to understand that a function with complexity <code>O(1)</code> is going to perform
+much better than one with <code>O(n)</code>.</p>
+
+<p>Hash tables have a <code>O(1)</code> complexity<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>: in layman&rsquo;s terms, they&rsquo;re <strong>superfast</strong>.
+Let&rsquo;s move on.</p>
+
+<h2>Let&rsquo;s build a (dumb) hash table</h2>
+
+<p>Our hash table has 2 simple methods &mdash; <code>set(x, y)</code> and <code>get(x)</code>. Let&rsquo;s start writing
+some code:</p>
+
+<p>``` js
+class DumbMap {
+  get(x) {</p>
+
+<pre><code>console.log(`get ${x}`)
+</code></pre>
+
+<p>  }</p>
+
+<p>  set(x, y) {</p>
+
+<pre><code>console.log(`set ${x} to ${y}`)
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>let m = new DumbMap()</p>
+
+<p>m.set(&lsquo;a&rsquo;, 1) // &ldquo;set a to 1&rdquo;
+m.get(&lsquo;a&rsquo;) // &ldquo;get a&rdquo;
+```</p>
+
+<p>ans let&rsquo;s implement a very simple, inefficient way to store these key-value pairs
+and retrieve them later on. We first start by storing them in an internal array
+(remember, we can&rsquo;t use <code>{}</code> since we are implementing <code>{}</code> &mdash; mindblown!):</p>
+
+<p>``` js
+class DumbMap {
+  constructor() {</p>
+
+<pre><code>this.list = []
+</code></pre>
+
+<p>  }</p>
+
+<p>  &hellip;</p>
+
+<p>  set(x, y) {</p>
+
+<pre><code>this.list.push([x, y])
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>then it&rsquo;s simply a matter of getting the right element from the list:</p>
+
+<p>``` js
+get(x) {
+  let result</p>
+
+<p>  this.list.forEach(pairs => {</p>
+
+<pre><code>if (pairs[0] === x) {
+  result = pairs[1]
+}
+</code></pre>
+
+<p>  })</p>
+
+<p>  return result
+}
+```</p>
+
+<p>Our full example:</p>
+
+<p>``` js
+class DumbMap {
+  constructor() {</p>
+
+<pre><code>this.list = []
+</code></pre>
+
+<p>  }</p>
+
+<p>  get(x) {</p>
+
+<pre><code>let result
+
+this.list.forEach(pairs =&gt; {
+  if (pairs[0] === x) {
+    result = pairs[1]
+  }
+})
+
+return result
+</code></pre>
+
+<p>  }</p>
+
+<p>  set(x, y) {</p>
+
+<pre><code>this.list.push([x, y])
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>let m = new DumbMap()</p>
+
+<p>m.set(&lsquo;a&rsquo;, 1)
+console.log(m.get(&lsquo;a&rsquo;)) // 1
+console.log(m.get(&lsquo;I_DONT_EXIST&rsquo;)) // undefined
+```</p>
+
+<p>Our <code>DumbMap is amazing</code>! It works right out of the box, but how will it perform when we add a large amount of key-value
+pairs?</p>
+
+<p>Let&rsquo;s try a simple benchmark &mdash; we will first try to find a non-existing element
+in an hash table with very few elements, and then try the same in one with a large quantity
+of elements:</p>
+
+<p>``` js
+let m = new DumbMap()
+m.set(&lsquo;x&rsquo;, 1)
+m.set(&lsquo;y&rsquo;, 2)</p>
+
+<p>console.time(&lsquo;with very few records in the map&rsquo;)
+m.get(&lsquo;I_DONT_EXIST&rsquo;)
+console.timeEnd(&lsquo;with very few records in the map&rsquo;)</p>
+
+<p>m = new DumbMap()</p>
+
+<p>for (x = 0; x &lt; 1000000; x++) {
+  m.set(<code>element${x}</code>, x)
+}</p>
+
+<p>console.time(&lsquo;with lots of records in the map&rsquo;)
+m.get(&lsquo;I_DONT_EXIST&rsquo;)
+console.timeEnd(&lsquo;with lots of records in the map&rsquo;)
+```</p>
+
+<p>The results? Not so encouraging:</p>
+
+<p><code>bash
+with very few records in the map: 0.118ms
+with lots of records in the map: 14.412ms
+</code></p>
+
+<p>In our implementation, we need to loop through all the elements inside <code>this.list</code>
+in order to find one with the matching key. The cost is <code>O(n)</code>, and it&rsquo;s quite
+terrible.</p>
+
+<h2>Make it fast(er)</h2>
+
+<p>We need to find a way to avoid looping through our list: time to put <em>hash</em>
+back into the <em>hash table</em>.</p>
+
+<p>Ever wondered why this data structure is called <strong>hash</strong> table? That&rsquo;s because
+a hashing function is used on the keys that you set and get: we will use this
+function to turn our key into an integer <code>i</code>, and store our value at index <code>i</code>
+of our internal list. Since accessing an element, by its index, from a list has
+a constant cost (<code>O(1)</code>), then the hash table will also have a cost of <code>O(1)</code>.</p>
+
+<p>Let&rsquo;s try this out:</p>
+
+<p>``` js
+let hash = require(&lsquo;string-hash&rsquo;)</p>
+
+<p>class DumbMap {
+  constructor() {</p>
+
+<pre><code>this.list = []
+</code></pre>
+
+<p>  }</p>
+
+<p>  get(x) {</p>
+
+<pre><code>return this.list[hash(x)]
+</code></pre>
+
+<p>  }</p>
+
+<p>  set(x, y) {</p>
+
+<pre><code>this.list[hash(x)] = y
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Here we are using the <a href="https://www.npmjs.com/package/string-hash">string-hash</a>
+module which simply converts a string to a numeric hash, and use it to store
+and fetch elements at index <code>hash(key)</code> of our list. The results?</p>
+
+<p><code>bash
+with lots of records in the map: 0.013ms
+</code></p>
+
+<p>W &ndash; O &ndash; W. This is what I&rsquo;m talking about!</p>
+
+<p>We don&rsquo;t have to loop through all elements in the list and retrieving elements
+from <code>DumbMap</code> is fast as hell!</p>
+
+<p>Let me put this as straightforward as possible: <strong>hashing is what makes hash tables
+extremely efficient</strong>. No magic. Nothing more. Nada. Just a simple, clever, ingenious
+idea.</p>
+
+<h2>The cost of picking the right hashing function</h2>
+
+<p>Of course, <strong>picking a fast hashing function is very important</strong>: if our <code>hash(key)</code>
+runs in a few seconds, our function will be quite slow regardless of its complexity.</p>
+
+<p>At the same time, <strong>it&rsquo;s very important to make sure that our hashing function doesn&rsquo;t
+produce a lot of collisions</strong>, as they would be detrimental to the complexity of our
+hash table.</p>
+
+<p>Confused? Let&rsquo;s take a closer look at collisions.</p>
+
+<h2>Collisions</h2>
+
+<p>You might think &ldquo;<em>Ah, a good hashing function never generates collisions!</em>&rdquo;: well,
+come back to the real world and think again. <a href="https://security.googleblog.com/2017/02/announcing-first-sha1-collision.html">Google was able to produce collisions
+for the SHA-1 hashing algorithm</a>,
+and it&rsquo;s just a matter of time, or computational power, before a hashing function
+cracks and returns the same hash for 2 different inputs. Always assume your hashing
+function generates collisions and implement the right defense against such cases.</p>
+
+<p>Case in point, let&rsquo;s try to use a <code>hash()</code> function that generates a lot of collisions:</p>
+
+<p>``` js
+function divide(int) {
+  int = Math.round(int / 2)</p>
+
+<p>  if (int > 10) {</p>
+
+<pre><code>return divide(int)
+</code></pre>
+
+<p>  }</p>
+
+<p>  return int
+}</p>
+
+<p>function hash(key) {
+  let h = require(&lsquo;string-hash&rsquo;)(key)
+  return divide(h)
+}
+```</p>
+
+<p>This function uses an array of 10 elements to store values, meaning that elements
+are likely to be replaced &mdash; a nasty bug in our <code>DumbMap</code>:</p>
+
+<p>``` js
+let m = new DumbMap()</p>
+
+<p>for (x = 0; x &lt; 1000000; x++) {
+  m.set(<code>element${x}</code>, x)
+}</p>
+
+<p>console.log(m.get(&lsquo;element0&rsquo;)) // 999988
+console.log(m.get(&lsquo;element1&rsquo;)) // 999988
+console.log(m.get(&lsquo;element1000&rsquo;)) // 999987
+```</p>
+
+<p>In order to resolve the issue, we can simply store multiple key-value pairs at the
+same index &mdash; let&rsquo;s amend our hash table:</p>
+
+<p>``` js
+class DumbMap {
+  constructor() {</p>
+
+<pre><code>this.list = []
+</code></pre>
+
+<p>  }</p>
+
+<p>  get(x) {</p>
+
+<pre><code>let i = hash(x)
+
+if (!this.list[i]) {
+  return undefined
+}
+
+let result
+
+this.list[i].forEach(pairs =&gt; {
+  if (pairs[0] === x) {
+    result = pairs[1]
+  }
+})
+
+return result
+</code></pre>
+
+<p>  }</p>
+
+<p>  set(x, y) {</p>
+
+<pre><code>let i = hash(x)
+
+if (!this.list[i]) {
+  this.list[i] = []
+}
+
+this.list[i].push([x, y])
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>As you might notice, here we fall back to our original implementation: store a list
+of key-value pairs and loop through each of them, which is going to be quite slow
+when there are a lot of collisions for a particular index of the list.</p>
+
+<p>Let&rsquo;s benchmark this using our own <code>hash()</code> function that generates indexes from 1 to 10:</p>
+
+<p><code>bash
+with lots of records in the map: 11.919ms
+</code></p>
+
+<p>and by using the hash function from <code>string-hash</code>, which generates random indexes:</p>
+
+<p><code>bash
+with lots of records in the map: 0.014ms
+</code></p>
+
+<p>Whoa! There&rsquo;s the cost of picking the right hashing function &mdash; fast enough that
+it doesn&rsquo;t slow our execution down on its own, and good enough that it doesn&rsquo;t produce a lot
+of collisions.</p>
+
+<h2>Generally O(1)</h2>
+
+<p>Remember my words?</p>
+
+<blockquote><p>Hash tables have a <code>O(1)</code> complexity</p></blockquote>
+
+<p>Well, I lied: the complexity of an hash table depends on the hashing function you
+pick. The more collisions you generate, the more the complexity tends toward <code>O(n)</code>.</p>
+
+<p>A hashing function such as:</p>
+
+<p><code>js
+function hash(key) {
+  return 0
+}
+</code></p>
+
+<p>would mean that our hash table has a complexity of <code>O(n)</code>.</p>
+
+<p>This is why, in general, computational complexity has 3 measures: best, average
+and worst-case scenarios. Hash tables have a <code>O(1)</code> complexity in best and average case scenarios, but fall
+to <code>O(n)</code> in their worst-case scenario.</p>
+
+<p>Remember: <strong>a good hashing function is the key to an efficient hash table</strong> &mdash; nothing more, nothing less.</p>
+
+<h2>More on collisions&hellip;</h2>
+
+<p>The technique we used to fix <code>DumbMap</code> in case of collisions is called <a href="https://xlinux.nist.gov/dads/HTML/separateChaining.html">separate chaining</a>:
+we store all the key-pairs that generate collisions in a list and loop through
+them.</p>
+
+<p>Another popular technique is <a href="https://en.wikipedia.org/wiki/Open_addressing">open addressing</a>:</p>
+
+<ul>
+<li>at each index of our list we store <strong>one and one only key-value pair</strong></li>
+<li>when trying to store a pair at index <code>x</code>, if there&rsquo;s already a key-value pair, try to store our new pair at <code>x + 1</code></li>
+<li>if <code>x + 1</code> is taken, try <code>x + 2</code> and so on&hellip;</li>
+<li>when retrieving an element, hash the key and see if the element at that position (<code>x</code>) matches our key</li>
+<li>if not, try to access the element at position <code>x + 1</code></li>
+<li>rinse and repeat until you get to the end of the list, or when you find an empty index &mdash; that means our element is not in the hash table</li>
+</ul>
+
+
+<p>Smart, simple, elegant and <a href="http://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16-28.html">usually very efficient</a>!</p>
+
+<h2>FAQs (or TL;DR)</h2>
+
+<h4>Does a hash table hash the values we&rsquo;re storing?</h4>
+
+<p>No, keys are hashed so that they can be turned into an integer <code>i</code>, and both keys
+and values are stored at position <code>i</code> in a list.</p>
+
+<h4>Do the hashing functions used by hash tables generate collisions?</h4>
+
+<p>Absolutely &mdash; so hash tables are implemented with <a href="https://en.wikipedia.org/wiki/Hash_table#Collision_resolution">defense strategies</a>
+to avoid nasty bugs.</p>
+
+<h4>Do hash tables use a list or a linked list internally?</h4>
+
+<p>It depends, <a href="https://stackoverflow.com/questions/13595767/why-do-hash%20tables-use-a-linked-list-over-an-array-for-the-bucket">both can work</a>.
+In our examples, we use the JavaScript array (<code>[]</code>) that can be <a href="https://www.quora.com/Do-arrays-in-JavaScript-grow-dynamically">dynamically resized</a>:</p>
+
+<p>``` js</p>
+
+<blockquote><p>a = []</p>
+
+<p>a[3] = 1</p>
+
+<p>a
+[ <3 empty items>, 1 ]
+```</p></blockquote>
+
+<h4>Why did you pick JavaScript for the examples? JS arrays ARE hash tables!</h4>
+
+<p>For example:</p>
+
+<p>``` js</p>
+
+<blockquote><p> a = []
+[]
+a[&ldquo;some&rdquo;] = &ldquo;thing&rdquo;
+&lsquo;thing&rsquo;
+a
+[ some: &lsquo;thing&rsquo; ]
+typeof a
+&lsquo;object&rsquo;
+```</p></blockquote>
+
+<p>I know, damn JavaScript.</p>
+
+<p>JavaScript is &ldquo;universal&rdquo; and probably the easiest language to understand when looking
+at some sample code. I agree JS might not be the best language, but I hope these
+examples are clear enough.</p>
+
+<h4>Is your example a really good implementation of an hash table? Is it really THAT simple?</h4>
+
+<p>No, not at all.</p>
+
+<p>Have a look at &ldquo;<a href="http://www.mattzeunert.com/2017/02/01/implementing-a-hash-table-in-javascript.html">implementing a hash table in JavaScript</a>&rdquo;
+by <a href="http://www.mattzeunert.com/">Matt Zeunert</a>, as it will give you a bit more
+context. There&rsquo;s a lot more to learn, so I would also suggest you to also have a look at:</p>
+
+<ul>
+<li><a href="http://cseweb.ucsd.edu/~kube/cls/100/Lectures/lec16/lec16.html">Paul Kube&rsquo;s course on hash tables</a></li>
+<li><a href="https://www.geeksforgeeks.org/implementing-our-own-hash-table-with-separate-chaining-in-java/">Implementing our Own Hash Table with Separate Chaining in Java</a></li>
+<li><a href="https://algs4.cs.princeton.edu/34hash/">Algorithms, 4th Edition &ndash; Hash tables</a></li>
+<li><a href="http://www.ilikebigbits.com/blog/2016/8/28/designing-a-fast-hash-table">Designing a fast hash table</a></li>
+</ul>
+
+
+<h2>In the end&hellip;</h2>
+
+<p>Hash tables are a very clever idea we use on a regular basis: no matter
+whether you create a <a href="https://stackoverflow.com/questions/114830/is-a-python-dictionary-an-example-of-a-hash-table">dictionary in Python</a>, an <a href="https://stackoverflow.com/a/3134315/934439">associative array in PHP</a> or a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map
+in JavaScript</a> &mdash; they all share the same concepts and beautifully work to let us
+store and retrieve element by an identifier, at a (most likely) constant cost.</p>
+
+<p>Hope you enjoyed this article, and feel free to share your feedback with me.</p>
+
+<p><em>A
+special thanks goes to <a href="https://github.com/joejean">Joe</a> who helped me by reviewing
+this article.</em></p>
+
+<p>Adios!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>I know, I know, I&rsquo;m kinda lying here. Read until the end of the post ;&ndash;) <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Nine Algorithms That Changed the Future]]></title>
+    <link href="https://odino.org/book-review-nine-algorithms-that-changed-the-future/"/>
+    <updated>2017-04-16T15:56:00+00:00</updated>
+    <id>https://odino.org/book-review-nine-algorithms-that-changed-the-future</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/9-algos-book.jpg"></p>
+
+<p>This was highly unexpected: <a href="https://www.amazon.com/Nine-Algorithms-That-Changed-Future/dp/0691158193">Nine Algorithms That Changed the Future</a>
+is a hell of a book!</p>
+
+<p>The premise of the book is that it might be too boring for those familiar with
+the industry, but it&rsquo;s one of the most fascinating books I&rsquo;ve read over the past
+few months instead: sure, some topics were really basic and you could skip some chapters
+as they were explaining computing fundamentals to people with no prior knowledge,
+but <strong>the book got me hooked</strong> regardless, as it&rsquo;s able to walk you through
+some very interesting topics such as Quantum Computing or
+<a href="https://www.technologyreview.com/s/416036/software-that-fixes-itself/">software that fixes itself</a>.</p>
+
+<!-- more -->
+
+
+<p>The book is divided in 9 + 1 chapters that will walk you through clever
+algorithms that dominate today&rsquo;s computing, from indexing techniques and crypto
+to pattern recognition and data compression: in each chapter you will
+slowly familiarize with the problem, go through the poor man&rsquo;s solution and see
+how clever algorithms efficiently solve the original problem. Chapters build up so
+well that&rsquo;s a real joy to go through them &mdash; the only negative point I might have
+is that a couple of them really strive to explain it to people without a solid
+background, and they might be too tedious to the programmer in you. But, considering
+that one of the goals of the book is to get people closer to Computer Science, even
+those &ldquo;boring&rdquo; chapters get my personal high-five!</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<p><blockquote><p>Babylonians were using indexing 5000 years before search engines existed</p></blockquote></p>
+
+<p><blockquote><p>if you download a 20-megabyte software program, and your computer misinterprets just one in every million characters it receives, there will probably still be over 20 errors in your downloaded program—every one of which could cause a potentially costly crash when you least expect it.<br/>The moral of the story is that, for a computer, being accurate 99.9999% of the time is not even close to good enough</p></blockquote></p>
+
+<p><blockquote><p>by repeating an unreliable message often enough, you can make it as reliable as you want</p></blockquote></p>
+
+<p><blockquote><p>Hamming we have met already: it was his annoyance at the weekend crashes of a company computer that led directly to his invention of the first error-correcting codes, now known as Hamming codes</p></blockquote></p>
+
+<p><blockquote><p>Shannon demonstrated through mathematics that it was possible, in principle, to achieve surprisingly high rates of error-free communication over a noisy, error-prone link. It was not until many decades later that scientists came close to achieving Shannon&rsquo;s theoretical maximum communication rate in practice.</p></blockquote></p>
+
+<p><blockquote><p>To keeps things simple, let&rsquo;s assume you work eight-hour days, five days a week, and that you divide your calendar into one-hour slots. So each of the five days has eight possible slots, for a total of 40 slots per week. Roughly speaking, then, to communicate a week of your calendar to someone else, you have to communicate 40 pieces of information. But if someone calls you up to schedule a meeting for next week, do you describe your availability by listing 40 separate pieces of information? Of course not! Most likely you will say something like “Monday and Tuesday are full, and I&rsquo;m booked from 1 p.m. to 3 p.m. on Thursday and Friday, but otherwise available.” This is an example of lossless data compression! The person you are talking to can exactly reconstruct your availability in all 40 slots for next week, but you didn&rsquo;t have to list them explicitly.</p></blockquote></p>
+
+<p><blockquote><p>Although physicists have known how to split atoms for many decades, the original meaning of “atomic” came from Greek, where it means “indivisible.” When computer scientists say “atomic,” they are referring to this original meaning.</p></blockquote></p>
+
+<p><blockquote><p>The issue of whether RSA is truly secure is among the most fascinating—and vexing—questions in the whole of computer science. For one thing, this question depends on both an ancient unsolved mathematical problem and a much more recent hot topic at the intersection of physics and computer science research. The mathematical problem is known as integer factorization, the hot research topic is quantum computing</p></blockquote></p>
+
+<p><blockquote><p>the pace of algorithmic innovation will, if anything, decrease in the future. I&rsquo;m referring to the fact that computer science is beginning to mature as a scientific discipline. Compared to fields such as physics, mathematics, and chemistry, computer science is very young: it has its beginnings in the 1930s. Arguably, therefore, the great algorithms discovered in the 20th century may have consisted of low hanging fruit, and it will become more and more difficult to find ingenious, widely applicable algorithms in the future.</p></blockquote></p>
+
+<p>As <a href="http://tech.namshi.com">leader of a team</a>, I&rsquo;m very happy with this book as it gives me a few good inspirations
+on how to teach these ideas both at work and &ldquo;at home&rdquo;: at the end of the day it&rsquo;s generally
+hard to find good metaphors for the stuff we use everyday, and this book has a plethora
+of straightforward ones that you can re-use whenever someone comes up to you and asks
+you &ldquo;<em>why is it safe to send sensitive information via HTTPS?</em>&rdquo;.</p>
+
+<p>Highly recommended!</p>
+]]></content>
+  </entry>
+  
+</feed>

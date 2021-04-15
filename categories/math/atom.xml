@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Math | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/math/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Combining Two Numbers Into a Unique One: Pairing Functions]]></title>
+    <link href="https://odino.org/combining-two-numbers-into-a-unique-one-pairing-functions/"/>
+    <updated>2020-12-05T10:08:00+00:00</updated>
+    <id>https://odino.org/combining-two-numbers-into-a-unique-one-pairing-functions</id>
+    <content type="html"><![CDATA[<p>Over the past couple of years I&rsquo;ve grown my interest in image and data compression
+&mdash; it&rsquo;s a very interesting field, with a lot of interesting solutions to important
+and lucrative problems (think Dropbox).</p>
+
+<p>Over the past few days I was running some experiments and bumped into an interesting
+concept: pairing positive integers into a &ldquo;unique&rdquo; number, with the ability to reverse
+the operation.</p>
+
+<p>Now, in the context of compression, pairing would only be useful when
+the resulting integer can be consistently represented with less bits
+than the original ones, and that&rsquo;s where I&rsquo;m still stuck at (more on this on a later post),
+but I still wanted to share a couple interesting approaches I&rsquo;ve bumped into.</p>
+
+<!-- more -->
+
+
+<h2>Cantor pairing</h2>
+
+<p>The folks at <a href="https://www.wolfram.com/">Wolfram</a> ask a very interesting question:</p>
+
+<blockquote><p>We all know that every point on a surface can be described by a pair of coordinates, but can
+every point on a surface be described by only one coordinate?</p></blockquote>
+
+<p>And it actually turns out that the german mathematician <a href="https://en.wikipedia.org/wiki/Georg_Cantor">Georg Cantor</a>
+had already develop a system to do exactly what we&rsquo;ve been talking about, called
+&ldquo;<a href="https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function">cantor pairing</a>&rdquo;:</p>
+
+<p>```go
+func pair(n, m int) int {</p>
+
+<pre><code>return (n + m) * (n + m + 1) /2 + m
+</code></pre>
+
+<p>}</p>
+
+<p>func unpair(z int) (int, int) {</p>
+
+<pre><code>w := int(math.Floor((math.Sqrt(float64(8 * z + 1)) - 1) / 2))
+t := (w * w + w) / 2
+m := z - t
+n := w - m
+return n, m
+</code></pre>
+
+<p>}
+```</p>
+
+<p><a href="https://gist.github.com/dyoo/8062270">(code gently found on a random <em>gist</em>)</a></p>
+
+<p>If you don&rsquo;t believe me, you can take a peek at this <a href="https://play.golang.org/p/wmvDNC2zEIx">runnable snippet that
+illustrates cantor pairing in action</a>.</p>
+
+<h2>Elegant pairing</h2>
+
+<p>Now, I eventually bumped into <a href="http://szudzik.com/ElegantPairing.pdf">this presentation from a Wolfram conference</a>
+15 years ago, and found another approach, which they call &ldquo;elegant pairing&rdquo;,
+which seems to be a lot more straightforward, at least in terms of the algorithm&rsquo;s
+readability:</p>
+
+<p>```go
+func pair(n, m int) int {</p>
+
+<pre><code>if n &gt;= m {
+    return n * n + n + m
+}
+
+return m * m + n
+</code></pre>
+
+<p>}</p>
+
+<p>func unpair(z int) (int, int) {</p>
+
+<pre><code>q := int(math.Floor(math.Sqrt(float64(z))))
+l := z - q * q
+
+if l &lt; q {
+    return l, q
+}
+
+return q, l - q
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Again, we can <a href="https://play.golang.org/p/u3mwn-o613X">take a look at this in action on the Go playground</a>.</p>
+
+<h2>So, what about compression?</h2>
+
+<p>Well, I won&rsquo;t go too deep into the realm of my thoughts so I&rsquo;ll keep this
+real simple: compression is all about communicating the same information,
+but with less characters. When you say &ldquo;jk&rdquo; you&rsquo;re compressing data (&ldquo;<em>just kidding</em>&rdquo;),
+while the other party involved in the communication understands the &ldquo;algorithm&rdquo;
+you&rsquo;re using and is able to translate that the 2 characters &ldquo;jk&rdquo; effectively
+mean &ldquo;just kidding&rdquo; (more than compression this is just a hashmap, but let me
+have it for the day&hellip;).</p>
+
+<p>Images like PNGs are usually just a bunch of pixels put together, with each pixel
+represented by R, G, B and A (alpha transparency) values. Each value is represented
+by 1 byte, so its maximum value can be <a href="https://www.quora.com/What-is-the-highest-number-you-can-get-to-using-1-byte">255 at most</a>.</p>
+
+<p>Think of an image as:</p>
+
+<p>```js
+[</p>
+
+<pre><code>Pixel(41, 130, 130, 255), // &lt;-- Red: 41, Green: 130, Blue: 130, Alpha: 255
+Pixel(41, 130, 130, 255),
+Pixel(41, 130, 130, 255), 
+Pixel(41, 130, 130, 255), 
+Pixel(41, 130, 130, 255),
+Pixel(41, 130, 130, 255),
+Pixel(41, 130, 130, 255),
+...
+</code></pre>
+
+<p>]
+```</p>
+
+<p>which can be reduced to:</p>
+
+<p><code>js
+41,130,130,255
+41,130,130,255
+41,130,130,255
+41,130,130,255
+41,130,130,255
+41,130,130,255
+41,130,130,255
+...
+</code></p>
+
+<p>What&rsquo;s interesting about pairing functions is that we could use
+them to combine numbers together to end up with:</p>
+
+<p><code>js
+16941,65155
+16941,65155
+16941,65155
+16941,65155
+16941,65155
+16941,65155
+16941,65155
+...
+</code></p>
+
+<p>which is, theoretically, less characters than we started with.</p>
+
+<p>Unfortunately for us, the max value one of our pair can have
+(255, 255) is 65535, which takes 2 bytes to store, so even if
+we end up with less &ldquo;characters&rdquo;, the number of bytes we need
+to use to store them is exactly the same
+(4 * 1 byte earlier, 2 * 2 bytes later) &mdash; so <em>no bueno</em>. I&rsquo;ve opened
+a can of worms that probably deserves its own post later on,
+so I&rsquo;ll keep my oversimplification for now and we&rsquo;ll go on with
+our lives :)</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

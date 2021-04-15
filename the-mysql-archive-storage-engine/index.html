@@ -1,0 +1,182 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="If you want an append-only solution for MySQL, the ARCHIVE engine might be for you" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>The MySQL ARCHIVE storage engine</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/the-mysql-archive-storage-engine/" />
+		<meta property="og:title" content="The MySQL ARCHIVE storage engine" />
+		<meta property="og:description" content="If you want an append-only solution for MySQL, the ARCHIVE engine might be for you" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/the-mysql-archive-storage-engine/">The MySQL ARCHIVE storage engine</a></h1>
+        <time>25 July 2015</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 6 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Ever wondered how you can treat MySQL as an append-only storage?
+Enter the <a href="https://dev.mysql.com/doc/refman/5.5/en/archive-storage-engine.html">ARCHIVE storage engine</a>.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/mysql.png"></p>
+
+<p>I am pretty sure there will be other, more effective and efficient
+solutions in the market, but if you want to go the simple way
+I guess this is a pretty solid solution.</p>
+
+<p>Append-only storages make it impossible to update  or delete data that has been
+written to them (think of logs or a <a href="https://en.wikipedia.org/wiki/Ledger">ledger</a>),
+so that, once an entry is in the DB, you can (kind of) confidently
+access the DB knowing that clients won&rsquo;t  be able to screw the data
+much. I believe this is a pretty good use-case when you want to enforce
+some business logic principles at the storage level.</p>
+
+<p>Of course, it seems like there are some quirks with this
+<a href="https://en.wikipedia.org/wiki/MySQL_Archive">engine</a>:</p>
+
+<blockquote><p>One of the current restrictions of Archive tables is that they do not support any indexes, thus necessitating a table scan for any SELECT tasks.<br/>[&#8230;] MySQL is examining index support for Archive tables in upcoming releases.<br/>The engine is not ACID compliant.</p><footer><strong>MySQL Archive</strong> <cite><a href='https://en.wikipedia.org/wiki/MySQL_Archive'>Wikipedia</a></cite></footer></blockquote>
+
+
+<p>It is, though, an interesting option for some scenarios: when implementing
+a ledger for <a href="https://www.namshi.com">Namshi</a> we bumped into
+this requirement (have an append-only table) but then decided to work it
+out at the application level rather than at the storage level, simply because
+we didn&rsquo;t find many battle-tested solutions (or a lot of feedback) for
+<a href="http://aws.amazon.com/rds/mysql/">RDS</a>, plus the points highlighted by
+the article on wikipedia felt a bit <em>scary</em><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> at that time.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>And, by the way, there isn&#8217;t much on StackOverflow as well (http://stackoverflow.com/questions/612428/pros-and-cons-of-the-mysql-archive-storage-engine and http://stackoverflow.com/questions/3546567/for-a-stats-systems-whats-better-in-mysql-innodb-archive-or-myisam) <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/the-mysql-archive-storage-engine/"
+		},
+		"headline": "The MySQL ARCHIVE storage engine",
+		"description": "If you want an append-only solution for MySQL, the ARCHIVE engine might be for you",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2015-07-25 18:24:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

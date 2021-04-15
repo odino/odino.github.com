@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Performance, | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/performance/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Benchmarking JavaScript Snippets]]></title>
+    <link href="https://odino.org/benchmarking-javascript-snippets/"/>
+    <updated>2017-04-12T18:32:00+00:00</updated>
+    <id>https://odino.org/benchmarking-javascript-snippets</id>
+    <content type="html"><![CDATA[<p>A few days back I was playing around with
+<a href="https://lodash.com/">lodash</a> to figure out if
+some of its functions would <a href="/beware-of-lodash-and-the-cost-of-abstractions/">add significant overhead</a>
+as opposed to their vanilla counterparts: in doing
+so I discovered <a href="https://github.com/logicalparadox/matcha">matcha</a>,
+an amazing tool for benchmarking JS code.</p>
+
+<!-- more -->
+
+
+<p>Matcha comes with a clear goal in mind: &ldquo;no waste of time, show me the code&rdquo;, as
+it&rsquo;s incredibly easy to setup and start benchmarking.</p>
+
+<p>We first need to create
+a benchmark file (say <code>index.js</code>) and start adding test suites; a suite simply
+describes the <em>functionality</em> we want to benchmark, such as
+creating a new object, handpicking properties, from a &ldquo;larger&rdquo; one:</p>
+
+<p>``` js
+let _ = require(&lsquo;lodash&rsquo;)</p>
+
+<p>suite(&lsquo;picking properties from an object&rsquo;, function () {
+  // &hellip;
+});
+```</p>
+
+<p>At this point, we can create a custom object that&rsquo;s going to be used by the
+implementations we want to benchmark:</p>
+
+<p>``` js
+let _ = require(&lsquo;lodash&rsquo;)</p>
+
+<p>suite(&lsquo;picking properties from an object&rsquo;, function () {
+  let obj = {</p>
+
+<pre><code>name: 'alex',
+age: 28,
+hair: 'enough',
+status: 'married',
+job: 'who really knows',
+</code></pre>
+
+<p>  }
+});
+```</p>
+
+<p>and, still inside the suite, start adding our implementations:</p>
+
+<p>``` js
+let _ = require(&lsquo;lodash&rsquo;)</p>
+
+<p>suite(&lsquo;picking properties from an object&rsquo;, function () {
+  let obj = {</p>
+
+<pre><code>name: 'alex',
+age: 28,
+hair: 'enough',
+status: 'married',
+job: 'who really knows',
+</code></pre>
+
+<p>  }</p>
+
+<p>  bench(&lsquo;lodash _.pick&rsquo;, function() {</p>
+
+<pre><code>return _.pick(obj, ['name', 'age'])
+</code></pre>
+
+<p>  });</p>
+
+<p>  bench(&lsquo;vanilla&rsquo;, function() {</p>
+
+<pre><code>return {
+  name: obj.name,
+  age: obj.age,
+}
+</code></pre>
+
+<p>  });
+});
+```</p>
+
+<p>Assuming matcha is installed globally (<code>npm install -g matcha</code>) you can then
+simply:</p>
+
+<p>``` bash
+$ matcha index.js</p>
+
+<pre><code>                  picking properties from an object
+     651,233 op/s » lodash _.pick
+  80,885,471 op/s » vanilla
+</code></pre>
+
+<p>```</p>
+
+<p>As you see, matcha starts executing those functions repeatedly, for a few seconds,
+and outputs how many executions it was able to do within that timeframe.</p>
+
+<p>The matcha bin will autorun tests as soon as you place under a <code>./benchmarks</code>
+folder, and you can customize the number of iterations to run the snippets
+for:</p>
+
+<p>``` js
+suite(&lsquo;picking properties from an object&rsquo;, function () {
+  set(&lsquo;iterations&rsquo;, 10000);</p>
+
+<p>  // &hellip;
+})
+```</p>
+
+<p>Support for async benchmarks is provided with a <code>next</code> callback that you&rsquo;ll need to
+call once the async operation is over:</p>
+
+<p>``` js
+bench(&lsquo;some async thingy with promises&rsquo;, function(next) {
+  somePromise(someParams).then(next)
+});</p>
+
+<p>bench(&lsquo;some async thingy with goold old callbacks&rsquo;, function(next) {
+  someFn(someParams, next)
+});
+```</p>
+
+<p>Can it get any easier?</p>
+]]></content>
+  </entry>
+  
+</feed>

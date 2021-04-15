@@ -1,0 +1,202 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="My review of 'Scalability Rules: 50 principles for scaling websites'" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Book review: Scalability Rules</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/book-review-scalability-rules/" />
+		<meta property="og:title" content="Book review: Scalability Rules" />
+		<meta property="og:description" content="My review of 'Scalability Rules: 50 principles for scaling websites'" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/book-review-scalability-rules/">Book review: Scalability Rules</a></h1>
+        <time>10 March 2017</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 4 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>I recently finished reading <a href="http://www.scalabilityrules.com/">Scalability Rules: 50 principles for scaling websites</a>
+(2nd edition) and wanted to share a few thoughts on the book.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/scalability-rules-book.png"></p>
+
+<p>The book is very straightforward, as it&rsquo;s basically a collection of 50 rules on
+how to plan for scalability &mdash; a lot of the rules aren&rsquo;t very sophisticated but
+my overall feedback on the book is quite positive, as it&rsquo;s an interesting read
+that can spark some inspiration.</p>
+
+<p>One of the interesting differences from the 1st edition (from what I understood)
+is that in the new release of the book the authors integrated some success (and horror)
+stories heard and witnessed around: for example, you&rsquo;ll read on how PayPal underwent
+a <a href="https://arstechnica.com/uncategorized/2004/10/4296-2/">massive downtime</a> due to
+some changes on how they were <a href="https://en.wikipedia.org/wiki/Two-phase_commit_protocol">managing transactions</a>,
+which proved to create more damage than anything else. These stories were the part
+of the book I kind of enjoyed the most, as the rules&#8217; credibility increases once
+you hear it from the guys who have been in the trenches.</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<blockquote><p>Design for 20x capacity. Implement for 3x capacity. Deploy for roughly 1.5x capacity.</p></blockquote>
+
+
+
+
+<blockquote><p>Apply the Pareto Principle (also known as the 80-20 rule) frequently. What 80% of your benefit is achieved from 20% of the work? In our case, a direct application is to ask, “What 80% of your revenue will be achieved by 20% of your features?”</p></blockquote>
+
+
+
+
+<blockquote><p>We hope you will get a sense of how you can push back on the idea that all data has to be kept in sync in real time.</p></blockquote>
+
+
+
+
+<blockquote><p>“Scaling up is failing up.” What does that mean? In our minds, it is clear: we believe that within hyper-growth environments it is critical that companies plan to scale in a horizontal fashion—what we describe as scaling out</p></blockquote>
+
+
+
+
+<blockquote><p>Build your systems to be capable of relying on commodity hardware, and don’t get caught in the trap of using high-margin, high-end servers.</p></blockquote>
+
+
+
+
+<blockquote><p>Try to avoid session data completely, but when needed, consider putting the data in users’ browsers</p></blockquote>
+
+
+
+
+<blockquote><p>Many commerce companies and some financial services institutions apply this concept to older data that is meant primarily for historical record keeping. Your online bank provider may put all historical transactions in a read-only file system, removing it from the transactional database. You can view your past transactions, but it is unlikely that you can make changes to them, update them, or cancel them. After some period of time, say 90 days or a year, they remove your access to the transactions online and you have to request them via e-mail.</p></blockquote>
+
+
+<p>All in all, I don&rsquo;t think the book is <em>mind-blowing</em> or anything as such, but I gotta give it to
+the authors that&rsquo;s something I&rsquo;m quite happy to have in my library: at the end of the day,
+it&rsquo;s a solid collection of memos on how to plan and build scalable, distributed systems.</p>
+
+<p>Cheers!</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/book-review-scalability-rules/"
+		},
+		"headline": "Book review: Scalability Rules",
+		"description": "My review of 'Scalability Rules: 50 principles for scaling websites'",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2017-03-10 12:11:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

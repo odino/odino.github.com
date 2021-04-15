@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Acid | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/acid/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[An Overview of OrientDB's Capabilities]]></title>
+    <link href="https://odino.org/an-overview-of-orientdbs-capabilities/"/>
+    <updated>2015-02-06T13:45:00+00:00</updated>
+    <id>https://odino.org/an-overview-of-orientdbs-capabilities</id>
+    <content type="html"><![CDATA[<p><ol class="aseries">
+	<p>This post is part of the "<strong><a href="/categories/orientdb-101/">OrientDB 101</a></strong>" series, derived from a previous work started in 2013/2014: some
+	information might be outdated, but the core of this series should still be intact.</p>
+	<p>Here is a list of all the articles in this series:</p>
+	<li>
+		<a href="/the-strange-case-of-orientdb-and-graph-databases/">The strange case of OrientDB and graph databases</a>
+	</li>
+	<li>
+		<a href="/an-overview-of-orientdbs-capabilities/">An overview of OrienDB's capabilities</a>
+	</li>
+	<li>
+		<a href="/going-beyond-rdbms/">Going beyond RDBMS</a>
+	</li>
+	<li>
+		<a href="/orientdb-just-like-any-other-nosql-database/">Just like any other NoSQL database?</a>
+	</li>
+</ol>
+</p>
+
+<p>To let  you immediately understand the uniqueness of this product
+we will briefly list some of its most interesting features:
+far for being an exhaustive overview, the following list
+will introduce you to some of the most interesting peculiarities
+that this DBMS brings into the table.</p>
+
+<!-- more -->
+
+
+<h2>Graphs everywhere</h2>
+
+<p>It is always difficult to understand what &ldquo;being a
+graph database&rdquo; means: simplifying outrageously, we would now
+define graph DBs as databases which can handle relationships
+in an easier and faster way compared to traditional databases.</p>
+
+<p>For example, let’s suppose that we have a dataset composed
+of many <code>Person</code> (vertexes of the graph) connected by a relationship
+named <code>Friend</code> (edges connecting those vertexes).</p>
+
+<p>How can we find all the people connected to me through my friends?</p>
+
+<p><img class="center" src="/images/orient-101/relationship.png"></p>
+
+<p>In OrientDB, you would write a SQL-similar query like:</p>
+
+<p><code>
+select * from (traverse * from RECORD_ID) where @class = 'Person'
+</code></p>
+
+<p>which basically means: select all attributes of the records
+of type <code>Person</code> that you will find while traversing all the
+relations of the record with the given <code>RECORD_ID</code>; in others
+words, we are retrieving all the Persons linked to a record,
+while traversing the graph: if, as proposed before, the graph
+is made of <code>Person</code> connected by a <code>Friend</code> relationship (<code>n:m</code> relation),
+the result would include all the people that are connected to the
+person identified with the <code>RECORD_ID</code>, at any level of depth &ndash; direct
+friends, friends of friends and so on.</p>
+
+<p>Being a bit more pragmatic, if you add the <code>$depth</code> parameter you
+would be able to retrieve people until a certain level of depth
+in the graph:</p>
+
+<p><code>
+select * from (traverse * from RECORD_ID)
+where @class = 'Person' and $depth = 2
+</code></p>
+
+<p>What will this query retrieve? All the friends of the friends of
+the person identified by the <code>RECORD_ID</code>, since they are 2 steps
+(of depth) distant from that person: one step is made to retrieve
+that person’s direct friend, the second one to retrieve the direct
+friends of his friends.</p>
+
+<p>Needless to say, this kind of query might sound a bit unfamiliar
+to the reader but, upon a second look, you will realize that is
+very much <strong>SQL-like</strong>: another powerful feature of OrientDB, in fact, is
+its query language, an enhanced version of the usual SQL.</p>
+
+<p>OrientDB, as said, belongs to the family of graph databases, but
+also breaks the paradigm behind traditional graph DBs by throwing
+into the table some more powerful layers that are less common to
+engines of this type: for example, it handles vertexes and edges
+as documents, as we are about to read in the next section.</p>
+
+<h2>Documents</h2>
+
+<p>Under the graph layer, OrientDB provides a very powerful document
+DB that is comparable to what products like MongoDB and CouchDB
+offer: one of the greatnesses of document DBs, also available in
+OrientDB, is the usage of documents.</p>
+
+<p><img class="right" src="/images/orient-101/document.png"></p>
+
+<p>Assuming that you have experienced RDBMS at least once in your
+career, you will definitely sound familiar with the concept of
+<strong>schema, tables, columns and rows</strong>: a schema defines columns in
+tables and the tables available in a DB, tables aggregate rows,
+rows represent a record of the dataset and columns the attributes
+of each row; all of this might sound exciting if you have prior
+knowledge of your data-structure, but what happens if you are,
+for example, dynamically storing records you are being sent over
+an API?</p>
+
+<p>Once the API changes &ndash; adding new attributes to its records and
+so on &ndash; your application will either crash due to unpredicted
+conditions or simply ignore the changes, a situation that can
+be avoided using documents: instead of behaving like rows with
+their predefined structure, documents are <strong>schema-free records</strong>,
+that can be filled with whatever data is inserted in each of them.
+Since they don’t need a pre-defined data-structure, documents are
+very useful to handle fuzzy domains and unpredictable integrations.</p>
+
+<p>Getting back to our <code>Person</code> class (a class is the equivalent of a
+table, in OrientDB), we can insert into the class as many records
+as we want, with their own attributes:</p>
+
+<p><code>
+INSERT INTO Person (name, age) VALUES('Sarah', 26)
+INSERT INTO Person (name, nationality) VALUES('Alex', ‘Italy’)
+</code></p>
+
+<p>and query on them with any of the fields, even if they are only
+present in a single document of the collection:</p>
+
+<p><code>
+SELECT * FROM Person WHERE age = 26
+</code></p>
+
+<p>It’s really interesting to understand how the graph
+layer of OrientDB is fully based on the document one. As a matter
+of fact, when you create a vertex in the graph:</p>
+
+<p><code>
+CREATE VERTEX Person set name = ‘Alex’
+</code></p>
+
+<p>you are just using the graph syntax instead of the document one:</p>
+
+<p><code>
+INSERT INTO Person (name) VALUES(‘Alex’)
+</code></p>
+
+<p>Of course, OrientDB is primarily a graph DB, but nothing should
+prevent us to understand that, under certain conditions, OrientDB
+can serve as a document one, replacing solutions like MongoDB.</p>
+
+<h2>SQL+</h2>
+
+<p>We already introduced a bit of OrientDB’s query language &ndash; which
+I like to call <strong>SQL+</strong> &ndash; so you might have already appreciated it
+for how similar it is to the traditional SQL: thanks to this,
+the transition from a RDBMS like MySQL to OrientDB, as far as
+the developers are concerned, is not very difficult.</p>
+
+<p>For example, if you need to retrieve the name and age attributes
+of records in the class <code>Person</code>, you would write a fully SQL-compliant
+query:</p>
+
+<p><code>
+SELECT name, age FROM Person
+</code></p>
+
+<p>Given the easiness with which we can start querying the DB, OrientDB
+shouldn’t be considered as a speed bump for a developer’s learning
+curve: sure, it has some additional operators and its own syntax to
+perform certain operations (like traversals), but when you first face
+OrientDB, writing your first queries, understanding the model and starting
+to implement CRUD operations over your graph won’t be a slowing factor
+in your work.</p>
+
+<p>Luckily, OrientDB doesn’t stop at providing support for the old-fashioned
+SQL syntax, since it also brings some other small &ndash;  but very convenient &ndash;
+shortcuts that let developers save time while querying the DB.</p>
+
+<p>For example, the star operator is never mandatory:</p>
+
+<p><code>
+SELECT FROM Person
+</code></p>
+
+<p>Note the missing star in the query: in SQL you would need to include
+it, writing <code>SELECT * FROM Person</code>.</p>
+
+<p>Another very convenient improvement that the authors OrientDB have done
+to its query language is the way to deal with JOINs: suppose that you
+have a class <code>Book</code> that as a <code>1:1</code> relation with records of class
+<code>Author</code>, you would have  an attribute named “author” in each <code>Book</code>
+record that is basically a foreign key to the Author:</p>
+
+<p><img class="center" src="/images/orient-101/book-author.png"></p>
+
+<p>As said, JOINing will be pretty easy, as it’s a matter of a “dot”:</p>
+
+<p><code>
+SELECT FROM Book WHERE author.name = ‘Alex’
+</code></p>
+
+<p>In this case, we are selecting from the collection <code>Book</code>, filtering,
+using a JOIN (<code>author.name</code>), by the author’s name: as you see, there
+is no need to even use the JOIN operator or define which fields link
+the two records, thing that in a traditional RDBMS would be expressed
+as <code>SELECT * FROM Book JOIN Author ON (Book.author = Author.id)</code>.</p>
+
+<h2>As fast as we can</h2>
+
+<p>Performance is a <strong>first-class citizen</strong> in OrientDB: internal benchmarks
+have shown that it can serve up to 10 thousand records per second with
+in-memory DBs (which are not persisted to the disk) while with disk-persisted
+DBs it performs slightly worse (9.7k GET requests served per second):
+the difference , of course, is due to the fact that a DB which lies
+in-memory doesn’t need disk access, but will be completely flushed
+upon every OrientDB’s restart.</p>
+
+<p>If you might consider this numbers as biased, like every benchmark,
+even <strong>more impressive results have come from the graph DB community</strong>:
+from the laboratories of IBM Research, Toyotaro Suzumura and Miyuru
+Dayarathna presented <a href="https://docs.google.com/viewer?a=v&amp;pid=sites&amp;srcid=ZGVmYXVsdGRvbWFpbnx0b2t5b3RlY2hzdXp1bXVyYWxhYmVuZ3xneDoyMGRiOGFlM2Y2OGY5Mzhj">a paper</a>, in late 2012,  which shows incredible
+numbers: OrientDB surpasses Neo4j’s &ndash; the enterprise-ready and most
+famous graph DB available in the market as of today &ndash; performances,
+on all tests, by a factor of 10; it basically means that what is
+considered to be the “best” graph DB in the market is not even
+comparable, on a performance basis, to OrientDB: sure, Neo4j is
+by far a more stable and established product in this market, but
+this benchmark shows how revolutionary OrientDB is.</p>
+
+<p><img class="center" src="/images/orient-101/speed.png"></p>
+
+<h2>The key: index-free adjacency</h2>
+
+<p><a href="http://markorodriguez.com/">Marko Rodriguez</a>, an influential personality in the graph DB ecosystem,
+once defined graph DBs as databases which provide <strong>index-free adjacency
+between records</strong>: this means that once you have a record, to access
+related records you don’t have to lookup relations in a index &ndash; like
+in traditional RDBMS &ndash; since relations are self-contained in the
+records themselves.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>Inheritance</h2>
+
+<p>You may have heard of <a href="http://en.wikipedia.org/wiki/Object_database">object databases</a>, which try to bring
+object-oriented concepts into storage engines: like them,
+OrientDB integrates quite a few concepts from the OO world.</p>
+
+<p>Probably the most powerful of them, inheritance, helps
+classifying records and gives more granularity to the
+schema, by allowing the developer to create classes that
+inherit from other classes.</p>
+
+<p>For example, given that we have a class <code>Car</code> and a class
+<code>Bike</code> which extend from <code>Vehicle</code> and have a <code>1:1</code> relationship
+with records of the class <code>Person</code>, it would be very easy to
+retrieve records all the vehicles that belong to a person:</p>
+
+<p><code>
+SELECT FROM Vehicle WHERE owner.name = ‘Alex’
+</code></p>
+
+<p>The above query would return you all vehicles (bikes as well
+as cars) that belong to a particular person.</p>
+
+<h2>HTTP interface</h2>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>ACID</h2>
+
+<p>A lot are quite skeptic towards NoSQL databases as they would
+argue that they can’t be use in a few context where acidity
+matters: for example, being unable to support transactions,
+MongoDB would never be a suitable candidate in a banking
+environment.</p>
+
+<p>ACIDity, instead, is implemented by OrientDB, which means
+that the storage engine is:</p>
+
+<ul>
+<li>Atomic, supporting transaction</li>
+<li>Consistent, with DBs never ending up in a corrupted state</li>
+<li>Isolated, so concurrent transactions execute as if they  were in series</li>
+<li>Durable, so once transaction are applied, they can’t be reverted by a fault in the system</li>
+</ul>
+
+
+<h2>Summary</h2>
+
+<p>If you individually take each of this feature, you won’t
+get excited, as most of the products in the DB market
+implement a few of them, but being able to meld down all
+of them together OrientDB is simply something that
+no developer has ever seen before; in his
+brief history, it has gained so much attention that almost
+everyone in the NoSQL ecosystem is looking at this new
+competitor with a curious eye.</p>
+
+<p>OrientDB won’t be your swiss-army knife, is not going to
+be the <em>one-size-fits-all</em> tool you always needed and never
+found before: it is a new way to think about data in our
+times, a way that has its own boundaries and scopes, and
+this series I&rsquo;m writing will give you an overview of the goods of
+OrientDB as well as the commonly-accepted anti-patterns
+when dealing with RDBMS.</p>
+
+<p>On top of this, OrientDB is not only a NoSQL database:
+it’s a mixture of RDBMS, NoSQL databases and eventually
+a graph DB; what makes this product so interesting is that
+it melds together 3 worlds as it never happened before.</p>
+
+<p>And to clarify the previous statement, in the next article
+we are going to take a look at the
+differences between OrientDB and traditional RDBMS, what
+makes it so special when compared with other NoSQL products
+and and understand in which scenarios OrientDB would fit
+our requirements.</p>
+]]></content>
+  </entry>
+  
+</feed>

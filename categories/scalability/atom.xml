@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Scalability | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/scalability/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Scalability Rules]]></title>
+    <link href="https://odino.org/book-review-scalability-rules/"/>
+    <updated>2017-03-10T12:11:00+00:00</updated>
+    <id>https://odino.org/book-review-scalability-rules</id>
+    <content type="html"><![CDATA[<p>I recently finished reading <a href="http://www.scalabilityrules.com/">Scalability Rules: 50 principles for scaling websites</a>
+(2nd edition) and wanted to share a few thoughts on the book.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/scalability-rules-book.png"></p>
+
+<p>The book is very straightforward, as it&rsquo;s basically a collection of 50 rules on
+how to plan for scalability &mdash; a lot of the rules aren&rsquo;t very sophisticated but
+my overall feedback on the book is quite positive, as it&rsquo;s an interesting read
+that can spark some inspiration.</p>
+
+<p>One of the interesting differences from the 1st edition (from what I understood)
+is that in the new release of the book the authors integrated some success (and horror)
+stories heard and witnessed around: for example, you&rsquo;ll read on how PayPal underwent
+a <a href="https://arstechnica.com/uncategorized/2004/10/4296-2/">massive downtime</a> due to
+some changes on how they were <a href="https://en.wikipedia.org/wiki/Two-phase_commit_protocol">managing transactions</a>,
+which proved to create more damage than anything else. These stories were the part
+of the book I kind of enjoyed the most, as the rules' credibility increases once
+you hear it from the guys who have been in the trenches.</p>
+
+<p>Some interesting quotes from the book:</p>
+
+<p><blockquote><p>Design for 20x capacity. Implement for 3x capacity. Deploy for roughly 1.5x capacity.</p></blockquote></p>
+
+<p><blockquote><p>Apply the Pareto Principle (also known as the 80-20 rule) frequently. What 80% of your benefit is achieved from 20% of the work? In our case, a direct application is to ask, “What 80% of your revenue will be achieved by 20% of your features?”</p></blockquote></p>
+
+<p><blockquote><p>We hope you will get a sense of how you can push back on the idea that all data has to be kept in sync in real time.</p></blockquote></p>
+
+<p><blockquote><p>“Scaling up is failing up.” What does that mean? In our minds, it is clear: we believe that within hyper-growth environments it is critical that companies plan to scale in a horizontal fashion—what we describe as scaling out</p></blockquote></p>
+
+<p><blockquote><p>Build your systems to be capable of relying on commodity hardware, and don’t get caught in the trap of using high-margin, high-end servers.</p></blockquote></p>
+
+<p><blockquote><p>Try to avoid session data completely, but when needed, consider putting the data in users’ browsers</p></blockquote></p>
+
+<p><blockquote><p>Many commerce companies and some financial services institutions apply this concept to older data that is meant primarily for historical record keeping. Your online bank provider may put all historical transactions in a read-only file system, removing it from the transactional database. You can view your past transactions, but it is unlikely that you can make changes to them, update them, or cancel them. After some period of time, say 90 days or a year, they remove your access to the transactions online and you have to request them via e-mail.</p></blockquote></p>
+
+<p>All in all, I don&rsquo;t think the book is <em>mind-blowing</em> or anything as such, but I gotta give it to
+the authors that&rsquo;s something I&rsquo;m quite happy to have in my library: at the end of the day,
+it&rsquo;s a solid collection of memos on how to plan and build scalable, distributed systems.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

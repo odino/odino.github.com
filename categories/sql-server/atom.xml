@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Sql Server | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/sql-server/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mssqldump, a Small Utility to Dump MS SQL Server Data]]></title>
+    <link href="https://odino.org/mssqldump-a-small-utility-to-dump-ms-sql-server-data/"/>
+    <updated>2018-05-22T14:56:00+00:00</updated>
+    <id>https://odino.org/mssqldump-a-small-utility-to-dump-ms-sql-server-data</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/mssql-logo.png"></p>
+
+<p>In the past few months I found myself busier with moving data here and there, so
+much that scripts ending with <code>load(transform(extract()))</code> have become my bread
+and butter &mdash; sad life, some say!</p>
+
+<p>Last night I wanted to import a bunch of data stored in SQL Server
+into a MySQL database, but didn&rsquo;t want to get my hards dirty with a GUI or PowerShell
+because, well, <a href="https://www.google.ae/search?q=powershell+sucks&amp;oq=powershell+sucks&amp;aqs=chrome..69i57j69i61j0l4.3713j0j7&amp;sourceid=chrome&amp;ie=UTF-8">PowerShell</a>.</p>
+
+<p>The result was <a href="https://github.com/odino/mssqldump">mssqldump</a>, a small utility
+&ndash; similar to <code>mysqldump</code> &ndash; to export data into <a href="/tsv-better-than-csv/">TSV</a>.</p>
+
+<!-- more -->
+
+
+<h2>Usage</h2>
+
+<p><code>mssqldump</code> does one thing &mdash; and hopefully well &mdash; run a query against the
+database and export the results as TSV to the stdout:</p>
+
+<p><code>
+./mssqldump -q "SELECT Name, 1 as ID, RAND() as thing from sys.Databases"
+master    1    0.4318099474883688
+tempdb    1    0.4318099474883688
+model     1    0.4318099474883688
+msdb      1    0.4318099474883688
+test      1    0.4318099474883688
+</code></p>
+
+<p>You can also include headings (column names) with the <code>-c</code> option:</p>
+
+<p><code>
+./mssqldump -q "SELECT Name, 1 as ID, RAND() as thing from sys.Databases"
+Name      ID   thing
+master    1    0.4318099474883688
+tempdb    1    0.4318099474883688
+model     1    0.4318099474883688
+msdb      1    0.4318099474883688
+test      1    0.4318099474883688
+</code></p>
+
+<p>If you want to print <code>mssqldump</code>&rsquo;s version information you can just specify <code>v</code>
+or <code>version</code> as the query parameter:</p>
+
+<p><code>
+./mssqldump -qversion
+1.0.0
+</code></p>
+
+<p>If you want to use <code>mssqldump</code> simply download the <a href="https://github.com/odino/mssqldump/releases">latest release from github</a>
+and start dumping data around!</p>
+
+<h2>A couple surprises</h2>
+
+<p>Building <code>mssqldump</code> was an experience on its own, as I discovered a couple useful
+things:</p>
+
+<ul>
+<li>Microsoft is killing it lately &mdash; I wanted to test this out and was resigned to
+spinning up a SQL Server instance on Azure. Turns out a simple <code>docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Password123!' --net host -d --name mssql --rm microsoft/mssql-server-linux</code>
+does the trick!</li>
+<li>knowing I was developing a CLI tool in Golang, I thought I would <em>need</em> to resort
+to <a href="https://github.com/spf13/cobra">cobra</a> &mdash; wanting to try to simplify things
+up I instead opted for <a href="https://github.com/jessevdk/go-flags">go-flags</a>, which has way less
+features but is also less opinionated and faster to setup (cobra is probably overkill
+for a CLI app with only one command)</li>
+</ul>
+
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

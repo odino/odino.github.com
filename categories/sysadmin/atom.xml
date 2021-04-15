@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Sysadmin | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/sysadmin/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Easily Deaggregate an IP Address Range]]></title>
+    <link href="https://odino.org/how-to-easily-deaggregate-an-ip-address-range/"/>
+    <updated>2018-03-08T14:11:00+00:00</updated>
+    <id>https://odino.org/how-to-easily-deaggregate-an-ip-address-range</id>
+    <content type="html"><![CDATA[<p>A few days ago I needed to <a href="https://en.wikipedia.org/wiki/Null_route">nullroute</a>
+an address range, so I found myself with the incredibly tedious task of de-aggregating
+IP ranges.</p>
+
+<!-- more -->
+
+
+<p>Sure that I wouldn&rsquo;t do such thing by hand, I googled around and found <a href="http://jodies.de/ipcalc">ipcalc</a>,
+which can be installed on most Linux systems:</p>
+
+<p>```
+$ apt-get install ipcalc</p>
+
+<p>$ ipcalc 1.2.168.0 &ndash; 1.2.169.255
+deaggregate 1.2.168.0 &ndash; 1.2.169.255
+1.2.168.0/23
+```</p>
+
+<p>As simple as that!</p>
+]]></content>
+  </entry>
+  
+</feed>

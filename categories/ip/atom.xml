@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Ip | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/ip/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Finding Where That IP Address Is From With Iploc]]></title>
+    <link href="https://odino.org/finding-where-that-ip-address-is-from-with-iploc/"/>
+    <updated>2018-07-07T16:45:00+00:00</updated>
+    <id>https://odino.org/finding-where-that-ip-address-is-from-with-iploc</id>
+    <content type="html"><![CDATA[<p>Today I spent some time building <a href="https://github.com/odino/iploc">iploc</a>, a small CLI utility that lets you retrieve
+geographical information of an IP address.</p>
+
+<!-- more -->
+
+
+<p>First and foremost, I&rsquo;d like to clarify that this library is nothing but a CLI
+wrapper for the <a href="http://ip-api.com/">ip-api.com</a>, which does the actual heavy-lifting
+for us.</p>
+
+<p>Long story short, <code>iploc</code> is a very small utility that let&rsquo;s you lookup geographical
+information of an IP address directly from the CLI &mdash; you simply give it the address
+you want to &ldquo;reverse geocode&rdquo; and it will print out a bunch of information:</p>
+
+<p><code>
+iploc 12.34.56.78
+{"as":"AS7018 AT\u0026T Services, Inc.","city":"Columbus","country":"United States","countryCode":"US","isp":"AT\u0026T Services","lat":39.9653,"lon":-83.0235,"org":"AT\u0026T Services","query":"12.34.56.78","region":"OH","regionName":"Ohio","status":"success","timezone":"America/New_York","zip":"43215"}
+</code></p>
+
+<p>Indulging my passion for <a href="https://en.wikipedia.org/wiki/Seven_deadly_sins#Gluttony">gluttony</a>,
+I&rsquo;ve added a <em>pretty-print</em> option for humans:</p>
+
+<p>```
+iploc 12.34.56.78 -p
+{</p>
+
+<pre><code>"as": "AS7018 AT\u0026T Services, Inc.",
+"city": "Columbus",
+"country": "United States",
+"countryCode": "US",
+"isp": "AT\u0026T Services",
+"lat": 39.9653,
+"lon": -83.0235,
+"org": "AT\u0026T Services",
+"query": "12.34.56.78",
+"region": "OH",
+"regionName": "Ohio",
+"status": "success",
+"timezone": "America/New_York",
+"zip": "43215"
+</code></pre>
+
+<p>}
+```</p>
+
+<p>but you&rsquo;d really be better off with tools such as <a href="https://stedolan.github.io/jq/">jq</a>:</p>
+
+<p><code>
+iploc 12.34.56.78 | jq -r .city
+Columbus
+</code></p>
+
+<p>Installing <code>iploc</code> is fairly straightforward, as you can simply grab the right binary
+from the release page on GitHub:</p>
+
+<p>```
+/tmp ᐅ wget <a href="https://github.com/odino/iploc/releases/download/v1.0.0/iploc_linux_amd64_v1.0.0.tar.gz">https://github.com/odino/iploc/releases/download/v1.0.0/iploc_linux_amd64_v1.0.0.tar.gz</a>
+&mdash;2018-07-07 16:35:12&mdash;  <a href="https://github.com/odino/iploc/releases/download/v1.0.0/iploc_linux_amd64_v1.0.0.tar.gz">https://github.com/odino/iploc/releases/download/v1.0.0/iploc_linux_amd64_v1.0.0.tar.gz</a>
+Resolving github.com (github.com)&hellip; 192.30.253.113, 192.30.253.112
+Connecting to github.com (github.com)|192.30.253.113|:443&hellip; connected.
+HTTP request sent, awaiting response&hellip; 302 Found
+Location: <a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/140064185/ae86980c-81dd-11e8-86f7-510d153790f8?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180707%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180707T123513Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=32b345f28416ae597379622a361e9f01347cfac31984125353ba4801d147473e&amp;X-Amz-SignedHeaders=host&amp;actor_id=0&amp;response-content-disposition=attachment%3B%20filename%3Diploc_linux_amd64_v1.0.0.tar.gz&amp;response-content-type=application%2Foctet-stream">https://github-production-release-asset-2e65be.s3.amazonaws.com/140064185/ae86980c-81dd-11e8-86f7-510d153790f8?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180707%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180707T123513Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=32b345f28416ae597379622a361e9f01347cfac31984125353ba4801d147473e&amp;X-Amz-SignedHeaders=host&amp;actor_id=0&amp;response-content-disposition=attachment%3B%20filename%3Diploc_linux_amd64_v1.0.0.tar.gz&amp;response-content-type=application%2Foctet-stream</a> [following]
+&mdash;2018-07-07 16:35:13&mdash;  <a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/140064185/ae86980c-81dd-11e8-86f7-510d153790f8?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180707%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180707T123513Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=32b345f28416ae597379622a361e9f01347cfac31984125353ba4801d147473e&amp;X-Amz-SignedHeaders=host&amp;actor_id=0&amp;response-content-disposition=attachment%3B%20filename%3Diploc_linux_amd64_v1.0.0.tar.gz&amp;response-content-type=application%2Foctet-stream">https://github-production-release-asset-2e65be.s3.amazonaws.com/140064185/ae86980c-81dd-11e8-86f7-510d153790f8?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180707%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180707T123513Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=32b345f28416ae597379622a361e9f01347cfac31984125353ba4801d147473e&amp;X-Amz-SignedHeaders=host&amp;actor_id=0&amp;response-content-disposition=attachment%3B%20filename%3Diploc_linux_amd64_v1.0.0.tar.gz&amp;response-content-type=application%2Foctet-stream</a>
+Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)&hellip; 52.216.96.227
+Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.96.227|:443&hellip; connected.
+HTTP request sent, awaiting response&hellip; 200 OK
+Length: 2977802 (2.8M) [application/octet-stream]
+Saving to: ‘iploc_linux_amd64_v1.0.0.tar.gz.1’</p>
+
+<p>iploc_linux_amd64_v1.0.0.tar.gz.1                     100%[======================================================================================================================>]   2.84M   362KB/s    in 10s</p>
+
+<p>2018-07-07 16:35:24 (287 KB/s) &ndash; ‘iploc_linux_amd64_v1.0.0.tar.gz.1’ saved [2977802/2977802]</p>
+
+<p>/tmp ᐅ tar -xzf iploc_linux_amd64_v1.0.0.tar.gz                                                  <br/>
+/tmp ᐅ ./iploc_linux_amd64_v1.0.0 12.34.56.78
+{&ldquo;as&rdquo;:&ldquo;AS7018 AT\u0026T Services, Inc.&rdquo;,&ldquo;city&rdquo;:&ldquo;Columbus&rdquo;,&ldquo;country&rdquo;:&ldquo;United States&rdquo;,&ldquo;countryCode&rdquo;:&ldquo;US&rdquo;,&ldquo;isp&rdquo;:&ldquo;AT\u0026T Services&rdquo;,&ldquo;lat&rdquo;:39.9653,&ldquo;lon&rdquo;:-83.0235,&ldquo;org&rdquo;:&ldquo;AT\u0026T Services&rdquo;,&ldquo;query&rdquo;:&ldquo;12.34.56.78&rdquo;,&ldquo;region&rdquo;:&ldquo;OH&rdquo;,&ldquo;regionName&rdquo;:&ldquo;Ohio&rdquo;,&ldquo;status&rdquo;:&ldquo;success&rdquo;,&ldquo;timezone&rdquo;:&ldquo;America/New_York&rdquo;,&ldquo;zip&rdquo;:&ldquo;43215&rdquo;}
+```</p>
+
+<p>&hellip;that&rsquo;s it: there&rsquo;s nothing else the tool does (rightfully, I would say).</p>
+
+<p><a href="/mssqldump-a-small-utility-to-dump-ms-sql-server-data/#a-couple-surprises">As opposed to last time</a>,
+today I opted to use <a href="https://github.com/spf13/cobra">cobra</a> as I wanted to see what overhead
+it would introduce in a tool this small: from my perspective, setting up the CLI app
+with cobra was fairly quick and straightforward, even though the binaries are a bit
+chubbier (the amd64 linux binary is 2.8mb vs 2.5mb, so nothing crazy to be honest).
+Definitely recommended.</p>
+
+<p>That&rsquo;s it for today!</p>
+]]></content>
+  </entry>
+  
+</feed>

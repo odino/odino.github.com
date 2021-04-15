@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Linux | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/linux/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fwupd Is the Best Thing That Ever Happened to Linux]]></title>
+    <link href="https://odino.org/fwupd-is-the-best-thing-that-ever-happened-to-linux/"/>
+    <updated>2021-04-15T10:41:00+00:00</updated>
+    <id>https://odino.org/fwupd-is-the-best-thing-that-ever-happened-to-linux</id>
+    <content type="html"><![CDATA[<p>Honestly, I have no words:</p>
+
+<p>```console
+$ fwupd.fwupdmgr refresh   <br/>
+WARNING: This package has not been validated, it may not work properly.
+Updating lvfs
+Downloading…             [<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>]
+Downloading…             [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Successfully downloaded new metadata: 1 local device supported</p>
+
+<p>$ fwupd.fwupdmgr get-updates        <br/>
+WARNING: This package has not been validated, it may not work properly.
+Devices with no available firmware updates:
+ • Integrated Webcam HD
+ • KBG40ZPZ1T02 NVMe KIOXIA 1024GB
+ • UEFI Device Firmware
+ • UEFI Device Firmware
+ • UEFI dbx
+XPS 13 9310 2-in-1
+│
+└─System Firmware:
+  │   Device ID:          [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │   Current version:    1.1.1
+  │   Minimum Version:    1.1.1
+  │   Vendor:             Dell Inc. (DMI:Dell Inc.)
+  │   GUIDs:              [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │                       [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │                       [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]
+  │   Device Flags:       • Internal device
+  │                       • Updatable
+  │                       • System requires external power source
+  │                       • Supported on remote server
+  │                       • Needs a reboot after installation
+  │                       • Cryptographic hash verification is available
+  │                       • Device is usable for the duration of the update
+  │
+  └─XPS 13 9310 2-in-1 System Update:</p>
+
+<pre><code>    New version:      2.2.1
+    Remote ID:        lvfs
+    Summary:          Firmware for the Dell XPS 13 9310 2-in-1
+    License:          Proprietary
+    Size:             26.7 MB
+    Created:          2021-03-25
+    Urgency:          Critical
+    Vendor:           Dell Inc.
+    Flags:            is-upgrade
+    Description:      
+    This stable release fixes the following issues:
+
+    • Fixed the issue where there is no audio output from the external monitor when you close the lid after restarting the system.
+
+    Some new functionality has also been added:
+
+    • Updated the Intel Management Engine to enhance the Thunderbolt connectivity.
+    • Updated the Embedded Controller Engine firmware to enhance the battery life.
+    • Added secondary function key that is Fn+Left as Home and Fn+Right as End.
+</code></pre>
+
+<p>$ fwupd.fwupdmgr update       <br/>
+WARNING: This package has not been validated, it may not work properly.
+Devices with no available firmware updates:
+ • Integrated Webcam HD
+ • KBG40ZPZ1T02 NVMe KIOXIA 1024GB
+ • UEFI Device Firmware
+ • UEFI Device Firmware
+ • UEFI dbx
+Upgrade available for System Firmware from 1.1.1 to 2.2.1
+XPS 13 9310 2-in-1 must remain plugged into a power source for the duration of the update to avoid damage. Continue with update? [Y|n]:
+Downloading…             [<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>] Less than one minute remaining…
+Decompressing…           [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Authenticating…          [<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>]
+Authenticating…          [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Updating System Firmware…[<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>]
+Scheduling…              [</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>]
+Successfully installed firmware</p>
+
+<p>An update requires a reboot to complete. Restart now? [y|N]:
+```</p>
+
+<p><img class="center" src="/images/fwupd.png"></p>
+
+<p><img class="center" src="/images/tearjoy.gif"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Avoid Battery Draining on Your Linux-flavored Dell XPS]]></title>
+    <link href="https://odino.org/avoid-battery-draining-on-your-linux-flavored-dell-xps/"/>
+    <updated>2021-01-31T14:40:00+00:00</updated>
+    <id>https://odino.org/avoid-battery-draining-on-your-linux-flavored-dell-xps</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/dell.png"></p>
+
+<p>Over the past few months my 2.5yo Dell XPS 13 has started showing signs of age,
+and I had to worry both about my keyboard as well as the battery.</p>
+
+<p>I haven&rsquo;t really managed to replace the keyboard yet (I&rsquo;m too scared of doing
+it on my own, so I&rsquo;ll wait to go back to the office and ask the IT folks
+to do it for me), though I managed to replace the battery (got it from <a href="https://www.noon.com/uae-en/replacement-battery-for-dell-xps-13-9360-black/N32141819A/p?o=a03e5f5f47c3ba5b">Noon</a>) since my old one was at &lt;40% capacity.</p>
+
+<p>A factor that contributed to the battery&rsquo;s demise was definitely the fact that,
+through a recent kernel update, the laptop started shutting down in <a href="https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/pm/sleep-states.rst#suspend-to-idle">s2idle</a>
+sleep mode, which is short for &ldquo;no bueno&rdquo; &mdash; it basically means that the system
+will use a pure software implementation of energy savings.</p>
+
+<!-- more -->
+
+
+<p>The fix is generally fairly easy &mdash; you can see what sleep state your
+system is going to use by:</p>
+
+<p><code>sh
+$ cat /sys/power/mem_sleep
+[s2idle] deep
+</code></p>
+
+<p>and a quick and easy fix is to switch to the <a href="https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/pm/sleep-states.rst#suspend-to-ram">deep</a> state:</p>
+
+<p><code>sh
+sudo bash -c "echo deep &gt; /sys/power/mem_sleep"
+</code></p>
+
+<p>Et-voila:</p>
+
+<p><code>sh
+$ cat /sys/power/mem_sleep
+s2idle [deep]
+</code></p>
+
+<p>Now, as usual, this change is not going to be permanent, as we need to
+register the kernel parameter either in systemd or grub, depending on what your system is running
+on.</p>
+
+<p>Remember: a battery will only last you ~500 charges, so making sure you save as much
+energy as possible while the system is resting will allow you to defer a purchase by
+months or years.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Makefile 101]]></title>
+    <link href="https://odino.org/makefile-101/"/>
+    <updated>2018-06-15T09:53:00+00:00</updated>
+    <id>https://odino.org/makefile-101</id>
+    <content type="html"><![CDATA[<p>It seems like developers are afraid of using <code>make</code> as they link it to the painful
+experience of compiling things from scratch &mdash; the dreaded <code>./configure &amp;&amp; make &amp;&amp; make install</code>.</p>
+
+<p>Part of this fear is due to the description of what <a href="https://linux.die.net/man/1/make">make(1)</a>
+does:</p>
+
+<p><blockquote><p>The purpose of the make utility is to determine automatically which pieces of a large program need to be recompiled, and issue the commands to recompile them.</p><footer><strong>Free Software Foundation <a href="https://linux.die.net/man/1/make">https://linux.die.net/man/1/make</a> The Linux man pages</strong></footer></blockquote></p>
+
+<p>Not everyone is aware that make can be easily
+used to manage tasks in your projects, so I wanted to share a brief introduction
+ad how <a href="https://github.com/odino/mssqldump/blob/master/Makefile">Makefiles help me automate some tasks</a>
+in my day to day activities: this brief guide will focus on using make as an
+automation tool for tasks rather than a tool for compiling code.</p>
+
+<!-- more -->
+
+
+<h2>Executing tasks&hellip;</h2>
+
+<p>Let&rsquo;s start by simply creating a <code>Makefile</code>, and defining a task to run:</p>
+
+<p><code>
+task:
+  date
+</code></p>
+
+<p>If you run <code>make task</code> you will bump into the following error:</p>
+
+<p><code>
+/tmp ᐅ make task
+Makefile:2: *** missing separator.  Stop.
+</code></p>
+
+<p>and that&rsquo;s because Makefiles use tabs to indent code. Let&rsquo;s update our example by
+using tabs rather than spaces and&hellip;   &hellip;voila:</p>
+
+<p><code>
+/tmp ᐅ make task
+date
+Fri Jun 15 08:34:15 +04 2018
+</code></p>
+
+<p>What kind of sorcery is this? Well, <code>make</code> understood you wanted to run the section
+<code>task</code> of your makefile, and ran the code (<code>date</code>) within that section in a shell,
+outputting both the command and its output. If you want skip outputting the command
+that&rsquo;s being executed you can simply prefix it with an <code>@</code>:</p>
+
+<p><code>
+task:
+  @date
+</code></p>
+
+<p><code>
+/tmp ᐅ make task
+Fri Jun 15 08:34:15 +04 2018
+</code></p>
+
+<p>The first task in a <code>Makefile</code> is the <em>default</em> one, meaning we can run <code>make</code>
+without any argument:</p>
+
+<p><code>
+/tmp ᐅ make       
+Fri Jun 15 08:37:11 +04 2018
+</code></p>
+
+<p>You can add additional tasks in your <code>Makefile</code> and call them with <code>make $TASK</code>:</p>
+
+<p>```
+task:</p>
+
+<pre><code>@date
+</code></pre>
+
+<p>some:</p>
+
+<pre><code>sleep 1
+echo "Slept"
+</code></pre>
+
+<p>thing:</p>
+
+<pre><code>cal
+</code></pre>
+
+<p>```</p>
+
+<p>```
+/tmp ᐅ make thing
+cal</p>
+
+<pre><code> June 2018        
+</code></pre>
+
+<p>Su Mo Tu We Th Fr Sa</p>
+
+<pre><code>            1  2  
+</code></pre>
+
+<p> 3  4  5  6  7  8  9<br/>
+10 11 12 13 14 15 16<br/>
+17 18 19 20 21 22 23<br/>
+24 25 26 27 28 29 30<br/>
+```</p>
+
+<h2>&hellip;in a specific order</h2>
+
+<p>A lot of times you will want to execute a task before the current one &mdash; think of
+it as <code>before</code> or <code>after</code> hooks in your automated tests. This can be done by specifying
+a list of tasks right after your task&rsquo;s name:</p>
+
+<p>```
+task: thing some</p>
+
+<pre><code>@date
+</code></pre>
+
+<p>&hellip;
+```</p>
+
+<p>```
+/tmp ᐅ make task
+cal</p>
+
+<pre><code> June 2018        
+</code></pre>
+
+<p>Su Mo Tu We Th Fr Sa</p>
+
+<pre><code>            1  2  
+</code></pre>
+
+<p> 3  4  5  6  7  8  9<br/>
+10 11 12 13 14 15 16<br/>
+17 18 19 20 21 22 23<br/>
+24 25 26 27 28 29 30</p>
+
+<p>sleep 1
+echo &ldquo;Slept&rdquo;
+Slept
+Fri Jun 15 08:40:23 +04 2018
+```</p>
+
+<h2>Variables</h2>
+
+<p>Defining and using variables is fairly straightforward:</p>
+
+<p>```
+VAR=123</p>
+
+<p>print_var:</p>
+
+<pre><code>    echo ${VAR}
+</code></pre>
+
+<p>&hellip;
+```</p>
+
+<p><code>
+/tmp ᐅ make print_var    
+echo 123
+123
+</code></p>
+
+<p>but watch out as your shell variables won&rsquo;t work out of the box:</p>
+
+<p>```
+print_user:</p>
+
+<pre><code>    echo $USER
+</code></pre>
+
+<p>```</p>
+
+<p><code>
+/tmp ᐅ make print_user   
+echo SER
+SER
+</code></p>
+
+<p>as you will need to escape them with either <code>${VAR}</code> or <code>$$VAR</code>.</p>
+
+<p>Passing flags is also a bit different from what you might be used to &mdash; they&rsquo;re
+positioned as flags but use the same syntax as environment variables:</p>
+
+<p>```
+print_foo:</p>
+
+<pre><code>echo $$FOO
+</code></pre>
+
+<p>```</p>
+
+<p>```
+/tmp ᐅ make print_foo
+echo $FOO</p>
+
+<p>/tmp ᐅ make print_foo FOO=bar
+echo $FOO
+bar
+```</p>
+
+<h2>The shell</h2>
+
+<p>```</p>
+
+<h2>5.3.1 Choosing the Shell</h2>
+
+<p>The program used as the shell is taken from the variable <code>SHELL'.  If
+this variable is not set in your makefile, the program</code>/bin/sh' is
+used as the shell.
+```</p>
+
+<p>Make will use <code>sh</code> to execute code in a task, meaning some stuff might not work
+as you&rsquo;re probably using some syntax that&rsquo;s specific to bash &mdash; in order to switch
+you can simply specify the <code>SHELL</code> variable (in our case
+we would want to use <code>SHELL:=/bin/bash</code>).</p>
+
+<p>As seen before, sometimes you will need to use a quirky, custom syntax to get a
+regular shell command to work in <code>make</code> &mdash; just like variables need to be escaped
+with a <code>$$</code> or <code>${...}</code>, you will need to use <code>shell</code> when using <a href="http://tldp.org/LDP/abs/html/commandsub.html">command substitution</a>:</p>
+
+<p>```
+subshell:</p>
+
+<pre><code>echo $(shell echo ${USER})
+</code></pre>
+
+<p>```</p>
+
+<p><code>
+/tmp ᐅ make subshell
+echo alex
+alex
+</code></p>
+
+<p>Don&rsquo;t believe me? Try removing the <code>shell</code> instruction and here&rsquo;s what you&rsquo;re going
+to get:</p>
+
+<p>```
+/tmp ᐅ make subshell
+echo</p>
+
+<p>```</p>
+
+<h2>Conclusion</h2>
+
+<p>There&rsquo;s so much more <code>make</code> can do, and so many more quirky things you might need
+to find out to decrease the wps (<em>WTF per second</em>) when working with it :) that
+doesn&rsquo;t erase the fact that <code>make</code> is an extremely helpful took that allows us
+to automate workflows with ease, without having to setup very complicated pipelines,
+by writing tab-separated lines with a bunch of shell commands instead.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Easily Deaggregate an IP Address Range]]></title>
+    <link href="https://odino.org/how-to-easily-deaggregate-an-ip-address-range/"/>
+    <updated>2018-03-08T14:11:00+00:00</updated>
+    <id>https://odino.org/how-to-easily-deaggregate-an-ip-address-range</id>
+    <content type="html"><![CDATA[<p>A few days ago I needed to <a href="https://en.wikipedia.org/wiki/Null_route">nullroute</a>
+an address range, so I found myself with the incredibly tedious task of de-aggregating
+IP ranges.</p>
+
+<!-- more -->
+
+
+<p>Sure that I wouldn&rsquo;t do such thing by hand, I googled around and found <a href="http://jodies.de/ipcalc">ipcalc</a>,
+which can be installed on most Linux systems:</p>
+
+<p>```
+$ apt-get install ipcalc</p>
+
+<p>$ ipcalc 1.2.168.0 &ndash; 1.2.169.255
+deaggregate 1.2.168.0 &ndash; 1.2.169.255
+1.2.168.0/23
+```</p>
+
+<p>As simple as that!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Running Out of Space Because of Docker Containers / Images?]]></title>
+    <link href="https://odino.org/running-out-of-space-because-of-docker-containers-slash-images/"/>
+    <updated>2018-01-12T16:25:00+00:00</updated>
+    <id>https://odino.org/running-out-of-space-because-of-docker-containers-slash-images</id>
+    <content type="html"><![CDATA[<p>Almost 3 years ago I published a much-needed post around <a href="/spring-cleaning-of-your-docker-containers/">cleaning up space taken
+by docker</a> (it&rsquo;s been one of the most
+popular posts on this blog according to Google Analytics), but since a year or so
+there&rsquo;s a much better way to achieve the same.</p>
+
+<!-- more -->
+
+
+<p>Disk space has been one of the biggest painpoints for whoever worked with docker:
+you build containers, run them and don&rsquo;t bother cleaning them up :)
+Images, build
+caches and container filesystems pile up and, before you know it, there&rsquo;s some
+50GB of space taken by docker.</p>
+
+<p>Luckily enough, the docker CLI now has a very simple way to free space taken
+by images / containers:</p>
+
+<p>```
+$ docker system prune</p>
+
+<p>WARNING! This will remove:</p>
+
+<pre><code>    - all stopped containers
+    - all networks not used by at least one container
+    - all dangling images
+    - all build cache
+</code></pre>
+
+<p>Are you sure you want to continue? [y/N]</p>
+
+<p>&hellip;
+Total reclaimed space: 513.6MB
+```</p>
+
+<p>The disadvantage of this approach is that it actually kills a few things you might
+be interested in (build caches, for example), but it&rsquo;s one of those instructions
+each and everyone of us should dump in the crontab of our servers, or run seldom
+on a local machine.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Cncf | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/cncf/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Cloud Native Infrastructure]]></title>
+    <link href="https://odino.org/book-review-cloud-native-infrastructure/"/>
+    <updated>2018-09-01T12:25:00+00:00</updated>
+    <id>https://odino.org/book-review-cloud-native-infrastructure</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/cni-book.jpg"></p>
+
+<p>This goes right into the list of <a href="/book-review-nodejs-high-performance/">books I really wanted to like</a> but kind of
+disappointed me.</p>
+
+<p>The book is structured extremely well, so it comes out as a very enjoyable read.
+One downside, though, becomes fairly evident a few chapters in:
+it isn&rsquo;t practical at all, describes few patterns and instead focuses a lot
+on processes, advices and high-level description of approaches you should follow
+to embrace CN infrastructure.</p>
+
+<!-- more -->
+
+
+<p>I was probably expecting too much, but when I read the book&rsquo;s <a href="https://www.amazon.com/Cloud-Native-Infrastructure-Applications-Environment/dp/1491984309">description on the
+Kindle store</a>:</p>
+
+<blockquote><p>This <strong>practical</strong> guide shows you how to design and maintain infrastructure capable of managing the full lifecycle of these implementations.</p></blockquote>
+
+<p>I got fairly excited and proceeded to buy.</p>
+
+<p>Again, as I mentioned the book is really nice to read &mdash; I devoured it during my
+daily commute to work, and that&rsquo;s something you don&rsquo;t expect from most technical books.
+When it comes to content, though, I found it a tad repetitive and without many
+real-world examples / lessons, so it felt more of an &ldquo;abstract&rdquo; book around
+the Cloud Native ecosystem than anything else.</p>
+
+<p>I would have definitely appreciated
+if the last chapter, which serves as an introduction to interesting patterns
+such as circuit breaking, would have gone more into details: it might have been
+out of the scope of the book but would have definitely made it feel more &ldquo;hands-on&rdquo;.</p>
+
+<p>At the end of the day, Cloud Native infrastructure goes down as an introductory
+guide to the CN world. I’d recommend you to read it if you just started
+approaching the ecosystem.</p>
+]]></content>
+  </entry>
+  
+</feed>

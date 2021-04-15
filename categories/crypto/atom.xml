@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Crypto | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/crypto/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Generating a MD5 Hash in NodeJS]]></title>
+    <link href="https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs/"/>
+    <updated>2018-11-30T17:36:00+00:00</updated>
+    <id>https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs</id>
+    <content type="html"><![CDATA[<p>A few days ago I wanted to integrate gravatar in
+one of the applications I'v been working on, and
+realized gravatar still uses MD5 for hashing the
+user&rsquo;s email.</p>
+
+<!-- more -->
+
+
+<p>I was wondering whether I would need
+an <a href="https://www.npmjs.com/package/md5">external module</a>
+to generate the hash, but quickly realized the native
+<code>crypto</code> can do the trick:</p>
+
+<p>``` js
+const crypto = require(&lsquo;crypto&rsquo;)</p>
+
+<p>let hash = crypto.createHash(&lsquo;md5&rsquo;).update(&lsquo;some_string&rsquo;).digest(&ldquo;hex&rdquo;)
+```</p>
+
+<p>It really doesn&rsquo;t get any easier than that &mdash; adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

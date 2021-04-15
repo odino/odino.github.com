@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Devtools | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/devtools/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome's DevTools Console Getting Cleared Unexpectedly? Blame the Buffer Extension!]]></title>
+    <link href="https://odino.org/chromes-devtools-console-getting-cleared-unexpectedly-blame-the-buffer-extension/"/>
+    <updated>2018-09-14T13:11:00+00:00</updated>
+    <id>https://odino.org/chromes-devtools-console-getting-cleared-unexpectedly-blame-the-buffer-extension</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/devtools.png"></p>
+
+<p>This was a funny one! After weeks thinking the Chrome team might have messed up,
+I finally got frustrated and looked for a solution to one of the weirdest problems
+I had encountered: the DevTool&rsquo;s console getting cleared unexpectedly.</p>
+
+<!-- more -->
+
+
+<p>I use the console on a daily basis to be able to debug applications,
+so it was fairly annoying to see the logs being wiped out unless I ticked the
+&ldquo;<em>Preserve log</em>&rdquo; checkbox &mdash; an error would occur, I would open the console only
+to find it blank. To make the matter worse, if I&rsquo;d try to reload the page, I could
+see the error blink on the console for a fraction of a second, only for it to be
+cleared under mysterious circumstances.</p>
+
+<p>Eventually, after a few weeks of enabling &ldquo;<em>Preserve log</em>&rdquo;, I bumped into <a href="https://productforums.google.com/forum/#!topic/chrome/NIdgxE4UnGQ">this
+thread on Chrome&rsquo;s forum</a>
+and realized I had Buffer installed as well: turning off the extension magically
+gave me my console back. Don&rsquo;t ask why, don&rsquo;t ask how &mdash; all that matters to me
+is that I got my DevTools back :)</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging NodeJS Applications From Your Browser]]></title>
+    <link href="https://odino.org/debugging-nodejs-applications-from-your-browser/"/>
+    <updated>2017-04-12T17:31:00+00:00</updated>
+    <id>https://odino.org/debugging-nodejs-applications-from-your-browser</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/chrome-node-debug.png"></p>
+
+<p>If you&rsquo;ve worked with Node long enough, chances are you probably grew fed up with the lack
+of <em>plug-and-play</em> benchmarking and profiling tools in its ecosystem: well, at
+least for debugging, say no more!</p>
+
+<p>One of the most overlooked features that landed in Node over
+the past year is <a href="https://github.com/nodejs/node/pull/6792">enhanced debuggability</a>
+which, coupled with Chrome&rsquo;s DevTools, makes it extremely easy
+to debug and profile server-side JavaScript: it comes with full support of the
+<em>usual suspects</em> such as <strong>breakpoints</strong> and <strong>CPU profiles</strong>, and it&rsquo;s
+extremely easy to setup &mdash; no external dependency, no overhead, just Chrome.</p>
+
+<!-- more -->
+
+
+<p>The trick is very simple, as you just need to launch your node scrips with the
+<code>--inspect</code> flag!</p>
+
+<p>Say you have an HTTP server up &amp; running on port 8080:</p>
+
+<p>``` js index.js
+require(&lsquo;http&rsquo;).createServer((req, res) => {</p>
+
+<pre><code>console.log('Hello')
+res.write('Oh my ')
+res.end('gosh!')
+</code></pre>
+
+<p>}).listen(8080)
+```</p>
+
+<p>you simply need to start it with <code>node --inspect index.js</code> and head to the URL
+pointed out by the command line, something like:</p>
+
+<p>``` bash
+/tmp ᐅ node &mdash;inspect index.js
+Debugger listening on port 9229.
+Warning: This is an experimental feature and could change at any time.
+To start debugging, open the following URL in Chrome:</p>
+
+<pre><code>chrome-devtools://devtools/bundled/inspector.html?experiments=true&amp;v8only=true&amp;ws=127.0.0.1:9229/737e256b-8640-4331-a145-27a119ba43c8
+</code></pre>
+
+<p>```</p>
+
+<p>Needless to say, if you want to pick a specific port, you just need to tweak
+the <em>inspect</em> option with something like <code>--inspect=4000</code><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>See you next time!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>At Namshi, most of us develop on remote machines (EC2 in Mumbai) and we only expose a handful of ports from those machines, so we run our debuggers on more &ldquo;common&rdquo; ports such as 8090 <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

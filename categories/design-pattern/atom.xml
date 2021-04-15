@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Design Pattern | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/design-pattern/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Code Simplicity]]></title>
+    <link href="https://odino.org/book-review-code-simplicity/"/>
+    <updated>2017-09-23T22:08:00+00:00</updated>
+    <id>https://odino.org/book-review-code-simplicity</id>
+    <content type="html"><![CDATA[<p>People who work with me tend to realize, quite soon, how much I
+strive towards trying to build simple software: simplicity keeps
+code reusable, open and easy to maintain or evolve &mdash; the toll
+abstractions take is generally a heavy one, and I try to avoid it
+every time I can (been guilty of building complex, and some time complicated,
+stuff too!): to me, <strong>simplicity is king</strong>.</p>
+
+<p>Now, I was really excited to find out that the main dev behind
+Bugzilla, the OS bug tracker, wrote a book about simplicity in software
+as &ndash; I thought &ndash; he could give me a really good overview of keeping
+things simple in such a huge (and dated) project.</p>
+
+<!-- more -->
+
+
+<p><img class="right <a" src="href="https://images-na.ssl-images-amazon.com/images/I/51c4Mbgv-pL._SX379_BO1,204,203,200_.jpg">https://images-na.ssl-images-amazon.com/images/I/51c4Mbgv-pL._SX379_BO1,204,203,200_.jpg</a>"></p>
+
+<p>So I went ahead and bought myself a copy of &ldquo;<a href="https://www.amazon.com/Code-Simplicity-Fundamentals-Max-Kanat-Alexander-ebook/dp/B007NZU848">Code simplicity</a>&rdquo; and,
+to be honest, it was a fairly intriguing book: nothing groundbreaking
+but, at the end of the day, it is a solid book that gives you some
+inspiration.</p>
+
+<p>Even though you might not agree with everything the author puts on the
+table, you will find yourself going through some pearls on software design
+and how to design good software, through simple &amp; coincise code:</p>
+
+<p><blockquote><p>The difference between a bad programmer and a good programmer is understanding.</p></blockquote></p>
+
+<p><blockquote><p>Programming, in essence, must become the act of reducing complexity to simplicity.</p></blockquote></p>
+
+<p><blockquote><p>You must not design by committee.</p></blockquote></p>
+
+<p><blockquote><p>The desirability of any change is directly proportional to the value of the change and inversely proportional to the effort involved in making the change.</p></blockquote></p>
+
+<p><blockquote><p>nearly all decisions in software design reduce entirely to measuring the future value of a change versus its effort of maintenance.</p></blockquote></p>
+
+<p><blockquote><p>It is more important to reduce the effort of maintenance than it is to reduce the effort of implementation.</p></blockquote></p>
+
+<p><blockquote><p>there is a difference between designing in a way that allows for future change and attempting to predict the future.</p></blockquote></p>
+
+<p><blockquote><p>Code should be designed based on what you know now, not on what you think will happen in the future.</p></blockquote></p>
+
+<p><blockquote><p>the more you code, the more defects you will introduce.</p></blockquote></p>
+
+<p><blockquote><p>Never “fix” anything unless it’s a problem, and you have evidence showing that the problem really exists.</p></blockquote></p>
+
+<p><blockquote><p>The ease of maintenance of any piece of software is proportional to the simplicity of its individual pieces.</p></blockquote></p>
+
+<p><blockquote><p>Names should be long enough to fully communicate what something is or does without being so long that they become hard to read.</p></blockquote></p>
+
+<p><blockquote><p>Consistency is a big part of simplicity. If you do something one way in one place, do it that way in every place.</p></blockquote></p>
+
+<p><blockquote><p>Some projects start out with such a complex set of requirements that they never get a first version out. If you’re in this situation, you should just trim features. Don’t shoot for the moon in your first release — get out something that works and make it work better over time.</p></blockquote></p>
+
+<p><blockquote><p>Some of the best programming is done on paper, really. Putting it into the computer is just a minor detail.</p></blockquote></p>
+
+<p><blockquote><p>Comments should explain why the code is doing something, not what it is doing.</p></blockquote></p>
+
+<p><blockquote><p>When presented with complexity, ask, “What problem are you trying to solve?”</p></blockquote></p>
+
+<p>As a &ldquo;secondary read&rdquo;<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> I think this is a pretty solid book!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>When I say &ldquo;secondary&rdquo; I mean one of those backup books you read throughout a long span of time, nothing that deserves your undivided attention while reading but is still valuable to you <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

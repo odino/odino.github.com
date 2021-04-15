@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Web Security | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/web-security/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WASEC, a Book About Web Application Security, Is Now Available for Sale]]></title>
+    <link href="https://odino.org/wasec-a-book-about-web-application-security-is-now-available-for-sale/"/>
+    <updated>2019-11-25T22:41:00+00:00</updated>
+    <id>https://odino.org/wasec-a-book-about-web-application-security-is-now-available-for-sale</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/wasec.jpeg"></p>
+
+<p>I&rsquo;m pleased to announce (even though you might have already heard about this on <a href="https://twitter.com/_odino_">my Twitter stream</a>)
+that the ebook on web application security I&rsquo;ve been working on over the past year is now
+officially available for sale, at the hopefully-reasonable price of <del>$6.99</del> $9.99.</p>
+
+<p>You can now buy the book at <a href="https://leanpub.com/wasec">leanpub.com/wasec</a>, while Kindle enthusiasts will
+have to wait a few more days for it to become available there: it is currently available for <a href="https://www.amazon.com/dp/B081Z7SD48">pre-order</a>
+and should be generally available in the next few days.</p>
+
+<p>WASEC is the culmination of over a year of thoughts regarding my experience with web application
+security from the point of view of a software engineer, rather than the one of a security researcher.
+I believe software engineers might find it extremely interesting as it approaches <em>defensive</em> security
+from the point of view of someone who has to build an app and needs to keep security into consideration
+<em>among other things</em>.</p>
+
+<!-- more -->
+
+
+<p>If you&rsquo;re unsure about purchasing the ebook you can take a look at some of its content that I previously
+shared <a href="/introduction-to-web-application-security/">in this blog</a>. If reading lengthy blog posts isn&rsquo;t
+your thing, you can also download the sample version from <a href="https://leanpub.com/wasec">leanpub itself</a> &mdash; it contains the first few
+complete chapters of the book.</p>
+
+<h2>What if I can&rsquo;t afford the book?</h2>
+
+<p>Reach out to me privately, and we&rsquo;ll sort something out. I will need to make sure you&rsquo;re not trying
+to <em>gamble the system</em>, but I&rsquo;d hate to see someone not being able to read the book simply because they
+can&rsquo;t afford it &mdash; I will try to make an effort to reply to everyone who reaches out to me, and make sure
+financial conditions don&rsquo;t get in the way of knowledge.</p>
+
+<p>I wrote this book to share what my experience with
+web security has been and, frankly, I don&rsquo;t think I&rsquo;ll ever make the money I spent on it (in terms of man-hours)
+ever &mdash; so there&rsquo;s no point in being greedy :&ndash;)</p>
+
+<p>Again, ping me and we&rsquo;ll try to work something out.</p>
+
+<h2>Sayonara</h2>
+
+<p>Again, please make sure you visit <a href="https://leanpub.com/wasec">WASEC&rsquo;s book page on leanpub</a> and,
+if you&rsquo;re interested in the topic and have a few bucks to spare, buy the book. Leanpub has a 45-day &ldquo;<a href="http://help.leanpub.com/en/articles/110743-what-if-i-want-to-return-a-book-can-i-get-a-refund">100% Happiness Guarantee</a>&rdquo;,
+which means there&rsquo;s no risk in purchasing any Leanpub book, and they make it easy to get a refund if you&rsquo;ve tried
+a book and want your money back within 45 days of your purchase. If you end up reading the book, feel free to reach
+out and let me know what your thoughts are.</p>
+
+<p>In the next few days I&rsquo;ll be publishing some more updates to the book (all future updates will be available for
+free for users who have purchased it) and release it on the Kindle store &mdash; hit me up if you have any question.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+</feed>

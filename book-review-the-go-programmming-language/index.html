@@ -1,0 +1,263 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="A breath-taking overview of Golang: one of the best reads of my life." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Book review: The Go programming language</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/book-review-the-go-programmming-language/" />
+		<meta property="og:title" content="Book review: The Go programming language" />
+		<meta property="og:description" content="A breath-taking overview of Golang: one of the best reads of my life." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/book-review-the-go-programmming-language/">Book review: The Go programming language</a></h1>
+        <time>23 September 2017</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 4 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Some books are so good you feel honored to be able
+to read them, and &ldquo;<a href="https://www.amazon.com/Programming-Language-Addison-Wesley-Professional-Computing/dp/0134190440">The Go programming language</a>&rdquo;,
+in my opinion, happens to make that list: it&rsquo;s a real gem.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="https://images-na.ssl-images-amazon.com/images/I/51kErZGgOZL._SX399_BO1,204,203,200_.jpg"></p>
+
+<p>Now, I can&rsquo;t really tell if it&rsquo;s because I personally
+like Golang a lot or because the author is some kind of
+Stephen King of technical writers, but I must admit this
+was one of the best books I&rsquo;ve ever read: the way it guides
+you through the language, explain design decisions, common
+pitfalls (and how to avoid them) and so on is simply beautiful.</p>
+
+<p>To give you a perspective, the book is very practical, and each
+chapter kind of adds a feature to the software you&rsquo;re building:</p>
+
+<ul>
+<li>first, familiarize with the language (ie. syntax)</li>
+<li>then, write a small app, such as a crawler</li>
+<li>then, make it perform faster through concurrency</li>
+<li><em>then, make it concurrency-safe etc etc etc&hellip;</em></li>
+</ul>
+
+
+<p>To me, reading the book just feels like entering Rob Pike&rsquo;s brain
+to understand the decisions and rationale behind Go&rsquo;s design,
+standard library and so on.</p>
+
+<p>(side note: Rob Pike actually reviewed the book. As soon as I found
+out, I got quite excited!)</p>
+
+<p>As someone who has been playing with the language for 2
+years but didn&rsquo;t deploy more than 2 real-word Go apps in production,
+it was definitely a good read, so I&rsquo;d encourage mid, novice
+and aspiring Golang programmers to read the book.</p>
+
+<p>Keeping in mind that I tend to be
+excited about Golang in general, here&rsquo;s a bunch of significant
+quotes from the book:</p>
+
+<blockquote><p>creating one goroutine is cheap and creating a million is practical</p></blockquote>
+
+
+
+
+<blockquote><p>go doc http.ListenAndServe</p></blockquote>
+
+
+
+
+<blockquote><p>There is no limit on name length, but convention and style in Go programs lean toward short names, especially for local variables with small scopes; you are much more likely to see variables named i than theLoopIndex. Generally, the larger the scope of a name, the longer and more meaningful it should be.</p></blockquote>
+
+
+
+
+<blockquote><p>normal practice in Go is to deal with the error in the if block and then return, so that the successful execution path is not indented</p></blockquote>
+
+
+
+
+<blockquote><p>Get into the habit of considering errors after every function call, and when you deliberately ignore one, document your intention clearly.</p></blockquote>
+
+
+
+
+<blockquote><p>the unit of encapsulation is the package, not the type as in many other languages.</p></blockquote>
+
+
+
+
+<blockquote><p>The entire errors package is only four lines long</p></blockquote>
+
+
+
+
+<blockquote><p>When designing a new package, novice Go programmers often start by creating a set of interfaces and only later define the concrete types that satisfy them. This approach results in many interfaces, each of which has only a single implementation. Don’t do that. Such interfaces are unnecessary abstractions; they also have a run-time cost. You can restrict which methods of a type or fields of a struct are visible outside a package using the export mechanism. Interfaces are only needed when there are two or more concrete types that must be dealt with in a uniform way.</p></blockquote>
+
+
+
+
+<blockquote><p>A defer is marginally more expensive than an explicit call to Unlock, but not enough to justify less clear code. As always with concurrent programs, favor clarity and resist premature optimization. Where possible, use defer and let critical sections extend to the end of a function.</p></blockquote>
+
+
+
+
+<blockquote><p>Be descriptive and unambiguous where possible. For example, don’t name a utility package util when a name such as imageutil or ioutil is specific yet still concise.</p></blockquote>
+
+
+
+
+<blockquote><p>Good documentation need not be extensive, and documentation is no substitute for simplicity.</p></blockquote>
+
+
+
+
+<blockquote><p>Go’s attitude to testing stands in stark contrast. It expects test authors to do most of this work themselves, defining functions to avoid repetition, just as they would for ordinary programs.</p></blockquote>
+
+
+
+
+<blockquote><p>As the influential computer scientist Edsger Dijkstra put it, “Testing shows the presence, not the absence of bugs.”</p></blockquote>
+
+
+
+
+<blockquote><p>Since other goroutines cannot access the variable directly, they must use a channel to send the confining goroutine a request to query or update the variable. This is what is meant by the Go mantra “Do not communicate by sharing memory; instead, share memory by communicating.”</p></blockquote>
+
+
+<p>Go is really magical, the kind of magical that makes you productive and
+leaves you speechless<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup> when writing code.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Note: not the PHP kind of speechless ;-)  <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/book-review-the-go-programmming-language/"
+		},
+		"headline": "Book review: The Go programming language",
+		"description": "A breath-taking overview of Golang: one of the best reads of my life.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2017-09-23 22:07:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

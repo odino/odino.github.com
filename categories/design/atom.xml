@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Design | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/design/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Import This]]></title>
+    <link href="https://odino.org/import-this/"/>
+    <updated>2015-02-21T23:16:00+00:00</updated>
+    <id>https://odino.org/import-this</id>
+    <content type="html"><![CDATA[<p>Since I recently bumped again into this,
+I thought it might be worth sharing with
+everyone what happens when you <code>import this</code>
+in Python&rsquo;s REPL.</p>
+
+<!-- more -->
+
+
+<p>```
+~  ᐅ python                         <br/>
+Python 2.7.4 (default, Sep 26 2013, 03:20:26)
+[GCC 4.7.3] on linux2
+Type &ldquo;help&rdquo;, &ldquo;copyright&rdquo;, &ldquo;credits&rdquo; or &ldquo;license&rdquo; for more information.</p>
+
+<blockquote><blockquote><blockquote><p>import this
+The Zen of Python, by Tim Peters</p></blockquote></blockquote></blockquote>
+
+<p>Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&rsquo;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one&mdash; and preferably only one &mdash;obvious way to do it.
+Although that way may not be obvious at first unless you&rsquo;re Dutch.
+Now is better than never.
+Although never is often better than <em>right</em> now.
+If the implementation is hard to explain, it&rsquo;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea &mdash; let&rsquo;s do more of those!
+```</p>
+
+<p>Holy words!</p>
+]]></content>
+  </entry>
+  
+</feed>

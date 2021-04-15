@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Twitter | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/twitter/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Advertising on Twitter: Give Us Your Personal Data or We're Going to Bomb Your Timeline With NSFW, Sexual Ads]]></title>
+    <link href="https://odino.org/advertising-on-twitter-give-us-your-personal-data-or-were-going-to-bomb-your-timeline-with-nsfw-sexual-ads/"/>
+    <updated>2018-07-07T15:50:00+00:00</updated>
+    <id>https://odino.org/advertising-on-twitter-give-us-your-personal-data-or-were-going-to-bomb-your-timeline-with-nsfw-sexual-ads</id>
+    <content type="html"><![CDATA[<p><img class="center" src="/images/dark-twitter.png"></p>
+
+<p>A few months back I started writing on <a href="https://medium.freecodecamp.org/@alexnadalin">freeCodeCamp</a>,
+with the spirit of &ldquo;giving back&rdquo; to the community whatever I used to share on
+<a href="https://odino.org">my personal blog</a> as well.</p>
+
+<p>FCC is a very interesting publication, and one of the personalities I got to
+&ldquo;discover&rdquo; was <a href="https://twitter.com/ossia">Quincy Larson</a>; it was by following
+Quincy that I discovered I could opt-out of Twitter&rsquo;s ad tracking, something
+that turned out to be quite of a journey.</p>
+
+<!-- more -->
+
+
+<p>Quincy&rsquo;s <a href="https://twitter.com/ossia/status/1003302742717292544">pinned tweet</a> is a gem:</p>
+
+<p><img class="center" src="/images/quincy-tweet.png"></p>
+
+<p>&ldquo;Amazing&rdquo;, I thought, let me do the same &mdash; I would definitely like to opt out
+from all those personalized ads: not because of their content, but simply because
+I&rsquo;d like advertisers (and Twitter) to connect fewer dots when it comes to my
+interests and habits.</p>
+
+<p><img class="center" src="/images/odino-privacy-twitter.png"></p>
+
+<p>How beautiful was to &ldquo;<em>Control how Twitter personalizes content and collects and shares certain data.</em>&rdquo; &mdash;
+I would never have imagined what kind of Pandora&rsquo;s box I had just opened.</p>
+
+<p>Within a few days from opting-out, I spot a relatively &ldquo;weird&rdquo; tweet on my timeline:</p>
+
+<p><img class="center" src="/images/tweet-nsfw.png"></p>
+
+<p>&ldquo;Ouch&rdquo;, I told myself, &ldquo;this must the result of turning off personalized ad data&rdquo;:
+now Twitter will just serve ads from the richest bidder, and this time it was a NSFW
+one. Without jumping to conclusions, I quickly flagged the ad as not relevant, blocked
+the user and moved on, thinking this isolated episode wouldn&rsquo;t be much of a problem.</p>
+
+<p>Except that, as the weeks went by, my timeline started to look like a Hooters joint:</p>
+
+<p><img class="center" src="/images/tweet-nsfw-2.png"></p>
+
+<p><img class="center" src="/images/tweet-nsfw-3.png"></p>
+
+<p>The ads are practically identical: a burner account
+posting a link with a media and the content of the tweet being a mere &ldquo;click here&rdquo; &mdash;
+how hard would it be for Twitter to prevent this from happening?</p>
+
+<p><img class="right" src="/images/eega-beeva.png"></p>
+
+<p>I&rsquo;d say not so hard, and before you ask me to consider the technical implications
+of such a feature, let me introduce you to <a href="https://en.wikipedia.org/wiki/Mickey_Mouse_universe#Eega_Beeva">Eega Beeva</a>, an interesting character
+from the Mickey Mouse comics. &ldquo;Why?&rdquo;, you ask &mdash; just hold on for a second.</p>
+
+<p>Now, Eega is a funny character &mdash; a human-sort-of-figure from the future who is
+very popular in the <a href="http://disney.wikia.com/wiki/Eega_Beeva">Italian version of the comic</a>:
+I know of him since my dad used to buy me the Mickey Mouse comics every single week,
+so I had a good understanding of the characters in the MM universe back then.</p>
+
+<p>A few days ago, I saw a tweet from the Italian edition of the MM magazine that
+caught my attention, as it was flagged for containing what Twitter thought it might
+have been a sensitive picture:</p>
+
+<p><img class="center" src="/images/tweet-mm.png"></p>
+
+<blockquote><p>The tweet reads &ldquo;A good friend from the future is the co-star of the new
+edition of #MickeyMouseSuperStar&hellip;do you like Eega Beeva? #MickeyMouseMagazine&rdquo;</p></blockquote>
+
+<p>And, right there, I knew that this was all about: Eega Beeva does not wear anything
+in the upper part of his body, so an algorithm deciding whether a tweet might contain
+explicit content might have thought that because of his resemblance to a naked body,
+Eega Beeva must be flagged down&hellip;   &hellip;and this was the &ldquo;<em>may contain sensitive material</em>&rdquo; picture:</p>
+
+<p><img class="center" src="/images/eega-beeva-tweet.png"></p>
+
+<blockquote><p>Note that &ldquo;Eega Beeva&rdquo; is translated to &ldquo;Eta Beta&rdquo; in the Italian edition
+of the magazine</p></blockquote>
+
+<p>Now, Twitter, can you please tell me how the picture on the right may contain
+sensitive material, but you have no problem with the one on the left?</p>
+
+<p><img class="center" src="/images/tweet-wtf.png"></p>
+
+<p>So don&rsquo;t tell me there&rsquo;s nothing Twitter can do to fix this &mdash; it can be done,
+but it might also be that they don&rsquo;t really care about fixing the problem, as it
+would require for them to invest time and money into a part of the ad business
+(being able to serve pertinent ads to users who opted out of ad tracking)
+that&rsquo;s probably not very profitable. Who cares for those hippy, freedom-lover users!</p>
+
+<p>This was a sad realization: that <strong>when we try to protect our privacy Twitter
+thinks we&rsquo;re clickbait material</strong>.</p>
+
+<p>That&rsquo;s a really, really, really sad thing for me to write.</p>
+
+<blockquote><p>No photoshop skill was harmed in the writing of this blog post and editing
+of the images. That&rsquo;s because I have no skills to begin with.</p>
+
+<p>I would also like to take some (serious) time to mention that corrections to the
+way Twitter serves ads are more than welcome: sometimes these kind of glitches
+are not foreseen, and I&rsquo;m sure the engineering team at Twitter would love to get
+rid of such stuff. The question is, would the ad team want the same? ;&ndash;)</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>

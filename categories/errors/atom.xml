@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Errors | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/errors/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[When Debugging Doesn't Suck: Beautiful Errors]]></title>
+    <link href="https://odino.org/when-debugging-doesnt-suck-beautiful-errors/"/>
+    <updated>2017-03-29T22:59:00+00:00</updated>
+    <id>https://odino.org/when-debugging-doesnt-suck-beautiful-errors</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/stacktrace-java.png"></p>
+
+<p>Exceptions happen everyday: the bigger (and the more distributed) the system, the
+higher the chances for things to go south.</p>
+
+<p>Most of us already learned the lesson when we idealized architectures and they
+bit us back in the form of a catastrophic downtime that could have been avoided,
+maybe by just <a href="/better-performance-the-case-for-timeouts/">adding a required timeout</a>
+or keeping a few <a href="/book-review-release-it-design-and-deploy-production-ready-software/">best practices for distributed systems</a>
+in mind: we are now better architects, who understand that <strong>failures are an option</strong>
+and we have to build resilient systems that embrace them and work towards mitigating
+their impact.</p>
+
+<p>There is one thing, though, that most of us (including me) still suck at: <strong>throwing
+beautiful errors</strong>.</p>
+
+<p>We have great infrastructures in place to log information and monitor our systems
+where, in theory, everything is taken care of; then the day comes when disaster, in the form
+of a nasty bug, strikes and we&rsquo;re left trying to understand what&rsquo;s
+going on with our software.</p>
+
+<p>How many times, after fixing a bug, you find yourself saying
+&ldquo;<em>let&rsquo;s add some more logs though</em>&rdquo;? If you&rsquo;ve been as frustrated as I&rsquo;ve been,
+I&rsquo;d recommend you to read on.</p>
+
+<!-- more -->
+
+
+<h2>Logging should be transparent to the app</h2>
+
+<p><code>stdout</code>/<code>stderr</code> work alright most of the time, that&rsquo;s where your app should
+log to in 99% of the cases: logging is generally part of the infrastructure,
+not the single app, so there&rsquo;s virtually no reason to make the app aware of a
+specific logging transport.</p>
+
+<p>Most logging libraries support <code>std***</code> out of the box, so that you can, at a higher
+level, collect those logs in a single place, without having to change a hundred apps when
+you decide to switch to a new log collector (ie. SumoLogic, ELK, Graylog).</p>
+
+<p>Make the app unaware of who&rsquo;s receiving the logs, it&rsquo;s the best way to centralize
+logging and make sure you&rsquo;re not trapped with one solution unless you change each
+and every app in your architecture.</p>
+
+<h2>Not too much, not too less</h2>
+
+<p>Nobody likes to ingest (and pay for) gigabytes of useless logs, especially when
+you&rsquo;re trying to debug and all that pops in your monitoring console is:</p>
+
+<p><code>
+Mar 17 17:53:35 app Received request for order #123
+Mar 17 17:53:35 app Opening mysql connection
+Mar 17 17:53:35 app Order #123 cannot be placed
+Mar 17 17:53:35 app There was some problem with order #123
+Mar 17 17:53:35 app Closing mysql connection (timeout)
+Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111
+Mar 17 17:53:35 app Unable to place order #123, responding to client with error code
+Mar 17 17:53:35 app Sent code 500 to client for order #123
+</code></p>
+
+<p>So, out of 8 messages we only care about 1 or 2 of them, the actual error
+(<code>connection timed out</code>) and maybe the incoming request message (first one above):
+most of those messages will not really add anything but clutter, and you&rsquo;re left
+looking at logs that you eventually have to <strong>filter out</strong>.</p>
+
+<p>A better strategy would probably be to log the error and provide some additional
+info, in case the reader wants to understand a bit more about the error:</p>
+
+<p><code>
+Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111 {
+  timeout: 10000,
+  httpStatus: 500,
+  orderParams: ...
+}
+</code></p>
+
+<p>This should help keeping logs as informative as possible, but it exposes you to
+a nasty problem, as you&rsquo;re only logging in case an error occurs. Supposing that
+your app is an HTTP server, I&rsquo;d strongly recommend to log the request (very high-level,
+no need for a lot of details) so that you know that the app is being hit:</p>
+
+<p><code>
+Mar 17 17:53:35 app POST /orders
+Mar 17 17:53:35 app Error saving order #123: Connection timed out at mysql.go on line 111 {
+  timeout: 10000,
+  httpStatus: 500,
+  orderParams: ...
+}
+</code></p>
+
+<p>else, when a bunch of requests ends up throwing a <code>500</code> error and you don&rsquo;t see
+logs in the console, you won&rsquo;t be able to tell if the problem is with the load
+balancer in front of the app that&rsquo;s rejecting some requests or what. Add <em>cheap</em>
+logs at an high level so that you don&rsquo;t have to make lots of assumption when
+things go wrong, so that when you see this in the logs:</p>
+
+<p>```
+Mar 17 17:53:35 Server starting on port 8080&hellip;</p>
+
+<p>```</p>
+
+<p>you know the app is probably not receiving traffic at all.</p>
+
+<h2>Cluster by identifiers</h2>
+
+<p><img class="right" src="/images/aws-xray.png"></p>
+
+<p>It&rsquo;s a good idea to be able to tag logs so that you can cluster them later on,
+especially if you have a multi-layered architecture: Amazon, for example, launched
+<a href="https://aws.amazon.com/xray/">X-Ray</a> to help in these exact scenarios.</p>
+
+<p>Assign a request ID to each and every request coming to your load balancers, and
+forward that ID to the inner levels of your architecture: this will help you
+giving more context to errors.</p>
+
+<p>For example, you might end up seeing that requests
+that came through the load balancer and hit service A with a particular query string
+parameter didn&rsquo;t eventually land on service B, thus you can now focus on
+understanding why service A is holding on all of the requests with that specific
+parameter.</p>
+
+<h2>What went wrong?</h2>
+
+<p>It&rsquo;s generally helpful to understand what exactly went wrong, or what kind of
+parameter we were expecting: most of the times it&rsquo;s a matter of being able
+to include the specific parameter that caused the error in the logs, as there&rsquo;s
+nothing worse than logging a generic <code>invalid parameters</code> error, leaving the
+next guy on-call trying to figure out what exactly triggered the error.</p>
+
+<p>Something as easy as:</p>
+
+<p>``` js
+app.post(&lsquo;/users&rsquo;, (req, res) {
+  let user = req.params</p>
+
+<p>  db.findUser(user).catch(err => {</p>
+
+<pre><code>console.log('Error creating new user', {err, params})
+</code></pre>
+
+<p>  })
+})
+```</p>
+
+<p>could help you understand the root cause of the failure.</p>
+
+<p>Bear in mind that you have to be very careful when embedding external parameters into your logs,
+as you might end up <strong>logging sensitive information such as DB credentials or credit
+card numbers</strong>: check the documentation of your specific logger to see if it supports
+<a href="https://github.com/pinojs/pino/blob/4c6170274abcd09721e9d37f668e01ec5083852a/docs/howtos.md#how-do-i-redact-sensitive-information">redacting</a> information, else you&rsquo;ll have to manually &ldquo;hide&rdquo; those values.</p>
+
+<h2>How do I fix this?</h2>
+
+<p>Another very important aspects of great logs is the ability to include
+remediation steps in the logs themselves, so that once a failure happens we&rsquo;re
+immediately able to troubleshoot.</p>
+
+<p>As easy as it sounds, it&rsquo;s not always feasible to include them:
+for example, when a clients sends the wrong parameter to a service, it&rsquo;s very
+easy to identify the root cause, but not so trivial to figure out what needs
+to be done to remediate the error.</p>
+
+<p>Was there a deployment that changed the
+parameter name from <code>userId</code> to <code>user_id</code>? Is the client broken due to an update
+on its side? Is it on &ldquo;our&rdquo; side or &ldquo;their&rdquo; side? No single, clear action can be
+taken without digging a bit further, and at that point it&rsquo;s better to avoid
+including vague, unhelpful remediation steps such as &ldquo;<em>contact the customer as they seem
+to be screwing up</em>&rdquo;, as it might lead you towards the wrong direction.</p>
+
+<p>An example of remediation steps for when a <a href="https://martinfowler.com/bliki/CircuitBreaker.html">circuit breaker</a>
+kicks in:</p>
+
+<p>```
+GET api.example.com &mdash; Circuit breaker prevented connection, if you believe this
+is an error you can manually open the circuit with the following command from our
+intranet:</p>
+
+<p>  curl -X POST -d &ldquo;state=open&rdquo; <a href="https://frontend.example.com/_breakers/api.namshi.com">https://frontend.example.com/_breakers/api.namshi.com</a>
+```</p>
+
+<p>Most of the time, the breaker will close the circuit for a valid reason; whenever
+that&rsquo;s not the case you have a solution right in front of you.</p>
+
+<p>It&rsquo;s worth noting that remediation steps, like any form of documentation,
+might get outdated quite fast: my advice is to not get too excited in order to avoid
+spamming your codebase with instructions that will change every 3 months.</p>
+
+<h2>Provide useful info</h2>
+
+<p>Most of the loggers available today let you specify some kind of context to
+surround your log message with: when a timeout connecting to MySQL occurs, for
+example, it would be nice to understand how your connections pool looked at the
+time, as well as other information like the timeout itself.</p>
+
+<p>``` js
+pool.getConnection({timeout})
+  .then(&hellip;)
+  .catch(err => {</p>
+
+<pre><code>logger.error(err, {
+  timeout,
+  pool: pool.getState(),
+})
+</code></pre>
+
+<p>  })<br/>
+```</p>
+
+<p>As usual, no rocket science.</p>
+
+<h2>Collect crashes</h2>
+
+<p><img class="left" src="/images/newrelic.jpg"></p>
+
+<p>Last but not least, something that might sound silly to many of you: <strong>collect
+crash reports</strong>.</p>
+
+<p>In some languages that&rsquo;s not as trivial as it sounds (for example, <a href="http://stackoverflow.com/questions/12928487/php-try-catch-and-fatal-error">PHP&rsquo;s
+fatal errors weren&rsquo;t catchable</a> until <a href="http://php.net/manual/en/language.errors.php7.php">PHP 7</a>),
+so you might need to look into other, lower-level solutions that are able
+to intercept and log crashes when userland code can do nothing about it.</p>
+
+<p><a href="https://newrelic.com/">NewRelic</a> seems to be the front-runner here, even though its
+host-based pricing model is quite quirky under certain circumstances
+(think containers or t2 instances on AWS).</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;ve done quite some damage in the past, so this is more of a collection of
+friendly advices from someone who banged his head against the wall several
+times.</p>
+
+<p>If you&rsquo;re curious about the infrastructure we use to handle monitoring and logging
+at Namshi let me just give you a brief overview:</p>
+
+<ul>
+<li>our legacy systems log to <a href="https://www.graylog.org/">Graylog</a> through specialized transports (ie. <a href="https://github.com/namshi/winston-graylog2">winston-graylog2</a>)</li>
+<li>the rest of our apps are running in containers and log to <code>stdout</code></li>
+<li>there&rsquo;s a container, on each host, that collects all docker logs and ships them to <a href="https://sematext.com/logsene/">sematext&rsquo;s logsene</a></li>
+<li>on staging, we give devs a bit more freedom and let them have a look at the <a href="https://github.com/kubernetes/dashboard#kubernetes-dashboard">kubernetes' dashboard</a></li>
+<li><a href="https://newrelic.com/">NewRelic</a> monitors crashes and performance</li>
+<li><a href="https://sensuapp.org/">Sensu</a> runs checks that ensure things are running smoothly (ie. <code>ping google.com</code> from the machines, check we have at least X products on the website, etc)</li>
+</ul>
+
+
+<p>If you&rsquo;d like to read more about logging, I&rsquo;d recommend <a href="http://www.masterzen.fr/2013/01/13/the-10-commandments-of-logging/">this article</a>
+that really helped me shape this post.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

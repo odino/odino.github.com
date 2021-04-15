@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Scripting | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/scripting/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.7.0: Ctrl+r and Other Optimizations]]></title>
+    <link href="https://odino.org/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations/"/>
+    <updated>2019-08-30T19:15:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-7-0-ctrl-plus-r-and-other-optimizations</id>
+    <content type="html"><![CDATA[<p>A few days ago I released a new minor version of the ABS
+programming language, <a href="https://github.com/abs-lang/abs/releases/tag/1.7.0">1.7.0</a>,
+which adds some syntactic sugar as well as improvments to
+the REPL &mdash; let&rsquo;s get to them!</p>
+
+<p><img class="center" src="/images/abs-1.7.png"></p>
+
+<!-- more -->
+
+
+<h2>Reverse search in the REPL through ctrl+r</h2>
+
+<p>You can type something in the REPL and, by pressing
+<code>ctrl+r</code>, ABS will try to find the last command that
+was executed that matches what you typed.</p>
+
+<p>See it in action:</p>
+
+<p><a href="https://asciinema.org/a/0yT7ZRCeIwGAYNRg5hmoykyoe"><img src="https://asciinema.org/a/0yT7ZRCeIwGAYNRg5hmoykyoe.svg" alt="asciicast" /></a></p>
+
+<p>If you press <code>ctrl+r</code> multiple times, the REPL will
+walk its way back into the history to find the previous
+command matching your input, until it reaches the end
+of the history.</p>
+
+<p>This feature has been implemented thanks to some improvements
+in <a href="https://github.com/c-bata/go-prompt">go-prompt</a>, so hats off to
+<a href="https://github.com/c-bata">Masashi Shibata</a> for helping out!</p>
+
+<h2>Number abbreviations</h2>
+
+<p>Easily my favorite, this feature allows you to append a suffix to a
+number in order to specify the &ldquo;order of magnitude&rdquo; of the number itself.
+Confused? It&rsquo;s actually quite simple:</p>
+
+<p><code>bash
+1k # 1000 - thousand
+1m # 1000000 - million
+1b # 1000000000 - billion
+1t # 1000000000000 - trillion
+</code></p>
+
+<p>Suffixes are case-insensitive, so you can express <code>1000000</code>
+with either <code>1m</code> or <code>1M</code>.</p>
+
+<h2>Improvements to some builtin functions</h2>
+
+<p>We&rsquo;ve decided to ease using some of the standard functions:
+you can now, for example, print a message before exiting
+a script directly through the <code>exit</code> function.</p>
+
+<p>Your code would have previously looked like:</p>
+
+<p>``` go
+if err {</p>
+
+<pre><code>echo("an error occurred, goodbye!")
+exit(1)
+</code></pre>
+
+<p>}
+```</p>
+
+<p>while now you can simply do:</p>
+
+<p>``` go
+if err {</p>
+
+<pre><code>exit(1, "an error occurred, goodbye!")
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Similarly, we made it easier to use the <code>replace</code> function on
+strings: you can now omit the last argument (number of replacements),
+with its default value being <code>-1</code> (no limit):</p>
+
+<p>``` bash
+&ldquo;aaa&rdquo;.replace(&ldquo;a&rdquo;, &ldquo;b&rdquo;, -1) # &ldquo;bbb&rdquo;</p>
+
+<h1>is now the same as</h1>
+
+<p>&ldquo;aaa&rdquo;.replace(&ldquo;a&rdquo;, &ldquo;b&rdquo;) # &ldquo;bbb&rdquo;
+```</p>
+
+<p>and you can now also specify a list of characters to replace:</p>
+
+<p><code>bash
+"a_0".replace(["a", "_", "0"], "b") # "bbb"
+</code></p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.6.0: The Convenience of Index Ranges and Default Return Values]]></title>
+    <link href="https://odino.org/abs-1-dot-6-0-the-convenience-of-index-ranges-and-default-return-values/"/>
+    <updated>2019-08-18T18:15:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-6-0-the-convenience-of-index-ranges-and-default-return-values</id>
+    <content type="html"><![CDATA[<p>Here we are with a new release of ABS, the elegant programming language
+for all of your scripting needs!</p>
+
+<p><img class="center" src="/images/abs-1.6.png"></p>
+
+<p>Even though small, 1.6 (with <a href="https://github.com/abs-lang/abs/releases/tag/1.6.0">1.6.0</a>
+and <a href="https://github.com/abs-lang/abs/releases/tag/1.6.1">1.6.1</a>) introduces a
+couple interesting features, so let&rsquo;s check them out!</p>
+
+<!-- more -->
+
+
+<h2>Index ranges</h2>
+
+<p>You can now access ranges within strings and arrays by using the
+popular <code>[start:end]</code> syntax: <code>[1,2,3,4][0:2]</code> will return <code>[1,2]</code>.</p>
+
+<p>Start and end can be ommitted &mdash; you could simplify the expression
+above with <code>[1,2,3,4][:2]</code>.</p>
+
+<h2>Default return values</h2>
+
+<p>You can now simply use a <code>return;</code> at the end of a function, and
+it will return the default value <code>null</code>:</p>
+
+<p>``` go
+fn = f() {</p>
+
+<pre><code>return;
+</code></pre>
+
+<p>}</p>
+
+<p>echo(fn())
+```</p>
+
+<h2>Deprecation of $(&hellip;)</h2>
+
+<p>If you&rsquo;ve followed ABS since its initial release, chances are you first
+used system commands through the <code>$(command)</code> syntax: we&rsquo;ve now deprecated
+it and make sure the documentation reflects the fact that <code>`command`</code>
+is the standard, preferred way to run commands.</p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.5.0: File Writers Have Landed!]]></title>
+    <link href="https://odino.org/abs-1-dot-5-0-file-writers-have-landed/"/>
+    <updated>2019-07-16T19:00:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-5-0-file-writers-have-landed</id>
+    <content type="html"><![CDATA[<p>A few hours ago I released a new minor version of the ABS programming
+language, <a href="https://github.com/abs-lang/abs/releases/tag/1.5.0">1.5.0</a>,
+which includes a couple of interesting features &mdash; let&rsquo;s get to them!</p>
+
+<p><img class="center" src="/images/abs-15-intro.png"></p>
+
+<!-- more -->
+
+
+<h2>File writers</h2>
+
+<p>Probably one of the most exciting things coming out of this release
+are file writers: <code>&gt;</code> and <code>&gt;&gt;</code>.</p>
+
+<p>``` go
+for x in 1..3 {</p>
+
+<pre><code>x &gt;&gt; "file.txt"
+</code></pre>
+
+<p>}</p>
+
+<p><code>cat file.txt</code> // 1\n2\n3</p>
+
+<p>for x in 1..3 {</p>
+
+<pre><code>x &gt; "file.txt"
+</code></pre>
+
+<p>}</p>
+
+<p><code>cat file.txt</code> // 3
+```</p>
+
+<p>These operators work as file writers when both the left and right
+arguments are strings, and proceed to either truncate and write
+(<code>&gt;</code>) or append (<code>&gt;&gt;</code>).</p>
+
+<h2>[].unique()</h2>
+
+<p>Arrays now have a <code>.unique()</code> method, used to filter out
+duplicated elements:</p>
+
+<p><code>go
+[1, 2, 2, 3].unique() // [1, 2, 3]
+</code></p>
+
+<p>An element is considered duplicate if both its type and string
+representation match:</p>
+
+<p><code>go
+[1, "1", 2, 2].unique() // [1, "1", 2]
+</code></p>
+
+<p>For example, different hashes with the same content are
+considered duplicates:</p>
+
+<p><code>go
+a = {"key": "value"}
+b = {"key": "value"}
+[a, b].unique() // [{"key": "value"}]
+</code></p>
+
+<h2>Break and continue in for loops</h2>
+
+<p>We finally implemented <code>break</code> and <code>continue</code>
+within for loops: earlier on you could use <code>return</code>
+to exit a loop but it always felt a tad awkward &mdash;
+with this release this has been fixed.</p>
+
+<p>``` go
+x = 0</p>
+
+<p>for v in 1..10 {</p>
+
+<pre><code>if v &lt; 10 {
+    continue
+}
+
+x += v
+</code></pre>
+
+<p>}</p>
+
+<p>x // 10</p>
+
+<p>for v in 1..10 {</p>
+
+<pre><code>if v &gt; 1 {
+    break
+}
+
+x += v
+</code></pre>
+
+<p>}</p>
+
+<p>x // 11
+```</p>
+
+<h2>for..in stackoverflow</h2>
+
+<p>We also fixed a bug that resulted in a stack overflow when looping
+a high number of times in a <code>for..in</code> loop:</p>
+
+<p><code>bash
+$ for x in 1..10_000_000 { 1 &amp; 2 }
+runtime: goroutine stack exceeds 1000000000-byte limit
+fatal error: stack overflow
+</code></p>
+
+<p>This has been fixed. As a bonus point, <code>for..in</code> loops are
+also significantly faster with this change (especially noticeable
+on larger loops, at around 30% faster):</p>
+
+<p><code>`` bash
+$ cat for-benchmark.abs
+start =</code>echo $(($(date +%s%N)/1000000))<code>
+for x in 1..1_000_000 { 1 &amp; 2 }
+end =</code>echo $(($(date +%s%N)/1000000))`
+echo(end.int() &ndash; start.int())</p>
+
+<p>$ abs1.4 for-benchmark.abs       <br/>
+820
+$ abs1.5 for-benchmark.abs
+546
+```</p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.4.0: Welcome Unicode!]]></title>
+    <link href="https://odino.org/abs-1-dot-4-0-welcome-unicode/"/>
+    <updated>2019-07-15T19:00:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-4-0-welcome-unicode</id>
+    <content type="html"><![CDATA[<p>A few weeks ago I released version 1.4.0 (and 1.4.1, with an additional bugfix)
+of the ABS programming language: in this post, I&rsquo;d like to explain everything
+major that made it in this new minor release.</p>
+
+<p><img class="center" src="/images/abs-1.4.png"></p>
+
+<!-- more -->
+
+
+<h2>ABS ❤ unicode</h2>
+
+<p>We have implemented unicode in ABS: you can now use both
+unicode letters in variable names as well as any
+unicode character in strings.</p>
+
+<p>For example, you can output any code point within a string:</p>
+
+<p><code>go
+echo("I ❤ ABS")
+echo("Hello 世界!")
+</code></p>
+
+<p>as well as use <a href="https://www.compart.com/en/unicode/category">unicode letters</a> in variable names:</p>
+
+<p><code>go
+ȼ = "this is a weird c"
+echo(ȼ) // "this is a weird c"
+</code></p>
+
+<p>Note that only unicode letters (category <code>L</code>) are allowed as variable
+names, and using any other character will result in a parsing error:</p>
+
+<p>``` go
+⧐  ❤ = a
+ parser errors:</p>
+
+<pre><code>Illegal token '❤'
+[1:1]   ❤ = a
+</code></pre>
+
+<p>```</p>
+
+<h2>eval(&hellip;)</h2>
+
+<p>Oh, good old-school <code>eval</code>!</p>
+
+<p>This function does exactly what you&rsquo;d expect it to do, as it executes
+the ABS code passed as its argument:</p>
+
+<p><code>go
+test = [1, 2, 3, 4]
+eval("test.len()") // 4
+eval("test.len()").type() // NUMBER
+</code></p>
+
+<h2>Digits in variable names</h2>
+
+<p>We now support digits in variable names:</p>
+
+<p><code>go
+v4r14bl3 = "I got numbers"
+</code></p>
+
+<p>We might expand this feature later on to include unicode numbers,
+if the community feels like this would be a useful feature (haven&rsquo;t
+heard of any use case so far).</p>
+
+<h2>Numeric separators</h2>
+
+<p>Following <a href="https://www.python.org/dev/peps/pep-0515/">Python 3.6</a>
+and <a href="https://github.com/tc39/proposal-numeric-separator">JS on Chrome 75</a>,
+we&rsquo;ve decided to help with readability on large numbers and allow
+<code>_</code> as a numeric separator:</p>
+
+<p>``` go
+// before
+ten_grands  = 10000
+ten_yards   = 10000000</p>
+
+<p>// now you can&hellip;
+ten_grands  = 10_000
+ten_yards   = 10_000_000
+```</p>
+
+<h2>Panic without a terminal</h2>
+
+<p>We fixed a panic when you try to run the ABS REPL without
+having a terminal attached (for example, during a Docker
+build, or when piping a bare <code>abs</code> command); ABS will now
+explicitely let you know what the problem is:</p>
+
+<p>```
+$ abs > file.txt</p>
+
+<p>$ echo $?
+1</p>
+
+<p>$ cat file.txt
+Hello alex, welcome to the ABS (1.4.1) programming language!
+Type &lsquo;quit&rsquo; when you&rsquo;re done, &lsquo;help&rsquo; if you get lost!
+unable to start the ABS repl (no terminal detected)
+```</p>
+
+<h2>Panic when converting empty strings to JSON</h2>
+
+<p>We fixed a pnic when trying to convert an empty string
+to JSON, which will now convert to an empty string:</p>
+
+<p><code>go
+"".json() // ""
+</code></p>
+
+<h2>Fixes to JSON conversion of hashes</h2>
+
+<p>You can easily convert an hash to JSON through the
+builtin <code>.str   ()</code> function:</p>
+
+<p>``` go
+$ key = &ldquo;hello&rdquo;
+$ value = &ldquo;world&rdquo;</p>
+
+<p>$ hash = {key: value}</p>
+
+<p>$ hash.str()
+{&ldquo;hello&rdquo;: &ldquo;world&rdquo;}
+```</p>
+
+<p>There was an issue when converting keys or values with
+double quotes in them, but it has since been fixed.
+Code such as <code>'{"x": "\"y"}'.json().x</code> will now work
+seamlessly.</p>
+
+<h2>Go modules</h2>
+
+<p>We&rsquo;ve migrated the codebase to <a href="https://github.com/golang/go/wiki/Modules">Go modules</a>:
+even though this might not be a ground-breaking change, it should
+help those who develop the ABS core, allowing no conflicts when it
+comes to dependencies.</p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+
+<p>PS: Again, many thanks to <a href="https://github.com/mingwho">Ming</a>,
+who&rsquo;s been taking a larger role as the weeks went by. Without her,
+many of the stuff included in 1.4 wouldn&rsquo;t be possible!</p>
+
+<p>PPS: <a href="https://github.com/abs-lang/abs/milestone/12">1.5.0 is already well underway</a> &mdash; expect
+it in the next few days. We&rsquo;ll be introducing extremely
+interesting features such as file writers, so it&rsquo;s going
+to be an exciting release!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ABS 1.3.2: Making ABS Faster With a Simple Fix]]></title>
+    <link href="https://odino.org/abs-1-dot-3-2-making-abs-faster-with-a-simple-fix/"/>
+    <updated>2019-06-05T20:36:00+00:00</updated>
+    <id>https://odino.org/abs-1-dot-3-2-making-abs-faster-with-a-simple-fix</id>
+    <content type="html"><![CDATA[<p>Hi there! Just a quick post to announce a bugfix release of the ABS programming
+language: <a href="https://github.com/abs-lang/abs/releases/tag/1.3.2">1.3.2</a> fixes a simple yet important performance bug dealing
+with short-circuit evaluation.</p>
+
+<p><img class="center" src="/images/abs132.png"></p>
+
+<!-- more -->
+
+
+<p>Short-circuiting is the amazing property some languages assign
+to boolean operators (eg. <code>&amp;&amp;</code> or <code>||</code>): if the first parameter
+in the expression is sufficient to determine the end value of
+the expression, the second value is not evaluated at all.</p>
+
+<p>Take a look at this example:</p>
+
+<p><code>bash
+false &amp;&amp; sleep(a_really_long_time)
+</code></p>
+
+<p>You wouldn&rsquo;t expect the script to <code>sleep</code> since the first parameter
+in the expression is already falsy, thus the expression can never be
+truthy.</p>
+
+<p>What about:</p>
+
+<p><code>bash
+true || sleep(a_really_long_time)
+</code></p>
+
+<p>Same thing, easy peasy.</p>
+
+<p>Even more important, short-circuiting can be really useful in order
+to access a property when not sure whether it exists:</p>
+
+<p>``` bash</p>
+
+<h1>we don&rsquo;t know whether X is null or what</h1>
+
+<p>x &amp;&amp; x.property
+```</p>
+
+<p>Compare that to what you&rsquo;d usually have to write:</p>
+
+<p>``` bash</p>
+
+<h1>we don&rsquo;t know whether X is null or what</h1>
+
+<p>if x {</p>
+
+<pre><code>return null
+</code></pre>
+
+<p>}</p>
+
+<p>return x.property
+```</p>
+
+<p>You might be wondering what does all of this have to do with ABS:
+well, we were supposed to have fully working short-circuiting but,
+as it turns out, there was a bug preventing this from working. Your
+code would work and run successfully, but it would always evaluate
+all the arguments of an expression, even if it short-circuited. In
+some cases (like when using short-circuiting for accessing properties)
+your code would crash &mdash; defeating the whole purpose of short-circuiting.</p>
+
+<p>Luckily, <a href="https://github.com/mingwho">Ming</a> fixed this in <a href="https://github.com/abs-lang/abs/pull/227">#227</a>
+and the fix got backported to the 1.3.x branch: <a href="https://github.com/abs-lang/abs/releases/tag/1.3.2">1.3.2 is served!</a></p>
+
+<h2>Now what?</h2>
+
+<p>Install ABS with a simple one-liner:</p>
+
+<p><code>
+bash &lt;(curl https://www.abs-lang.org/installer.sh)
+</code></p>
+
+<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
+]]></content>
+  </entry>
+  
+</feed>

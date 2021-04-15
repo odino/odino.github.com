@@ -1,0 +1,568 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="How do browsers work? This is the question we're going to try to answer, with a focus on security." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>WASEC: understanding the browser</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/wasec-understanding-the-browser/" />
+		<meta property="og:title" content="WASEC: understanding the browser" />
+		<meta property="og:description" content="How do browsers work? This is the question we're going to try to answer, with a focus on security." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/wasec-understanding-the-browser/">WASEC: understanding the browser</a></h1>
+        <time>29 July 2018</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 3 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><ol class="aseries">
+    <p>This post is part of the &#8221;<strong><a href="/categories/wasec/">WASEC: Web Application SECurity</a></strong>&#8221; series, which is a portion of the content of <a href="https://leanpub.com/wasec">WASEC</a>, an e-book on web application security I&#8217;ve written.</p>
+    <p>Here is a list of all the articles in this series:</p>
+    <li>
+        <a href="/web-security-demistified/">Web security demystified: WASEC</a>
+    </li>
+    <li>
+        <a href="/introduction-to-web-application-security/">Introduction</a>
+    </li>
+    <li>
+        <a href="/wasec-understanding-the-browser/">Understanding the browser</a>
+    </li>
+    <li>
+        <a href="/security-https-perspective/">Security at the HTTP level</a>
+    </li>
+    <li>
+        <a href="/secure-your-web-application-with-these-http-headers/">HTTP headers to secure your application</a>
+    </li>
+    <li>
+        <a href="/security-hardening-http-cookies/">Hardening HTTP cookies</a>
+    </li>
+    <li>
+        <a href="/wasec-web-application-security-what-to-do-when-dot-dot-dot/">Situationals</a>
+    </li>
+    </br>
+    <p>
+        If you&#8217;ve enjoyed the content of this article, consider buying the complete ebook on either the <a href="https://www.amazon.com/WASEC-Application-Everything-developer-application-ebook/dp/B081Z7SD48">Kindle store</a> or <a href="https://leanpub.com/wasec">Leanpub</a>.
+    </p>
+</ol>
+
+
+<p>I want to open this series with an article aimed at understanding what browsers do,
+and a brief explanation on how they do so. It is important since most of your
+customers will interact with your web application through a browser, so it&rsquo;s
+imperative to understand the basics of these wonderful programs.</p>
+
+<!-- more -->
+
+
+<p><strong>The browser is a rendering engine</strong>: its job is to download a
+web page and render it in a way that&rsquo;s understandable by a
+human being.</p>
+
+<p>Even though this is an almost-criminal oversimplification,
+it&rsquo;s all we need to know for now: the user enters
+an address in the browser bar, the browser downloads the &ldquo;document&rdquo;
+at that URL and renders it.</p>
+
+<p><img class="center" src="/images/wasec/browser.png"></p>
+
+<p>You might be used to work with one of the most popular browsers such
+as Chrome, Firefox, Edge or Safari, but that does not mean that
+there aren&rsquo;t different browsers out there: <a href="https://lynx.browser.org/">lynx</a>, for example,
+is a lightweight, text-based browser that works from your command
+line. At the heart of lynx lie the same exact principles that
+you would find in any other &ldquo;mainstream&rdquo; browser: a user enters
+a web address (URL), the browser fetches the document and renders
+it &mdash; the only difference being the fact that lynx does not use
+a visual rendering engine but rather a text-based interface,
+which makes websites like Google look like this:</p>
+
+<p><img class="center" src="/images/wasec/lynx.png"></p>
+
+<p>We broadly understand what a browser does, but let&rsquo;s take a closer
+look at the steps these ingenious applications do for us.</p>
+
+<h2>What does a browser do?</h2>
+
+<p>Long story short, a browser&rsquo;s job mainly consists of:</p>
+
+<ul>
+<li>DNS resolution</li>
+<li>HTTP exchange</li>
+<li>rendering</li>
+<li>rinse and repeat</li>
+</ul>
+
+
+<p><strong>DNS resolution</strong> makes sure that once the user enters a URL,
+the browser knows to which server it has to connect to:
+the browser contacts a DNS server to find that <code>google.ae</code>
+translates to <code>216.58.207.110</code>, an IP address the browser
+can connect to.</p>
+
+<p>Once the browser has identified which server is going to
+serve our request, it will initiate a TCP connection with it
+and begin the <strong>HTTP exchange</strong>: this is nothing but a way for
+the browser to communicate to the server what he wants, and
+for the server to reply back. HTTP is simply the name of the most popular
+protocol for communicating on the web, and browsers mostly talk via HTTP when
+communicating with servers. An HTTP exchange involves the client (our browser)
+sending a <strong>request</strong>, and the server replying back with a <strong>response</strong>.</p>
+
+<p>For example, after the browser has successfully connected to
+the server behind <code>google.com</code>, it will send a request that looks
+like the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET / HTTP/1.1
+</span><span class='line'>Host: google.com
+</span><span class='line'>Accept: */*</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s break the request down, line by line:</p>
+
+<ul>
+<li><code>GET / HTTP/1.1</code>: with this first line, the browser aks the server to retrieve
+the document at the location <code>/</code>, adding that the rest of the request will follow
+the HTTP/1.1 protocol (it could also used <code>1.0</code> or <code>2</code>)</li>
+<li><code>Host: google.com</code>: this is <strong>the only HTTP header mandatory in HTTP/1.1</strong>. Since
+the server might serve multiple domains (<code>google.com</code>, <code>google.co.uk</code>, etc) the
+client here mentions that the request was for that specific host</li>
+<li><code>Accept: */*</code>: an optional header, where the browser is telling the server that
+it will accept any kind of response back. The server could have a resource that
+available in JSON, XML or HTML formats, so it can pick whichever format it prefers</li>
+</ul>
+
+
+<p>In this example, the browser, which acts as a <strong>client</strong>, is done with its request;
+now it&rsquo;s the turn of the server to reply back:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Cache-Control: private, max-age=0
+</span><span class='line'>Content-Type: text/html; charset=ISO-8859-1
+</span><span class='line'>Server: gws
+</span><span class='line'>X-XSS-Protection: 1; mode=block
+</span><span class='line'>X-Frame-Options: SAMEORIGIN
+</span><span class='line'>Set-Cookie: NID=1234; expires=Fri, 18-Jan-2019 18:25:04 GMT; path=/; domain=.google.com; HttpOnly
+</span><span class='line'>
+</span><span class='line'>&lt;!doctype html&gt;&lt;html"&gt;
+</span><span class='line'>...
+</span><span class='line'>...
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Whoa, that&rsquo;s a lot of information to digest: the server lets us know that the
+request was successful (<code>200 OK</code>) and adds a few headers to the <strong>response</strong>,
+for example, it advertises what server processed our request
+(<code>Server: gws</code>), what&rsquo;s the <code>X-XSS-Protection</code> policy of this response and so on and
+so forth. You do not need to understand each and every single information, as
+we will treat the HTTP protocol, its headers and so on later on in their dedicated
+chapters. For now, all you need to understand is that the client and the server
+are exchanging information, and that they do so via HTTP.</p>
+
+<p>Last but not least, the <strong>rendering</strong> process: how good would a browser be if
+the only thing it would show to the user is a list of funny characters?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!doctype html&gt;&lt;html"&gt;
+</span><span class='line'>...
+</span><span class='line'>...
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the <strong>body</strong> of the response, the server includes the representation of the
+response according to the <code>Content-Type</code> header: in our case, the content type
+was set to <code>text/html</code>, so we are expecting HTML markup in the response &mdash;
+which is exactly what we find in the body. This is where a browser truly shines:
+it parses the HTML, loads additional resources included in
+the markup (for example, there could be JavaScript files or CSS documents to fetch)
+and presents them to the user as soon as possible.</p>
+
+<p>Once more, the end result is something the average Joe can understand:</p>
+
+<p><img class="center" src="/images/wasec/browser.png"></p>
+
+<p>For a more detailed version of what really happens when we hit enter in the address
+bar of a browser I would suggest to read &ldquo;<a href="https://github.com/alex/what-happens-when">What happens when&hellip;</a>&rdquo;,
+a very elaborate attempt at explaining the mechanics behind the process.</p>
+
+<p>Since this is a series focused on security, I am going to drop a hint on what we&rsquo;ve
+just learned: <strong>attackers easily make a living out of vulnerabilities in
+the HTTP exchange and rendering part</strong>. Vulnerabilities, and malicious users, lurk
+elsewhere as well, but a better security approach on those levels already allows you
+to make strides in improving your security posture.</p>
+
+<h2>Vendors</h2>
+
+<p>The 4 most popular browser out there belong to different vendors:</p>
+
+<ul>
+<li>Chrome by Google</li>
+<li>Firefox by Mozilla</li>
+<li>Safari by Apple</li>
+<li>Edge by Microsoft</li>
+</ul>
+
+
+<p>Beside battling each other in order to increase their market penetration, vendors
+also engage with each other in order to improve the <strong>web standards</strong>, which are
+a sort of &ldquo;minimum requirements&rdquo; for browsers.</p>
+
+<p>The <a href="https://www.w3.org/">W3C</a> is the body behind the development
+of the standards, but it&rsquo;s not unusual for browsers to develop their own features
+that eventually make it as web standards, and security is no exception to that.</p>
+
+<p>Chrome 51, for example, <a href="https://www.chromestatus.com/feature/4672634709082112">introduced SameSite cookies</a>,
+a feature that would allow web applications to get rid of a particular type of
+vulnerability known as CSRF (more on this later). Other vendors decided
+this was a good idea and followed suit, leading to SameSite being a web standard:
+as of now, <a href="https://caniuse.com/#search=samesite">Safari is the only major browser without SameSite cookie support</a>.</p>
+
+<p><img class="center" src="/images/wasec/samesite.png"></p>
+
+<p>This tells us 2 things:</p>
+
+<ul>
+<li>Safari does not seem to care enough about their users&#8217; security (just kidding: SameSite cookies
+will be available in Safari 12, which might have already been released by the time
+you&rsquo;re reading this book)</li>
+<li><strong>patching a vulnerability on one browser does not mean that all your users are safe</strong></li>
+</ul>
+
+
+<p>The first point is a shot at Safari (as I mentioned, just kidding!), while the
+second information is really important: when developing web applications, we don&rsquo;t
+just need to make sure that they look the same across various browsers, but
+also that they ensure our users are protected in the same way across platforms.
+<strong>Your strategy towards web security should vary according to what a browser&rsquo;s vendor
+allows us to do</strong>: nowadays, most browsers support the same set
+of features and rarely deviate from their common roadmap, but instances like
+the one above still happen, and it&rsquo;s something we need to take into account
+when defining our security strategy.</p>
+
+<p>In our case, if we decide that we&rsquo;re going to mitigate CSRF attacks only through
+SameSite cookies, we should be aware that we&rsquo;re putting our Safari users at risk.
+And our users should know that too.</p>
+
+<p>Last but not least, you should remember that you can decide whether to support a
+browser version or not: supporting each and every browser version would be impractical
+(think of Internet Explorer 6); making sure that the last few versions of the
+major browser are supported, though, it&rsquo;s generally a
+good decision. If you don&rsquo;t plan to offer protection on a particular platform,
+though, it&rsquo;s generally advisable to let your users know.</p>
+
+<blockquote><h2>Don&rsquo;t support outdated browsers</h2>
+
+<p>You should never encourage your users to use outdated browsers, or actively
+support them. Even though you might have took all the necessary precautions,
+other web developer won&rsquo;t. Encourage users to use the latest supported version
+of one of the major browsers.</p></blockquote>
+
+<h2>Vendor or standard bug?</h2>
+
+<p>The fact that the average user accesses our application through a 3rd party client
+(the browser) adds another level of indirection towards a clear, secure browsing
+experience: the browser itself might present a security vulnerability.</p>
+
+<p>Vendors generally provide rewards (aka <em>bug bounties</em>) to security researchers
+who can find a vulnerability on the browser itself &mdash; these bugs are not tied to
+your implementation, but rather to how the browser handles security
+on its own. The <a href="https://www.google.com/about/appsecurity/chrome-rewards/">Chrome reward program</a>,
+for example, lets security engineers reach out to the Chrome security team to
+report vulnerabilities they have found; if these vulnerabilities are confirmed,
+a patch is issued, a security advisory notice is generally released to the public
+and the researcher receives a (usually financial) reward from the program.</p>
+
+<p>Companies like Google invest a relatively good amount of capital into their
+Bug Bounty programs, as it allows them to attract researchers by promising a financial
+benefit should they find any problem with the application.</p>
+
+<p>In a Bug Bounty program, everyone wins: the vendor manages to improve the security of its software, and
+researchers get paid for their findings. We will discuss these programs later on
+in the book, as I believe Bug Bounty initiatives deserve their own chapter in
+the security landscape.</p>
+
+<blockquote><h2>I discovered a browser bug!</h2>
+
+<p>Jake Archibald is a developer advocate at Google who recently discovered a
+vulnerability impacting more than one browser: he documented his efforts, how
+he approached different vendors and their reactions in an interesting <a href="https://jakearchibald.com/2018/i-discovered-a-browser-bug/">blog
+post</a> that I&rsquo;d recommend you to read.</p></blockquote>
+
+<h2>A browser for developers</h2>
+
+<p>By now, we should have understood a very simple but rather important concept:
+<strong>browsers are simply HTTP clients built for the average internet surfer</strong>.</p>
+
+<p>They are definitely more powerful than a platform&rsquo;s bare HTTP client (think of
+NodeJS&rsquo;s <code>require('http')</code>, for example), but at the end of the day, they&rsquo;re &ldquo;just&rdquo;
+a natural evolution of simpler HTTP clients.</p>
+
+<p>As developers, our HTTP client of choice is probably <a href="http://curl.haxx.se">cURL</a>
+by Daniel Stenberg, one of the most popular software programs web developers use
+on a daily basis: it allows us to do an HTTP exchange on-the-fly, by sending an
+HTTP request from our command line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -I localhost:8080
+</span><span class='line'>
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>server: ecstatic-2.2.1
+</span><span class='line'>Content-Type: text/html
+</span><span class='line'>etag: "23724049-4096-"2018-07-20T11:20:35.526Z""
+</span><span class='line'>last-modified: Fri, 20 Jul 2018 11:20:35 GMT
+</span><span class='line'>cache-control: max-age=3600
+</span><span class='line'>Date: Fri, 20 Jul 2018 11:21:02 GMT
+</span><span class='line'>Connection: keep-alive</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the example above, we have requested the document at <code>localhost:8080/</code>, and a
+local server replied successfully.</p>
+
+<p>Rather than dumping the response&rsquo;s body to the command line, here we&rsquo;ve used the
+<code>-I</code> flag which tells cURL we&rsquo;re only interested in the response headers. Taking
+it one step forward, we can instruct cURL to dump a few more information, including
+the actual request it performs, so that we can have a better look at this whole HTTP
+exchange. The option we need to use is <code>-v</code> (verbose):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -I -v localhost:8080
+</span><span class='line'>* Rebuilt URL to: localhost:8080/
+</span><span class='line'>*   Trying 127.0.0.1...
+</span><span class='line'>* Connected to localhost (127.0.0.1) port 8080 (#0)
+</span><span class='line'>&gt; HEAD / HTTP/1.1
+</span><span class='line'>&gt; Host: localhost:8080
+</span><span class='line'>&gt; User-Agent: curl/7.47.0
+</span><span class='line'>&gt; Accept: */*
+</span><span class='line'>&gt;
+</span><span class='line'>&lt; HTTP/1.1 200 OK
+</span><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>&lt; server: ecstatic-2.2.1
+</span><span class='line'>server: ecstatic-2.2.1
+</span><span class='line'>&lt; Content-Type: text/html
+</span><span class='line'>Content-Type: text/html
+</span><span class='line'>&lt; etag: "23724049-4096-"2018-07-20T11:20:35.526Z""
+</span><span class='line'>etag: "23724049-4096-"2018-07-20T11:20:35.526Z""
+</span><span class='line'>&lt; last-modified: Fri, 20 Jul 2018 11:20:35 GMT
+</span><span class='line'>last-modified: Fri, 20 Jul 2018 11:20:35 GMT
+</span><span class='line'>&lt; cache-control: max-age=3600
+</span><span class='line'>cache-control: max-age=3600
+</span><span class='line'>&lt; Date: Fri, 20 Jul 2018 11:25:55 GMT
+</span><span class='line'>Date: Fri, 20 Jul 2018 11:25:55 GMT
+</span><span class='line'>&lt; Connection: keep-alive
+</span><span class='line'>Connection: keep-alive
+</span><span class='line'>
+</span><span class='line'>&lt;
+</span><span class='line'>* Connection #0 to host localhost left intact</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Just about the same information is available in mainstream browsers through their
+DevTools: as we&rsquo;ve seen, browsers are nothing more than elaborate HTTP clients.
+Sure, they add an enormous amount of features (think of credential management,
+bookmarking, history, etc) but the truth is that they were born as HTTP clients
+for humans. This is important, as in most cases you don&rsquo;t need a browser to test
+your web application&rsquo;s security, as you can simply &ldquo;curl it&rdquo; and have a look at
+the response.</p>
+
+<p>One final thing I&rsquo;d like us to understand is that <strong>anything can be a browser</strong>: if
+you have a mobile application that consumes APIs through the HTTP protocol, then the
+app is your browser &mdash; it just happens to be a highly customized one you built
+yourself, one that only understands a specific type of HTTP responses (from your own
+API).</p>
+
+<h2>Into the HTTP protocol</h2>
+
+<p>As we mentioned, the <strong>HTTP exchange</strong> and <strong>rendering</strong> phases are the ones that we&rsquo;re
+mostly going to cover, as they provide the largest number
+of <strong>attack vectors</strong> for malicious users. In the next article, we&rsquo;re going to
+take a deeper look at the HTTP protocol and try to understand what measures we
+should take in order to secure HTTP exchanges.</p>
+
+<div class="series_nav">
+  
+  <div class="prev">
+    <a href="/introduction-to-web-application-security/">Introduction</a>
+  </div>
+  
+  
+  <div class="next">
+    <a href="/security-https-perspective/">Security at the HTTP level</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/wasec-understanding-the-browser/"
+		},
+		"headline": "WASEC: understanding the browser",
+		"description": "How do browsers work? This is the question we're going to try to answer, with a focus on security.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2018-07-29 13:54:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

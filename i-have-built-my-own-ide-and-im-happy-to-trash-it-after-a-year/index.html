@@ -1,0 +1,385 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="The story of how Open Source projects are born and die, without regrets" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>I have built my own IDE and I'm happy to trash it after a year</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/i-have-built-my-own-ide-and-im-happy-to-trash-it-after-a-year/" />
+		<meta property="og:title" content="I have built my own IDE and I'm happy to trash it after a year" />
+		<meta property="og:description" content="The story of how Open Source projects are born and die, without regrets" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/i-have-built-my-own-ide-and-im-happy-to-trash-it-after-a-year/">I have built my own IDE and I'm happy to trash it after a year</a></h1>
+        <time>01 August 2015</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 6 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p><img class="right" src="/images/nikki-logo.svg" width="180"></p>
+
+<p>Last year I dedicated quite some time, <a href="https://github.com/odino/nikki/graphs/contributors">during ramadan</a>, to a project
+I really cared about: building a <strong>fast and smart text editor</strong> to use
+on a daily basis.</p>
+
+<p>That&rsquo;s how <a href="/last-weekend-i-wrote-an-ide-in-javascript/">Nikki was born</a>, and today I am happy to announce that the
+project is dead, simply because I found another, very similar tool
+that does the job.</p>
+
+<p>This is the story of <strong>how open source projects get born and die</strong>,
+and why we should still celebrate it.</p>
+
+<!-- more -->
+
+
+<h2>Preface</h2>
+
+<p>I had been using <a href="https://www.jetbrains.com/phpstorm/">PHPStorm</a> for quite some time and I was happily
+paying its license since, in the PHP world, it seemed like no
+editor could match its features while performing that fast: the
+problem was that PHPStorm was still an IDE at its core, meaning
+that to be able to write a couple lines of code I needed to wait
+at least 10 seconds for it to boot the GUI, scan the current project,
+look for updates, cook dinner, do the dishes and whatever else
+it needed to do&hellip;</p>
+
+<p>See, it&rsquo;s been a while <strong>I changed job</strong>: at <a href="https://www.namshi.com">Namshi</a> I&rsquo;m no longer the guy who is
+going to implement long-term features or will need to spend a lot of time on a single, monolithic
+project; right now I am mostly kicking new projects off, adding
+small features, pairing or discussing with the team what kind of
+design to use and so on: most of my time is really spent in
+scripting over microservices which, in my opinion, rarely require
+an IDE, especially when they&rsquo;re written in JavaScript.</p>
+
+<p>At the end of the day our typical project looks very slim: if
+I compare the size of our initial API layer (a Symfony app with
+lots of bundles and abstraction) to our newest services (express
+apps with 10/15 files in total<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>) they look like night
+and day; our node microservices ain&rsquo;t very complex and are quite
+self-explanatory: you won&rsquo;t need to navigate through a lot of
+methods to understand the responsibilities of each module.</p>
+
+<p>Want to make an API call? Just open <code>api.js</code> and
+see which methods are public:</p>
+
+<figure class='code'><figcaption><span>api.js: an example module that wraps some API calls</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">request</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">getCustomer</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">request</span><span class="p">(</span><span class="s1">&#39;/customers/&#39;</span> <span class="o">+</span> <span class="nx">email</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">getCustomer</span><span class="o">:</span> <span class="nx">getCustomer</span><span class="p">,</span>
+</span><span class='line'>  <span class="c1">//  ...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This transition happened around a year and a half ago, and
+I started growing frustrated of PHPStorm as it wasn&rsquo;t very helpful
+for my use-case: it was doing too much, taking too long.</p>
+
+<p>Time to look for an alternative!</p>
+
+<h2>Looking around</h2>
+
+<p>There were a few alternatives at that time:</p>
+
+<ul>
+<li><a href="http://www.sublimetext.com/">sublime</a></li>
+<li><a href="http://lighttable.com/">lighttable</a></li>
+<li>a pimped <a href="http://grigio.org/pimp_my_gedit_was_textmate_linux/">gedit</a></li>
+</ul>
+
+
+<p>but none of them felt &ldquo;right&rdquo;: either they didn&rsquo;t have a
+vibrant community behind them or they simply lacked of
+coolness (I&rsquo;m looking at you, gedit).</p>
+
+<p>So far I couldn&rsquo;t find a real winner amongst them, so I started thinking that
+writing a simple thingy on my own would have been a very
+good learning experience now that the new <a href="http://socket.io/">socket.io</a>
+had just been <a href="http://socket.io/blog/introducing-socket-io-1-0/">released</a>.</p>
+
+<p>I mean, you can create editors in <a href="https://coderwall.com/p/lhsrcq/one-line-browser-notepad">one line of code</a>,
+how big of a task would this be?</p>
+
+<h2>Enter Nikki</h2>
+
+<p>That&rsquo;s how Nikki was born: I put up some <a href="https://raw.githubusercontent.com/odino/nikki/master/bin/images/nikki-ss.png">crappy frontend</a>
+and made it talk with a simple NodeJS server that would have
+fun browsing, opening and modifying files on my machine.</p>
+
+<p>I can&rsquo;t say that the code was the <a href="https://github.com/odino/nikki/blob/master/server/socket.js#L81-L93">best I&rsquo;ve ever written</a>
+(especially on the <a href="https://github.com/odino/nikki/blob/master/client/scripts/fs.js">frontend</a> :-P), but
+at the end of the day I got the chance to play with socket.io,
+<a href="https://github.com/substack/dnode">dnode</a>, learned how to &ldquo;<a href="https://github.com/odino/nikki/commit/efecd05ab8a02406d63011e465850f2931ecef07">daemonize</a>&rdquo;
+a node process, played with the <a href="http://ace.c9.io/">ACE editor</a> and
+learned <a href="https://github.com/odino/nikki/commit/704927c369ef156d3d03d90af68853657328c5f4">how to watch for file changes in Node</a> (and the fact that this feature was <a href="https://nodejs.org/docs/latest/api/fs.html#fs_fs_watch_filename_options_listener">quite unstable</a>):
+I dedicated a lot of time to Nikki but I also practiced
+a lot with new tools and patterns, which resulted in me getting to know
+the platform and becoming more confident with JavaScript<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>
+as the days went by.</p>
+
+<p>I&rsquo;m not lying: whenever I needed to start a new project or make some
+changes my terminal would look like:</p>
+
+<figure class='code'><figcaption><span>api.js: an example module that wraps some API calls</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">~</span> <span class="p">(</span><span class="nx">master</span> <span class="err">✔</span><span class="p">)</span> <span class="err">ᐅ</span> <span class="nx">cd</span> <span class="nx">projects</span><span class="o">/</span><span class="nx">something</span>
+</span><span class='line'><span class="o">~</span><span class="err">/projects/something (master ✔) ᐅ nikki</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and my browser would open on port <code>9123</code> and let me code in milliseconds:
+how nice it felt!</p>
+
+<p>Of course, Nikki didn&rsquo;t have a community behind it so
+<a href="https://github.com/odino/nikki/issues?q=is%3Aissue+is%3Aclosed">features or bugfixes took me some time</a>
+but, by using it on a daily basis, I made sure that it
+wouldn&rsquo;t crash or misbehave &mdash; else I would have grown
+frustrated at my own child!</p>
+
+<h2>Then, one night&hellip;</h2>
+
+<p><img class="right" src="/images/atom.png"></p>
+
+<p>This went on for over a year: I think I was the only guy
+on the planet using it, and it still made me feel very proud
+as it fit my needs very well.</p>
+
+<p>At the same time, I got very curious when I first heard of <a href="https://atom.io/">Atom</a>
+as it felt modern (JavaScript) and cool (GitHub), though, as soon as
+GitHub released it, I realized it was still missing a couple things:</p>
+
+<ul>
+<li>not battle-tested</li>
+<li>not a huge community</li>
+<li>no Linux build</li>
+</ul>
+
+
+<p>The first 2 points were quickly resolved: developers started to love
+the &ldquo;hackable text editor&rdquo; and the community beefed up in a very short
+span of time, meaning that the project could reach a stable
+version very quickly as lots of people were using and testing it<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>.</p>
+
+<p>A working version for Linux came into existence after
+a few months, which meant that Atom was ready for me:
+then, one night, I decided to format my machine and give
+it a brand new life, a good excuse to <strong>try something new</strong>.</p>
+
+<p>I installed Atom and never looked back: it behaves quite like Nikki<sup id='fnref:4'><a href='#fn:4' rel='footnote'>4</a></sup>,
+has plugins, a well-tested ground and has a huge community of users / developers
+ready to help: this product <strong>makes much more sense</strong>. I am
+happily using it since a month or so and I <strong>totally love it</strong>: the way it uses
+shortcuts for a ton of things, &ldquo;open in github&rdquo;, the speed it takes to open
+up, how simple it is to customize&hellip;</p>
+
+<p>&hellip;and here we are: now that <strong>Nikki is dead</strong>, was it a wasted effort?</p>
+
+<h2>Let&rsquo;s celebrate Open Source</h2>
+
+<p>I think, on a smaller scale, PHPStorm, Nikki and Atom represent a very
+common pattern in technology and Open Source: a cool project that
+doesn&rsquo;t age very well, or needs to adapt to new technologies.</p>
+
+<p>The same has happened with Solr, just a few years ago: ElasticSearch
+was born and Solr suddenly lost its coolness.</p>
+
+<p>The same is happening with Python and Golang.</p>
+
+<p>The same for the <a href="https://en.wikipedia.org/wiki/Zend_Engine">Zend Engine</a>
+and <a href="http://hhvm.com/">HHVM</a>.</p>
+
+<p>Same for Ruby and NodeJS.</p>
+
+<p>Might be that the same will happen for <a href="https://www.graylog.org/">Graylog</a> and <a href="https://github.com/getsentry/sentry">Sentry</a>.</p>
+
+<p>Now&hellip;you got me.</p>
+
+<p>The beauty of Open Source is that <strong>no one
+will prevent you from converting your ideas into working code</strong>: great
+engineers will develop a new product, the underlying technology
+will age and look less appealing in 1, 3 or 5 years and a new
+group of developers will pick those great ideas, patterns and
+implement them on their own, on a newer, different platform, to
+provide some competition to the &ldquo;old guys&rdquo;.</p>
+
+<p>At the end of the day, I have 3 key takeaways from this experience:</p>
+
+<ul>
+<li><strong>community wins</strong>: no man is an island, you should look for help
+and be guided by the community as they most-likely had your same
+problem and already found an answer. In most cases, follow what smart
+people do and look at the size of the community, as that will tell you
+how big of a reach the project has</li>
+<li><strong>OSS is a phenomenal learning experience</strong>: open source your code,
+use the tools that the community gives you. Even if you have to trash
+it after a few months you&rsquo;ll probably learn so much on your way to <code>v1.0</code></li>
+<li><strong>don&rsquo;t go too far</strong>: do not think that you are going to create
+the Next Big Thing, keep a low profile and learn not to love code:
+it doesn&rsquo;t age well and there will always be someone that can write
+a faster and more elegant version of your function. From <a href="https://github.com/docker/libcontainer/blob/master/PRINCIPLES.md">libcontainer&rsquo;s principles</a>:
+&ldquo;<em>Don&rsquo;t try to replace every tool. Instead, be an ingredient to improve them</em>&rdquo;</li>
+</ul>
+
+
+<p>With this in mind, I am still glad I wrote Nikki: it was a truly great
+learning experience.</p>
+
+<p><strong>Check</strong>.</p>
+
+<p>And I&rsquo;m still happy to trash it: it served
+its purpose, I knew its limitations and led me to another great tool.</p>
+
+<p><strong>Check</strong>.</p>
+
+<p>And yeah, I&rsquo;m super-excited for who&rsquo;s going to challenge Atom.<br />
+That&rsquo;s the way it is, the way it will always be.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>Plus tests&#8230;   &#8230;most of the times :-P <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Back at the time my go-to language was still PHP, whereas now I can almost only do JS <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>Funny enough, a couple guys at the office told me they tried it way back at the time and weren&#8217;t happy with it because it used to be quirky <a href='#fnref:3' rev='footnote'>↩</a></li><li id='fn:4'>or&#8230;I should say Nikki behaves quite like Atom :) <a href='#fnref:4' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/i-have-built-my-own-ide-and-im-happy-to-trash-it-after-a-year/"
+		},
+		"headline": "I have built my own IDE and I'm happy to trash it after a year",
+		"description": "The story of how Open Source projects are born and die, without regrets",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2015-08-01 11:42:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

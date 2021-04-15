@@ -1,0 +1,670 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="I decided to move as much as possible to containers, even for everyday tasks like browsing the internet" name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>How Docker changed me</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/how-docker-changed-me/" />
+		<meta property="og:title" content="How Docker changed me" />
+		<meta property="og:description" content="I decided to move as much as possible to containers, even for everyday tasks like browsing the internet" />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/how-docker-changed-me/">How Docker changed me</a></h1>
+        <time>07 August 2015</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 6 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>A lot of people blog about their experiences with
+<a href="https://www.docker.com/">Docker</a> and how it helps
+them either running apps in production or easily
+replicating development environments, so I won&rsquo;t
+spend much time on that.</p>
+
+<p>This post is about how docker changed the way
+I think of my personal laptop which is, yes, used
+to deploy containers to production and develop
+apps through <a href="https://docs.docker.com/compose/">docker-compose</a>,
+but also to blog and do a lot of personal stuff
+with it.</p>
+
+<!-- more -->
+
+
+<h2>Dockerizing myself</h2>
+
+<p>A few weeks back I decided to format my <a href="http://www.cnet.com/products/dell-xps-13-january-2013/">XPS</a>
+in order to clean it up: I never had problems related
+to its performances but, since the disk space on my
+machine isn&rsquo;t much (128gb), I constantly had troubles
+between Docker containers and my stuff on Dropbox<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>Formatting and upgrading has never been easy: you
+need to re-install a hella lot of packages from scratch
+and configure your machine as it was: since I wanted
+to find a simple way to automate this and I already had
+some experience with Docker, I decided that the best
+approach would be to simply get a list of all the packages
+I had installed, trim it down to what I really needed
+and manage everything else through containers.</p>
+
+<h2>First off: get a list of packages you&rsquo;ll need</h2>
+
+<p>This one&rsquo;s pretty easy, you just need some bash voodoo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>comm -23 &lt;(apt-mark showmanual | sort -u) &lt;(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u) | awk {'print  $0'}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This command will simply print a very handy list of packages
+installed on your system:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~ (master ✔) ᐅ comm -23 &lt;(apt-mark showmanual | sort -u) &lt;(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u) | awk {'print  $0'}
+</span><span class='line'>atom
+</span><span class='line'>build-essential
+</span><span class='line'>dropbox
+</span><span class='line'>flashplugin-installer
+</span><span class='line'>gimp
+</span><span class='line'>git
+</span><span class='line'>google-chrome-stable
+</span><span class='line'>guake
+</span><span class='line'>htop
+</span><span class='line'>lxc-docker
+</span><span class='line'>mysql-workbench
+</span><span class='line'>skype:i386
+</span><span class='line'>teamviewer:i386
+</span><span class='line'>vim
+</span><span class='line'>whois
+</span><span class='line'>zsh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This way I&rsquo;ll be able to understand what all I have put
+on my machine and remove packages I don&rsquo;t need anymore:
+I&rsquo;m trying to keep this list as slim as possible and
+move everything else through containers.</p>
+
+<h2>Secondly, create containers for whatever you need</h2>
+
+<p>Here comes the nice part: need <a href="/how-to-test-3rd-party-hooks-and-webservices-locally/">ngrok</a>
+running locally? There&rsquo;s a <a href="https://github.com/CenturyLinkLabs/docker-ngrok">container</a> for that!</p>
+
+<p>But a container isn&rsquo;t the only thing that will make the trick,
+as you still need to type something like
+<code>docker run --rm --name ngrok -e "HTTP_PORT=8080" centurylink/ngrok</code>,
+which is quite annoying: my approach is to then have basic bash functions
+for all my containers, so that I don&rsquo;t &ldquo;see&rdquo; docker and simply run stuff
+like it was natively running on my laptop:</p>
+
+<figure class='code'><figcaption><span>.zshrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ngrok <span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  docker run --rm -ti --name ngrok -e <span class="nv">HTTP_PORT</span><span class="o">=</span><span class="nv">$@</span> ngrok
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point I can simply type <code>ngrok 8080</code> and forget
+about how <code>ngrok</code> is running:</p>
+
+<figure class='code'><figcaption><span>.zshrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~ <span class="o">(</span>master ✔<span class="o">)</span> ᐅ ngrok 8080
+</span><span class='line'><span class="o">[</span>08/07/15 12:43:45<span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Reading configuration file /.ngrok
+</span><span class='line'><span class="o">[</span>08/07/15 12:43:45<span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> <span class="o">[</span>client<span class="o">]</span> Trusting root CAs: <span class="o">[</span>assets/client/tls/ngrokroot.crt<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>08/07/15 12:43:45<span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> <span class="o">[</span>view<span class="o">]</span> <span class="o">[</span>web<span class="o">]</span> Serving web interface on 127.0.0.1:4040
+</span><span class='line'><span class="o">[</span>08/07/15 12:43:45<span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Checking <span class="k">for </span>update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Last but not least: some manual stuff</h2>
+
+<p>I didn&rsquo;t want to think of a decent way to dockerize
+NodeJS / NPM / bower for when I need them for my
+experiments, outside of a container, running on my
+machine: you can still do that with an alias like
+<code>docker run -ti -v $(pwd):/src node</code>, but I didnt
+want to spend too much time thinking how to save
+global modules in the same image without putting it
+in the base Dockerfile etc etc (so that when I do
+<code>npm install -g clusterjs</code> it will save it in the
+image for future reuse).</p>
+
+<p>So, for the moment, I still have node and all its
+related tools running locally as well.</p>
+
+<h2>At the end of it&hellip;</h2>
+
+<p>I have now created few &ldquo;personal&rdquo; containers,
+though I&rsquo;m planning to add them as I need them:</p>
+
+<ul>
+<li><a href="https://github.com/odino/dev/tree/master/cap">deployments through capistrano</a>:
+this <a href="https://github.com/odino/dev/blob/2dc2b07c0fd88d2203faf4e75b3f014cf7c2f145/aliases#L5">mounts my SSH keys inside the container</a> and lets me deploy the <a href="https://www.namshi.com">Namshi</a> apps
+that we still deploy through capistrano (best is: I don&rsquo;t
+need ruby, gems, bundler or whatever installed on my machine)</li>
+<li><a href="https://github.com/odino/dev/tree/master/ngrok">ngrok</a>, to
+expose local ports to the internet</li>
+<li><a href="https://github.com/odino/dev/tree/master/play">a dev environment to play with (includes python and node)</a></li>
+</ul>
+
+
+<p>This blog also runs on a <a href="https://github.com/odino/odino.github.com/blob/source/Dockerfile">container</a>, and the alias I
+use is <a href="https://github.com/odino/dev/blob/2dc2b07c0fd88d2203faf4e75b3f014cf7c2f145/aliases#L60">here</a>.</p>
+
+<p>As you might have noticed, I created a repo to facilitate all
+of this stuff (<a href="https://github.com/odino/dev">odino/dev</a>), so
+that when I want to get my environment ready on my next machine
+I will only<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup> need to clone this repo and run
+<code>./build.sh</code>:</p>
+
+<figure class='code'><figcaption><span>.zshrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>~/projects/dev <span class="o">(</span>master ✔<span class="o">)</span> ᐅ ./build.sh
+</span><span class='line'>Prerequisites:
+</span><span class='line'>* clone and compile node <span class="o">(</span>with npm<span class="o">)</span>
+</span><span class='line'>* install docker <span class="o">(</span>https://blog.docker.com/2015/07/new-apt-and-yum-repos/<span class="o">)</span> and have it running <span class="k">for </span>yur user <span class="o">(</span>https://docs.docker.com/installation/ubuntulinux/#optional-configurations-for-docker-on-ubuntu<span class="o">)</span>
+</span><span class='line'>Please abort <span class="o">(</span>you have 5 seconds<span class="o">)</span> <span class="k">if </span>this stuff ain<span class="s1">&#39;t done!</span>
+</span><span class='line'><span class="s1">Installing NPM modules:</span>
+</span><span class='line'><span class="s1">You have 5 seconds to stop this operation...</span>
+</span><span class='line'><span class="s1">/home/odino/local/node/bin/gulp -&gt; /home/odino/local/node/lib/node_modules/gulp/bin/gulp.js</span>
+</span><span class='line'><span class="s1">/home/odino/local/node/bin/bower -&gt; /home/odino/local/node/lib/node_modules/bower/bin/bower</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/npm-package-arg requires semver@&#39;</span>4<span class="s1">&#39; but will load</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/semver,</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency which is version 2.3.0</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/rimraf/node_modules/glob requires inflight@&#39;</span>^1.0.4<span class="s1">&#39; but will load</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/inflight,</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency which is version 1.0.1</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/rimraf/node_modules/glob requires minimatch@&#39;</span>^2.0.1<span class="s1">&#39; but will load</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/minimatch,</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency which is version 1.0.0</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/node-gyp/node_modules/glob requires inflight@&#39;</span>^1.0.4<span class="s1">&#39; but will load</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/inflight,</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency which is version 1.0.1</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/read-installed/node_modules/readdir-scoped-modules requires graceful-fs@&#39;</span>^3.0.4<span class="s1">&#39; but will load</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency /home/odino/local/node/lib/node_modules/npm/node_modules/graceful-fs,</span>
+</span><span class='line'><span class="s1">npm WARN unmet dependency which is version 3.0.2</span>
+</span><span class='line'><span class="s1">gulp@3.9.0 /home/odino/local/node/lib/node_modules/gulp</span>
+</span><span class='line'><span class="s1">├── pretty-hrtime@1.0.0</span>
+</span><span class='line'><span class="s1">├── interpret@0.6.5</span>
+</span><span class='line'><span class="s1">├── deprecated@0.0.1</span>
+</span><span class='line'><span class="s1">├── archy@1.0.0</span>
+</span><span class='line'><span class="s1">├── minimist@1.1.3</span>
+</span><span class='line'><span class="s1">├── tildify@1.1.0 (os-homedir@1.0.1)</span>
+</span><span class='line'><span class="s1">├── v8flags@2.0.10 (user-home@1.1.1)</span>
+</span><span class='line'><span class="s1">├── semver@4.3.6</span>
+</span><span class='line'><span class="s1">├── chalk@1.1.0 (escape-string-regexp@1.0.3, supports-color@2.0.0, ansi-styles@2.1.0, strip-ansi@3.0.0, has-ansi@2.0.0)</span>
+</span><span class='line'><span class="s1">├── orchestrator@0.3.7 (stream-consume@0.1.0, sequencify@0.0.7, end-of-stream@0.1.5)</span>
+</span><span class='line'><span class="s1">├── gulp-util@3.0.6 (array-differ@1.0.0, array-uniq@1.0.2, lodash._reescape@3.0.0, beeper@1.1.0, lodash._reevaluate@3.0.0, lodash._reinterpolate@3.0.0, object-assign@3.0.0, replace-ext@0.0.1, vinyl@0.5.1, lodash.template@3.6.2, through2@2.0.0, multipipe@0.1.2, dateformat@1.0.11)</span>
+</span><span class='line'><span class="s1">├── liftoff@2.1.0 (extend@2.0.1, rechoir@0.6.2, flagged-respawn@0.3.1, resolve@1.1.6, findup-sync@0.2.1)</span>
+</span><span class='line'><span class="s1">└── vinyl-fs@0.3.13 (graceful-fs@3.0.8, strip-bom@1.0.0, defaults@1.0.2, vinyl@0.4.6, mkdirp@0.5.1, through2@0.6.5, glob-stream@3.1.18, glob-watcher@0.0.6)</span>
+</span><span class='line'>
+</span><span class='line'><span class="s1">bower@1.4.1 /home/odino/local/node/lib/node_modules/bower</span>
+</span><span class='line'><span class="s1">├── is-root@1.0.0</span>
+</span><span class='line'><span class="s1">├── junk@1.0.2</span>
+</span><span class='line'><span class="s1">├── stringify-object@1.0.1</span>
+</span><span class='line'><span class="s1">├── user-home@1.1.1</span>
+</span><span class='line'><span class="s1">├── chmodr@0.1.0</span>
+</span><span class='line'><span class="s1">├── abbrev@1.0.7</span>
+</span><span class='line'><span class="s1">├── archy@1.0.0</span>
+</span><span class='line'><span class="s1">├── opn@1.0.2</span>
+</span><span class='line'><span class="s1">├── bower-logger@0.2.2</span>
+</span><span class='line'><span class="s1">├── bower-endpoint-parser@0.2.2</span>
+</span><span class='line'><span class="s1">├── graceful-fs@3.0.8</span>
+</span><span class='line'><span class="s1">├── lockfile@1.0.1</span>
+</span><span class='line'><span class="s1">├── lru-cache@2.6.5</span>
+</span><span class='line'><span class="s1">├── nopt@3.0.3</span>
+</span><span class='line'><span class="s1">├── retry@0.6.1</span>
+</span><span class='line'><span class="s1">├── tmp@0.0.24</span>
+</span><span class='line'><span class="s1">├── request-progress@0.3.1 (throttleit@0.0.2)</span>
+</span><span class='line'><span class="s1">├── q@1.4.1</span>
+</span><span class='line'><span class="s1">├── chalk@1.1.0 (escape-string-regexp@1.0.3, supports-color@2.0.0, ansi-styles@2.1.0, has-ansi@2.0.0, strip-ansi@3.0.0)</span>
+</span><span class='line'><span class="s1">├── shell-quote@1.4.3 (array-filter@0.0.1, array-map@0.0.0, array-reduce@0.0.0, jsonify@0.0.0)</span>
+</span><span class='line'><span class="s1">├── which@1.1.1 (is-absolute@0.1.7)</span>
+</span><span class='line'><span class="s1">├── semver@2.3.2</span>
+</span><span class='line'><span class="s1">├── p-throttler@0.1.1 (q@0.9.7)</span>
+</span><span class='line'><span class="s1">├── fstream@1.0.7 (inherits@2.0.1)</span>
+</span><span class='line'><span class="s1">├── bower-json@0.4.0 (intersect@0.0.3, deep-extend@0.2.11, graceful-fs@2.0.3)</span>
+</span><span class='line'><span class="s1">├── promptly@0.2.0 (read@1.0.6)</span>
+</span><span class='line'><span class="s1">├── mkdirp@0.5.0 (minimist@0.0.8)</span>
+</span><span class='line'><span class="s1">├── fstream-ignore@1.0.2 (inherits@2.0.1, minimatch@2.0.10)</span>
+</span><span class='line'><span class="s1">├── insight@0.5.3 (object-assign@2.1.1, lodash.debounce@3.1.1, async@0.9.2, os-name@1.0.3, tough-cookie@0.12.1)</span>
+</span><span class='line'><span class="s1">├── tar-fs@1.8.1 (pump@1.0.0, tar-stream@1.2.1)</span>
+</span><span class='line'><span class="s1">├── decompress-zip@0.1.0 (mkpath@0.1.0, touch@0.0.3, readable-stream@1.1.13, binary@0.3.0)</span>
+</span><span class='line'><span class="s1">├── glob@4.5.3 (inherits@2.0.1, once@1.3.2, inflight@1.0.4, minimatch@2.0.10)</span>
+</span><span class='line'><span class="s1">├── rimraf@2.4.2 (glob@5.0.14)</span>
+</span><span class='line'><span class="s1">├── cardinal@0.4.4 (ansicolors@0.2.1, redeyed@0.4.4)</span>
+</span><span class='line'><span class="s1">├── mout@0.11.0</span>
+</span><span class='line'><span class="s1">├── bower-config@0.6.1 (osenv@0.0.3, graceful-fs@2.0.3, optimist@0.6.1, mout@0.9.1)</span>
+</span><span class='line'><span class="s1">├── request@2.53.0 (caseless@0.9.0, aws-sign2@0.5.0, forever-agent@0.5.2, stringstream@0.0.4, oauth-sign@0.6.0, tunnel-agent@0.4.1, isstream@0.1.2, json-stringify-safe@5.0.1, node-uuid@1.4.3, qs@2.3.3, combined-stream@0.0.7, form-data@0.2.0, mime-types@2.0.14, http-signature@0.10.1, bl@0.9.4, tough-cookie@2.0.0, hawk@2.3.1)</span>
+</span><span class='line'><span class="s1">├── github@0.2.4 (mime@1.3.4)</span>
+</span><span class='line'><span class="s1">├── bower-registry-client@0.3.0 (graceful-fs@2.0.3, request-replay@0.2.0, rimraf@2.2.8, lru-cache@2.3.1, async@0.2.10, mkdirp@0.3.5, request@2.51.0)</span>
+</span><span class='line'><span class="s1">├── update-notifier@0.3.2 (is-npm@1.0.0, string-length@1.0.1, semver-diff@2.0.0, latest-version@1.0.1)</span>
+</span><span class='line'><span class="s1">├── inquirer@0.8.0 (figures@1.3.5, ansi-regex@1.1.1, mute-stream@0.0.4, through@2.3.8, readline2@0.1.1, chalk@0.5.1, lodash@2.4.2, rx@2.5.3, cli-color@0.3.3)</span>
+</span><span class='line'><span class="s1">├── configstore@0.3.2 (object-assign@2.1.1, xdg-basedir@1.0.1, uuid@2.0.1, osenv@0.1.3, js-yaml@3.3.1)</span>
+</span><span class='line'><span class="s1">└── handlebars@2.0.0 (optimist@0.3.7, uglify-js@2.3.6)</span>
+</span><span class='line'><span class="s1">Manually installing some packages:</span>
+</span><span class='line'><span class="s1">You have 5 seconds to stop this operation...</span>
+</span><span class='line'><span class="s1">[sudo] password for odino:</span>
+</span><span class='line'><span class="s1">Reading package lists... Done</span>
+</span><span class='line'><span class="s1">Building dependency tree</span>
+</span><span class='line'><span class="s1">Reading state information... Done</span>
+</span><span class='line'><span class="s1">build-essential is already the newest version.</span>
+</span><span class='line'><span class="s1">gimp is already the newest version.</span>
+</span><span class='line'><span class="s1">vim is already the newest version.</span>
+</span><span class='line'><span class="s1">whois is already the newest version.</span>
+</span><span class='line'><span class="s1">zsh is already the newest version.</span>
+</span><span class='line'><span class="s1">guake is already the newest version.</span>
+</span><span class='line'><span class="s1">htop is already the newest version.</span>
+</span><span class='line'><span class="s1">keepassx is already the newest version.</span>
+</span><span class='line'><span class="s1">mysql-workbench is already the newest version.</span>
+</span><span class='line'><span class="s1">git is already the newest version.</span>
+</span><span class='line'><span class="s1">flashplugin-installer is already the newest version.</span>
+</span><span class='line'><span class="s1">dropbox is already the newest version.</span>
+</span><span class='line'><span class="s1">google-chrome-stable is already the newest version.</span>
+</span><span class='line'><span class="s1">skype:i386 is already the newest version.</span>
+</span><span class='line'><span class="s1">atom is already the newest version.</span>
+</span><span class='line'><span class="s1">0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.</span>
+</span><span class='line'><span class="s1">Reading package lists... Done</span>
+</span><span class='line'><span class="s1">Building dependency tree</span>
+</span><span class='line'><span class="s1">Reading state information... Done</span>
+</span><span class='line'><span class="s1">Package &#39;</span>thunderbird<span class="s1">&#39; is not installed, so not removed</span>
+</span><span class='line'><span class="s1">0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.</span>
+</span><span class='line'><span class="s1">Creating docker images:</span>
+</span><span class='line'><span class="s1">You have 5 seconds to stop this operation...</span>
+</span><span class='line'><span class="s1">BUILDING DOCKER IMAGE play</span>
+</span><span class='line'><span class="s1">Sending build context to Docker daemon 2.048 kB</span>
+</span><span class='line'><span class="s1">Sending build context to Docker daemon</span>
+</span><span class='line'><span class="s1">Step 0 : FROM alpine</span>
+</span><span class='line'><span class="s1"> ---&gt; 31f630c65071</span>
+</span><span class='line'><span class="s1">Step 1 : RUN apk add --update wget curl net-tools python nodejs</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; 2eeb0a0ef349</span>
+</span><span class='line'><span class="s1">Step 2 : RUN wget https://bootstrap.pypa.io/get-pip.py</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; 78725d89fba9</span>
+</span><span class='line'><span class="s1">Step 3 : RUN python get-pip.py</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; fd735c51db07</span>
+</span><span class='line'><span class="s1">Step 4 : RUN npm install -g lodash nodemon</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; e21b10071701</span>
+</span><span class='line'><span class="s1">Step 5 : COPY . /root</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; 65bd0eb15552</span>
+</span><span class='line'><span class="s1">Step 6 : CMD sh</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; 5f2b1c8d4c49</span>
+</span><span class='line'><span class="s1">Successfully built 5f2b1c8d4c49</span>
+</span><span class='line'><span class="s1">BUILDING DOCKER IMAGE ngrok</span>
+</span><span class='line'><span class="s1">Sending build context to Docker daemon 2.048 kB</span>
+</span><span class='line'><span class="s1">Sending build context to Docker daemon</span>
+</span><span class='line'><span class="s1">Step 0 : FROM centurylink/ngrok</span>
+</span><span class='line'><span class="s1"> ---&gt; cc659eb07d3f</span>
+</span><span class='line'><span class="s1">Successfully built cc659eb07d3f</span>
+</span><span class='line'><span class="s1">BUILDING DOCKER IMAGE cap</span>
+</span><span class='line'><span class="s1">Sending build context to Docker daemon 4.096 kB</span>
+</span><span class='line'><span class="s1">Sending build context to Docker daemon</span>
+</span><span class='line'><span class="s1">Step 0 : FROM ruby:2.0</span>
+</span><span class='line'><span class="s1"> ---&gt; 90986d8f1fb8</span>
+</span><span class='line'><span class="s1">Step 1 : RUN gem install capistrano -v 2.15.5</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; 018127882b81</span>
+</span><span class='line'><span class="s1">Step 2 : RUN gem install hipchat capistrano-slack-notify capifony -V</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; b206b90efbdb</span>
+</span><span class='line'><span class="s1">Step 3 : RUN mkdir /root/.ssh</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; 130eb02d5e29</span>
+</span><span class='line'><span class="s1">Step 4 : WORKDIR /src</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; b73756babee9</span>
+</span><span class='line'><span class="s1">Step 5 : COPY . /root</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; fa71b45ad026</span>
+</span><span class='line'><span class="s1">Step 6 : RUN chmod +x /root/init.sh</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; d7bc97503855</span>
+</span><span class='line'><span class="s1">Step 7 : CMD /root/init.sh &amp;&amp; bash</span>
+</span><span class='line'><span class="s1"> ---&gt; Using cache</span>
+</span><span class='line'><span class="s1"> ---&gt; f5d9a3ee15da</span>
+</span><span class='line'><span class="s1">Successfully built f5d9a3ee15da</span>
+</span><span class='line'><span class="s1">Manually installing atom&#39;</span>s extensions:
+</span><span class='line'>You have 5 seconds to stop this operation...
+</span><span class='line'>Installing docblockr to /home/odino/.atom/packages ✓
+</span><span class='line'>Configuring git:
+</span><span class='line'>You have 5 seconds to stop this operation...
+</span><span class='line'>All <span class="k">done</span>!
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start moving stuff to &ldquo;personal&rdquo; containers, avoid polluting
+your machine and live a happier life: we finally have a way
+to keep our hardware very much separated from our tools, something
+very hard to do without docker<sup id='fnref:3'><a href='#fn:3' rel='footnote'>3</a></sup>.</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>I used to run sudo baobab every other day&#8230; :) <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>Almost &#8220;only&#8221; :) <a href='#fnref:2' rev='footnote'>↩</a></li><li id='fn:3'>You can do the same exact stuff with Vagrant or any other VM manager but, at the end of the day, how heavier and less straightforward would that be? <a href='#fnref:3' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/how-docker-changed-me/"
+		},
+		"headline": "How Docker changed me",
+		"description": "I decided to move as much as possible to containers, even for everyday tasks like browsing the internet",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2015-08-07 17:11:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Python | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/python/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Import This]]></title>
+    <link href="https://odino.org/import-this/"/>
+    <updated>2015-02-21T23:16:00+00:00</updated>
+    <id>https://odino.org/import-this</id>
+    <content type="html"><![CDATA[<p>Since I recently bumped again into this,
+I thought it might be worth sharing with
+everyone what happens when you <code>import this</code>
+in Python&rsquo;s REPL.</p>
+
+<!-- more -->
+
+
+<p>```
+~  ᐅ python                         <br/>
+Python 2.7.4 (default, Sep 26 2013, 03:20:26)
+[GCC 4.7.3] on linux2
+Type &ldquo;help&rdquo;, &ldquo;copyright&rdquo;, &ldquo;credits&rdquo; or &ldquo;license&rdquo; for more information.</p>
+
+<blockquote><blockquote><blockquote><p>import this
+The Zen of Python, by Tim Peters</p></blockquote></blockquote></blockquote>
+
+<p>Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&rsquo;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one&mdash; and preferably only one &mdash;obvious way to do it.
+Although that way may not be obvious at first unless you&rsquo;re Dutch.
+Now is better than never.
+Although never is often better than <em>right</em> now.
+If the implementation is hard to explain, it&rsquo;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea &mdash; let&rsquo;s do more of those!
+```</p>
+
+<p>Holy words!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Beautifying JSON Data From the Shell]]></title>
+    <link href="https://odino.org/beautifying-json-data-from-the-shell/"/>
+    <updated>2013-06-22T15:36:00+00:00</updated>
+    <id>https://odino.org/beautifying-json-data-from-the-shell</id>
+    <content type="html"><![CDATA[<p>Yesterday I bumped into a very
+handly utility to beautify JSON
+data directly from your command
+line.</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s say that, with a command, you
+are retrieving some data in JSON
+format<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
+
+<p>``` bash
+curl -X POST &mdash;user admin:admin \
+<a href="http://localhost:2480/command/temp/sql/select%20from%20person">http://localhost:2480/command/temp/sql/select%20from%20person</a></p>
+
+<p>{&ldquo;result&rdquo;:[{&ldquo;@type&rdquo;:&ldquo;d&rdquo;,&ldquo;@rid&rdquo;:&ldquo;#9:2&rdquo;,&ldquo;@version&rdquo;:0,&ldquo;@class&rdquo;:&ldquo;person&rdquo;,&ldquo;name&rdquo;:&ldquo;Luca&rdquo;}, {&ldquo;@type&rdquo;:&ldquo;d&rdquo;,&ldquo;@rid&rdquo;:&ldquo;#9:3&rdquo;,&ldquo;@version&rdquo;:0,&ldquo;@class&rdquo;:&ldquo;person&rdquo;}, {&ldquo;@type&rdquo;:&ldquo;d&rdquo;,&ldquo;@rid&rdquo;:&ldquo;#9:4&rdquo;,&ldquo;@version&rdquo;:0,&ldquo;@class&rdquo;:&ldquo;person&rdquo;}]}
+```</p>
+
+<p>Of course, the result doesn&rsquo;t really look
+readable, but thanks to a python
+utility we can directly expand and beautify
+our JSON by piping:</p>
+
+<p>```
+curl -X POST &mdash;user admin:admin \
+<a href="http://localhost:2480/command/temp/sql/select%20from%20person">http://localhost:2480/command/temp/sql/select%20from%20person</a> \
+| python -mjson.tool</p>
+
+<p>{</p>
+
+<pre><code>"result": [
+    {
+        "@class": "person",
+        "@rid": "#9:2",
+        "@type": "d",
+        "@version": 0,
+        "name": "Luca"
+    },
+    {
+        "@class": "person",
+        "@rid": "#9:3",
+        "@type": "d",
+        "@version": 0
+    },
+    {
+        "@class": "person",
+        "@rid": "#9:4",
+        "@type": "d",
+        "@version": 0
+    }
+]
+</code></pre>
+
+<p>}
+```</p>
+
+<p>That&rsquo;s all, folks!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>In my case, I am retrieving data from OrientDB, a NoSQL graph=document DB which handles data in JSON format over its HTTP interface <a href='#fnref:1' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Network | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/network/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cannot Connect to the Internet From Your Docker Containers?]]></title>
+    <link href="https://odino.org/cannot-connect-to-the-internet-from-your-docker-containers/"/>
+    <updated>2015-02-06T00:54:00+00:00</updated>
+    <id>https://odino.org/cannot-connect-to-the-internet-from-your-docker-containers</id>
+    <content type="html"><![CDATA[<p>Stuck trying to figure out what&rsquo;s up with
+your containers, as they cannot seem to be
+able to access the network?</p>
+
+<!-- more -->
+
+
+<p>Well, that happened to a few of us at
+<a href="http://tech.namshi.com">Namshi</a> in the
+past couple of days.</p>
+
+<p>The good news is that you can clearly verify
+that something is just wrong with Docker by
+simply pinging <code>google.com</code> from your host
+and a simple container:</p>
+
+<p>```
+$ ping google.com
+PING google.com (173.194.124.7) 56(84) bytes of data.
+64 bytes from 173.194.124.7: icmp_req=1 ttl=56 time=11.1 ms
+64 bytes from 173.194.124.7: icmp_req=2 ttl=56 time=13.2 ms
+&hellip;</p>
+
+<p>$ docker run -ti ubuntu ping google.com</p>
+
+<h1>BLACK HOLE</h1>
+
+<p>```</p>
+
+<p>If you happen to get stuck in this kind of
+situation, you might want to look into what
+DNS server Docker is actually using to let
+your containers resolve onto the internet.</p>
+
+<p>In our case, we realized our firewall was
+acting pretty weirdly with Google&rsquo;s public
+DNSes (<code>8.8.8.8</code> and <code>8.8.4.4</code>), which happen
+to be the default ones Docker is gonna use in
+case you don&rsquo;t have anything custom specified
+in your <code>resolv.conf</code> and so on.</p>
+
+<p>The issue, overall, was quite easy to circumvent,
+as we just told docker to use OpenDNS in our
+<code>/etc/default/docker</code>:</p>
+
+<p>```</p>
+
+<h1>Docker Upstart and SysVinit configuration file</h1>
+
+<h1>Use DOCKER_OPTS to modify the daemon startup options.</h1>
+
+<p>DOCKER_OPTS=&ldquo;&mdash;dns 208.67.222.222 &mdash;dns 208.67.220.220&rdquo;
+```</p>
+
+<p>Then, you will only need to restart the Docker
+demon and everything should be fine:</p>
+
+<p>```
+$ sudo service docker restart<br/>
+docker stop/waiting
+docker start/running, process 26999</p>
+
+<p>$ docker run ubuntu ping google.com <br/>
+PING google.com (173.194.124.2) 56(84) bytes of data.
+64 bytes from 173.194.124.2: icmp_seq=1 ttl=55 time=11.4 ms
+64 bytes from 173.194.124.2: icmp_seq=2 ttl=55 time=11.2 ms
+&hellip;
+```</p>
+
+<p>Hope this helps! To be honest we&rsquo;ve googled
+around and found out that there might be <a href="https://github.com/docker/docker/issues/490">some</a>
+<a href="http://stackoverflow.com/questions/23810845/i-cant-get-docker-containers-to-access-the-internet">other</a>,
+<a href="https://github.com/docker/docker/issues/866#issuecomment-19218300">creepier</a>,
+issues that might cause the problem, so I&rsquo;d
+really hope yours is just as silly as the one
+I&rsquo;ve faced.</p>
+]]></content>
+  </entry>
+  
+</feed>

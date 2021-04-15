@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Web Payments | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/web-payments/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[2 Web APIs I'm Particularly Excited About]]></title>
+    <link href="https://odino.org/2-web-apis-im-particularly-excited-about/"/>
+    <updated>2016-10-25T01:02:00+00:00</updated>
+    <id>https://odino.org/2-web-apis-im-particularly-excited-about</id>
+    <content type="html"><![CDATA[<p>In the past few months we have seen Google and Apple push in 2
+very different directions &mdash; as much as Apple has been steady
+pushing publishers to embrace their app market, Google has been
+working on a bunch of initiatives to improve the &ldquo;web platform&rdquo;,
+rolling out projects like <a href="http://tech.namshi.com/blog/2016/09/20/embracing-amp-for-the-speed-and-profit/">AMP</a> and giving a lot of coverage to
+technologies like <a href="https://developers.google.com/web/progressive-web-apps/">PWAs</a>.</p>
+
+<p>I&rsquo;m particularly excited about the work that Google is putting
+on the web as they&rsquo;re slowly bridging the gap with the native experience,
+and there are 2 Web APIs I can&rsquo;t really wait to use in
+production to give <a href="https://www.namshi.com/">our users</a> an enhanced
+experience on the web.</p>
+
+<!--  more -->
+
+
+<p>As much as these aren&rsquo;t coming just from Google, I need to tribute them
+to big G as they&rsquo;re the ones who are throwing them onto the mainstream:
+I&rsquo;m talking about <a href="https://www.w3.org/TR/payment-request/">Web Payments</a> and
+<a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/">Web Push Notifications</a>.</p>
+
+<h2>Web Push Notifications</h2>
+
+<p>You can start adding push notifications to your web app today: they involve
+installing a <a href="https://developers.google.com/web/fundamentals/getting-started/primers/service-workers">service worker</a>
+which &ldquo;lives&rdquo; in background and is capable of listening for push events.</p>
+
+<p><img class="center <a" src="href="https://blog.kissmetrics.com/wp-content/uploads/2015/11/push-notifications-desktop-mobile.png">https://blog.kissmetrics.com/wp-content/uploads/2015/11/push-notifications-desktop-mobile.png</a>"></p>
+
+<p>Let&rsquo;s test it out real quick on Chrome:</p>
+
+<ul>
+<li>if you&rsquo;re reading this article from a <strong>desktop machine</strong>:
+
+<ul>
+<li>head <a href="https://gauntface.github.io/simple-push-demo/">here</a></li>
+<li>accept permissions</li>
+<li>copy the curl command</li>
+<li>close that webpage</li>
+<li>open a terminal and run that curl</li>
+<li>be amazed</li>
+</ul>
+</li>
+<li>if you&rsquo;re reading this article from a <strong>mobile device</strong>:
+
+<ul>
+<li>head <a href="https://gauntface.github.io/simple-push-demo/">here</a></li>
+<li>accept permissions</li>
+<li>copy that curl command and send it to a friend</li>
+<li>close the browser</li>
+<li>ask your friend to run it</li>
+<li>be amazed</li>
+</ul>
+</li>
+</ul>
+
+
+<p>If you close your browser (at least on android) the service worker
+keeps living, making it possible to reach your users until the SW dies,
+which generally happens when the app (chrome) crashes or the phone
+is rebooted, which are unlikely to happen on a frequent basis<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>You will need a good understanding of service workers but the code
+to implement push notifications is <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/push-messaging-and-notifications/service-worker.js">really trivial</a>
+and the &ldquo;backend&rdquo; implementation is very well explained by &ndash; again &ndash; the <a href="https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/">Google guys</a>, which use
+Firebase Cloud Messaging (formerly known as GCM) to deliver pushes
+to the subscribed clients.</p>
+
+<p>Web Push requires <a href="http://caniuse.com/#feat=serviceworkers">service workers</a>, and support
+is currently limited to <a href="http://caniuse.com/#feat=push-api">Chrome / Firefox / Opera</a>.</p>
+
+<h2>Payment Request API</h2>
+
+<p>This one isn&rsquo;t as immediate as Web Pushes, especially since it <a href="https://9to5google.com/2016/08/08/chrome-53-beta-features/">landed in Chrome just a few weeks back</a>, so support is
+pretty experimental &mdash; but have a look at the following video to get an idea
+of how checkouts could be much simpler through a native way of collecting payment
+details:</p>
+
+<iframe width="760" height="415" src="https://www.youtube.com/embed/hmqZxP6iTpo" frameborder="0" allowfullscreen></iframe>
+
+
+<p>This API isn&rsquo;t a payment solution but rather a sophisticated way to collect payment
+data from your users, without needing to implement payment forms on your own &mdash; you
+simply create a payment request and the browser does the rest:</p>
+
+<p>``` js
+// is this real?
+if (window.PaymentRequest) {
+  // what kind of payments are we accepting?
+  let methodData = [</p>
+
+<pre><code>{
+  supportedMethods: ['visa', 'mastercard']
+}
+</code></pre>
+
+<p>  ];</p>
+
+<p>  // what is the user purchasing?
+  let details = {</p>
+
+<pre><code>displayItems: [
+  {
+    label: 'Argo, Blue-Ray movie',
+    amount: { currency: 'USD', value : '15.00' }
+  },
+  {
+    label: 'Power customer discount',
+    amount: { currency: 'USD', value : '-10.00' }
+  }
+],
+total:  {
+  label: 'Total',
+  amount: { currency: 'USD', value : '5.00' }
+}
+</code></pre>
+
+<p>  };</p>
+
+<p>  let request = new window.PaymentRequest(methodData, details, {});</p>
+
+<p>  // start the fun!
+  request.show().then(function(result) {</p>
+
+<pre><code>result.complete('success');
+// example of result.details:
+//  - cardNumber
+//  - cardSecurityCode
+//  - expiryMonth
+//  - expiryYear
+
+return apiCallToThePaymentGateway(result.details).then(res =&gt; {
+  return result.complete('success');
+}).catch(result =&gt; {
+  return result.complete('fail');
+})
+</code></pre>
+
+<p>  });
+}
+```</p>
+
+<p>You simply need to create a <code>PaymentRequest</code> and <code>.show()</code> it &mdash; the browser
+will then show the native UI and you&rsquo;ll eventually receive the details once
+the user is done entering his / her details: it&rsquo;s pretty neat since it&rsquo;s a very
+simple yet powerful way of offloading this kind of annoying &ldquo;feature&rdquo; to the
+browser (who&rsquo;s really happy to write a new credit card form in 2016? anyone who actually likes <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">luhn</a>?).</p>
+
+<p>As I said, this is pretty experimental, meaning that support is&hellip; &hellip;well,
+you&rsquo;re <a href="http://caniuse.com/#feat=payment-request">on your own for now</a>, as
+the <strong>only</strong> browser that supports it is chrome for mobile<sup id='fnref:2'><a href='#fn:2' rel='footnote'>2</a></sup>.</p>
+
+<h2>So?</h2>
+
+<p>Who could have though things like these could actually happen in a browser
+3 years ago?</p>
+
+<p>I bet most of us didn&rsquo;t, which is why I&rsquo;m excited to see the
+web growing and adding capabilities that make the browsing experience
+better day after day.</p>
+
+<p>And with things like <a href="https://www.chromestatus.com/feature/5298357018820608">Ambient Light Sensor API</a>,
+<a href="https://www.chromestatus.com/feature/5762982487261184">CompositorWorkers</a> (worker threads that can respond to input and update visuals)
+and <a href="https://www.chromestatus.com/feature/4532810371039232">WebVR</a> in the pipeline,
+the future of browsers looks yummier than ever!</p>
+
+<p><div class="footnotes">
+<span>
+Notes
+</span>
+	<ol>
+		<li id='fn:1'>How many times do you reboot your phone daily? Sorry, what? You have a Samsung? Oh&hellip; <a href='#fnref:1' rev='footnote'>↩</a></li><li id='fn:2'>What&rsquo;s  scary, though, is that &ldquo;Apple provides an equivalent proprietary API called Apple Pay JS&rdquo; (<a href="http://caniuse.com/#feat=payment-request">http://caniuse.com/#feat=payment-request</a>) <a href='#fnref:2' rev='footnote'>↩</a></li>
+	</ol>
+</div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

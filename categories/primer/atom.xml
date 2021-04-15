@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Primer | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/primer/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Intro to React for Busy People]]></title>
+    <link href="https://odino.org/understanding-react-for-busy-people/"/>
+    <updated>2017-10-08T16:55:00+00:00</updated>
+    <id>https://odino.org/understanding-react-for-busy-people</id>
+    <content type="html"><![CDATA[<p>In order to get <a href="http://tech.namshi.io/team">our backend team</a> to familiarize with React, I ran a quick intro
+to the library, based on &ldquo;evolving&rdquo; a JSFiddle from a single, static component
+to adding UI interactions, using props / state and so on. Nothing groundbreaking
+but something that covers the most important bits of React.</p>
+
+<p>I summarized my intro in a repo called &ldquo;<a href="https://github.com/odino/react-in-1000-words">React in 1000 words</a>&rdquo;
+and wanted to share it here as well, in case anyone finds it useful.</p>
+
+<!-- more -->
+
+
+<p>The goal of the guide is to get people who haven&rsquo;t worked with React before
+familiar with the most important concepts, and illustrate how easy it is to
+compose interfaces based on loosely-coupled React components. Feel free to send
+a PR, but let&rsquo;s keep the word count low! :)</p>
+]]></content>
+  </entry>
+  
+</feed>

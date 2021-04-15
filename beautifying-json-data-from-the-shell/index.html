@@ -1,0 +1,236 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Beautifying JSON data from the shell</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/beautifying-json-data-from-the-shell/" />
+		<meta property="og:title" content="Beautifying JSON data from the shell" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/beautifying-json-data-from-the-shell/">Beautifying JSON data from the shell</a></h1>
+        <time>22 June 2013</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 8 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>Yesterday I bumped into a very
+handly utility to beautify JSON
+data directly from your command
+line.</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s say that, with a command, you
+are retrieving some data in JSON
+format<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -X POST --user admin:admin <span class="se">\</span>
+</span><span class='line'>http://localhost:2480/command/temp/sql/select%20from%20person
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span><span class="s2">&quot;result&quot;</span>:<span class="o">[{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:2&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Luca&quot;</span><span class="o">}</span>, <span class="o">{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:3&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span><span class="o">}</span>, <span class="o">{</span><span class="s2">&quot;@type&quot;</span>:<span class="s2">&quot;d&quot;</span>,<span class="s2">&quot;@rid&quot;</span>:<span class="s2">&quot;#9:4&quot;</span>,<span class="s2">&quot;@version&quot;</span>:0,<span class="s2">&quot;@class&quot;</span>:<span class="s2">&quot;person&quot;</span><span class="o">}]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course, the result doesn&rsquo;t really look
+readable, but thanks to a python
+utility we can directly expand and beautify
+our JSON by piping:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -X POST --user admin:admin <span class="se">\</span>
+</span><span class='line'>http://localhost:2480/command/temp/sql/select%20from%20person <span class="se">\</span>
+</span><span class='line'>| python -mjson.tool
+</span><span class='line'>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="s2">&quot;result&quot;</span>: <span class="o">[</span>
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:2&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0,
+</span><span class='line'>            <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;Luca&quot;</span>
+</span><span class='line'>        <span class="o">}</span>,
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:3&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0
+</span><span class='line'>        <span class="o">}</span>,
+</span><span class='line'>        <span class="o">{</span>
+</span><span class='line'>            <span class="s2">&quot;@class&quot;</span>: <span class="s2">&quot;person&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@rid&quot;</span>: <span class="s2">&quot;#9:4&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@type&quot;</span>: <span class="s2">&quot;d&quot;</span>,
+</span><span class='line'>            <span class="s2">&quot;@version&quot;</span>: 0
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">]</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all, folks!</p>
+
+<div class="footnotes">
+<span>
+Notes
+</span>
+    <ol>
+        <li id='fn:1'>In my case, I am retrieving data from OrientDB, a NoSQL graph=document DB which handles data in JSON format over its HTTP interface <a href='#fnref:1' rev='footnote'>↩</a></li>
+    </ol>
+</div>
+
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/beautifying-json-data-from-the-shell/"
+		},
+		"headline": "Beautifying JSON data from the shell",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2013-06-22 15:36:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->

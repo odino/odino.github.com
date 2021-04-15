@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Category: Blog | Alessandro Nadalin]]></title>
+  <link href="https://odino.org/categories/blog/atom.xml" rel="self"/>
+  <link href="https://odino.org/"/>
+  <updated>2021-04-15T11:32:06+00:00</updated>
+  <id>https://odino.org/</id>
+  <author>
+    <name><![CDATA[Alessandro Nadalin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cross-posting on Medium]]></title>
+    <link href="https://odino.org/cross-posting-on-medium/"/>
+    <updated>2017-12-29T15:43:00+00:00</updated>
+    <id>https://odino.org/cross-posting-on-medium</id>
+    <content type="html"><![CDATA[<p>Just a heads up: I&rsquo;ve decided to follow <a href="https://twitter.com/cirpo">a friend</a>&rsquo;s
+advice and start cross-posting the contents of this blog on <a href="https://medium.com/">Medium</a>.</p>
+
+<p>All new content will be published both here (I like my data!) and there, with the
+goal of reaching a broader community. I also got fed up with the Disqus comments
+(they mostly show freaking clickbait links) and wanted to find an alternative, so
+I will be shutting down comments on my blog shortly and instead point people to
+Medium.</p>
+
+<p>Here&rsquo;s <a href="https://medium.com/@alexnadalin">my profile</a> and a link to my latest
+<a href="https://medium.com/@alexnadalin/unix-goodies-to-the-rescue-vol-2-5da643407561">medium-ized post</a> :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The 2017 Blogging Pledge]]></title>
+    <link href="https://odino.org/the-2017-blogging-pledge/"/>
+    <updated>2017-01-02T16:54:00+00:00</updated>
+    <id>https://odino.org/the-2017-blogging-pledge</id>
+    <content type="html"><![CDATA[<p>Last year I wrote <a href="/archives">12 posts</a>, which makes it
+a decent average of once a month.</p>
+
+<p>Even though I would have liked to be able to blog more
+often (and do some more public coding: there are at least
+&frac34; projects I have worked on without getting them far enough
+to make it to github), I&rsquo;m still happy
+with the outcome so far &mdash; at the end of the day this
+blog still attracts a few hundred visitors a day and
+I&rsquo;m happy as long as I retain those numbers.</p>
+
+<p>For 2017 I would like, though, to follow a different
+approach while try to put in the same amount of effort,
+with &ndash; hopefully &ndash; better results.</p>
+
+<!-- more -->
+
+
+<p>One post a month is generally easy to achieve, especially
+when you aim low and publish very short pieces (<a href="http://odino.org/xyz-programming-language-sucks/">BUSTED!</a>),
+something I want to change by working with a different
+approach:</p>
+
+<ul>
+<li>still try to publish 1 post a month (let&rsquo;s be realistic), with exceptions if there are some quick articles I&rsquo;d like to share</li>
+<li>pick a broad topic (ie. resiliency in distributed systems)</li>
+<li>start working on a &ldquo;schedule&rdquo; at the beginning of the month, thinking what I want to cover, examples, caveats, etc so that the post is as exhaustive as possible (something like <a href="https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#.ucqcvhqyi">this</a>)</li>
+<li>publish the article by the end of the month</li>
+</ul>
+
+
+<p>I have noted down the list of posts I would like to blog about
+in the <a href="/archives/">archives section of the blog</a>, so you can always get an
+idea of what I&rsquo;m working on &mdash; hopefully this year I will be
+able to deliver more in-depth, exhaustive, well-thought articles
+to my (few) readers.</p>
+
+<p>See ya!</p>
+]]></content>
+  </entry>
+  
+</feed>

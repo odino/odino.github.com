@@ -1,0 +1,158 @@
+
+<!doctype html>
+<!-- BEGIN _layouts/default.html -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<meta content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." name="description">
+		<meta content="Alessandro Nadalin" name="author">
+		
+		<title>Singletons of the web</title>
+		<meta name="google-site-verification" content="dSNHLHJFQzKASjN8qHJisk2XLkKqbF_ilGSj9bscwKs" />
+		<link href="/favicon.png" rel="icon">
+		<link href="/stylesheets/screen.css" rel="stylesheet">
+		<link href="/atom.xml" rel="alternate" title="Alessandro Nadalin" type="application/atom+xml">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/MyFontsWebfontsKit.css">
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@_odino_" />
+		<meta property="og:url" content="https://odino.org/singletons-of-the-web/" />
+		<meta property="og:title" content="Singletons of the web" />
+		<meta property="og:description" content="Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams." />
+		
+	</head>
+	<body>
+		<div class="wrap">
+			<header>
+				<div class="navi">
+					<ul>
+                        <li><a href="/"><i class="icon-home icon-large"></i> Home</a></li>
+                        <li><a href="/about"><i class="icon-user icon-large"></i> About</a></li>
+                        <li><a href="/conferences"><i class="icon-group icon-large"></i> Conferences</a></li>
+                        <li><a href="/archives"><i class="icon-briefcase icon-large"></i> Archives</a></li>
+                        <li><a href="/atom.xml"><i class="icon-rss icon-large"></i> RSS</a></li>
+					</ul>
+				</div>
+			</header>
+			<!-- BEGIN _layouts/post.html -->
+
+    <header>
+        <h1><a href="/singletons-of-the-web/">Singletons of the web</a></h1>
+        <time>21 March 2011</time>
+        <!-- 
+        
+        
+        
+          <br />
+          <time>(note: this post was written 10 years ago and might be outdated)</time>
+         -->
+    </header>
+<div class="entry-content "><p>A few hours ago I was reading <a href="http://philsturgeon.co.uk/blog/2011/03/video-set-up-a-rest-api-with-codeigniter">a post from a member of the CI community</a>, which was explaining how to set up a REST api ( omitting the most important part, the <a href="http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven)">hypermedia constraint</a>.</p>
+
+<!-- more -->
+
+
+<p>I argued with the author that what he was showing wasn&rsquo;t a RESTful interface, and at the beginning he was surprised by the importance I gave to hypermedia:</p>
+
+<blockquote><p>I have never seen the point of jamming links into the response, that is what documentation is for.<br/>[&#8230;] As for HATEOAS? I don&#8217;t see the point. I&#8217;d be interested to see some examples of it being useful [&#8230;]</p></blockquote>
+
+
+<p>that leaded to my response:</p>
+
+<blockquote><p>To just make an example&#8230; without using hypermedia relations you need your client to make assumptions about resource location ( such information can be retrieved on your documentation, for instance ).<br/>When you change the implementation ( for example, URI schemas ), your client is broken: driving application&#8217;s state by hypermedia means that clients are loosly coupled with your service and consume it without any assumption.<br/>My point was mainly against URI schemas as far as we are intending them nowadays: the resource which the consumer is relating to during the service&#8217;s consumption.</p></blockquote>
+
+
+<p>Although <a href="http://www.odino.org/304/rest-better-common-pitfalls">URI schemas are generally awesome</a>, because it&rsquo;s easy to start consuming an application implementing a widely-known point of access, they&rsquo;ve gained too much power in our interfaces; and like <a href="http://blogs.msdn.com/b/scottdensmore/archive/2004/05/25/140827.aspx">singletons</a> ( and <a href="http://kore-nordmann.de/blog/0103_static_considered_harmful.html">statics</a> ), we become slaves of this power.</p>
+
+<p>We don&rsquo;t want coupling inside our code, so why would we like to have <strong>tight coupling inside our architecture</strong>?</p>
+</div>
+
+
+
+<div class="recent entry-content">
+  <hr class="divider-cazzuto">
+  <h3>
+    In the mood for some more reading?
+  </h3>
+  <ul>
+    
+      <li><a href="/fwupd-is-the-best-thing-that-ever-happened-to-linux/">fwupd is the best thing that ever happened to Linux</a> (15 April 2021)</li>
+    
+      <li><a href="/avoid-battery-draining-on-your-linux-flavored-dell-xps/">Avoid battery draining on your Linux-flavored Dell XPS</a> (31 January 2021)</li>
+    
+      <li><a href="/combining-two-numbers-into-a-unique-one-pairing-functions/">Combining two numbers into a unique one: pairing functions</a> (05 December 2020)</li>
+    
+      <li><a href="/running-ci-tests-in-kubernetes-through-github-actions/">Running CI tests in Kubernetes through Github Actions</a> (20 March 2020)</li>
+    
+      <li><a href="/ive-decided-to-make-the-wasec-ebook-free-during-these-trying-times/">I've decided to make the WASEC ebook free during these trying times</a> (20 March 2020)</li>
+    
+      <li><a href="/local-k8s-development-in-2020/">Local k8s development in 2020</a> (31 December 2019)</li>
+    
+      <li><a href="/wasec-a-book-about-web-application-security-is-now-available-for-sale/">WASEC, a book about Web Application Security, is now available for sale</a> (25 November 2019)</li>
+    
+  </ul>
+    <p>
+      ...or <a href="/archives/">check the archives</a>.
+    </p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.0/anchor.min.js"></script>
+<script type="text/javascript" />
+(function () {
+  'use strict';
+
+  anchors.options = {
+    placement: 'left',
+    visible: 'hover',
+    icon: '¶'
+  };
+
+  anchors.add('h2');
+  anchors.add('h3');
+  anchors.add('h4');
+
+})();
+</script>
+
+			<footer>
+				<center>
+	Copyleft <!--[if lte IE 8]><span style="filter: FlipH; -ms-filter: "FlipH"; display: inline-block;"><![endif]--><span style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1); display: inline-block;">©</span><!--[if lte IE 8]></span><![endif]--> 2021 — Alessandro Nadalin
+	<address>
+	</address>
+</center>
+			</footer>
+		</div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-7407627-3', 'auto');
+      ga('send', 'pageview');
+	</script>
+	
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://odino.org/singletons-of-the-web/"
+		},
+		"headline": "Singletons of the web",
+		"description": "Blog of Alex, technologist in Dubai: writing about Service Oriented Architectures, web APIs and development teams.",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Alessandro Nadalin"
+		},
+		"datePublished": "2011-03-21 11:14:00 +0000"
+		}
+	</script>
+	
+	</body>
+</html>
+<!-- END _layouts/default.html -->
