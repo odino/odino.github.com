@@ -20,7 +20,7 @@ leading mid-sized development teams and managing complexity in distributed syste
 I am a forward-thinker by nature and I still love to get my hands dirty with code, or testing new platforms: I am quite active on [github](https://github.com/odino) and, from time to time,
 blog over here.
 
-I'm currently in Dubai, where work as SVP of Engineering @ [Noon](https://www.noon.com): I am in charge of an amazing team of over 50 talented folks that span engineering, product, SRE, UX and QA -- our goal is to deliver an exceptional experience to both of our customers: consumers and sellers.
+I'm currently in Dubai, where work as SVP of Technology @ [Noon](https://www.noon.com): I am in charge of an amazing team of over 70 talented folks that span engineering, product, SRE, UX and QA -- our goal is to deliver an exceptional experience to both of our customers: consumers and sellers.
 In my position, I set the direction of our team, drive the design of our systems, grow the various tech teams and contribute from the trenches every now and then.
 
 I joined Noon with a personal mission of creating opportunities in the region: my goal is to build an ecosystem in which consumers can access a huge, convenient and unique catalog, and where sellers can start, expand and refine their business. Creating opportunities has, and will always be, a very important personal mission for me, and I'm glad I found an organization that allows me to do so at a large scale.
