@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Wasec | Alessandro Nadalin]]></title>
   <link href="https://odino.org/categories/wasec/atom.xml" rel="self"/>
   <link href="https://odino.org/"/>
-  <updated>2021-07-18T10:30:01+00:00</updated>
+  <updated>2021-07-18T10:30:41+00:00</updated>
   <id>https://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -430,7 +430,7 @@ $ npm audit</p>
 <p>found 1 high severity vulnerability in 1 scanned package
   run <code>npm audit fix</code> to fix 1 of them.
 $ npm audit fix
-+ <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#108;&#x6f;&#x64;&#97;&#115;&#x68;&#x40;&#x34;&#46;&#49;&#x37;&#x2e;&#x31;&#53;">&#x6c;&#x6f;&#x64;&#97;&#115;&#x68;&#x40;&#52;&#46;&#x31;&#55;&#46;&#x31;&#53;</a>
++ <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#108;&#111;&#x64;&#x61;&#115;&#x68;&#64;&#x34;&#46;&#49;&#55;&#x2e;&#49;&#53;">&#x6c;&#x6f;&#100;&#x61;&#115;&#x68;&#x40;&#x34;&#x2e;&#x31;&#x37;&#46;&#x31;&#x35;</a>
 updated 1 package in 0.421s
 fixed 1 of 1 vulnerability in 1 scanned package
 ```</p>
