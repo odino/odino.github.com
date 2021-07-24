@@ -45,6 +45,63 @@
 <!-- START _includes/article.html -->
 <article>
     <header>
+        <h1><a href="/minimal-docker-run-your-nodejs-app-in-25mb-of-an-image/">Minimal docker : run your NodeJS app in <25mb of an image</a></h1>
+        <time>31 July 2015</time>
+    </header>
+    <div class="content">
+        <p><img class="right" src="/images/docker.png"></p>
+
+<p>Managing Docker images might become a bit of a painful
+experience, especially when looking at your storages: very &ldquo;simple&rdquo;
+images like <a href="https://imagelayers.io/?images=node:latest">node</a>
+end up quite fat and contribute to sucking up a good
+chunck of your HDD.</p>
+
+<p>At the same time, the most painful moment with Docker
+images is, at least for me, when you want to pull
+and run a brand new image, not available on your
+machine (or production servers, not <em>much</em> difference):
+you will need to wait until the whole image gets
+downloaded before being able to play around with it<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
+
+<p>At the end of the day, one thing is clear: we&rsquo;d like
+to <a href="http://matthewkwilliams.com/index.php/2015/03/23/shrinking-docker-images/">shrink</a> <a href="http://stackoverflow.com/questions/24394243/why-are-docker-container-images-so-large">images</a> <a href="http://tuhrig.de/flatten-a-docker-container-or-image/">as much as possible</a>.
+Turns out, the easiest solution is, as often, the simplest one:
+<strong>start small, end small</strong>.</p>
+
+<p>There are plenty of resources on <a href="https://www.google.ae/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=shrinking%20docker%20images">limiting the size of your images / containers</a>,
+but today I am going to start with this very simple approach.</p>
+
+
+        
+         <a href="/minimal-docker-run-your-nodejs-app-in-25mb-of-an-image/">Read on &rarr;</a> 
+    </div>
+    <footer>
+        
+
+
+
+
+
+
+Tags:
+
+<a class='category' href='/categories/alpine/'>alpine</a>, <a class='category' href='/categories/busybox/'>busybox</a>, <a class='category' href='/categories/docker/'>docker</a>, <a class='category' href='/categories/javascript/'>javascript</a>, <a class='category' href='/categories/linux/'>linux</a>, <a class='category' href='/categories/nodejs/'>nodejs</a>
+
+
+        
+    </footer>
+</article>
+<!-- END _includes/article.html -->
+
+
+
+
+
+
+<!-- START _includes/article.html -->
+<article>
+    <header>
         <h1><a href="/the-mysql-archive-storage-engine/">The MySQL ARCHIVE storage engine</a></h1>
         <time>25 July 2015</time>
     </header>
@@ -398,48 +455,6 @@ of the language and the platform.</p>
 Tags:
 
 <a class='category' href='/categories/golang/'>golang</a>, <a class='category' href='/categories/programming/'>programming</a>
-
-
-        
-    </footer>
-</article>
-<!-- END _includes/article.html -->
-
-
-
-
-
-
-<!-- START _includes/article.html -->
-<article>
-    <header>
-        <h1><a href="/3-years-at-namshi-dot-dot-dot-and-still-counting/">3 years at Namshi&#8230;and still counting!</a></h1>
-        <time>01 April 2015</time>
-    </header>
-    <div class="content">
-        <p>Today I celebrate my third birthday at Namshi, 3 long, long
-years that represent an amazing journey in my life.</p>
-
-<p>There are so many moments I will remember forever, many positive ones,
-few negative ones, a lot of excitement and huge growth, both
-from a personal and professional perspective. There are very
-few things I regret and I&rsquo;m honestly proud of that.</p>
-
-
-        
-         <a href="/3-years-at-namshi-dot-dot-dot-and-still-counting/">Read on &rarr;</a> 
-    </div>
-    <footer>
-        
-
-
-
-
-
-
-Tags:
-
-<a class='category' href='/categories/namshi/'>namshi</a>, <a class='category' href='/categories/personal/'>personal</a>
 
 
         
