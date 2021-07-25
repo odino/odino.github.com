@@ -3,13 +3,49 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="https://odino.org/atom.xml" rel="self"/>
 	<link href="https://odino.org/"/>
-	<updated>2021-07-24T08:15:36+00:00</updated>
+	<updated>2021-07-25T08:48:47+00:00</updated>
 	<id>https://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
 		
 	</author>
 	<generator uri="http://octopress.org/">Octopress</generator>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[Dell XPS 13 9310: USB-C port not recognizing external devices]]></title>
+		
+		<link href="https://odino.org/dell-xps-13-9310-usb-c-port-not-recognizing-external-devices/"/>
+		<updated>2021-07-25T08:32:00+00:00</updated>
+		<id>https://odino.org/dell-xps-13-9310-usb-c-port-not-recognizing-external-devices</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Just a quick one as I got back from my holidays and got taken aback
+by a glitch in my XPS.</p>
+
+<p>My right USB-C port stopped recognizing external devices yesterday:
+it would be able to charge my laptop through the regular charger but
+I couldn&rsquo;t get it to recognize or charge neither my airpods or phone.</p>
+
+<p>After digging a little bit around the Dell support forums I found
+someone having luck by just restarting the laptop (though letting it rest
+for a while).</p>
+
+<p>So that&rsquo;s exactly what I did &mdash; turned off the laptop, let it rest
+for a few hours (actually, overnight) and then turn it back on again&hellip;
+&hellip;and the problem was gone. Worth to notice that I also tried shutting
+it down for 1/2m and didn&rsquo;t work out.</p>
+
+<p>I do believe this is a firmware issue, and I noticed it kicked in
+by booting the laptop with a device connected to that port. Strange
+world!</p>
+]]>
+		</content>
+	</entry>
 	
 	<entry>
 		
@@ -3542,107 +3578,6 @@ the nasty screen you&rsquo;d face before:</p>
 
 <p>PS: Thanks to <a href="https://github.com/mingwho">Ming</a>
 who was behind this one!</p>
-
-<p>See you next time!</p>
-]]>
-		</content>
-	</entry>
-	
-	<entry>
-		
-			<title type="html"><![CDATA[ABS 1.3.0: interactive shell commands bring more productivity to the language]]></title>
-		
-		<link href="https://odino.org/abs-1-dot-3-0-interactive-shell-commands-bring-more-productivity-to-the-language/"/>
-		<updated>2019-05-12T00:00:00+00:00</updated>
-		<id>https://odino.org/abs-1-dot-3-0-interactive-shell-commands-bring-more-productivity-to-the-language</id>
-		<content type="html">
-			<![CDATA[
-				
-					<p></p>
-				
-			]]>
-			<![CDATA[<p>A couple weeks ago the ABS team managed to pull together
-a new minor release of the language, <a href="https://github.com/abs-lang/abs/releases/tag/1.3.0">1.3.0</a>.
-This new release only adds 2 new features, but we believe
-one of them (interactive commands) is money!</p>
-
-<p><img class="center" src="https://odino.org/images/abs-13-intro.png"></p>
-
-<!-- more -->
-
-
-<h2>Interactive commands via exec(&hellip;)</h2>
-
-<p>Interactive commands allow you throw the user into their
-preferred shell while running an ABS script (even within
-the ABS repl).</p>
-
-<p>An asciinema is worth a thousand words:</p>
-
-<p><a href="https://asciinema.org/a/ZVMEJ59cuhbZPfOkcVOE2ocfw"><img src="https://asciinema.org/a/ZVMEJ59cuhbZPfOkcVOE2ocfw.svg" alt="asciicast" /></a></p>
-
-<p>The syntax is very simple: just call the <code>exec</code> function with the
-command you want to run as the only argument, such as
-<code>exec("vi /etc/hosts")</code>. IO is left to the user so ABS will
-not try to meddle with that &mdash; it&rsquo;s all yours!</p>
-
-<h2>for&hellip;else</h2>
-
-<p>We added the ability to specify an <code>else</code> block
-in a <code>for</code> loop!</p>
-
-<p>This feature is <a href="http://jinja.pocoo.org/docs/2.10/templates/#for">inspired by the
-jinja template engine</a> and allows to run code
-when the list you&rsquo;re iterating over is empty:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for </span>x in flag<span class="o">(</span><span class="s2">&quot;test&quot;</span><span class="o">)</span>.split<span class="o">(</span><span class="s2">&quot;,&quot;</span><span class="o">)</span>.filter<span class="o">(</span>f<span class="o">(</span>e<span class="o">)</span> <span class="o">{</span> e.int<span class="o">()</span> !<span class="o">=</span> 1 <span class="o">})</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nb">echo</span><span class="o">(</span>x<span class="o">)</span>
-</span><span class='line'><span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nb">echo</span><span class="o">(</span><span class="s2">&quot;No elements provided&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># $ abs script.abs --test 1,2,3,4</span>
-</span><span class='line'>2
-</span><span class='line'>3
-</span><span class='line'>4
-</span><span class='line'>
-</span><span class='line'><span class="c"># $abs script.abs --test 1,1,1,1</span>
-</span><span class='line'>No elements provided
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Now what?</h2>
-
-<p>Install ABS with a simple one-liner:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bash &lt;<span class="o">(</span>curl https://www.abs-lang.org/installer.sh<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
-
-<p>PS: Again, many thanks to <a href="https://github.com/ntwrick">Erich</a>,
-who&rsquo;s been taking a larger role as the weeks have gone by &mdash; interactive
-commands were his idea, and he took care of implementing them from A
-to the Z!</p>
-
-<p>I would also like to thank <a href="https://github.com/mingwho">Ming</a>
-who already helped ABS with a few contributions in the past,
-and was responsible for <code>for...else</code> in this release!</p>
 
 <p>See you next time!</p>
 ]]>

