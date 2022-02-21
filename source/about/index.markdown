@@ -20,12 +20,12 @@ leading mid-sized development teams and managing complexity in distributed syste
 I am a forward-thinker by nature and I still love to get my hands dirty with code, or testing new platforms: I am quite active on [github](https://github.com/odino) and, from time to time,
 blog over here.
 
-I'm currently in Dubai, where work as SVP of Technology @ [Noon](https://www.noon.com): I am in charge of an amazing team of over 70 talented folks that span engineering, product, SRE, UX and QA -- our goal is to deliver an exceptional experience to both of our customers: consumers and sellers.
+I'm currently in Dubai, where work as SVP of Technology @ [Noon](https://www.noon.com): I am in charge of an amazing team of over 120 talented folks that span engineering, product, SRE, UX and QA -- our goal is to deliver an exceptional experience to both of our customers: consumers and sellers.
 In my position, I set the direction of our team, drive the design of our systems, grow the various tech teams and contribute from the trenches every now and then.
 
 I joined Noon with a personal mission of creating opportunities in the region: my goal is to build an ecosystem in which consumers can access a huge, convenient and unique catalog, and where sellers can start, expand and refine their business. Creating opportunities has, and will always be, a very important personal mission for me, and I'm glad I found an organization that allows me to do so at a large scale.
 
-I'm a big supporter of **microservices**, the **REST** architectural style, asynchronous messaging systems and I'm used to work with some practices of extreme programming (and agile development, in general), like TDD and pair-programming.
+I'm a big supporter of microservices, the REST architectural style, asynchronous messaging systems and I'm used to work with some practices of extreme programming (and agile development, in general), like TDD and pair-programming.
 
 I have been involved in projects for governments, mainstream companies
 such as Samsung or Nissan and pioneered the technology scene of
@@ -39,6 +39,14 @@ I always try to make a positive impact in the organizations I
 work at, both from a technical and interpersonal perspective;
 some of the feedback that I received includes:
 
+> Alex is a standout mentor that everyone needs in their corner! His ability to prioritize people and understand their problems is valued by everyone I know, as he says "humans first". On the engineering side, I haven't met anyone that can move quite so seamlessly between different fields, you can throw anything (product architecture, design review, infrastructure issues, architectural challenges, complicated problems, hands-on development) at him and he won't sweat. I was confident I could go to Alex with any technical problem and be sure that he would try his best to solve it, he is someone I've always looked for direction and strategy.
+>
+> His distinct enthusiasm for sharing his expertise, skills and knowledge is unparalleled. There is nothing he can't do from writing beautiful code to being a positive role model, publishing a book, creating a programming language, managing and inspiring a highly scalable team to spotting quick wins within existing system that creates meaningful impact.
+>
+> Having known him for almost a decade I could happily say he is one of my favorite person to work with. I've always looked up to him as a leader with unimpeachable integrity and transparency, a standard that I strive to reach some day.
+>
+> **Samar Agrawal, Engineering Lead @ Noon (2022)**
+>
 > Alex is one of the best software engineers/architects I have ever worked with. If I say I have learned a lot from him that would be an understatement.
 > I remember my first feature flag in 2012 was supervised by him to solving a pretty complex programming problem pair programming with him. He is a gifted engineer and a great manager.
 > I have not seen another CTO who is still so hands-on who can take up any problem and come up with innovative solutions.
@@ -179,14 +187,47 @@ which I visited for a [conference](http://2011.osidays.com/speakers)
 * I'm totally informal
 * In my first 15 months at Namshi I covered 3 positions: Lead Developer, Head of Development and VP Technology
 * ~~I own an XboX, but I rarely play alone (though my wife kicks my ass at [Forza 2](https://en.wikipedia.org/wiki/Forza_Motorsport_2))~~
-* I visited 21 countries so far (Maldives, Kenya, Spain, Belgium, Switzerland, France, Slovenia, UAE, Oman, USA, Austria, Germany, Hungary, Vatican City, Poland, India, Canada, Nederlands, Turkey, Vietnam, Finland), some of them very briefly, mostly during conferences
+* I visited 21 countries so far, some of them very briefly, mostly during conferences
+    * Austria
+    * Belgium
+    * Canada
+    * Finland
+    * France
+    * Germany
+    * Hungary
+    * India
+    * Kenya
+    * Maldives
+    * Nederlands
+    * Oman
+    * Poland
+    * Slovenia
+    * Spain
+    * Switzerland
+    * Turkey
+    * UAE
+    * USA
+    * Vatican City
+    * Vietnam
 * I don't drink alcohol
 * one of my favorites TV shows is [River Monsters](http://en.wikipedia.org/wiki/River_Monsters), it brings back great memories of days spent fishing with my father
-* once I moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks), [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers), [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls), Blake Griffin (L.A. Clippers), Kevin Durant (Oklahoma City Thunder), Damien Lillard (Portland Trail Blazers), Kobe Bryant (L.A. Lakers #24), Kobe Bryant (L.A. Lakers - Hardwood Classic Rookie Edition #8), Carmelo Anthony (New York Knicks), Rajon Rondo (Boston Celtics)
+* once I moved to Dubai, I decided to start collecting NBA jerseys: so far I got the swingman's of 
+    * [Dirk Nowitzki](http://en.wikipedia.org/wiki/Dirk_Nowitzki) (Dallas Mavericks)
+    * [Kyrie Irving](http://en.wikipedia.org/wiki/Kyrie_Irving) (Cleveland Cavaliers)
+    * [Derrick Rose](http://en.wikipedia.org/wiki/Derrick_Rose) (Chicago Bulls)
+    * Blake Griffin (L.A. Clippers)
+    * Kevin Durant (Oklahoma City Thunder)
+    * Damien Lillard (Portland Trail Blazers)
+    * Kobe Bryant (L.A. Lakers #24)
+    * Kobe Bryant (L.A. Lakers - Hardwood Classic Rookie Edition #8)
+    * Carmelo Anthony (New York Knicks)
+    * Rajon Rondo (Boston Celtics)
 * I got [married](/married) to [Sarah](https://www.facebook.com/sarah.mujeeb) in June 2015
 * I think [Game of Thrones](https://en.wikipedia.org/wiki/Game_of_Thrones) is too predictable
-* I own a PS4 -- a generous gift from my better half. Though I suck at whatever game I try to play
+* ~~I own a PS4 -- a generous gift from my better half. Though I suck at whatever game I try to play~~
 * I enjoy my solo-time more than I would care to admit
 * I smoke [dokha](https://en.wikipedia.org/wiki/Dokha)
 * in the span of 12 months I decided to turn down an MBA and a FAANG offer -- I told my wife we should set a reminder for 2030 to see how those 2 decisions panned out...
 * I bought a [PlaySeat](https://www.playseatstore.com/f1-aston-martin-red-bull-racing-new.html) well into my 30s: I don't particularly like racing games, but I have a soft spot for F1 having grown up during Ferrari's dominant years with [Jean Todt](https://en.wikipedia.org/wiki/Jean_Todt) at the helm and [Michael Schumacher](https://en.wikipedia.org/wiki/Michael_Schumacher) at the wheel
+* I was one of the first few people who got access to the PS5 on launch day in the UAE, thanks to my wonderful wife
+* I'm a top 1% [Loba](https://apexlegends.fandom.com/wiki/Loba) main in [Apex Legends](https://www.ea.com/games/apex-legends). This is due to volume rather than skill, as I'm a really terrible player who anyhow enjoys playing rather frequently :)
