@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Git | Alessandro Nadalin]]></title>
   <link href="https://odino.org/categories/git/atom.xml" rel="self"/>
   <link href="https://odino.org/"/>
-  <updated>2022-02-21T09:37:30+00:00</updated>
+  <updated>2022-05-07T15:04:41+00:00</updated>
   <id>https://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -139,7 +139,7 @@ Bisecting: 0 revisions left to test after this (roughly 1 step)
 <p>/tmp/test-repo (11e5f96 ✔) ᐅ git bisect good
 affade823e7f0cb72a1a97052f700c31dc90cfee is the first bad commit
 commit affade823e7f0cb72a1a97052f700c31dc90cfee
-Author: odino <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#58;&#115;&#x6f;&#x6d;&#x65;&#46;&#111;&#110;&#x65;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;">&#115;&#111;&#109;&#101;&#x2e;&#111;&#110;&#101;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;</a>
+Author: odino <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#115;&#111;&#x6d;&#x65;&#46;&#111;&#110;&#101;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#x73;&#111;&#109;&#x65;&#x2e;&#x6f;&#x6e;&#x65;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>
 Date:   Sun Jun 24 23:29:02 2018 +0400</p>
 
 <pre><code>Now: 10

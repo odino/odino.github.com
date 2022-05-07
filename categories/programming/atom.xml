@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Programming | Alessandro Nadalin]]></title>
   <link href="https://odino.org/categories/programming/atom.xml" rel="self"/>
   <link href="https://odino.org/"/>
-  <updated>2022-02-21T09:37:30+00:00</updated>
+  <updated>2022-05-07T15:04:41+00:00</updated>
   <id>https://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -190,7 +190,7 @@ Dockerfile starting with:</p>
 <p>```
 FROM golang</p>
 
-<p>MAINTAINER Alessandro Nadalin &ldquo;<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#97;&#108;&#x65;&#115;&#x73;&#x61;&#110;&#100;&#114;&#x6f;&#x2e;&#110;&#x61;&#100;&#x61;&#x6c;&#105;&#x6e;&#64;&#x67;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;">&#97;&#x6c;&#x65;&#115;&#x73;&#97;&#110;&#100;&#114;&#111;&#x2e;&#110;&#x61;&#100;&#97;&#x6c;&#105;&#110;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a>&rdquo;</p>
+<p>MAINTAINER Alessandro Nadalin &ldquo;<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#97;&#108;&#x65;&#115;&#115;&#97;&#x6e;&#100;&#114;&#111;&#x2e;&#x6e;&#97;&#x64;&#x61;&#x6c;&#x69;&#x6e;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#97;&#x6c;&#x65;&#115;&#115;&#97;&#110;&#100;&#x72;&#111;&#x2e;&#x6e;&#97;&#100;&#97;&#x6c;&#105;&#110;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#109;</a>&rdquo;</p>
 
 <p>RUN go get github.com/codegangsta/gin
 &hellip;

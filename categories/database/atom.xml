@@ -3,7 +3,7 @@
   <title><![CDATA[Category: Database | Alessandro Nadalin]]></title>
   <link href="https://odino.org/categories/database/atom.xml" rel="self"/>
   <link href="https://odino.org/"/>
-  <updated>2022-02-21T09:37:30+00:00</updated>
+  <updated>2022-05-07T15:04:41+00:00</updated>
   <id>https://odino.org/</id>
   <author>
     <name><![CDATA[Alessandro Nadalin]]></name>
@@ -11,6 +11,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL Features I Can’t Wait for Them to Happen]]></title>
+    <link href="https://odino.org/mysql-features-i-cant-wait-for-them-to-happen/"/>
+    <updated>2022-05-07T14:32:00+00:00</updated>
+    <id>https://odino.org/mysql-features-i-cant-wait-for-them-to-happen</id>
+    <content type="html"><![CDATA[<p>Having worked with MySQL for over ten years, and having had the chance to
+see other storage engines at work during my career, I&rsquo;ve developed a list of
+features that I&rsquo;d like to see MySQL implement. The inspiration of this post comes
+from the implementation of <a href="https://www.percona.com/blog/2020/08/03/using-skip-lock-for-queue-processing-in-mysql/">SKIP LOCKED</a> in v8 &mdash; which was one of the items in my
+bucket list :)</p>
+
+<!-- more -->
+
+
+<h2>TTL</h2>
+
+<p>I recently bumped into <a href="https://cloud.google.com/spanner/docs/ttl">Google Cloud Spanner&rsquo;s TTL feature</a>, which I love:
+you can specify a policy to delete &ldquo;old&rdquo; rows from a table you don&rsquo;t care
+about anymore.</p>
+
+<p>The <a href="https://cloud.google.com/spanner/docs/ttl/working-with-ttl#syntax">doc</a> is pretty self-explanatory:</p>
+
+<p><code>sql
+CREATE TABLE MyTable(
+  Key INT64,
+  CreatedAt TIMESTAMP,
+) PRIMARY KEY (Key)
+, ROW DELETION POLICY (OLDER_THAN(CreatedAt, INTERVAL 30 DAY));
+</code></p>
+
+<p>Over the course of my career I&rsquo;ve had to setup a whole bunch of
+jobs that would, at intervals, have to go and delete rows from a
+table, and would be an enthusiastic user of this feature!</p>
+
+<h2>Record archival</h2>
+
+<p>Similar to the above, archival of records would be pretty neat.</p>
+
+<p>I haven&rsquo;t bumped into this problem just yet (or when I did, I simply
+opted for getting rid of those old rows), but being able to support
+record archival would be fun, for example by specifying a dynamic
+set of tables records would end up in after a certain time:</p>
+
+<p>```sql
+CREATE TABLE rider_location (</p>
+
+<pre><code>id_rider INT ...,
+created_at TIMESTAMP ...
+</code></pre>
+
+<p>) &hellip;
+ARCHIVE (OLDER_THAN(created_at), INTERVAL 1 MONTH)
+IN rider_location<em>%yyyy</em>%mm
+```</p>
+
+<p>and then you would need to go and query <code>rider_location_2022_01</code>
+to get records that were initially inserted in January.</p>
+
+<h2>Implicit GROUPing</h2>
+
+<p>This is easily one of my biggest frustrations &mdash; having such a verbose
+implementation of <code>GROUP BY</code> without being able to infer grouping columns
+implicitly.</p>
+
+<p>I&rsquo;m talking about having to write:</p>
+
+<p><code>sql
+SELECT city, district, age, gender, count(*)
+FROM users
+GROUP BY 1,2,3,4
+</code></p>
+
+<p>instead of:</p>
+
+<p><code>sql
+SELECT city, district, age, gender, count(*)
+FROM users
+</code></p>
+
+<p>having the engine implicitly use selected columns that aren&rsquo;t aggregated
+with functions such as <code>MIN</code>, <code>count(...)</code> or <code>AVG</code> by default.</p>
+
+<p><a href="https://dzone.com/articles/how-sql-group-should-have-been">Folks at DZONE have summed it up pretty well</a>,
+so I&rsquo;ll let you go through their article and see what kind of solution
+they&rsquo;ve proposed.</p>
+
+<h2>Table and DB aliases</h2>
+
+<p>Countless of times I&rsquo;ve made mistakes naming tables and DBs
+(<a href="https://martinfowler.com/bliki/TwoHardThings.html">it&rsquo;s one of the hard things at the end of the day!</a>)
+and I would love to be able to specify DB and table name aliases
+without having to think about renaming / migrating them
+altogether &mdash; table names are more manageable, so that&rsquo;s
+probably something I don&rsquo;t really need (though it would still
+be helpful to migrate tables used by different sets of apps eg.
+writer and reader apps), but DB aliasing would make me fairly happy :)</p>
+
+<h2>Want more?</h2>
+
+<p>I&rsquo;m sure I&rsquo;m forgetting some big ticket item, but these above would
+already make the ergonomics of working with MySQL a lot smoother for me.</p>
+
+<p>What would <em>you</em> like to see in MySQL instead? Feel free to
+reach out on <a href="https://twitter.com/_odino_">twitter</a>!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MySQL's INSERT IGNORE and NOT NULL Columns]]></title>
@@ -716,142 +823,6 @@ differences between OrientDB and traditional RDBMS, what
 makes it so special when compared with other NoSQL products
 and and understand in which scenarios OrientDB would fit
 our requirements.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Strange Case of OrientDB and Graph Databases]]></title>
-    <link href="https://odino.org/the-strange-case-of-orientdb-and-graph-databases/"/>
-    <updated>2015-02-06T01:29:00+00:00</updated>
-    <id>https://odino.org/the-strange-case-of-orientdb-and-graph-databases</id>
-    <content type="html"><![CDATA[<p><ol class="aseries">
-	<p>This post is part of the "<strong><a href="/categories/orientdb-101/">OrientDB 101</a></strong>" series, derived from a previous work started in 2013/2014: some
-	information might be outdated, but the core of this series should still be intact.</p>
-	<p>Here is a list of all the articles in this series:</p>
-	<li>
-		<a href="/the-strange-case-of-orientdb-and-graph-databases/">The strange case of OrientDB and graph databases</a>
-	</li>
-	<li>
-		<a href="/an-overview-of-orientdbs-capabilities/">An overview of OrienDB's capabilities</a>
-	</li>
-	<li>
-		<a href="/going-beyond-rdbms/">Going beyond RDBMS</a>
-	</li>
-	<li>
-		<a href="/orientdb-just-like-any-other-nosql-database/">Just like any other NoSQL database?</a>
-	</li>
-</ol>
-</p>
-
-<p>I&rsquo;d  like to start this new series by providing some
-context and all-around information about the subject,
-so this article will mostly be a boring cascade of
-words rather than real-world examples: I plan to publish
-~10 articles on OrientDB in the next 2/3 months (as I have some
-old drafts that I finally got to complete) so&hellip;just be patient ;&ndash;)</p>
-
-<!-- more -->
-
-
-<h2>OrientDB in a sentence</h2>
-
-<p><a href="http://www.orientechnologies.com/orientdb/">OrientDB</a> in a sentence?
-Let&rsquo;s try with:</p>
-
-<blockquote><p>A NoSQL graph database that recently gained lot of attention
-due to its performances and features which, combined together,
-offer a tool that is by far different from any other product
-in the DBMS ecosystem</p></blockquote>
-
-<p>The aim of this series is to guide the reader through understanding
-what are the most interesting  features that OrientDB brings on
-the table out-of-the-box and how, melding them altogether,
-this database differs from traditional relational systems and
-other NoSQL products, being it document DBs like MongoDB or
-key-value stores like Redis or Memcache.</p>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<h2>Why looking into OrientDB?</h2>
-
-<p>It would be easier, but probably too less interesting, to start this series
-by immediately introducing the reader to the incredible meshup of features
-and scenarios that OrientDB offers and covers; so before digging into the
-product itself, a good question we should ask ourselves would be:
-why should we look at another database engine?</p>
-
-<p>One thing that we &ndash; software engineers &ndash; are always eager to do is to learn
-new patterns, tools and practices, as the process of learning stimulates us
-and seems to be a good workaround for our day-to-day routine.</p>
-
-<p>On an opposite note, what we find really hard to accept, is to apply very old
-technologies and schemes to new contexts, as we tend to think that what has been
-working for us in the past few years will always work and be there for us.</p>
-
-<p>If you, for example, think about the NoSQL ecosystem, you will find that those
-concepts that are really attractive in our times are an implementation of <strong>ideas
-engineers had 20, 30 or even 40 years ago</strong>: when Mikio Hirabayashi released,
-in 2007, Tokyo Cabinet, a key-value storage engine,  it was clear that most of
-Hirabayashi’s work was a re-implementation a tool he already wrote 4 years before,
-named QDBM; an interesting thing that a few know is that QDBM itself is almost 40
-years old, as it is a direct descendant of <a href="http://en.wikipedia.org/wiki/Dbm">DBM</a>, a generic database library written
-by <a href="http://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> &ndash; also known for being the main contributor to the UNIX operating
-system &ndash; in 1979.</p>
-
-<p>When we look at Hirabayashi’s work, we can think of it as a &ldquo;<a href="http://en.wikipedia.org/wiki/Kaizen">Kaizen</a>&rdquo; &ndash; a Japanese
-word which stands for “continuous improvement“ &ndash; as he took concepts and an initial
-design (DBM) and developed 3 tools, in rapid succession, based on that 30+ years
-old original tool: QDBM, Tokyo and Kyoto Cabinet<sup id='fnref:1'><a href='#fn:1' rel='footnote'>1</a></sup>.</p>
-
-<p>Surround your pullquote like this {" text to be quoted "}</p>
-
-<h2>NoSQL to the rescue</h2>
-
-<p>But this was a few years back, right?</p>
-
-<p>In the last ~5 years we saw a huge  growth in utilization of NoSQL
-storage engines like CouchDB, MongoDB, Redis  or whatsoever buzzword of
-the moment: we first took a look at those tools, thought that they were
-pretty attractive and eventually used them, without
-really asking ourselves “why are we using a NoSQL database?” and &ndash; most
-important &ndash; “why is it called NoSQL?”.</p>
-
-<p>As most of us know, <strong>NoSQL is not a negation of the traditional RDBMS ecosystem</strong>,
-it just stands for “Not only SQL”, as if there is no war between relational
-engines and NoSQL databases: fact is that there is no conflict between relational
-and non-relational models, as they serve for different needs; comparing the 2
-is like comparing pizza with eggs: one can chose based on his own taste, but at
-the end the final decision is made considering external requirements, like if
-you are on a diet or out for dinner with your better half; we, as software engineers,
-are bound to the same constraint: we cannot decide based on our own taste, we
-need to first consider the project’s requirements and eventually pick the right
-tool for the situation.</p>
-
-<p>This is why I am writing this series dealing with a NoSQL database &ndash; <em>one of a kind</em>, I would
-say &ndash; as it’s build on top of innovative concepts as well as ten-years-old ones,
-it’s a direct descendant of other DBMS and brings brand new possibilities in
-data storage and management.</p>
-
-<p>Categorizing a tool such as OrientDB is a very difficult job: sure, we can
-define OrientDB as a NoSQL graph database, but limiting ourselves to a mere
-definition wouldn’t allow us to comprehend the power of the tool itself;
-OrientDB, for example, also includes a document layer and can be therefore
-classified also as a document DB: given the mix of concepts and features
-included in it, this storage engine pushes a developer’s boundaries further
-ahead compared to what any other DBMS can offer.</p>
-
-<p>Ready to <a href="http://pettergraff.blogspot.sg/2013/12/orientdb-thanks.html">be amazed</a>?
-Let&rsquo;s have a closer look at Orient&rsquo;s power features in the next article!</p>
-
-<p><div class="footnotes">
-<span>
-Notes
-</span>
-	<ol>
-		<li id='fn:1'>Hirabayashi eventually developed Kyoto 2009, to review the implementation of Tokyo <a href='#fnref:1' rev='footnote'>↩</a></li>
-	</ol>
-</div>
-</p>
 ]]></content>
   </entry>
   

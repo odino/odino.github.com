@@ -3,13 +3,142 @@
 	<title><![CDATA[Alessandro Nadalin]]></title>
 	<link href="https://odino.org/atom.xml" rel="self"/>
 	<link href="https://odino.org/"/>
-	<updated>2022-02-21T09:37:30+00:00</updated>
+	<updated>2022-05-07T15:04:41+00:00</updated>
 	<id>https://odino.org/</id>
 	<author>
 		<name><![CDATA[Alessandro Nadalin]]></name>
 		
 	</author>
 	<generator uri="http://octopress.org/">Octopress</generator>
+	
+	<entry>
+		
+			<title type="html"><![CDATA[MySQL features I can’t wait for them to happen]]></title>
+		
+		<link href="https://odino.org/mysql-features-i-cant-wait-for-them-to-happen/"/>
+		<updated>2022-05-07T14:32:00+00:00</updated>
+		<id>https://odino.org/mysql-features-i-cant-wait-for-them-to-happen</id>
+		<content type="html">
+			<![CDATA[
+				
+					<p></p>
+				
+			]]>
+			<![CDATA[<p>Having worked with MySQL for over ten years, and having had the chance to
+see other storage engines at work during my career, I&rsquo;ve developed a list of
+features that I&rsquo;d like to see MySQL implement. The inspiration of this post comes
+from the implementation of <a href="https://www.percona.com/blog/2020/08/03/using-skip-lock-for-queue-processing-in-mysql/">SKIP LOCKED</a> in v8 &mdash; which was one of the items in my
+bucket list :)</p>
+
+<!-- more -->
+
+
+<h2>TTL</h2>
+
+<p>I recently bumped into <a href="https://cloud.google.com/spanner/docs/ttl">Google Cloud Spanner&rsquo;s TTL feature</a>, which I love:
+you can specify a policy to delete &ldquo;old&rdquo; rows from a table you don&rsquo;t care
+about anymore.</p>
+
+<p>The <a href="https://cloud.google.com/spanner/docs/ttl/working-with-ttl#syntax">doc</a> is pretty self-explanatory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">MyTable</span><span class="p">(</span>
+</span><span class='line'>  <span class="k">Key</span> <span class="n">INT64</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">CreatedAt</span> <span class="k">TIMESTAMP</span><span class="p">,</span>
+</span><span class='line'><span class="p">)</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="k">Key</span><span class="p">)</span>
+</span><span class='line'><span class="p">,</span> <span class="k">ROW</span> <span class="n">DELETION</span> <span class="n">POLICY</span> <span class="p">(</span><span class="n">OLDER_THAN</span><span class="p">(</span><span class="n">CreatedAt</span><span class="p">,</span> <span class="nb">INTERVAL</span> <span class="mi">30</span> <span class="k">DAY</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Over the course of my career I&rsquo;ve had to setup a whole bunch of
+jobs that would, at intervals, have to go and delete rows from a
+table, and would be an enthusiastic user of this feature!</p>
+
+<h2>Record archival</h2>
+
+<p>Similar to the above, archival of records would be pretty neat.</p>
+
+<p>I haven&rsquo;t bumped into this problem just yet (or when I did, I simply
+opted for getting rid of those old rows), but being able to support
+record archival would be fun, for example by specifying a dynamic
+set of tables records would end up in after a certain time:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">rider_location</span> <span class="p">(</span>
+</span><span class='line'>    <span class="n">id_rider</span> <span class="nb">INT</span> <span class="p">...,</span>
+</span><span class='line'>    <span class="n">created_at</span> <span class="k">TIMESTAMP</span> <span class="p">...</span>
+</span><span class='line'><span class="p">)</span> <span class="p">...</span>
+</span><span class='line'><span class="n">ARCHIVE</span> <span class="p">(</span><span class="n">OLDER_THAN</span><span class="p">(</span><span class="n">created_at</span><span class="p">),</span> <span class="nb">INTERVAL</span> <span class="mi">1</span> <span class="k">MONTH</span><span class="p">)</span>
+</span><span class='line'><span class="k">IN</span> <span class="n">rider_location_</span><span class="o">%</span><span class="n">yyyy_</span><span class="o">%</span><span class="n">mm</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and then you would need to go and query <code>rider_location_2022_01</code>
+to get records that were initially inserted in January.</p>
+
+<h2>Implicit GROUPing</h2>
+
+<p>This is easily one of my biggest frustrations &mdash; having such a verbose
+implementation of <code>GROUP BY</code> without being able to infer grouping columns
+implicitly.</p>
+
+<p>I&rsquo;m talking about having to write:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">district</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">users</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>instead of:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">district</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">users</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>having the engine implicitly use selected columns that aren&rsquo;t aggregated
+with functions such as <code>MIN</code>, <code>count(...)</code> or <code>AVG</code> by default.</p>
+
+<p><a href="https://dzone.com/articles/how-sql-group-should-have-been">Folks at DZONE have summed it up pretty well</a>,
+so I&rsquo;ll let you go through their article and see what kind of solution
+they&rsquo;ve proposed.</p>
+
+<h2>Table and DB aliases</h2>
+
+<p>Countless of times I&rsquo;ve made mistakes naming tables and DBs
+(<a href="https://martinfowler.com/bliki/TwoHardThings.html">it&rsquo;s one of the hard things at the end of the day!</a>)
+and I would love to be able to specify DB and table name aliases
+without having to think about renaming / migrating them
+altogether &mdash; table names are more manageable, so that&rsquo;s
+probably something I don&rsquo;t really need (though it would still
+be helpful to migrate tables used by different sets of apps eg.
+writer and reader apps), but DB aliasing would make me fairly happy :)</p>
+
+<h2>Want more?</h2>
+
+<p>I&rsquo;m sure I&rsquo;m forgetting some big ticket item, but these above would
+already make the ergonomics of working with MySQL a lot smoother for me.</p>
+
+<p>What would <em>you</em> like to see in MySQL instead? Feel free to
+reach out on <a href="https://twitter.com/_odino_">twitter</a>!</p>
+]]>
+		</content>
+	</entry>
 	
 	<entry>
 		
@@ -3462,124 +3591,6 @@ and the fix got backported to the 1.3.x branch: <a href="https://github.com/abs-
 
 
 <p>&hellip;and start scripting like it&rsquo;s 2019!</p>
-]]>
-		</content>
-	</entry>
-	
-	<entry>
-		
-			<title type="html"><![CDATA[ABS 1.3.1 released: a minor bugfix for our JSON parser]]></title>
-		
-		<link href="https://odino.org/abs-1-dot-3-1-a-minor-bugfix-for-our-json-parser/"/>
-		<updated>2019-05-20T19:31:00+00:00</updated>
-		<id>https://odino.org/abs-1-dot-3-1-a-minor-bugfix-for-our-json-parser</id>
-		<content type="html">
-			<![CDATA[
-				
-					<p></p>
-				
-			]]>
-			<![CDATA[<p>We just <a href="https://github.com/abs-lang/abs/releases/tag/1.3.1">released version 1.3.1</a>
-of <a href="https://www.abs-lang.org/">ABS</a>, which fixes a simple bug
-in our JSON parser.</p>
-
-<!-- more -->
-
-
-<p>This is a bugfix release that fixes <a href="https://github.com/abs-lang/abs/issues/222">#222</a>
-through <a href="https://github.com/abs-lang/abs/pull/226">#226</a> (originally merged in
-the <code>1.4.x</code> branch).
-An empty string will now not cause a panic when parsed as JSON &mdash; this is
-the nasty screen you&rsquo;d face before:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>⧐  "".json()
-</span><span class='line'>panic: runtime error: index out of range
-</span><span class='line'>
-</span><span class='line'>goroutine 1 [running]:
-</span><span class='line'>github.com/abs-lang/abs/evaluator.jsonFn(0x580b0b, 0x1, 0x2, 0x69714e, 0x1, 0xc000162370, 0x1, 0x1, 0x559d40, 0x5af060)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/functions.go:785 +0x82e
-</span><span class='line'>github.com/abs-lang/abs/evaluator.applyMethod(0x580b0b, 0x1, 0x2, 0x69714e, 0x1, 0x5b02c0, 0xc000244070, 0xc00001a5d6, 0x4, 0x0, ...)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/evaluator.go:974 +0x1e8
-</span><span class='line'>github.com/abs-lang/abs/evaluator.Eval(0x5aeea0, 0xc000236060, 0xc0000125c0, 0x5aeea0, 0xc000236060)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/evaluator.go:195 +0x1beb
-</span><span class='line'>github.com/abs-lang/abs/evaluator.Eval(0x5aec60, 0xc0001ac300, 0xc0000125c0, 0x5aec60, 0xc0001ac300)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/evaluator.go:67 +0x1636
-</span><span class='line'>github.com/abs-lang/abs/evaluator.evalProgram(0xc0001aa1a0, 0xc0000125c0, 0x100, 0x7f463a89bfff)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/evaluator.go:232 +0x9b
-</span><span class='line'>github.com/abs-lang/abs/evaluator.Eval(0x5aefa0, 0xc0001aa1a0, 0xc0000125c0, 0x7f463d0566d0, 0x0)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/evaluator.go:61 +0x461
-</span><span class='line'>github.com/abs-lang/abs/evaluator.BeginEval(...)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/evaluator/evaluator.go:54
-</span><span class='line'>github.com/abs-lang/abs/repl.Run(0xc00001a5d3, 0x9, 0x301)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/repl/repl.go:151 +0xcb
-</span><span class='line'>github.com/abs-lang/abs/repl.executor(0xc00001a5d3, 0x9)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/repl/repl.go:129 +0xf9
-</span><span class='line'>github.com/abs-lang/abs/vendor/github.com/c-bata/go-prompt.(*Prompt).Run(0xc0000aa100)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/vendor/github.com/c-bata/go-prompt/prompt.go:85 +0x7f2
-</span><span class='line'>github.com/abs-lang/abs/repl.Start(0x5ae1e0, 0xc000010010, 0x5ae200, 0xc000010018)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/repl/repl.go:94 +0x263
-</span><span class='line'>github.com/abs-lang/abs/repl.BeginRepl(0xc0000121b0, 0x1, 0x1, 0x580ebb, 0x5)
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/repl/repl.go:211 +0x326
-</span><span class='line'>main.main()
-</span><span class='line'>  /go/src/github.com/abs-lang/abs/main.go:20 +0x94</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and the beautiful one you would see now:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>⧐  "".json()
-</span><span class='line'>
-</span><span class='line'>⧐  </span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s it!</p>
-
-<h2>Now what?</h2>
-
-<p>Install ABS with a simple one-liner:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bash &lt;(curl https://www.abs-lang.org/installer.sh)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;and start scripting like it&rsquo;s 2019!</p>
-
-<p>PS: Thanks to <a href="https://github.com/mingwho">Ming</a>
-who was behind this one!</p>
-
-<p>See you next time!</p>
 ]]>
 		</content>
 	</entry>

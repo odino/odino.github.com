@@ -1361,6 +1361,10 @@
         <lastmod>2021-07-25T08:44:25+00:00</lastmod>
     </url>
     <url>
+        <loc>https://odino.org/mysql-features-i-cant-wait-for-them-to-happen/</loc>
+        <lastmod>2022-05-07T15:02:19+00:00</lastmod>
+    </url>
+    <url>
         <loc>https://odino.org/conferences/</loc>
         <lastmod>2021-03-05T12:17:48+00:00</lastmod>
     </url>
@@ -1374,7 +1378,7 @@
     </url>
     <url>
         <loc>https://odino.org/archives/</loc>
-        <lastmod>2021-12-19T10:00:48+00:00</lastmod>
+        <lastmod>2022-05-07T15:02:19+00:00</lastmod>
     </url>
     <url>
         <loc>https://odino.org/robots.txt</loc>
@@ -1386,11 +1390,11 @@
     </url>
     <url>
         <loc>https://odino.org/blog/archives/</loc>
-        <lastmod>2021-07-25T08:44:25+00:00</lastmod>
+        <lastmod>2022-05-07T15:02:19+00:00</lastmod>
     </url>
     <url>
         <loc>https://odino.org/blog/</loc>
-        <lastmod>2021-07-25T08:44:25+00:00</lastmod>
+        <lastmod>2022-05-07T15:02:19+00:00</lastmod>
     </url>
     <url>
         <loc>https://odino.org/about/</loc>
@@ -1398,6 +1402,6 @@
     </url>
     <url>
         <loc>https://odino.org/</loc>
-        <lastmod>2021-07-25T08:44:25+00:00</lastmod>
+        <lastmod>2022-05-07T15:02:19+00:00</lastmod>
     </url>
 </urlset>
