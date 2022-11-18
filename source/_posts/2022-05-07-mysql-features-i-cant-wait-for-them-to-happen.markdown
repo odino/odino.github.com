@@ -4,6 +4,7 @@ title: "MySQL features I can’t wait for them to happen"
 date: 2022-05-07 14:32
 comments: true
 categories: [MySQL, database]
+description: "Here are 4 features I'd like to see integrated in MySQL: TTL, record archival, implicit grouping and DB aliasing"
 ---
 
 Having worked with MySQL for over ten years, and having had the chance to
